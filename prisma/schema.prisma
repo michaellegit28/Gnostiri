@@ -7,19 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  accounts      Account[]
-  sessions      Session[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -46,10 +33,161 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  avatar        String?
+  country       String?        @default("NG")
+  password      String?
+  createdAt     DateTime       @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  profile       Profile?
+  subscriptions Subscription[]
+  quizAttempts  QuizAttempt[]
+  progress      Progress[]
+  tutorSessions TutorSession[]
+  studyPlans    StudyPlan[]
+}
 
-  @@unique([identifier, token])
+model Profile {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  currentDomain String    @default("highschool")
+  streak        Int       @default(0)
+  lastActive    DateTime  @default(now())
+  preferredExam String?   @default("WAEC")
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Subscription {
+  id            String    @id @default(cuid())
+  userId        String
+  tier          String    @default("free")
+  domainAccess  String[]  @default(["highschool", "extras"])
+  expiresAt     DateTime?
+  provider      String?
+  status        String    @default("active")
+  createdAt     DateTime  @default(now())
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Domain {
+  id                String  @id @default(cuid())
+  slug              String  @unique
+  name              String
+  isPublic          Boolean @default(true)
+  requiresSubscription Boolean @default(false)
+}
+
+model Examination {
+  id          String   @id @default(cuid())
+  domain      String
+  name        String
+  code        String
+  country     String
+  syllabusUrl String?
+}
+
+model Subject {
+  id          String   @id @default(cuid())
+  domain      String
+  examId      String?
+  title       String
+  description String?
+  orderIndex  Int      @default(0)
+  isPublished Boolean  @default(true)
+  topics      Topic[]
+}
+
+model Topic {
+  id              String     @id @default(cuid())
+  domain          String
+  subjectId       String
+  title           String
+  description     String?
+  orderIndex      Int        @default(0)
+  isPublished     Boolean    @default(true)
+  estimatedMinutes Int       @default(15)
+  subject         Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  lessons         Lesson[]
+  questions       Question[]
+  progress        Progress[]
+}
+
+model Lesson {
+  id              String   @id @default(cuid())
+  topicId         String
+  title           String
+  content         Json
+  orderIndex      Int      @default(0)
+  estimatedMinutes Int     @default(15)
+  topic           Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
+
+model Question {
+  id            String   @id @default(cuid())
+  topicId       String
+  type          String   @default("mcq")
+  questionText  String
+  options       Json
+  correctAnswer String
+  explanation   String
+  difficulty    String   @default("medium")
+  sourceExam    String?
+  topic         Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
+
+model QuizAttempt {
+  id              String   @id @default(cuid())
+  userId          String
+  domain          String
+  topicId         String?
+  score           Int      @default(0)
+  maxScore        Int      @default(0)
+  answers         Json
+  durationSeconds Int      @default(0)
+  createdAt       DateTime @default(now())
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Progress {
+  id           String   @id @default(cuid())
+  userId       String
+  domain       String
+  entityType   String
+  entityId     String
+  status       String   @default("not_started")
+  accuracy     Float    @default(0)
+  lastStudied  DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  topic        Topic?   @relation(fields: [topicId], references: [id])
+  topicId      String?
+  
+  @@unique([userId, entityType, entityId])
+}
+
+model TutorSession {
+  id        String   @id @default(cuid())
+  userId    String
+  domain    String
+  subjectId String?
+  topicId   String?
+  messages  Json
+  context   String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model StudyPlan {
+  id         String   @id @default(cuid())
+  userId     String
+  domain     String
+  examDate   DateTime?
+  items      Json
+  isActive   Boolean  @default(true)
+  generatedBy String @default("manual")
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
