@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AppDomain {
+  highschool
+  university
+  extras
+}
+
+model User {
+  id            String        @id @default(cuid())
+  firebaseUid   String        @unique
+  email         String        @unique
+  name          String?
+  avatar        String?
+  country       String?
+  createdAt     DateTime      @default(now())
+
+  profile       Profile?
+  subscriptions Subscription[]
+  quizAttempts  QuizAttempt[]
+  progress      Progress[]
+  tutorSessions TutorSession[]
+  studyPlans    StudyPlan[]
+}
+
+model Profile {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentDomain AppDomain @default(highschool)
+  streak        Int       @default(0)
+  lastActive    DateTime  @default(now())
+  preferredExam String?
+}
+
+model Subscription {
+  id           String      @id @default(cuid())
+  userId       String
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tier         String      @default("free") // 'free' | 'premium'
+  domainAccess AppDomain[]
+  expiresAt    DateTime?
+  provider     String?
+  status       String      @default("active")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Domain {
+  id                   String  @id @default(cuid())
+  slug                 String  @unique
+  name                 String
+  isPublic             Boolean @default(true)
+  requiresSubscription Boolean @default(false)
+}
+
+model Examination {
+  id          String    @id @default(cuid())
+  domain      AppDomain
+  name        String
+  code        String
+  country     String?
+  syllabusUrl String?
+}
+
+model Topic {
+  id            String         @id @default(cuid())
+  domain        AppDomain
+  parentId      String?
+  parent        Topic?         @relation("TopicHierarchy", fields: [parentId], references: [id])
+  children      Topic[]        @relation("TopicHierarchy")
+  title         String
+  description   String?
+  orderIndex    Int            @default(0)
+  isPublished   Boolean        @default(true)
+  lessons       Lesson[]
+  questions     Question[]
+  quizAttempts  QuizAttempt[]
+  tutorSessions TutorSession[]
+}
+
+model Lesson {
+  id               String    @id @default(cuid())
+  domain           AppDomain
+  topicId          String
+  topic            Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  title            String
+  content          Json
+  orderIndex       Int       @default(0)
+  estimatedMinutes Int       @default(10)
+}
+
+model Question {
+  id           String    @id @default(cuid())
+  domain       AppDomain
+  topicId      String
+  topic        Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  type         String    @default("mcq")
+  questionText String
+  options      Json
+  correctAnswer String
+  explanation  String?
+  difficulty   String    @default("medium")
+  sourceExam   String?
+}
+
+model QuizAttempt {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain          AppDomain
+  topicId         String
+  topic           Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  score           Int
+  maxScore        Int
+  answers         Json
+  durationSeconds Int
+  createdAt       DateTime  @default(now())
+}
+
+model Progress {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain      AppDomain
+  entityType  String
+  entityId    String
+  status      String    @default("not_started") // 'not_started' | 'in_progress' | 'completed' | 'mastered'
+  accuracy    Float?
+  lastStudied DateTime  @default(now())
+}
+
+model TutorSession {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain    AppDomain
+  subjectId String?
+  topicId   String?
+  topic     Topic?    @relation(fields: [topicId], references: [id])
+  messages  Json
+  context   String?
+  createdAt DateTime  @default(now())
+}
+
+model StudyPlan {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain      AppDomain
+  examDate    DateTime?
+  items       Json
+  isActive    Boolean   @default(true)
+  generatedBy String    @default("ai") // 'manual' | 'ai'
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
