@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
+import { DomainProvider } from "@/context/DomainContext";
 
 export const metadata: Metadata = {
   title: "Gnostiri",
@@ -13,7 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          <DomainProvider>
+            {children}
+          </DomainProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }
