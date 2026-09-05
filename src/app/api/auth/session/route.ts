@@ -37,7 +37,15 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ user }, { status: 200 });
+    const response = NextResponse.json({ user }, { status: 200 });
+    response.cookies.set("firebaseUid", uid, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+    });
+
+    return response;
   } catch (error) {
     console.error("Error verifying token or syncing session:", error);
     return NextResponse.json({ error: "Unauthorized or server error" }, { status: 401 });
