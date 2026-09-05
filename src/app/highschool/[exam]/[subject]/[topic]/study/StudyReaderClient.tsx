@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 import { LessonContent, LessonBlock } from "@/types/lesson";
 import {
   ChevronRight,
@@ -15,6 +16,7 @@ import {
   AlertTriangle,
   Sparkles,
   List,
+  Check,
 } from "lucide-react";
 
 interface TopicItem {
@@ -44,8 +46,43 @@ export default function StudyReaderClient({
   topics,
   lessonContent,
 }: StudyReaderClientProps) {
+  const { user } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileTocOpen, setMobileTocOpen] = useState(false);
+
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isMarking, setIsMarking] = useState(false);
+
+  const fullTopicId = `${examCode}-${subjectSlug}-${topicSlug}`;
+
+  const handleMarkComplete = async () => {
+    if (isCompleted || isMarking) return;
+    setIsMarking(true);
+
+    try {
+      if (user) {
+        const res = await fetch("/api/progress/mark-complete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            firebaseUid: user.uid,
+            domain: "highschool",
+            topicId: fullTopicId,
+          }),
+        });
+        if (res.ok) {
+          setIsCompleted(true);
+        }
+      } else {
+        // Unauthenticated fallback local state
+        setIsCompleted(true);
+      }
+    } catch (err) {
+      console.error("Failed to mark complete:", err);
+    } finally {
+      setIsMarking(false);
+    }
+  };
 
   const renderBlock = (block: LessonBlock, index: number) => {
     switch (block.type) {
@@ -314,23 +351,29 @@ export default function StudyReaderClient({
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-2 md:gap-4">
           <button
             type="button"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 font-semibold text-xs md:text-sm transition-colors"
+            onClick={handleMarkComplete}
+            disabled={isCompleted || isMarking}
+            className={`flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg font-semibold text-xs md:text-sm transition-colors ${
+              isCompleted
+                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+                : "bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20"
+            }`}
           >
-            <CheckCircle className="w-4 h-4 shrink-0" />
-            <span className="truncate">Mark Complete</span>
+            {isCompleted ? <Check className="w-4 h-4 shrink-0" /> : <CheckCircle className="w-4 h-4 shrink-0" />}
+            <span className="truncate">{isCompleted ? "Completed ✓" : isMarking ? "Saving..." : "Mark Complete"}</span>
           </button>
 
-          <button
-            type="button"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-amber-500 text-slate-950 hover:bg-amber-400 font-semibold text-xs md:text-sm transition-colors"
+          <Link
+            href={`/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz`}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-amber-500 text-slate-950 hover:bg-amber-400 font-semibold text-xs md:text-sm transition-colors text-center"
           >
             <HelpCircle className="w-4 h-4 shrink-0" />
             <span className="truncate">Practice Questions</span>
-          </button>
+          </Link>
 
           <button
             type="button"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs md:text-sm transition-colors border border-slate-700"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs md:text-sm transition-colors border border-slate-700 opacity-80"
           >
             <MessageSquare className="w-4 h-4 shrink-0 text-teal-400" />
             <span className="truncate">Ask Tutor</span>

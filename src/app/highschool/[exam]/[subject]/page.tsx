@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import prisma from "@/lib/db";
-import { ChevronRight, Clock, CheckCircle2, BookOpen, ArrowRight } from "lucide-react";
+import { ChevronRight, Clock, CheckCircle2, BookOpen, HelpCircle } from "lucide-react";
 
 interface SubjectPageProps {
   params: {
@@ -58,6 +59,37 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     },
   });
 
+  // Fetch logged-in user's progress if session cookie exists
+  const cookieStore = cookies();
+  const firebaseUid = cookieStore.get("firebaseUid")?.value;
+
+  const progressMap = new Map<string, { accuracy: number; status: string }>();
+
+  if (firebaseUid) {
+    const user = await prisma.user.findFirst({
+      where: { firebaseUid },
+    });
+
+    if (user) {
+      const topicIds = topics.map((t) => t.id);
+      const progressRows = await prisma.progress.findMany({
+        where: {
+          userId: user.id,
+          domain: "highschool",
+          entityType: "topic",
+          entityId: { in: topicIds },
+        },
+      });
+
+      for (const p of progressRows) {
+        progressMap.set(p.entityId, {
+          accuracy: p.accuracy ?? (p.status === "completed" ? 1.0 : 0.0),
+          status: p.status,
+        });
+      }
+    }
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
@@ -89,6 +121,11 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
             const topicSlug = topic.id.replace(`${subjectTopic.id}-`, "");
             const estimatedMinutes = topic.lessons[0]?.estimatedMinutes ?? 10;
 
+            const userProgress = progressMap.get(topic.id);
+            const completionPercent = userProgress
+              ? Math.round((userProgress.accuracy ?? (userProgress.status === "completed" ? 1 : 0)) * 100)
+              : 0;
+
             return (
               <div
                 key={topic.id}
@@ -102,8 +139,14 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                     <h2 className="text-lg font-semibold text-slate-100">{topic.title}</h2>
                     <div className="mt-2 flex items-center gap-4 text-xs text-slate-400">
                       <div className="flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" />
-                        <span>Completion: 0%</span>
+                        <CheckCircle2
+                          className={`w-3.5 h-3.5 ${
+                            completionPercent > 0 ? "text-emerald-400" : "text-slate-500"
+                          }`}
+                        />
+                        <span className={completionPercent > 0 ? "text-emerald-300 font-medium" : ""}>
+                          Completion: {completionPercent}%
+                        </span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5 text-slate-500" />
@@ -113,13 +156,21 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                   </div>
                 </div>
 
-                <div className="sm:shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
+                <div className="sm:shrink-0 flex items-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800">
                   <Link
                     href={`/highschool/${examination.code.toLowerCase()}/${subjectSlug}/${topicSlug}/study`}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors w-full sm:w-auto"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition-colors border border-slate-700"
                   >
                     <BookOpen className="w-4 h-4" />
                     <span>Study</span>
+                  </Link>
+
+                  <Link
+                    href={`/highschool/${examination.code.toLowerCase()}/${subjectSlug}/${topicSlug}/quiz`}
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors"
+                  >
+                    <HelpCircle className="w-4 h-4" />
+                    <span>Quiz</span>
                   </Link>
                 </div>
               </div>
