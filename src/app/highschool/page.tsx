@@ -6,25 +6,41 @@ import { GraduationCap, BookOpen, ArrowRight, ChevronRight, History } from "luci
 export const dynamic = "force-dynamic";
 
 export default async function HighSchoolHubPage() {
-  // Query examinations for highschool domain
-  const examinations = await prisma.examination.findMany({
-    where: {
-      domain: "highschool",
-    },
-    orderBy: {
-      name: "asc",
-    },
-  });
+  // Query examinations for highschool domain safely
+  let examinations: Array<{
+    id: string;
+    code: string;
+    name: string;
+    syllabusUrl: string | null;
+  }> = [];
+
+  try {
+    examinations = await prisma.examination.findMany({
+      where: {
+        domain: "highschool",
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching examinations for High School hub:", error);
+  }
 
   // Attach subject count and descriptive blurb for each exam
   const examSummaries = await Promise.all(
     examinations.map(async (exam) => {
-      const subjectCount = await prisma.topic.count({
-        where: {
-          domain: "highschool",
-          parentId: exam.code.toLowerCase(),
-        },
-      });
+      let subjectCount = 0;
+      try {
+        subjectCount = await prisma.topic.count({
+          where: {
+            domain: "highschool",
+            parentId: exam.code.toLowerCase(),
+          },
+        });
+      } catch (err) {
+        console.error(`Error counting subjects for ${exam.code}:`, err);
+      }
 
       let description = exam.syllabusUrl;
       if (!description) {
@@ -48,65 +64,86 @@ export default async function HighSchoolHubPage() {
     })
   );
 
-  // Fetch recent user activity if authenticated and progress exists
+  // Fetch recent user activity if authenticated and progress exists (wrapped in try-catch to avoid breaking page render)
   let recentActivity: {
     link: string;
     label: string;
   } | null = null;
 
-  const cookieStore = cookies();
-  const firebaseUid = cookieStore.get("firebaseUid")?.value;
+  try {
+    const cookieStore = cookies();
+    const firebaseUid = cookieStore.get("firebaseUid")?.value;
 
-  if (firebaseUid) {
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
-    });
-
-    if (user) {
-      const lastProgress = await prisma.progress.findFirst({
-        where: {
-          userId: user.id,
-          domain: "highschool",
-        },
-        orderBy: {
-          lastStudied: "desc",
-        },
+    if (firebaseUid) {
+      const user = await prisma.user.findFirst({
+        where: { firebaseUid },
       });
 
-      if (lastProgress) {
-        const topic = await prisma.topic.findFirst({
+      if (user) {
+        const lastProgress = await prisma.progress.findFirst({
           where: {
-            id: lastProgress.entityId,
+            userId: user.id,
             domain: "highschool",
           },
-          include: {
-            parent: {
-              include: {
-                parent: true,
-              },
-            },
+          orderBy: {
+            lastStudied: "desc",
           },
         });
 
-        if (topic && topic.parent) {
-          const subjectTopic = topic.parent;
-          const examCode = subjectTopic.parentId || "";
-          const subjectSlug = subjectTopic.id.replace(`${examCode}-`, "");
-          const topicSlug = topic.id.replace(`${subjectTopic.id}-`, "");
+        if (lastProgress) {
+          const topic = await prisma.topic.findFirst({
+            where: {
+              id: lastProgress.entityId,
+              domain: "highschool",
+            },
+            include: {
+              parent: {
+                include: {
+                  parent: true,
+                },
+              },
+            },
+          });
 
-          const examName = subjectTopic.parent?.title || examCode.toUpperCase();
-          const subjectTitle = subjectTopic.title;
-          const topicTitle = topic.title;
+          if (topic) {
+            if (topic.parent && topic.parent.parent) {
+              // Subtopic level (e.g., waec-mathematics-quadratic-equations)
+              const subjectTopic = topic.parent;
+              const examTopic = topic.parent.parent;
 
-          if (examCode && subjectSlug && topicSlug) {
-            recentActivity = {
-              link: `/highschool/${examCode.toLowerCase()}/${subjectSlug.toLowerCase()}/${topicSlug.toLowerCase()}/study`,
-              label: `Continue: ${examName} ${subjectTitle} — ${topicTitle}`,
-            };
+              const examCode = examTopic.id.toLowerCase();
+              const subjectSlug = subjectTopic.id.replace(`${examCode}-`, "").toLowerCase();
+              const topicSlug = topic.id.replace(`${subjectTopic.id}-`, "").toLowerCase();
+
+              const examName = examTopic.title.toUpperCase();
+              const subjectTitle = subjectTopic.title;
+              const topicTitle = topic.title;
+
+              if (examCode && subjectSlug && topicSlug) {
+                recentActivity = {
+                  link: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/study`,
+                  label: `Continue: ${examName} ${subjectTitle} — ${topicTitle}`,
+                };
+              }
+            } else if (topic.parent) {
+              // Subject level (e.g., waec-mathematics)
+              const examTopic = topic.parent;
+              const examCode = examTopic.id.toLowerCase();
+              const subjectSlug = topic.id.replace(`${examCode}-`, "").toLowerCase();
+
+              if (examCode && subjectSlug) {
+                recentActivity = {
+                  link: `/highschool/${examCode}/${subjectSlug}`,
+                  label: `Continue: ${examTopic.title.toUpperCase()} ${topic.title}`,
+                };
+              }
+            }
           }
         }
       }
     }
+  } catch (err) {
+    console.error("Error retrieving recent activity for high school hub:", err);
   }
 
   return (
