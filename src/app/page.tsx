@@ -61,9 +61,18 @@ export default function Home() {
           >
             Explore
           </Link>
-          <button className="px-5 py-2.5 min-h-[48px] text-sm font-medium rounded-lg bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+          <Link
+            href="/progress"
+            className="px-4 py-2 min-h-[48px] inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
+          >
+            Progress
+          </Link>
+          <Link
+            href="/highschool"
+            className="px-5 py-2.5 min-h-[48px] inline-flex items-center text-sm font-medium rounded-lg bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
+          >
             Get Started
-          </button>
+          </Link>
         </nav>
       </header>
 
@@ -166,6 +175,9 @@ export default function Home() {
               </Link>
               <Link href="/extras" className="hover:text-slate-200 transition-colors">
                 Extras
+              </Link>
+              <Link href="/progress" className="hover:text-slate-200 transition-colors">
+                Progress
               </Link>
             </div>
           </div>
