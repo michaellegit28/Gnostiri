@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import prisma from "@/lib/db";
+import { getSessionUser } from "@/lib/auth-server";
 import { GraduationCap, BookOpen, ArrowRight, ChevronRight, History } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -54,16 +54,12 @@ export default async function HighSchoolHubPage() {
     label: string;
   } | null = null;
 
-  const cookieStore = cookies();
-  const firebaseUid = cookieStore.get("firebaseUid")?.value;
+  const session = await getSessionUser();
 
-  if (firebaseUid) {
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
-    });
-
-    if (user) {
-      const lastProgress = await prisma.progress.findFirst({
+  if (session) {
+    // Authenticated: load the user's most recent study activity.
+    const user = session.dbUser;
+    const lastProgress = await prisma.progress.findFirst({
         where: {
           userId: user.id,
           domain: "highschool",
@@ -106,7 +102,6 @@ export default async function HighSchoolHubPage() {
           }
         }
       }
-    }
   }
 
   return (

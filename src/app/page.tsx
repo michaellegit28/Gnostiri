@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
+import NavAuth from "@/components/NavAuth";
 
 export default function Home() {
   const domainCards = [
@@ -54,7 +55,7 @@ export default function Home() {
         <div className="flex items-center gap-2">
           <span className="text-2xl font-serif font-bold text-[#D4AF37]">Gnostiri</span>
         </div>
-        <nav className="flex items-center gap-4">
+        <nav className="flex items-center gap-2 sm:gap-4">
           <Link
             href="/highschool"
             className="px-4 py-2 min-h-[48px] inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
@@ -63,16 +64,11 @@ export default function Home() {
           </Link>
           <Link
             href="/progress"
-            className="px-4 py-2 min-h-[48px] inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
+            className="hidden sm:inline-flex px-4 py-2 min-h-[48px] items-center text-sm text-slate-300 hover:text-white transition-colors"
           >
             Progress
           </Link>
-          <Link
-            href="/highschool"
-            className="px-5 py-2.5 min-h-[48px] inline-flex items-center text-sm font-medium rounded-lg bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
-          >
-            Get Started
-          </Link>
+          <NavAuth />
         </nav>
       </header>
 

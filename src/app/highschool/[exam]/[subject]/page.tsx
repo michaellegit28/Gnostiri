@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import prisma from "@/lib/db";
+import { getSessionUser } from "@/lib/auth-server";
 import { ChevronRight, Clock, CheckCircle2, BookOpen, HelpCircle } from "lucide-react";
 
 interface SubjectPageProps {
@@ -59,34 +59,28 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     },
   });
 
-  // Fetch logged-in user's progress if session cookie exists
-  const cookieStore = cookies();
-  const firebaseUid = cookieStore.get("firebaseUid")?.value;
+  // Fetch logged-in user's progress if a valid session exists
+  const session = await getSessionUser();
 
   const progressMap = new Map<string, { accuracy: number; status: string }>();
 
-  if (firebaseUid) {
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
+  if (session) {
+    const user = session.dbUser;
+    const topicIds = topics.map((t) => t.id);
+    const progressRows = await prisma.progress.findMany({
+      where: {
+        userId: user.id,
+        domain: "highschool",
+        entityType: "topic",
+        entityId: { in: topicIds },
+      },
     });
 
-    if (user) {
-      const topicIds = topics.map((t) => t.id);
-      const progressRows = await prisma.progress.findMany({
-        where: {
-          userId: user.id,
-          domain: "highschool",
-          entityType: "topic",
-          entityId: { in: topicIds },
-        },
+    for (const p of progressRows) {
+      progressMap.set(p.entityId, {
+        accuracy: p.accuracy ?? (p.status === "completed" ? 1.0 : 0.0),
+        status: p.status,
       });
-
-      for (const p of progressRows) {
-        progressMap.set(p.entityId, {
-          accuracy: p.accuracy ?? (p.status === "completed" ? 1.0 : 0.0),
-          status: p.status,
-        });
-      }
     }
   }
 

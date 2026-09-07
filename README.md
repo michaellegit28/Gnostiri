@@ -1,6 +1,6 @@
 # Gnostiri
 
-AI-powered learning platform. Built with Next.js (App Router), TypeScript, Tailwind CSS, Prisma, and NextAuth.
+AI-powered learning platform. Built with Next.js (App Router), TypeScript, Tailwind CSS, Prisma, and Firebase Auth.
 
 ## Setup
 

@@ -1,32 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { authenticateRequest } from "@/lib/auth-server";
 import { AppDomain } from "@prisma/client";
+
+const VALID_DOMAINS: AppDomain[] = ["highschool", "university", "extras"];
 
 export async function POST(req: NextRequest) {
   try {
-    const { firebaseUid, domain, topicId } = await req.json();
-
-    const targetDomain: AppDomain = domain === "highschool" ? "highschool" : "highschool";
-
-    if (!firebaseUid) {
-      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+    const auth = await authenticateRequest(req);
+    if (!auth) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      );
     }
+
+    const { domain, topicId } = await req.json();
+
+    // Fail safely: reject unknown/missing domains, never silently default.
+    if (!domain || !VALID_DOMAINS.includes(domain)) {
+      return NextResponse.json({ error: "Invalid domain" }, { status: 400 });
+    }
+    const targetDomain: AppDomain = domain;
 
     if (!topicId) {
       return NextResponse.json({ error: "Topic ID required" }, { status: 400 });
     }
 
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
     const existing = await prisma.progress.findFirst({
       where: {
-        userId: user.id,
+        userId: auth.dbUser.id,
         domain: targetDomain,
         entityType: "topic",
         entityId: topicId,
@@ -46,7 +49,7 @@ export async function POST(req: NextRequest) {
     } else {
       progressRow = await prisma.progress.create({
         data: {
-          userId: user.id,
+          userId: auth.dbUser.id,
           domain: targetDomain,
           entityType: "topic",
           entityId: topicId,

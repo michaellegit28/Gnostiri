@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { authedFetch } from "@/lib/auth-client";
 import {
   GraduationCap,
   BookOpen,
@@ -57,7 +58,7 @@ export default function ProgressPage() {
       setFetching(true);
       setError(null);
 
-      fetch(`/api/progress/dashboard?firebaseUid=${user.uid}&domain=highschool`)
+      authedFetch(user, `/api/progress/dashboard?domain=highschool`)
         .then((res) => {
           if (!res.ok) throw new Error("Failed to load progress data");
           return res.json();
@@ -120,12 +121,19 @@ export default function ProgressPage() {
               Please sign in to view your personalized learning progress, weak topics analysis, and quiz attempt history.
             </p>
           </div>
-          <div>
+          <div className="space-y-3">
+            <Link
+              href="/login?redirect=/progress"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[48px] rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors w-full"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Sign in</span>
+            </Link>
             <Link
               href="/highschool"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[48px] rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition-colors w-full border border-slate-700"
             >
-              <span>Go to High School</span>
+              <span>Browse High School as guest</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

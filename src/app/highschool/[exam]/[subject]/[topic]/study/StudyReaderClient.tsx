@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { authedFetch } from "@/lib/auth-client";
 import { LessonContent, LessonBlock } from "@/types/lesson";
 import {
   ChevronRight,
@@ -61,11 +62,9 @@ export default function StudyReaderClient({
 
     try {
       if (user) {
-        const res = await fetch("/api/progress/mark-complete", {
+        const res = await authedFetch(user, "/api/progress/mark-complete", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            firebaseUid: user.uid,
             domain: "highschool",
             topicId: fullTopicId,
           }),

@@ -1,20 +1,24 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { User, onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/client";
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  signOutUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
+  signOutUser: async () => {},
 });
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -41,8 +45,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => unsubscribe();
   }, []);
 
+  const signOutUser = async () => {
+    try {
+      await fetch("/api/auth/signout", { method: "POST" });
+    } catch (error) {
+      console.error("Failed to clear server session:", error);
+    } finally {
+      await firebaseSignOut(auth);
+      setUser(null);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, signOutUser }}>
       {children}
     </AuthContext.Provider>
   );

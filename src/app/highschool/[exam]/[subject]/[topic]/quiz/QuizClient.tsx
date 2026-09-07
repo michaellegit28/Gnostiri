@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { authedFetch } from "@/lib/auth-client";
 import {
   ChevronRight,
   CheckCircle2,
@@ -135,11 +136,9 @@ export default function QuizClient({
 
     try {
       const correctCount = finalAnswers.filter((a) => a.isCorrect).length;
-      const res = await fetch("/api/quiz/attempt", {
+      const res = await authedFetch(user, "/api/quiz/attempt", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          firebaseUid: user?.uid,
           domain: "highschool",
           topicId,
           score: correctCount,

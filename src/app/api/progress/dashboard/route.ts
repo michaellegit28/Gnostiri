@@ -1,36 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { authenticateRequest } from "@/lib/auth-server";
 import { getWeakTopics, getStrongTopics } from "@/lib/progress";
 import { AppDomain } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
+const VALID_DOMAINS: AppDomain[] = ["highschool", "university", "extras"];
+
 export async function GET(req: NextRequest) {
   try {
+    const auth = await authenticateRequest(req);
+    if (!auth) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
-    const firebaseUid = searchParams.get("firebaseUid");
     const domainParam = searchParams.get("domain") || "highschool";
 
-    const targetDomain: AppDomain = domainParam === "highschool" ? "highschool" : "highschool";
-
-    if (!firebaseUid) {
-      return NextResponse.json({ error: "firebaseUid required" }, { status: 400 });
+    // Fail safely: reject unknown domains, never silently default.
+    if (!VALID_DOMAINS.includes(domainParam as AppDomain)) {
+      return NextResponse.json({ error: "Invalid domain" }, { status: 400 });
     }
+    const targetDomain: AppDomain = domainParam as AppDomain;
 
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
-    const weakTopics = await getWeakTopics(user.id, targetDomain);
-    const strongTopics = await getStrongTopics(user.id, targetDomain);
+    const weakTopics = await getWeakTopics(auth.dbUser.id, targetDomain);
+    const strongTopics = await getStrongTopics(auth.dbUser.id, targetDomain);
 
     const recentAttemptsData = await prisma.quizAttempt.findMany({
       where: {
-        userId: user.id,
+        userId: auth.dbUser.id,
         domain: targetDomain,
       },
       orderBy: {
@@ -48,7 +50,10 @@ export async function GET(req: NextRequest) {
       topicTitle: attempt.topic?.title || attempt.topicId,
       score: attempt.score,
       maxScore: attempt.maxScore,
-      accuracy: attempt.maxScore > 0 ? Math.round((attempt.score / attempt.maxScore) * 100) : 0,
+      accuracy:
+        attempt.maxScore > 0
+          ? Math.round((attempt.score / attempt.maxScore) * 100)
+          : 0,
       durationSeconds: attempt.durationSeconds,
       createdAt: attempt.createdAt,
     }));
