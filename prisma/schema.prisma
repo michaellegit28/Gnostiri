@@ -51,6 +51,8 @@ model Subscription {
   status       String      @default("active")
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
+  providerRef  String?     @unique
+  billingPeriod String     @default("monthly")
 }
 
 model Domain {
@@ -161,4 +163,69 @@ model StudyPlan {
   generatedBy String    @default("ai") // 'manual' | 'ai'
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  domain      AppDomain
+  slug        String
+  title       String
+  department  String
+  description String?
+  isPublished Boolean  @default(true)
+  lessons     CourseLesson[]
+  certificates Certificate[]
+  questions   CourseQuestion[]
+  quizAttempts CourseQuizAttempt[]
+  @@unique([domain, slug])
+}
+
+model CourseQuestion {
+  id            String   @id @default(cuid())
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  domain        AppDomain @default(university)
+  questionText  String
+  options       Json
+  correctAnswer String
+  explanation   String?
+}
+
+model CourseQuizAttempt {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  domain    AppDomain @default(university)
+  score     Int
+  maxScore  Int
+  createdAt DateTime @default(now())
+}
+
+model CourseLesson {
+  id               String   @id @default(cuid())
+  courseId         String
+  domain           AppDomain @default(university)
+  course           Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title            String
+  content          Json
+  orderIndex       Int      @default(0)
+  estimatedMinutes Int      @default(10)
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String
+  domain      AppDomain @default(university)
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  issuedAt    DateTime @default(now())
+  @@unique([userId, courseId])
+}
+
+model PaymentEvent {
+  id        String   @id @default(cuid())
+  eventId   String   @unique
+  provider  String
+  createdAt DateTime @default(now())
 }

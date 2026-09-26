@@ -65,7 +65,6 @@ export default function StudyReaderClient({
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            firebaseUid: user.uid,
             domain: "highschool",
             topicId: fullTopicId,
           }),
@@ -371,13 +370,13 @@ export default function StudyReaderClient({
             <span className="truncate">Practice Questions</span>
           </Link>
 
-          <button
-            type="button"
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs md:text-sm transition-colors border border-slate-700 opacity-80"
+          <Link
+            href={`/tutor?domain=highschool&topicId=${encodeURIComponent(fullTopicId)}`}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs md:text-sm transition-colors border border-slate-700"
           >
             <MessageSquare className="w-4 h-4 shrink-0 text-teal-400" />
             <span className="truncate">Ask Tutor</span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

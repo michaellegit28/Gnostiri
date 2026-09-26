@@ -336,6 +336,34 @@ async function main() {
     });
   }
 
+  const courseSeed = [
+    { id: "course-programming", slug: "introduction-to-programming", title: "Introduction to Programming", department: "Computer Science", description: "Learn programming fundamentals with practical examples." },
+    { id: "course-data", slug: "data-foundations", title: "Data Foundations", department: "Computer Science", description: "Understand how data is represented, queried, and used." },
+    { id: "course-statistics", slug: "applied-statistics", title: "Applied Statistics", department: "Mathematics", description: "Build confidence with probability and statistical reasoning." },
+    { id: "course-writing", slug: "academic-writing", title: "Academic Writing", department: "Humanities", description: "Plan, structure, and improve academic arguments." },
+  ];
+  for (const course of courseSeed) {
+    await prisma.course.upsert({ where: { id: course.id }, update: { ...course, domain: "university" }, create: { ...course, domain: "university" } });
+    await prisma.courseLesson.upsert({
+      where: { id: `${course.id}-lesson-1` },
+      update: { courseId: course.id, domain: "university", title: `Getting started with ${course.title}`, orderIndex: 0, estimatedMinutes: 15, content: { blocks: [{ type: "heading", level: 2, text: course.title }, { type: "paragraph", text: course.description }, { type: "definition", term: "Learning objective", text: "By the end of this lesson, you can explain the key ideas and apply them to a simple example." }] } },
+      create: { id: `${course.id}-lesson-1`, courseId: course.id, domain: "university", title: `Getting started with ${course.title}`, orderIndex: 0, estimatedMinutes: 15, content: { blocks: [{ type: "heading", level: 2, text: course.title }, { type: "paragraph", text: course.description }, { type: "definition", term: "Learning objective", text: "By the end of this lesson, you can explain the key ideas and apply them to a simple example." }] } },
+    });
+    {
+      await prisma.courseLesson.upsert({ where: { id: `${course.id}-lesson-2` }, update: { domain: "university", title: "Variables and expressions", orderIndex: 1 }, create: { id: `${course.id}-lesson-2`, courseId: course.id, domain: "university", title: "Variables and expressions", orderIndex: 1, estimatedMinutes: 20, content: { blocks: [{ type: "heading", level: 2, text: "Variables and expressions" }, { type: "paragraph", text: "A variable gives a name to a value so a program can store and use information." }] } } });
+    }
+    await prisma.courseQuestion.upsert({ where: { id: `${course.id}-quiz-1` }, update: { domain: "university", courseId: course.id, questionText: `Which best describes the purpose of studying ${course.title}?`, options: ["To understand and apply its core ideas", "To memorize unrelated facts", "To avoid practicing examples", "To replace all other subjects"], correctAnswer: "To understand and apply its core ideas", explanation: "The course builds understanding that learners can use in practical contexts." }, create: { id: `${course.id}-quiz-1`, domain: "university", courseId: course.id, questionText: `Which best describes the purpose of studying ${course.title}?`, options: ["To understand and apply its core ideas", "To memorize unrelated facts", "To avoid practicing examples", "To replace all other subjects"], correctAnswer: "To understand and apply its core ideas", explanation: "The course builds understanding that learners can use in practical contexts." } });
+  }
+
+  const extras = ["World Geography", "Everyday Science", "Critical Thinking", "Digital Literacy", "Financial Basics"];
+  for (let index = 0; index < extras.length; index++) {
+    const title = extras[index];
+    const id = `extras-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "")}`;
+    await prisma.topic.upsert({ where: { id }, update: { title, domain: "extras", parentId: null, orderIndex: index, isPublished: true }, create: { id, title, domain: "extras", orderIndex: index } });
+    await prisma.lesson.upsert({ where: { id: `${id}-lesson` }, update: { title, domain: "extras", topicId: id }, create: { id: `${id}-lesson`, title, domain: "extras", topicId: id, estimatedMinutes: 10, content: { blocks: [{ type: "heading", level: 2, text: title }, { type: "paragraph", text: `Explore the foundations of ${title.toLowerCase()} through clear explanations and examples.` }] } } });
+    await prisma.question.upsert({ where: { id: `${id}-question` }, update: { domain: "extras", topicId: id, questionText: `Which is a good way to build understanding of ${title.toLowerCase()}?`, options: ["Ask questions and apply ideas", "Avoid examples", "Memorize unrelated details", "Skip practice"], correctAnswer: "Ask questions and apply ideas", explanation: "Active practice and applying ideas help develop understanding." }, create: { id: `${id}-question`, domain: "extras", topicId: id, questionText: `Which is a good way to build understanding of ${title.toLowerCase()}?`, options: ["Ask questions and apply ideas", "Avoid examples", "Memorize unrelated details", "Skip practice"], correctAnswer: "Ask questions and apply ideas", explanation: "Active practice and applying ideas help develop understanding." } });
+  }
+
   console.log("Database seed completed successfully.");
 }
 

@@ -1,0 +1,7 @@
+"use client";
+import { useState } from "react";
+export default function CourseCompletionButton({ courseId, lessonId, locked }: { courseId: string; lessonId: string; locked: boolean }) {
+  const [message, setMessage] = useState(""); const [certificateId, setCertificateId] = useState(""); const [busy, setBusy] = useState(false);
+  async function complete() { setBusy(true); try { const response = await fetch(`/api/courses/${courseId}/complete`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ lessonId }) }); const data = await response.json(); if (!response.ok) throw new Error(data.error); setMessage(data.certificate ? "Course complete — your certificate has been issued." : `Lesson marked complete (${data.completed}/${data.total}).`); if (data.certificate?.id) setCertificateId(data.certificate.id); } catch (e) { setMessage(e instanceof Error ? e.message : "Could not save completion."); } finally { setBusy(false); } }
+  return locked ? null : <div className="mt-4"><button disabled={busy} onClick={() => void complete()} className="min-h-11 rounded-lg border border-teal-700 px-4 text-sm text-teal-300 disabled:opacity-50">{busy ? "Saving…" : "Mark lesson complete"}</button>{message && <p className="mt-2 text-sm text-slate-300">{message} {certificateId && <a href={`/certificates/${certificateId}`} className="underline">View / download certificate</a>}</p>}</div>;
+}

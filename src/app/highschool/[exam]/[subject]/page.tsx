@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import prisma from "@/lib/db";
+import { getCurrentUser } from "@/lib/server-auth";
 import { ChevronRight, Clock, CheckCircle2, BookOpen, HelpCircle } from "lucide-react";
 
 interface SubjectPageProps {
@@ -60,17 +60,9 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   });
 
   // Fetch logged-in user's progress if session cookie exists
-  const cookieStore = cookies();
-  const firebaseUid = cookieStore.get("firebaseUid")?.value;
-
   const progressMap = new Map<string, { accuracy: number; status: string }>();
-
-  if (firebaseUid) {
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
-    });
-
-    if (user) {
+  const user = await getCurrentUser();
+  if (user) {
       const topicIds = topics.map((t) => t.id);
       const progressRows = await prisma.progress.findMany({
         where: {
@@ -87,7 +79,6 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
           status: p.status,
         });
       }
-    }
   }
 
   return (

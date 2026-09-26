@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { DomainProvider } from "@/context/DomainContext";
+import ServiceWorker from "@/components/ServiceWorker";
 
 export const metadata: Metadata = {
   title: "Gnostiri",
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <ServiceWorker />
         <AuthProvider>
           <DomainProvider>
             {children}
