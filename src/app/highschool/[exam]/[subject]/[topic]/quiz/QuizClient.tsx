@@ -21,7 +21,7 @@ export interface QuestionItem {
   id: string;
   questionText: string;
   options: string[];
-  correctAnswer: string;
+  correctAnswer?: string;
   explanation?: string;
   difficulty: string;
 }
@@ -41,6 +41,7 @@ interface QuizClientProps {
   topicSlug: string;
   topicTitle: string;
   topicId: string;
+  domain?: "highschool" | "university" | "extras";
   initialQuestions: QuestionItem[];
 }
 
@@ -52,6 +53,7 @@ export default function QuizClient({
   topicSlug,
   topicTitle,
   topicId,
+  domain = "highschool",
   initialQuestions,
 }: QuizClientProps) {
   const { user } = useAuth();
@@ -67,9 +69,12 @@ export default function QuizClient({
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [submittingAnswer, setSubmittingAnswer] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
 
   const isSavingAttemptRef = useRef(false);
+  const examHubHref = domain === "extras" ? "/extras" : `/highschool/${examCode}`;
+  const subjectHref = domain === "extras" ? "/extras" : `/highschool/${examCode}/${subjectSlug}`;
 
   // Restart/reset timer when starting quiz
   useEffect(() => {
@@ -92,7 +97,7 @@ export default function QuizClient({
           </div>
           <div>
             <Link
-              href={`/highschool/${examCode}/${subjectSlug}`}
+              href={subjectHref}
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors w-full"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -113,19 +118,26 @@ export default function QuizClient({
     setSelectedOption(option);
   };
 
-  const handleSubmitQuestion = () => {
+  const handleSubmitQuestion = async () => {
     if (!selectedOption || !currentQuestion || isSubmitted) return;
-
-    const isCorrect = selectedOption.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase();
+    setSubmittingAnswer(true);
+    try {
+      const result = await fetch("/api/quiz/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domain, topicId, questionId: currentQuestion.id, answer: selectedOption }) });
+    if (!result.ok) throw new Error("Could not check this answer");
+    const feedback = await result.json() as { isCorrect: boolean; correctAnswer: string; explanation?: string | null };
+    const isCorrect = feedback.isCorrect;
+    setActiveQuestions((items) => items.map((item, index) => index === currentIndex ? { ...item, correctAnswer: feedback.correctAnswer, explanation: feedback.explanation || undefined } : item));
     const record: UserAnswerRecord = {
       questionId: currentQuestion.id,
       selectedAnswer: selectedOption,
       isCorrect,
-      correctAnswer: currentQuestion.correctAnswer,
+      correctAnswer: feedback.correctAnswer,
     };
 
     setUserAnswers((prev) => [...prev, record]);
     setIsSubmitted(true);
+    } catch (error) { console.error(error); }
+    finally { setSubmittingAnswer(false); }
   };
 
   const persistAttempt = async (finalAnswers: UserAnswerRecord[], durationSec: number) => {
@@ -139,8 +151,7 @@ export default function QuizClient({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          firebaseUid: user?.uid,
-          domain: "highschool",
+          domain,
           topicId,
           score: correctCount,
           maxScore: finalAnswers.length,
@@ -172,7 +183,11 @@ export default function QuizClient({
 
       const durationSec = Math.max(1, Math.round((finishTime - startTime) / 1000));
       if (user) {
-        persistAttempt(userAnswers, durationSec);
+        const finalAnswers = userAnswers.some((answer) => answer.questionId === currentQuestion.id)
+          ? userAnswers
+          : [...userAnswers, { questionId: currentQuestion.id, selectedAnswer: selectedOption || "", isCorrect: false, correctAnswer: currentQuestion.correctAnswer || "" }];
+        setUserAnswers(finalAnswers);
+        void persistAttempt(finalAnswers, durationSec);
       }
     }
   };
@@ -302,7 +317,7 @@ export default function QuizClient({
                 </div>
               </div>
               <Link
-                href="/highschool"
+                href="/login"
                 className="px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs transition-colors shrink-0"
               >
                 Sign In
@@ -333,7 +348,7 @@ export default function QuizClient({
             )}
 
             <Link
-              href={`/highschool/${examCode}/${subjectSlug}`}
+              href={subjectHref}
               className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors"
             >
               <span>Back to {subjectTitle}</span>
@@ -350,12 +365,12 @@ export default function QuizClient({
       {/* Top Bar Navigation & Progress */}
       <div className="space-y-4">
         <nav className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
-          <Link href={`/highschool/${examCode}`} className="hover:text-amber-400 transition-colors">
+          <Link href={examHubHref} className="hover:text-amber-400 transition-colors">
             {examName}
           </Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
           <Link
-            href={`/highschool/${examCode}/${subjectSlug}`}
+            href={subjectHref}
             className="hover:text-amber-400 transition-colors"
           >
             {subjectTitle}
@@ -401,7 +416,7 @@ export default function QuizClient({
                 "bg-slate-950/80 border-slate-800 text-slate-200 hover:border-slate-700 hover:bg-slate-900";
 
               if (isSubmitted) {
-                const isCorrectOpt = option.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase();
+                const isCorrectOpt = option.trim().toLowerCase() === (currentQuestion.correctAnswer || "").trim().toLowerCase();
                 const isUserChoice = isSelected;
 
                 if (isCorrectOpt) {
@@ -443,19 +458,19 @@ export default function QuizClient({
             <div className="space-y-4 pt-4 border-t border-slate-800 animate-fadeIn">
               <div
                 className={`p-4 rounded-xl border flex items-start gap-3 ${
-                  selectedOption?.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase()
+                  selectedOption?.trim().toLowerCase() === (currentQuestion.correctAnswer || "").trim().toLowerCase()
                     ? "bg-emerald-950/30 border-emerald-500/40 text-emerald-200"
                     : "bg-rose-950/30 border-rose-500/40 text-rose-200"
                 }`}
               >
-                {selectedOption?.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase() ? (
+                {selectedOption?.trim().toLowerCase() === (currentQuestion.correctAnswer || "").trim().toLowerCase() ? (
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                 ) : (
                   <XCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
                 )}
                 <div>
                   <div className="font-semibold text-sm">
-                    {selectedOption?.trim().toLowerCase() === currentQuestion.correctAnswer.trim().toLowerCase()
+                    {selectedOption?.trim().toLowerCase() === (currentQuestion.correctAnswer || "").trim().toLowerCase()
                       ? "Correct!"
                       : "Incorrect"}
                   </div>
@@ -478,7 +493,7 @@ export default function QuizClient({
             <button
               type="button"
               onClick={handleSubmitQuestion}
-              disabled={!selectedOption}
+              disabled={!selectedOption || submittingAnswer}
               className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:opacity-40 disabled:hover:bg-amber-500 text-slate-950 font-semibold text-sm transition-colors"
             >
               Submit Answer
@@ -486,15 +501,13 @@ export default function QuizClient({
           </div>
         ) : (
           <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3">
-            {/* Inert "Similar Question" button (Sprint 4 Tutor placeholder) */}
-            <button
-              type="button"
-              disabled
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 text-slate-500 text-xs font-semibold cursor-not-allowed border border-slate-700/50 flex items-center justify-center gap-1.5"
+            <Link
+              href={`/tutor?domain=${domain}&topicId=${encodeURIComponent(topicId)}`}
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 text-teal-300 text-xs font-semibold border border-slate-700/50 flex items-center justify-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Similar Question (AI Tutor)</span>
-            </button>
+              <span>Ask Tutor / Get Similar Question</span>
+            </Link>
 
             <button
               type="button"

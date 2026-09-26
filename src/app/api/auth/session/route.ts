@@ -37,12 +37,14 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const response = NextResponse.json({ user }, { status: 200 });
-    response.cookies.set("firebaseUid", uid, {
+    const sessionCookie = await adminAuth.createSessionCookie(idToken, { expiresIn: 60 * 60 * 24 * 7 * 1000 });
+    const response = NextResponse.json({ user: { id: user.id, email: user.email, name: user.name } }, { status: 200 });
+    response.cookies.set("__session", sessionCookie, {
       path: "/",
       httpOnly: true,
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24 * 7,
     });
 
     return response;
@@ -50,4 +52,10 @@ export async function POST(req: NextRequest) {
     console.error("Error verifying token or syncing session:", error);
     return NextResponse.json({ error: "Unauthorized or server error" }, { status: 401 });
   }
+}
+
+export async function DELETE() {
+  const response = NextResponse.json({ success: true });
+  response.cookies.delete("__session");
+  return response;
 }

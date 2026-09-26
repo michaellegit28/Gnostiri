@@ -42,7 +42,11 @@ interface DashboardData {
   weakTopics: TopicSummary[];
   strongTopics: TopicSummary[];
   recentAttempts: QuizAttemptSummary[];
+  streak?: number;
+  studyPlan?: { id: string; examDate: string | null; items: PlanItem[]; generatedBy: string } | null;
 }
+
+interface PlanItem { subject: string; topic: string; duration: number; priority: string }
 
 export default function ProgressPage() {
   const { user, loading } = useAuth();
@@ -53,11 +57,11 @@ export default function ProgressPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (user && activeTab === "highschool") {
+    if (user) {
       setFetching(true);
       setError(null);
 
-      fetch(`/api/progress/dashboard?firebaseUid=${user.uid}&domain=highschool`)
+      fetch(`/api/progress/dashboard?domain=${activeTab}`)
         .then((res) => {
           if (!res.ok) throw new Error("Failed to load progress data");
           return res.json();
@@ -122,10 +126,10 @@ export default function ProgressPage() {
           </div>
           <div>
             <Link
-              href="/highschool"
+              href="/login"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors w-full"
             >
-              <span>Go to High School</span>
+              <span>Sign in or create an account</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -190,23 +194,8 @@ export default function ProgressPage() {
           </button>
         </div>
 
-        {/* Non-High School Tab Empty States */}
-        {activeTab !== "highschool" && (
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-12 text-center space-y-4">
-            <div className="w-12 h-12 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center mx-auto">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <h2 className="text-2xl font-serif font-bold text-slate-200">
-              {activeTab === "university" ? "University" : "Extras"} Domain — Coming Soon
-            </h2>
-            <p className="text-slate-400 text-sm max-w-md mx-auto">
-              Progress tracking for this domain will be available as soon as courses are published. Check out High School topics in the meantime!
-            </p>
-          </div>
-        )}
-
-        {/* High School Dashboard Content */}
-        {activeTab === "highschool" && (
+        {/* Domain dashboard */}
+        {
           <div className="space-y-10">
             {fetching ? (
               <div className="flex items-center justify-center py-12 text-slate-400 gap-3">
@@ -219,6 +208,10 @@ export default function ProgressPage() {
               </div>
             ) : (
               <>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Current streak</p><p className="mt-2 text-3xl font-bold text-amber-400">{dashboardData?.streak || 0} days</p></div>
+                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Today’s plan</p>{dashboardData?.studyPlan ? <div className="mt-2"><p className="font-semibold">{dashboardData.studyPlan.items.length} study items</p><Link href="/study-plan" className="text-sm text-teal-300 underline">Edit plan</Link></div> : <Link href="/study-plan" className="mt-2 inline-block text-teal-300 underline">Create a study plan</Link>}</div>
+                </div>
                 {/* Weak & Strong Topics Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Weak Topics Card */}
@@ -309,6 +302,18 @@ export default function ProgressPage() {
                     </h2>
                   </div>
 
+                  {dashboardData?.recentAttempts?.length ? (
+                    <div aria-label="Recent quiz accuracy chart" className="flex h-36 items-end gap-3 overflow-x-auto border-b border-slate-800 px-2 pb-2">
+                      {dashboardData.recentAttempts.slice(0, 7).reverse().map((attempt) => (
+                        <div key={attempt.id} className="flex h-full min-w-12 flex-col items-center justify-end gap-1">
+                          <span className="text-[10px] text-slate-400">{attempt.accuracy}%</span>
+                          <div className="w-8 rounded-t bg-amber-500" style={{ height: `${Math.max(4, attempt.accuracy)}%` }} title={`${attempt.topicTitle}: ${attempt.accuracy}%`} />
+                          <span className="max-w-16 truncate text-[10px] text-slate-500">{attempt.topicTitle}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+
                   {!dashboardData?.recentAttempts || dashboardData.recentAttempts.length === 0 ? (
                     <p className="text-slate-400 text-sm italic py-4">
                       No quiz attempts recorded yet. Start practicing from any topic page to build your history!
@@ -360,7 +365,7 @@ export default function ProgressPage() {
               </>
             )}
           </div>
-        )}
+        }
       </div>
     </div>
   );

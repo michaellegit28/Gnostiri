@@ -1,28 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { AppDomain } from "@prisma/client";
+import { getCurrentUser } from "@/lib/server-auth";
+import { recordLearningActivity } from "@/lib/activity";
 
 export async function POST(req: NextRequest) {
   try {
-    const { firebaseUid, domain, topicId } = await req.json();
-
-    const targetDomain: AppDomain = domain === "highschool" ? "highschool" : "highschool";
-
-    if (!firebaseUid) {
+    const { domain, topicId } = await req.json();
+    const targetDomain: AppDomain | undefined = ["highschool", "university", "extras"].includes(domain) ? domain : undefined;
+    const user = await getCurrentUser();
+    if (!user) {
       return NextResponse.json({ error: "Authentication required" }, { status: 401 });
     }
 
+    if (!targetDomain) return NextResponse.json({ error: "Domain not found" }, { status: 404 });
     if (!topicId) {
       return NextResponse.json({ error: "Topic ID required" }, { status: 400 });
     }
-
-    const user = await prisma.user.findFirst({
-      where: { firebaseUid },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
+    const topic = await prisma.topic.findFirst({ where: { id: topicId, domain: targetDomain } });
+    if (!topic) return NextResponse.json({ error: "Topic not found" }, { status: 404 });
 
     const existing = await prisma.progress.findFirst({
       where: {
@@ -56,6 +52,7 @@ export async function POST(req: NextRequest) {
         },
       });
     }
+    await recordLearningActivity(user.id);
 
     return NextResponse.json({ progress: progressRow, success: true }, { status: 200 });
   } catch (error) {

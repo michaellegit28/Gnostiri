@@ -35,6 +35,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error("Failed to sync session with Postgres:", error);
         }
       }
+      else {
+        await fetch("/api/auth/session", { method: "DELETE" });
+      }
       setLoading(false);
     });
 

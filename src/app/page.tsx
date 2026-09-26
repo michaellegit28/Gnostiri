@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
+import CountrySelector from "@/components/CountrySelector";
 
 export default function Home() {
   const domainCards = [
@@ -68,7 +69,7 @@ export default function Home() {
             Progress
           </Link>
           <Link
-            href="/highschool"
+            href="/login"
             className="px-5 py-2.5 min-h-[48px] inline-flex items-center text-sm font-medium rounded-lg bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
           >
             Get Started
@@ -183,21 +184,7 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-4">
-            <label htmlFor="country-select" className="text-xs text-slate-400">
-              Country:
-            </label>
-            <select
-              id="country-select"
-              defaultValue="US"
-              className="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 min-h-[48px] focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
-            >
-              <option value="US">United States</option>
-              <option value="UK">United Kingdom</option>
-              <option value="NG">Nigeria</option>
-              <option value="KE">Kenya</option>
-              <option value="GH">Ghana</option>
-              <option value="GLOBAL">Global / Other</option>
-            </select>
+            <CountrySelector />
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-6 text-center md:text-left text-xs text-slate-500">
