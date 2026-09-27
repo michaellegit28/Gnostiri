@@ -10,21 +10,33 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-let app: FirebaseApp | null = null;
-let auth: Auth;
+const isFirebaseConfigured = Boolean(
+  firebaseConfig.apiKey &&
+    firebaseConfig.authDomain &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId
+);
 
-if (typeof window !== "undefined" || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+let app: FirebaseApp | null = null;
+let auth: Auth | null = null;
+
+if (isFirebaseConfigured) {
   try {
     app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
     auth = getAuth(app);
   } catch (error) {
     console.warn("Firebase client SDK failed to initialize:", error);
-    auth = getAuth();
+    app = null;
+    auth = null;
   }
-} else {
-  console.warn("Missing NEXT_PUBLIC_FIREBASE_API_KEY env var. Firebase client SDK initialized with defaults.");
-  app = getApps().length > 0 ? getApp() : initializeApp({ apiKey: "placeholder" });
-  auth = getAuth(app);
+} else if (typeof window !== "undefined") {
+  // Client-side without env vars: warn once and run in "auth disabled" mode
+  // instead of throwing at import time (which would black-screen every page
+  // under RootLayout with "Application error: a client-side exception...").
+  console.warn(
+    "Missing NEXT_PUBLIC_FIREBASE_* env vars. Running without Firebase Auth. " +
+      "Set them in Vercel Project Settings > Environment Variables and redeploy."
+  );
 }
 
-export { app, auth };
+export { app, auth, isFirebaseConfigured };
