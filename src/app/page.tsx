@@ -101,20 +101,34 @@ export default async function Home() {
     },
   ];
 
-  const [examCount, topicCount, regionRows] = await Promise.all([
-    prisma.examination.count({ where: { domain: "highschool" } }),
-    prisma.topic.count({ where: { isPublished: true } }),
-    prisma.examination.findMany({ where: { domain: "highschool" }, select: { country: true } }),
-  ]);
-  const regionCount = new Set(
-    regionRows.map((r: { country: string | null }) => (r.country || "International").trim())
-  ).size;
+  // Live stats — sequential queries (pooler-safe) with graceful fallback:
+  // if the database is unreachable during prerender, the band hides
+  // instead of failing the build.
+  let examCount = 0;
+  let topicCount = 0;
+  let regionCount = 0;
+  try {
+    examCount = await prisma.examination.count({ where: { domain: "highschool" } });
+    topicCount = await prisma.topic.count({ where: { isPublished: true } });
+    const regionRows: { country: string | null }[] = await prisma.examination.findMany({
+      where: { domain: "highschool" },
+      select: { country: true },
+    });
+    regionCount = new Set(
+      regionRows.map((r) => (r.country || "International").trim())
+    ).size;
+  } catch {
+    examCount = 0;
+    topicCount = 0;
+    regionCount = 0;
+  }
 
   const stats = [
     { value: `${examCount}`, label: "Examination systems" },
     { value: `${regionCount}`, label: "Regions covered" },
     { value: `${topicCount}+`, label: "Topics and counting" },
   ];
+  const showStats = examCount + topicCount + regionCount > 0;
 
   return (
     <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans">
@@ -205,7 +219,8 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Stats band — real numbers, never faked */}
+        {/* Stats band — real numbers, never faked; hidden if DB unreachable */}
+        {showStats && (
         <section aria-label="Gnostiri in numbers" className="w-full">
           <dl className="grid grid-cols-3 gap-4 md:gap-8">
             {stats.map((s) => (
@@ -223,6 +238,7 @@ export default async function Home() {
             ))}
           </dl>
         </section>
+        )}
 
         {/* Showcase — FlexCarousel */}
         <section className="w-full space-y-6">
