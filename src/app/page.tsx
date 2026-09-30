@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
 import CountrySelector from "@/components/CountrySelector";
 import HomeDashboard from "@/components/HomeDashboard";
+import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
 import DarkVeil from "@/components/effects/DarkVeil";
 import TechText from "@/components/effects/TechText";
 import FlexCarousel from "@/components/effects/FlexCarousel";
@@ -98,7 +99,7 @@ export default function Home() {
       {/* Header / Navbar */}
       <header className="border-b border-slate-800 px-6 py-4 flex items-center justify-between max-w-7xl w-full mx-auto">
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-serif font-bold text-[#D4AF37]">Gnostiri</span>
+          <GnostiriLogo />
         </div>
         <nav className="flex items-center gap-4">
           <Link
@@ -300,7 +301,7 @@ export default function Home() {
       <footer className="border-t border-slate-800 py-10 px-6 bg-transparent text-slate-400 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
-            <span className="font-serif font-bold text-[#D4AF37] text-lg">Gnostiri</span>
+            <GnostiriLogo wordClassName="font-serif font-bold text-[#D4AF37] text-lg" markClassName="w-7 h-7 text-[#D4AF37]" />
             <span className="text-slate-600">|</span>
             <div className="flex items-center gap-4">
               <Link href="/highschool" className="hover:text-slate-200 transition-colors">

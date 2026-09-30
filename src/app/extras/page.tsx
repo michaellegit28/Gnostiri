@@ -1,6 +1,7 @@
 import prisma from "@/lib/db";
 import Link from "next/link";
-import { Telescope, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { SectionMark } from "@/components/logo/GnostiriLogo";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,7 @@ export default async function ExtrasPage() {
         />
         <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-semibold border border-violet-500/30">
-            <Telescope className="w-4 h-4" />
+            <SectionMark variant="discovery" className="w-4 h-4 text-violet-300" accent="#a78bfa" />
             <span>Discovery — beyond the curriculum</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">

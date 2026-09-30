@@ -1,7 +1,8 @@
 import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
-import { GraduationCap, BookOpen, ArrowRight, ChevronRight, History } from "lucide-react";
+import { BookOpen, ArrowRight, ChevronRight, History } from "lucide-react";
+import { SectionMark } from "@/components/logo/GnostiriLogo";
 
 export const dynamic = "force-dynamic";
 
@@ -116,7 +117,7 @@ export default async function HighSchoolHubPage() {
         {/* Page Header */}
         <div className="border-b border-slate-800 pb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold mb-3">
-            <GraduationCap className="w-4 h-4" />
+            <SectionMark variant="school" className="w-4 h-4 text-teal-300" accent="#14B8A6" />
             <span>High School Domain</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-100 tracking-tight">

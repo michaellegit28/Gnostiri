@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { SectionMark } from "@/components/logo/GnostiriLogo";
 import {
   Swords,
   CalendarDays,
@@ -146,7 +147,7 @@ export default function BattlePlanPage() {
 
         <header className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-semibold border border-[#D4AF37]/30">
-            <Swords className="w-4 h-4" />
+            <SectionMark variant="battle" className="w-4 h-4 text-[#D4AF37]" />
             <span>Exam Battle Plan</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
