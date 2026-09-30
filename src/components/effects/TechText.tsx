@@ -287,6 +287,7 @@ export default function TechText({
     reach,
     softness,
     specks,
+    draggable,
   ]);
 
   return (

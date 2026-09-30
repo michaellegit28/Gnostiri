@@ -32,7 +32,7 @@ interface DiscoveryReaderProps {
   title: string;
   trail: TrailLink[];
   lessons: DepthLesson[];
-  children: TrailLink[];
+  subtopics: TrailLink[];
   siblings: TrailLink[];
 }
 
@@ -120,7 +120,7 @@ export default function DiscoveryReader({
   title,
   trail,
   lessons,
-  children,
+  subtopics,
   siblings,
 }: DiscoveryReaderProps) {
   const [depth, setDepth] = useState(0);
@@ -214,14 +214,14 @@ export default function DiscoveryReader({
         )}
 
         {/* Go deeper */}
-        {children.length > 0 && (
+        {subtopics.length > 0 && (
           <section className="mt-12 space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
               <ArrowDown className="w-5 h-5 text-[#D4AF37]" />
               Go deeper
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
-              {children.map((c) => (
+              {subtopics.map((c) => (
                 <Link
                   key={c.id}
                   href={`/extras/${c.id}`}

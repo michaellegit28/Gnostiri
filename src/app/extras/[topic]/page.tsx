@@ -33,7 +33,7 @@ export default async function ExtrasTopicPage({ params }: { params: { topic: str
     guard += 1;
   }
 
-  const children = all
+  const subtopics = all
     .filter((t) => t.parentId === topic.id)
     .sort((a, b) => a.orderIndex - b.orderIndex)
     .map((t) => ({ id: t.id, title: t.title }));
@@ -60,7 +60,7 @@ export default async function ExtrasTopicPage({ params }: { params: { topic: str
       title={topic.title}
       trail={trail}
       lessons={lessons}
-      children={children}
+      subtopics={subtopics}
       siblings={siblings}
     />
   );
