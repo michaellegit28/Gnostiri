@@ -104,13 +104,13 @@ export default function Home() {
         <nav className="flex items-center gap-4">
           <Link
             href="/highschool"
-            className="px-4 py-2 min-h-[48px] inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
           >
             Explore
           </Link>
           <Link
             href="/progress"
-            className="px-4 py-2 min-h-[48px] inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
           >
             Progress
           </Link>
@@ -323,8 +323,13 @@ export default function Home() {
             <CountrySelector />
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-6 text-center md:text-left text-xs text-slate-500">
-          © {new Date().getFullYear()} Gnostiri. All rights reserved.
+        <div className="max-w-7xl mx-auto mt-8 space-y-2 text-center md:text-left">
+          <p className="font-serif italic text-slate-400 text-sm">
+            Learning is not a place. It is a posture toward the world.
+          </p>
+          <p className="text-xs text-slate-500">
+            © {new Date().getFullYear()} Gnostiri. All fields open, all doors unlocked.
+          </p>
         </div>
       </footer>
     </div>
