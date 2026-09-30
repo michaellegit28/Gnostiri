@@ -11,8 +11,8 @@ import GhostFibers from "@/components/effects/GhostFibers";
 export default function Home() {
   const domainCards = [
     {
-      title: "High School",
-      description: "Master curriculum subjects and ace standardized national examinations.",
+      title: "Global School",
+      description: "Whatever your country's system — master its subjects and ace its examinations.",
       badge: "Free Forever",
       badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
       link: "/highschool",
@@ -65,8 +65,8 @@ export default function Home() {
 
   const showcase = [
     {
-      title: "High School",
-      caption: "WAEC, JAMB & NECO prep — free lessons and practice questions.",
+      title: "Global School",
+      caption: "Any country's system — free lessons and practice questions.",
       href: "/highschool",
       badge: "Free Forever",
       gradient: "bg-gradient-to-br from-teal-950 via-slate-900 to-slate-900",
