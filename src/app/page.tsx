@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
+import prisma from "@/lib/db";
 import CountrySelector from "@/components/CountrySelector";
 import HomeDashboard from "@/components/HomeDashboard";
 import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
@@ -8,11 +9,13 @@ import TechText from "@/components/effects/TechText";
 import FlexCarousel from "@/components/effects/FlexCarousel";
 import GhostFibers from "@/components/effects/GhostFibers";
 
-export default function Home() {
+export default async function Home() {
   const domainCards = [
     {
       title: "Global School",
       description: "Whatever your country's system — master its subjects and ace its examinations.",
+      numeral: "I",
+      rule: "via-teal-400/60",
       badge: "Free Forever",
       badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
       link: "/highschool",
@@ -24,6 +27,8 @@ export default function Home() {
     {
       title: "University",
       description: "Deep dive into degree-level coursework, technical modules, and research.",
+      numeral: "II",
+      rule: "via-[#D4AF37]/60",
       badge: "From $3/mo",
       badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
       link: "/university",
@@ -35,6 +40,8 @@ export default function Home() {
     {
       title: "Extras",
       description: "Explore professional certifications, practical skills, and elective topics.",
+      numeral: "III",
+      rule: "via-violet-400/60",
       badge: "Free",
       badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
       link: "/extras",
@@ -92,6 +99,21 @@ export default function Home() {
       badge: "New",
       gradient: "bg-gradient-to-br from-[#2a230f] via-slate-900 to-slate-950",
     },
+  ];
+
+  const [examCount, topicCount, regionRows] = await Promise.all([
+    prisma.examination.count({ where: { domain: "highschool" } }),
+    prisma.topic.count({ where: { isPublished: true } }),
+    prisma.examination.findMany({ where: { domain: "highschool" }, select: { country: true } }),
+  ]);
+  const regionCount = new Set(
+    regionRows.map((r: { country: string | null }) => (r.country || "International").trim())
+  ).size;
+
+  const stats = [
+    { value: `${examCount}`, label: "Examination systems" },
+    { value: `${regionCount}`, label: "Regions covered" },
+    { value: `${topicCount}+`, label: "Topics and counting" },
   ];
 
   return (
@@ -183,6 +205,25 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Stats band — real numbers, never faked */}
+        <section aria-label="Gnostiri in numbers" className="w-full">
+          <dl className="grid grid-cols-3 gap-4 md:gap-8">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-6 text-center"
+              >
+                <dd className="font-serif text-3xl md:text-5xl font-bold text-[#D4AF37]">
+                  {s.value}
+                </dd>
+                <dt className="mt-2 text-[10px] md:text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+                  {s.label}
+                </dt>
+              </div>
+            ))}
+          </dl>
+        </section>
+
         {/* Showcase — FlexCarousel */}
         <section className="w-full space-y-6">
           <div className="text-center space-y-3">
@@ -207,11 +248,16 @@ export default function Home() {
           />
         </section>
 
-        {/* Domain Cards Section */}
+        {/* Domain Cards Section — the three doorways */}
         <section className="w-full space-y-8">
-          <div className="text-center space-y-3">
-            <h2 className="text-3xl font-serif font-bold text-slate-100">Choose your path</h2>
-            <p className="text-slate-400 text-sm sm:text-base">
+          <div className="space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+              The three ways
+            </p>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-100">
+              Learning has never been one shape.
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base max-w-2xl">
               Three worlds, one account — your progress follows you everywhere.
             </p>
           </div>
@@ -223,8 +269,11 @@ export default function Home() {
                   key={card.title}
                   className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b ${card.tint} p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-lg hover:shadow-xl ${card.glow}`}
                 >
-                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className={`pointer-events-none absolute inset-x-8 top-0 h-[2px] bg-gradient-to-r from-transparent ${card.rule} to-transparent`} />
                   <div>
+                    <div className="text-xs font-mono tracking-[0.25em] text-slate-500 mb-4">
+                      {card.numeral}.
+                    </div>
                     <div className="flex items-center justify-between mb-6">
                       <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
                         <IconComponent className={`w-6 h-6 ${card.iconColor}`} />
@@ -296,6 +345,20 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+        {/* Manifesto */}
+        <section className="w-full max-w-4xl mx-auto text-center space-y-5 py-4">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+            The Gnostiri principle
+          </p>
+          <blockquote className="font-serif text-3xl md:text-5xl font-bold leading-tight text-slate-100">
+            Curiosity is the <span className="italic text-[#D4AF37]">only</span> prerequisite.
+          </blockquote>
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto font-light">
+            Not your grades, not your country, not your past. If you wonder about
+            something, this is a place built to walk with you while you find out.
+          </p>
+        </section>
 
       {/* Footer */}
       <footer className="border-t border-slate-800 py-10 px-6 bg-transparent text-slate-400 text-sm">
