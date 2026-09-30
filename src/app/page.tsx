@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
 import CountrySelector from "@/components/CountrySelector";
+import HomeDashboard from "@/components/HomeDashboard";
 import DarkVeil from "@/components/effects/DarkVeil";
 import TechText from "@/components/effects/TechText";
 import FlexCarousel from "@/components/effects/FlexCarousel";
@@ -93,7 +94,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-transparent text-slate-100 flex flex-col font-sans">
       {/* Header / Navbar */}
       <header className="border-b border-slate-800 px-6 py-4 flex items-center justify-between max-w-7xl w-full mx-auto">
         <div className="flex items-center gap-2">
@@ -123,6 +124,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-16 flex flex-col items-center justify-center space-y-20">
+        <HomeDashboard />
         {/* Hero Section — GhostFibers atmosphere + TechText particle brand */}
         <section className="relative w-full overflow-hidden rounded-2xl border border-slate-800/60">
           <div className="relative h-[600px] md:h-[640px]">
@@ -295,7 +297,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 py-10 px-6 bg-slate-950 text-slate-400 text-sm">
+      <footer className="border-t border-slate-800 py-10 px-6 bg-transparent text-slate-400 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
             <span className="font-serif font-bold text-[#D4AF37] text-lg">Gnostiri</span>

@@ -68,7 +68,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
     : [];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-800 pb-6">

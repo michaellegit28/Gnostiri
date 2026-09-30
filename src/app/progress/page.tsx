@@ -101,7 +101,7 @@ export default function ProgressPage() {
   // 1. Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-transparent text-slate-50 flex items-center justify-center p-6">
         <div className="flex items-center gap-3 text-slate-400">
           <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
           <span>Loading dashboard...</span>
@@ -113,7 +113,7 @@ export default function ProgressPage() {
   // 2. Unauthenticated state
   if (!user) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12 flex items-center justify-center">
+      <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12 flex items-center justify-center">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6 shadow-xl">
           <div className="w-16 h-16 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto">
             <LogIn className="w-8 h-8" />
@@ -139,7 +139,7 @@ export default function ProgressPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-800 pb-6">

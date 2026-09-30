@@ -10,7 +10,7 @@ export default async function UniversityPage() {
   const premium = user ? await hasPremiumAccess(user.id) : false;
   const courses = await prisma.course.findMany({ where: { domain: "university", isPublished: true }, include: { lessons: { orderBy: { orderIndex: "asc" } } }, orderBy: { title: "asc" } });
   return (
-    <main className="min-h-screen p-6 md:p-12 bg-slate-950 text-slate-50">
+    <main className="min-h-screen p-6 md:p-12 bg-transparent text-slate-50">
       <div className="max-w-6xl mx-auto space-y-8">
         <header><p className="text-teal-400 text-sm font-semibold">University</p><h1 className="text-4xl font-serif font-bold text-amber-400 mt-2">Course catalog</h1><p className="text-slate-400 mt-3">Explore university courses and start with a free lesson preview.</p></header>
         {!premium && <aside className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-5"><strong className="text-amber-300">Unlock every course</strong><p className="text-slate-300 mt-1">Premium includes all university lessons, quizzes, and unlimited Tutor access.</p><Link href="/pricing" className="inline-flex mt-3 rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-950">View plans</Link></aside>}

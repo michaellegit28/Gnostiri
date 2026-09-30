@@ -130,7 +130,7 @@ export default function DiscoveryReader({
     : 0;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50">
+    <div className="min-h-screen bg-transparent text-slate-50">
       {/* Cosmic header */}
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,#1b1440_0%,#0d0a24_50%,#060814_100%)]">
         <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">

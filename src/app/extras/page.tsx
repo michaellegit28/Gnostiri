@@ -18,7 +18,7 @@ export default async function ExtrasPage() {
   });
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-50">
+    <main className="min-h-screen bg-transparent text-slate-50">
       {/* Immersive hero — distinct from the structured exam pages */}
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,#1b1440_0%,#0d0a24_45%,#060814_100%)]">
         <div

@@ -82,7 +82,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Breadcrumbs: Exam > Subject */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">

@@ -134,7 +134,7 @@ export default function BattlePlanPage() {
   const progress = total > 0 ? Math.round((doneCount / total) * 100) : 0;
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 p-6 md:p-12">
+    <main className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-4xl space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/highschool" className="hover:text-amber-400 transition-colors">
