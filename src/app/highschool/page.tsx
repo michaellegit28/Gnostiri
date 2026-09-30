@@ -146,11 +146,17 @@ export default async function HighSchoolHubPage() {
         )}
 
         {/* Regions */}
-        {orderedRegions.map(([region, exams]) => (
+        {orderedRegions.map(([region, exams], ri) => (
           <section key={region} className="space-y-5">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs tracking-[0.25em] text-slate-500">
+                {String(ri + 1).padStart(2, "0")}
+              </span>
               <Globe2 className="w-5 h-5 text-teal-300" />
               <h2 className="text-xl md:text-2xl font-serif font-bold">{region}</h2>
+              <span className="text-xs text-slate-500">
+                · {exams.length} examination{exams.length === 1 ? "" : "s"}
+              </span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {exams.map((exam) => (

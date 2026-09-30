@@ -59,6 +59,11 @@ export default async function ExtrasPage() {
 
       {/* Fields */}
       <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 space-y-8">
+        <dl className="flex flex-wrap gap-x-10 gap-y-4">
+          <div><dd className="font-serif text-3xl font-bold text-[#D4AF37]">{fields.length}</dd><dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Fields open</dt></div>
+          <div><dd className="font-serif text-3xl font-bold text-[#D4AF37]">{fields.reduce((s, f) => s + f.children.length, 0)}</dd><dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Trails to wander</dt></div>
+          <div><dd className="font-serif text-3xl font-bold text-[#D4AF37]">4</dd><dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Depth levels</dt></div>
+        </dl>
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Sparkles className="w-4 h-4 text-[#D4AF37]" />
           <span>Fields of knowledge — choose where to begin wandering</span>
