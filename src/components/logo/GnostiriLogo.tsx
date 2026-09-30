@@ -21,22 +21,20 @@ interface MarkProps {
   accent?: string;
 }
 
-/** Master Gnostiri mark. Inherits text color; spark glows in accent. */
+/** Master Gnostiri monogram — a dotted orbit ring around a gold nucleus.
+ *  Minimal, premium, legible from favicon to hero. */
 export function GnostiriMark({ className = "w-8 h-8", accent = "#D4AF37" }: MarkProps) {
+  const dots = Array.from({ length: 12 }, (_, i) => {
+    const a = (i / 12) * Math.PI * 2 - Math.PI / 2;
+    return { x: 12 + 8.4 * Math.cos(a), y: 12 + 8.4 * Math.sin(a) };
+  });
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <circle cx="12" cy="12" r="10.2" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M12 8.2C10.2 6.9 7.6 6.4 5 6.4v10.2c2.6 0 5.2.5 7 1.8 1.8-1.3 4.4-1.8 7-1.8V6.4c-2.6 0-5.2.5-7 1.8z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path d="M12 8.2v10.2" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M18.6 2.4l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z"
-        fill={accent}
-      />
+      {dots.map((d, i) => (
+        <circle key={i} cx={d.x} cy={d.y} r={i % 3 === 0 ? 1.05 : 0.8} fill="currentColor" opacity={i % 3 === 0 ? 0.95 : 0.6} />
+      ))}
+      <circle cx="12" cy="12" r="2.4" fill={accent} />
+      <circle cx="12" cy="12" r="4.1" stroke={accent} strokeWidth="0.7" opacity="0.45" />
     </svg>
   );
 }
