@@ -84,6 +84,24 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
           </p>
         </div>
 
+        {/* Battle Plan CTA */}
+        <Link
+          href="/battle-plan"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-[#D4AF37]/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-5 hover:border-[#D4AF37]/60 transition-colors group"
+        >
+          <div>
+            <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-[#D4AF37] transition-colors">
+              Get your automatic battle plan
+            </div>
+            <p className="text-sm text-slate-400 mt-1">
+              Pick your exam date — we turn the syllabus into a day-by-day mission, weak topics first.
+            </p>
+          </div>
+          <span className="inline-flex items-center justify-center gap-2 shrink-0 min-h-[44px] px-5 py-2.5 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm group-hover:bg-[#c3a030] transition-colors">
+            Build my plan
+          </span>
+        </Link>
+
         {/* Subject Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjectTopics.map((subject) => {

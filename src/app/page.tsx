@@ -15,6 +15,9 @@ export default function Home() {
       badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
       link: "/highschool",
       icon: BookOpen,
+      tint: "from-teal-950/50 via-slate-900 to-slate-900",
+      iconColor: "text-teal-300",
+      glow: "hover:shadow-teal-500/10",
     },
     {
       title: "University",
@@ -23,6 +26,9 @@ export default function Home() {
       badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
       link: "/university",
       icon: GraduationCap,
+      tint: "from-amber-950/40 via-slate-900 to-slate-900",
+      iconColor: "text-[#D4AF37]",
+      glow: "hover:shadow-[#D4AF37]/10",
     },
     {
       title: "Extras",
@@ -31,6 +37,9 @@ export default function Home() {
       badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
       link: "/extras",
       icon: Sparkles,
+      tint: "from-slate-800/80 via-slate-900 to-slate-950",
+      iconColor: "text-teal-300",
+      glow: "hover:shadow-teal-500/10",
     },
   ];
 
@@ -196,19 +205,26 @@ export default function Home() {
         </section>
 
         {/* Domain Cards Section */}
-        <section className="w-full">
+        <section className="w-full space-y-8">
+          <div className="text-center space-y-3">
+            <h2 className="text-3xl font-serif font-bold text-slate-100">Choose your path</h2>
+            <p className="text-slate-400 text-sm sm:text-base">
+              Three worlds, one account — your progress follows you everywhere.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {domainCards.map((card) => {
               const IconComponent = card.icon;
               return (
                 <div
                   key={card.title}
-                  className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-8 flex flex-col justify-between hover:border-[#D4AF37]/50 transition-all shadow-lg hover:shadow-[#D4AF37]/5"
+                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b ${card.tint} p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-lg hover:shadow-xl ${card.glow}`}
                 >
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <div className="p-3 bg-slate-700/50 rounded-lg text-[#14B8A6]">
-                        <IconComponent className="w-6 h-6" />
+                      <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
+                        <IconComponent className={`w-6 h-6 ${card.iconColor}`} />
                       </div>
                       <span
                         className={`text-xs font-semibold px-3 py-1 rounded-full border ${card.badgeColor}`}
@@ -226,7 +242,7 @@ export default function Home() {
 
                   <Link
                     href={card.link}
-                    className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-[#14B8A6] hover:bg-[#0f9284] text-slate-950 font-semibold text-sm transition-colors focus:ring-2 focus:ring-[#14B8A6] focus:outline-none"
+                    className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-[#D4AF37] hover:bg-[#c3a030] text-slate-950 font-semibold text-sm transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
                   >
                     Enter {card.title}
                   </Link>
