@@ -90,7 +90,7 @@ export default function StudyReaderClient({
           return (
             <h2
               key={index}
-              className="font-serif text-2xl md:text-3xl font-bold text-slate-100 mt-8 mb-4 border-b border-slate-800 pb-2"
+              className="font-serif text-2xl md:text-3xl font-bold text-[#1F1E26] mt-8 mb-4 border-b border-[#D8CBA4] pb-2"
             >
               {block.text}
             </h2>
@@ -99,7 +99,7 @@ export default function StudyReaderClient({
         return (
           <h3
             key={index}
-            className="font-serif text-xl md:text-2xl font-semibold text-amber-400 mt-6 mb-3"
+            className="font-serif text-xl md:text-2xl font-semibold text-[#8A6D1C] mt-6 mb-3"
           >
             {block.text}
           </h3>
@@ -109,7 +109,7 @@ export default function StudyReaderClient({
         return (
           <p
             key={index}
-            className="text-slate-300 font-sans text-base md:text-lg leading-[1.6] my-4"
+            className="text-[#3A3844] font-sans text-base md:text-lg leading-[1.75] my-4"
           >
             {block.text}
           </p>
@@ -119,13 +119,13 @@ export default function StudyReaderClient({
         return (
           <div
             key={index}
-            className="border border-amber-500/30 bg-amber-950/20 rounded-xl p-5 my-6 shadow-sm"
+            className="border border-[#C9A227]/50 bg-[#F3E9CF] rounded-xl p-5 my-6 shadow-sm"
           >
-            <div className="text-xs font-semibold uppercase tracking-wider text-amber-500 mb-1">
-              Definition
+            <div className="text-xs font-semibold uppercase tracking-wider text-[#8A6D1C] mb-1">
+              Key idea
             </div>
-            <div className="font-bold text-amber-400 text-lg mb-2">{block.term}</div>
-            <div className="text-slate-300 leading-relaxed">{block.text}</div>
+            <div className="font-bold text-[#1F1E26] text-lg mb-2">{block.term}</div>
+            <div className="text-[#3A3844] leading-relaxed">{block.text}</div>
           </div>
         );
 
@@ -133,13 +133,13 @@ export default function StudyReaderClient({
         return (
           <div
             key={index}
-            className="border-l-4 border-teal-500 bg-teal-950/20 rounded-r-xl p-5 my-6 shadow-sm"
+            className="border-l-4 border-[#2F6B4F] bg-[#E9EFE7] rounded-r-xl p-5 my-6 shadow-sm"
           >
-            <div className="text-xs font-semibold uppercase tracking-wider text-teal-400 mb-2 flex items-center gap-1.5">
+            <div className="text-xs font-semibold uppercase tracking-wider text-[#2F6B4F] mb-2 flex items-center gap-1.5">
               <Sparkles className="w-4 h-4" />
               <span>Example</span>
             </div>
-            <div className="text-slate-200 leading-relaxed">{block.text}</div>
+            <div className="text-[#2C2A35] leading-relaxed">{block.text}</div>
           </div>
         );
 
@@ -148,14 +148,14 @@ export default function StudyReaderClient({
           return (
             <div
               key={index}
-              className="border border-blue-500/30 bg-blue-950/20 text-blue-200 rounded-xl p-5 my-6 flex items-start gap-3"
+              className="border border-[#1E4A6B]/30 bg-[#E4EDF3] text-[#1E3A52] rounded-xl p-5 my-6 flex items-start gap-3"
             >
-              <Info className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+              <Info className="w-5 h-5 text-[#1E4A6B] shrink-0 mt-0.5" />
               <div>
-                <div className="text-xs font-semibold uppercase tracking-wider text-blue-400 mb-1">
-                  Info
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#1E4A6B] mb-1">
+                  Note
                 </div>
-                <div className="leading-relaxed text-slate-200">{block.text}</div>
+                <div className="leading-relaxed">{block.text}</div>
               </div>
             </div>
           );
@@ -163,41 +163,41 @@ export default function StudyReaderClient({
         return (
           <div
             key={index}
-            className="border border-amber-500/30 bg-amber-950/20 text-amber-200 rounded-xl p-5 my-6 flex items-start gap-3"
+            className="border border-[#8A5A00]/40 bg-[#F7ECD0] text-[#6B4A00] rounded-xl p-5 my-6 flex items-start gap-3"
           >
-            <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            <AlertTriangle className="w-5 h-5 text-[#8A5A00] shrink-0 mt-0.5" />
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-1">
-                Warning
+              <div className="text-xs font-semibold uppercase tracking-wider text-[#8A5A00] mb-1">
+                Watch out
               </div>
-              <div className="leading-relaxed text-slate-200">{block.text}</div>
+              <div className="leading-relaxed">{block.text}</div>
             </div>
           </div>
         );
 
       case "table":
         return (
-          <div key={index} className="overflow-x-auto my-6 rounded-xl border border-slate-800">
+          <div key={index} className="overflow-x-auto my-6 rounded-xl border border-[#D8CBA4] bg-[#FBF7EA]">
             <table className="w-full text-left border-collapse">
-              <thead className="bg-slate-900 border-b border-slate-800">
+              <thead className="bg-[#ECE2C6] border-b border-[#D8CBA4]">
                 <tr>
                   {block.headers.map((header, hIdx) => (
                     <th
                       key={hIdx}
-                      className="p-3 text-sm font-semibold text-slate-200 border-r border-slate-800 last:border-r-0"
+                      className="p-3 text-sm font-semibold text-[#1F1E26] border-r border-[#D8CBA4] last:border-r-0"
                     >
                       {header}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800">
+              <tbody className="divide-y divide-[#E4D8B8]">
                 {block.rows.map((row, rIdx) => (
-                  <tr key={rIdx} className="hover:bg-slate-900/50">
+                  <tr key={rIdx} className="hover:bg-[#F3ECCE]">
                     {row.map((cell, cIdx) => (
                       <td
                         key={cIdx}
-                        className="p-3 text-sm text-slate-300 border-r border-slate-800 last:border-r-0"
+                        className="p-3 text-sm text-[#3A3844] border-r border-[#E4D8B8] last:border-r-0"
                       >
                         {cell}
                       </td>
@@ -328,9 +328,11 @@ export default function StudyReaderClient({
           </div>
 
           {hasBlocks ? (
-            <div className="space-y-2">
-              {lessonContent!.blocks.map((block, idx) => renderBlock(block, idx))}
-            </div>
+            <article className="rounded-2xl bg-[#F6F0E1] p-6 md:p-10 shadow-xl shadow-black/40">
+              <div className="space-y-2">
+                {lessonContent!.blocks.map((block, idx) => renderBlock(block, idx))}
+              </div>
+            </article>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/50 p-8">
               <BookOpen className="w-12 h-12 text-slate-600 mb-4" />
