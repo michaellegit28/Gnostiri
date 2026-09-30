@@ -364,6 +364,208 @@ async function main() {
     await prisma.question.upsert({ where: { id: `${id}-question` }, update: { domain: "extras", topicId: id, questionText: `Which is a good way to build understanding of ${title.toLowerCase()}?`, options: ["Ask questions and apply ideas", "Avoid examples", "Memorize unrelated details", "Skip practice"], correctAnswer: "Ask questions and apply ideas", explanation: "Active practice and applying ideas help develop understanding." }, create: { id: `${id}-question`, domain: "extras", topicId: id, questionText: `Which is a good way to build understanding of ${title.toLowerCase()}?`, options: ["Ask questions and apply ideas", "Avoid examples", "Memorize unrelated details", "Skip practice"], correctAnswer: "Ask questions and apply ideas", explanation: "Active practice and applying ideas help develop understanding." } });
   }
 
+  // ---- Discovery deep chain: Physics → Mechanics → Motion → Forces → Energy ----
+  // Depth convention (no schema change): a topic's lessons ordered by
+  // orderIndex map to depth levels: 0 Understand, 1 Explore, 2 Go Deeper, 3 Research.
+  interface DiscoSeed {
+    id: string;
+    title: string;
+    parent: string | null;
+    order: number;
+    lessonTitle: string;
+    blocks: object[];
+    exploreTitle?: string;
+    exploreBlocks?: object[];
+    question: {
+      id: string;
+      questionText: string;
+      options: string[];
+      correctAnswer: string;
+      explanation: string;
+    };
+  }
+
+  const disco: DiscoSeed[] = [
+    {
+      id: "disco-physics",
+      title: "Physics",
+      parent: null,
+      order: 0,
+      lessonTitle: "What physics really is",
+      blocks: [
+        { type: "heading", level: 2, text: "The study of everything that moves and changes" },
+        { type: "paragraph", text: "Physics asks the simplest and hardest questions: why do things fall, what is light, what is time? It studies matter, energy, and the rules that connect them — from tiny atoms to entire galaxies." },
+        { type: "definition", term: "Physics", text: "The science of matter, energy, motion, and force — and the fundamental laws that describe how the universe behaves." },
+        { type: "example", text: "When you throw a ball, physics can predict exactly where it lands. When engineers build bridges or satellites, they trust the same rules. The same laws work on Earth and on distant planets." },
+        { type: "callout", variant: "info", text: "Everything you are about to explore — motion, forces, energy, waves, electricity — is a branch of this one tree." },
+      ],
+      exploreTitle: "The map of physics",
+      exploreBlocks: [
+        { type: "heading", level: 2, text: "How the territory fits together" },
+        { type: "paragraph", text: "Physics begins with Mechanics — how objects move. Motion leads to Forces, forces lead to Energy, and energy opens the door to Fields, Electromagnetism, Waves, and eventually Relativity and Quantum mechanics." },
+        { type: "paragraph", text: "You do not need to learn it in one straight line. Wander: each step links to the next, and every idea connects sideways to mathematics, chemistry, engineering, and astronomy." },
+      ],
+      question: {
+        id: "disco-physics-question",
+        questionText: "Which of these best describes what physics studies?",
+        options: ["Matter, energy, motion and force", "Only living things", "Only chemicals in a laboratory", "Only stars and planets"],
+        correctAnswer: "Matter, energy, motion and force",
+        explanation: "Physics covers matter and energy at every scale — living things, chemicals and stars are studied by biology, chemistry and astronomy using physical laws.",
+      },
+    },
+    {
+      id: "disco-mechanics",
+      title: "Mechanics",
+      parent: "disco-physics",
+      order: 0,
+      lessonTitle: "The rules of motion",
+      blocks: [
+        { type: "heading", level: 2, text: "Why things move the way they do" },
+        { type: "paragraph", text: "Mechanics is the oldest branch of physics. It explains walking, driving, flying, and orbiting — anything with mass that moves. Its foundation is three laws discovered by Isaac Newton in the 1600s." },
+        { type: "definition", term: "Mechanics", text: "The branch of physics describing the motion of objects and the forces that cause or change that motion." },
+        { type: "example", text: "A car braking at a traffic light, a football curving through the air, the Moon circling Earth — all mechanics, all the same three laws." },
+      ],
+      exploreTitle: "Beyond Newton",
+      exploreBlocks: [
+        { type: "heading", level: 2, text: "Where Newton stops working" },
+        { type: "paragraph", text: "Newton's laws are superb for everyday speeds and sizes. Near the speed of light they give way to Relativity; at the scale of atoms they give way to Quantum mechanics. Mechanics is the doorway to both." },
+      ],
+      question: {
+        id: "disco-mechanics-question",
+        questionText: "Mechanics is best described as the study of…",
+        options: ["Motion of objects and the forces behind it", "Chemical reactions", "Living cells", "Electric circuits only"],
+        correctAnswer: "Motion of objects and the forces behind it",
+        explanation: "Mechanics deals with mass, motion and force — the other options belong to chemistry, biology and electromagnetism.",
+      },
+    },
+    {
+      id: "disco-motion",
+      title: "Motion",
+      parent: "disco-mechanics",
+      order: 0,
+      lessonTitle: "Describing movement precisely",
+      blocks: [
+        { type: "heading", level: 2, text: "Displacement, velocity, acceleration" },
+        { type: "paragraph", text: "To describe motion, physicists track three quantities. Displacement is how far something moved from its start. Velocity is displacement per second. Acceleration is how fast velocity itself changes." },
+        { type: "definition", term: "Acceleration", text: "The rate of change of velocity. A car speeding up, slowing down, or turning is accelerating — even at constant speed, turning counts." },
+        { type: "example", text: "A sprinter exploding from the blocks accelerates at roughly 3 m/s² — every second, their velocity grows by 3 metres per second." },
+      ],
+      question: {
+        id: "disco-motion-question",
+        questionText: "A car drives at a steady 60 km/h around a circular bend. Is it accelerating?",
+        options: ["Yes — its direction is changing", "No — its speed is constant", "Only if it uses more fuel", "Only on uphill bends"],
+        correctAnswer: "Yes — its direction is changing",
+        explanation: "Acceleration is any change in velocity, and velocity includes direction. Turning at constant speed is still acceleration.",
+      },
+    },
+    {
+      id: "disco-forces",
+      title: "Forces",
+      parent: "disco-motion",
+      order: 0,
+      lessonTitle: "What pushes the world",
+      blocks: [
+        { type: "heading", level: 2, text: "Newton's three laws" },
+        { type: "paragraph", text: "First law: objects keep doing what they are doing unless a force acts — this is inertia. Second law: force equals mass times acceleration (F = ma). Third law: every action has an equal and opposite reaction." },
+        { type: "example", text: "Push a heavy box and a light box with the same force: the light one accelerates more. That is F = ma, felt in your arms." },
+        { type: "callout", variant: "warning", text: "Common trap: action–reaction pairs act on DIFFERENT objects. The rocket pushes gas down; the gas pushes the rocket up." },
+      ],
+      question: {
+        id: "disco-forces-question",
+        questionText: "A 2 kg object experiences a 10 N force. Its acceleration is…",
+        options: ["5 m/s²", "20 m/s²", "12 m/s²", "0.2 m/s²"],
+        correctAnswer: "5 m/s²",
+        explanation: "F = ma, so a = F/m = 10/2 = 5 m/s².",
+      },
+    },
+    {
+      id: "disco-energy",
+      title: "Energy",
+      parent: "disco-forces",
+      order: 0,
+      lessonTitle: "The currency of the universe",
+      blocks: [
+        { type: "heading", level: 2, text: "Energy is never created or destroyed" },
+        { type: "paragraph", text: "Energy changes form but the total never changes. A raised weight holds gravitational potential energy; falling, it becomes kinetic energy of motion; landing, it becomes heat and sound. Nothing is lost — only transformed." },
+        { type: "definition", term: "Conservation of energy", text: "In a closed system the total energy stays constant. It is one of the most tested and trusted principles in all of science." },
+        { type: "example", text: "Hydroelectric dams are conservation of energy at giant scale: falling water's motion spins turbines that generate electricity lighting distant cities." },
+        { type: "callout", variant: "info", text: "Go deeper next: fields and electromagnetism — energy carried through empty space itself." },
+      ],
+      question: {
+        id: "disco-energy-question",
+        questionText: "A ball falls from a height. Ignoring air resistance, what happens to its total mechanical energy?",
+        options: ["It stays constant — potential becomes kinetic", "It decreases steadily", "It increases as it speeds up", "It becomes zero at the ground"],
+        correctAnswer: "It stays constant — potential becomes kinetic",
+        explanation: "Lost potential energy reappears exactly as kinetic energy. Conservation of energy holds at every instant of the fall.",
+      },
+    },
+    {
+      id: "disco-waves",
+      title: "Waves",
+      parent: "disco-physics",
+      order: 1,
+      lessonTitle: "How energy travels",
+      blocks: [
+        { type: "heading", level: 2, text: "Disturbances on the move" },
+        { type: "paragraph", text: "A wave carries energy from place to place without carrying matter along. Ocean waves move across water while the water mostly bobs up and down. Sound, light, and earthquakes all travel as waves." },
+        { type: "definition", term: "Wave", text: "A travelling disturbance that transfers energy. Key properties: wavelength, frequency, amplitude and speed, linked by speed = frequency × wavelength." },
+        { type: "example", text: "Pluck a guitar string: the string vibrates hundreds of times per second, the air carries that vibration to your ear, and your brain hears a note." },
+      ],
+      question: {
+        id: "disco-waves-question",
+        questionText: "What does a wave transport from one place to another?",
+        options: ["Energy, without net movement of matter", "Matter from source to receiver", "Only sound", "Only light"],
+        correctAnswer: "Energy, without net movement of matter",
+        explanation: "The medium oscillates in place while the energy of the disturbance travels onward — true for water, sound and light alike.",
+      },
+    },
+    {
+      id: "disco-electromagnetism",
+      title: "Electromagnetism",
+      parent: "disco-physics",
+      order: 2,
+      lessonTitle: "Electricity and magnetism are one thing",
+      blocks: [
+        { type: "heading", level: 2, text: "Two forces, one field" },
+        { type: "paragraph", text: "Electric charges create electric fields; moving charges create magnetic fields. In the 1800s Maxwell showed they are a single electromagnetic field — and that light itself is a wave in it." },
+        { type: "paragraph", text: "Every screen, motor, generator and radio you have ever used runs on this unity. It is the deepest idea in classical physics, and the bridge to relativity and quantum theory." },
+      ],
+      question: {
+        id: "disco-electromagnetism-question",
+        questionText: "What did Maxwell's equations reveal about light?",
+        options: ["Light is an electromagnetic wave", "Light needs air to travel", "Light is unrelated to electricity", "Light travels slower than sound"],
+        correctAnswer: "Light is an electromagnetic wave",
+        explanation: "Maxwell predicted electromagnetic waves travelling at the known speed of light — identifying light as one of them.",
+      },
+    },
+  ];
+
+  for (const item of disco) {
+    await prisma.topic.upsert({
+      where: { id: item.id },
+      update: { title: item.title, domain: "extras", parentId: item.parent, orderIndex: item.order, isPublished: true },
+      create: { id: item.id, title: item.title, domain: "extras", parentId: item.parent, orderIndex: item.order, isPublished: true },
+    });
+    await prisma.lesson.upsert({
+      where: { id: `${item.id}-lesson` },
+      update: { title: item.lessonTitle, domain: "extras", topicId: item.id, orderIndex: 0, content: { blocks: item.blocks } },
+      create: { id: `${item.id}-lesson`, title: item.lessonTitle, domain: "extras", topicId: item.id, orderIndex: 0, estimatedMinutes: 8, content: { blocks: item.blocks } },
+    });
+    if (item.exploreBlocks) {
+      await prisma.lesson.upsert({
+        where: { id: `${item.id}-lesson-explore` },
+        update: { title: item.exploreTitle ?? "Explore", domain: "extras", topicId: item.id, orderIndex: 1, content: { blocks: item.exploreBlocks } },
+        create: { id: `${item.id}-lesson-explore`, title: item.exploreTitle ?? "Explore", domain: "extras", topicId: item.id, orderIndex: 1, estimatedMinutes: 6, content: { blocks: item.exploreBlocks } },
+      });
+    }
+    const q = item.question;
+    await prisma.question.upsert({
+      where: { id: q.id },
+      update: { domain: "extras", topicId: item.id, questionText: q.questionText, options: q.options, correctAnswer: q.correctAnswer, explanation: q.explanation },
+      create: { id: q.id, domain: "extras", topicId: item.id, questionText: q.questionText, options: q.options, correctAnswer: q.correctAnswer, explanation: q.explanation },
+    });
+  }
+
   console.log("Database seed completed successfully.");
 }
 

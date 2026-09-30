@@ -1,11 +1,67 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import prisma from "@/lib/db";
-import { LessonContent } from "@/types/lesson";
+import type { LessonContent } from "@/types/lesson";
+import DiscoveryReader from "./DiscoveryReader";
+
+export const dynamic = "force-dynamic";
 
 export default async function ExtrasTopicPage({ params }: { params: { topic: string } }) {
-  const topic = await prisma.topic.findFirst({ where: { id: params.topic, domain: "extras", isPublished: true }, include: { lessons: { where: { domain: "extras" }, orderBy: { orderIndex: "asc" } } } });
+  const topic = await prisma.topic.findFirst({
+    where: { id: params.topic, domain: "extras", isPublished: true },
+    include: {
+      lessons: { where: { domain: "extras" }, orderBy: { orderIndex: "asc" } },
+    },
+  });
   if (!topic) notFound();
-  const blocks = (topic.lessons[0]?.content as unknown as LessonContent | undefined)?.blocks || [];
-  return <main className="min-h-screen bg-slate-950 p-6 text-slate-100 md:p-12"><article className="mx-auto max-w-3xl"><Link href="/extras" className="text-sm text-slate-400">← Extras</Link><h1 className="mt-6 font-serif text-4xl font-bold text-amber-400">{topic.title}</h1><div className="mt-7 space-y-5">{blocks.map((block, i) => <div key={i}>{block.type === "heading" ? <h2 className="font-serif text-2xl font-bold">{block.text}</h2> : block.type === "paragraph" ? <p className="leading-relaxed text-slate-300">{block.text}</p> : block.type === "definition" ? <p className="rounded-xl border border-teal-800 p-5 text-slate-300"><strong>{block.term}: </strong>{block.text}</p> : null}</div>)}</div><Link href={`/extras/${topic.id}/quiz`} className="mt-8 inline-flex rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">Practice questions</Link></article></main>;
+
+  // Whole extras map (small table) to build trail, children and side paths.
+  const all: { id: string; title: string; parentId: string | null; orderIndex: number }[] =
+    await prisma.topic.findMany({
+    where: { domain: "extras", isPublished: true },
+    select: { id: true, title: true, parentId: true, orderIndex: true },
+  });
+  const byId = new Map(all.map((t) => [t.id, t]));
+
+  const trail: { id: string; title: string }[] = [];
+  let cursor = topic.parentId;
+  let guard = 0;
+  while (cursor && guard < 10) {
+    const parent = byId.get(cursor);
+    if (!parent) break;
+    trail.unshift({ id: parent.id, title: parent.title });
+    cursor = parent.parentId;
+    guard += 1;
+  }
+
+  const children = all
+    .filter((t) => t.parentId === topic.id)
+    .sort((a, b) => a.orderIndex - b.orderIndex)
+    .map((t) => ({ id: t.id, title: t.title }));
+
+  const siblings = all
+    .filter((t) => t.parentId === topic.parentId && t.id !== topic.id)
+    .sort((a, b) => a.orderIndex - b.orderIndex)
+    .slice(0, 8)
+    .map((t) => ({ id: t.id, title: t.title }));
+
+  const lessons = topic.lessons.map(
+    (l: { id: string; title: string; orderIndex: number; content: unknown }, i: number) => ({
+    id: l.id,
+    title: l.title,
+    depth: Math.min(l.orderIndex ?? i, 3),
+    blocks: ((l.content as unknown as LessonContent | undefined)?.blocks ?? []).filter((b) =>
+      ["heading", "paragraph", "definition", "example", "callout", "table"].includes(b.type)
+    ),
+  }));
+
+  return (
+    <DiscoveryReader
+      topicId={topic.id}
+      title={topic.title}
+      trail={trail}
+      lessons={lessons}
+      children={children}
+      siblings={siblings}
+    />
+  );
 }
