@@ -222,9 +222,11 @@ async function main() {
   }
 
   const boards = await prisma.curriculumBoard.findMany();
+  if (boards.length === 0) throw new Error("No boards found — seed boards first");
+  const alignReport: Record<string, number> = {};
   for (const slug of VERIFIED_CORE_SLUGS) {
     const topic = await prisma.topic.findFirst({ where: { slug } });
-    if (!topic) continue;
+    if (!topic) throw new Error(`Hard-correction topic missing for slug=${slug} — seed master topics first`);
     for (const board of boards) {
       // NOTE: (topicId, boardId, NULL trackId) cannot use upsert — Postgres treats
       // NULLs as distinct and Prisma rejects null in compound-unique where.
@@ -255,10 +257,11 @@ async function main() {
           },
         });
       }
+      alignReport[slug] = (alignReport[slug] || 0) + 1;
     }
   }
 
-  console.log("Curriculum seed complete: 20 regions, boards, 11 departments, master topics pending + 3 CORE verified.");
+  console.log("Curriculum seed complete: 20 regions, boards, 11 departments, master topics pending + 3 CORE verified.", alignReport);
 }
 
 main()
