@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     }).filter((r) => r.slug || r.board || r.tier);
 
     // 1. Validate ALL slugs first — reject entire batch on any invalid
-    const slugs = [...new Set(rows.map((r) => r.slug))];
+    const slugs = Array.from(new Set(rows.map((r) => r.slug)));
     const topics = await prisma.topic.findMany({ where: { slug: { in: slugs } }, select: { id: true, slug: true } });
     const topicBySlug = new Map(topics.map((t) => [t.slug!, t.id]));
     const badSlugs = slugs.filter((s) => !topicBySlug.has(s));
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     if (badTiers.length > 0) return NextResponse.json({ error: `Invalid tier on line(s) ${badTiers.map((r) => r.line).join(", ")}. Use core|elective|excluded. Entire batch rejected.` }, { status: 422 });
 
     // 2. Resolve boards + tracks
-    const boardNames = [...new Set(rows.map((r) => r.board))];
+    const boardNames = Array.from(new Set(rows.map((r) => r.board)));
     const boards = await prisma.curriculumBoard.findMany({ where: { name: { in: boardNames } }, select: { id: true, name: true } });
     const boardByName = new Map(boards.map((b) => [b.name, b.id]));
     const badBoards = boardNames.filter((n) => !boardByName.has(n));
