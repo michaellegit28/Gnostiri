@@ -43,6 +43,21 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     : [];
   const subjects = await prisma.topic.findMany({ where: { id: { in: related.map((t) => t.parentId || "") } }, select: { id: true, title: true } });
   const subjectById = new Map(subjects.map((s) => [s.id, s]));
+  // Extras discovery chain + university courses share vocabulary — link those too.
+  const extraHit = keywords.length
+    ? await prisma.topic.findMany({
+        where: { domain: "extras", isPublished: true, OR: keywords.map((k) => ({ title: { contains: k, mode: "insensitive" as const } })) },
+        select: { id: true, title: true, _count: { select: { lessons: true, questions: true } } },
+        take: 6,
+      })
+    : [];
+  const courseHit = keywords.length
+    ? await prisma.course.findMany({
+        where: { isPublished: true, OR: keywords.map((k) => ({ title: { contains: k, mode: "insensitive" as const } })) },
+        select: { slug: true, title: true },
+        take: 4,
+      })
+    : [];
   const studyLinks = related.filter((t) => t._count.lessons > 0).slice(0, 6).map((t) => {
     const subj = subjectById.get(t.parentId || "")!;
     const examCode = subj.id.split("-")[0];
@@ -50,6 +65,12 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     const topicSlug = t.id.slice(subj.id.length + 1);
     return { title: `${subj.title} — ${t.title}`, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/study` };
   });
+  for (const e of extraHit.filter((t) => t._count.lessons > 0).slice(0, 4)) {
+    studyLinks.push({ title: `Discovery — ${e.title}`, href: `/extras/${e.id}` });
+  }
+  for (const c of courseHit.slice(0, 3)) {
+    studyLinks.push({ title: `University — ${c.title}`, href: `/university/${c.slug}` });
+  }
   const quizLinks = related.filter((t) => t._count.questions > 0).slice(0, 6).map((t) => {
     const subj = subjectById.get(t.parentId || "")!;
     const examCode = subj.id.split("-")[0];
@@ -57,6 +78,9 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     const topicSlug = t.id.slice(subj.id.length + 1);
     return { title: `${subj.title} — ${t.title} (${t._count.questions} questions)`, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz` };
   });
+  for (const e of extraHit.filter((t) => t._count.questions > 0).slice(0, 4)) {
+    quizLinks.push({ title: `Discovery — ${e.title} quiz`, href: `/extras/${e.id}/quiz` });
+  }
   // Hands-on cards surface existing worked examples (no fabricated lab content).
   const practicals: { text: string; href: string }[] = [];
   for (const t of related) {
