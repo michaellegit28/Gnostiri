@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { LessonContent, LessonBlock } from "@/types/lesson";
+import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
+import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
+import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 import {
   ChevronRight,
   ChevronLeft,
@@ -34,6 +37,9 @@ interface StudyReaderClientProps {
   topicTitle: string;
   topics: TopicItem[];
   lessonContent: LessonContent | null;
+  alignmentSlug?: string;
+  lite?: boolean;
+  lastAudited?: string | null;
 }
 
 export default function StudyReaderClient({
@@ -45,6 +51,9 @@ export default function StudyReaderClient({
   topicTitle,
   topics,
   lessonContent,
+  alignmentSlug,
+  lite = false,
+  lastAudited = null,
 }: StudyReaderClientProps) {
   const { user } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -321,10 +330,14 @@ export default function StudyReaderClient({
 
         {/* Content Area */}
         <main className="flex-1 max-w-3xl mx-auto w-full">
-          <div className="mb-8">
+          <LiteModeBanner />
+          <div className="mb-8 flex items-start justify-between gap-4">
             <h1 className="text-3xl md:text-4xl font-serif font-bold text-slate-100 tracking-tight">
               {topicTitle}
             </h1>
+            <div className="shrink-0">
+              <CurriculumAlignmentWidget topicSlug={alignmentSlug || topicSlug} lite={lite} />
+            </div>
           </div>
 
           {hasBlocks ? (
@@ -344,6 +357,7 @@ export default function StudyReaderClient({
               </p>
             </div>
           )}
+          <AlignmentDisclaimer lastAudited={lastAudited} />
         </main>
       </div>
 

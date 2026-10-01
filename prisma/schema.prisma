@@ -72,6 +72,84 @@ model Examination {
   syllabusUrl String?
 }
 
+enum AlignmentTier {
+  core
+  elective
+  excluded
+}
+
+model Region {
+  id          String            @id @default(cuid())
+  name        String
+  isoCode     String            @unique
+  rtlLanguage Boolean           @default(false)
+  boards      CurriculumBoard[]
+}
+
+model CurriculumBoard {
+  id                 String                @id @default(cuid())
+  name               String
+  regionId           String
+  region             Region                @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  officialSyllabusUrl String?
+  syllabusVersionYear Int?
+  lastAuditedDate    DateTime
+  tracks             StudyTrack[]
+  alignments         TopicBoardAlignment[]
+
+  @@index([regionId])
+}
+
+model Department {
+  id       String  @id @default(cuid())
+  name     String  @unique
+  iconSlug String?
+  topics   Topic[]
+}
+
+model StudyTrack {
+  id          String                @id @default(cuid())
+  boardId     String
+  board       CurriculumBoard       @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  alignments  TopicBoardAlignment[]
+
+  @@index([boardId])
+}
+
+model TopicBoardAlignment {
+  id                    String          @id @default(cuid())
+  topicId               String
+  topic                 Topic           @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  boardId               String
+  board                 CurriculumBoard @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  trackId               String?
+  track                 StudyTrack?     @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  tier                  AlignmentTier
+  languageOfInstruction String?
+  weightNotes           String?
+  verifiedDate          DateTime
+  verifiedBy            String?
+
+  @@unique([topicId, boardId, trackId])
+  @@index([topicId, boardId])
+  @@index([tier])
+  @@index([boardId])
+}
+
+model AlignmentAudit {
+  id            String   @id @default(cuid())
+  alignmentId   String
+  actorEmail    String?
+  action        String
+  previousValue Json?
+  newValue      Json?
+  createdAt     DateTime @default(now())
+
+  @@index([alignmentId])
+}
+
 model Topic {
   id            String         @id @default(cuid())
   domain        AppDomain
@@ -86,6 +164,12 @@ model Topic {
   questions     Question[]
   quizAttempts  QuizAttempt[]
   tutorSessions TutorSession[]
+  departmentId  String?
+  department    Department?    @relation(fields: [departmentId], references: [id])
+  slug          String?        @unique
+  lastAuditedDate DateTime?
+  needsVerification Boolean    @default(true)
+  alignments    TopicBoardAlignment[]
 }
 
 model Lesson {

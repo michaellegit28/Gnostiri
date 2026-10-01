@@ -31,3 +31,11 @@ body {
     radial-gradient(1px 1px at 63% 78%, rgba(255, 255, 255, 0.35), transparent);
   background-attachment: fixed;
 }
+
+/* Curriculum Alignment Engine — RTL + low-bandwidth helpers (Phase 6) */
+[dir="rtl"] { text-align: right; }
+[dir="rtl"] .ltr-flip { transform: scaleX(-1); }
+/* Logical spacing for widget + cards (margin-inline respects RTL) */
+.align-card { margin-inline: auto; padding-inline: 1rem; }
+/* Lite mode (?lite=1): hide heavy media/widgets, text-only */
+html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { display: none !important; }

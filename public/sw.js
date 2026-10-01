@@ -1,11 +1,14 @@
-const CACHE = "gnostiri-lessons-v1";
+const CACHE = "gnostiri-lessons-v2";
 self.addEventListener("install", (event) => { self.skipWaiting(); });
 self.addEventListener("activate", (event) => { event.waitUntil(self.clients.claim()); });
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
   const path = new URL(request.url).pathname;
-  if (!path.endsWith("/study")) return;
+  // Offline-capable topic cards: highschool study + extras + university (GET only, network-first)
+  // Alignment API (/api/alignment) is intentionally NOT cached — always fresh.
+  const cacheable = path.endsWith("/study") || path.startsWith("/extras/") || path.startsWith("/university/");
+  if (!cacheable) return;
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     try { const response = await fetch(request); if (response.ok) await cache.put(request, response.clone()); return response; }

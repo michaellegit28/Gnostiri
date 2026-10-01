@@ -9,9 +9,12 @@ interface StudyPageProps {
     subject: string;
     topic: string;
   };
+  searchParams?: { lite?: string };
 }
 
-export default async function StudyPage({ params }: StudyPageProps) {
+export const revalidate = 60;
+
+export default async function StudyPage({ params, searchParams }: StudyPageProps) {
   const examSlug = params.exam.toLowerCase();
   const subjectSlug = params.subject.toLowerCase();
   const topicSlug = params.topic.toLowerCase();
@@ -88,6 +91,9 @@ export default async function StudyPage({ params }: StudyPageProps) {
       topicTitle={currentTopic.title}
       topics={topics}
       lessonContent={lessonContent}
+      alignmentSlug={topicSlug}
+      lite={searchParams?.lite === "1"}
+      lastAudited={currentTopic.lastAuditedDate ? new Date(currentTopic.lastAuditedDate).toISOString().slice(0, 10) : null}
     />
   );
 }

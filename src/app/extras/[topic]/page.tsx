@@ -2,10 +2,15 @@ import { notFound } from "next/navigation";
 import prisma from "@/lib/db";
 import type { LessonContent } from "@/types/lesson";
 import DiscoveryReader from "./DiscoveryReader";
+import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
+import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
+import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
-export default async function ExtrasTopicPage({ params }: { params: { topic: string } }) {
+export default async function ExtrasTopicPage({ params, searchParams }: { params: { topic: string }; searchParams?: { lite?: string } }) {
+  const lite = searchParams?.lite === "1";
   const topic = await prisma.topic.findFirst({
     where: { id: params.topic, domain: "extras", isPublished: true },
     include: {
@@ -55,13 +60,25 @@ export default async function ExtrasTopicPage({ params }: { params: { topic: str
   }));
 
   return (
-    <DiscoveryReader
-      topicId={topic.id}
-      title={topic.title}
-      trail={trail}
-      lessons={lessons}
-      subtopics={subtopics}
-      siblings={siblings}
-    />
+    <div className="mx-auto max-w-6xl px-4 md:px-8 py-6 space-y-4">
+      <LiteModeBanner />
+      <div className="flex items-start justify-between gap-4">
+        <nav className="text-sm text-slate-400" aria-label="Breadcrumb">
+          Extras / {topic.title}
+        </nav>
+        <div className="shrink-0">
+          <CurriculumAlignmentWidget topicSlug={topic.slug || topic.id} lite={lite} />
+        </div>
+      </div>
+      <DiscoveryReader
+        topicId={topic.id}
+        title={topic.title}
+        trail={trail}
+        lessons={lessons}
+        subtopics={subtopics}
+        siblings={siblings}
+      />
+      <AlignmentDisclaimer lastAudited={topic.lastAuditedDate ? new Date(topic.lastAuditedDate).toISOString().slice(0, 10) : null} />
+    </div>
   );
 }
