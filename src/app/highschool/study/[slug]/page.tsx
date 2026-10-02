@@ -106,8 +106,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     }
   }
   // Boards with exam-paper pages on this site link out; others are reference tags.
-  const EXAM_LINK: Record<string, string> = { "WAEC Nigeria": "waec", "WAEC Ghana": "waec", NECO: "neco" };
-  const examBoards = topic.alignments.filter((a) => a.tier === "core" && EXAM_LINK[a.board.name]);
+  // (Exams section removed — past papers live in the quiz bank + exam banks.)
 
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
@@ -157,14 +156,8 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
                   {l.kinds.length ? l.kinds.map((k) => <span key={k} aria-label={`Past questions from ${k}`} className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 border border-slate-600 text-slate-200">{k}</span>) : <span className="text-[11px] text-slate-500">Practice set</span>}
                 </span>
               </li>))}</ul>
-          ) : <p className="mt-1 text-xs text-slate-500">No real past questions linked yet for this topic.</p>}
-        </section>
-
-        <section aria-label="Exams" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <h2 className="font-bold">Exams</h2>
-          {examBoards.length ? (
-            <ul className="mt-2 space-y-1 text-sm">{examBoards.map((a) => <li key={a.id}><Link href={`/highschool/${EXAM_LINK[a.board.name]}`} className="text-slate-200 hover:underline">{a.board.name} past papers →</Link></li>)}</ul>
-          ) : <p className="mt-1 text-xs text-slate-500">Core-exam paper links appear once boards are verified above.</p>}
+          ) : null}
+          {!quizLinks.length && topic._count.questions === 0 && <p className="mt-1 text-xs text-slate-500">No real past questions linked yet for this topic.</p>}
         </section>
 
         <section aria-label="Practicals" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
@@ -182,7 +175,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
               <div className="mt-2 flex flex-wrap gap-2">
                 {rows.map((a) => (
                   <span key={a.id} aria-label={`${a.board.name} ${a.tier}`} className={`px-2 py-0.5 rounded-full text-xs font-semibold ${pill(a.tier)}`}>
-                    {a.board.name}: {a.tier}{a.track ? ` (${a.track.name})` : ""}
+                    {a.board.name}: {a.tier.charAt(0).toUpperCase() + a.tier.slice(1)}{a.track ? ` (${a.track.name})` : ""}
                   </span>
                 ))}
               </div>
