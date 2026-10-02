@@ -46,6 +46,8 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     : [];
   const subjects = await prisma.topic.findMany({ where: { id: { in: related.map((t) => t.parentId || "") } }, select: { id: true, title: true } });
   const subjectById = new Map(subjects.map((s) => [s.id, s]));
+  // Leaf exam topics only: master/root rows have no parent and would crash URL building.
+  const leaf = related.filter((t) => t.parentId && subjectById.has(t.parentId));
   // Extras discovery chain + university courses share vocabulary — link those too.
   const extraHit = keywords.length
     ? await prisma.topic.findMany({
@@ -61,7 +63,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
         take: 4,
       })
     : [];
-  const studyLinks = related.filter((t) => t._count.lessons > 0).slice(0, 6).map((t) => {
+  const studyLinks = leaf.filter((t) => t._count.lessons > 0).slice(0, 6).map((t) => {
     const subj = subjectById.get(t.parentId || "")!;
     const examCode = subj.id.split("-")[0];
     const subjectSlug = subj.id.slice(examCode.length + 1);
@@ -77,7 +79,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   // Exam bank = real past questions only: label each quiz with its exam kind(s).
   const kindsOf = (t: { questions: { sourceExam: string | null }[] }) =>
     Array.from(new Set(t.questions.map((q) => (q.sourceExam || "").toUpperCase()).filter(Boolean)));
-  const quizLinks = related.filter((t) => t._count.questions > 0).slice(0, 6).map((t) => {
+  const quizLinks = leaf.filter((t) => t._count.questions > 0).slice(0, 6).map((t) => {
     const subj = subjectById.get(t.parentId || "")!;
     const examCode = subj.id.split("-")[0];
     const subjectSlug = subj.id.slice(examCode.length + 1);
@@ -90,7 +92,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   }
   // Hands-on cards surface existing worked examples (no fabricated lab content).
   const practicals: { text: string; href: string }[] = [];
-  for (const t of related) {
+  for (const t of leaf) {
     const subj = subjectById.get(t.parentId || "");
     if (!subj || practicals.length >= 3) continue;
     const blocks = ((t.lessons[0]?.content as unknown as { blocks?: { type: string; text?: string }[] } | null)?.blocks || []).filter((b) => b.type === "example" && b.text);
