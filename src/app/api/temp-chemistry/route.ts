@@ -208,10 +208,15 @@ export async function GET(req: NextRequest) {
           create: { id: `master-${t.slug}-q${i + 1}`, domain: "highschool", topicId: topic.id, type: "mcq", questionText: item.q, options: item.o, correctAnswer: item.a, explanation: item.e, difficulty: item.d, sourceExam: "WAEC" },
         });
       }
-      for (const board of boards) {
-        const existing = await prisma.topicBoardAlignment.findFirst({ where: { topicId: topic.id, boardId: board.id, trackId: null } });
-        if (existing) await prisma.topicBoardAlignment.update({ where: { id: existing.id }, data: { tier: "core", verifiedDate: today, weightNotes: t.note } });
-        else await prisma.topicBoardAlignment.create({ data: { topicId: topic.id, boardId: board.id, trackId: null, tier: "core", verifiedDate: today, weightNotes: t.note } });
+      // Batched: one update for existing rows, one createMany for missing boards.
+      const existingRows = await prisma.topicBoardAlignment.findMany({ where: { topicId: topic.id }, select: { id: true, boardId: true } });
+      const haveBoards = new Set(existingRows.map((r) => r.boardId));
+      await prisma.topicBoardAlignment.updateMany({ where: { topicId: topic.id }, data: { tier: "core", verifiedDate: today, weightNotes: t.note } });
+      const missing = boards.filter((b) => !haveBoards.has(b.id));
+      if (missing.length) {
+        await prisma.topicBoardAlignment.createMany({
+          data: missing.map((b) => ({ topicId: topic.id, boardId: b.id, trackId: null, tier: "core" as const, verifiedDate: today, weightNotes: t.note })),
+        });
       }
       await prisma.topic.update({ where: { id: topic.id }, data: { lastAuditedDate: today, needsVerification: false } });
       done[t.slug] = t.blocks.length;
