@@ -20,7 +20,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   const lite = searchParams?.lite === "1";
   const topic = await prisma.topic.findFirst({
     where: { slug: params.slug },
-    include: { department: true, alignments: { include: { board: { include: { region: true } }, track: true } }, lessons: { orderBy: { orderIndex: "asc" }, take: 3 } },
+    include: { department: true, alignments: { include: { board: { include: { region: true } }, track: true } }, lessons: { orderBy: { orderIndex: "asc" }, take: 3 }, _count: { select: { questions: true } } },
   });
   if (!topic) notFound();
   const chapter = topic.lessons[0]?.content as unknown as { blocks?: { type: string; level?: number; text?: string; term?: string; variant?: string; headers?: string[]; rows?: string[][] }[] } | null;
@@ -92,6 +92,10 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   }
   // Hands-on cards surface existing worked examples (no fabricated lab content).
   const practicals: { text: string; href: string }[] = [];
+  const masterExamples = (chapterBlocks.filter((b) => b.type === "example" && b.text).slice(0, 2) as { text?: string }[]);
+  for (const b of masterExamples) {
+    if (b.text) practicals.push({ text: b.text, href: `/highschool/study/${topic.slug}` });
+  }
   for (const t of leaf) {
     const subj = subjectById.get(t.parentId || "");
     if (!subj || practicals.length >= 3) continue;
@@ -140,6 +144,11 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
 
         <section aria-label="Quiz" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
           <h2 className="font-bold">Quiz <span className="text-[11px] font-normal text-slate-500">· real past questions only</span></h2>
+          {topic._count.questions > 0 && (
+            <Link href={`/highschool/study/${topic.slug}/quiz`} className="mt-2 inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm">
+              Take the {topic.title} quiz ({topic._count.questions} questions) →
+            </Link>
+          )}
           {quizLinks.length ? (
             <ul className="mt-2 space-y-2 text-sm">{quizLinks.map((l) => (
               <li key={l.href}>
