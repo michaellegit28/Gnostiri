@@ -8,9 +8,10 @@ export const revalidate = 60;
 export default async function CurriculumIndex({ searchParams }: { searchParams?: { region?: string } }) {
   const regions = await prisma.region.findMany({ orderBy: { name: "asc" }, include: { boards: true } });
   const fRegion = searchParams?.region || "";
+  const boardTotal = await prisma.curriculumBoard.count();
   const departments = await prisma.department.findMany({
     orderBy: { name: "asc" },
-    include: { topics: { where: { id: { startsWith: "master-" } }, orderBy: { title: "asc" }, include: { alignments: fRegion ? { where: { board: { regionId: fRegion } } } : true } } },
+    include: { topics: { where: { id: { startsWith: "master-" } }, orderBy: { title: "asc" }, include: { alignments: fRegion ? { where: { board: { regionId: fRegion } } } : true, _count: { select: { lessons: true } } } } },
   });
   const total = departments.reduce((n, d) => n + d.topics.length, 0);
 
@@ -34,9 +35,18 @@ export default async function CurriculumIndex({ searchParams }: { searchParams?:
           <button className="px-3 py-1.5 rounded bg-amber-500 text-slate-950 font-semibold" type="submit">Filter</button>
         </form>
 
-        {departments.map((d) => (
+        {departments.map((d) => {
+          const verified = d.topics.filter((t) => !t.needsVerification).length;
+          const withChapters = d.topics.filter((t) => t._count.lessons > 0).length;
+          const cores = d.topics.reduce((n, t) => n + t.alignments.filter((a) => a.tier === "core").length, 0);
+          return (
           <section key={d.id} aria-label={d.name} className="space-y-3">
-            <h2 className="text-xl font-serif font-bold">{d.name} <span className="text-xs text-slate-500 font-sans">· {d.topics.length}</span></h2>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h2 className="text-xl font-serif font-bold">{d.name}</h2>
+              <span aria-label={`${d.name} tags`} className="text-xs text-slate-400">
+                {d.topics.length} topics · {verified} verified · {withChapters} with chapters {cores > 0 && <span className="text-emerald-400">· core in {cores}/{boardTotal} boards</span>}
+              </span>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {d.topics.map((t) => {
                 const cores = t.alignments.filter((a) => a.tier === "core").length;
@@ -45,14 +55,16 @@ export default async function CurriculumIndex({ searchParams }: { searchParams?:
                   <Link key={t.id} href={`/highschool/study/${t.slug}`} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 hover:border-amber-500/40 transition-colors">
                     <h3 className="font-semibold text-slate-100">{t.title}</h3>
                     <p className="mt-1 text-xs text-slate-500">
-                      {t.needsVerification ? "Pending verification" : "Verified"} {cores > 0 && <span className="text-emerald-400">· core in {cores}{totalBoards ? `/${totalBoards}` : ""}</span>}
+                      {t._count.lessons > 0 ? <span className="text-teal-300">Chapter ready</span> : "Chapter coming"}
+                      {" · "}{t.needsVerification ? "Pending verification" : "Verified"} {cores > 0 && <span className="text-emerald-400">· core in {cores}{totalBoards ? `/${totalBoards}` : ""}</span>}
                     </p>
                   </Link>
                 );
               })}
             </div>
           </section>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

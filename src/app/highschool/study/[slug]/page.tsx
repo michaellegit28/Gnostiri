@@ -20,9 +20,12 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   const lite = searchParams?.lite === "1";
   const topic = await prisma.topic.findFirst({
     where: { slug: params.slug },
-    include: { department: true, alignments: { include: { board: { include: { region: true } }, track: true } } },
+    include: { department: true, alignments: { include: { board: { include: { region: true } }, track: true } }, lessons: { orderBy: { orderIndex: "asc" }, take: 3 } },
   });
   if (!topic) notFound();
+  const chapter = topic.lessons[0]?.content as unknown as { blocks?: { type: string; level?: number; text?: string; term?: string; variant?: string; headers?: string[]; rows?: string[][] }[] } | null;
+  const chapterBlocks = chapter?.blocks || [];
+  const chapterMinutes = topic.lessons[0]?.estimatedMinutes || 0;
 
   const byRegion = new Map<string, { region: string; rows: typeof topic.alignments }>();
   for (const a of topic.alignments) {
@@ -115,10 +118,22 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
         </header>
 
         <section aria-label="Study" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <h2 className="font-bold">Study</h2>
-          {studyLinks.length ? (
-            <ul className="mt-2 space-y-1 text-sm">{studyLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-teal-300 hover:underline">{l.title} →</Link></li>)}</ul>
-          ) : <p className="mt-1 text-xs text-slate-500">Study notes linking here soon — see High School exam pages.</p>}
+          <h2 className="font-bold">Study {chapterBlocks.length > 0 && <span className="text-[11px] font-normal text-teal-300">· chapter ready (~{chapterMinutes} min)</span>}</h2>
+          {chapterBlocks.length > 0 ? (
+            <article className="mt-3 space-y-3">
+              {chapterBlocks.map((b, i) => {
+                if (b.type === "heading") return <h3 key={i} className="font-serif text-lg font-bold text-slate-100">{b.text}</h3>;
+                if (b.type === "definition") return <p key={i} className="text-sm text-slate-200 rounded-lg border border-teal-800 p-3"><strong>{b.term}: </strong>{b.text}</p>;
+                if (b.type === "example") return <p key={i} className="text-sm text-slate-300 border-l-2 border-teal-500 pl-3">{b.text}</p>;
+                if (b.type === "callout") return <p key={i} className="text-sm text-amber-200/90 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3">{b.text}</p>;
+                if (b.type === "table" && b.headers) return <div key={i} className="overflow-x-auto rounded-lg border border-slate-700"><table className="w-full text-xs"><thead><tr>{b.headers.map((h) => <th key={h} className="p-2 text-left bg-slate-800">{h}</th>)}</tr></thead><tbody>{(b.rows || []).map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci} className="p-2 border-t border-slate-800">{c}</td>)}</tr>)}</tbody></table></div>;
+                return <p key={i} className="text-sm text-slate-300 leading-relaxed">{b.text}</p>;
+              })}
+            </article>
+          ) : <p className="mt-1 text-xs text-slate-500">Chapter being written — linked notes below in the meantime.</p>}
+          {studyLinks.length > 0 && (
+            <ul className="mt-3 space-y-1 text-sm">{studyLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-teal-300 hover:underline">{l.title} →</Link></li>)}</ul>
+          )}
         </section>
 
         <section aria-label="Quiz" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
