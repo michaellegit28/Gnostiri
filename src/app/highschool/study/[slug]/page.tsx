@@ -37,7 +37,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   const related = keywords.length
     ? await prisma.topic.findMany({
         where: { domain: "highschool", OR: keywords.map((k) => ({ title: { contains: k, mode: "insensitive" as const } })) },
-        select: { id: true, title: true, parentId: true, lessons: { select: { id: true, title: true, content: true }, take: 1 }, _count: { select: { lessons: true, questions: true } } },
+        select: { id: true, title: true, parentId: true, lessons: { select: { id: true, title: true, content: true }, take: 1 }, questions: { select: { sourceExam: true }, take: 30 }, _count: { select: { lessons: true, questions: true } } },
         take: 12,
       })
     : [];
@@ -71,15 +71,19 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
   for (const c of courseHit.slice(0, 3)) {
     studyLinks.push({ title: `University — ${c.title}`, href: `/university/${c.slug}` });
   }
+  // Exam bank = real past questions only: label each quiz with its exam kind(s).
+  const kindsOf = (t: { questions: { sourceExam: string | null }[] }) =>
+    Array.from(new Set(t.questions.map((q) => (q.sourceExam || "").toUpperCase()).filter(Boolean)));
   const quizLinks = related.filter((t) => t._count.questions > 0).slice(0, 6).map((t) => {
     const subj = subjectById.get(t.parentId || "")!;
     const examCode = subj.id.split("-")[0];
     const subjectSlug = subj.id.slice(examCode.length + 1);
     const topicSlug = t.id.slice(subj.id.length + 1);
-    return { title: `${subj.title} — ${t.title} (${t._count.questions} questions)`, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz` };
+    const kinds = kindsOf(t);
+    return { title: `${subj.title} — ${t.title} (${t._count.questions} questions)`, kinds, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz` };
   });
   for (const e of extraHit.filter((t) => t._count.questions > 0).slice(0, 4)) {
-    quizLinks.push({ title: `Discovery — ${e.title} quiz`, href: `/discovery/${e.id}/quiz` });
+    quizLinks.push({ title: `Discovery — ${e.title} quiz`, kinds: [] as string[], href: `/discovery/${e.id}/quiz` });
   }
   // Hands-on cards surface existing worked examples (no fabricated lab content).
   const practicals: { text: string; href: string }[] = [];
@@ -118,10 +122,16 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
         </section>
 
         <section aria-label="Quiz" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <h2 className="font-bold">Quiz</h2>
+          <h2 className="font-bold">Quiz <span className="text-[11px] font-normal text-slate-500">· real past questions only</span></h2>
           {quizLinks.length ? (
-            <ul className="mt-2 space-y-1 text-sm">{quizLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-amber-300 hover:underline">{l.title} →</Link></li>)}</ul>
-          ) : <p className="mt-1 text-xs text-slate-500">No quiz bank linked yet for this topic.</p>}
+            <ul className="mt-2 space-y-2 text-sm">{quizLinks.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="text-amber-300 hover:underline">{l.title} →</Link>
+                <span className="mt-1 flex flex-wrap gap-1">
+                  {l.kinds.length ? l.kinds.map((k) => <span key={k} aria-label={`Past questions from ${k}`} className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 border border-slate-600 text-slate-200">{k}</span>) : <span className="text-[11px] text-slate-500">Practice set</span>}
+                </span>
+              </li>))}</ul>
+          ) : <p className="mt-1 text-xs text-slate-500">No real past questions linked yet for this topic.</p>}
         </section>
 
         <section aria-label="Exams" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
