@@ -86,7 +86,7 @@ export default async function ExtrasPage() {
                     : "New territory being charted"}
               </p>
               <Link
-                href={`/extras/${field.id}`}
+                href={`/discovery/${field.id}`}
                 className="mt-5 inline-flex items-center gap-2 min-h-[44px] rounded-lg bg-white/5 border border-white/10 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-[#D4AF37] hover:text-slate-950 hover:border-transparent transition-colors"
               >
                 Enter field

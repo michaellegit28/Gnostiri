@@ -73,8 +73,8 @@ export default function QuizClient({
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
 
   const isSavingAttemptRef = useRef(false);
-  const examHubHref = domain === "extras" ? "/extras" : `/highschool/${examCode}`;
-  const subjectHref = domain === "extras" ? "/extras" : `/highschool/${examCode}/${subjectSlug}`;
+  const examHubHref = domain === "extras" ? "/discovery" : `/highschool/${examCode}`;
+  const subjectHref = domain === "extras" ? "/discovery" : `/highschool/${examCode}/${subjectSlug}`;
 
   // Restart/reset timer when starting quiz
   useEffect(() => {

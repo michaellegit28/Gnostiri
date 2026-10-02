@@ -15,7 +15,7 @@ function pill(tier: string) {
 }
 
 // Master topic page: study + quiz + exams + practicals aggregated from existing
-// exam/university/extras content (no duplication), plus alignment matrix + widget.
+// exam/university/discovery content (no duplication), plus alignment matrix + widget.
 export default async function CurriculumTopicPage({ params, searchParams }: { params: { slug: string }; searchParams?: { lite?: string } }) {
   const lite = searchParams?.lite === "1";
   const topic = await prisma.topic.findFirst({
@@ -66,7 +66,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     return { title: `${subj.title} — ${t.title}`, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/study` };
   });
   for (const e of extraHit.filter((t) => t._count.lessons > 0).slice(0, 4)) {
-    studyLinks.push({ title: `Discovery — ${e.title}`, href: `/extras/${e.id}` });
+    studyLinks.push({ title: `Discovery — ${e.title}`, href: `/discovery/${e.id}` });
   }
   for (const c of courseHit.slice(0, 3)) {
     studyLinks.push({ title: `University — ${c.title}`, href: `/university/${c.slug}` });
@@ -79,7 +79,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     return { title: `${subj.title} — ${t.title} (${t._count.questions} questions)`, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz` };
   });
   for (const e of extraHit.filter((t) => t._count.questions > 0).slice(0, 4)) {
-    quizLinks.push({ title: `Discovery — ${e.title} quiz`, href: `/extras/${e.id}/quiz` });
+    quizLinks.push({ title: `Discovery — ${e.title} quiz`, href: `/discovery/${e.id}/quiz` });
   }
   // Hands-on cards surface existing worked examples (no fabricated lab content).
   const practicals: { text: string; href: string }[] = [];
@@ -100,7 +100,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-4xl mx-auto space-y-6">
         <LiteModeBanner />
-        <nav className="text-sm text-slate-400"><Link href="/curriculum" className="hover:text-amber-400">Curriculum</Link> <span>→ {topic.department?.name}</span></nav>
+        <nav className="text-sm text-slate-400"><Link href="/highschool/study" className="hover:text-amber-400">Study</Link> <span>→ {topic.department?.name}</span></nav>
         <header className="flex items-start justify-between gap-4">
           <div>
             <p className="text-teal-400 text-sm">{topic.department?.name}</p>
@@ -114,7 +114,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
           <h2 className="font-bold">Study</h2>
           {studyLinks.length ? (
             <ul className="mt-2 space-y-1 text-sm">{studyLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-teal-300 hover:underline">{l.title} →</Link></li>)}</ul>
-          ) : <p className="mt-1 text-xs text-slate-500">Study notes linking here soon — see Global School exam pages.</p>}
+          ) : <p className="mt-1 text-xs text-slate-500">Study notes linking here soon — see High School exam pages.</p>}
         </section>
 
         <section aria-label="Quiz" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">

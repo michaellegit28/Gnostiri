@@ -12,7 +12,7 @@ import GhostFibers from "@/components/effects/GhostFibers";
 export default async function Home() {
   const domainCards = [
     {
-      title: "Global School",
+      title: "High School",
       description: "Whatever your country's system — master its subjects and ace its examinations.",
       numeral: "I",
       rule: "via-teal-400/60",
@@ -44,7 +44,7 @@ export default async function Home() {
       rule: "via-violet-400/60",
       badge: "Free",
       badgeColor: "bg-teal-500/10 text-teal-400 border-teal-500/20",
-      link: "/extras",
+      link: "/discovery",
       icon: Sparkles,
       tint: "from-slate-800/80 via-slate-900 to-slate-950",
       iconColor: "text-teal-300",
@@ -72,7 +72,7 @@ export default async function Home() {
 
   const showcase = [
     {
-      title: "Global School",
+      title: "High School",
       caption: "Any country's system — free lessons and practice questions.",
       href: "/highschool",
       badge: "Free Forever",
@@ -88,7 +88,7 @@ export default async function Home() {
     {
       title: "Extras",
       caption: "Certifications, practical skills and electives.",
-      href: "/extras",
+      href: "/discovery",
       badge: "Free",
       gradient: "bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950",
     },
@@ -389,7 +389,7 @@ export default async function Home() {
               <Link href="/university" className="hover:text-slate-200 transition-colors">
                 University
               </Link>
-              <Link href="/extras" className="hover:text-slate-200 transition-colors">
+              <Link href="/discovery" className="hover:text-slate-200 transition-colors">
                 Extras
               </Link>
               <Link href="/progress" className="hover:text-slate-200 transition-colors">

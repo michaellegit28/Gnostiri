@@ -17,7 +17,7 @@ export default async function CurriculumIndex({ searchParams }: { searchParams?:
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-8">
-        <nav className="text-sm text-slate-400"><Link href="/" className="hover:text-amber-400">Home</Link> <span>→ Curriculum</span></nav>
+        <nav className="text-sm text-slate-400"><Link href="/highschool" className="hover:text-amber-400">High School</Link> <span>→ Study</span></nav>
         <header className="space-y-2">
           <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37]">Master curriculum</p>
           <h1 className="text-3xl md:text-5xl font-serif font-bold">Subjects, countries, topics</h1>
@@ -42,7 +42,7 @@ export default async function CurriculumIndex({ searchParams }: { searchParams?:
                 const cores = t.alignments.filter((a) => a.tier === "core").length;
                 const totalBoards = fRegion ? t.alignments.length : undefined;
                 return (
-                  <Link key={t.id} href={`/curriculum/${t.slug}`} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 hover:border-amber-500/40 transition-colors">
+                  <Link key={t.id} href={`/highschool/study/${t.slug}`} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 hover:border-amber-500/40 transition-colors">
                     <h3 className="font-semibold text-slate-100">{t.title}</h3>
                     <p className="mt-1 text-xs text-slate-500">
                       {t.needsVerification ? "Pending verification" : "Verified"} {cores > 0 && <span className="text-emerald-400">· core in {cores}{totalBoards ? `/${totalBoards}` : ""}</span>}

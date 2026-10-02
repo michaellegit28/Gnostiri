@@ -135,13 +135,13 @@ export default function DiscoveryReader({
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,#1b1440_0%,#0d0a24_50%,#060814_100%)]">
         <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">
           <nav className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm text-slate-400">
-            <Link href="/extras" className="hover:text-[#D4AF37] transition-colors">
+            <Link href="/discovery" className="hover:text-[#D4AF37] transition-colors">
               Discovery
             </Link>
             {trail.map((t) => (
               <span key={t.id} className="flex items-center gap-1.5">
                 <span className="text-slate-600">/</span>
-                <Link href={`/extras/${t.id}`} className="hover:text-[#D4AF37] transition-colors">
+                <Link href={`/discovery/${t.id}`} className="hover:text-[#D4AF37] transition-colors">
                   {t.title}
                 </Link>
               </span>
@@ -224,7 +224,7 @@ export default function DiscoveryReader({
               {subtopics.map((c) => (
                 <Link
                   key={c.id}
-                  href={`/extras/${c.id}`}
+                  href={`/discovery/${c.id}`}
                   className="group rounded-xl border border-white/10 bg-gradient-to-b from-violet-950/30 to-slate-900 p-5 hover:border-[#D4AF37]/40 transition-colors"
                 >
                   <div className="font-semibold text-slate-100 group-hover:text-[#D4AF37] transition-colors flex items-center justify-between gap-2">
@@ -248,7 +248,7 @@ export default function DiscoveryReader({
               {siblings.map((s) => (
                 <Link
                   key={s.id}
-                  href={`/extras/${s.id}`}
+                  href={`/discovery/${s.id}`}
                   className="min-h-[44px] inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 hover:border-violet-400/50 hover:text-white transition-colors"
                 >
                   {s.title}
@@ -261,7 +261,7 @@ export default function DiscoveryReader({
         {/* Practice + tutor */}
         <section className="mt-10 flex flex-col sm:flex-row gap-3 pb-16">
           <Link
-            href={`/extras/${topicId}/quiz`}
+            href={`/discovery/${topicId}/quiz`}
             className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors"
           >
             <HelpCircle className="w-4 h-4" />
@@ -276,7 +276,7 @@ export default function DiscoveryReader({
           </Link>
           {trail.length > 0 && (
             <Link
-              href={`/extras/${trail[trail.length - 1].id}`}
+              href={`/discovery/${trail[trail.length - 1].id}`}
               className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-white/5 text-slate-300 font-semibold text-sm hover:bg-white/10 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
