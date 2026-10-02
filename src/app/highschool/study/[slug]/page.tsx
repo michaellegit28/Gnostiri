@@ -33,7 +33,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
 
   // Keyword match against existing exam content (shared vocabulary, no duplication).
   const STOP = new Set(["with", "from", "human", "into", "cell", "world", "history"]);
-  const keywords = topic.title.toLowerCase().split(/[^a-z]+/).filter((w) => w.length > 3 && !STOP.has(w));
+  const keywords = `${topic.title} ${topic.description || ""}`.toLowerCase().split(/[^a-z]+/).filter((w) => w.length > 4 && !STOP.has(w)).slice(0, 8);
   const related = keywords.length
     ? await prisma.topic.findMany({
         where: { domain: "highschool", OR: keywords.map((k) => ({ title: { contains: k, mode: "insensitive" as const } })) },
