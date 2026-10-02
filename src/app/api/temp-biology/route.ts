@@ -144,12 +144,14 @@ export async function GET(req: NextRequest) {
     const today = new Date();
     const boards = await prisma.curriculumBoard.findMany({ select: { id: true } });
     if (!boards.length) throw new Error("No boards found");
+    const only = req.nextUrl.searchParams.get("only");
     const topics: { slug: string; title: string; blocks: B[]; qs: Q[] }[] = [
       { slug: "genetics-molecular-biology", title: "Genetics & Molecular Biology", blocks: GENETICS_BLOCKS, qs: GENETICS_QS },
       { slug: "human-physiology", title: "Human Physiology", blocks: PHYSIO_BLOCKS, qs: PHYSIO_QS },
       { slug: "ecology-evolution", title: "Ecology & Evolution", blocks: ECOLOGY_BLOCKS, qs: ECOLOGY_QS },
       { slug: "plant-biology", title: "Plant Biology", blocks: PLANT_BLOCKS, qs: PLANT_QS },
-    ];
+    ].filter((t) => !only || t.slug === only || t.slug.startsWith(only));
+    if (!topics.length) return NextResponse.json({ error: "Unknown only=. Use genetics-molecular-biology|human-physiology|ecology-evolution|plant-biology" }, { status: 400 });
     const done: Record<string, number> = {};
     for (const t of topics) {
       const topic = await prisma.topic.findFirst({ where: { slug: t.slug } });
