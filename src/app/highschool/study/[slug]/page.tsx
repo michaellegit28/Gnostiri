@@ -23,9 +23,14 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     include: { department: true, alignments: { include: { board: { include: { region: true } }, track: true } }, lessons: { orderBy: { orderIndex: "asc" }, take: 3 }, _count: { select: { questions: true } } },
   });
   if (!topic) notFound();
-  const chapter = topic.lessons[0]?.content as unknown as { blocks?: { type: string; level?: number; text?: string; term?: string; variant?: string; headers?: string[]; rows?: string[][] }[] } | null;
-  const chapterBlocks = chapter?.blocks || [];
-  const chapterMinutes = topic.lessons[0]?.estimatedMinutes || 0;
+  type Block = { type: string; level?: number; text?: string; term?: string; variant?: string; headers?: string[]; rows?: string[][] };
+  const chapters = topic.lessons.map((l) => ({
+    title: l.title,
+    minutes: l.estimatedMinutes || 0,
+    blocks: ((l.content as unknown as { blocks?: Block[] } | null)?.blocks || []) as Block[],
+  }));
+  const chapterBlocks = chapters[0]?.blocks || [];
+  const chapterMinutes = chapters[0]?.minutes || 0;
 
   const byRegion = new Map<string, { region: string; rows: typeof topic.alignments }>();
   for (const a of topic.alignments) {
@@ -136,6 +141,21 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
               })}
             </article>
           ) : <p className="mt-1 text-xs text-slate-500">Chapter being written — linked notes below in the meantime.</p>}
+          {chapters.slice(1).map((ch) => (
+            <details key={ch.title} className="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
+              <summary className="font-bold text-sm cursor-pointer text-amber-200">{ch.title} — advanced (~{ch.minutes} min)</summary>
+              <article className="mt-3 space-y-3">
+                {ch.blocks.map((b, i) => {
+                  if (b.type === "heading") return <h3 key={i} className="font-serif text-lg font-bold text-slate-100">{b.text}</h3>;
+                  if (b.type === "definition") return <p key={i} className="text-sm text-slate-200 rounded-lg border border-teal-800 p-3"><strong>{b.term}: </strong>{b.text}</p>;
+                  if (b.type === "example") return <p key={i} className="text-sm text-slate-300 border-l-2 border-teal-500 pl-3">{b.text}</p>;
+                  if (b.type === "callout") return <p key={i} className="text-sm text-amber-200/90 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3">{b.text}</p>;
+                  if (b.type === "table" && b.headers) return <div key={i} className="overflow-x-auto rounded-lg border border-slate-700"><table className="w-full text-xs"><thead><tr>{b.headers.map((h) => <th key={h} className="p-2 text-left bg-slate-800">{h}</th>)}</tr></thead><tbody>{(b.rows || []).map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci} className="p-2 border-t border-slate-800">{c}</td>)}</tr>)}</tbody></table></div>;
+                  return <p key={i} className="text-sm text-slate-300 leading-relaxed">{b.text}</p>;
+                })}
+              </article>
+            </details>
+          ))}
           {studyLinks.length > 0 && (
             <ul className="mt-3 space-y-1 text-sm">{studyLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-teal-300 hover:underline">{l.title} →</Link></li>)}</ul>
           )}
