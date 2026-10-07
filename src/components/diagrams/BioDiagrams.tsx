@@ -145,6 +145,130 @@ function PhotosynthesisMap() {
   );
 }
 
+function MicroscopeScale() {
+  return (
+    <Fig title="Fig. — Resolution ladder: light microscope (cells) → TEM (organelles) → SEM (surfaces)">
+      <line x1="40" y1="60" x2="40" y2="200" stroke={faint} strokeWidth="1.5" />
+      <line x1="40" y1="200" x2="365" y2="200" stroke={faint} strokeWidth="1.5" />
+      <rect x="60" y="150" width="90" height="40" rx="4" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="105" y="168" textAnchor="middle" fill={accent} fontSize="10">Light: cells,</text>
+      <text x="105" y="181" textAnchor="middle" fill={accent} fontSize="10">nuclei (~200nm)</text>
+      <rect x="165" y="110" width="90" height="40" rx="4" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="210" y="128" textAnchor="middle" fill={gold} fontSize="10">TEM: membranes,</text>
+      <text x="210" y="141" textAnchor="middle" fill={gold} fontSize="10">ribosomes (~1nm)</text>
+      <rect x="270" y="70" width="90" height="40" rx="4" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="315" y="88" textAnchor="middle" fill={ink} fontSize="10">SEM: 3D</text>
+      <text x="315" y="101" textAnchor="middle" fill={ink} fontSize="10">surfaces (~10nm)</text>
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="12">resolution improves → smaller visible</text>
+      <text x="200" y="218" textAnchor="middle" fill={faint} fontSize="10">magnification without resolution is empty enlargement</text>
+    </Fig>
+  );
+}
+
+function FluidMosaic() {
+  return (
+    <Fig title="Fig. — Fluid mosaic: bilayer + cholesterol + proteins; diffusion, channel, Na⁺/K⁺ pump">
+      <circle cx="90" cy="90" r="9" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="90" y1="99" x2="90" y2="112" stroke={accent} strokeWidth="2" />
+      <circle cx="310" cy="90" r="9" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="310" y1="99" x2="310" y2="112" stroke={accent} strokeWidth="2" />
+      {[115, 140, 165, 235, 260, 285].map((x) => (
+        <g key={x}>
+          <circle cx={x} cy="90" r="9" fill="none" stroke={ink} strokeWidth="1.5" />
+          <line x1={x} y1="99" x2={x} y2="112" stroke={ink} strokeWidth="1.5" />
+          <circle cx={x} cy="138" r="9" fill="none" stroke={ink} strokeWidth="1.5" />
+          <line x1={x} y1="129" x2={x} y2="116" stroke={ink} strokeWidth="1.5" />
+        </g>
+      ))}
+      <rect x="185" y="70" width="30" height="80" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="200" y="165" textAnchor="middle" fill={gold} fontSize="10">channel</text>
+      <rect x="330" y="70" width="34" height="80" rx="6" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="347" y="165" textAnchor="middle" fill="#f87171" fontSize="10">Na⁺/K⁺ pump</text>
+      <text x="60" y="70" fill={faint} fontSize="10">outside</text>
+      <text x="60" y="185" fill={faint} fontSize="10">inside</text>
+      <line x1="40" y1="80" x2="365" y2="60" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
+      <text x="250" y="45" fill={faint} fontSize="10">simple diffusion ↓ gradient</text>
+    </Fig>
+  );
+}
+
+function EndomembranePath() {
+  const steps: [number, string][] = [[60, "RER"], [150, "vesicle"], [240, "Golgi"], [330, "membrane/lysosome"]];
+  return (
+    <Fig title="Fig. — Secretory pathway: RER → vesicle → Golgi (cis→trans) → membrane or lysosome">
+      {steps.map(([x, label], i) => (
+        <g key={label}>
+          <rect x={x - 32} y="95" width="64" height="44" rx="8" fill="none" stroke={i === 2 ? gold : accent} strokeWidth="2" />
+          <text x={x} y="113" textAnchor="middle" fill={ink} fontSize="10">{label}</text>
+          <text x={x} y="128" textAnchor="middle" fill={faint} fontSize="9">{["translate", "carry", "modify", "deliver"][i]}</text>
+          {i < 3 && <line x1={x + 32} y1="117" x2={x + 58} y2="117" stroke={ink} strokeWidth="2" />}
+        </g>
+      ))}
+      <text x="200" y="50" textAnchor="middle" fill={ink} fontSize="12">nucleus feeds the RER; Golgi cis receives, trans ships</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="10">lysosomes digest • secretions exit by exocytosis</text>
+    </Fig>
+  );
+}
+
+function GpcrCascade() {
+  const nodes: [number, string, string][] = [[55, "ligand +", "GPCR"], [150, "G-protein", "activated"], [250, "adenylyl", "cyclase→cAMP"], [345, "PK-A", "response"] ];
+  return (
+    <Fig title="Fig. — GPCR cascade: reception → G-protein → cAMP → kinase amplification">
+      {nodes.map(([x, a, b], i) => (
+        <g key={a}>
+          <circle cx={x} cy="115" r="34" fill="none" stroke={i === 0 ? accent : i === 3 ? gold : ink} strokeWidth="2" />
+          <text x={x} y="112" textAnchor="middle" fill={ink} fontSize="9">{a}</text>
+          <text x={x} y="125" textAnchor="middle" fill={ink} fontSize="9">{b}</text>
+          {i < 3 && <line x1={x + 34} y1="115" x2={x + 61} y2="115" stroke={ink} strokeWidth="2" />}
+        </g>
+      ))}
+      <text x="200" y="50" textAnchor="middle" fill={ink} fontSize="12">one signal → many cAMP → thousands phosphorylated</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="10">kinases on • phosphatases off • amplification at every arrow</text>
+    </Fig>
+  );
+}
+
+function CellCycleClock() {
+  return (
+    <Fig title="Fig. — Cell-cycle clock: G1–S–G2–M with checkpoints; mitosis PMAT beside it">
+      <circle cx="130" cy="120" r="70" fill="none" stroke={ink} strokeWidth="2" />
+      <path d="M130 50 A70 70 0 0 1 200 120" fill="none" stroke={accent} strokeWidth="8" />
+      <path d="M200 120 A70 70 0 0 1 130 190" fill="none" stroke={gold} strokeWidth="8" />
+      <path d="M130 190 A70 70 0 0 1 60 120" fill="none" stroke={accent} strokeWidth="8" opacity="0.6" />
+      <text x="130" y="124" textAnchor="middle" fill={ink} fontSize="11">G1•S•G2•M</text>
+      <circle cx="200" cy="120" r="5" fill="#f87171" />
+      <text x="272" y="80" fill="#f87171" fontSize="10">● G1/S, G2/M, M</text>
+      <text x="272" y="95" fill={faint} fontSize="10">p53 guards them</text>
+      {["P", "M", "A", "T"].map((s, i) => (
+        <g key={s}>
+          <circle cx={250 + i * 38} cy="150" r="15" fill="none" stroke={accent} strokeWidth="1.5" />
+          <text x={250 + i * 38} y="155" textAnchor="middle" fill={ink} fontSize="11">{s}</text>
+        </g>
+      ))}
+      <text x="307" y="185" textAnchor="middle" fill={faint} fontSize="10">condense•align•split•reform</text>
+    </Fig>
+  );
+}
+
+function CrossingOver() {
+  return (
+    <Fig title="Fig. — Panel A: crossing over at the chiasma · Panel B: normal vs nondisjunction">
+      <text x="100" y="30" textAnchor="middle" fill={accent} fontSize="11">A: crossover</text>
+      <line x1="40" y1="60" x2="160" y2="160" stroke={accent} strokeWidth="3" />
+      <line x1="160" y1="60" x2="40" y2="160" stroke={ink} strokeWidth="3" />
+      <circle cx="100" cy="110" r="7" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="100" y="185" textAnchor="middle" fill={gold} fontSize="10">chiasma: swap</text>
+      <text x="300" y="30" textAnchor="middle" fill={accent} fontSize="11">B: segregation</text>
+      <line x1="260" y1="60" x2="260" y2="160" stroke={accent} strokeWidth="3" />
+      <line x1="300" y1="60" x2="300" y2="160" stroke={accent} strokeWidth="3" />
+      <text x="280" y="185" textAnchor="middle" fill={accent} fontSize="10">normal 1:1 ✓</text>
+      <line x1="340" y1="60" x2="340" y2="160" stroke="#f87171" strokeWidth="3" />
+      <line x1="360" y1="60" x2="360" y2="160" stroke="#f87171" strokeWidth="1" strokeDasharray="3 3" />
+      <text x="350" y="185" textAnchor="middle" fill="#f87171" fontSize="10">2:0 ✗ Down/Turner</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -153,6 +277,12 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "atp-cycle": AtpCycle,
   "respiration-map": RespirationMap,
   "photosynthesis-map": PhotosynthesisMap,
+  "microscope-scale": MicroscopeScale,
+  "fluid-mosaic": FluidMosaic,
+  "endomembrane-path": EndomembranePath,
+  "gpcr-cascade": GpcrCascade,
+  "cell-cycle-clock": CellCycleClock,
+  "crossing-over": CrossingOver,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
