@@ -4,7 +4,8 @@ export type LessonBlock =
   | { type: "definition"; term: string; text: string }
   | { type: "example"; text: string }
   | { type: "callout"; variant: "info" | "warning"; text: string }
-  | { type: "table"; headers: string[]; rows: string[][] };
+  | { type: "table"; headers: string[]; rows: string[][] }
+  | { type: "diagram"; diagramId: string; caption: string };
 
 export type LessonContent = {
   blocks: LessonBlock[];

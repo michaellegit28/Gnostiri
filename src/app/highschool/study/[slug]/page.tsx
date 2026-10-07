@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
+import { BioDiagram } from "@/components/diagrams/BioDiagrams";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
@@ -23,7 +24,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
     include: { department: true, alignments: { include: { board: { include: { region: true } }, track: true } }, lessons: { orderBy: { orderIndex: "asc" }, take: 3 }, _count: { select: { questions: true } } },
   });
   if (!topic) notFound();
-  type Block = { type: string; level?: number; text?: string; term?: string; variant?: string; headers?: string[]; rows?: string[][] };
+  type Block = { type: string; level?: number; text?: string; term?: string; variant?: string; headers?: string[]; rows?: string[][]; diagramId?: string; caption?: string };
   const chapters = topic.lessons.map((l) => ({
     title: l.title,
     minutes: l.estimatedMinutes || 0,
@@ -136,6 +137,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
                 if (b.type === "definition") return <p key={i} className="text-sm text-slate-200 rounded-lg border border-teal-800 p-3"><strong>{b.term}: </strong>{b.text}</p>;
                 if (b.type === "example") return <p key={i} className="text-sm text-slate-300 border-l-2 border-teal-500 pl-3">{b.text}</p>;
                 if (b.type === "callout") return <p key={i} className="text-sm text-amber-200/90 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3">{b.text}</p>;
+                if (b.type === "diagram" && b.diagramId) return <BioDiagram key={i} diagramId={b.diagramId} caption={b.caption || ""} />;
                 if (b.type === "table" && b.headers) return <div key={i} className="overflow-x-auto rounded-lg border border-slate-700"><table className="w-full text-xs"><thead><tr>{b.headers.map((h) => <th key={h} className="p-2 text-left bg-slate-800">{h}</th>)}</tr></thead><tbody>{(b.rows || []).map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci} className="p-2 border-t border-slate-800">{c}</td>)}</tr>)}</tbody></table></div>;
                 return <p key={i} className="text-sm text-slate-300 leading-relaxed">{b.text}</p>;
               })}
@@ -150,6 +152,7 @@ export default async function CurriculumTopicPage({ params, searchParams }: { pa
                   if (b.type === "definition") return <p key={i} className="text-sm text-slate-200 rounded-lg border border-teal-800 p-3"><strong>{b.term}: </strong>{b.text}</p>;
                   if (b.type === "example") return <p key={i} className="text-sm text-slate-300 border-l-2 border-teal-500 pl-3">{b.text}</p>;
                   if (b.type === "callout") return <p key={i} className="text-sm text-amber-200/90 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3">{b.text}</p>;
+                  if (b.type === "diagram" && b.diagramId) return <BioDiagram key={i} diagramId={b.diagramId} caption={b.caption || ""} />;
                   if (b.type === "table" && b.headers) return <div key={i} className="overflow-x-auto rounded-lg border border-slate-700"><table className="w-full text-xs"><thead><tr>{b.headers.map((h) => <th key={h} className="p-2 text-left bg-slate-800">{h}</th>)}</tr></thead><tbody>{(b.rows || []).map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci} className="p-2 border-t border-slate-800">{c}</td>)}</tr>)}</tbody></table></div>;
                   return <p key={i} className="text-sm text-slate-300 leading-relaxed">{b.text}</p>;
                 })}
