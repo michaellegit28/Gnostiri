@@ -269,6 +269,125 @@ function CrossingOver() {
   );
 }
 
+function SelectionModes() {
+  const bell = (cx: number, w: number) => `M${cx - w} 180 C ${cx - w * 0.5} 180, ${cx - 12} 90, ${cx} 90 C ${cx + 12} 90, ${cx + w * 0.5} 180, ${cx + w} 180`;
+  return (
+    <Fig title="Fig. — Selection modes: directional shifts, stabilising narrows, disruptive splits">
+      {[["directional", 70, 0], ["stabilising", 200, 0], ["disruptive", 330, 0]].map(([label, cx]) => (
+        <g key={label as string}>
+          <path d={bell(cx as number, 45)} fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="4 3" />
+          <path
+            d={label === "directional" ? bell((cx as number) + 22, 45) : label === "stabilising" ? bell(cx as number, 24) : bell(cx as number, 45)}
+            fill="none" stroke={label === "disruptive" ? "#f87171" : accent} strokeWidth="2"
+          />
+          {label === "disruptive" && <path d={bell((cx as number) - 26, 22) + " " + bell((cx as number) + 26, 22)} fill="none" stroke={accent} strokeWidth="2" />}
+          <text x={cx as number} y="205" textAnchor="middle" fill={ink} fontSize="10">{label}</text>
+        </g>
+      ))}
+      <text x="200" y="30" textAnchor="middle" fill={faint} fontSize="10">dashed = before · solid = after</text>
+    </Fig>
+  );
+}
+
+function PhylogenySpeciation() {
+  return (
+    <Fig title="Fig. — Cladogram (outgroup, node, monophyletic clade) + allopatric split by barrier">
+      <line x1="40" y1="60" x2="40" y2="170" stroke={ink} strokeWidth="1.5" />
+      <circle cx="40" cy="170" r="4" fill={gold} />
+      <line x1="40" y1="90" x2="110" y2="90" stroke={ink} strokeWidth="1.5" />
+      <line x1="40" y1="140" x2="110" y2="140" stroke={ink} strokeWidth="1.5" />
+      <text x="30" y="55" fill={faint} fontSize="10">outgroup</text>
+      <text x="115" y="93" fill={ink} fontSize="10">sister taxa</text>
+      <rect x="105" y="120" width="80" height="45" rx="6" fill="none" stroke={accent} strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="145" y="183" textAnchor="middle" fill={accent} fontSize="10">monophyletic clade</text>
+      <line x1="230" y1="60" x2="230" y2="170" stroke="#f87171" strokeWidth="6" />
+      <text x="230" y="185" textAnchor="middle" fill="#f87171" fontSize="10">barrier (river)</text>
+      <line x1="250" y1="100" x2="310" y2="100" stroke={accent} strokeWidth="2" />
+      <line x1="250" y1="140" x2="310" y2="140" stroke={accent} strokeWidth="2" />
+      <text x="330" y="105" fill={ink} fontSize="10">sp. A</text>
+      <text x="330" y="145" fill={ink} fontSize="10">sp. B</text>
+      <text x="290" y="50" textAnchor="middle" fill={ink} fontSize="11">allopatric speciation</text>
+    </Fig>
+  );
+}
+
+function GrowthSurvivorship() {
+  return (
+    <Fig title="Fig. — Panel A: J vs S growth with K · Panel B: survivorship types I, II, III">
+      <text x="100" y="25" textAnchor="middle" fill={ink} fontSize="11">A: growth</text>
+      <path d="M30 180 C 80 180, 110 120, 170 60" fill="none" stroke={gold} strokeWidth="2" />
+      <path d="M30 180 C 90 178, 100 150, 120 148 L170 148" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="30" y1="148" x2="175" y2="148" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
+      <text x="178" y="140" fill={faint} fontSize="10">K</text>
+      <text x="100" y="200" textAnchor="middle" fill={faint} fontSize="10">J-exponential vs S-logistic</text>
+      <text x="300" y="25" textAnchor="middle" fill={ink} fontSize="11">B: survivorship</text>
+      <path d="M220 60 C 280 60, 320 120, 360 180" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="220" y1="60" x2="360" y2="180" stroke={gold} strokeWidth="2" />
+      <path d="M220 60 C 230 140, 300 170, 360 180" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="290" y="200" textAnchor="middle" fill={faint} fontSize="10">I (us) · II (birds) · III (fish)</text>
+    </Fig>
+  );
+}
+
+function NicheCascade() {
+  return (
+    <Fig title="Fig. — Realized vs fundamental niches; orca→otter→urchin→kelp cascade">
+      <ellipse cx="100" cy="110" rx="60" ry="45" fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="4 3" />
+      <ellipse cx="100" cy="120" rx="32" ry="26" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="100" y="195" textAnchor="middle" fill={faint} fontSize="10">realised inside fundamental</text>
+      {["orca", "otter", "urchin", "kelp"].map((t, i) => (
+        <g key={t}>
+          <rect x={210} y={45 + i * 38} width="110" height="28" rx="6" fill="none" stroke={i % 2 ? accent : ink} strokeWidth="1.5" />
+          <text x={265} y={63 + i * 38} textAnchor="middle" fill={ink} fontSize="10">{t}</text>
+          {i < 3 && <line x1={265} y1={73 + i * 38} x2={265} y2={83 + i * 38} stroke={ink} strokeWidth="1.5" />}
+        </g>
+      ))}
+      <text x="265" y="30" textAnchor="middle" fill={ink} fontSize="11">remove otters → kelp forests fall</text>
+    </Fig>
+  );
+}
+
+function NitrogenPyramid() {
+  return (
+    <Fig title="Fig. — Nitrogen cycle (N₂→fixation→plants→denitrification) + 10% energy pyramid">
+      <circle cx="90" cy="60" r="26" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="90" y="64" textAnchor="middle" fill={ink} fontSize="10">N₂ air</text>
+      <circle cx="90" cy="150" r="26" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="90" y="146" textAnchor="middle" fill={ink} fontSize="9">root-nodule</text>
+      <text x="90" y="158" textAnchor="middle" fill={ink} fontSize="9">fixers</text>
+      <line x1="90" y1="86" x2="90" y2="124" stroke={ink} strokeWidth="1.5" />
+      <line x1="116" y1="150" x2="180" y2="150" stroke={ink} strokeWidth="1.5" />
+      <text x="160" y="140" textAnchor="middle" fill={faint} fontSize="9">nitrify→plants</text>
+      {[["producers", 100], ["herbivores", 10], ["carnivores", 1]].map(([label, pct], i) => (
+        <g key={label as string}>
+          <rect x={230 + i * 22} y={170 - i * 42} width={150 - i * 44} height={34} rx="4" fill="none" stroke={i === 0 ? accent : faint} strokeWidth="1.5" />
+          <text x={305} y={191 - i * 42} textAnchor="middle" fill={ink} fontSize="9">{label} {pct}%</text>
+        </g>
+      ))}
+      <text x="305" y="30" textAnchor="middle" fill={ink} fontSize="11">only ~10% climbs each level</text>
+    </Fig>
+  );
+}
+
+function Biomagnification() {
+  const levels: [string, number][] = [["phytoplankton", 3], ["zooplankton", 6], ["small fish", 10], ["bird (apex)", 15]];
+  return (
+    <Fig title="Fig. — Biomagnification up the chain + eutrophication cascade">
+      {levels.map(([label, r], i) => (
+        <g key={label}>
+          <circle cx={50 + i * 70} cy="80" r={r} fill="none" stroke={i === 3 ? "#f87171" : accent} strokeWidth="2" />
+          <text x={50 + i * 70} y="130" textAnchor="middle" fill={ink} fontSize="8">{label}</text>
+        </g>
+      ))}
+      <text x="155" y="30" textAnchor="middle" fill={ink} fontSize="11">toxins concentrate upward</text>
+      <text x="200" y="165" textAnchor="middle" fill={faint} fontSize="10">runoff → bloom → decay → hypoxia → die-off</text>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <circle key={i} cx={60 + i * 70} cy="185" r={4 + i * 1.5} fill="none" stroke={gold} strokeWidth="1.5" />
+      ))}
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -283,6 +402,12 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "gpcr-cascade": GpcrCascade,
   "cell-cycle-clock": CellCycleClock,
   "crossing-over": CrossingOver,
+  "selection-modes": SelectionModes,
+  "phylogeny-speciation": PhylogenySpeciation,
+  "growth-survivorship": GrowthSurvivorship,
+  "niche-cascade": NicheCascade,
+  "nitrogen-pyramid": NitrogenPyramid,
+  "biomagnification": Biomagnification,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
