@@ -204,7 +204,7 @@ function SubtopicChips({ subtopics }: { subtopics: string[] }) {
       {first.map((s) => (
         <span key={s} className="rounded border border-slate-800 bg-slate-950/60 px-1.5 py-0.5 truncate max-w-[220px]">{s}</span>
       ))}
-      {rest.length > 0 && (
+      {subtopics.length > first.length && (
         <details className="inline">
           <summary className="cursor-pointer list-none rounded border border-slate-700 bg-slate-800/60 px-1.5 py-0.5 text-slate-400">+{subtopics.length - first.length} more</summary>
           <div className="mt-1 flex flex-wrap gap-1">
