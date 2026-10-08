@@ -60,9 +60,9 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
     });
     const latest = new Map<string, { score: number; maxScore: number }>();
     for (const a of attempts) if (!latest.has(a.topicId)) latest.set(a.topicId, { score: a.score, maxScore: a.maxScore });
-    for (const [topicId, a] of latest) {
+    latest.forEach((a, topicId) => {
       if (!completed.has(topicId) && a.maxScore > 0 && a.score / a.maxScore < 0.7) needsRetry.add(topicId);
-    }
+    });
     const last = progress[0];
     if (last) {
       const found = rows.find((r) => r.id === last.entityId);
