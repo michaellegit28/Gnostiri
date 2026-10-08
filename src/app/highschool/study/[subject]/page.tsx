@@ -140,7 +140,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
             </select>
             <button className="rounded bg-amber-500 px-3 py-1.5 font-semibold text-slate-950" type="submit">Apply</button>
             {regionParam && <Link href={`/highschool/study/${subject.slug}`} className="rounded border border-slate-600 px-3 py-1.5">Clear</Link>}
-            <span className="text-xs text-slate-500">Highlights topics marked core in that region's boards.</span>
+            <span className="text-xs text-slate-500">Highlights topics marked core in that region&apos;s boards.</span>
           </form>
         </details>
 
