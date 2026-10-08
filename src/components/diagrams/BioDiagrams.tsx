@@ -388,6 +388,84 @@ function Biomagnification() {
   );
 }
 
+function WarsTimeline() {
+  const marks: [number, string][] = [[60, "1914 WWI"], [110, "1918 armistice"], [160, "1919 Versailles"], [230, "1939 WWII"], [290, "1941 Pearl Harbor"], [350, "1945 end"]];
+  return (
+    <Fig title="Fig. — World Wars timeline: Sarajevo → Versailles → blitzkrieg → UN era">
+      <line x1="40" y1="115" x2="370" y2="115" stroke={ink} strokeWidth="2" />
+      {marks.map(([x, label], i) => (
+        <g key={label}>
+          <circle cx={x} cy="115" r="4" fill={i < 3 ? accent : gold} />
+          <text x={x} y={i % 2 ? "140" : "95"} textAnchor="middle" fill={ink} fontSize="9">{label}</text>
+        </g>
+      ))}
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="11">two wars, one chain of consequences</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="10">Versailles guilt → Depression → dictators → WWII</text>
+    </Fig>
+  );
+}
+
+function ColdWarBlocs() {
+  return (
+    <Fig title="Fig. — Cold War bipolarity: NATO west vs Warsaw Pact east, proxies between">
+      <rect x="25" y="70" width="120" height="80" rx="8" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="85" y="100" textAnchor="middle" fill={ink} fontSize="10">NATO / USA</text>
+      <text x="85" y="115" textAnchor="middle" fill={faint} fontSize="9">capitalism · containment</text>
+      <rect x="255" y="70" width="120" height="80" rx="8" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="315" y="100" textAnchor="middle" fill={ink} fontSize="10">Warsaw Pact / USSR</text>
+      <text x="315" y="115" textAnchor="middle" fill={faint} fontSize="9">communism · expansion</text>
+      <line x1="145" y1="110" x2="255" y2="110" stroke={ink} strokeWidth="2" strokeDasharray="6 4" />
+      <text x="200" y="100" textAnchor="middle" fill={gold} fontSize="9">iron curtain</text>
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="11">never directly fought — fought through proxies</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="10">Korea · Cuba · Vietnam · Angola · Afghanistan</text>
+    </Fig>
+  );
+}
+
+function DecolonizationWaves() {
+  const waves: [number, string, string][] = [[80, "1947", "South Asia (India, Pakistan)"], [200, "1957–60", "West Africa (Ghana, Nigeria)"], [320, "1960s–80s", "East & Southern Africa"]];
+  return (
+    <Fig title="Fig. — Decolonization waves: partition → Ghana's lead → apartheid's fall">
+      {waves.map(([x, year, label]) => (
+        <g key={year}>
+          <rect x={x - 52} y="80" width="104" height="64" rx="8" fill="none" stroke={accent} strokeWidth="2" />
+          <text x={x} y="103" textAnchor="middle" fill={gold} fontSize="11">{year}</text>
+          <text x={x} y="120" textAnchor="middle" fill={ink} fontSize="8">{label}</text>
+        </g>
+      ))}
+      <line x1="40" y1="150" x2="370" y2="150" stroke={faint} strokeWidth="1.5" />
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="11">empire ends in waves, not at once</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="10">legacies: borders, economies, neo-colonial ties</text>
+    </Fig>
+  );
+}
+
+function RegionalHistoryTimelines() {
+  const rows: [number, string, [number, string][]][] = [
+    [50, "Nigeria", [[60, "1804 Sokoto"], [150, "1914 amalgamation"], [250, "1960 independence"], [330, "1967–70 civil war"]]],
+    [120, "Israel", [[60, "1917 Balfour"], [160, "1948 state"], [260, "1967 Six-Day"], [340, "1993 Oslo"]]],
+    [190, "Egypt", [[60, "1919 revolution"], [170, "1952 Free Officers"], [270, "1956 Suez"], [340, "1970s Sadat"]]],
+  ];
+  return (
+    <Fig title="Fig. — Compulsory national histories: Nigeria · Israel · Egypt">
+      {rows.map(([y, label, marks]) => (
+        <g key={label}>
+          <text x="20" y={y + 4} fill={gold} fontSize="9">{label}</text>
+          <line x1="55" y1={y} x2="370" y2={y} stroke={ink} strokeWidth="1.5" />
+          {marks.map(([x, ml]) => (
+            <g key={ml}>
+              <circle cx={x} cy={y} r="3.5" fill={accent} />
+              <text x={x} y={y - 8} textAnchor="middle" fill={ink} fontSize="8">{ml}</text>
+            </g>
+          ))}
+        </g>
+      ))}
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="11">each syllabus makes its national story compulsory</text>
+      <text x="200" y="225" textAnchor="middle" fill={faint} fontSize="9">WAEC · Bagrut · Thanaweya require these by name</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -408,6 +486,10 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "niche-cascade": NicheCascade,
   "nitrogen-pyramid": NitrogenPyramid,
   "biomagnification": Biomagnification,
+  "wars-timeline": WarsTimeline,
+  "cold-war-blocs": ColdWarBlocs,
+  "decolonization-waves": DecolonizationWaves,
+  "regional-history-timelines": RegionalHistoryTimelines,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {

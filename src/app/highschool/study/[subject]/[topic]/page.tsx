@@ -98,13 +98,6 @@ export default async function TopicPage({ params, searchParams }: { params: { su
         take: 6,
       })
     : [];
-  const courseHit = keywords.length
-    ? await prisma.course.findMany({
-        where: { isPublished: true, OR: keywords.map((k) => ({ title: { contains: k, mode: "insensitive" as const } })) },
-        select: { slug: true, title: true },
-        take: 4,
-      })
-    : [];
   const studyLinks = leaf.filter((t) => t._count.lessons > 0).slice(0, 6).map((t) => {
     const subj = subjectById.get(t.parentId || "")!;
     const examCode = subj.id.split("-")[0];
@@ -113,7 +106,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
     return { title: `${subj.title} — ${t.title}`, href: `/highschool/${examCode}/${subjectSlug}/${topicSlug}/study` };
   });
   for (const e of extraHit.filter((t) => t._count.lessons > 0).slice(0, 4)) studyLinks.push({ title: `Discovery — ${e.title}`, href: `/discovery/${e.id}` });
-  for (const c of courseHit.slice(0, 3)) studyLinks.push({ title: `University — ${c.title}`, href: `/university/${c.slug}` });
+  // University stays standalone — no cross-links between University and High School content.
 
   const kindsOf = (t: { questions: { sourceExam: string | null }[] }) =>
     Array.from(new Set(t.questions.map((q) => (q.sourceExam || "").toUpperCase()).filter(Boolean)));
