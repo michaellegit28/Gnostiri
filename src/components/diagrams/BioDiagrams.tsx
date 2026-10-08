@@ -466,6 +466,43 @@ function RegionalHistoryTimelines() {
   );
 }
 
+function DoubleCirculation() {
+  return (
+    <Fig title="Fig. — Double circulation: pulmonary loop (lungs) and systemic loop (body)">
+      <rect x="160" y="70" width="80" height="90" rx="10" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="200" y="105" textAnchor="middle" fill={ink} fontSize="10">HEART</text>
+      <text x="200" y="122" textAnchor="middle" fill={faint} fontSize="8">4 chambers</text>
+      <rect x="30" y="55" width="70" height="40" rx="8" fill="none" stroke={accent} strokeWidth="1.5" />
+      <text x="65" y="80" textAnchor="middle" fill={accent} fontSize="9">lungs</text>
+      <rect x="30" y="150" width="70" height="40" rx="8" fill="none" stroke="#f87171" strokeWidth="1.5" />
+      <text x="65" y="175" textAnchor="middle" fill="#f87171" fontSize="9">body</text>
+      <path d="M240 90 C 280 90, 280 75, 100 75" fill="none" stroke={accent} strokeWidth="2" />
+      <path d="M100 170 C 280 170, 280 155, 240 155" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="270" y="112" fill={accent} fontSize="8">pulmonary</text>
+      <text x="270" y="145" fill="#f87171" fontSize="8">systemic</text>
+      <text x="200" y="40" textAnchor="middle" fill={ink} fontSize="10">blood is re-pressurised between loops</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">right side → lungs · left side → body</text>
+    </Fig>
+  );
+}
+
+function Nephron() {
+  return (
+    <Fig title="Fig. — The nephron: filter at the glomerulus, reabsorb along the tubule, ADH tunes the duct">
+      <circle cx="90" cy="90" r="22" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="90" y="87" textAnchor="middle" fill={ink} fontSize="8">glomerulus</text>
+      <text x="90" y="99" textAnchor="middle" fill={faint} fontSize="7">filter under pressure</text>
+      <path d="M112 95 C 160 95, 170 60, 210 60 C 250 60, 250 130, 300 130" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="180" y="50" fill={accent} fontSize="8">reabsorb: glucose, water, salts</text>
+      <path d="M300 130 L 350 130" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="325" y="150" textAnchor="middle" fill="#f87171" fontSize="8">collecting duct</text>
+      <text x="325" y="162" textAnchor="middle" fill={faint} fontSize="7">ADH → more water kept</text>
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="10">one million per kidney, filtering all blood every ~5 min</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="9">out: urea + excess water and salts = urine</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -490,6 +527,8 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "cold-war-blocs": ColdWarBlocs,
   "decolonization-waves": DecolonizationWaves,
   "regional-history-timelines": RegionalHistoryTimelines,
+  "double-circulation": DoubleCirculation,
+  "nephron": Nephron,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
