@@ -403,7 +403,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-8 space-y-2 text-center md:text-left">
-          <p className="font-serif italic text-slate-400 text-sm">
+          <p className="font-reading italic text-slate-400 text-sm">
             Learning is not a place. It is a posture toward the world.
           </p>
           <p className="text-xs text-slate-500">
