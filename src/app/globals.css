@@ -42,3 +42,7 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
 
 /* Premium reading font polish — Literata for long-form study text */
 .font-reading { text-rendering: optimizeLegibility; font-feature-settings: "kern" 1, "liga" 1; }
+
+/* Mini-TOC horizontal pill bar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
