@@ -50,7 +50,7 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "paragraph":
       return (
-        <p className="text-slate-300 text-base md:text-lg leading-[1.7] my-4 font-light">
+        <p className="text-slate-300 font-reading text-base md:text-lg leading-[1.8] my-4">
           {block.text}
         </p>
       );
@@ -61,7 +61,7 @@ function Block({ block }: { block: LessonBlock }) {
             Key idea
           </div>
           <div className="font-bold text-slate-100 text-lg mb-2">{block.term}</div>
-          <div className="text-slate-300 leading-relaxed">{block.text}</div>
+          <div className="text-slate-300 font-reading leading-relaxed">{block.text}</div>
         </div>
       );
     case "example":
@@ -70,7 +70,7 @@ function Block({ block }: { block: LessonBlock }) {
           <div className="text-xs font-semibold uppercase tracking-wider text-violet-300 mb-2">
             See it in action
           </div>
-          <div className="text-slate-200 leading-relaxed">{block.text}</div>
+          <div className="text-slate-200 font-reading leading-relaxed">{block.text}</div>
         </div>
       );
     case "callout":

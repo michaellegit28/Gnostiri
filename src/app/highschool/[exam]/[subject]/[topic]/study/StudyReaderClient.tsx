@@ -118,7 +118,7 @@ export default function StudyReaderClient({
         return (
           <p
             key={index}
-            className="text-[#3A3844] font-sans text-base md:text-lg leading-[1.75] my-4"
+            className="text-[#3A3844] font-reading text-base md:text-lg leading-[1.8] my-4"
           >
             {block.text}
           </p>
@@ -134,7 +134,7 @@ export default function StudyReaderClient({
               Key idea
             </div>
             <div className="font-bold text-[#1F1E26] text-lg mb-2">{block.term}</div>
-            <div className="text-[#3A3844] leading-relaxed">{block.text}</div>
+            <div className="text-[#3A3844] font-reading leading-relaxed">{block.text}</div>
           </div>
         );
 
@@ -148,7 +148,7 @@ export default function StudyReaderClient({
               <Sparkles className="w-4 h-4" />
               <span>Example</span>
             </div>
-            <div className="text-[#2C2A35] leading-relaxed">{block.text}</div>
+            <div className="text-[#2C2A35] font-reading leading-relaxed">{block.text}</div>
           </div>
         );
 
@@ -164,7 +164,7 @@ export default function StudyReaderClient({
                 <div className="text-xs font-semibold uppercase tracking-wider text-[#1E4A6B] mb-1">
                   Note
                 </div>
-                <div className="leading-relaxed">{block.text}</div>
+                <div className="font-reading leading-relaxed">{block.text}</div>
               </div>
             </div>
           );
@@ -179,7 +179,7 @@ export default function StudyReaderClient({
               <div className="text-xs font-semibold uppercase tracking-wider text-[#8A5A00] mb-1">
                 Watch out
               </div>
-              <div className="leading-relaxed">{block.text}</div>
+              <div className="font-reading leading-relaxed">{block.text}</div>
             </div>
           </div>
         );
@@ -206,7 +206,7 @@ export default function StudyReaderClient({
                     {row.map((cell, cIdx) => (
                       <td
                         key={cIdx}
-                        className="p-3 text-sm text-[#3A3844] border-r border-[#E4D8B8] last:border-r-0"
+                        className="p-3 text-sm font-reading text-[#3A3844] border-r border-[#E4D8B8] last:border-r-0"
                       >
                         {cell}
                       </td>

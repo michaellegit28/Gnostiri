@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Playfair_Display, Inter, Literata } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { DomainProvider } from "@/context/DomainContext";
@@ -7,15 +7,21 @@ import ServiceWorker from "@/components/ServiceWorker";
 import SiteMenu from "@/components/chrome/SiteMenu";
 import TutorPill from "@/components/chrome/TutorPill";
 
-const display = Fraunces({
+const display = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Manrope({
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+});
+
+const reading = Literata({
+  subsets: ["latin"],
+  variable: "--font-reading",
   display: "swap",
 });
 
@@ -30,8 +36,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body className="font-sans">
+    <html lang="en" className={`${display.variable} ${body.variable} ${reading.variable}`}>
+      <body className="font-sans antialiased">
         <ServiceWorker />
         <AuthProvider>
           <DomainProvider>
