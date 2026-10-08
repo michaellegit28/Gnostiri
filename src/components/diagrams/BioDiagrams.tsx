@@ -503,6 +503,46 @@ function Nephron() {
   );
 }
 
+function TranspirationStream() {
+  return (
+    <Fig title="Fig. — Transpiration stream: evaporation pulls a cohesive water column from root to leaf">
+      <rect x="30" y="150" width="90" height="50" rx="10" fill="none" stroke={accent} strokeWidth="1.5" />
+      <text x="75" y="180" textAnchor="middle" fill={accent} fontSize="9">root hairs</text>
+      <line x1="120" y1="140" x2="200" y2="80" stroke={ink} strokeWidth="3" />
+      <text x="150" y="115" fill={faint} fontSize="9">xylem ↑</text>
+      <ellipse cx="255" cy="60" rx="55" ry="30" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="255" y="57" textAnchor="middle" fill={gold} fontSize="9">leaf + stomata</text>
+      <text x="255" y="72" textAnchor="middle" fill={faint} fontSize="8">evaporation pulls</text>
+      {[0, 1, 2].map((i) => (
+        <circle key={i} cx={130 + i * 35} cy={133 - i * 22} r="2.5" fill="none" stroke={accent} strokeWidth="1.5" />
+      ))}
+      <path d="M310 40 C 340 30, 350 25, 360 18" fill="none" stroke="#f87171" strokeWidth="1.5" />
+      <text x="355" y="40" fill="#f87171" fontSize="8">water vapour out</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">cohesion holds the column; tension does the lifting</text>
+    </Fig>
+  );
+}
+
+function FlowerParts() {
+  return (
+    <Fig title="Fig. — Flower anatomy: anther and stigma (fertilisation route) around the ovary">
+      <circle cx="200" cy="95" r="70" fill="none" stroke={gold} strokeWidth="2" />
+      {[0, 60, 120, 180, 240, 300].map((a) => (
+        <ellipse key={a} cx="200" cy="95" rx="70" ry="18" fill="none" stroke={faint} strokeWidth="1" transform={`rotate(${a} 200 95)`} />
+      ))}
+      <text x="200" y="28" textAnchor="middle" fill={faint} fontSize="9">petals — insect advert</text>
+      <circle cx="180" cy="75" r="8" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="180" y="60" textAnchor="middle" fill={accent} fontSize="8">anther (pollen)</text>
+      <circle cx="220" cy="75" r="8" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="222" y="60" textAnchor="middle" fill="#f87171" fontSize="8">stigma</text>
+      <line x1="220" y1="83" x2="215" y2="105" stroke="#f87171" strokeWidth="1.5" />
+      <ellipse cx="212" cy="115" rx="14" ry="11" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="212" y="118" textAnchor="middle" fill={ink} fontSize="8">ovary</text>
+      <text x="200" y="185" textAnchor="middle" fill={faint} fontSize="9">ovule → seed · ovary wall → fruit</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -529,6 +569,8 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "regional-history-timelines": RegionalHistoryTimelines,
   "double-circulation": DoubleCirculation,
   "nephron": Nephron,
+  "transpiration-stream": TranspirationStream,
+  "flower-parts": FlowerParts,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
