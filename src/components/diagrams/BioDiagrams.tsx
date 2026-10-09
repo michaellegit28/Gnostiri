@@ -695,6 +695,32 @@ function HeatingCurve() {
   );
 }
 
+function HalfLifeCurve() {
+  return (
+    <Fig title="Fig. — The half-life decay curve: half the sample falls every half-life">
+      <line x1="50" y1="25" x2="50" y2="200" stroke={ink} strokeWidth="1.5" />
+      <line x1="50" y1="200" x2="370" y2="200" stroke={ink} strokeWidth="1.5" />
+      <text x="55" y="18" textAnchor="start" fill={faint} fontSize="8">mass remaining (g)</text>
+      <text x="215" y="218" textAnchor="middle" fill={faint} fontSize="8">time (× half-life) →</text>
+      <path d="M60 40 Q90 75 120 120 T180 160 T240 180 T300 190 T360 195" fill="none" stroke={accent} strokeWidth="2.5" />
+      <line x1="50" y1="40" x2="60" y2="40" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <text x="45" y="44" textAnchor="end" fill={faint} fontSize="8">800</text>
+      <line x1="120" y1="120" x2="120" y2="200" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <line x1="50" y1="120" x2="120" y2="120" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <text x="45" y="124" textAnchor="end" fill={faint} fontSize="8">400</text>
+      <line x1="180" y1="160" x2="180" y2="200" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <line x1="50" y1="160" x2="180" y2="160" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <text x="45" y="164" textAnchor="end" fill={faint} fontSize="8">200</text>
+      <line x1="240" y1="180" x2="240" y2="200" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <line x1="50" y1="180" x2="240" y2="180" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <text x="45" y="184" textAnchor="end" fill={faint} fontSize="8">100</text>
+      <text x="255" y="72" textAnchor="middle" fill={accent} fontSize="9">halve every half-life</text>
+      <text x="160" y="100" textAnchor="middle" fill={ink} fontSize="8">3 half-lives: 800 → 400 → 200 → 100</text>
+      <text x="300" y="150" textAnchor="middle" fill={faint} fontSize="8">never quite reaches zero</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -729,6 +755,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "electrolysis-cell": ElectrolysisCell,
   "series-parallel": SeriesParallelCircuit,
   "heating-curve": HeatingCurve,
+  "half-life-curve": HalfLifeCurve,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
