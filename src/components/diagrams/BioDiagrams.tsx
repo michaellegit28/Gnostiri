@@ -559,6 +559,36 @@ function PeriodicTrends() {
   );
 }
 
+function MolecularShapes() {
+  const atom = (x: number, y: number, label: string, color = accent) => (
+    <g key={label}>
+      <circle cx={x} cy={y} r="9" fill="none" stroke={color} strokeWidth="2" />
+      <text x={x} y={y + 3} textAnchor="middle" fontSize="8" fill={ink}>{label}</text>
+    </g>
+  );
+  return (
+    <Fig title="Fig. — VSEPR shapes: lone pairs squeeze bond angles down">
+      {atom(200, 60, "C", gold)}
+      {atom(160, 60, "H", ink)}{atom(240, 60, "H", ink)}
+      {atom(180, 30, "H", ink)}{atom(220, 30, "H", ink)}
+      <line x1="191" y1="60" x2="169" y2="60" stroke={ink} strokeWidth="1.5" />
+      <line x1="209" y1="60" x2="231" y2="60" stroke={ink} strokeWidth="1.5" />
+      <line x1="192" y1="54" x2="188" y2="38" stroke={ink} strokeWidth="1.5" />
+      <line x1="208" y1="54" x2="212" y2="38" stroke={ink} strokeWidth="1.5" />
+      <text x="200" y="78" textAnchor="middle" fill={ink} fontSize="9">CH₄ tetrahedral 109.5°</text>
+      {atom(80, 160, "O", gold)}{atom(120, 160, "H", ink)}{atom(88, 190, "H", ink)}
+      <line x1="89" y1="160" x2="111" y2="160" stroke={ink} strokeWidth="1.5" />
+      <line x1="82" y1="168" x2="88" y2="181" stroke={ink} strokeWidth="1.5" />
+      <text x="100" y="212" textAnchor="middle" fill={ink} fontSize="9">H₂O bent 104.5° — 2 lone pairs squeeze</text>
+      {atom(310, 160, "N", gold)}{atom(290, 190, "H", ink)}{atom("310", "195", "H", ink)}{atom(330, 190, "H", ink)}
+      <line x1="308" y1="168" x2="292" y2="181" stroke={ink} strokeWidth="1.5" />
+      <line x1="310" y1="169" x2="310" y2="186" stroke={ink} strokeWidth="1.5" />
+      <line x1="312" y1="168" x2="328" y2="181" stroke={ink} strokeWidth="1.5" />
+      <text x="310" y="212" textAnchor="middle" fill={ink} fontSize="9">NH₃ pyramidal 107°</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -588,6 +618,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "transpiration-stream": TranspirationStream,
   "flower-parts": FlowerParts,
   "periodic-trends": PeriodicTrends,
+  "molecular-shapes": MolecularShapes,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
