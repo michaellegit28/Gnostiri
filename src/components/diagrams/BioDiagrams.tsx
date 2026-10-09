@@ -580,7 +580,7 @@ function MolecularShapes() {
       <line x1="89" y1="160" x2="111" y2="160" stroke={ink} strokeWidth="1.5" />
       <line x1="82" y1="168" x2="88" y2="181" stroke={ink} strokeWidth="1.5" />
       <text x="100" y="212" textAnchor="middle" fill={ink} fontSize="9">H₂O bent 104.5° — 2 lone pairs squeeze</text>
-      {atom(310, 160, "N", gold)}{atom(290, 190, "H", ink)}{atom("310", "195", "H", ink)}{atom(330, 190, "H", ink)}
+      {atom(310, 160, "N", gold)}{atom(290, 190, "H", ink)}{atom(310, 195, "H", ink)}{atom(330, 190, "H", ink)}
       <line x1="308" y1="168" x2="292" y2="181" stroke={ink} strokeWidth="1.5" />
       <line x1="310" y1="169" x2="310" y2="186" stroke={ink} strokeWidth="1.5" />
       <line x1="312" y1="168" x2="328" y2="181" stroke={ink} strokeWidth="1.5" />
