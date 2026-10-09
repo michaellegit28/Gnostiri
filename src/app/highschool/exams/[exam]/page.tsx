@@ -3,11 +3,13 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import { BellPlus, ChevronRight, Clock, FileText, Target } from "lucide-react";
+import { paperUrl, subjectSlugOf } from "@/lib/papers";
 
 export const dynamic = "force-dynamic";
 
 interface PaperSummary {
   id: string;
+  subject: string;
   year: number;
   paperNumber: string;
   durationMinutes: number;
@@ -64,6 +66,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
   for (const paper of examination.papers) {
     const summary: PaperSummary = {
       id: paper.id,
+      subject: paper.subject,
       year: paper.year,
       paperNumber: paper.paperNumber,
       durationMinutes: paper.durationMinutes,
@@ -122,19 +125,25 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                   {String(gi + 1).padStart(2, "0")}
                 </span>
                 <FileText className="w-5 h-5 text-teal-300" />
-                <h2 className="text-xl md:text-2xl font-serif font-bold">{group.subject}</h2>
+                <Link
+                  href={`/highschool/exams/${examination.slug}/${subjectSlugOf(group.subject)}`}
+                  className="text-xl md:text-2xl font-serif font-bold hover:text-amber-400 transition-colors"
+                >
+                  {group.subject}
+                </Link>
                 <span className="text-xs text-slate-500">
                   · {group.papers.length} paper{group.papers.length === 1 ? "" : "s"}
                 </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {group.papers.map((paper) => (
-                  <div
+                  <Link
                     key={paper.id}
-                    className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg"
+                    href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)}
+                    className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg hover:border-amber-500/40 transition-all group"
                   >
                     <div className="flex items-start justify-between gap-3 mb-4">
-                      <span className="font-serif text-3xl font-bold text-amber-400">
+                      <span className="font-serif text-3xl font-bold text-amber-400 group-hover:text-amber-300">
                         {paper.year}
                       </span>
                       <span className="text-xs font-medium text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
@@ -151,10 +160,10 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                         <span>{paper.totalMarks} marks</span>
                       </div>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-500">
-                      Timed attempts open in a coming update
+                    <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-500 group-hover:text-amber-400 transition-colors">
+                      Open paper →
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </section>
