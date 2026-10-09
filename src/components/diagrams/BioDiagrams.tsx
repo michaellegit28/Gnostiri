@@ -543,6 +543,22 @@ function FlowerParts() {
   );
 }
 
+function PeriodicTrends() {
+  return (
+    <Fig title="Fig. — Periodic trends: radius and ionisation energy turn at every period edge">
+      {[0, 1, 2].map((r) => (
+        <rect key={r} x={70 + r * 18} y={55 + r * 26} width={210 - r * 36} height={18} rx="4" fill="none" stroke={accent} strokeWidth="1.5" />
+      ))}
+      <text x="70" y="30" fill={ink} fontSize="9">radius ↓ across (protons pull harder)</text>
+      <path d="M295 120 C 320 110, 320 70, 290 60" fill="none" stroke={gold} strokeWidth="2" markerEnd="url(#ah)" />
+      <text x="345" y="90" fill={gold} fontSize="9">ionisation ↑</text>
+      <path d="M70 150 C 50 140, 50 120, 68 108" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="20" y="140" fill="#f87171" fontSize="9">radius ↑ down</text>
+      <text x="200" y="185" textAnchor="middle" fill={faint} fontSize="9">each new period opens a new shell — the saw-tooth restarts</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -571,6 +587,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "nephron": Nephron,
   "transpiration-stream": TranspirationStream,
   "flower-parts": FlowerParts,
+  "periodic-trends": PeriodicTrends,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
