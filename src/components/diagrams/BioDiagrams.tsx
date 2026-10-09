@@ -673,6 +673,28 @@ function SeriesParallelCircuit() {
   );
 }
 
+function HeatingCurve() {
+  return (
+    <Fig title="Fig. — The heating curve: sloped sections are mcΔT, flat sections are mL">
+      <line x1="50" y1="30" x2="50" y2="200" stroke={ink} strokeWidth="1.5" />
+      <line x1="50" y1="200" x2="370" y2="200" stroke={ink} strokeWidth="1.5" />
+      <text x="55" y="22" textAnchor="start" fill={faint} fontSize="8">temperature (°C)</text>
+      <text x="210" y="218" textAnchor="middle" fill={faint} fontSize="8">energy added →</text>
+      <line x1="110" y1="130" x2="50" y2="130" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <line x1="260" y1="70" x2="50" y2="70" stroke={faint} strokeWidth="1" strokeDasharray="3 3" />
+      <text x="45" y="134" textAnchor="end" fill={faint} fontSize="8">0 °C</text>
+      <text x="45" y="74" textAnchor="end" fill={faint} fontSize="8">100 °C</text>
+      <path d="M60 185 L110 130 L160 130 L260 70 L320 70 L355 48" fill="none" stroke={accent} strokeWidth="2.5" />
+      <text x="80" y="170" textAnchor="middle" fill={faint} fontSize="8">ice warms — mcΔT</text>
+      <text x="135" y="118" textAnchor="middle" fill={gold} fontSize="8">melting — E = mL (flat)</text>
+      <text x="205" y="118" textAnchor="middle" fill={faint} fontSize="8">water warms — mcΔT</text>
+      <text x="290" y="56" textAnchor="middle" fill={gold} fontSize="8">boiling — E = mL (flat)</text>
+      <text x="345" y="40" textAnchor="middle" fill={faint} fontSize="8">steam</text>
+      <text x="210" y="155" textAnchor="middle" fill={ink} fontSize="9">flat = state change — temperature frozen while bonds break</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -706,6 +728,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "mole-triangle": MoleTriangle,
   "electrolysis-cell": ElectrolysisCell,
   "series-parallel": SeriesParallelCircuit,
+  "heating-curve": HeatingCurve,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
