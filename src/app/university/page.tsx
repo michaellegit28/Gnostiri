@@ -3,12 +3,13 @@ import prisma from "@/lib/db";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import { getCurrentUser } from "@/lib/server-auth";
 import { hasPremiumAccess } from "@/lib/entitlements";
+import { UNIVERSITY_OPEN } from "@/lib/access";
 
 export const dynamic = "force-dynamic";
 
 export default async function UniversityPage() {
   const user = await getCurrentUser();
-  const premium = user ? await hasPremiumAccess(user.id) : false;
+  const premium = user ? await hasPremiumAccess(user.id) : UNIVERSITY_OPEN;
   const courses = await prisma.course.findMany({ where: { domain: "university", isPublished: true }, include: { lessons: { orderBy: { orderIndex: "asc" } } }, orderBy: { title: "asc" } });
   const departments: string[] = Array.from(
     new Set(courses.map((c: { department: string }) => c.department))
