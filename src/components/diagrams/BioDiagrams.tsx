@@ -781,6 +781,30 @@ function QuadraticParabola() {
   );
 }
 
+function TrigCircle() {
+  return (
+    <Fig title="Fig. — The unit circle: sin and cos are coordinates, any angle">
+      <circle cx="140" cy="125" r="85" fill="none" stroke={ink} strokeWidth="1.5" />
+      <line x1="50" y1="125" x2="230" y2="125" stroke={ink} strokeWidth="1.2" />
+      <line x1="140" y1="35" x2="140" y2="215" stroke={ink} strokeWidth="1.2" />
+      <line x1="140" y1="125" x2="208" y2="74" stroke={ink} strokeWidth="2" />
+      <line x1="140" y1="125" x2="208" y2="125" stroke={accent} strokeWidth="2" />
+      <line x1="208" y1="125" x2="208" y2="74" stroke={gold} strokeWidth="2" />
+      <circle cx="208" cy="74" r="4" fill={gold} />
+      <text x="215" y="66" textAnchor="start" fill={ink} fontSize="8">P(cos θ, sin θ)</text>
+      <text x="174" y="140" textAnchor="middle" fill={accent} fontSize="8">cos θ = adjacent</text>
+      <text x="214" y="105" textAnchor="start" fill={gold} fontSize="8">sin θ</text>
+      <text x="162" y="118" textAnchor="middle" fill={faint} fontSize="9">θ</text>
+      <text x="300" y="75" textAnchor="middle" fill={ink} fontSize="8">sin 30° = 1/2 · cos 30° = √3/2</text>
+      <text x="300" y="95" textAnchor="middle" fill={ink} fontSize="8">sin 45° = √2/2 · cos 45° = √2/2</text>
+      <text x="300" y="115" textAnchor="middle" fill={ink} fontSize="8">sin 60° = √3/2 · cos 60° = 1/2</text>
+      <text x="300" y="140" textAnchor="middle" fill={accent} fontSize="8">tan 30° = 1/√3 · tan 45° = 1 · tan 60° = √3</text>
+      <text x="300" y="165" textAnchor="middle" fill={faint} fontSize="8">ASTC: quadrant signs — All, Sine, Tan, Cos</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">the unit circle generalises SOH CAH TOA to any angle</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -818,6 +842,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "half-life-curve": HalfLifeCurve,
   "field-lines": FieldLines,
   "quadratic-parabola": QuadraticParabola,
+  "trig-circle": TrigCircle,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
