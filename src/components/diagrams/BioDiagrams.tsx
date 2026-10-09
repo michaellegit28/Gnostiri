@@ -589,6 +589,24 @@ function MolecularShapes() {
   );
 }
 
+function MoleTriangle() {
+  return (
+    <Fig title="Fig. — The mole triangle: mass, particles, gas volume, solution — all through moles">
+      <circle cx="200" cy="110" r="46" fill="none" stroke={gold} strokeWidth="2.5" />
+      <text x="200" y="105" textAnchor="middle" fill={gold} fontSize="12">moles</text>
+      <text x="200" y="122" textAnchor="middle" fill={faint} fontSize="8">n</text>
+      <text x="200" y="38" textAnchor="middle" fill={ink} fontSize="10">mass = n × Mr</text>
+      <text x="60" y="115" textAnchor="middle" fill={accent} fontSize="8">particles</text>
+      <text x="60" y="128" textAnchor="middle" fill={faint} fontSize="7">× 6.02×10²³</text>
+      <text x="340" y="115" textAnchor="middle" fill={accent} fontSize="8">volume / conc</text>
+      <text x="340" y="128" textAnchor="middle" fill={faint} fontSize="7">24 dm³ · conc × vol</text>
+      <line x1="155" y1="90" x2="80" y2="105" stroke={ink} strokeWidth="1.5" />
+      <line x1="245" y1="90" x2="320" y2="105" stroke={ink} strokeWidth="1.5" />
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">every calculation routes through n — balance the equation first</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -619,6 +637,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "flower-parts": FlowerParts,
   "periodic-trends": PeriodicTrends,
   "molecular-shapes": MolecularShapes,
+  "mole-triangle": MoleTriangle,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
