@@ -633,6 +633,46 @@ function ElectrolysisCell() {
   );
 }
 
+function SeriesParallelCircuit() {
+  return (
+    <Fig title="Fig. — Series vs parallel: the two circuits every paper draws">
+      <text x="105" y="22" textAnchor="middle" fill={accent} fontSize="10">SERIES — one loop</text>
+      <path d="M40 90 V40 H170 V140 H40 V110" fill="none" stroke={ink} strokeWidth="2" />
+      <line x1="28" y1="94" x2="52" y2="94" stroke={gold} strokeWidth="2.5" />
+      <line x1="37" y1="106" x2="43" y2="106" stroke={gold} strokeWidth="2.5" />
+      <text x="20" y="98" textAnchor="middle" fill={faint} fontSize="9">+</text>
+      <circle cx="80" cy="40" r="12" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="72" y1="32" x2="88" y2="48" stroke={accent} strokeWidth="1.5" />
+      <line x1="88" y1="32" x2="72" y2="48" stroke={accent} strokeWidth="1.5" />
+      <circle cx="130" cy="40" r="12" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="122" y1="32" x2="138" y2="48" stroke={accent} strokeWidth="1.5" />
+      <line x1="138" y1="32" x2="122" y2="48" stroke={accent} strokeWidth="1.5" />
+      <circle cx="105" cy="140" r="9" fill="none" stroke={accent} strokeWidth="1.5" />
+      <text x="105" y="143" textAnchor="middle" fill={accent} fontSize="8">A</text>
+      <text x="105" y="72" textAnchor="middle" fill={faint} fontSize="8">same current I everywhere</text>
+      <text x="105" y="168" textAnchor="middle" fill={faint} fontSize="8">voltages share: V₁ + V₂ = supply</text>
+      <text x="105" y="184" textAnchor="middle" fill={ink} fontSize="9">R total = R₁ + R₂ — adds up</text>
+      <text x="295" y="22" textAnchor="middle" fill={accent} fontSize="10">PARALLEL — branches</text>
+      <path d="M225 90 V55 H365 V135 H225 V100" fill="none" stroke={ink} strokeWidth="2" />
+      <line x1="213" y1="94" x2="237" y2="94" stroke={gold} strokeWidth="2.5" />
+      <line x1="222" y1="106" x2="228" y2="106" stroke={gold} strokeWidth="2.5" />
+      <line x1="285" y1="55" x2="285" y2="83" stroke={ink} strokeWidth="2" />
+      <circle cx="285" cy="95" r="12" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="277" y1="87" x2="293" y2="103" stroke={accent} strokeWidth="1.5" />
+      <line x1="293" y1="87" x2="277" y2="103" stroke={accent} strokeWidth="1.5" />
+      <line x1="285" y1="107" x2="285" y2="135" stroke={ink} strokeWidth="2" />
+      <line x1="325" y1="55" x2="325" y2="83" stroke={ink} strokeWidth="2" />
+      <circle cx="325" cy="95" r="12" fill="none" stroke={accent} strokeWidth="2" />
+      <line x1="317" y1="87" x2="333" y2="103" stroke={accent} strokeWidth="1.5" />
+      <line x1="333" y1="87" x2="317" y2="103" stroke={accent} strokeWidth="1.5" />
+      <line x1="325" y1="107" x2="325" y2="135" stroke={ink} strokeWidth="2" />
+      <text x="295" y="168" textAnchor="middle" fill={faint} fontSize="8">full supply V on every branch</text>
+      <text x="295" y="184" textAnchor="middle" fill={ink} fontSize="9">currents share: I = I₁ + I₂</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">1/R total = 1/R₁ + 1/R₂ — total resistance falls in parallel</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -665,6 +705,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "molecular-shapes": MolecularShapes,
   "mole-triangle": MoleTriangle,
   "electrolysis-cell": ElectrolysisCell,
+  "series-parallel": SeriesParallelCircuit,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
