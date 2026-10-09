@@ -86,7 +86,7 @@ describe("hard-correction topics (UK/SG/IL)", () => {
     for (const f of [
       "src/components/curriculum/AlignmentDisclaimer.tsx",
       "src/app/highschool/[exam]/[subject]/[topic]/study/StudyReaderClient.tsx",
-      "src/app/extras/[topic]/page.tsx",
+      "src/app/discovery/[topic]/page.tsx",
       "src/app/university/[course]/page.tsx",
     ]) {
       const src = readFileSync(f, "utf8");
