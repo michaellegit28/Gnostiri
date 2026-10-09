@@ -173,6 +173,7 @@ model Topic {
   lastAuditedDate DateTime?
   needsVerification Boolean    @default(true)
   alignments    TopicBoardAlignment[]
+  paperQuestions PaperQuestion[]
 }
 
 model Lesson {
@@ -187,17 +188,75 @@ model Lesson {
 }
 
 model Question {
-  id           String    @id @default(cuid())
+  id           String   @id @default(cuid())
   domain       AppDomain
   topicId      String
-  topic        Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  type         String    @default("mcq")
+  topic        Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  type         String   @default("mcq")
   questionText String
   options      Json
   correctAnswer String
   explanation  String?
-  difficulty   String    @default("medium")
+  difficulty   String   @default("medium")
   sourceExam   String?
+}
+
+// One physical past paper: a board + subject + year + paper number (e.g. WAEC Biology 2024, Paper 2).
+model ExamPaper {
+  id               String         @id @default(cuid())
+  examinationId    String
+  examination      Examination    @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  subject          String
+  year             Int
+  paperNumber      String
+  durationMinutes  Int
+  totalMarks       Int
+  isPublished      Boolean        @default(true)
+  markingSchemeUrl String?
+  sourceUrl        String?
+  questions        PaperQuestion[]
+  attempts         PaperAttempt[]
+
+  @@unique([examinationId, subject, year, paperNumber])
+  @@index([examinationId, subject])
+  @@index([year])
+}
+
+// Questions inside a paper, in paper order. topicId cross-links a question back
+// to the curriculum tree so paper attempts feed weak-topic analytics.
+model PaperQuestion {
+  id            String    @id @default(cuid())
+  paperId       String
+  paper         ExamPaper @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  orderIndex     Int       @default(0)
+  questionText  String
+  options       Json
+  correctAnswer String
+  marks         Int       @default(1)
+  explanation   String?
+  topicId       String?
+  topic         Topic?    @relation(fields: [topicId], references: [id], onDelete: SetNull)
+
+  @@index([paperId])
+  @@index([topicId])
+}
+
+// A learner's sitting of a paper. mode: 'timed' (exam conditions) | 'open' (untimed practice).
+model PaperAttempt {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  paperId         String
+  paper           ExamPaper @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  mode            String    @default("timed") // 'timed' | 'open'
+  score           Int
+  maxScore        Int
+  answers         Json
+  durationSeconds Int
+  createdAt       DateTime  @default(now())
+
+  @@index([userId])
+  @@index([paperId])
 }
 
 model QuizAttempt {

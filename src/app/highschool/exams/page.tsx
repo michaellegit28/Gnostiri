@@ -2,16 +2,17 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
-import { BookOpen, ArrowRight, ChevronRight, History, Globe2, BellPlus } from "lucide-react";
+import { BookOpen, FileText, ArrowRight, ChevronRight, History, Globe2, BellPlus } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 interface ExamSummary {
   id: string;
-  code: string;
+  slug: string;
   name: string;
   country: string | null;
   subjectCount: number;
+  paperCount: number;
   description: string;
 }
 
@@ -19,18 +20,18 @@ function describeExam(code: string, name: string, syllabusUrl: string | null): s
   if (syllabusUrl) return syllabusUrl;
   switch (code) {
     case "waec":
-      return "West African Senior School Certificate Examination prep with syllabus-aligned lessons and practice questions.";
+      return "West African Senior School Certificate Examination — past papers, syllabus-aligned lessons, and practice questions.";
     case "jamb":
-      return "Joint Admissions and Matriculation Board UTME preparation modules and past question practice.";
+      return "Joint Admissions and Matriculation Board UTME — past papers, prep modules, and practice questions.";
     case "neco":
-      return "National Examinations Council Senior School Certificate Examination curriculum resources.";
+      return "National Examinations Council Senior School Certificate — past papers and curriculum resources.";
     default:
-      return `${name} examination syllabus, structured lessons, and practice questions.`;
+      return `${name} examination past papers, structured lessons, and practice questions.`;
   }
 }
 
 export default async function HighSchoolHubPage() {
-  const examinations: { id: string; code: string; name: string; country: string | null; syllabusUrl: string | null }[] =
+  const examinations: { id: string; code: string; slug: string; name: string; country: string | null; syllabusUrl: string | null }[] =
     await prisma.examination.findMany({
       where: { domain: "highschool" },
       orderBy: { name: "asc" },
@@ -41,12 +42,16 @@ export default async function HighSchoolHubPage() {
       const subjectCount = await prisma.topic.count({
         where: { domain: "highschool", parentId: exam.code.toLowerCase() },
       });
+      const paperCount = await prisma.examPaper.count({
+        where: { examinationId: exam.id, isPublished: true },
+      });
       return {
         id: exam.id,
-        code: exam.code.toLowerCase(),
+        slug: exam.slug,
         name: exam.name,
         country: exam.country,
         subjectCount,
+        paperCount,
         description: describeExam(exam.code.toLowerCase(), exam.name, exam.syllabusUrl),
       };
     })
@@ -165,13 +170,19 @@ export default async function HighSchoolHubPage() {
                   className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-amber-500/40 transition-all duration-200 group shadow-lg"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                       <h3 className="text-2xl font-serif font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
                         {exam.name.toUpperCase()}
                       </h3>
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
-                        <BookOpen className="w-3.5 h-3.5 text-amber-500" />
-                        <span>{exam.subjectCount} Subjects</span>
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
+                          <BookOpen className="w-3.5 h-3.5 text-amber-500" />
+                          <span>{exam.subjectCount} Subjects</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
+                          <FileText className="w-3.5 h-3.5 text-amber-500" />
+                          <span>{exam.paperCount} Paper{exam.paperCount === 1 ? "" : "s"}</span>
+                        </div>
                       </div>
                     </div>
                     <p className="text-slate-400 text-sm leading-relaxed mb-6">
@@ -179,10 +190,10 @@ export default async function HighSchoolHubPage() {
                     </p>
                   </div>
                   <Link
-                    href={`/highschool/${exam.code}`}
+                    href={`/highschool/exams/${exam.slug}`}
                     className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors"
                   >
-                    <span>Start Studying</span>
+                    <span>Open exam board</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>

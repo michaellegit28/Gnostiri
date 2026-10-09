@@ -19,6 +19,7 @@ async function main() {
       where: { id: exam.id },
       update: {
         code: exam.code,
+        slug: exam.code,
         name: exam.name,
         domain,
         country: exam.country,
@@ -26,6 +27,7 @@ async function main() {
       create: {
         id: exam.id,
         code: exam.code,
+        slug: exam.code,
         name: exam.name,
         domain,
         country: exam.country,
