@@ -761,6 +761,26 @@ function FieldLines() {
   );
 }
 
+function QuadraticParabola() {
+  return (
+    <Fig title="Fig. — The parabola: sketch from the three facts">
+      <line x1="200" y1="25" x2="200" y2="210" stroke={ink} strokeWidth="1.5" />
+      <line x1="30" y1="150" x2="370" y2="150" stroke={ink} strokeWidth="1.5" />
+      <line x1="200" y1="40" x2="200" y2="205" stroke={faint} strokeWidth="1" strokeDasharray="4 4" />
+      <path d="M60 40 Q200 330 340 40" fill="none" stroke={accent} strokeWidth="2.5" />
+      <circle cx="131" cy="150" r="4" fill={gold} />
+      <circle cx="269" cy="150" r="4" fill={gold} />
+      <circle cx="200" cy="185" r="4" fill={gold} />
+      <text x="131" y="168" textAnchor="middle" fill={gold} fontSize="8">root x₁</text>
+      <text x="269" y="168" textAnchor="middle" fill={gold} fontSize="8">root x₂</text>
+      <text x="200" y="202" textAnchor="middle" fill={gold} fontSize="8">vertex (−b/2a, y)</text>
+      <text x="258" y="55" textAnchor="start" fill={faint} fontSize="8">axis of symmetry</text>
+      <text x="38" y="140" textAnchor="start" fill={faint} fontSize="8">(0, c)</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">a > 0 opens up (smile) · a < 0 opens down (frown) · roots from factorising or the formula</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -797,6 +817,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "heating-curve": HeatingCurve,
   "half-life-curve": HalfLifeCurve,
   "field-lines": FieldLines,
+  "quadratic-parabola": QuadraticParabola,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
