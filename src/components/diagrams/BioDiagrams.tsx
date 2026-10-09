@@ -721,6 +721,46 @@ function HalfLifeCurve() {
   );
 }
 
+function FieldLines() {
+  return (
+    <Fig title="Fig. — Field lines: radial from a point, uniform between plates">
+      <text x="70" y="22" textAnchor="middle" fill={accent} fontSize="10">GRAVITATIONAL — always inward</text>
+      <circle cx="70" cy="115" r="14" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="70" y="119" textAnchor="middle" fill={gold} fontSize="9">M</text>
+      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, idx) => {
+        const rad = (deg * Math.PI) / 180;
+        const x1 = 70 + 18 * Math.cos(rad);
+        const y1 = 115 + 18 * Math.sin(rad);
+        const x2 = 70 + 58 * Math.cos(rad);
+        const y2 = 115 + 58 * Math.sin(rad);
+        return <line key={idx} x1={x1} y1={y1} x2={x2} y2={y2} stroke={accent} strokeWidth="1.2" />;
+      })}
+      <text x="70" y="205" textAnchor="middle" fill={faint} fontSize="8">g = GM/r² — double the distance, a quarter the field</text>
+      <text x="215" y="22" textAnchor="middle" fill={accent} fontSize="10">ELECTRIC — charge decides</text>
+      <circle cx="185" cy="80" r="11" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="185" y="84" textAnchor="middle" fill={gold} fontSize="9">+</text>
+      <circle cx="185" cy="150" r="11" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="185" y="154" textAnchor="middle" fill="#f87171" fontSize="9">−</text>
+      <line x1="185" y1="91" x2="185" y2="139" stroke={accent} strokeWidth="1.5" />
+      <line x1="185" y1="69" x2="185" y2="58" stroke={accent} strokeWidth="1.2" />
+      <line x1="185" y1="161" x2="185" y2="172" stroke={accent} strokeWidth="1.2" />
+      <line x1="174" y1="91" x2="162" y2="98" stroke={accent} strokeWidth="1.2" />
+      <line x1="196" y1="91" x2="208" y2="98" stroke={accent} strokeWidth="1.2" />
+      <line x1="174" y1="139" x2="162" y2="132" stroke={accent} strokeWidth="1.2" />
+      <line x1="196" y1="139" x2="208" y2="132" stroke={accent} strokeWidth="1.2" />
+      <text x="278" y="118" textAnchor="middle" fill={faint} fontSize="8">out of +, into −</text>
+      <text x="330" y="22" textAnchor="middle" fill={accent} fontSize="10">UNIFORM — plates</text>
+      <rect x="285" y="55" width="70" height="5" fill={gold} />
+      <rect x="285" y="165" width="70" height="5" fill="#f87171" />
+      {[300, 305, 310, 315, 320, 325, 330, 335, 340].map((x, idx) => (
+        <line key={idx} x1={x} y1="63" x2={x} y2="162" stroke={accent} strokeWidth="1" />
+      ))}
+      <text x="320" y="192" textAnchor="middle" fill={faint} fontSize="8">E = V/d — parallel, evenly spaced</text>
+      <text x="200" y="218" textAnchor="middle" fill={faint} fontSize="9">line density = field strength — same convention in every field</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -756,6 +796,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "series-parallel": SeriesParallelCircuit,
   "heating-curve": HeatingCurve,
   "half-life-curve": HalfLifeCurve,
+  "field-lines": FieldLines,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
