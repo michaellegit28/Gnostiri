@@ -14,20 +14,21 @@ enum AppDomain {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  firebaseUid   String        @unique
-  email         String        @unique
-  name          String?
-  avatar        String?
-  country       String?
-  createdAt     DateTime      @default(now())
+  id             String         @id @default(cuid())
+  firebaseUid    String         @unique
+  email          String         @unique
+  name           String?
+  avatar         String?
+  country        String?
+  createdAt      DateTime       @default(now())
 
-  profile       Profile?
-  subscriptions Subscription[]
-  quizAttempts  QuizAttempt[]
-  progress      Progress[]
-  tutorSessions TutorSession[]
-  studyPlans    StudyPlan[]
+  profile        Profile?
+  subscriptions  Subscription[]
+  quizAttempts   QuizAttempt[]
+  progress       Progress[]
+  tutorSessions  TutorSession[]
+  studyPlans     StudyPlan[]
+  paperAttempts  PaperAttempt[]
 }
 
 model Profile {
@@ -64,12 +65,14 @@ model Domain {
 }
 
 model Examination {
-  id          String    @id @default(cuid())
+  id          String      @id @default(cuid())
   domain      AppDomain
   name        String
   code        String
+  slug        String      @unique
   country     String?
   syllabusUrl String?
+  papers      ExamPaper[]
 }
 
 enum AlignmentTier {
