@@ -607,6 +607,32 @@ function MoleTriangle() {
   );
 }
 
+function ElectrolysisCell() {
+  return (
+    <Fig title="Fig. — Electrolysis: cations to the cathode (reduction), anions to the anode (oxidation)">
+      <rect x="40" y="85" width="70" height="30" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="75" y="105" textAnchor="middle" fill={ink} fontSize="9">dc supply</text>
+      <line x1="110" y1="100" x2="150" y2="100" stroke={ink} strokeWidth="2" />
+      <rect x="150" y="55" width="22" height="110" rx="4" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="161" y="50" textAnchor="middle" fill={accent} fontSize="9">cathode −</text>
+      <rect x="280" y="55" width="22" height="110" rx="4" fill="none" stroke="#f87171" strokeWidth="2" />
+      <text x="291" y="50" textAnchor="middle" fill="#f87171" fontSize="9">anode +</text>
+      <rect x="150" y="140" width="152" height="40" rx="8" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="226" y="165" textAnchor="middle" fill={faint} fontSize="8">electrolyte (molten or aqueous)</text>
+      <line x1="110" y1="95" x2="112" y2="95" stroke={ink} strokeWidth="2" />
+      <line x1="302" y1="100" x2="330" y2="100" stroke={ink} strokeWidth="2" />
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <circle cx={200 + i * 8} cy="120" r="5" fill="none" stroke={accent} strokeWidth="1.5" />
+          <line x1={205 + i * 8} y1="120" x2={215 + i * 8} y2="120" stroke={accent} strokeWidth="1" />
+        </g>
+      ))}
+      <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="10">positive cations march left; negative anions right</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">label by electron flow: gain at cathode, loss at anode</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -638,6 +664,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "periodic-trends": PeriodicTrends,
   "molecular-shapes": MolecularShapes,
   "mole-triangle": MoleTriangle,
+  "electrolysis-cell": ElectrolysisCell,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
