@@ -776,7 +776,7 @@ function QuadraticParabola() {
       <text x="200" y="202" textAnchor="middle" fill={gold} fontSize="8">vertex (−b/2a, y)</text>
       <text x="258" y="55" textAnchor="start" fill={faint} fontSize="8">axis of symmetry</text>
       <text x="38" y="140" textAnchor="start" fill={faint} fontSize="8">(0, c)</text>
-      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">a > 0 opens up (smile) · a < 0 opens down (frown) · roots from factorising or the formula</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">a &gt; 0 opens up (smile) · a &lt; 0 opens down (frown) · roots from factorising or the formula</text>
     </Fig>
   );
 }
@@ -801,6 +801,23 @@ function TrigCircle() {
       <text x="300" y="140" textAnchor="middle" fill={accent} fontSize="8">tan 30° = 1/√3 · tan 45° = 1 · tan 60° = √3</text>
       <text x="300" y="165" textAnchor="middle" fill={faint} fontSize="8">ASTC: quadrant signs — All, Sine, Tan, Cos</text>
       <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">the unit circle generalises SOH CAH TOA to any angle</text>
+    </Fig>
+  );
+}
+
+function TangentGradient() {
+  return (
+    <Fig title="Fig. — The tangent touches where the normal stands perpendicular">
+      <line x1="60" y1="25" x2="60" y2="205" stroke={ink} strokeWidth="1.5" />
+      <line x1="60" y1="190" x2="370" y2="190" stroke={ink} strokeWidth="1.5" />
+      <path d="M70 180 C150 170 240 120 350 40" fill="none" stroke={accent} strokeWidth="2.5" />
+      <line x1="150" y1="150" x2="290" y2="70" stroke={gold} strokeWidth="2" strokeDasharray="6 3" />
+      <circle cx="220" cy="110" r="4.5" fill={gold} />
+      <text x="228" y="126" textAnchor="start" fill={faint} fontSize="8">P(a, f(a))</text>
+      <text x="235" y="86" textAnchor="middle" fill={gold} fontSize="8">tangent — gradient f′(a)</text>
+      <text x="330" y="60" textAnchor="middle" fill={faint} fontSize="8">dy/dx here</text>
+      <text x="215" y="205" textAnchor="middle" fill={ink} fontSize="9">normal ⊥ tangent — gradients multiply to −1</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">tangent: y − f(a) = f′(a)(x − a) · normal gradient: −1/f′(a)</text>
     </Fig>
   );
 }
@@ -843,6 +860,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "field-lines": FieldLines,
   "quadratic-parabola": QuadraticParabola,
   "trig-circle": TrigCircle,
+  "tangent-gradient": TangentGradient,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
