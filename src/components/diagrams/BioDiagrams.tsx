@@ -922,6 +922,77 @@ function AccountingEquation() {
   );
 }
 
+function HydrologicalCycle() {
+  return (
+    <Fig title="Fig. — The hydrological cycle: evaporation, condensation, precipitation, runoff">
+      <circle cx="330" cy="38" r="14" fill="none" stroke={gold} strokeWidth="2" />
+      <path d="M40 205 q25 -8 50 0 q25 8 50 0 q25 -8 50 0 q25 8 50 0 q25 -8 50 0" fill="none" stroke={accent} strokeWidth="2" />
+      <path d="M60 205 L95 120 L130 205" fill="none" stroke={ink} strokeWidth="2" />
+      <path d="M150 70 q20 -12 40 0 q20 12 40 0" fill="none" stroke={ink} strokeWidth="1.5" />
+      <line x1="270" y1="150" x2="270" y2="85" stroke={gold} strokeWidth="1.5" strokeDasharray="4 3" />
+      <line x1="285" y1="150" x2="285" y2="85" stroke={gold} strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="277" y="168" textAnchor="middle" fill={gold} fontSize="8">evaporation</text>
+      <text x="190" y="58" textAnchor="middle" fill={ink} fontSize="8">condensation — cloud forms</text>
+      <line x1="90" y1="95" x2="110" y2="135" stroke={accent} strokeWidth="1.5" strokeDasharray="4 3" />
+      <line x1="105" y1="90" x2="125" y2="130" stroke={accent} strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="70" y="85" textAnchor="middle" fill={accent} fontSize="8">precipitation</text>
+      <path d="M130 190 C180 200 220 200 262 205" fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="200" y="190" textAnchor="middle" fill={faint} fontSize="8">runoff / infiltration</text>
+      <text x="340" y="225" textAnchor="middle" fill={faint} fontSize="8">storage: ocean ~97%</text>
+      <text x="200" y="25" textAnchor="middle" fill={faint} fontSize="9">the cycle feeds every river — upper vertical, middle lateral, lower deposition</text>
+    </Fig>
+  );
+}
+
+function ThreeBranches() {
+  return (
+    <Fig title="Fig. — Separation of powers: legislature, executive, judiciary with checks">
+      <rect x="40" y="30" width="100" height="48" rx="8" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="90" y="50" textAnchor="middle" fill={accent} fontSize="9">LEGISLATURE</text>
+      <text x="90" y="68" textAnchor="middle" fill={faint} fontSize="8">makes laws</text>
+      <rect x="150" y="30" width="100" height="48" rx="8" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="200" y="50" textAnchor="middle" fill={gold} fontSize="9">EXECUTIVE</text>
+      <text x="200" y="68" textAnchor="middle" fill={faint} fontSize="8">implements</text>
+      <rect x="260" y="30" width="100" height="48" rx="8" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="310" y="50" textAnchor="middle" fill={ink} fontSize="9">JUDICIARY</text>
+      <text x="310" y="68" textAnchor="middle" fill={faint} fontSize="8">interprets</text>
+      <line x1="95" y1="78" x2="190" y2="130" stroke={accent} strokeWidth="1.5" />
+      <text x="118" y="108" textAnchor="middle" fill={faint} fontSize="8">budget, impeachment</text>
+      <line x1="200" y1="78" x2="140" y2="130" stroke={gold} strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="196" y="108" textAnchor="middle" fill={faint} fontSize="8">veto</text>
+      <path d="M115 155 L280 155" fill="none" stroke={ink} strokeWidth="1.5" />
+      <path d="M280 155 L272 150 M280 155 L272 160" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="200" y="148" textAnchor="middle" fill={ink} fontSize="8">judicial review — checks BOTH branches</text>
+      <text x="200" y="185" textAnchor="middle" fill={ink} fontSize="9">no branch can tyrannise — each check runs against a named branch</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">appointments: executive proposes, legislature confirms — the pairing is the mark</text>
+    </Fig>
+  );
+}
+
+function MemoryStages() {
+  return (
+    <Fig title="Fig. — Memory: sensory, short-term, long-term stores">
+      <rect x="30" y="85" width="90" height="52" rx="8" fill="none" stroke={faint} strokeWidth="2" />
+      <text x="75" y="106" textAnchor="middle" fill={faint} fontSize="9">SENSORY</text>
+      <text x="75" y="124" textAnchor="middle" fill={faint} fontSize="8">under 2 seconds</text>
+      <rect x="155" y="85" width="95" height="52" rx="8" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="202" y="106" textAnchor="middle" fill={accent} fontSize="9">SHORT-TERM</text>
+      <text x="202" y="124" textAnchor="middle" fill={faint} fontSize="8">7±2 items, 15–30 s</text>
+      <rect x="285" y="85" width="90" height="52" rx="8" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="330" y="106" textAnchor="middle" fill={gold} fontSize="9">LONG-TERM</text>
+      <text x="330" y="124" textAnchor="middle" fill={faint} fontSize="8">unlimited</text>
+      <path d="M120 111 L155 111" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="137" y="103" textAnchor="middle" fill={ink} fontSize="8">attention</text>
+      <path d="M250 111 L285 111" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="267" y="103" textAnchor="middle" fill={ink} fontSize="8">encoding</text>
+      <path d="M290 85 C240 45 215 45 202 85" fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="4 3" />
+      <text x="255" y="38" textAnchor="middle" fill={faint} fontSize="8">retrieval — the cue unlocks it</text>
+      <text x="200" y="165" textAnchor="middle" fill={faint} fontSize="8">rehearsal holds the short-term store; interference and decay lose the rest</text>
+      <text x="200" y="205" textAnchor="middle" fill={faint} fontSize="9">retroactive: new disrupts old · proactive: old disrupts new — name the direction</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -966,6 +1037,9 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "supply-demand": SupplyDemand,
   "business-cycle": BusinessCycle,
   "accounting-equation": AccountingEquation,
+  "hydrological-cycle": HydrologicalCycle,
+  "three-branches": ThreeBranches,
+  "memory-stages": MemoryStages,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
