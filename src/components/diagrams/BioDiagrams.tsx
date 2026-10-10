@@ -869,6 +869,26 @@ function ArgandDiagram() {
   );
 }
 
+function SupplyDemand() {
+  return (
+    <Fig title="Fig. — Supply and demand: the X that prices everything">
+      <line x1="60" y1="25" x2="60" y2="205" stroke={ink} strokeWidth="1.5" />
+      <line x1="60" y1="205" x2="370" y2="205" stroke={ink} strokeWidth="1.5" />
+      <line x1="90" y1="45" x2="330" y2="185" stroke={accent} strokeWidth="2.5" />
+      <line x1="90" y1="185" x2="330" y2="45" stroke={gold} strokeWidth="2.5" />
+      <text x="352" y="190" textAnchor="middle" fill={faint} fontSize="8">Q</text>
+      <text x="60" y="20" textAnchor="middle" fill={faint} fontSize="8">P</text>
+      <text x="322" y="200" textAnchor="end" fill={accent} fontSize="8">S — rises</text>
+      <text x="322" y="40" textAnchor="end" fill={gold} fontSize="8">D — falls</text>
+      <circle cx="210" cy="115" r="4.5" fill={gold} />
+      <text x="218" y="108" textAnchor="start" fill={ink} fontSize="8">equilibrium — the market clears</text>
+      <text x="150" y="75" textAnchor="middle" fill={faint} fontSize="8">above: surplus — price pushed down</text>
+      <text x="150" y="160" textAnchor="middle" fill={faint} fontSize="8">below: shortage — price pushed up</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">surplus and shortage self-correct — the market always returns to the X</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -910,6 +930,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "tangent-gradient": TangentGradient,
   "normal-distribution": NormalDistribution,
   "argand-diagram": ArgandDiagram,
+  "supply-demand": SupplyDemand,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
