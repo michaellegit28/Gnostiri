@@ -123,23 +123,32 @@ async function main() {
 
   // 2. Cross-board CORE tagging: curriculum MCQ questions serve every board's
   // first MCQ paper. Curriculum content is board-agnostic; boards package it.
-  const mcqQuestions = await prisma.question.findMany({
-    where: { type: "mcq" },
-    select: { id: true },
+  // RESUME GUARD: serverless functions can hit execution limits mid-seed —
+  // if tags already exist, skip the bulk pass and continue with the samples.
+  const existingTagCount = await prisma.questionBoardTag.count({
+    where: { examinationId: { in: boardIds.map((b) => b.id) } },
   });
   let tagCount = 0;
-  for (const board of boardIds) {
-    const firstMcqPaper = (
-      await prisma.examinationPaper.findMany({ where: { examinationId: board.id }, orderBy: { sequence: "asc" } })
-    ).find((p) => Array.isArray(p.questionTypes) && (p.questionTypes as string[]).includes("MCQ"));
-    if (!firstMcqPaper) continue;
-    for (const question of mcqQuestions) {
-      await prisma.questionBoardTag.upsert({
-        where: { questionId_examinationId: { questionId: question.id, examinationId: board.id } },
-        update: { tier: "CORE", paperIds: [firstMcqPaper.paperId] },
-        create: { questionId: question.id, examinationId: board.id, tier: "CORE", paperIds: [firstMcqPaper.paperId] },
-      });
-      tagCount++;
+  if (existingTagCount > 0) {
+    console.log(`↷ skip cross-board tag pass (${existingTagCount} tags already present)`);
+  } else {
+    const mcqQuestions = await prisma.question.findMany({
+      where: { type: "mcq" },
+      select: { id: true },
+    });
+    for (const board of boardIds) {
+      const firstMcqPaper = (
+        await prisma.examinationPaper.findMany({ where: { examinationId: board.id }, orderBy: { sequence: "asc" } })
+      ).find((p) => Array.isArray(p.questionTypes) && (p.questionTypes as string[]).includes("MCQ"));
+      if (!firstMcqPaper) continue;
+      for (const question of mcqQuestions) {
+        await prisma.questionBoardTag.upsert({
+          where: { questionId_examinationId: { questionId: question.id, examinationId: board.id } },
+          update: { tier: "CORE", paperIds: [firstMcqPaper.paperId] },
+          create: { questionId: question.id, examinationId: board.id, tier: "CORE", paperIds: [firstMcqPaper.paperId] },
+        });
+        tagCount++;
+      }
     }
   }
   console.log(`✓ ${tagCount} CORE question tags across boards`);

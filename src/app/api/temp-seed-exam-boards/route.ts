@@ -4,7 +4,9 @@ import { seedExamBoards } from "../../../../prisma/seed-exam-boards";
 // One-shot production seeder for the exam blueprint engine (board profiles,
 // cross-board question tags, validation samples). Same cadence as the other
 // temp seeders: deploy -> trigger ONCE with REVALIDATE_SECRET -> remove in a
-// cleanup commit.
+// cleanup commit. Resumable: safe to re-trigger after a partial run.
+export const maxDuration = 60;
+
 export async function GET(req: NextRequest) {
   const secret = req.nextUrl.searchParams.get("secret");
   if (!secret || secret !== process.env.REVALIDATE_SECRET) {
