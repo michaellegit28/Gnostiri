@@ -67,8 +67,12 @@ export async function GET(req: NextRequest) {
     const today = new Date();
     const topic = await prisma.topic.findFirst({ where: { slug: "political-science-government" } });
     if (!topic) throw new Error("master political-science-government topic missing");
-    const lesson = await prisma.lesson.findFirst({ where: { topicId: topic.id }, orderBy: { orderIndex: "asc" } });
-    if (!lesson) throw new Error("political-science-government standard lesson missing");
+    let lesson = await prisma.lesson.findFirst({ where: { topicId: topic.id }, orderBy: { orderIndex: "asc" } });
+    if (!lesson) {
+      lesson = await prisma.lesson.create({
+        data: { domain: "highschool", topicId: topic.id, title: "Standard lesson (auto-created)", orderIndex: 0, content: { blocks: [] } as object },
+      });
+    }
     await prisma.lesson.update({ where: { id: lesson.id }, data: { title: "Political Science / Government — Complete", content: { blocks: POL_BLOCKS } as object, estimatedMinutes: 55 } });
     for (let i = 0; i < POL_QS.length; i++) {
       const item = POL_QS[i];

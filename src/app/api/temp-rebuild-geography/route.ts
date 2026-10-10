@@ -65,8 +65,12 @@ export async function GET(req: NextRequest) {
     const today = new Date();
     const topic = await prisma.topic.findFirst({ where: { slug: "geography" } });
     if (!topic) throw new Error("master geography topic missing");
-    const lesson = await prisma.lesson.findFirst({ where: { topicId: topic.id }, orderBy: { orderIndex: "asc" } });
-    if (!lesson) throw new Error("geography standard lesson missing");
+    let lesson = await prisma.lesson.findFirst({ where: { topicId: topic.id }, orderBy: { orderIndex: "asc" } });
+    if (!lesson) {
+      lesson = await prisma.lesson.create({
+        data: { domain: "highschool", topicId: topic.id, title: "Standard lesson (auto-created)", orderIndex: 0, content: { blocks: [] } as object },
+      });
+    }
     await prisma.lesson.update({ where: { id: lesson.id }, data: { title: "Geography — Complete", content: { blocks: GEO_BLOCKS } as object, estimatedMinutes: 55 } });
     for (let i = 0; i < GEO_QS.length; i++) {
       const item = GEO_QS[i];
