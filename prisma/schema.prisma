@@ -33,6 +33,7 @@ model User {
   conceptMastery ConceptMastery[]
   skillAttempts  SkillStationAttempt[]
   transcripts    CompetencyTranscript[]
+  practiceSessions PracticeSession[]
 }
 
 model Profile {
@@ -76,7 +77,12 @@ model Examination {
   slug        String      @unique
   country     String?
   syllabusUrl String?
+  lastVerified DateTime?
+  notes        String?
   papers      ExamPaper[]
+  blueprint   ExaminationPaper[]
+  questionBoardTags QuestionBoardTag[]
+  practiceSessions PracticeSession[]
 }
 
 enum AlignmentTier {
@@ -181,6 +187,7 @@ model Topic {
   needsVerification Boolean    @default(true)
   alignments    TopicBoardAlignment[]
   paperQuestions PaperQuestion[]
+  practiceSessions PracticeSession[]
 }
 
 model Lesson {
@@ -206,6 +213,9 @@ model Question {
   explanation  String?
   difficulty   String   @default("medium")
   sourceExam   String?
+  hint         String?
+  markingPoints Json?
+  boardTags    QuestionBoardTag[]
 }
 
 // One physical past paper: a board + subject + year + paper number (e.g. WAEC Biology 2024, Paper 2).
@@ -634,4 +644,65 @@ model CompetencyTranscript {
   issuedAt    DateTime @default(now())
   @@index([userId])
   @@index([programmeId])
+}
+
+// Exam Blueprint Engine — Layer 2. One row per paper in a board's format
+// (e.g. WAEC P1 Objective, P2 Theory, P3 Practical). The manifest engine
+// hydrates RenderManifests from these; there is no separate config source.
+model ExaminationPaper {
+  id              String      @id @default(cuid())
+  examinationId   String
+  examination     Examination @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  paperId         String      // "P1"
+  paperName       String      // "Objective"
+  sequence        Int
+  delivery        String      // "CBT" | "PAPER" | "HYBRID" | "ORAL"
+  questionTypes   Json        // ["MCQ"] etc — uppercase per board profile
+  durationMinutes Int
+  marks           Int
+  applicability   Json        // ["all"] or subject categories e.g. ["sciences", "technical"]
+  required        Boolean     @default(true)
+  instructions    String?
+
+  @@unique([examinationId, paperId])
+  @@index([examinationId, sequence])
+}
+
+// Board tags attach curriculum questions to exam boards: the tier for that
+// board and which blueprint papers the question may appear in.
+model QuestionBoardTag {
+  id            String       @id @default(cuid())
+  questionId    String
+  question      Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  examinationId String
+  examination   Examination  @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  tier          String       @default("CORE") // 'CORE' | 'OPTIONAL' | 'NOT_EXAMINED'
+  paperIds      Json
+
+  @@unique([questionId, examinationId])
+  @@index([examinationId, tier])
+  @@index([questionId])
+}
+
+// Practice sessions enforce the section bridge lock server-side: sections
+// before currentSectionIndex are locked; drafts are only accepted for the
+// active section; submit grades the server-stored answers and closes it.
+model PracticeSession {
+  id                 String      @id @default(cuid())
+  userId             String?
+  user               User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examinationId      String
+  examination        Examination @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  topicId            String
+  topic              Topic       @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  subjectSlug        String
+  currentSectionIndex Int        @default(0)
+  status             String      @default("active") // 'active' | 'completed'
+  answers            Json        @default("{}")
+  expiresAt          DateTime?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([examinationId, topicId])
 }
