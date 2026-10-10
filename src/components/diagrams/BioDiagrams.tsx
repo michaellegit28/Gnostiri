@@ -840,7 +840,7 @@ function NormalDistribution() {
       <text x="200" y="130" textAnchor="middle" fill={accent} fontSize="11">68%</text>
       <text x="200" y="170" textAnchor="middle" fill={gold} fontSize="9">95%</text>
       <text x="322" y="80" textAnchor="middle" fill={ink} fontSize="8">z = (x − μ)/σ</text>
-      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">99.7% within ±3σ · symmetric: P(X > μ) = 0.5, no calculation needed</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">99.7% within ±3σ · symmetric: P(X &gt; μ) = 0.5, no calculation needed</text>
     </Fig>
   );
 }
@@ -862,7 +862,7 @@ function ArgandDiagram() {
       <text x="145" y="222" textAnchor="middle" fill={ink} fontSize="9">r = √(3² + 4²) = 5 · θ = tan⁻¹(4/3) ≈ 53.1°</text>
       <text x="318" y="80" textAnchor="middle" fill={ink} fontSize="8">r = |z| = √(a² + b²)</text>
       <text x="318" y="100" textAnchor="middle" fill={ink} fontSize="8">θ = tan⁻¹(b/a)</text>
-      <text x="318" y="120" textAnchor="middle" fill={faint} fontSize="8">add 180° when a < 0</text>
+      <text x="318" y="120" textAnchor="middle" fill={faint} fontSize="8">add 180° when a &lt; 0</text>
       <text x="318" y="140" textAnchor="middle" fill={faint} fontSize="8">conjugate a − bi: mirror in the real axis</text>
       <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">z = a + bi is the point (a, b) · polar form: z = r(cos θ + i sin θ)</text>
     </Fig>
