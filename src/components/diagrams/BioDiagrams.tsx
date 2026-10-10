@@ -889,6 +889,22 @@ function SupplyDemand() {
   );
 }
 
+function BusinessCycle() {
+  return (
+    <Fig title="Fig. — The business cycle: boom, recession, trough, recovery">
+      <line x1="40" y1="115" x2="370" y2="115" stroke={faint} strokeWidth="1" strokeDasharray="5 4" />
+      <path d="M50 140 C90 60 120 55 150 70 C180 85 200 160 240 165 C280 165 300 130 330 95" fill="none" stroke={accent} strokeWidth="2.5" />
+      <text x="105" y="42" textAnchor="middle" fill={gold} fontSize="9">boom</text>
+      <text x="215" y="185" textAnchor="middle" fill={gold} fontSize="9">trough</text>
+      <text x="60" y="170" textAnchor="middle" fill={ink} fontSize="8">recession ↓</text>
+      <text x="300" y="112" textAnchor="middle" fill={ink} fontSize="8">recovery ↑</text>
+      <text x="48" y="110" textAnchor="end" fill={faint} fontSize="8">trend</text>
+      <text x="240" y="205" textAnchor="middle" fill={faint} fontSize="8">output above trend: inflation, low unemployment</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">policy leans against the cycle: cool the boom, lift the trough</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -931,6 +947,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "normal-distribution": NormalDistribution,
   "argand-diagram": ArgandDiagram,
   "supply-demand": SupplyDemand,
+  "business-cycle": BusinessCycle,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
