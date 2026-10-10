@@ -822,6 +822,29 @@ function TangentGradient() {
   );
 }
 
+function NormalDistribution() {
+  return (
+    <Fig title="Fig. — The normal distribution: 68–95–99.7">
+      <line x1="40" y1="190" x2="360" y2="190" stroke={ink} strokeWidth="1.5" />
+      <path d="M40 190 C110 188 140 55 200 50 C260 55 290 188 360 190" fill="none" stroke={accent} strokeWidth="2.5" />
+      <line x1="200" y1="50" x2="200" y2="190" stroke={faint} strokeWidth="1" strokeDasharray="4 4" />
+      <line x1="140" y1="88" x2="140" y2="190" stroke={faint} strokeWidth="1" strokeDasharray="4 4" />
+      <line x1="260" y1="88" x2="260" y2="190" stroke={faint} strokeWidth="1" strokeDasharray="4 4" />
+      <line x1="85" y1="168" x2="85" y2="190" stroke={faint} strokeWidth="1" strokeDasharray="4 4" />
+      <line x1="315" y1="168" x2="315" y2="190" stroke={faint} strokeWidth="1" strokeDasharray="4 4" />
+      <text x="200" y="205" textAnchor="middle" fill={ink} fontSize="9">μ</text>
+      <text x="140" y="205" textAnchor="middle" fill={faint} fontSize="8">−1σ</text>
+      <text x="260" y="205" textAnchor="middle" fill={faint} fontSize="8">+1σ</text>
+      <text x="85" y="205" textAnchor="middle" fill={faint} fontSize="8">−2σ</text>
+      <text x="315" y="205" textAnchor="middle" fill={faint} fontSize="8">+2σ</text>
+      <text x="200" y="130" textAnchor="middle" fill={accent} fontSize="11">68%</text>
+      <text x="200" y="170" textAnchor="middle" fill={gold} fontSize="9">95%</text>
+      <text x="322" y="80" textAnchor="middle" fill={ink} fontSize="8">z = (x − μ)/σ</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">99.7% within ±3σ · symmetric: P(X > μ) = 0.5, no calculation needed</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -861,6 +884,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "quadratic-parabola": QuadraticParabola,
   "trig-circle": TrigCircle,
   "tangent-gradient": TangentGradient,
+  "normal-distribution": NormalDistribution,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
