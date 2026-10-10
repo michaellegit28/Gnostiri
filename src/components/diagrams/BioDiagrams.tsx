@@ -905,6 +905,23 @@ function BusinessCycle() {
   );
 }
 
+function AccountingEquation() {
+  return (
+    <Fig title="Fig. — Assets = Liabilities + Capital: the scale never tips">
+      <line x1="45" y1="70" x2="355" y2="70" stroke={ink} strokeWidth="2" />
+      <line x1="200" y1="70" x2="200" y2="95" stroke={ink} strokeWidth="2.5" />
+      <rect x="60" y="100" width="115" height="55" rx="8" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="117" y="122" textAnchor="middle" fill={accent} fontSize="9">ASSETS</text>
+      <text x="117" y="140" textAnchor="middle" fill={faint} fontSize="8">what the business OWNS</text>
+      <rect x="225" y="100" width="130" height="55" rx="8" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="290" y="122" textAnchor="middle" fill={gold} fontSize="9">LIABILITIES + CAPITAL</text>
+      <text x="290" y="140" textAnchor="middle" fill={faint} fontSize="8">what it OWES + what the OWNER put in</text>
+      <text x="200" y="185" textAnchor="middle" fill={ink} fontSize="9">every transaction posts twice — one debit, one credit, equal</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">borrowing: both sides rise · buying assets with cash: assets swap, balance unchanged</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -948,6 +965,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "argand-diagram": ArgandDiagram,
   "supply-demand": SupplyDemand,
   "business-cycle": BusinessCycle,
+  "accounting-equation": AccountingEquation,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
