@@ -845,6 +845,30 @@ function NormalDistribution() {
   );
 }
 
+function ArgandDiagram() {
+  return (
+    <Fig title="Fig. — The Argand diagram: modulus r, argument θ">
+      <line x1="40" y1="125" x2="250" y2="125" stroke={ink} strokeWidth="1.5" />
+      <line x1="145" y1="30" x2="145" y2="210" stroke={ink} strokeWidth="1.5" />
+      <line x1="145" y1="125" x2="205" y2="45" stroke={ink} strokeWidth="2" />
+      <line x1="145" y1="125" x2="205" y2="125" stroke={accent} strokeWidth="2" />
+      <line x1="205" y1="125" x2="205" y2="45" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
+      <circle cx="205" cy="45" r="4" fill={gold} />
+      <text x="215" y="42" textAnchor="start" fill={gold} fontSize="9">z = 3 + 4i</text>
+      <text x="175" y="140" textAnchor="middle" fill={accent} fontSize="8">real part a = 3</text>
+      <text x="212" y="90" textAnchor="start" fill={faint} fontSize="8">b = 4</text>
+      <path d="M175 125 A30 30 0 0 0 168 106" fill="none" stroke={gold} strokeWidth="1.5" />
+      <text x="182" y="106" textAnchor="start" fill={gold} fontSize="8">θ</text>
+      <text x="145" y="222" textAnchor="middle" fill={ink} fontSize="9">r = √(3² + 4²) = 5 · θ = tan⁻¹(4/3) ≈ 53.1°</text>
+      <text x="318" y="80" textAnchor="middle" fill={ink} fontSize="8">r = |z| = √(a² + b²)</text>
+      <text x="318" y="100" textAnchor="middle" fill={ink} fontSize="8">θ = tan⁻¹(b/a)</text>
+      <text x="318" y="120" textAnchor="middle" fill={faint} fontSize="8">add 180° when a < 0</text>
+      <text x="318" y="140" textAnchor="middle" fill={faint} fontSize="8">conjugate a − bi: mirror in the real axis</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">z = a + bi is the point (a, b) · polar form: z = r(cos θ + i sin θ)</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -885,6 +909,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "trig-circle": TrigCircle,
   "tangent-gradient": TangentGradient,
   "normal-distribution": NormalDistribution,
+  "argand-diagram": ArgandDiagram,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
