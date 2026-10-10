@@ -29,6 +29,10 @@ model User {
   tutorSessions  TutorSession[]
   studyPlans     StudyPlan[]
   paperAttempts  PaperAttempt[]
+  enrollments    Enrollment[]
+  conceptMastery ConceptMastery[]
+  skillAttempts  SkillStationAttempt[]
+  transcripts    CompetencyTranscript[]
 }
 
 model Profile {
@@ -108,6 +112,9 @@ model Department {
   name     String  @unique
   iconSlug String?
   topics   Topic[]
+  facultyId String?
+  faculty   Faculty? @relation(fields: [facultyId], references: [id], onDelete: SetNull)
+  programmes Programme[]
 }
 
 model StudyTrack {
@@ -324,6 +331,29 @@ model Course {
   questions   CourseQuestion[]
   quizAttempts CourseQuizAttempt[]
   @@unique([domain, slug])
+
+  // --- Phase 0 academic identity ---
+  code         String?   // official handbook code, e.g. "ANA 201"
+  level        Int?      // 100..600
+  credits      Int?      // credit units / hours
+  semester     String?   // 'first' | 'second' | 'full'
+  programmeId  String?
+  programme    Programme? @relation(fields: [programmeId], references: [id], onDelete: SetNull)
+  facultyId    String?
+  faculty      Faculty?   @relation(fields: [facultyId], references: [id], onDelete: SetNull)
+  // Concept spine
+  modules      CourseModule[]
+  concepts     ConceptNode[]
+  // Clinical & skills layer
+  clinicalCases ClinicalCase[]
+  skillStations SkillStation[]
+  // Prerequisite chain (concept-level DAG lives on ConceptNode)
+  prerequisites CoursePrerequisite[] @relation("CoursePrereqOf")
+  prerequisiteFor CoursePrerequisite[] @relation("CoursePrerequisites")
+  alignments    CurriculumAlignment[]
+  @@index([programmeId])
+  @@index([facultyId])
+  @@index([level])
 }
 
 model CourseQuestion {
@@ -374,4 +404,234 @@ model PaymentEvent {
   eventId   String   @unique
   provider  String
   createdAt DateTime @default(now())
+}
+
+// =====================================================================
+// UNIVERSITY ACADEMIC STRUCTURE (Phase 0)
+// Faculty -> Department -> Programme -> Course -> Module -> ConceptNode
+// Every layer carries audit metadata; mastery is tracked per student.
+// =====================================================================
+
+model Faculty {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  blurb       String?
+  iconSlug    String?
+  accent      String?  // brand accent for premium UI theming
+  orderIndex  Int      @default(0)
+  isPublished Boolean  @default(true)
+  departments Department[]
+  programmes  Programme[]
+  courses     Course[]
+}
+
+model Programme {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  name           String   // "Medicine & Surgery (MBBS)"
+  degreeAwarded  String   // "MBBS" | "BSc" | "PharmD" | "LL.B"
+  facultyId      String
+  faculty        Faculty  @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  departmentId   String?
+  department     Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  durationYears  Int      @default(5)
+  totalCredits   Int?
+  description    String?
+  iconSlug       String?
+  orderIndex     Int      @default(0)
+  isPublished    Boolean  @default(true)
+  courses        Course[]
+  enrollments    Enrollment[]
+  standards      CurriculumStandard[]
+  transcripts    CompetencyTranscript[]
+  @@index([facultyId])
+  @@index([departmentId])
+}
+
+// A student's enrollment in a programme (one degree at a time is typical,
+// but the model allows concurrent e.g. MBBS + elective diploma).
+model Enrollment {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  programmeId String
+  programme   Programme @relation(fields: [programmeId], references: [id], onDelete: Cascade)
+  level       Int      @default(100) // current level: 100..600
+  status      String   @default("active") // 'active' | 'completed' | 'withdrawn'
+  enrolledAt  DateTime @default(now())
+  @@unique([userId, programmeId])
+  @@index([userId])
+  @@index([programmeId])
+}
+
+// Official benchmark a programme maps to (NUC BMAS, MDCN, GMC/WFME, COREN...).
+// Reuses the "trust, never fake" discipline: lastAuditedDate is mandatory.
+model CurriculumStandard {
+  id              String   @id @default(cuid())
+  programmeId     String
+  programme       Programme @relation(fields: [programmeId], references: [id], onDelete: Cascade)
+  authority       String   // "National Universities Commission" | "MDCN" | "GMC"
+  editionYear     Int
+  officialUrl     String?
+  lastAuditedDate DateTime @default(now())
+  alignments      CurriculumAlignment[]
+  @@unique([programmeId, authority, editionYear])
+  @@index([programmeId])
+}
+
+// Maps one course onto one curriculum standard (reuse of the high-school
+// alignment-engine pattern, now at course granularity).
+model CurriculumAlignment {
+  id           String   @id @default(cuid())
+  courseId     String
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  standardId   String
+  standard     CurriculumStandard @relation(fields: [standardId], references: [id], onDelete: Cascade)
+  moduleCode   String?  // the code the standard uses, e.g. "ANA 201"
+  mappingTier  String   @default("core") // 'core' | 'elective' | 'supplementary'
+  weightNotes  String?
+  verifiedDate DateTime @default(now())
+  verifiedBy   String?
+  @@unique([courseId, standardId])
+  @@index([courseId])
+  @@index([standardId])
+}
+
+// Course-level prerequisite edge. (Concept-level DAG lives on ConceptNode.)
+model CoursePrerequisite {
+  id             String @id @default(cuid())
+  courseId       String
+  course         Course @relation("CoursePrereqOf", fields: [courseId], references: [id], onDelete: Cascade)
+  prerequisiteId String
+  prerequisite   Course @relation("CoursePrerequisites", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+  @@unique([courseId, prerequisiteId])
+  @@index([courseId])
+  @@index([prerequisiteId])
+}
+
+// A concept cluster inside a course — a "module" of 3-8 concepts.
+model CourseModule {
+  id         String   @id @default(cuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title      String
+  slug       String
+  orderIndex Int      @default(0)
+  concepts   ConceptNode[]
+  @@unique([courseId, slug])
+  @@index([courseId])
+}
+
+// The atomic learnable unit — the spine of the pedagogy engine.
+// Prerequisites form a DAG; mastery is tracked per student.
+model ConceptNode {
+  id              String   @id @default(cuid())
+  courseId         String
+  course           Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  moduleId         String?
+  module           CourseModule? @relation(fields: [moduleId], references: [id], onDelete: SetNull)
+  title           String
+  slug            String
+  summary         String?
+  bloomsLevel     String   @default("understand") // remember|understand|apply|analyze|evaluate|create
+  estMinutes      Int      @default(15)
+  orderIndex      Int      @default(0)
+  isPublished     Boolean  @default(true)
+  // Concept-level prerequisite graph (the "how knowledge connects" map)
+  prerequisites   ConceptPrerequisite[] @relation("ConceptPrereqOf")
+  prerequisiteFor ConceptPrerequisite[] @relation("ConceptPrerequisites")
+  mastery         ConceptMastery[]
+  @@unique([courseId, slug])
+  @@index([courseId])
+  @@index([moduleId])
+}
+
+model ConceptPrerequisite {
+  id             String @id @default(cuid())
+  conceptId      String
+  concept        ConceptNode @relation("ConceptPrereqOf", fields: [conceptId], references: [id], onDelete: Cascade)
+  prerequisiteId String
+  prerequisite   ConceptNode @relation("ConceptPrerequisites", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+  rationale      String? // why this concept must come first
+  @@unique([conceptId, prerequisiteId])
+  @@index([conceptId])
+  @@index([prerequisiteId])
+}
+
+// Per-student mastery of one concept — feeds spaced repetition + transcript.
+model ConceptMastery {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conceptId      String
+  concept        ConceptNode @relation(fields: [conceptId], references: [id], onDelete: Cascade)
+  status         String   @default("not_started") // not_started|in_progress|completed|mastered
+  masteryScore   Float?   // 0..1 — averaged over exam-condition demonstrations
+  attempts       Int      @default(0)
+  correctStreak  Int      @default(0)
+  lastReviewed   DateTime?
+  nextReviewDue  DateTime? // spaced-repetition scheduler
+  @@unique([userId, conceptId])
+  @@index([userId])
+  @@index([conceptId])
+}
+
+// Case-based / clinical correlation content block for a course.
+model ClinicalCase {
+  id             String   @id @default(cuid())
+  courseId       String
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title          String
+  vignette       String   @db.Text
+  presentation   String?  @db.Text
+  questions      Json
+  teachingPoints String?  @db.Text
+  difficulty     String   @default("medium")
+  orderIndex     Int      @default(0)
+  isPublished    Boolean  @default(true)
+  @@index([courseId])
+}
+
+// OSCE / practical skill station with ordered checklist steps.
+model SkillStation {
+  id             String   @id @default(cuid())
+  courseId       String
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title          String
+  checklist      Json     // [{step, marks, mustPass}]
+  durationMinutes Int     @default(10)
+  orderIndex     Int      @default(0)
+  isPublished    Boolean  @default(true)
+  attempts       SkillStationAttempt[]
+  @@index([courseId])
+}
+
+model SkillStationAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stationId   String
+  station     SkillStation @relation(fields: [stationId], references: [id], onDelete: Cascade)
+  score       Int
+  maxScore    Int
+  checks      Json     // per-step awarded marks
+  feedback    String?
+  createdAt   DateTime @default(now())
+  @@index([userId])
+  @@index([stationId])
+}
+
+// Verified competency record — the "transcript" a residency board would read.
+model CompetencyTranscript {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  programmeId String?
+  programme   Programme? @relation(fields: [programmeId], references: [id], onDelete: SetNull)
+  title       String
+  summary     Json     // concepts mastered, skills demonstrated, exam-readiness score
+  issuedAt    DateTime @default(now())
+  @@index([userId])
+  @@index([programmeId])
 }

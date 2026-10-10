@@ -13,6 +13,7 @@ const GROUPS: { label: string; links: { href: string; title: string; note: strin
     label: "Three ways of learning",
     links: [
       { href: "/highschool", title: "High School", note: "Textbooks and exam banks" },
+      { href: "/university", title: "University", note: "Degree-depth courses and faculties" },
       { href: "/discovery", title: "Discovery", note: "Follow curiosity past the syllabus" },
       { href: "/arena", title: "Global Arena", note: "Inter-school contests" },
     ],
