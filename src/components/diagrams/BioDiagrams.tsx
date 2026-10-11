@@ -1101,6 +1101,102 @@ function MLPipeline() {
   );
 }
 
+function ColorWheel() {
+  return (
+    <Fig title="Fig. — The colour wheel: primaries, secondaries, and the harmony schemes">
+      <circle cx="120" cy="105" r="24" fill="#e74c3c" stroke={ink} strokeWidth="1" />
+      <text x="70" y="80" textAnchor="middle" fill="#e74c3c" fontSize="8">R — primary</text>
+      <circle cx="186" cy="66" r="24" fill="#e67e22" stroke={ink} strokeWidth="1" />
+      <text x="196" y="36" textAnchor="middle" fill="#e67e22" fontSize="8">O — secondary</text>
+      <circle cx="252" cy="105" r="24" fill="#f1c40f" stroke={ink} strokeWidth="1" />
+      <text x="300" y="80" textAnchor="middle" fill="#f1c40f" fontSize="8">Y — primary</text>
+      <circle cx="252" cy="173" r="24" fill="#27ae60" stroke={ink} strokeWidth="1" />
+      <text x="304" y="200" textAnchor="middle" fill="#27ae60" fontSize="8">G — secondary</text>
+      <circle cx="186" cy="212" r="24" fill="#2980b9" stroke={ink} strokeWidth="1" />
+      <text x="186" y="224" textAnchor="middle" fill="#2980b9" fontSize="8" opacity="0">.</text>
+      <circle cx="120" cy="173" r="24" fill="#8e44ad" stroke={ink} strokeWidth="1" />
+      <text x="76" y="206" textAnchor="middle" fill="#8e44ad" fontSize="8">V — secondary</text>
+      <line x1="120" y1="105" x2="252" y2="173" stroke={ink} strokeWidth="1.5" strokeDasharray="5 4" />
+      <text x="215" y="150" textAnchor="middle" fill={ink} fontSize="8">complementary — opposites</text>
+      <path d="M120 105 A 85 85 0 0 1 186 66" fill="none" stroke={gold} strokeWidth="1.5" strokeDasharray="3 3" />
+      <text x="196" y="52" textAnchor="middle" fill={gold} fontSize="8">analogous — neighbours</text>
+      <text x="330" y="120" textAnchor="middle" fill={faint} fontSize="8">blue — primary</text>
+      <text x="186" y="255" textAnchor="middle" fill={faint} fontSize="9" opacity="0">.</text>
+      <text x="200" y="46" textAnchor="middle" fill={faint} fontSize="8">tertiary = primary + adjacent secondary (red-orange)</text>
+      <text x="200" y="120" textAnchor="middle" fill={faint} fontSize="8">warm advance · cool recede · monochrome = one hue, many values</text>
+    </Fig>
+  );
+}
+
+function NoteValues() {
+  return (
+    <Fig title="Fig. — Note values: each step halves — the dot adds half the value">
+      <ellipse cx="60" cy="60" rx="18" ry="13" fill={ink} transform="rotate(-15 60 60)" />
+      <text x="60" y="95" textAnchor="middle" fill={faint} fontSize="8">semibreve — 4</text>
+      <line x1="150" y1="47" x2="150" y2="72" stroke={ink} strokeWidth="2" />
+      <ellipse cx="142" cy="72" rx="11" ry="8" fill={ink} transform="rotate(-15 142 72)" />
+      <text x="150" y="95" textAnchor="middle" fill={faint} fontSize="8">minim — 2</text>
+      <ellipse cx="228" cy="72" rx="10" ry="7.5" fill={ink} transform="rotate(-15 228 72)" />
+      <line x1="237" y1="68" x2="237" y2="43" stroke={ink} strokeWidth="2" />
+      <text x="228" y="95" textAnchor="middle" fill={faint} fontSize="8">crotchet — 1</text>
+      <ellipse cx="296" cy="72" rx="9" ry="6.5" fill={ink} transform="rotate(-15 296 72)" />
+      <line x1="304" y1="68" x2="304" y2="43" stroke={ink} strokeWidth="2" />
+      <path d="M304 43 q10 4 0 10" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="296" y="95" textAnchor="middle" fill={faint} fontSize="8">quaver — ½</text>
+      <ellipse cx="356" cy="72" rx="8" ry="6" fill={ink} transform="rotate(-15 356 72)" />
+      <line x1="363" y1="68" x2="363" y2="43" stroke={ink} strokeWidth="2" />
+      <path d="M363 43 q8 4 0 8 M363 51 q8 4 0 8" fill="none" stroke={ink} strokeWidth="1.2" />
+      <text x="356" y="95" textAnchor="middle" fill={faint} fontSize="8">semiquaver — ¼</text>
+      <text x="200" y="130" textAnchor="middle" fill={ink} fontSize="9">each step down halves the duration — rests match every value</text>
+      <text x="200" y="165" textAnchor="middle" fill={accent} fontSize="9">dot = + half: dotted crotchet = 1 + ½ = 1½ beats</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="8">two quavers = one crotchet · six quavers = one dotted minim — trace the ladder</text>
+    </Fig>
+  );
+}
+
+function DramaticArc() {
+  return (
+    <Fig title="Fig. — Dramatic structure: tension rises, peaks at the climax, releases">
+      <line x1="40" y1="190" x2="370" y2="190" stroke={faint} strokeWidth="1" />
+      <path d="M55 185 C120 175 160 130 200 55 C240 130 290 165 350 182" fill="none" stroke={accent} strokeWidth="2.5" />
+      <text x="62" y="172" textAnchor="middle" fill={ink} fontSize="8">exposition</text>
+      <text x="140" y="128" textAnchor="middle" fill={gold} fontSize="8">rising action</text>
+      <text x="200" y="42" textAnchor="middle" fill={accent} fontSize="9">CLIMAX</text>
+      <text x="200" y="30" textAnchor="middle" fill={faint} fontSize="8">the irreversible turn</text>
+      <text x="278" y="128" textAnchor="middle" fill={gold} fontSize="8">falling action</text>
+      <text x="335" y="172" textAnchor="middle" fill={ink} fontSize="8">resolution</text>
+      <text x="46" y="150" textAnchor="middle" fill={faint} fontSize="8">tension ↑</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">conflict is the engine — no conflict, no drama</text>
+      <text x="200" y="150" textAnchor="middle" fill={faint} fontSize="8">climax is the point of no return — not the loudest scene</text>
+    </Fig>
+  );
+}
+
+function DesignCycle() {
+  return (
+    <Fig title="Fig. — The design cycle: iterate — evaluation feeds the next round">
+      <circle cx="200" cy="115" r="72" fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="5 4" />
+      <rect x="160" y="18" width="80" height="26" rx="6" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="200" y="35" textAnchor="middle" fill={accent} fontSize="8">brief</text>
+      <rect x="268" y="60" width="76" height="26" rx="6" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="306" y="77" textAnchor="middle" fill={faint} fontSize="8">research</text>
+      <rect x="292" y="140" width="76" height="26" rx="6" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="330" y="157" textAnchor="middle" fill={faint} fontSize="8">specify</text>
+      <rect x="230" y="188" width="76" height="26" rx="6" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="268" y="205" textAnchor="middle" fill={faint} fontSize="8">ideas + develop</text>
+      <rect x="120" y="188" width="72" height="26" rx="6" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="156" y="205" textAnchor="middle" fill={faint} fontSize="8">prototype + make</text>
+      <rect x="40" y="140" width="66" height="26" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="73" y="157" textAnchor="middle" fill={gold} fontSize="8">test</text>
+      <rect x="52" y="60" width="80" height="26" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="92" y="77" textAnchor="middle" fill={gold} fontSize="8">evaluate</text>
+      <path d="M132 73 C150 60 158 50 160 44" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="200" y="122" textAnchor="middle" fill={ink} fontSize="9">iterate — findings change the design</text>
+      <text x="200" y="228" textAnchor="middle" fill={faint} fontSize="9">test against YOUR specification — the same ruler both ways</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -1153,6 +1249,10 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "memory-hierarchy": MemoryHierarchy,
   "normal-forms": NormalForms,
   "ml-pipeline": MLPipeline,
+  "color-wheel": ColorWheel,
+  "note-values": NoteValues,
+  "dramatic-arc": DramaticArc,
+  "design-cycle": DesignCycle,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
