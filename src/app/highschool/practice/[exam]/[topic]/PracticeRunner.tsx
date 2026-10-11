@@ -10,6 +10,7 @@ import {
   ExternalLink,
   Lightbulb,
   RefreshCw,
+  Sparkles,
   Target,
   XCircle,
 } from "lucide-react";
@@ -90,6 +91,19 @@ export default function PracticeRunner({
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
   const [breakdown, setBreakdown] = useState<Breakdown | null>(null);
   const [selfChecked, setSelfChecked] = useState<Record<string, number[]>>({});
+  const [aiMarks, setAiMarks] = useState<
+    Record<
+      string,
+      | "loading"
+      | {
+          points: { index: number; point: string; maxMarks: number; awarded: number; reason: string }[];
+          totalAwarded: number;
+          maxTotal: number;
+          feedback: string;
+        }
+    >
+  >({});
+  const [aiErrors, setAiErrors] = useState<Record<string, string>>({});
 
   const section = sections[sectionIndex];
   const question = section?.questions[questionIndex];
@@ -251,6 +265,37 @@ export default function PracticeRunner({
           : [...current, pointIndex],
       };
     });
+  }
+
+  async function markWithAi(sectionId: string, questionId: string) {
+    if (!sessionId || aiMarks[questionId] === "loading") return;
+    setAiMarks((prev) => ({ ...prev, [questionId]: "loading" }));
+    setAiErrors((prev) => ({ ...prev, [questionId]: "" }));
+    try {
+      const res = await fetch("/api/practice/ai-mark", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId, sectionId, questionId }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setAiErrors((prev) => ({ ...prev, [questionId]: data.error || "AI marking failed" }));
+        setAiMarks((prev) => {
+          const next = { ...prev };
+          delete next[questionId];
+          return next;
+        });
+        return;
+      }
+      setAiMarks((prev) => ({ ...prev, [questionId]: data.aiMark }));
+    } catch {
+      setAiErrors((prev) => ({ ...prev, [questionId]: "AI marking failed — check your connection" }));
+      setAiMarks((prev) => {
+        const next = { ...prev };
+        delete next[questionId];
+        return next;
+      });
+    }
   }
 
   function selfAssessTotal(modelAnswers: NonNullable<ScoreSection["modelAnswers"]>): number {
@@ -529,6 +574,8 @@ export default function PracticeRunner({
                       const mq = manifestSection?.questions.find((q) => q.id === ma.questionId);
                       const yourAnswer = answers[s.sectionId]?.[ma.questionId];
                       const checked = selfChecked[ma.questionId] ?? [];
+                      const aiMark = aiMarks[ma.questionId];
+                      const aiError = aiErrors[ma.questionId];
                       return (
                         <div key={ma.questionId} className="space-y-3 rounded-lg border border-slate-800 bg-slate-950 p-4">
                           <p className="text-sm font-semibold text-slate-100">{mq?.questionText ?? ma.questionId}</p>
@@ -559,6 +606,50 @@ export default function PracticeRunner({
                               ))}
                             </div>
                           ) : null}
+
+                          {/* AI marking — grades your typed answer against the scheme */}
+                          {aiMark === "loading" ? (
+                            <p className="flex items-center gap-2 text-sm text-teal-300">
+                              <Sparkles className="w-4 h-4 animate-pulse" /> Marking your answer with AI…
+                            </p>
+                          ) : aiMark ? (
+                            <div className="space-y-2 rounded-lg border border-teal-500/30 bg-teal-500/5 p-3">
+                              <p className="text-xs font-semibold uppercase tracking-wide text-teal-300">AI marking</p>
+                              {aiMark.points.map((p) => (
+                                <div key={p.index} className="flex items-start gap-2 text-sm">
+                                  {p.awarded > 0 ? (
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                                  ) : (
+                                    <XCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                                  )}
+                                  <div>
+                                    <span className="text-slate-200">{p.point}</span>
+                                    <span className="ml-2 text-xs font-semibold text-amber-400">{p.awarded}/{p.maxMarks}</span>
+                                    {p.reason && <p className="text-xs text-slate-400">{p.reason}</p>}
+                                  </div>
+                                </div>
+                              ))}
+                              <p className="text-sm font-bold text-emerald-300">
+                                AI-awarded: {aiMark.totalAwarded} of {aiMark.maxTotal} marks
+                              </p>
+                              {aiMark.feedback && (
+                                <p className="text-xs text-slate-300 border-t border-teal-500/20 pt-2">{aiMark.feedback}</p>
+                              )}
+                            </div>
+                          ) : (
+                            <div>
+                              <button
+                                type="button"
+                                onClick={() => void markWithAi(s.sectionId, ma.questionId)}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-300 border border-teal-500/40 bg-teal-500/10 rounded-full px-3 py-1.5 hover:bg-teal-500/20 transition-colors"
+                              >
+                                <Sparkles className="w-3.5 h-3.5" /> Mark with AI
+                              </button>
+                              {aiError && (
+                                <p className="mt-1 text-xs text-rose-300">{aiError}</p>
+                              )}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
