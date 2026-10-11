@@ -61,6 +61,10 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
     notFound();
   }
 
+  const blueprintCount = await prisma.examinationPaper.count({
+    where: { examinationId: examination.id },
+  });
+
   // Group papers by subject, newest year first — the board grows by data, never redesign.
   const bySubject = new Map<string, PaperSummary[]>();
   for (const paper of examination.papers) {
@@ -106,6 +110,27 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
             {groups.length} subject{groups.length === 1 ? "" : "s"}, {examination.papers.length} published paper{examination.papers.length === 1 ? "" : "s"}.
           </p>
         </div>
+
+        {/* Board-format practice */}
+        {blueprintCount > 0 && (
+          <Link
+            href={`/highschool/practice/${examination.slug}`}
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-teal-500/30 bg-gradient-to-r from-teal-950/40 via-slate-900 to-slate-900 p-5 hover:border-teal-400/60 transition-colors group"
+          >
+            <div>
+              <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-teal-300 transition-colors">
+                Practice in this board&apos;s real format
+              </div>
+              <p className="text-sm text-slate-400 mt-1">
+                Sessions follow the official paper structure — {blueprintCount} paper{blueprintCount === 1 ? "" : "s"} with
+                the real durations, sections, and mark allocations.
+              </p>
+            </div>
+            <span className="text-sm font-semibold text-teal-300 group-hover:text-teal-200 transition-colors shrink-0">
+              Open board practice →
+            </span>
+          </Link>
+        )}
 
         {/* Subject sections or empty state */}
         {groups.length === 0 ? (
