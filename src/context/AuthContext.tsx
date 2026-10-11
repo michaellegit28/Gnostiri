@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { User, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase/client";
 
 interface AuthContextType {
@@ -31,13 +31,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (currentUser) {
         try {
           const idToken = await currentUser.getIdToken();
-          await fetch("/api/auth/session", {
+          const response = await fetch("/api/auth/session", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ idToken }),
           });
+          // Server session is the truth: if it cannot be established (twice),
+          // never keep a client-side "signed in" state that the server rejects —
+          // that half-state makes every authenticated feature fail confusingly.
+          if (!response.ok) {
+            const retry = await fetch("/api/auth/session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ idToken }),
+            });
+            if (!retry.ok) await signOut(auth);
+          }
         } catch (error) {
           console.error("Failed to sync session with Postgres:", error);
         }
