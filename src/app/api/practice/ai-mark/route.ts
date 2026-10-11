@@ -11,6 +11,10 @@ import { getCurrentUser } from "@/lib/server-auth";
 
 const AI_MARK_DAILY_LIMIT = 10;
 
+// Reasoning models (e.g. Atria-Dawn-Preview) take 20-40s on real marking
+// prompts — the default 10s function limit is not enough.
+export const maxDuration = 60;
+
 interface DraftedAnswer {
   questionId: string;
   selectedAnswer: string | null;
