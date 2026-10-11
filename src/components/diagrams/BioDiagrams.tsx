@@ -1197,6 +1197,146 @@ function DesignCycle() {
   );
 }
 
+function Levers() {
+  return (
+    <Fig title="Fig. — The three lever classes: fulcrum, load, effort — position decides everything">
+      <polygon points="80,150 70,170 90,170" fill={gold} />
+      <line x1="30" y1="145" x2="150" y2="145" stroke={ink} strokeWidth="2.5" />
+      <rect x="20" y="120" width="20" height="25" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="30" y="112" textAnchor="middle" fill={accent} fontSize="8">effort ↓</text>
+      <rect x="140" y="120" width="20" height="25" fill="none" stroke={faint} strokeWidth="2" />
+      <text x="150" y="112" textAnchor="middle" fill={faint} fontSize="8">load</text>
+      <text x="80" y="188" textAnchor="middle" fill={gold} fontSize="8">class 1: F between — see-saw, crowbar</text>
+      <line x1="215" y1="145" x2="335" y2="145" stroke={ink} strokeWidth="2.5" />
+      <polygon points="215,150 205,170 225,170" fill={gold} />
+      <rect x="250" y="120" width="20" height="25" fill="none" stroke={faint} strokeWidth="2" />
+      <text x="260" y="112" textAnchor="middle" fill={faint} fontSize="8">load</text>
+      <rect x="320" y="120" width="20" height="25" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="330" y="112" textAnchor="middle" fill={accent} fontSize="8">effort ↓</text>
+      <text x="275" y="188" textAnchor="middle" fill={gold} fontSize="8">class 2: L between — wheelbarrow (force win)</text>
+      <line x1="30" y1="212" x2="150" y2="212" stroke={ink} strokeWidth="2.5" />
+      <polygon points="30,217 20,222 40,222" fill={gold} />
+      <rect x="75" y="188" width="18" height="24" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="84" y="182" textAnchor="middle" fill={accent} fontSize="8">effort ↑</text>
+      <rect x="130" y="188" width="18" height="24" fill="none" stroke={faint} strokeWidth="2" />
+      <text x="139" y="182" textAnchor="middle" fill={faint} fontSize="8">load</text>
+      <text x="90" y="226" textAnchor="middle" fill={gold} fontSize="7" opacity="0">.</text>
+      <text x="275" y="222" textAnchor="middle" fill={faint} fontSize="8">class 3: effort between — tweezers (reach win)</text>
+      <text x="200" y="150" textAnchor="middle" fill={faint} fontSize="8" opacity="0">.</text>
+      <text x="200" y="100" textAnchor="middle" fill={faint} fontSize="9">effort × arm = load × arm — the arms start at the FULCRUM</text>
+    </Fig>
+  );
+}
+
+function SoilProfile() {
+  return (
+    <Fig title="Fig. — The soil profile: O, A, B, C horizons — topsoil is the fertility bank">
+      <rect x="60" y="30" width="280" height="24" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="200" y="46" textAnchor="middle" fill={faint} fontSize="8">O — litter, organic debris</text>
+      <rect x="60" y="54" width="280" height="44" fill="none" stroke={gold} strokeWidth="2.5" />
+      <text x="200" y="72" textAnchor="middle" fill={gold} fontSize="9">A — TOPSOIL: humus + roots + life</text>
+      <text x="200" y="88" textAnchor="middle" fill={gold} fontSize="8">the fertility bank — erosion steals this first</text>
+      <rect x="60" y="98" width="280" height="52" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="200" y="120" textAnchor="middle" fill={accent} fontSize="9">B — SUBSOIL: minerals leached down</text>
+      <text x="200" y="138" textAnchor="middle" fill={faint} fontSize="8">less organic matter, accumulation zone</text>
+      <rect x="60" y="150" width="280" height="42" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="200" y="175" textAnchor="middle" fill={faint} fontSize="9">C — weathered parent rock</text>
+      <line x1="60" y1="192" x2="340" y2="192" stroke={ink} strokeWidth="2.5" />
+      <text x="200" y="208" textAnchor="middle" fill={faint} fontSize="8">bedrock</text>
+      <text x="200" y="228" textAnchor="middle" fill={faint} fontSize="9">sandy drains fast · clay waterlogs · loam is the balanced ideal</text>
+    </Fig>
+  );
+}
+
+function BalancedPlate() {
+  return (
+    <Fig title="Fig. — The balanced plate: half protective, quarter energy, quarter body-building">
+      <circle cx="200" cy="112" r="80" fill="none" stroke={ink} strokeWidth="2" />
+      <path d="M200 32 A80 80 0 0 1 269 152 L200 112 Z" fill="none" stroke={accent} strokeWidth="2" />
+      <path d="M200 32 A80 80 0 0 0 131 152 L200 112 Z" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="200" y="72" textAnchor="middle" fill={accent} fontSize="8">vegetables + fruit — ~half</text>
+      <text x="200" y="86" textAnchor="middle" fill={faint} fontSize="7">vitamins, minerals, fibre, water</text>
+      <text x="160" y="150" textAnchor="middle" fill={gold} fontSize="8">carbs — quarter</text>
+      <text x="160" y="163" textAnchor="middle" fill={faint} fontSize="7">rice, yam, bread — energy</text>
+      <text x="243" y="150" textAnchor="middle" fill={ink} fontSize="8">protein — quarter</text>
+      <text x="243" y="163" textAnchor="middle" fill={faint} fontSize="7">beans, fish, egg — growth</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">balance is built over the DAY — variety is the mechanism</text>
+      <text x="200" y="232" textAnchor="middle" fill={faint} fontSize="8">no single food carries everything — fats sparingly, water always</text>
+    </Fig>
+  );
+}
+
+function Orthographic() {
+  return (
+    <Fig title="Fig. — Orthographic projection: three aligned views define the object exactly">
+      <path d="M60 60 L100 60 L100 100 L140 100 L140 130 L60 130 Z" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="100" y="148" textAnchor="middle" fill={accent} fontSize="8">FRONT — the L-profile</text>
+      <rect x="185" y="60" width="80" height="70" fill="none" stroke={gold} strokeWidth="2" />
+      <line x1="185" y1="95" x2="265" y2="95" stroke={gold} strokeWidth="1.5" />
+      <text x="225" y="148" textAnchor="middle" fill={gold} fontSize="8">TOP — width + depth (plan)</text>
+      <path d="M290 60 L330 60 L330 100 L290 130 Z" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="310" y="148" textAnchor="middle" fill={ink} fontSize="8">SIDE — heights</text>
+      <line x1="140" y1="88" x2="185" y2="88" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
+      <line x1="100" y1="130" x2="100" y2="155" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
+      <text x="200" y="175" textAnchor="middle" fill={faint} fontSize="8">projected at right angles — edges ALIGNED: front/top share width, front/side share height</text>
+      <text x="200" y="205" textAnchor="middle" fill={faint} fontSize="9">first angle: top BELOW front · third angle: top ABOVE — read the symbol</text>
+      <text x="200" y="224" textAnchor="middle" fill={faint} fontSize="8">thick = visible · dashed = hidden · chain = centre</text>
+    </Fig>
+  );
+}
+
+function TrainingZones() {
+  return (
+    <Fig title="Fig. — Heart-rate training zones: max HR = 220 − age — train the goal's zone">
+      <line x1="50" y1="60" x2="50" y2="170" stroke={ink} strokeWidth="1.5" />
+      <line x1="50" y1="170" x2="370" y2="170" stroke={ink} strokeWidth="1.5" />
+      <rect x="50" y="128" width="140" height="42" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="120" y="148" textAnchor="middle" fill={accent} fontSize="9">moderate 50–70%</text>
+      <text x="120" y="163" textAnchor="middle" fill={faint} fontSize="7">aerobic base — can hold a conversation</text>
+      <rect x="190" y="80" width="120" height="90" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="250" y="110" textAnchor="middle" fill={gold} fontSize="9">vigorous 70–85%</text>
+      <text x="250" y="126" textAnchor="middle" fill={faint} fontSize="7">cardio gains — speech breaks up</text>
+      <line x1="310" y1="60" x2="310" y2="170" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
+      <text x="340" y="55" textAnchor="middle" fill={faint} fontSize="8">MAX</text>
+      <text x="50" y="52" textAnchor="middle" fill={faint} fontSize="8">resting — lower with fitness</text>
+      <text x="200" y="196" textAnchor="middle" fill={ink} fontSize="9">a 16-year-old: max ≈ 204 · vigorous ≈ 143–173 bpm — compute it</text>
+      <text x="200" y="220" textAnchor="middle" fill={faint} fontSize="8">intensity is a NUMBER, not a feeling — the zone measures the effort number</text>
+    </Fig>
+  );
+}
+
+function DiseaseChain() {
+  return (
+    <Fig title="Fig. — The chain of infection: six links — break ANY one and transmission stops">
+      <circle cx="55" cy="80" r="30" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="55" y="77" textAnchor="middle" fill={accent} fontSize="8">pathogen</text>
+      <text x="55" y="90" textAnchor="middle" fill={faint} fontSize="7">virus, bacteria</text>
+      <circle cx="150" cy="80" r="30" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="150" y="77" textAnchor="middle" fill={gold} fontSize="8">reservoir</text>
+      <text x="150" y="90" textAnchor="middle" fill={faint} fontSize="7">person, water</text>
+      <circle cx="245" cy="80" r="30" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="245" y="77" textAnchor="middle" fill={ink} fontSize="8">exit</text>
+      <text x="245" y="90" textAnchor="middle" fill={faint} fontSize="7">sneeze, blood</text>
+      <circle cx="345" cy="80" r="30" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="345" y="77" textAnchor="middle" fill={accent} fontSize="8">transmission</text>
+      <text x="345" y="90" textAnchor="middle" fill={faint} fontSize="7">air, vector, food</text>
+      <circle cx="150" cy="170" r="30" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="150" y="167" textAnchor="middle" fill={gold} fontSize="8">entry</text>
+      <text x="150" y="180" textAnchor="middle" fill={faint} fontSize="7">mouth, cut</text>
+      <circle cx="250" cy="170" r="30" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="250" y="167" textAnchor="middle" fill={ink} fontSize="8">host</text>
+      <text x="250" y="180" textAnchor="middle" fill={faint} fontSize="7">susceptible</text>
+      <line x1="85" y1="80" x2="120" y2="80" stroke={faint} strokeWidth="1.5" />
+      <line x1="180" y1="80" x2="215" y2="80" stroke={faint} strokeWidth="1.5" />
+      <line x1="275" y1="80" x2="315" y2="80" stroke={faint} strokeWidth="1.5" />
+      <path d="M345 110 C330 160 195 185 180 175" fill="none" stroke={faint} strokeWidth="1.5" />
+      <line x1="120" y1="170" x2="85" y2="170" stroke={faint} strokeWidth="0" />
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">bed nets break transmission · soap breaks entry · vaccines shield the host</text>
+      <text x="200" y="45" textAnchor="middle" fill={faint} fontSize="8">malaria: Plasmodium → people → blood → Anopheles mosquito → bite → susceptible</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -1253,6 +1393,12 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "note-values": NoteValues,
   "dramatic-arc": DramaticArc,
   "design-cycle": DesignCycle,
+  levers: Levers,
+  "soil-profile": SoilProfile,
+  "balanced-plate": BalancedPlate,
+  orthographic: Orthographic,
+  "training-zones": TrainingZones,
+  "disease-chain": DiseaseChain,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
