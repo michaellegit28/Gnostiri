@@ -993,6 +993,114 @@ function MemoryStages() {
   );
 }
 
+function ControlFlow() {
+  return (
+    <Fig title="Fig. — The three control structures: sequence, selection, iteration">
+      <rect x="40" y="20" width="80" height="26" rx="5" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="80" y="37" textAnchor="middle" fill={faint} fontSize="9">statement</text>
+      <line x1="80" y1="46" x2="80" y2="66" stroke={faint} strokeWidth="1.5" />
+      <text x="80" y="14" textAnchor="middle" fill={ink} fontSize="8">SEQUENCE — one after another</text>
+      <polygon points="220,20 285,45 220,70 155,45" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="220" y="49" textAnchor="middle" fill={accent} fontSize="8">condition?</text>
+      <text x="295" y="42" textAnchor="start" fill={accent} fontSize="8">true → do A</text>
+      <text x="145" y="42" textAnchor="end" fill={faint} fontSize="8">false → do B</text>
+      <text x="220" y="88" textAnchor="middle" fill={ink} fontSize="8">SELECTION — choose a path</text>
+      <rect x="360" y="20" width="26" height="26" rx="3" fill="none" stroke={gold} strokeWidth="1.5" />
+      <line x1="373" y1="60" x2="373" y2="88" stroke={gold} strokeWidth="1.5" />
+      <line x1="373" y1="88" x2="345" y2="88" stroke={gold} strokeWidth="1.5" />
+      <text x="345" y="95" textAnchor="middle" fill={gold} fontSize="8">while</text>
+      <text x="373" y="112" textAnchor="middle" fill={ink} fontSize="8">ITERATION</text>
+      <text x="200" y="140" textAnchor="middle" fill={ink} fontSize="9">every program is built from these three — nothing else</text>
+      <text x="200" y="170" textAnchor="middle" fill={faint} fontSize="8">counted repeats: FOR · condition-dependent: WHILE — which may run zero times</text>
+      <text x="200" y="195" textAnchor="middle" fill={faint} fontSize="8">trace tables catch off-by-one errors at loop boundaries — copy values exactly</text>
+    </Fig>
+  );
+}
+
+function BigOCurves() {
+  return (
+    <Fig title="Fig. — Big-O growth: how work scales with input size n">
+      <line x1="45" y1="20" x2="45" y2="180" stroke={ink} strokeWidth="1.5" />
+      <line x1="45" y1="180" x2="380" y2="180" stroke={ink} strokeWidth="1.5" />
+      <line x1="60" y1="165" x2="360" y2="165" stroke={faint} strokeWidth="2" />
+      <text x="362" y="158" textAnchor="end" fill={faint} fontSize="8">O(1) constant</text>
+      <path d="M60 170 C150 130 300 100 365 92" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="330" y="86" textAnchor="end" fill={accent} fontSize="8">O(n) linear</text>
+      <path d="M60 172 C180 150 320 60 370 30" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="300" y="40" textAnchor="end" fill={gold} fontSize="8">O(n²) — nested loops</text>
+      <path d="M60 168 C160 140 300 118 368 110" fill="none" stroke={ink} strokeWidth="1.5" strokeDasharray="5 3" />
+      <text x="352" y="126" textAnchor="end" fill={ink} fontSize="8">O(n log n) — good sorts</text>
+      <text x="50" y="195" textAnchor="middle" fill={faint} fontSize="8">halving the space each step = log n · counting loops reads the class off the code</text>
+      <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">Big-O is about GROWTH — not machine speed or constant factors</text>
+    </Fig>
+  );
+}
+
+function MemoryHierarchy() {
+  return (
+    <Fig title="Fig. — The memory hierarchy: speed and cost rise as capacity falls">
+      <polygon points="200,25 260,55 200,85 140,55" fill="none" stroke={ink} strokeWidth="2" />
+      <text x="200" y="52" textAnchor="middle" fill={ink} fontSize="8">REGISTERS</text>
+      <text x="200" y="66" textAnchor="middle" fill={faint} fontSize="7">bytes · fastest</text>
+      <polygon points="120,95 280,95 240,135 160,135" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="200" y="112" textAnchor="middle" fill={accent} fontSize="8">CACHE</text>
+      <text x="200" y="126" textAnchor="middle" fill={faint} fontSize="7">KB–MB · hot data</text>
+      <polygon points="140,145 260,145 235,180 165,180" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="200" y="160" textAnchor="middle" fill={gold} fontSize="8">RAM</text>
+      <text x="200" y="174" textAnchor="middle" fill={faint} fontSize="7">GB · volatile working set</text>
+      <line x1="160" y1="192" x2="240" y2="192" stroke={faint} strokeWidth="2" />
+      <text x="200" y="205" textAnchor="middle" fill={faint} fontSize="8">SSD / HDD — TB · persistent</text>
+      <text x="352" y="55" textAnchor="end" fill={ink} fontSize="8">↑ faster, costlier</text>
+      <text x="352" y="195" textAnchor="end" fill={faint} fontSize="8">↑ bigger, cheaper, slower</text>
+      <text x="200" y="222" textAnchor="middle" fill={faint} fontSize="9">power cut: RAM empties · SSD and ROM persist — volatility is the exam line</text>
+    </Fig>
+  );
+}
+
+function NormalForms() {
+  return (
+    <Fig title="Fig. — Normalisation: 1NF atomic, 2NF whole key, 3NF no chains">
+      <rect x="40" y="30" width="90" height="40" rx="6" fill="none" stroke={faint} strokeWidth="2" />
+      <text x="85" y="48" textAnchor="middle" fill={faint} fontSize="9">1NF</text>
+      <text x="85" y="62" textAnchor="middle" fill={faint} fontSize="7">atomic cells</text>
+      <line x1="135" y1="50" x2="165" y2="50" stroke={ink} strokeWidth="1.5" />
+      <rect x="170" y="30" width="90" height="40" rx="6" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="215" y="48" textAnchor="middle" fill={accent} fontSize="9">2NF</text>
+      <text x="215" y="62" textAnchor="middle" fill={faint} fontSize="7">whole-key dependency</text>
+      <line x1="265" y1="50" x2="295" y2="50" stroke={ink} strokeWidth="1.5" />
+      <rect x="300" y="30" width="90" height="40" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="345" y="48" textAnchor="middle" fill={gold} fontSize="9">3NF</text>
+      <text x="345" y="62" textAnchor="middle" fill={faint} fontSize="7">no transitive chains</text>
+      <text x="200" y="105" textAnchor="middle" fill={ink} fontSize="8">split at each violation — one table per entity, keys carry the links</text>
+      <text x="200" y="140" textAnchor="middle" fill={faint} fontSize="8">1NF: no comma lists · 2NF: non-key column depends on the WHOLE composite key</text>
+      <text x="200" y="165" textAnchor="middle" fill={faint} fontSize="8">3NF: non-key columns must not depend on other non-key columns</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="9">purpose: kill update, insert and delete anomalies — every fact stored once</text>
+    </Fig>
+  );
+}
+
+function MLPipeline() {
+  return (
+    <Fig title="Fig. — The ML pipeline: collect, clean, train, evaluate, deploy, monitor">
+      <rect x="25" y="60" width="72" height="34" rx="6" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="61" y="80" textAnchor="middle" fill={faint} fontSize="8">collect</text>
+      <rect x="112" y="60" width="60" height="34" rx="6" fill="none" stroke={faint} strokeWidth="1.5" />
+      <text x="142" y="80" textAnchor="middle" fill={faint} fontSize="8">clean</text>
+      <rect x="187" y="60" width="58" height="34" rx="6" fill="none" stroke={accent} strokeWidth="2" />
+      <text x="216" y="80" textAnchor="middle" fill={accent} fontSize="8">train</text>
+      <rect x="260" y="60" width="72" height="34" rx="6" fill="none" stroke={gold} strokeWidth="2" />
+      <text x="296" y="80" textAnchor="middle" fill={gold} fontSize="8">evaluate</text>
+      <rect x="347" y="60" width="38" height="34" rx="6" fill="none" stroke={ink} strokeWidth="1.5" />
+      <text x="366" y="80" textAnchor="middle" fill={ink} fontSize="8">deploy</text>
+      <path d="M97 77 L112 77 M172 77 L187 77 M245 77 L260 77 M332 77 L347 77" stroke={ink} strokeWidth="1.5" />
+      <path d="M366 94 C300 135 130 135 61 94" fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="5 3" />
+      <text x="215" y="132" textAnchor="middle" fill={faint} fontSize="8">monitor — retrain when the world drifts</text>
+      <text x="200" y="165" textAnchor="middle" fill={ink} fontSize="9">evaluate on data the model NEVER saw — the held-out split is the honesty check</text>
+      <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="9">data quality dominates: garbage in, garbage out — the model inherits its data</text>
+    </Fig>
+  );
+}
+
 const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   mitochondrion: Mitochondrion,
   chloroplast: Chloroplast,
@@ -1040,6 +1148,11 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
   "hydrological-cycle": HydrologicalCycle,
   "three-branches": ThreeBranches,
   "memory-stages": MemoryStages,
+  "control-flow": ControlFlow,
+  "bigo-curves": BigOCurves,
+  "memory-hierarchy": MemoryHierarchy,
+  "normal-forms": NormalForms,
+  "ml-pipeline": MLPipeline,
 };
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
