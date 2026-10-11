@@ -172,6 +172,12 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("AI marking failed:", error);
-    return NextResponse.json({ error: "AI marking failed — please try again" }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "AI marking failed — please try again",
+        detail: error instanceof Error ? error.message.slice(0, 400) : String(error).slice(0, 400),
+      },
+      { status: 500 }
+    );
   }
 }
