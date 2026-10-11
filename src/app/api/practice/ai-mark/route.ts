@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) return NextResponse.json({ error: "AI marking is not configured" }, { status: 503 });
 
-    const client = new OpenAI({ apiKey });
+    const client = new OpenAI({ apiKey, baseURL: process.env.OPENAI_BASE_URL || undefined });
     const completion = await client.chat.completions.create({
       model: process.env.OPENAI_TUTOR_MODEL || "gpt-4o-mini",
       response_format: { type: "json_object" },
@@ -129,7 +129,11 @@ export async function POST(req: NextRequest) {
     });
 
     const raw = completion.choices[0]?.message?.content || "";
-    const parsed = JSON.parse(raw) as {
+    // Robust extraction: some models wrap JSON in markdown fences or prose.
+    const stripped = raw.replace(/```(?:json)?/gi, "").trim();
+    const start = stripped.indexOf("{");
+    const end = stripped.lastIndexOf("}");
+    const parsed = JSON.parse(start >= 0 && end > start ? stripped.slice(start, end + 1) : stripped) as {
       points?: { index?: number; awarded?: number; reason?: string }[];
       totalAwarded?: number;
       feedback?: string;

@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     const history = Array.isArray(body.messages) ? body.messages.slice(-8).filter((m: any) => ["user", "assistant"].includes(m.role) && typeof m.content === "string").map((m: any) => ({ role: m.role, content: m.content.slice(0, 2000) })) : [];
     const context = topic ? `Current domain: ${domain}. Subject: ${topic.parent?.title || "General"}. Topic: ${topic.title}. Lesson: ${JSON.stringify(topic.lessons[0]?.content || {}).slice(0, 6000)}` : `Current domain: ${domain}.`;
     const system = `You are Gnostiri Tutor. Teach only within the learner's educational curriculum. Do not browse the web. Politely decline harmful and non-educational requests. ${context} Use concise Markdown for explanations. For similar_question return a JSON object with questionText, options (string array), correctAnswer, explanation. For study_plan return a JSON object with items: an array of {subject, topic, duration, priority}.`;
-    const client = new OpenAI({ apiKey });
+    const client = new OpenAI({ apiKey, baseURL: process.env.OPENAI_BASE_URL || undefined });
     if (action === "similar_question" || action === "study_plan") {
       const result = await client.chat.completions.create({
         model: process.env.OPENAI_TUTOR_MODEL || "gpt-4o-mini",
