@@ -17,7 +17,7 @@ export default async function UniversityPage() {
   const user = await getCurrentUser();
   const premium = user ? await hasPremiumAccess(user.id) : UNIVERSITY_OPEN;
 
-  const [faculties, courses, programmes] = await Promise.all([
+  const [faculties, courses, programmes, standards] = await Promise.all([
     prisma.faculty.findMany({
       where: { isPublished: true },
       orderBy: { orderIndex: "asc" },
@@ -42,6 +42,10 @@ export default async function UniversityPage() {
       where: { isPublished: true },
       include: { faculty: { select: { name: true, accent: true } } },
       orderBy: { orderIndex: "asc" },
+    }),
+    prisma.curriculumStandard.findMany({
+      orderBy: { authority: "asc" },
+      select: { authority: true, editionYear: true, officialUrl: true },
     }),
   ]);
 
@@ -141,9 +145,22 @@ export default async function UniversityPage() {
                 Choose your path.
               </h2>
               <p className="text-slate-400 text-sm md:text-base max-w-2xl">
-                Each programme is mapped to its official benchmark standard — NUC BMAS,
-                MDCN, and their equivalents — so what you study matches your degree handbook.
+                Each programme is mapped to a global accreditation baseline, with
+                regional overlays — so what you study matches your degree handbook
+                anywhere in the world.
               </p>
+              {standards.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {standards.map((s) => (
+                    <span
+                      key={`${s.authority}-${s.editionYear}`}
+                      className="text-[11px] font-medium text-slate-300 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full"
+                    >
+                      {s.authority} · {s.editionYear}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {programmes.map((p) => (

@@ -23,6 +23,7 @@ const GROUPS: { label: string; links: { href: string; title: string; note: strin
     links: [
       { href: "/battle-plan", title: "Battle Plan", note: "Your day-by-day mission" },
       { href: "/progress", title: "My Progress", note: "Streaks, accuracy, history" },
+      { href: "/university/revision", title: "Revision Queue", note: "Concepts due for review" },
       { href: "/tutor", title: "AI Tutor", note: "A guide, not an oracle" },
       { href: "/pricing", title: "Premium", note: "Unlock everything" },
     ],

@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test:alignment": "node --test tests/alignment-engine.test.mjs",
+    "test:spaced-repetition": "node --test tests/spaced-repetition.test.mjs",
+    "test:assessment": "node --test tests/assessment.test.mjs",
     "postinstall": "prisma generate"
   },
   "dependencies": {

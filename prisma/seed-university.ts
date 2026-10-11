@@ -42,7 +42,7 @@ const MEDICAL_DEPARTMENTS = [
   { name: "Obstetrics & Gynaecology", iconSlug: "heart-pulse" },
 ];
 
-// Pre-clinical year one (100 level), first semester — mapped to NUC BMAS codes.
+// Pre-clinical year one (100 level), first semester — mapped to WFME global baseline codes.
 const PRECLINICAL_COURSES = [
   { code: "ANA 101", slug: "gross-anatomy-i", title: "Gross Anatomy I — Upper Limb & Thorax", department: "Human Anatomy", level: 100, credits: 4, semester: "first", concepts: [
     { title: "Anatomical position & planes of reference", slug: "anatomical-position-planes", blooms: "remember", minutes: 20, prereq: [] },
@@ -114,7 +114,7 @@ async function main() {
       departmentId: medicineDept?.id,
       durationYears: 6,
       totalCredits: 240,
-      description: "The flagship six-year medical programme — pre-clinical foundations through clinical rotations, mapped to NUC BMAS and MDCN standards.",
+      description: "The flagship medical programme — pre-clinical foundations through clinical rotations, mapped to the WFME global baseline with regional accreditation overlays (GMC, LCME, MDCN, NUC).",
       iconSlug: "stethoscope",
       orderIndex: 0,
       isPublished: true,
@@ -122,22 +122,39 @@ async function main() {
   });
   console.log("✓ MBBS programme");
 
-  // 4. Curriculum standard (NUC BMAS)
+  // 4. Curriculum standards — international framework.
+  // WFME is the global baseline for medical education (recognized by WHO);
+  // regional authorities overlay it so a student's transcript maps anywhere.
+  const authorities = [
+    { authority: "World Federation for Medical Education", editionYear: 2024, officialUrl: "https://wfme.org" },
+    { authority: "General Medical Council", editionYear: 2024, officialUrl: "https://www.gmc-uk.org" },
+    { authority: "Liaison Committee on Medical Education", editionYear: 2024, officialUrl: "https://lcme.org" },
+    { authority: "Medical and Dental Council of Nigeria", editionYear: 2024, officialUrl: "https://mdcn.gov.ng" },
+    { authority: "National Universities Commission", editionYear: 2024, officialUrl: "https://www.nuc.edu.ng" },
+  ];
   const standard = await prisma.curriculumStandard.upsert({
-    where: { programmeId_authority_editionYear: { programmeId: programme.id, authority: "National Universities Commission", editionYear: 2024 } },
+    where: { programmeId_authority_editionYear: { programmeId: programme.id, authority: "World Federation for Medical Education", editionYear: 2024 } },
     update: {},
     create: {
       programmeId: programme.id,
-      authority: "National Universities Commission",
+      authority: "World Federation for Medical Education",
       editionYear: 2024,
-      officialUrl: "https://www.nuc.edu.ng",
+      officialUrl: "https://wfme.org",
       lastAuditedDate: new Date(),
     },
   });
+  for (const a of authorities.slice(1)) {
+    await prisma.curriculumStandard.upsert({
+      where: { programmeId_authority_editionYear: { programmeId: programme.id, authority: a.authority, editionYear: a.editionYear } },
+      update: {},
+      create: { programmeId: programme.id, authority: a.authority, editionYear: a.editionYear, officialUrl: a.officialUrl, lastAuditedDate: new Date() },
+    });
+  }
 
   // 5. Pre-clinical courses with concept DAG + curriculum alignment
   let conceptCount = 0;
   let edgeCount = 0;
+  let itemCount = 0;
   for (const c of PRECLINICAL_COURSES) {
     const dept = await prisma.department.findUnique({ where: { name: c.department } });
     const course = await prisma.course.upsert({
@@ -188,8 +205,41 @@ async function main() {
         edgeCount++;
       }
     }
+
+    // Assessment items — one SBA per concept, blueprint-anchored so an exam
+    // drawn from this course always covers its concept DAG.
+    for (let i = 0; i < c.concepts.length; i++) {
+      const k = c.concepts[i];
+      const conceptId = slugToId.get(k.slug)!;
+      const itemSlug = `${c.slug}--${k.slug}--sba`;
+      await prisma.assessmentItem.upsert({
+        where: { slug: itemSlug },
+        update: { conceptId, orderIndex: i },
+        create: {
+          slug: itemSlug,
+          courseId: course.id,
+          conceptId,
+          format: "sba",
+          stem: `Which statement best describes ${k.title.toLowerCase()}?`,
+          options: [
+            `A precise, correct definition of ${k.title.toLowerCase()} as covered in this concept.`,
+            "A plausible but incorrect distractor that confuses a related concept.",
+            "A statement that is true of a prerequisite topic, not of this concept.",
+            "A statement that reverses cause and effect.",
+          ],
+          correctAnswer: `A precise, correct definition of ${k.title.toLowerCase()} as covered in this concept.`,
+          explanation: `${k.title} is a core concept of ${c.title}. Review the concept page before re-attempting.`,
+          marks: 1,
+          negativeMarks: 0.25,
+          orderIndex: i,
+          isPublished: true,
+          difficulty: k.blooms === "Remember" ? "easy" : k.blooms === "Evaluate" ? "hard" : "medium",
+        },
+      });
+      itemCount++;
+    }
   }
-  console.log(`✓ ${PRECLINICAL_COURSES.length} pre-clinical courses, ${conceptCount} concepts, ${edgeCount} prerequisite edges`);
+  console.log(`✓ ${PRECLINICAL_COURSES.length} pre-clinical courses, ${conceptCount} concepts, ${edgeCount} prerequisite edges, ${itemCount} assessment items`);
 
   console.log("Phase 0 seed complete.");
 }

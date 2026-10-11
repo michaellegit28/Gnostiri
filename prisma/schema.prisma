@@ -34,6 +34,7 @@ model User {
   skillAttempts  SkillStationAttempt[]
   transcripts    CompetencyTranscript[]
   practiceSessions PracticeSession[]
+  assessmentSessions AssessmentSession[]
   launchTokens LaunchToken[]
 }
 
@@ -361,6 +362,9 @@ model Course {
   // Prerequisite chain (concept-level DAG lives on ConceptNode)
   prerequisites CoursePrerequisite[] @relation("CoursePrereqOf")
   prerequisiteFor CoursePrerequisite[] @relation("CoursePrerequisites")
+  // Assessment layer
+  assessmentItems AssessmentItem[]
+  assessmentSessions AssessmentSession[]
   alignments    CurriculumAlignment[]
   @@index([programmeId])
   @@index([facultyId])
@@ -552,6 +556,8 @@ model ConceptNode {
   // Concept-level prerequisite graph (the "how knowledge connects" map)
   prerequisites   ConceptPrerequisite[] @relation("ConceptPrereqOf")
   prerequisiteFor ConceptPrerequisite[] @relation("ConceptPrerequisites")
+  // Assessment layer
+  assessmentItems AssessmentItem[]
   mastery         ConceptMastery[]
   @@unique([courseId, slug])
   @@index([courseId])
@@ -583,6 +589,9 @@ model ConceptMastery {
   correctStreak  Int      @default(0)
   lastReviewed   DateTime?
   nextReviewDue  DateTime? // spaced-repetition scheduler
+  // SM-2 scheduling state
+  easeFactor     Float    @default(2.5)
+  intervalDays   Int      @default(0)
   @@unique([userId, conceptId])
   @@index([userId])
   @@index([conceptId])
@@ -601,6 +610,8 @@ model ClinicalCase {
   difficulty     String   @default("medium")
   orderIndex     Int      @default(0)
   isPublished    Boolean  @default(true)
+  // Items authored from this case feed the exam simulator.
+  items          AssessmentItem[]
   @@index([courseId])
 }
 
@@ -633,7 +644,59 @@ model SkillStationAttempt {
   @@index([stationId])
 }
 
+// One exam-grade item, authored from a course or a clinical case.
+// format: 'sba' | 'emq' | 'vignette' | 'short-answer'
+// Blueprint: the concept node the item tests, so exam results feed mastery.
+model AssessmentItem {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  caseId        String?
+  case          ClinicalCase? @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  conceptId     String?
+  concept       ConceptNode? @relation(fields: [conceptId], references: [id], onDelete: SetNull)
+  format        String   @default("sba")
+  stem          String   @db.Text
+  options       Json     // string array for SBA/EMQ; null for short-answer
+  correctAnswer String?
+  explanation   String?
+  marks         Int      @default(1)
+  negativeMarks Float?   // null => no penalty; negative marking for SBA/EMQ
+  orderIndex    Int      @default(0)
+  isPublished   Boolean  @default(true)
+  difficulty    String   @default("medium")
+  sessions      AssessmentSession[] @relation("ItemSessions")
+  @@index([courseId])
+  @@index([caseId])
+  @@index([conceptId])
+}
+
+// One sitting of a scored exam — timed, blueprint-balanced, negative marking applied.
+model AssessmentSession {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId        String
+  course          Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title           String
+  mode            String   @default("timed") // 'timed' | 'open'
+  durationMinutes Int      @default(60)
+  startTime       DateTime?
+  endTime         DateTime?
+  answers         Json     // [{itemId, selected, freeText, marked, awarded}]
+  score           Float
+  maxScore        Float
+  negativeApplied Float
+  createdAt       DateTime @default(now())
+  items           AssessmentItem[] @relation("ItemSessions")
+  @@index([userId])
+  @@index([courseId])
+}
+
 // Verified competency record — the "transcript" a residency board would read.
+// Normalized lines (CompetencyLine) make it queryable; summary stays for the
+// portable snapshot.
 model CompetencyTranscript {
   id          String   @id @default(cuid())
   userId      String
@@ -643,8 +706,23 @@ model CompetencyTranscript {
   title       String
   summary     Json     // concepts mastered, skills demonstrated, exam-readiness score
   issuedAt    DateTime @default(now())
+  lines       CompetencyLine[]
+  @@unique([userId, programmeId])
   @@index([userId])
   @@index([programmeId])
+}
+
+// Normalized line of a competency transcript — queryable, not a blob.
+model CompetencyLine {
+  id           String   @id @default(cuid())
+  transcriptId String
+  transcript   CompetencyTranscript @relation(fields: [transcriptId], references: [id], onDelete: Cascade)
+  code         String   // "C1.1"
+  title        String
+  level        String   @default("developing") // developing | proficient | mastery
+  evidence     String?
+  awardedAt    DateTime @default(now())
+  @@index([transcriptId])
 }
 
 // Exam Blueprint Engine — Layer 2. One row per paper in a board's format

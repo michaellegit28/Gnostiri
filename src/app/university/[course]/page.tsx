@@ -184,6 +184,18 @@ export default async function CoursePage({ params, searchParams }: { params: { c
               <Brain className="w-4 h-4 mr-2" /> Concept map
             </Link>
           )}
+          <Link
+            href={`/university/${course.slug}/exams`}
+            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-[#D4AF37]/50 px-6 py-3 font-semibold text-[#D4AF37] text-sm hover:bg-[#D4AF37]/10 transition-colors"
+          >
+            Exam hall
+          </Link>
+          <Link
+            href="/university/transcript"
+            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-[#D4AF37]/60 hover:text-white transition-colors"
+          >
+            Transcript
+          </Link>
         </div>
 
         {!premium && (
