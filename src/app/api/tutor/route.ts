@@ -10,7 +10,7 @@ const domains: AppDomain[] = ["highschool", "university", "extras"];
 async function incrementDaily(userId: string, domain: AppDomain) {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) throw new Error("Tutor rate limiter is not configured");
+  if (!url || !token) return 0; // limiter not configured — fail open (see middleware.ts pattern)
   const date = new Date().toISOString().slice(0, 10);
   const key = `tutor:${userId}:${domain}:${date}`;
   const response = await fetch(`${url}/pipeline`, {
@@ -19,7 +19,7 @@ async function incrementDaily(userId: string, domain: AppDomain) {
     body: JSON.stringify([["INCR", key], ["EXPIRE", key, 90000]]),
     cache: "no-store",
   });
-  if (!response.ok) throw new Error("Tutor rate limiter unavailable");
+  if (!response.ok) return 0;
   const result = await response.json();
   return Number(result?.[0]?.result || 0);
 }

@@ -38,18 +38,22 @@ async function aiMarkCount(userId: string): Promise<number> {
 async function incrementAiMarkCount(userId: string): Promise<number> {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) throw new Error("AI marking limiter is not configured");
+  if (!url || !token) return 0; // limiter not configured — fail open (see middleware.ts pattern)
   const date = new Date().toISOString().slice(0, 10);
   const key = `ai-mark:${userId}:${date}`;
-  const response = await fetch(`${url}/pipeline`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify([["INCR", key], ["EXPIRE", key, 90000]]),
-    cache: "no-store",
-  });
-  if (!response.ok) throw new Error("AI marking limiter unavailable");
-  const result = await response.json();
-  return Number(result?.[0]?.result || 0);
+  try {
+    const response = await fetch(`${url}/pipeline`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify([["INCR", key], ["EXPIRE", key, 90000]]),
+      cache: "no-store",
+    });
+    if (!response.ok) return 0;
+    const result = await response.json();
+    return Number(result?.[0]?.result || 0);
+  } catch {
+    return 0;
+  }
 }
 
 interface AiMarkPoint {
