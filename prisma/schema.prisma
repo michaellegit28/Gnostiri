@@ -34,6 +34,7 @@ model User {
   skillAttempts  SkillStationAttempt[]
   transcripts    CompetencyTranscript[]
   practiceSessions PracticeSession[]
+  launchTokens LaunchToken[]
 }
 
 model Profile {
@@ -705,4 +706,24 @@ model PracticeSession {
 
   @@index([userId])
   @@index([examinationId, topicId])
+}
+
+// 1st-launch access tokens: single-use, country-bound. Max 220 total, of
+// which max 20 are benefactor tier (launch access + university premium).
+// A token dies when consumed (usedById) or when its launch window ends.
+model LaunchToken {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  country   String    // ISO code, e.g. "NG" — token only redeems in this country
+  tier      String    @default("standard") // 'standard' | 'benefactor'
+  usedById  String?   @unique // single consumer — one token per user, atomic claim
+  usedAt    DateTime?
+  expiresAt DateTime?
+  note      String?
+  createdAt DateTime  @default(now())
+
+  user      User?     @relation(fields: [usedById], references: [id], onDelete: SetNull)
+
+  @@index([country, tier])
+  @@index([usedById])
 }

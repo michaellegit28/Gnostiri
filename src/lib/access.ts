@@ -9,3 +9,12 @@ export const OPEN_PREVIEW = false;
 // returns true for everyone, unlocking all lessons, quizzes, tutor access,
 // and adaptive plans without a subscription.
 export const UNIVERSITY_OPEN = false;
+
+// 1st-launch token gate. While true, the whole site sits behind the launch
+// screen: only token holders (and the allowlisted auth/launch routes) pass.
+// LAUNCH_ENDS_AT (ISO string) auto-opens the site when it passes — set both
+// together on launch day. Caps: 220 tokens total, max 20 benefactor tier.
+export const LAUNCH_GATE = false;
+export const LAUNCH_ENDS_AT: string | null = null;
+export const LAUNCH_MAX_TOKENS = 220;
+export const LAUNCH_MAX_BENEFACTORS = 20;
