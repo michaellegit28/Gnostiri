@@ -1,0 +1,3037 @@
+{
+ "reviewStatus": "needs-human-review",
+ "method": "Blind solve performed WITHOUT the key: pre-recovery questions (170) solved fresh this run from question text; post-recovery questions (220) encoded from same-session authoring records; pilot (50) previously double-solved by independent script. Structural validation on all. This file compares blind answers to the stored key — it does NOT fix anything.",
+ "counts": {
+  "total": 430,
+  "waecLabelled": 380,
+  "originalExamStyle": 50,
+  "matched": 397,
+  "structuralOnlyOrNeedsCheck": 29,
+  "mismatches": 4
+ },
+ "systemicFindings": [
+  {
+   "finding": "correct-answer position bias",
+   "detail": "Across the bank the correct option is heavily concentrated at fixed positions (option B in most master-* topics; option A in the entire mathematics pilot file). Students could game the bank by position alone. RECOMMENDATION: shuffle option order at integration time.",
+   "affected": [
+    {
+     "topic": "algebra-foundations",
+     "counts": {
+      "A": 7,
+      "B": 2,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "calculus",
+     "counts": {
+      "A": 7,
+      "B": 3,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "microeconomics",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "macroeconomics",
+     "counts": {
+      "A": 2,
+      "B": 8,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "business-studies",
+     "counts": {
+      "A": 0,
+      "B": 7,
+      "C": 3,
+      "D": 0
+     }
+    },
+    {
+     "topic": "accounting",
+     "counts": {
+      "A": 2,
+      "B": 7,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "commerce",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "geography",
+     "counts": {
+      "A": 0,
+      "B": 9,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "sociology",
+     "counts": {
+      "A": 1,
+      "B": 9,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "psychology",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "philosophy",
+     "counts": {
+      "A": 1,
+      "B": 9,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "religious-studies",
+     "counts": {
+      "A": 2,
+      "B": 8,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "data-structures-algorithms",
+     "counts": {
+      "A": 1,
+      "B": 8,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "computer-systems",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "databases",
+     "counts": {
+      "A": 1,
+      "B": 9,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "ai-emerging-tech",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "visual-arts",
+     "counts": {
+      "A": 1,
+      "B": 9,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "music",
+     "counts": {
+      "A": 1,
+      "B": 7,
+      "C": 2,
+      "D": 0
+     }
+    },
+    {
+     "topic": "drama-theatre",
+     "counts": {
+      "A": 0,
+      "B": 9,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "design-technology",
+     "counts": {
+      "A": 0,
+      "B": 8,
+      "C": 2,
+      "D": 0
+     }
+    },
+    {
+     "topic": "engineering",
+     "counts": {
+      "A": 1,
+      "B": 9,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "agriculture",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "home-economics-food-nutrition",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "technical-drawing-egd",
+     "counts": {
+      "A": 1,
+      "B": 8,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "physical-education",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "health-education",
+     "counts": {
+      "A": 0,
+      "B": 8,
+      "C": 2,
+      "D": 0
+     }
+    },
+    {
+     "topic": "life-orientation",
+     "counts": {
+      "A": 0,
+      "B": 10,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "waves-optics",
+     "counts": {
+      "A": 1,
+      "B": 8,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "electricity-magnetism",
+     "counts": {
+      "A": 8,
+      "B": 2,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "nuclear-quantum-physics",
+     "counts": {
+      "A": 2,
+      "B": 7,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "further-mechanics-fields",
+     "counts": {
+      "A": 1,
+      "B": 8,
+      "C": 1,
+      "D": 0
+     }
+    },
+    {
+     "topic": "pilot:algebra-foundations",
+     "counts": {
+      "A": 10,
+      "B": 0,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "pilot:geometry-trigonometry",
+     "counts": {
+      "A": 10,
+      "B": 0,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "pilot:calculus",
+     "counts": {
+      "A": 10,
+      "B": 0,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "pilot:statistics-probability",
+     "counts": {
+      "A": 10,
+      "B": 0,
+      "C": 0,
+      "D": 0
+     }
+    },
+    {
+     "topic": "pilot:further-mathematics",
+     "counts": {
+      "A": 10,
+      "B": 0,
+      "C": 0,
+      "D": 0
+     }
+    }
+   ]
+  },
+  {
+   "finding": "answer-position bias quantified",
+   "detail": "36 of 38 topics have >=70% of correct answers at a single option position (mostly B); the mathematics pilot places 100% of correct answers at position A. RECOMMENDATION: shuffle options at integration."
+  }
+ ],
+ "mismatches": [
+  {
+   "id": "master-stats-q2",
+   "key": "A",
+   "blind": "C",
+   "note": "blind solve says option \"C\", key marks \"A\"",
+   "needsCheck": true,
+   "verdict": "VERDICT: AMBIGUOUS — key (IQR=6) follows the standard exclusive-median convention (Q1=2, Q3=8); the blind solve used the include-median convention (Q1=3, Q3=7 → IQR=4). Both are taught. Recommendation: accept the key BUT reword the question to state the convention, or replace. needsCheck: true."
+  },
+  {
+   "id": "master-stats-q9",
+   "key": "A",
+   "blind": "B",
+   "note": "blind solve says option \"B\", key marks \"A\"",
+   "needsCheck": true,
+   "verdict": "VERDICT: KEY CONFIRMED — P(Z>2) = 1 − 0.9772 = 0.0228 ≈ 2.5%. The blind-solve's 5% was the solver's error (two-tailed confusion), not a key error."
+  },
+  {
+   "id": "master-stats-q10",
+   "key": "B",
+   "blind": "A",
+   "note": "blind solve says option \"A\", key marks \"B\"",
+   "needsCheck": true,
+   "verdict": "VERDICT: KEY CONFIRMED — the confounder (summer) is the correct conclusion; the flagged mismatch was a transcription slip in the blind-solve table, not a content error."
+  },
+  {
+   "id": "master-health-education-q7",
+   "key": "C",
+   "blind": "B",
+   "note": "blind solve says option \"B\", key marks \"C\"",
+   "needsCheck": true,
+   "verdict": "VERDICT: KEY CONFIRMED — the question asks what does NOT transmit HIV; sharing needles DOES transmit, mosquito bites/hugs/shared cups do not. The blind solve misread the negation."
+  }
+ ],
+ "ambiguous": [],
+ "weakExplanations": [
+  "master-trig-q1",
+  "master-trig-q5",
+  "master-trig-q7",
+  "master-calculus-q8",
+  "master-stats-q3",
+  "master-further-q2",
+  "master-business-studies-q4",
+  "master-business-studies-q5",
+  "master-accounting-q7",
+  "master-commerce-q7",
+  "master-geography-q3",
+  "master-geography-q10",
+  "master-sociology-q3",
+  "master-philosophy-q6",
+  "master-dsa-q4",
+  "master-dsa-q8",
+  "master-music-q1",
+  "master-music-q8",
+  "master-stoichiometry-mole-q1",
+  "master-stoichiometry-mole-q8",
+  "master-waves-optics-q1",
+  "master-waves-optics-q2",
+  "master-waves-optics-q9",
+  "master-electricity-magnetism-q2",
+  "master-electricity-magnetism-q3",
+  "master-electricity-magnetism-q4",
+  "master-thermodynamics-q2",
+  "master-thermodynamics-q7",
+  "master-nuclear-quantum-physics-q4"
+ ],
+ "entries": [
+  {
+   "id": "master-algebra-foundations-q1",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q2",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q3",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q4",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q5",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q6",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q7",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q8",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q9",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-algebra-foundations-q10",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q1",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-trig-q2",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q3",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q4",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q5",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-trig-q6",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q7",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-trig-q8",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q9",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-trig-q10",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q1",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q2",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q3",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q4",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q5",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q6",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q7",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q8",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-calculus-q9",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-calculus-q10",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q1",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q2",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "mismatch",
+   "note": "blind solve says option \"C\", key marks \"A\"",
+   "verdict": "VERDICT: AMBIGUOUS — key (IQR=6) follows the standard exclusive-median convention (Q1=2, Q3=8); the blind solve used the include-median convention (Q1=3, Q3=7 → IQR=4). Both are taught. Recommendation: accept the key BUT reword the question to state the convention, or replace. needsCheck: true.",
+   "needsCheck": true
+  },
+  {
+   "id": "master-stats-q3",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-stats-q4",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q5",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q6",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q7",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q8",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stats-q9",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "mismatch",
+   "note": "blind solve says option \"B\", key marks \"A\"",
+   "verdict": "VERDICT: KEY CONFIRMED — P(Z>2) = 1 − 0.9772 = 0.0228 ≈ 2.5%. The blind-solve's 5% was the solver's error (two-tailed confusion), not a key error.",
+   "needsCheck": true
+  },
+  {
+   "id": "master-stats-q10",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "mismatch",
+   "note": "blind solve says option \"A\", key marks \"B\"",
+   "verdict": "VERDICT: KEY CONFIRMED — the confounder (summer) is the correct conclusion; the flagged mismatch was a transcription slip in the blind-solve table, not a content error.",
+   "needsCheck": true
+  },
+  {
+   "id": "master-further-q1",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q2",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-further-q3",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q4",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q5",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q6",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q7",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q8",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q9",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-q10",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q1",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q2",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q3",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q4",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q5",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q6",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q7",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q8",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q9",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-microeconomics-q10",
+   "topicSlug": "microeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q1",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q2",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q3",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q4",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q5",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q6",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q7",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q8",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q9",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-macroeconomics-q10",
+   "topicSlug": "macroeconomics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q1",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q2",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q3",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q4",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-business-studies-q5",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-business-studies-q6",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q7",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q8",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q9",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-business-studies-q10",
+   "topicSlug": "business-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q1",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q2",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q3",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q4",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q5",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q6",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q7",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-accounting-q8",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q9",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-accounting-q10",
+   "topicSlug": "accounting",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q1",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q2",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q3",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q4",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q5",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q6",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q7",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-commerce-q8",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q9",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-commerce-q10",
+   "topicSlug": "commerce",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q1",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q2",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q3",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-geography-q4",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q5",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q6",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q7",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q8",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q9",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-geography-q10",
+   "topicSlug": "geography",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-polisci-q1",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q2",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q3",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q4",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q5",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q6",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q7",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q8",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q9",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-polisci-q10",
+   "topicSlug": "political-science-government",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q1",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q2",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q3",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-sociology-q4",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q5",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q6",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q7",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q8",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q9",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-sociology-q10",
+   "topicSlug": "sociology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q1",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q2",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q3",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q4",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q5",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q6",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q7",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q8",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q9",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-psychology-q10",
+   "topicSlug": "psychology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q1",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q2",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q3",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q4",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q5",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q6",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-philosophy-q7",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q8",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q9",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-philosophy-q10",
+   "topicSlug": "philosophy",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q1",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q2",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q3",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q4",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q5",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q6",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q7",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q8",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q9",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-religious-q10",
+   "topicSlug": "religious-studies",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q1",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q2",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q3",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q4",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q5",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q6",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q7",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q8",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q9",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-programming-q10",
+   "topicSlug": "programming-fundamentals",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q1",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q2",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q3",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q4",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-dsa-q5",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q6",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q7",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q8",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-dsa-q9",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-dsa-q10",
+   "topicSlug": "data-structures-algorithms",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q1",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q2",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q3",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q4",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q5",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q6",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q7",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q8",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q9",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-compsys-q10",
+   "topicSlug": "computer-systems",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q1",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q2",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q3",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q4",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q5",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q6",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q7",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q8",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q9",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-databases-q10",
+   "topicSlug": "databases",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q1",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q2",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q3",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q4",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q5",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q6",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q7",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q8",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q9",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-aitech-q10",
+   "topicSlug": "ai-emerging-tech",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q1",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q2",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q3",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q4",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q5",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q6",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q7",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q8",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q9",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-visual-arts-q10",
+   "topicSlug": "visual-arts",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q1",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-music-q2",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q3",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q4",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q5",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q6",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q7",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q8",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-music-q9",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-music-q10",
+   "topicSlug": "music",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q1",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q2",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q3",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q4",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q5",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q6",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q7",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q8",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q9",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-drama-theatre-q10",
+   "topicSlug": "drama-theatre",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q1",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q2",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q3",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q4",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q5",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q6",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q7",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q8",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q9",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-design-technology-q10",
+   "topicSlug": "design-technology",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q1",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q2",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q3",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q4",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q5",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q6",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q7",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q8",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q9",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-engineering-q10",
+   "topicSlug": "engineering",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q1",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q2",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q3",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q4",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q5",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q6",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q7",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q8",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q9",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-agriculture-q10",
+   "topicSlug": "agriculture",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q1",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q2",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q3",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q4",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q5",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q6",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q7",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q8",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q9",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-homeecon-q10",
+   "topicSlug": "home-economics-food-nutrition",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q1",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q2",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q3",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q4",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q5",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q6",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q7",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q8",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q9",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-techdrawing-q10",
+   "topicSlug": "technical-drawing-egd",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q1",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q2",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q3",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q4",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q5",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q6",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q7",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q8",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q9",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-physical-education-q10",
+   "topicSlug": "physical-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q1",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q2",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q3",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q4",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q5",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q6",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q7",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "mismatch",
+   "note": "blind solve says option \"B\", key marks \"C\"",
+   "verdict": "VERDICT: KEY CONFIRMED — the question asks what does NOT transmit HIV; sharing needles DOES transmit, mosquito bites/hugs/shared cups do not. The blind solve misread the negation.",
+   "needsCheck": true
+  },
+  {
+   "id": "master-health-education-q8",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q9",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-health-education-q10",
+   "topicSlug": "health-education",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q1",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q2",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q3",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q4",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q5",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q6",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q7",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q8",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q9",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-life-orientation-q10",
+   "topicSlug": "life-orientation",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q1",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-stoichiometry-mole-q2",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q3",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q4",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q5",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q6",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q7",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q8",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-stoichiometry-mole-q9",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-stoichiometry-mole-q10",
+   "topicSlug": "stoichiometry-mole",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q1",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-waves-optics-q2",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-waves-optics-q3",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q4",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q5",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q6",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q7",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q8",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-waves-optics-q9",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-waves-optics-q10",
+   "topicSlug": "waves-optics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q1",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q2",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-electricity-magnetism-q3",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-electricity-magnetism-q4",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-electricity-magnetism-q5",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q6",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q7",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q8",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q9",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-electricity-magnetism-q10",
+   "topicSlug": "electricity-magnetism",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q1",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q2",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-thermodynamics-q3",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q4",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q5",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q6",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q7",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-thermodynamics-q8",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q9",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-thermodynamics-q10",
+   "topicSlug": "thermodynamics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q1",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q2",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q3",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q4",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "needsCheck",
+   "note": "weak explanation"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q5",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q6",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q7",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q8",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q9",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-nuclear-quantum-physics-q10",
+   "topicSlug": "nuclear-quantum-physics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q1",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q2",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q3",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q4",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q5",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q6",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q7",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q8",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q9",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "master-further-mechanics-fields-q10",
+   "topicSlug": "further-mechanics-fields",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (blind solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q1",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q2",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q3",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q4",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q5",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q6",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q7",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q8",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q9",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-algebra-q10",
+   "topicSlug": "algebra-foundations",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q1",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q2",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q3",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q4",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q5",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q6",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q7",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q8",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q9",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-geo-q10",
+   "topicSlug": "geometry-trigonometry",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q1",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q2",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q3",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q4",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q5",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q6",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q7",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q8",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q9",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-calc-q10",
+   "topicSlug": "calculus",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q1",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q2",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q3",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q4",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q5",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q6",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q7",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q8",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q9",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-stats-q10",
+   "topicSlug": "statistics-probability",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q1",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q2",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q3",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q4",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q5",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q6",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q7",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q8",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q9",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  },
+  {
+   "id": "pilot-math-further-q10",
+   "topicSlug": "further-mathematics",
+   "reviewStatus": "needs-human-review",
+   "status": "matched (prior double-solve)"
+  }
+ ]
+}
