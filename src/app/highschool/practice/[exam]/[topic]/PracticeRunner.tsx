@@ -347,7 +347,7 @@ export default function PracticeRunner({
             type="button"
             onClick={() => void startPractice()}
             disabled={busy}
-            className="w-full min-h-12 rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-amber-400 transition-colors"
+            className="w-full min-h-12 rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
             {busy ? "Starting…" : "Start practice session"}
           </button>
@@ -388,7 +388,7 @@ export default function PracticeRunner({
                 <button
                   type="button"
                   onClick={() => setHintsOpen((p) => ({ ...p, [question.id]: !p[question.id] }))}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-400 border border-amber-500/30 bg-amber-500/10 rounded-full px-3 py-1.5"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-400 border border-amber-500/30 bg-amber-500/10 rounded-full px-3 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   aria-expanded={hintsOpen[question.id] ?? false}
                 >
                   <Lightbulb className="w-3.5 h-3.5" /> Hint
@@ -442,7 +442,7 @@ export default function PracticeRunner({
                     <button
                       type="button"
                       onClick={() => setExplanationsOpen((p) => ({ ...p, [question.id]: !p[question.id] }))}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 border border-slate-700 rounded-full px-3 py-1.5 hover:border-slate-500"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 border border-slate-700 rounded-full px-3 py-1.5 hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
                       aria-expanded={explanationsOpen[question.id] ?? false}
                     >
                       Why? <ChevronDown className={`w-3.5 h-3.5 transition-transform ${explanationsOpen[question.id] ? "rotate-180" : ""}`} />
@@ -480,7 +480,7 @@ export default function PracticeRunner({
               type="button"
               disabled={questionIndex === 0}
               onClick={() => setQuestionIndex((i) => Math.max(0, i - 1))}
-              className="rounded-lg border border-slate-700 px-4 py-2.5 text-sm font-semibold text-slate-200 disabled:opacity-40 hover:border-slate-500"
+              className="rounded-lg border border-slate-700 px-4 py-2.5 text-sm font-semibold text-slate-200 disabled:opacity-40 hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               Back
             </button>
@@ -489,7 +489,7 @@ export default function PracticeRunner({
                 type="button"
                 onClick={() => setQuestionIndex((i) => i + 1)}
                 disabled={busy}
-                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-slate-800 border border-slate-700 px-5 font-semibold text-slate-100 hover:bg-slate-700 disabled:opacity-50"
+                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-slate-800 border border-slate-700 px-5 font-semibold text-slate-100 hover:bg-slate-700 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
               >
                 Next <ArrowRight className="w-4 h-4" />
               </button>
@@ -498,7 +498,7 @@ export default function PracticeRunner({
                 type="button"
                 onClick={() => void completeSection()}
                 disabled={busy}
-                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-amber-500 px-5 font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50"
+                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-amber-500 px-5 font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
               >
                 {busy ? "Saving…" : sectionIndex < sections.length - 1 ? "Complete section" : "Finish & submit"}
               </button>
@@ -519,7 +519,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={advanceToNextSection}
-              className="w-full min-h-12 rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 hover:bg-amber-400"
+              className="w-full min-h-12 rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
             >
               Continue
             </button>
@@ -628,7 +628,7 @@ export default function PracticeRunner({
                               <button
                                 type="button"
                                 onClick={() => void markWithAi(s.sectionId, ma.questionId)}
-                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-300 border border-teal-500/40 bg-teal-500/10 rounded-full px-3 py-1.5 hover:bg-teal-500/20 transition-colors"
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-300 border border-teal-500/40 bg-teal-500/10 rounded-full px-3 py-1.5 hover:bg-teal-500/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
                               >
                                 <Sparkles className="w-3.5 h-3.5" /> Mark with AI
                               </button>
@@ -660,13 +660,13 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-amber-500 px-5 font-semibold text-slate-950 hover:bg-amber-400"
+              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-amber-500 px-5 font-semibold text-slate-950 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
             >
               <RefreshCw className="w-4 h-4" /> Practice again
             </button>
             <Link
               href={`/highschool/practice/${boardSlug}`}
-              className="inline-flex items-center gap-2 min-h-11 rounded-lg border border-slate-700 px-5 font-semibold text-slate-200 hover:border-slate-500"
+              className="inline-flex items-center gap-2 min-h-11 rounded-lg border border-slate-700 px-5 font-semibold text-slate-200 hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               More {boardName} topics <ExternalLink className="w-4 h-4" />
             </Link>

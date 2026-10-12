@@ -69,7 +69,7 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool/exams" className="hover:text-amber-400 transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="rounded hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
           <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-amber-400 transition-colors">
             {examination.name.toUpperCase()}
@@ -107,7 +107,7 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
                   <Link
                     key={topic.id}
                     href={`/highschool/practice/${examination.slug}/${topic.id}?subject=${subject.slug}`}
-                    className="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-amber-500/40 transition-all group"
+                    className="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-amber-500/40 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   >
                     <div>
                       <div className="font-semibold text-slate-100 group-hover:text-amber-400 transition-colors">{topic.title}</div>

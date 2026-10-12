@@ -10,7 +10,7 @@ export default function HighSchoolHub() {
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-10">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/" className="hover:text-amber-400 transition-colors">Home</Link>
+          <Link href="/" className="rounded hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Home</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
           <span className="text-slate-100 font-medium">High School</span>
         </nav>
@@ -35,7 +35,7 @@ export default function HighSchoolHub() {
               <h2 className="text-2xl font-serif font-bold mb-2">Study</h2>
               <p className="text-slate-400 text-sm mb-6">11 subjects, 55 topics — click any topic and study, with syllabus alignment for your country.</p>
             </div>
-            <Link href="/highschool/study" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-teal-500 text-slate-950 font-semibold text-sm hover:bg-teal-400 transition-colors">
+            <Link href="/highschool/study" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-teal-500 text-slate-950 font-semibold text-sm hover:bg-teal-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400">
               Open textbooks
             </Link>
           </div>
@@ -45,7 +45,7 @@ export default function HighSchoolHub() {
               <h2 className="text-2xl font-serif font-bold mb-2">Exams</h2>
               <p className="text-slate-400 text-sm mb-6">Past papers by board and year — timed attempts with marking schemes.</p>
             </div>
-            <Link href="/highschool/exams" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors">
+            <Link href="/highschool/exams" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
               Open exam banks
             </Link>
           </div>
@@ -53,7 +53,7 @@ export default function HighSchoolHub() {
 
         <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center">
           <Trophy className="w-6 h-6 text-[#D4AF37] mx-auto mb-2" />
-          <p className="text-sm text-slate-400">Want to compete? <Link href="/arena" className="text-amber-400 hover:underline">Global Arena</Link> hosts inter-school and inter-country contests.</p>
+          <p className="text-sm text-slate-400">Want to compete? <Link href="/arena" className="rounded text-amber-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Global Arena</Link> hosts inter-school and inter-country contests.</p>
         </section>
       </div>
     </div>

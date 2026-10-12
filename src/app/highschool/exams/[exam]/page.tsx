@@ -89,9 +89,9 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-amber-400 transition-colors">High School</Link>
+          <Link href="/highschool" className="rounded hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">High School</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href="/highschool/exams" className="hover:text-amber-400 transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="rounded hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
           <span className="text-slate-100 font-medium">{examination.name.toUpperCase()}</span>
         </nav>
@@ -115,7 +115,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
         {blueprintCount > 0 && (
           <Link
             href={`/highschool/practice/${examination.slug}`}
-            className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-teal-500/30 bg-gradient-to-r from-teal-950/40 via-slate-900 to-slate-900 p-5 hover:border-teal-400/60 transition-colors group"
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-teal-500/30 bg-gradient-to-r from-teal-950/40 via-slate-900 to-slate-900 p-5 hover:border-teal-400/60 transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
           >
             <div>
               <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-teal-300 transition-colors">
@@ -152,7 +152,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                 <FileText className="w-5 h-5 text-teal-300" />
                 <Link
                   href={`/highschool/exams/${examination.slug}/${subjectSlugOf(group.subject)}`}
-                  className="text-xl md:text-2xl font-serif font-bold hover:text-amber-400 transition-colors"
+                  className="rounded text-xl md:text-2xl font-serif font-bold hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
                   {group.subject}
                 </Link>
@@ -165,7 +165,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                   <Link
                     key={paper.id}
                     href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)}
-                    className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg hover:border-amber-500/40 transition-all group"
+                    className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg hover:border-amber-500/40 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   >
                     <div className="flex items-start justify-between gap-3 mb-4">
                       <span className="font-serif text-3xl font-bold text-amber-400 group-hover:text-amber-300">
