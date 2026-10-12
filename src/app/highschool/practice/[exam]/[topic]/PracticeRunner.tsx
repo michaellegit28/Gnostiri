@@ -14,6 +14,9 @@ import {
   Target,
   XCircle,
 } from "lucide-react";
+import ExamTimer from "@/components/exam/ExamTimer";
+import NavigatorGrid from "@/components/exam/NavigatorGrid";
+import OptionCard from "@/components/exam/OptionCard";
 
 interface Question {
   id: string;
@@ -365,29 +368,17 @@ export default function PracticeRunner({
               <p className="mt-1 text-sm text-slate-400">Question {questionProgress}</p>
             </div>
             {secondsLeft !== null && (
-              <span
-                className={`font-mono text-lg font-bold px-3 py-1.5 rounded-lg border tabular-nums ${
-                  secondsLeft <= 300
-                    ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
-                    : "border-slate-700 bg-slate-950 text-slate-100"
-                }`}
-              >
-                {formatClock(secondsLeft)}
-              </span>
+              <ExamTimer secondsLeft={secondsLeft} />
             )}
           </div>
 
-          {/* progress dots */}
-          <div className="flex items-center gap-1.5" aria-label="Progress">
-            {section.questions.map((_, i) => (
-              <span
-                key={i}
-                className={`h-1.5 flex-1 rounded-full ${
-                  i < questionIndex ? "bg-emerald-500/70" : i === questionIndex ? "bg-amber-500" : "bg-slate-700"
-                }`}
-              />
-            ))}
-          </div>
+          <NavigatorGrid
+            total={section.questions.length}
+            current={questionIndex}
+            answered={section.questions.map((q) => (sectionAnswers[q.id] ?? "") !== "")}
+            flagged={section.questions.map(() => false)}
+            onSelect={(i) => setQuestionIndex(i)}
+          />
 
           <article className="space-y-4 rounded-xl border border-slate-800 bg-slate-900 p-5 md:p-6">
             <h2 className="text-lg font-semibold whitespace-pre-wrap">{question.questionText}</h2>
@@ -413,32 +404,28 @@ export default function PracticeRunner({
 
             {section.questionType === "MCQ" ? (
               <div className="space-y-2">
-                {question.options.map((option) => {
+                {question.options.map((option, oi) => {
                   const reveal = reveals[question.id];
                   const picked = sectionAnswers[question.id] === option;
                   const isCorrectOption = reveal?.correctAnswer === option;
+                  const state = reveal
+                    ? isCorrectOption
+                      ? ("correct" as const)
+                      : picked
+                        ? ("incorrect" as const)
+                        : ("idle" as const)
+                    : picked
+                      ? ("selected" as const)
+                      : ("idle" as const);
                   return (
-                    <button
+                    <OptionCard
                       key={option}
-                      type="button"
+                      letter={String.fromCharCode(65 + oi)}
+                      text={option}
+                      state={state}
                       disabled={Boolean(reveal) || busy}
-                      onClick={() => void answerMcq(question, option)}
-                      className={`flex w-full min-h-12 items-center gap-3 rounded-lg border px-4 text-left transition-colors disabled:cursor-default ${
-                        reveal
-                          ? isCorrectOption
-                            ? "border-emerald-500/60 bg-emerald-500/10"
-                            : picked
-                              ? "border-rose-500/60 bg-rose-500/10"
-                              : "border-slate-800"
-                          : picked
-                            ? "border-teal-500/60 bg-teal-500/10"
-                            : "border-slate-700 hover:border-slate-500"
-                      }`}
-                    >
-                      <span>{option}</span>
-                      {reveal && isCorrectOption && <CheckCircle2 className="ml-auto w-5 h-5 text-emerald-400 shrink-0" />}
-                      {reveal && picked && !isCorrectOption && <XCircle className="ml-auto w-5 h-5 text-rose-400 shrink-0" />}
-                    </button>
+                      onSelect={() => void answerMcq(question, option)}
+                    />
                   );
                 })}
                 <div aria-live="polite">
