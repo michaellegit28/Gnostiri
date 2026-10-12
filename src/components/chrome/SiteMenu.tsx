@@ -8,14 +8,14 @@ import { usePathname } from "next/navigation";
  * SiteMenu — one navigation for the whole app. Hamburger opens a calm
  * fullscreen overlay; every link is a real destination (no dead ends).
  */
-const GROUPS: { label: string; links: { href: string; title: string; note: string }[] }[] = [
+const GROUPS: { label: string; links: { href: string; title: string; note: string; badge?: string }[] }[] = [
   {
     label: "Three ways of learning",
     links: [
       { href: "/highschool", title: "High School", note: "Textbooks and exam banks" },
       { href: "/university", title: "University", note: "Degree-depth courses and faculties" },
       { href: "/discovery", title: "Discovery", note: "Follow curiosity past the syllabus" },
-      { href: "/arena", title: "Global Arena", note: "Inter-school contests" },
+      { href: "/arena", title: "Global Arena", note: "Inter-school contests", badge: "Soon" },
     ],
   },
   {
@@ -108,11 +108,17 @@ export default function SiteMenu() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="group flex items-center justify-between gap-4 py-4"
+                        aria-disabled={link.badge ? true : undefined}
+                        className="group flex items-center justify-between gap-4 rounded-lg py-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
                       >
                         <span>
                           <span className="block font-serif text-2xl font-bold text-slate-100 group-hover:text-[#D4AF37] transition-colors">
                             {link.title}
+                            {link.badge && (
+                              <span className="ml-3 inline-block rounded-full border border-amber-500/40 bg-amber-500/10 px-2.5 py-0.5 align-middle font-sans text-xs font-semibold text-amber-300">
+                                {link.badge}
+                              </span>
+                            )}
                           </span>
                           <span className="mt-0.5 block text-sm text-slate-500">
                             {link.note}
