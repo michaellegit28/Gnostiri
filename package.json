@@ -10,6 +10,7 @@
     "test:alignment": "node --test tests/alignment-engine.test.mjs",
     "test:spaced-repetition": "node --test tests/spaced-repetition.test.mjs",
     "test:assessment": "node --test tests/assessment.test.mjs",
+    "test:lesson-python": "node --test tests/lesson-python.test.mjs",
     "postinstall": "prisma generate"
   },
   "dependencies": {
