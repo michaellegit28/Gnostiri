@@ -10,6 +10,14 @@ export default function ArenaPage() {
       <div className="max-w-3xl mx-auto text-center space-y-6">
         <Trophy className="w-12 h-12 text-[#D4AF37] mx-auto" />
         <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37]">Global Arena</p>
+        <p
+          role="status"
+          aria-disabled="true"
+          aria-label="Global Arena — coming soon"
+          className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-amber-300"
+        >
+          Coming soon
+        </p>
         <h1 className="text-3xl md:text-5xl font-serif font-bold">Compete across borders</h1>
         <p className="text-slate-400">
           Inter-school and inter-country contests are opening soon — weekly challenges first,
