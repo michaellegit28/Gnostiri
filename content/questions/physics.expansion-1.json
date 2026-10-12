@@ -1,0 +1,1144 @@
+[
+ {
+  "id": "exp1-mechanics-q1",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A car accelerates uniformly from rest to 24 m/s in 8 s. Its acceleration is",
+  "options": [
+   "3 m/s²",
+   "192 m/s²",
+   "0.33 m/s²",
+   "16 m/s²"
+  ],
+  "correctAnswer": "3 m/s²",
+  "explanation": "a = (v − u)/t = (24 − 0)/8 = 3 m/s². The answer 192 multiplies speed by time; 0.33 inverts the division.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q2",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A resultant force of 20 N acts on a body of mass 5 kg. Its acceleration is",
+  "options": [
+   "4 m/s²",
+   "100 m/s²",
+   "0.25 m/s²",
+   "15 m/s²"
+  ],
+  "correctAnswer": "4 m/s²",
+  "explanation": "Newton's second law: a = F/m = 20/5 = 4 m/s². The answer 100 multiplies instead of dividing; 0.25 inverts the fraction.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q3",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A crate weighs 250 N where g = 10 m/s². Its mass is",
+  "options": [
+   "25 kg",
+   "2500 kg",
+   "2.5 kg",
+   "250 kg"
+  ],
+  "correctAnswer": "25 kg",
+  "explanation": "Weight = mass × g, so mass = W/g = 250/10 = 25 kg. Weight and mass are different quantities — the answer 250 kg treats them as equal.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q4",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A ball is thrown vertically upwards at 30 m/s. Taking g = 10 m/s², the total time before it returns to the thrower is",
+  "options": [
+   "6 s",
+   "3 s",
+   "30 s",
+   "1.5 s"
+  ],
+  "correctAnswer": "6 s",
+  "explanation": "Time up: v = u − gt → 0 = 30 − 10t, so t = 3 s. By symmetry the descent takes the same time: total = 2 × 3 = 6 s. The answer 3 s gives only the ascent — the question asks for the return.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q5",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A 2 kg trolley moving at 3 m/s collides with a stationary 4 kg trolley and they move off together. Their common velocity is",
+  "options": [
+   "1 m/s",
+   "1.5 m/s",
+   "3 m/s",
+   "0.75 m/s"
+  ],
+  "correctAnswer": "1 m/s",
+  "explanation": "Momentum is conserved: before = 2 × 3 = 6 kg m/s; after = (2 + 4)v = 6v. So v = 1 m/s. The answer 1.5 m/s divides by the struck mass only.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q6",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "Which of the following is a vector quantity?",
+  "options": [
+   "speed",
+   "distance",
+   "displacement",
+   "mass"
+  ],
+  "correctAnswer": "displacement",
+  "explanation": "A vector has magnitude AND direction. Displacement carries direction; speed, distance and mass are scalars. Speed is the scalar magnitude of velocity — the classic trap.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q7",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A force of 50 N pushes a box 4 m in the direction of the force. The work done is",
+  "options": [
+   "200 J",
+   "12.5 J",
+   "54 J",
+   "0.08 J"
+  ],
+  "correctAnswer": "200 J",
+  "explanation": "Work = force × distance moved in the force direction = 50 × 4 = 200 J. The answer 12.5 divides instead of multiplying.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q8",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A satellite's orbital radius is raised from r to 4r. The gravitational force on it becomes",
+  "options": [
+   "one-sixteenth of the original",
+   "one-quarter of the original",
+   "one-eighth of the original",
+   "four times the original"
+  ],
+  "correctAnswer": "one-sixteenth of the original",
+  "explanation": "Gravitation follows an inverse-square law: F ∝ 1/r². Doubling r would quarter the force; quadrupling r gives 1/4² = 1/16. The answer one-quarter squares only the 2 in '4r' or halves the distance reasoning.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q9",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A skater decelerates uniformly and stops after coasting 20 m in 4 s. The initial speed was",
+  "options": [
+   "10 m/s",
+   "5 m/s",
+   "80 m/s",
+   "24 m/s"
+  ],
+  "correctAnswer": "10 m/s",
+  "explanation": "For uniform deceleration to rest, average speed = (u + 0)/2, and distance = average speed × time: 20 = (u/2)(4) = 2u, so u = 10 m/s. The answer 5 m/s divides distance by time — that is the AVERAGE speed, not the initial speed.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-mechanics-q10",
+  "domain": "highschool",
+  "topicSlug": "mechanics",
+  "type": "mcq",
+  "questionText": "A ball rolls horizontally off a 20 m cliff at 15 m/s. Taking g = 10 m/s², how long until it lands?",
+  "options": [
+   "2 s",
+   "1.33 s",
+   "4 s",
+   "3 s"
+  ],
+  "correctAnswer": "2 s",
+  "explanation": "Vertical motion is independent of the horizontal speed: h = ½gt² → 20 = 5t² → t² = 4 → t = 2 s. The answer 1.33 divides the horizontal speed by the height — mixing the two independent motions.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q1",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "A wave has a period of 0.02 s. Its frequency is",
+  "options": [
+   "50 Hz",
+   "0.02 Hz",
+   "2 Hz",
+   "500 Hz"
+  ],
+  "correctAnswer": "50 Hz",
+  "explanation": "Frequency = 1/period = 1/0.02 = 50 Hz. The answer 0.02 Hz confuses the two quantities instead of inverting.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q2",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "A ray strikes a plane mirror at 35° to the mirror surface. The angle between the incident ray and the reflected ray is",
+  "options": [
+   "70°",
+   "35°",
+   "145°",
+   "55°"
+  ],
+  "correctAnswer": "70°",
+  "explanation": "Angles are measured from the NORMAL: the incident ray makes 90° − 35° = 55° with the normal. Reflection gives an equal 55° on the other side. Between the rays: 55 + 55 = 110? No — wait: the angle between incident and reflected rays = 55° + 55° = 110°. Hmm — 35° to the SURFACE means 55° to the normal, so the total between the rays is 110°.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "needsCheck": true,
+  "selfCheck": "needsCheck"
+ },
+ {
+  "id": "exp1-waves-q3",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "Which region of the electromagnetic spectrum has the LONGEST wavelength?",
+  "options": [
+   "radio waves",
+   "gamma rays",
+   "X-rays",
+   "ultraviolet"
+  ],
+  "correctAnswer": "radio waves",
+  "explanation": "The spectrum in order of decreasing wavelength: radio, microwave, infrared, visible, ultraviolet, X-rays, gamma. Radio waves are the longest; gamma the shortest.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q4",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "Light travels at 3.0 × 10⁸ m/s in air and 2.0 × 10⁸ m/s in glass. The refractive index of the glass is",
+  "options": [
+   "1.5",
+   "0.67",
+   "1.0 × 10⁸",
+   "3.0"
+  ],
+  "correctAnswer": "1.5",
+  "explanation": "Refractive index = speed in vacuum (air) ÷ speed in medium = 3.0 ÷ 2.0 = 1.5. The answer 0.67 inverts the ratio — an index below 1 is physically impossible.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q5",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "Sound travels at 1500 m/s in water. A 750 Hz underwater sound has a wavelength of",
+  "options": [
+   "2 m",
+   "0.5 m",
+   "1 125 000 m",
+   "1.5 m"
+  ],
+  "correctAnswer": "2 m",
+  "explanation": "λ = v/f = 1500/750 = 2 m. The answer 0.5 inverts; 1 125 000 multiplies without units discipline.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q6",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "A medium has refractive index 1.33. Its critical angle (for glass-to-air style transition) is closest to",
+  "options": [
+   "48.8°",
+   "41.2°",
+   "90°",
+   "33.7°"
+  ],
+  "correctAnswer": "48.8°",
+  "explanation": "sin c = 1/n = 1/1.33 = 0.752, so c = sin⁻¹(0.752) ≈ 48.8°. The answer 41.2° is the complement — it comes from using n instead of 1/n.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q7",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "A water wave passes from deep to shallow water. Its frequency and wavelength change as follows:",
+  "options": [
+   "frequency unchanged; wavelength shorter",
+   "frequency increases; wavelength unchanged",
+   "frequency unchanged; wavelength longer",
+   "both change in proportion"
+  ],
+  "correctAnswer": "frequency unchanged; wavelength shorter",
+  "explanation": "The source sets the frequency — it cannot change at the boundary. The wave SLOWS in shallow water, so λ = v/f falls: shorter wavelength at the same frequency.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q8",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "Two coherent sources interfere at a point where the path difference is 1.5 wavelengths. The point is",
+  "options": [
+   "destructive — an odd number of half-wavelengths",
+   "constructive — paths add up",
+   "silent only if the sources are loud",
+   "constructive — 1.5 is a whole number of waves"
+  ],
+  "correctAnswer": "destructive — an odd number of half-wavelengths",
+  "explanation": "A path difference of 1.5λ = 3 × (λ/2) — an ODD number of half-wavelengths means the waves arrive in antiphase and cancel: destructive interference. Whole wavelengths give constructive.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q9",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "An ultrasound pulse sent straight down returns 0.4 s later (speed in water = 1500 m/s). The sea depth is",
+  "options": [
+   "300 m",
+   "600 m",
+   "3750 m",
+   "150 m"
+  ],
+  "correctAnswer": "300 m",
+  "explanation": "The pulse travels DOWN and BACK: total distance = 1500 × 0.4 = 600 m, so the depth is half: 300 m. The answer 600 m forgets the two-way trip — the classic echo error.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-waves-q10",
+  "domain": "highschool",
+  "topicSlug": "waves-optics",
+  "type": "mcq",
+  "questionText": "An object is placed 15 cm from a converging lens of focal length 10 cm. The image forms at",
+  "options": [
+   "30 cm — real, beyond 2f",
+   "6 cm",
+   "25 cm",
+   "50 cm"
+  ],
+  "correctAnswer": "30 cm — real, beyond 2f",
+  "explanation": "Lens formula: 1/v = 1/f + 1/u (real-is-positive convention) → 1/v = 1/10 − 1/15 = (3 − 2)/30 = 1/30 → v = 30 cm. The object sits between f and 2f, so the image is real, inverted and beyond 2f on the far side.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q1",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A current of 0.5 A flows for 2 minutes. The charge transferred is",
+  "options": [
+   "60 C",
+   "1 C",
+   "240 C",
+   "30 C"
+  ],
+  "correctAnswer": "60 C",
+  "explanation": "Q = I × t = 0.5 × 120 = 60 C. The time must be in SECONDS — the answer 1 C forgets the minute-to-second conversion; 30 divides by 2 instead of multiplying.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q2",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A 6 V battery drives 0.5 A through a resistor. Its resistance is",
+  "options": [
+   "12 Ω",
+   "3 Ω",
+   "0.083 Ω",
+   "6 Ω"
+  ],
+  "correctAnswer": "12 Ω",
+  "explanation": "Ohm's law: R = V/I = 6/0.5 = 12 Ω. The answer 3 Ω multiplies; 0.083 inverts the division.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q3",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "Two 6 Ω resistors are connected in parallel. The combined resistance is",
+  "options": [
+   "3 Ω",
+   "12 Ω",
+   "6 Ω",
+   "0.33 Ω"
+  ],
+  "correctAnswer": "3 Ω",
+  "explanation": "Parallel: 1/R = 1/6 + 1/6 = 2/6, so R = 3 Ω. Equal resistors in parallel simply halve: 6/2 = 3 Ω. The answer 12 Ω treats it as series — parallel is always BELOW the smallest branch.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q4",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A 2 Ω and a 4 Ω resistor in series are connected to a 12 V battery. The voltage across the 4 Ω resistor is",
+  "options": [
+   "8 V",
+   "4 V",
+   "6 V",
+   "12 V"
+  ],
+  "correctAnswer": "8 V",
+  "explanation": "Series: total R = 6 Ω, so I = 12/6 = 2 A. The 4 Ω resistor takes V = IR = 2 × 4 = 8 V. The answer 4 V assigns equal shares — the 4 Ω resistor takes twice the share of the 2 Ω.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q5",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A 100 W lamp burns for 30 s. The energy it uses is",
+  "options": [
+   "3000 J",
+   "3.33 J",
+   "300 J",
+   "130 J"
+  ],
+  "correctAnswer": "3000 J",
+  "explanation": "Energy = power × time = 100 × 30 = 3000 J. The answer 3.33 divides instead of multiplying.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q6",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "An appliance rated 920 W at 230 V should be fitted with a fuse of rating",
+  "options": [
+   "5 A",
+   "3 A",
+   "13 A",
+   "920 A"
+  ],
+  "correctAnswer": "5 A",
+  "explanation": "Working current: I = P/V = 920/230 = 4 A. The fuse should carry the normal current but blow on fault surges: the nearest standard rating ABOVE 4 A is 5 A. The 13 A fuse would never protect it.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q7",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "Which change makes the magnetic field of a solenoid STRONGER?",
+  "options": [
+   "increasing the current and the number of turns",
+   "removing the iron core",
+   "reducing the number of turns",
+   "reversing the current"
+  ],
+  "correctAnswer": "increasing the current and the number of turns",
+  "explanation": "Field strength rises with current and turns per length, and an iron core concentrates it. Reversing the current only flips the poles — the strength is unchanged.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q8",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A transformer steps 240 V down to 12 V. The primary has 500 turns. The secondary has",
+  "options": [
+   "25 turns",
+   "10 000 turns",
+   "50 turns",
+   "12 turns"
+  ],
+  "correctAnswer": "25 turns",
+  "explanation": "Vs/Vp = Ns/Np → 12/240 = Ns/500 → Ns = 500 × 12/240 = 25 turns. A step-DOWN transformer has FEWER secondary turns; the answer 10 000 turns would step the voltage up enormously.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q9",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A wire of length 0.5 m carries 3 A perpendicular to a field of 0.2 T. The force on it is",
+  "options": [
+   "0.3 N",
+   "30 N",
+   "0.033 N",
+   "1.2 N"
+  ],
+  "correctAnswer": "0.3 N",
+  "explanation": "F = BIL = 0.2 × 3 × 0.5 = 0.3 N, directed by Fleming's left hand. The answer 30 is a factor-of-100 slip; 1.2 adds a factor of 2 with no origin.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-elec-q10",
+  "domain": "highschool",
+  "topicSlug": "electricity-magnetism",
+  "type": "mcq",
+  "questionText": "A 2 kW heater runs for 5 hours. The energy sold by the utility is",
+  "options": [
+   "10 kWh",
+   "10 J",
+   "0.4 kWh",
+   "2.5 kWh"
+  ],
+  "correctAnswer": "10 kWh",
+  "explanation": "Energy (kWh) = power (kW) × time (h) = 2 × 5 = 10 kWh. The kWh is a UNIT OF ENERGY — multiplying watts by hours without converting gives the commercial unit directly.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q1",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "Convert 47 °C to kelvin.",
+  "options": [
+   "320 K",
+   "220 K",
+   "47 K",
+   "273 K"
+  ],
+  "correctAnswer": "320 K",
+  "explanation": "K = °C + 273 = 47 + 273 = 320 K. The answer 220 SUBTRACTS — kelvin is always the larger number for positive Celsius.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q2",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "Which method of heat transfer requires NO material medium?",
+  "options": [
+   "radiation",
+   "conduction",
+   "convection",
+   "evaporation"
+  ],
+  "correctAnswer": "radiation",
+  "explanation": "Radiation travels as electromagnetic waves — through the vacuum of space, which is how the Sun's energy reaches Earth. Conduction and convection both need particles.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q3",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "A metal railing feels colder than a wooden bench in the same room because metal",
+  "options": [
+   "conducts heat away from the hand faster",
+   "is at a lower temperature",
+   "is always colder at night",
+   "has a lower density"
+  ],
+  "correctAnswer": "conducts heat away from the hand faster",
+  "explanation": "Both are at ROOM TEMPERATURE — a thermometer proves it. Metal's high conductivity drains heat from the hand quickly, which the skin senses as 'cold'. Temperature and heat FLOW are different things.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q4",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "How much energy raises 500 g of water by 10 °C? (c = 4.2 J/g °C)",
+  "options": [
+   "21 000 J",
+   "210 J",
+   "210 000 J",
+   "4200 J"
+  ],
+  "correctAnswer": "21 000 J",
+  "explanation": "Q = mcΔT = 500 × 4.2 × 10 = 21 000 J. The answer 210 000 is a factor-of-10 slip on the mass or temperature; 210 drops a factor of 100.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q5",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "A vacuum between the walls of a flask keeps drinks hot because the vacuum",
+  "options": [
+   "blocks conduction AND convection",
+   "blocks radiation",
+   "generates heat to replace losses",
+   "lowers the drink's boiling point"
+  ],
+  "correctAnswer": "blocks conduction AND convection",
+  "explanation": "Conduction needs contact; convection needs a moving fluid — a vacuum denies both. The SILVERED walls handle the third channel by reflecting radiation. All three transfer routes must be answered together.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q6",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "During the day, a sea breeze blows from sea to land because",
+  "options": [
+   "land heats faster than the sea, and the rising land air draws cooler air in from the sea",
+   "the sea is warmer than the land in the day",
+   "the land's higher pressure pushes air seaward",
+   "cool air always sinks toward water"
+  ],
+  "correctAnswer": "land heats faster than the sea, and the rising land air draws cooler air in from the sea",
+  "explanation": "Land's lower heat capacity means it warms faster; warm air over the land rises, lowering surface pressure, and cooler sea air flows in to replace it — the sea breeze. At night the flow reverses.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q7",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "A gas at 300 K and 100 kPa is heated to 450 K at constant volume. Its new pressure is",
+  "options": [
+   "150 kPa",
+   "66.7 kPa",
+   "200 kPa",
+   "75 kPa"
+  ],
+  "correctAnswer": "150 kPa",
+  "explanation": "Pressure law: P/T = constant → P₂ = 100 × (450/300) = 150 kPa. The answer 66.7 inverts the temperature ratio.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q8",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "0.5 kg of water at 80 °C is mixed with 0.5 kg at 20 °C. Ignoring losses, the final temperature is",
+  "options": [
+   "50 °C",
+   "40 °C",
+   "60 °C",
+   "65 °C"
+  ],
+  "correctAnswer": "50 °C",
+  "explanation": "Equal masses of the SAME liquid: the heat lost by the hot half equals the heat gained by the cold half, and with equal masses the final temperature sits exactly midway: (80 + 20)/2 = 50 °C. The answer 65 °C weights the hot side without reason.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q9",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "Evaporation cools the remaining liquid because",
+  "options": [
+   "the most energetic molecules escape, lowering the average kinetic energy",
+   "the liquid loses mass only",
+   "heat flows in from the surroundings",
+   "the vapour is colder than the liquid"
+  ],
+  "correctAnswer": "the most energetic molecules escape, lowering the average kinetic energy",
+  "explanation": "Temperature measures AVERAGE kinetic energy. Evaporation selectively removes the fastest molecules at the surface, so the average — and the temperature — of what remains falls.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-thermo-q10",
+  "domain": "highschool",
+  "topicSlug": "thermodynamics",
+  "type": "mcq",
+  "questionText": "Steam at 100 °C scalds more severely than the same mass of water at 100 °C because the steam",
+  "options": [
+   "releases its latent heat of condensation on the skin",
+   "has a higher temperature",
+   "contains more heat per degree",
+   "moves faster"
+  ],
+  "correctAnswer": "releases its latent heat of condensation on the skin",
+  "explanation": "Both are at 100 °C — the temperature is the same. Condensing 0.1 kg of steam releases L = 0.1 × 2.26 MJ ≈ 226 kJ EXTRA before the liquid even starts to cool. Latent heat is the entire difference.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q1",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "Which isotope is used to date once-living organic remains?",
+  "options": [
+   "carbon-14",
+   "uranium-238",
+   "potassium-40",
+   "cobalt-60"
+  ],
+  "correctAnswer": "carbon-14",
+  "explanation": "Living things absorb carbon (including C-14) continuously; after death the C-14 decays with a half-life of about 5 700 years — the residual fraction dates the remains. U-238 dates ROCKS on far longer timescales.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q2",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "Gamma radiation consists of",
+  "options": [
+   "electromagnetic waves with no mass and no charge",
+   "fast electrons",
+   "helium nuclei",
+   "slow neutrons"
+  ],
+  "correctAnswer": "electromagnetic waves with no mass and no charge",
+  "explanation": "Gamma is the nucleus's excess energy emitted as a high-frequency electromagnetic wave — no particles, so no deflection in electric or magnetic fields. Fast electrons are beta; helium nuclei are alpha.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q3",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "After 4 half-lives, the fraction of a radioactive sample remaining is",
+  "options": [
+   "1/16",
+   "1/4",
+   "1/8",
+   "1/32"
+  ],
+  "correctAnswer": "1/16",
+  "explanation": "Each half-life halves the sample: 1 → 1/2 → 1/4 → 1/8 → 1/16. Four halvings = (1/2)⁴.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q4",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "Uranium-238 decays by emitting an alpha particle. The daughter nucleus has mass number",
+  "options": [
+   "234",
+   "236",
+   "240",
+   "238"
+  ],
+  "correctAnswer": "234",
+  "explanation": "An alpha particle carries away 2 protons + 2 neutrons = mass number 4: 238 − 4 = 234 (and the atomic number falls by 2). The mass number must DROP by exactly 4 in alpha decay.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q5",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "Radioactive waste is stored under water or behind thick lead because",
+  "options": [
+   "these absorb the penetrating gamma radiation",
+   "they cool the material to zero activity",
+   "water neutralises the nuclei chemically",
+   "they speed up the decay"
+  ],
+  "correctAnswer": "these absorb the penetrating gamma radiation",
+  "explanation": "Gamma needs dense, thick absorbers — water and lead both attenuate it (and water also moderates neutrons and cools). Nothing you do changes the half-life: shielding protects people, it does not stop decay.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q6",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "A source has an initial activity of 800 Bq and a half-life of 2 hours. Its activity after 6 hours is",
+  "options": [
+   "100 Bq",
+   "400 Bq",
+   "200 Bq",
+   "266 Bq"
+  ],
+  "correctAnswer": "100 Bq",
+  "explanation": "6 hours = 3 half-lives: 800 → 400 → 200 → 100 Bq. The answer 266 divides by 3 instead of halving — activity decays GEOMETRICALLY, not linearly.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q7",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "In the photoelectric effect, increasing the LIGHT INTENSITY while staying below the threshold frequency",
+  "options": [
+   "still ejects no electrons",
+   "ejects more electrons",
+   "ejects faster electrons",
+   "lowers the threshold"
+  ],
+  "correctAnswer": "still ejects no electrons",
+  "explanation": "Each photon must ALONE carry at least the work function energy (E = hf). Below threshold, more photons per second still means every individual photon is too weak — intensity cannot substitute for frequency. This is the quantum evidence.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed",
+  "editorialNote": "difficulty label adjusted from medium to hard during self-check to meet the 3E/4M/3H format; flagged here rather than adjusted silently"
+ },
+ {
+  "id": "exp1-nuclear-q8",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "A nuclear reactor sustains its chain reaction by",
+  "options": [
+   "moderators slowing neutrons so they cause further fissions",
+   "absorbing all neutrons in the control rods",
+   "fusing fuel pellets together",
+   "venting neutrons to the air"
+  ],
+  "correctAnswer": "moderators slowing neutrons so they cause further fissions",
+  "explanation": "Fission neutrons are too fast to be captured reliably; the moderator (water/graphite) slows them to thermal speeds so U-235 captures them and splits again. Control rods ABSORB excess neutrons — they regulate, they do not sustain.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q9",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "Which pair of quantities is conserved in EVERY nuclear decay equation?",
+  "options": [
+   "total mass number and total charge (proton number)",
+   "volume and temperature",
+   "electron count and isotope name",
+   "activity and half-life"
+  ],
+  "correctAnswer": "total mass number and total charge (proton number)",
+  "explanation": "Decay equations balance because nucleon number and proton number are conserved: the sums of the top and bottom numbers are equal on both sides. That balance is how daughter nuclei are identified.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-nuclear-q10",
+  "domain": "highschool",
+  "topicSlug": "nuclear-quantum-physics",
+  "type": "mcq",
+  "questionText": "The energy released in nuclear reactions ultimately comes from",
+  "options": [
+   "the conversion of a small amount of mass, E = mc²",
+   "the electrons orbiting the nucleus",
+   "chemical bonds breaking",
+   "the kinetic energy of the fuel"
+  ],
+  "correctAnswer": "the conversion of a small amount of mass, E = mc²",
+  "explanation": "The products weigh slightly LESS than the reactants — the missing mass appears as energy: E = mc². Chemical bonds are millions of times weaker per event; the electrons are spectators in nuclear processes.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q1",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "In simple harmonic motion, the speed of the oscillator is maximum",
+  "options": [
+   "at the equilibrium position",
+   "at maximum displacement",
+   "halfway between centre and amplitude",
+   "nowhere — the speed is constant"
+  ],
+  "correctAnswer": "at the equilibrium position",
+  "explanation": "In SHM the restoring force (and acceleration) is zero at equilibrium — like a swing passing its lowest point. All the energy there is kinetic: speed peaks at the centre and is momentarily zero at the amplitudes.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q2",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "If a pendulum's length is quadrupled, its period",
+  "options": [
+   "doubles",
+   "quadruples",
+   "halves",
+   "is unchanged"
+  ],
+  "correctAnswer": "doubles",
+  "explanation": "T = 2π√(L/g): the period scales with √L. Quadrupling L multiplies √L by 2 — the period doubles, not quadruples (the square root is the trap).",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q3",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "The SI unit of angular frequency ω is",
+  "options": [
+   "radians per second",
+   "hertz",
+   "metres per second",
+   "newton-metres"
+  ],
+  "correctAnswer": "radians per second",
+  "explanation": "ω = 2πf measures the angle swept per second — radians per second. Hertz is ORDINARY frequency f (cycles per second); the 2π bridges them.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q4",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "Damping affects an oscillating system by",
+  "options": [
+   "removing energy, so the amplitude decays over time",
+   "increasing the frequency steadily",
+   "shifting the equilibrium position",
+   "making the period grow without limit"
+  ],
+  "correctAnswer": "removing energy, so the amplitude decays over time",
+  "explanation": "Dissipative forces (friction, drag) drain the oscillation's energy: the amplitude decays toward zero while the period stays approximately set by the system — damping changes the SIZE of the swing, not the clock.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q5",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "Coulomb's law: if the distance between two point charges is tripled, the force between them",
+  "options": [
+   "falls to one-ninth",
+   "falls to one-third",
+   "triples",
+   "is unchanged"
+  ],
+  "correctAnswer": "falls to one-ninth",
+  "explanation": "F ∝ 1/r²: tripling the distance gives 1/3² = 1/9 of the force. The answer one-third forgets the SQUARE in the inverse-square law.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q6",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "Two like charges are pushed closer together. Their electric potential energy",
+  "options": [
+   "increases — work is done against the repulsion",
+   "decreases — they want to be close",
+   "stays constant",
+   "becomes negative"
+  ],
+  "correctAnswer": "increases — work is done against the repulsion",
+  "explanation": "Like charges repel; pushing them together means doing work AGAINST that repulsion, which is stored as increased potential energy — like compressing a spring. Release them and the stored energy becomes kinetic.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q7",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "A satellite's escape speed from a planet depends on",
+  "options": [
+   "the planet's mass and radius only",
+   "the mass of the escaping object",
+   "the direction of launch only",
+   "the object's engine power"
+  ],
+  "correctAnswer": "the planet's mass and radius only",
+  "explanation": "Setting kinetic energy equal to the gravitational potential from the surface: v = √(2GM/R) — the object's mass cancels. A feather and a rocket need the same escape speed from the same planet.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q8",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "A 200 µF capacitor is charged to 25 V. The charge stored is",
+  "options": [
+   "5 mC",
+   "8 mC",
+   "0.05 C",
+   "5 C"
+  ],
+  "correctAnswer": "5 mC",
+  "explanation": "Q = CV = 200 × 10⁻⁶ × 25 = 5 × 10⁻³ C = 5 mC. The micro prefix (10⁻⁶) is the trap — skipping it gives 5 C, a physically absurd charge for a small capacitor.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q9",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "The field lines of two opposite charges placed near each other",
+  "options": [
+   "run from the positive to the negative charge, and never cross",
+   "run from negative to positive",
+   "cross midway between the charges",
+   "form closed circles around each charge"
+  ],
+  "correctAnswer": "run from the positive to the negative charge, and never cross",
+  "explanation": "Field lines point away from positive and into negative charge, and they never cross — at a crossing the field would need two directions at once, which is impossible. Closed circles describe magnetic fields, not electric.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "exp1-fmech-q10",
+  "domain": "highschool",
+  "topicSlug": "further-mechanics-fields",
+  "type": "mcq",
+  "questionText": "Compared with a geostationary satellite, a satellite in LOW Earth orbit",
+  "options": [
+   "moves faster, because a smaller orbital radius demands a higher orbital speed",
+   "moves slower, because it is closer to Earth",
+   "has the same speed — gravity is constant",
+   "must orbit above the equator"
+  ],
+  "correctAnswer": "moves faster, because a smaller orbital radius demands a higher orbital speed",
+  "explanation": "Orbital speed v = √(GM/r): smaller r means larger v. Low-orbit satellites circle in ~90 minutes versus 24 hours for geostationary — closer in, faster around. Only the geostationary orbit requires the equatorial plane.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ }
+]
