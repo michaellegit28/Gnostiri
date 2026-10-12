@@ -402,6 +402,11 @@ model CourseLesson {
   content          Json
   orderIndex       Int      @default(0)
   estimatedMinutes Int      @default(10)
+  // Content governance: every seeded lesson starts as draft until a human
+  // signs it off. needsCheck marks anything the author was not certain of.
+  reviewStatus     String   @default("needs-human-review") // needs-human-review | draft | verified
+  needsCheck       Boolean  @default(false)
+  @@index([courseId])
 }
 
 model Certificate {
@@ -666,6 +671,8 @@ model AssessmentItem {
   orderIndex    Int      @default(0)
   isPublished   Boolean  @default(true)
   difficulty    String   @default("medium")
+  reviewStatus  String   @default("needs-human-review") // needs-human-review | draft | verified
+  needsCheck    Boolean  @default(false)
   sessions      AssessmentSession[] @relation("ItemSessions")
   @@index([courseId])
   @@index([caseId])

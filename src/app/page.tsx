@@ -1,19 +1,19 @@
 import Link from "next/link";
 import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
 import prisma from "@/lib/db";
+import { allTopicSlugs } from "@/lib/curriculum";
 import CountrySelector from "@/components/CountrySelector";
 import HomeDashboard from "@/components/HomeDashboard";
 import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
 import DarkVeil from "@/components/effects/DarkVeil";
 import TechText from "@/components/effects/TechText";
-import FlexCarousel from "@/components/effects/FlexCarousel";
 import GhostFibers from "@/components/effects/GhostFibers";
 
 export default async function Home() {
   const domainCards = [
     {
       title: "High School",
-      description: "Whatever your country's system — master its subjects and ace its examinations.",
+      description: "WAEC, JAMB & NECO, more exams coming — master its subjects and ace its examinations.",
       numeral: "I",
       rule: "via-teal-400/60",
       badge: "Free Forever",
@@ -29,7 +29,7 @@ export default async function Home() {
       description: "Deep dive into degree-level coursework, technical modules, and research.",
       numeral: "II",
       rule: "via-[#D4AF37]/60",
-      badge: "From $3/mo",
+      badge: "Coming soon",
       badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
       link: "/university",
       icon: GraduationCap,
@@ -70,36 +70,6 @@ export default async function Home() {
     },
   ];
 
-  const showcase = [
-    {
-      title: "High School",
-      caption: "Any country's system — free lessons and practice questions.",
-      href: "/highschool",
-      badge: "Free Forever",
-      gradient: "bg-gradient-to-br from-teal-950 via-slate-900 to-slate-900",
-    },
-    {
-      title: "University",
-      caption: "Degree-level courses, quizzes and certificates.",
-      href: "/university",
-      badge: "From $3/mo",
-      gradient: "bg-gradient-to-br from-amber-950/70 via-slate-900 to-slate-900",
-    },
-    {
-      title: "Extras",
-      caption: "Certifications, practical skills and electives.",
-      href: "/discovery",
-      badge: "Free",
-      gradient: "bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950",
-    },
-    {
-      title: "AI Tutor",
-      caption: "Ask anything — explanations, examples and study plans.",
-      href: "/tutor",
-      badge: "New",
-      gradient: "bg-gradient-to-br from-[#2a230f] via-slate-900 to-slate-950",
-    },
-  ];
 
   // Live stats — sequential queries (pooler-safe) with graceful fallback:
   // if the database is unreachable during prerender, the band hides
@@ -109,7 +79,7 @@ export default async function Home() {
   let regionCount = 0;
   try {
     examCount = await prisma.examination.count({ where: { domain: "highschool" } });
-    topicCount = await prisma.topic.count({ where: { isPublished: true } });
+    topicCount = await prisma.topic.count({ where: { isPublished: true, slug: { in: allTopicSlugs() } } });
     const regionRows: { country: string | null }[] = await prisma.examination.findMany({
       where: { domain: "highschool" },
       select: { country: true },
@@ -126,7 +96,7 @@ export default async function Home() {
   const stats = [
     { value: `${examCount}`, label: "Examination systems" },
     { value: `${regionCount}`, label: "Regions covered" },
-    { value: `${topicCount}+`, label: "Topics and counting" },
+    { value: `${topicCount}`, label: "Topics" },
   ];
   const showStats = examCount + topicCount + regionCount > 0;
 
@@ -137,16 +107,31 @@ export default async function Home() {
         <div className="flex items-center gap-2">
           <GnostiriLogo />
         </div>
-        <nav className="flex items-center gap-4">
+        <div className="hidden md:block">
+          <CountrySelector />
+        </div>
+        <nav aria-label="Primary" className="flex items-center gap-2 sm:gap-4">
           <Link
             href="/highschool"
-            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
             Explore
           </Link>
           <Link
+            href="/university"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          >
+            University
+          </Link>
+          <Link
+            href="/tutor"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          >
+            Tutor
+          </Link>
+          <Link
             href="/progress"
-            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center text-sm text-slate-300 hover:text-white transition-colors"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
             Progress
           </Link>
@@ -154,7 +139,7 @@ export default async function Home() {
             href="/login"
             className="px-5 py-2.5 min-h-[48px] inline-flex items-center text-sm font-medium rounded-lg bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
           >
-            Get Started
+            Sign up free
           </Link>
         </nav>
       </header>
@@ -240,28 +225,32 @@ export default async function Home() {
         </section>
         )}
 
-        {/* Showcase — FlexCarousel */}
-        <section className="w-full space-y-6">
-          <div className="text-center space-y-3">
-            <h2 className="text-3xl font-serif font-bold text-slate-100">Explore Gnostiri</h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              Tap a card to step inside each learning world.
-            </p>
-          </div>
-          <FlexCarousel
-            items={showcase}
-            preset="liquid"
-            intro="rise"
-            fit="natural"
-            cardHeight={0.6}
-            gap={16}
-            radius={8}
-            squeeze={0.15}
-            focusOnClick={true}
-            captions={true}
-            autoplay={true}
-            interval={5}
-          />
+        {/* AI Tutor — slim banner (domain cards below carry each world exactly once) */}
+        <section aria-label="AI Tutor" className="w-full">
+          <Link
+            href="/tutor"
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-r from-[#2a230f] via-slate-900 to-slate-950 p-6 md:p-8 transition-colors hover:border-[#D4AF37]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
+                <Sparkles className="w-6 h-6 text-[#D4AF37]" />
+              </div>
+              <div>
+                <p className="font-serif text-xl font-bold text-slate-100">
+                  Ask the AI Tutor{" "}
+                  <span className="ml-2 align-middle font-sans text-xs font-semibold px-3 py-1 rounded-full border bg-amber-500/10 text-amber-400 border-amber-500/20">
+                    New
+                  </span>
+                </p>
+                <p className="text-slate-400 text-sm mt-1">
+                  Explanations, examples and study plans.
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm whitespace-nowrap">
+              Try the Tutor →
+            </span>
+          </Link>
         </section>
 
         {/* Domain Cards Section — the three doorways */}
@@ -407,7 +396,7 @@ export default async function Home() {
             Learning is not a place. It is a posture toward the world.
           </p>
           <p className="text-xs text-slate-500">
-            © {new Date().getFullYear()} Gnostiri. All fields open, all doors unlocked.
+            © {new Date().getFullYear()} Gnostiri. High School is free, forever.
           </p>
         </div>
       </footer>

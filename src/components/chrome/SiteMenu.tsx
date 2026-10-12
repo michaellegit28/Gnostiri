@@ -32,6 +32,7 @@ const GROUPS: { label: string; links: { href: string; title: string; note: strin
 
 export default function SiteMenu() {
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -51,6 +52,25 @@ export default function SiteMenu() {
     };
   }, [open ]);
 
+  // Hide on scroll-down, reveal on scroll-up (never hides while open).
+  // The 48px hit area is preserved for touch targets; only the icon shrinks.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setHidden(y > 160 && y > lastY && !open);
+        lastY = y;
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open ]);
+
   return (
     <>
       <button
@@ -58,14 +78,14 @@ export default function SiteMenu() {
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="fixed top-4 right-4 z-[70] flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/15 bg-slate-950/80 backdrop-blur-md text-slate-200 hover:border-[#D4AF37]/60 hover:text-white transition-colors"
+        className={`fixed top-6 right-4 z-[70] flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/15 bg-slate-950/80 backdrop-blur-md text-slate-200 hover:border-[#D4AF37]/60 hover:text-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${hidden && !open ? "-translate-y-28 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}
       >
         {open ? (
-          <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M6 6l12 12M18 6L6 18" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M4 7h16M4 12h16M4 17h10" />
           </svg>
         )}

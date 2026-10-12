@@ -32,6 +32,13 @@ body {
   background-attachment: fixed;
 }
 
+/* Floating-chrome clearance: keep page ends above the fixed Tutor pill (mobile) */
+@media (max-width: 640px) {
+  body {
+    padding-bottom: 5.5rem;
+  }
+}
+
 /* Curriculum Alignment Engine — RTL + low-bandwidth helpers (Phase 6) */
 [dir="rtl"] { text-align: right; }
 [dir="rtl"] .ltr-flip { transform: scaleX(-1); }
