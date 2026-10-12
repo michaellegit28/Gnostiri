@@ -6,6 +6,7 @@ import { DomainProvider } from "@/context/DomainContext";
 import ServiceWorker from "@/components/ServiceWorker";
 import SiteMenu from "@/components/chrome/SiteMenu";
 import TutorPill from "@/components/chrome/TutorPill";
+import LiteModeToggle from "@/components/chrome/LiteModeToggle";
 
 const display = Sora({
   subsets: ["latin"],
@@ -43,6 +44,10 @@ export default function RootLayout({
           <DomainProvider>
             <SiteMenu />
             {children}
+            <footer className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-6">
+              <p className="text-xs text-slate-500">Gnostiri — text-only Lite Mode hides heavy media.</p>
+              <LiteModeToggle />
+            </footer>
             <TutorPill />
           </DomainProvider>
         </AuthProvider>

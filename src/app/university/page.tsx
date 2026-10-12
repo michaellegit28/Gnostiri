@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/server-auth";
 import { hasPremiumAccess } from "@/lib/entitlements";
 import { UNIVERSITY_OPEN } from "@/lib/access";
 import { GraduationCap, Sparkles, ArrowRight, BookOpen, Brain, Trophy } from "lucide-react";
+import WaitlistForm from "@/components/university/WaitlistForm";
 
 export const dynamic = "force-dynamic";
 
@@ -49,18 +50,22 @@ export default async function UniversityPage() {
     }),
   ]);
 
-  const totalConcepts = courses.reduce((s, c) => s + c.concepts.length, 0);
   const totalLessons = courses.reduce((s, c) => s + c.lessons.length, 0);
-  const totalMinutes = courses.reduce(
-    (s, c) => s + c.lessons.reduce((a, l) => a + l.estimatedMinutes, 0),
-    0
-  );
 
+  const liveFaculties = faculties.filter(
+    (f) =>
+      f.programmes.length > 0 ||
+      f.courses.some((c) => c.lessons.length > 0)
+  );
+  const comingFaculties = faculties.filter(
+    (f) =>
+      f.programmes.length === 0 && f.courses.every((c) => c.lessons.length === 0)
+  );
   const stats = [
-    { value: `${faculties.length}`, label: "Faculties" },
-    { value: `${courses.length}`, label: "Courses" },
-    { value: `${totalConcepts}`, label: "Concept nodes" },
-    { value: `${Math.max(1, Math.round(totalMinutes / 60))}`, label: "Hours of depth" },
+    { value: `${faculties.length}`, label: faculties.length === 1 ? "Faculty" : "Faculties" },
+    { value: `${programmes.length}`, label: programmes.length === 1 ? "Programme" : "Programmes" },
+    { value: `${courses.length}`, label: courses.length === 1 ? "Course" : "Courses" },
+    { value: `${totalLessons}`, label: totalLessons === 1 ? "Lesson" : "Lessons" },
   ];
 
   return (
@@ -78,7 +83,7 @@ export default async function UniversityPage() {
               Study at <span className="text-[#D4AF37]">degree depth.</span>
             </h1>
             <p className="text-slate-300 text-base md:text-lg max-w-2xl leading-relaxed">
-              Thirteen faculties. One concept map. Every course is built on a spine of
+              {faculties.length} {faculties.length === 1 ? "faculty" : "faculties"}. One concept map. Every course is built on a spine of
               connected concepts with clinical correlation, OSCE-grade skills, and a
               verified competency transcript — not a completion badge.
             </p>
@@ -91,10 +96,10 @@ export default async function UniversityPage() {
               </Link>
               {!premium && (
                 <Link
-                  href="/pricing"
-                  className="inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl border border-slate-600 text-slate-200 font-semibold text-sm hover:border-[#D4AF37]/60 hover:text-white transition-colors"
+                  href="#waitlist"
+                  className="inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl border border-slate-600 text-slate-200 font-semibold text-sm hover:border-[#D4AF37]/60 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
                 >
-                  Unlock Premium
+                  Join the waitlist
                 </Link>
               )}
             </div>
@@ -117,20 +122,16 @@ export default async function UniversityPage() {
         </header>
 
         {!premium && (
-          <aside className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.07] p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <aside id="waitlist" className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.07] p-6 md:p-8 space-y-5 scroll-mt-24">
             <div>
-              <strong className="text-amber-300">Unlock every course</strong>
-              <p className="text-slate-300 mt-1 text-sm">
-                Premium includes all university lessons, concept mastery tracking, quizzes,
-                certificates, and unlimited AI Tutor access.
+              <strong className="text-amber-300 font-serif text-xl">Gnostiri Premium — coming soon</strong>
+              <p className="text-slate-300 mt-2 text-sm max-w-2xl">
+                All university lessons, concept mastery tracking, and quizzes — plus
+                completion certificates and unlimited AI Tutor access (both coming soon).
+                Payments aren&apos;t live yet, so reserve your place instead.
               </p>
             </div>
-            <Link
-              href="/pricing"
-              className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-amber-500 px-6 py-3 font-semibold text-slate-950 text-sm whitespace-nowrap"
-            >
-              View plans
-            </Link>
+            <WaitlistForm />
           </aside>
         )}
 
@@ -150,15 +151,20 @@ export default async function UniversityPage() {
                 anywhere in the world.
               </p>
               {standards.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {standards.map((s) => (
-                    <span
-                      key={`${s.authority}-${s.editionYear}`}
-                      className="text-[11px] font-medium text-slate-300 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full"
-                    >
-                      {s.authority} · {s.editionYear}
-                    </span>
-                  ))}
+                <div className="space-y-2 pt-2">
+                  <div className="flex flex-wrap gap-2">
+                    {standards.map((s) => (
+                      <span
+                        key={`${s.authority}-${s.editionYear}`}
+                        className="text-[11px] font-medium text-slate-300 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full"
+                      >
+                        {s.authority} · {s.editionYear}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500">
+                    Aligned with, not accredited by, these standards.
+                  </p>
                 </div>
               )}
             </div>
@@ -204,14 +210,14 @@ export default async function UniversityPage() {
         <section className="space-y-8">
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
-              The thirteen faculties
+              {faculties.length === 13 ? "The thirteen faculties" : "Our faculties"}
             </p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold">
               A whole university, structured.
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {faculties.map((f) => {
+            {liveFaculties.map((f) => {
               const lessonTotal = f.courses.reduce(
                 (s, c) => s + c.lessons.length,
                 0
@@ -242,6 +248,12 @@ export default async function UniversityPage() {
               );
             })}
           </div>
+          {comingFaculties.length > 0 && (
+            <p className="text-sm text-slate-400">
+              <span className="font-semibold text-slate-300">Coming soon: </span>
+              {comingFaculties.map((f) => f.name).join(" · ")}
+            </p>
+          )}
         </section>
 
         {/* Courses */}
@@ -264,7 +276,7 @@ export default async function UniversityPage() {
                   className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-slate-900/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 hover:shadow-xl hover:shadow-amber-500/5"
                 >
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-3">
                       <span className="font-mono text-xs tracking-[0.15em] text-[#D4AF37]">
                         {course.code || course.department}
                       </span>
@@ -294,12 +306,21 @@ export default async function UniversityPage() {
                       {course.credits != null && <span>· {course.credits} credits</span>}
                     </div>
                   </div>
-                  <Link
-                    href={`/university/${course.slug}`}
-                    className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl bg-white/5 border border-white/15 px-5 py-3 font-semibold text-sm text-slate-100 group-hover:bg-[#D4AF37] group-hover:text-slate-950 group-hover:border-[#D4AF37] transition-colors"
-                  >
-                    {premium ? "Open course" : "Preview course"}
-                  </Link>
+                  {course.lessons.length === 0 ? (
+                    <span
+                      aria-disabled="true"
+                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-700 px-5 py-3 font-semibold text-sm text-slate-500 cursor-not-allowed"
+                    >
+                      {course.concepts.length > 0 ? "Concepts only" : "Coming soon"}
+                    </span>
+                  ) : (
+                    <Link
+                      href={`/university/${course.slug}`}
+                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl bg-white/5 border border-white/15 px-5 py-3 font-semibold text-sm text-slate-100 group-hover:bg-[#D4AF37] group-hover:text-slate-950 group-hover:border-[#D4AF37] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                    >
+                      {premium ? "Open course" : "Preview course"}
+                    </Link>
+                  )}
                 </article>
               ))}
             </div>

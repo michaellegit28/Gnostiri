@@ -55,6 +55,8 @@ export default function ProgressPage() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [fetching, setFetching] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
+  const [authTimedOut, setAuthTimedOut] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -77,7 +79,16 @@ export default function ProgressPage() {
           setFetching(false);
         });
     }
-  }, [user, activeTab]);
+  }, [user, activeTab, retryKey]);
+
+  useEffect(() => {
+    if (!loading) {
+      setAuthTimedOut(false);
+      return;
+    }
+    const timer = setTimeout(() => setAuthTimedOut(true), 8000);
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -98,8 +109,9 @@ export default function ProgressPage() {
     }
   };
 
-  // 1. Loading state
-  if (loading) {
+  // 1. Loading state — capped at 8s; a stuck auth check degrades to the
+  // sign-in card (with retry) instead of an endless spinner.
+  if (loading && !authTimedOut) {
     return (
       <div className="min-h-screen bg-transparent text-slate-50 flex items-center justify-center p-6">
         <div className="flex items-center gap-3 text-slate-400">
@@ -110,8 +122,8 @@ export default function ProgressPage() {
     );
   }
 
-  // 2. Unauthenticated state
-  if (!user) {
+  // 2. Unauthenticated (or auth-timed-out) state — always a way forward.
+  if (!user || authTimedOut) {
     return (
       <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12 flex items-center justify-center">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6 shadow-xl">
@@ -119,9 +131,11 @@ export default function ProgressPage() {
             <LogIn className="w-8 h-8" />
           </div>
           <div className="space-y-2">
-            <h1 className="text-2xl font-serif font-bold text-slate-100">Sign in required</h1>
+            <h1 className="text-2xl font-serif font-bold text-slate-100">{authTimedOut ? "Taking too long?" : "Sign in required"}</h1>
             <p className="text-slate-400 text-sm">
-              Please sign in to view your personalized learning progress, weak topics analysis, and quiz attempt history.
+              {authTimedOut
+                ? "Sign-in is taking too long. Check your connection, then retry — or continue to sign in."
+                : "Please sign in to view your personalized learning progress, weak topics analysis, and quiz attempt history."}
             </p>
           </div>
           <div>
@@ -132,6 +146,15 @@ export default function ProgressPage() {
               <span>Sign in or create an account</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+            {authTimedOut && (
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="mt-3 inline-flex min-h-[48px] w-full items-center justify-center rounded-xl border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              >
+                Retry
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -158,8 +181,10 @@ export default function ProgressPage() {
         {/* Domain Switcher Tabs */}
         <div className="flex border-b border-slate-800 gap-2 overflow-x-auto">
           <button
+            type="button"
+            aria-pressed={activeTab === "highschool"}
             onClick={() => setActiveTab("highschool")}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
+            className={`flex min-h-[48px] items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
               activeTab === "highschool"
                 ? "border-amber-500 text-amber-400 bg-amber-500/5"
                 : "border-transparent text-slate-400 hover:text-slate-200"
@@ -170,8 +195,10 @@ export default function ProgressPage() {
           </button>
 
           <button
+            type="button"
+            aria-pressed={activeTab === "university"}
             onClick={() => setActiveTab("university")}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
+            className={`flex min-h-[48px] items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
               activeTab === "university"
                 ? "border-amber-500 text-amber-400 bg-amber-500/5"
                 : "border-transparent text-slate-400 hover:text-slate-200"
@@ -182,8 +209,10 @@ export default function ProgressPage() {
           </button>
 
           <button
+            type="button"
+            aria-pressed={activeTab === "extras"}
             onClick={() => setActiveTab("extras")}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
+            className={`flex min-h-[48px] items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
               activeTab === "extras"
                 ? "border-amber-500 text-amber-400 bg-amber-500/5"
                 : "border-transparent text-slate-400 hover:text-slate-200"
@@ -198,13 +227,24 @@ export default function ProgressPage() {
         {
           <div className="space-y-10">
             {fetching ? (
-              <div className="flex items-center justify-center py-12 text-slate-400 gap-3">
-                <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
-                <span>Loading your High School performance data...</span>
+              <div role="status" aria-busy="true" aria-label="Loading performance data" className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="h-24 animate-pulse rounded-xl border border-white/10 bg-white/[0.04]" />
+                  <div className="h-24 animate-pulse rounded-xl border border-white/10 bg-white/[0.04]" />
+                </div>
+                <div className="h-64 animate-pulse rounded-2xl border border-white/10 bg-white/[0.04]" />
+                <p className="sr-only">Loading your {activeTab === "highschool" ? "High School" : activeTab === "university" ? "University" : "Extras"} performance data…</p>
               </div>
             ) : error ? (
-              <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-300 text-sm">
-                {error}
+              <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-500/30 text-sm flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
+                <p role="alert" className="text-rose-300">{error}</p>
+                <button
+                  type="button"
+                  onClick={() => setRetryKey((k) => k + 1)}
+                  className="inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-lg border border-rose-500/40 px-5 py-2.5 font-semibold text-rose-200 transition-colors hover:bg-rose-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+                >
+                  Retry
+                </button>
               </div>
             ) : (
               <>
