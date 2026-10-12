@@ -253,6 +253,7 @@ export default function StudyReaderClient({
 
           {/* Sidebar Toggle for Desktop */}
           <button
+            type="button"
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="hidden md:flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
           >
@@ -265,6 +266,7 @@ export default function StudyReaderClient({
       {/* Mobile Dropdown TOC */}
       <div className="md:hidden bg-slate-900 border-b border-slate-800 px-4 py-3">
         <button
+            type="button"
           onClick={() => setMobileTocOpen(!mobileTocOpen)}
           className="flex items-center justify-between w-full text-sm font-medium text-slate-200 bg-slate-800/80 rounded-lg px-3.5 py-2"
         >

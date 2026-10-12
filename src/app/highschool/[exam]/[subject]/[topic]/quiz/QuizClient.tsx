@@ -339,6 +339,7 @@ export default function QuizClient({
           <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-800">
             {score < totalQuestions && (
               <button
+                type="button"
                 onClick={handleRetryMissed}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition-colors"
               >
@@ -455,7 +456,7 @@ export default function QuizClient({
 
           {/* Explanation Box (Visible after submit) */}
           {isSubmitted && (
-            <div className="space-y-4 pt-4 border-t border-slate-800 animate-fadeIn">
+            <div aria-live="polite" className="space-y-4 pt-4 border-t border-slate-800 animate-fadeIn">
               <div
                 className={`p-4 rounded-xl border flex items-start gap-3 ${
                   selectedOption?.trim().toLowerCase() === (currentQuestion.correctAnswer || "").trim().toLowerCase()
