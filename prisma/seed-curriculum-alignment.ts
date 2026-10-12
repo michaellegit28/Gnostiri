@@ -1,5 +1,5 @@
 // Curriculum Alignment Engine — Phase 2 seed (hybrid per approval)
-// - Seeds 20 regions, boards, 11 departments, master topics (needsVerification=TRUE, lastAuditedDate=NULL)
+// - Seeds 20 regions, boards, 12 departments, master topics (needsVerification=TRUE, lastAuditedDate=NULL)
 // - Seeds ONLY 3 hard-correction alignments as CORE across all boards (verified)
 // - Run after migration: npx ts-node prisma/seed-curriculum-alignment.ts
 // DO NOT auto-generate other alignments — human verification via /admin/alignments.
@@ -74,6 +74,7 @@ const DEPARTMENTS: { name: string; icon: string }[] = [
   { name: "Arts & Design", icon: "palette" },
   { name: "Technical & Vocational", icon: "wrench" },
   { name: "Physical Education & Health", icon: "heart-pulse" },
+  { name: "English Language", icon: "book" },
 ];
 
 const MASTER_TOPICS: { dept: string; title: string; slug: string; desc: string }[] = [
@@ -132,6 +133,15 @@ const MASTER_TOPICS: { dept: string; title: string; slug: string; desc: string }
   { dept: "Physical Education & Health", title: "Physical Education", slug: "physical-education", desc: "Fitness, sports skills, training principles" },
   { dept: "Physical Education & Health", title: "Health Education", slug: "health-education", desc: "Hygiene, disease prevention, wellbeing" },
   { dept: "Physical Education & Health", title: "Life Orientation", slug: "life-orientation", desc: "ZA compulsory life skills and citizenship" },
+  { dept: "English Language", title: "Grammar Foundations", slug: "grammar-foundations", desc: "Parts of speech, phrases, clauses, sentence types and functions" },
+  { dept: "English Language", title: "Concord (Subject-Verb Agreement)", slug: "concord", desc: "Agreement rules, tricky subjects, proximity, notional concord" },
+  { dept: "English Language", title: "Tenses and Aspect", slug: "tenses-and-aspect", desc: "The 12 tense forms, sequence of tenses, tense consistency" },
+  { dept: "English Language", title: "Punctuation and Mechanics", slug: "punctuation-mechanics", desc: "Commas, semicolons, apostrophes, capitalisation, spelling rules" },
+  { dept: "English Language", title: "Lexis and Structure", slug: "lexis-structure", desc: "Articles, pronoun case, verbals, modifiers, collocations, idioms, phrasal verbs" },
+  { dept: "English Language", title: "Reading Comprehension", slug: "reading-comprehension", desc: "Skimming, scanning, inference, main idea, tone, question strategies" },
+  { dept: "English Language", title: "Summary Writing", slug: "summary-writing", desc: "Main points, paraphrase, word limits, examiner criteria" },
+  { dept: "English Language", title: "Continuous Writing", slug: "continuous-writing", desc: "Essay structure, letters, speeches, narrative, argumentative, marking criteria" },
+  { dept: "English Language", title: "Oral English", slug: "oral-english", desc: "Vowel and consonant sounds, minimal pairs, stress, rhythm, intonation" },
 ];
 
 // ONLY pre-verified alignments at launch (hard constraints)
@@ -261,7 +271,7 @@ async function main() {
     }
   }
 
-  console.log("Curriculum seed complete: 20 regions, boards, 11 departments, master topics pending + 3 CORE verified.", alignReport);
+  console.log("Curriculum seed complete: 20 regions, boards, 12 departments, master topics pending + 3 CORE verified.", alignReport);
 }
 
 main()
