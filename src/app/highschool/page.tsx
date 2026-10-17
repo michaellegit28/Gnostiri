@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { BookOpen, FileText, ChevronRight, Trophy } from "lucide-react";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
+import { SUBJECTS, allTopicSlugs } from "@/lib/curriculum";
 
 export const dynamic = "force-dynamic";
 
 // High School hub: two doors — Study (textbooks) and Exams (past papers).
-export default function HighSchoolHub() {
+export default async function HighSchoolHub() {
+  const subjects = SUBJECTS.length;
+  const topics = allTopicSlugs().length;
   return (
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-10">
@@ -24,7 +27,7 @@ export default function HighSchoolHub() {
             Textbooks and exams, <span className="text-[#D4AF37]">one roof</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Master 11 subjects in the study textbooks, then prove it on real past papers — WAEC, JAMB, Bagrut and more.
+            Master {subjects} subjects in the study textbooks, then prove it on real past papers — WAEC, JAMB, Bagrut and more.
           </p>
         </div>
 
@@ -33,7 +36,7 @@ export default function HighSchoolHub() {
             <div>
               <BookOpen className="w-8 h-8 text-teal-300 mb-4" />
               <h2 className="text-2xl font-serif font-bold mb-2">Study</h2>
-              <p className="text-slate-400 text-sm mb-6">11 subjects, 55 topics — click any topic and study, with syllabus alignment for your country.</p>
+              <p className="text-slate-400 text-sm mb-6">{subjects} subjects, {topics} topics — click any topic and study, with syllabus alignment for your country.</p>
             </div>
             <Link href="/highschool/study" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-teal-500 text-slate-950 font-semibold text-sm hover:bg-teal-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400">
               Open textbooks
