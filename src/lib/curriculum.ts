@@ -161,6 +161,23 @@ export const SUBJECTS: SubjectMeta[] = [
       { slug: "life-orientation", title: "Life Orientation", subtopics: ["Self & values", "Relationships", "Careers & study skills", "Citizenship", "Human rights"] },
     ],
   },
+  {
+    slug: "english-language",
+    name: "English Language",
+    icon: "BookOpen",
+    group: "core",
+    topics: [
+      { slug: "grammar-foundations", title: "Grammar Foundations", subtopics: ["The eight word classes", "Word-class shifts in context", "Phrases and clauses", "Sentence types (structure and function)", "Fragments, run-ons and comma splices"] },
+      { slug: "concord", title: "Concord (Subject-Verb Agreement)", subtopics: ["Basic concord rules", "Tricky subjects (indefinite pronouns, collective nouns)", "Proximity and notional concord", "Compound subjects with 'either/or'", "Concord with relative clauses"] },
+      { slug: "tenses-and-aspect", title: "Tenses and Aspect", subtopics: ["The 12 tense forms", "Sequence of tenses", "Tense consistency in reported speech", "Aspect: simple, continuous, perfect", "Common tense errors"] },
+      { slug: "punctuation-mechanics", title: "Punctuation and Mechanics", subtopics: ["Commas, semicolons and colons", "Apostrophes (possession and contraction)", "Capitalisation", "Spelling rules", "Quotation marks and brackets"] },
+      { slug: "lexis-structure", title: "Lexis and Structure", subtopics: ["Articles (a/an/the)", "Pronoun case and agreement", "Verbals (infinitives, gerunds, participles)", "Modifiers and collocations", "Idioms and phrasal verbs"] },
+      { slug: "reading-comprehension", title: "Reading Comprehension", subtopics: ["Skimming and scanning", "Inference and implied meaning", "Main idea and supporting details", "Tone and attitude", "Question strategies"] },
+      { slug: "summary-writing", title: "Summary Writing", subtopics: ["Identifying main points", "Paraphrase and condensation", "Word limits and concision", "Examiner criteria", "Avoiding plagiarism"] },
+      { slug: "continuous-writing", title: "Continuous Writing", subtopics: ["Essay structure (introduction, body, conclusion)", "Letters (formal and informal)", "Speeches and narratives", "Argumentative essays", "Marking criteria"] },
+      { slug: "oral-english", title: "Oral English", subtopics: ["Vowel and consonant sounds", "Minimal pairs", "Word and sentence stress", "Rhythm and intonation", "Phonetic symbols"] },
+    ],
+  },
 ];
 
 export const TOPIC_INDEX: Map<string, { topic: TopicMeta; subject: SubjectMeta }> = (() => {
