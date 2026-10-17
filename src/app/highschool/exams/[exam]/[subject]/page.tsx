@@ -44,9 +44,9 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool/exams" className="hover:text-amber-400 transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-amber-400 transition-colors">
+          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
             {examination.name.toUpperCase()}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -70,11 +70,11 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
             <Link
               key={paper.id}
               href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)}
-              className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg hover:border-amber-500/40 transition-all group"
+              className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg hover:border-gold/40 transition-all group"
             >
               <div>
                 <div className="flex items-start justify-between gap-3 mb-4">
-                  <span className="font-serif text-3xl font-bold text-amber-400 group-hover:text-amber-300">
+                  <span className="font-serif text-3xl font-bold text-gold group-hover:text-amber-300">
                     {paper.year}
                   </span>
                   <span className="text-xs font-medium text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
@@ -92,7 +92,7 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
                   </div>
                 </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-500 group-hover:text-amber-400 transition-colors">
+              <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-500 group-hover:text-gold transition-colors">
                 Open paper →
               </div>
             </Link>
@@ -101,7 +101,7 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
 
         <Link
           href={`/highschool/exams/${examination.slug}`}
-          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-amber-400 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-gold transition-colors"
         >
           <ArrowRight className="w-4 h-4 rotate-180" />
           All {examination.name.toUpperCase()} subjects

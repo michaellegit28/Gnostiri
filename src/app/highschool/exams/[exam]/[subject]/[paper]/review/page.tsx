@@ -59,13 +59,13 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Breadcrumb */}
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool/exams" className="hover:text-amber-400 transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-amber-400 transition-colors">
+          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
             {examination.name.toUpperCase()}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={base} className="hover:text-amber-400 transition-colors">
+          <Link href={base} className="hover:text-gold transition-colors">
             {paper.subject} {paper.year} · {paper.paperNumber}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -85,7 +85,7 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
               href={paper.markingSchemeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-amber-400 hover:underline"
+              className="inline-flex items-center gap-2 text-sm text-gold hover:underline"
             >
               <ExternalLink className="w-4 h-4" />
               Official marking scheme (PDF)
@@ -95,9 +95,9 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
 
         {/* Latest attempt */}
         {latestAttempt && (
-          <section className="rounded-xl border border-[#D4AF37]/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">
+          <section className="rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Your latest attempt</p>
-            <p className="text-3xl font-serif font-bold text-[#D4AF37]">
+            <p className="text-3xl font-serif font-bold text-gold">
               {latestAttempt.score}/{latestAttempt.maxScore} marks
             </p>
             <p className="text-sm text-slate-400 capitalize">{latestAttempt.mode} attempt</p>
@@ -110,7 +110,7 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
             <p className="text-slate-400 text-sm">
               Questions for this paper have not been transcribed yet — nothing to review.
             </p>
-            <Link href={base} className="inline-flex rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">
+            <Link href={base} className="inline-flex rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
               ← Back to paper
             </Link>
           </section>
@@ -129,7 +129,7 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
                       {question.questionText}
                     </h2>
                     <span className="shrink-0 inline-flex items-center gap-1.5 text-xs font-medium text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
-                      <Target className="w-3.5 h-3.5 text-amber-500" />
+                      <Target className="w-3.5 h-3.5 text-gold" />
                       {question.marks} mark{question.marks === 1 ? "" : "s"}
                     </span>
                   </div>
@@ -174,7 +174,7 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
 
         {questions.length > 0 && (
           <div className="flex flex-wrap gap-3">
-            <Link href={`${base}/take`} className="rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">
+            <Link href={`${base}/take`} className="rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
               Sit this paper
             </Link>
             <Link href={`/highschool/exams/${examination.slug}`} className="rounded-lg border border-slate-700 px-5 py-3 font-semibold text-slate-200 hover:border-slate-500">

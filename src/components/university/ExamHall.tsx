@@ -106,10 +106,10 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
   if (error && !session) {
     return (
-      <div className="rounded-2xl border border-amber-300 bg-amber-50 p-8 dark:border-amber-500/30 dark:bg-amber-500/10">
+      <div className="rounded-2xl border border-amber-300 bg-amber-50 p-8 dark:border-gold/30 dark:bg-gold/10">
         <h3 className="font-semibold text-amber-800 dark:text-amber-300">Exam unavailable</h3>
         <p className="mt-2 text-sm text-amber-700 dark:text-amber-200/80">{error}</p>
-        <button onClick={() => void start()} className="mt-4 rounded-lg border border-amber-400 px-4 py-2 text-sm font-medium text-amber-800 hover:bg-amber-100 dark:text-amber-200 dark:hover:bg-amber-500/20">
+        <button onClick={() => void start()} className="mt-4 rounded-lg border border-gold px-4 py-2 text-sm font-medium text-amber-800 hover:bg-amber-100 dark:text-amber-200 dark:hover:bg-gold/20">
           Try again
         </button>
       </div>

@@ -18,9 +18,9 @@ interface AlignmentResp {
 const LS_KEY = "gnostiri-alignment-profile";
 
 function badgeClass(tier: string) {
-  if (tier === "core") return "bg-emerald-100 text-emerald-800 border border-emerald-300";
-  if (tier === "elective") return "bg-amber-50 text-amber-800 border border-amber-300";
-  return "bg-red-50 text-red-700 border border-red-200 opacity-75";
+  if (tier === "core") return "bg-emerald-500/15 text-emerald-300 border border-emerald-500/40";
+  if (tier === "elective") return "bg-amber-500/15 text-amber-300 border border-amber-500/40";
+  return "bg-red-500/15 text-red-300 border border-red-500/40 opacity-75";
 }
 
 function badgeLabel(tier: string, pending?: boolean) {

@@ -39,7 +39,7 @@ export default async function ConceptMapPage({ params }: { params: { course: str
     <main className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto max-w-4xl px-6 py-10 md:py-14 space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href={`/university/${course.slug}`} className="hover:text-amber-400 transition-colors inline-flex items-center gap-1.5">
+          <Link href={`/university/${course.slug}`} className="hover:text-gold transition-colors inline-flex items-center gap-1.5">
             <ArrowLeft className="w-4 h-4" /> {course.title}
           </Link>
           <span className="text-slate-600">/</span>

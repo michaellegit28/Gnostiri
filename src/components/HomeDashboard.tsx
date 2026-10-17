@@ -91,7 +91,7 @@ export default function HomeDashboard() {
 
   return (
     <section aria-label="Your progress" className="w-full">
-      <div className="relative overflow-hidden rounded-2xl border border-[#D4AF37]/25 bg-gradient-to-r from-amber-950/30 via-slate-900/80 to-slate-900/80 p-6 md:p-7">
+      <div className="relative overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-r from-amber-950/30 via-slate-900/80 to-slate-900/80 p-6 md:p-7">
         <div className="flex flex-col gap-5">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
             <div>
@@ -134,27 +134,27 @@ export default function HomeDashboard() {
           {mission ? (
             <Link
               href={`/highschool/${mission.examCode}/${mission.subjectSlug}/${mission.topicSlug}/${mission.kind === "quiz" ? "quiz" : "study"}`}
-              className="flex items-center justify-between gap-3 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 px-4 py-3 hover:bg-[#D4AF37]/15 transition-colors"
+              className="flex items-center justify-between gap-3 rounded-xl bg-gold/10 border border-gold/30 px-4 py-3 hover:bg-gold/15 transition-colors"
             >
               <span className="flex items-center gap-2 text-sm">
-                <Swords className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <Swords className="w-4 h-4 text-gold shrink-0" />
                 <span className="text-slate-200">
                   Today: <strong>{mission.topic}</strong>
                   <span className="text-slate-400"> • {mission.subject}</span>
                 </span>
               </span>
-              <ArrowRight className="w-4 h-4 text-[#D4AF37] shrink-0" />
+              <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </Link>
           ) : (
             <Link
               href="/battle-plan"
-              className="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:border-[#D4AF37]/40 transition-colors"
+              className="flex items-center justify-between gap-3 rounded-xl bg-white/5 border border-white/10 px-4 py-3 hover:border-gold/40 transition-colors"
             >
               <span className="flex items-center gap-2 text-sm text-slate-200">
-                <Swords className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <Swords className="w-4 h-4 text-gold shrink-0" />
                 No mission yet — generate your WAEC battle plan
               </span>
-              <ArrowRight className="w-4 h-4 text-[#D4AF37] shrink-0" />
+              <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </Link>
           )}
         </div>

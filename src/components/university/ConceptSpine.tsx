@@ -57,7 +57,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
     return (
       <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
         <h3 className="font-serif text-lg font-bold flex items-center gap-2">
-          <Brain className="w-5 h-5 text-[#D4AF37]" /> Concept spine
+          <Brain className="w-5 h-5 text-gold" /> Concept spine
         </h3>
         <p className="text-slate-400 text-sm mt-2">
           {concepts.length} connected concepts across {Math.max(1, modules.length)} module{modules.length === 1 ? "" : "s"}.
@@ -76,7 +76,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
     <section className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="font-serif text-2xl font-bold flex items-center gap-2">
-          <Brain className="w-6 h-6 text-[#D4AF37]" /> The concept spine
+          <Brain className="w-6 h-6 text-gold" /> The concept spine
         </h2>
         <span className="text-xs text-slate-500">{concepts.length} concepts</span>
       </div>
@@ -109,7 +109,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
                 <ol className="relative px-5 pb-5 pt-2 space-y-1">
                   {/* the spine line */}
                   <span
-                    className="absolute left-[34px] top-2 bottom-6 w-px bg-gradient-to-b from-[#D4AF37]/50 via-teal-500/30 to-transparent"
+                    className="absolute left-[34px] top-2 bottom-6 w-px bg-gradient-to-b from-gold/50 via-teal-500/30 to-transparent"
                     aria-hidden
                   />
                   {group.items.map((concept, i) => {
@@ -121,7 +121,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
                           {i === 0 ? (
                             <Circle className="w-5 h-5 text-teal-400 fill-teal-400/20" />
                           ) : isLast ? (
-                            <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" />
+                            <CheckCircle2 className="w-5 h-5 text-gold" />
                           ) : (
                             <Lock className="w-5 h-5 text-slate-600" />
                           )}

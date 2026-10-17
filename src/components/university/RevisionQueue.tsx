@@ -89,7 +89,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
 
       <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-teal-500 to-[#D4AF37] transition-all duration-300"
+          className="h-full bg-gradient-to-r from-teal-500 to-gold transition-all duration-300"
           style={{ width: `${(index / due.length) * 100}%` }}
         />
       </div>
@@ -145,13 +145,13 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={next}
                   disabled={index >= due.length - 1}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-[#D4AF37] px-6 py-3 font-semibold text-slate-950 text-sm disabled:opacity-40"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-gold px-6 py-3 font-semibold text-slate-950 text-sm disabled:opacity-40"
                 >
                   Next concept <ChevronRight className="w-4 h-4 ml-1" />
                 </button>
                 <Link
                   href={`/university/${current.courseSlug}/concepts`}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-[#D4AF37]/60 transition-colors"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-gold/60 transition-colors"
                 >
                   Revisit the concept map
                 </Link>

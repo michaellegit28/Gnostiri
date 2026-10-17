@@ -69,9 +69,9 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool/exams" className="rounded hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Exams</Link>
+          <Link href="/highschool/exams" className="rounded hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-amber-400 transition-colors">
+          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
             {examination.name.toUpperCase()}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -81,7 +81,7 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
         <header className="space-y-3">
           <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">Board-format practice</p>
           <h1 className="text-3xl md:text-4xl font-serif font-bold">
-            Practice {examination.name.toUpperCase()} the way the exam is <span className="text-[#D4AF37]">actually set</span>
+            Practice {examination.name.toUpperCase()} the way the exam is <span className="text-gold">actually set</span>
           </h1>
           <p className="text-slate-400 text-sm max-w-2xl">
             Sessions follow the board&apos;s real paper structure — objectives, theory, practicals — with
@@ -107,23 +107,23 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
                   <Link
                     key={topic.id}
                     href={`/highschool/practice/${examination.slug}/${topic.id}?subject=${subject.slug}`}
-                    className="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-amber-500/40 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                    className="flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-gold/40 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   >
                     <div>
-                      <div className="font-semibold text-slate-100 group-hover:text-amber-400 transition-colors">{topic.title}</div>
+                      <div className="font-semibold text-slate-100 group-hover:text-gold transition-colors">{topic.title}</div>
                       <div className="mt-2 flex items-center gap-4 text-xs text-slate-400">
                         {counts.mcq > 0 && (
                           <span className="flex items-center gap-1"><HelpCircle className="w-3.5 h-3.5 text-teal-400" /> {counts.mcq} objective</span>
                         )}
                         {counts.theory > 0 && (
-                          <span className="flex items-center gap-1"><ClipboardCheck className="w-3.5 h-3.5 text-amber-500" /> {counts.theory} theory</span>
+                          <span className="flex items-center gap-1"><ClipboardCheck className="w-3.5 h-3.5 text-gold" /> {counts.theory} theory</span>
                         )}
                         {counts.practical > 0 && (
                           <span className="flex items-center gap-1"><FlaskConical className="w-3.5 h-3.5 text-emerald-400" /> {counts.practical} practical</span>
                         )}
                       </div>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all shrink-0" />
+                    <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-gold group-hover:translate-x-0.5 transition-all shrink-0" />
                   </Link>
                 ))}
               </div>

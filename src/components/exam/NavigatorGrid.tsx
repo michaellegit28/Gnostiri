@@ -15,7 +15,7 @@ type NavigatorGridProps = {
 
 function cellTone(isCurrent: boolean, isAnswered: boolean, isFlagged: boolean): string {
   if (isCurrent) return "border-sky-400 bg-sky-400/15 text-sky-200";
-  if (isFlagged) return "border-amber-500/60 bg-amber-500/15 text-amber-300";
+  if (isFlagged) return "border-gold/60 bg-gold/15 text-gold";
   if (isAnswered) return "border-emerald-500/60 bg-emerald-500/15 text-emerald-300";
   return "border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-500";
 }

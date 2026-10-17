@@ -88,7 +88,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
         <nav className="flex items-center gap-2 text-sm text-slate-400">
           <Link
             href={`/highschool/${examination.code.toLowerCase()}`}
-            className="hover:text-amber-400 transition-colors"
+            className="hover:text-gold transition-colors"
           >
             {examination.name.toUpperCase()}
           </Link>
@@ -123,7 +123,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition-colors"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 font-serif font-bold text-sm shrink-0 mt-0.5">
+                  <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-gold/10 text-gold font-serif font-bold text-sm shrink-0 mt-0.5">
                     {index + 1}
                   </div>
                   <div>
@@ -158,7 +158,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
 
                   <Link
                     href={`/highschool/${examination.code.toLowerCase()}/${subjectSlug}/${topicSlug}/quiz`}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors"
                   >
                     <HelpCircle className="w-4 h-4" />
                     <span>Quiz</span>

@@ -63,11 +63,11 @@ export default async function StudyBoard() {
     <div className="min-h-screen bg-transparent text-slate-100 p-4 md:p-10">
       <div className="max-w-6xl mx-auto space-y-8">
         <nav className="text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-amber-400">High School</Link> <span>→ Study</span>
+          <Link href="/highschool" className="hover:text-gold">High School</Link> <span>→ Study</span>
         </nav>
 
         <header className="space-y-4 text-center">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37]">Open textbooks</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Open textbooks</p>
           <h1 className="text-3xl md:text-5xl font-serif font-bold">Pick your subject, open a chapter</h1>
           <StudySearch />
         </header>
@@ -75,14 +75,14 @@ export default async function StudyBoard() {
         {resume && (
           <Link
             href={`/highschool/study/${resume.subjectSlug}/${resume.topicSlug}`}
-            className="block rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 hover:border-amber-400/60 transition-colors"
+            className="block rounded-xl border border-gold/30 bg-gold/10 p-4 hover:border-gold/60 transition-colors"
           >
             <div className="flex items-center justify-between gap-3">
               <span className="text-sm text-amber-200">
                 Continue: <strong>{resume.subjectName} → {resume.topicTitle}</strong>
                 <span className="ml-2 text-xs text-amber-300/80">{resume.pct}% complete</span>
               </span>
-              <ArrowRight className="w-4 h-4 text-amber-400 shrink-0" />
+              <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </div>
           </Link>
         )}
@@ -98,11 +98,11 @@ export default async function StudyBoard() {
                   <Link
                     key={subject.slug}
                     href={`/highschool/study/${subject.slug}`}
-                    className="group rounded-xl border border-slate-800 bg-slate-900/70 p-5 hover:border-[#D4AF37]/50 transition-colors"
+                    className="group rounded-xl border border-slate-800 bg-slate-900/70 p-5 hover:border-gold/50 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <span className="rounded-lg border border-slate-700 bg-slate-800/60 p-2"><Icon className="w-5 h-5 text-[#D4AF37]" /></span>
+                        <span className="rounded-lg border border-slate-700 bg-slate-800/60 p-2"><Icon className="w-5 h-5 text-gold" /></span>
                         <h3 className="font-semibold text-slate-100 group-hover:text-amber-300">{subject.name}</h3>
                       </div>
                       <ProgressRing value={stats.total ? stats.done / stats.total : 0} />

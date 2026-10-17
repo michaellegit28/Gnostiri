@@ -104,13 +104,13 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
     <div
       role="dialog"
       aria-label="AI Tutor"
-      className="fixed z-[80] inset-x-3 bottom-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-[400px] flex flex-col overflow-hidden rounded-2xl border border-[#D4AF37]/30 bg-[#0B0F22]/98 shadow-2xl shadow-black/60 backdrop-blur-xl animate-[panel-up_0.3s_ease-out]"
+      className="fixed z-[80] inset-x-3 bottom-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-[400px] flex flex-col overflow-hidden rounded-2xl border border-gold/30 bg-[#0B0F22]/98 shadow-2xl shadow-black/60 backdrop-blur-xl animate-[panel-up_0.3s_ease-out]"
       style={{ maxHeight: "min(78vh, 620px)", height: "560px", maxWidth: "100%" }}
     >
       {/* Header */}
       <div className="flex items-start justify-between border-b border-white/10 px-5 py-4">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D4AF37]">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
             Tutor
           </p>
           <p className="mt-1 font-serif text-xl italic text-slate-100">
@@ -132,7 +132,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3" aria-live="polite">
         {messages.length === 0 && (
-          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-relaxed text-slate-200 border-l-2 !border-l-[#D4AF37]">
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-relaxed text-slate-200 border-l-2 !border-l-gold">
             I&apos;m your Tutor. Right now we&apos;re here to help you learn anything.
             Ask me anything, or pick a starter below.
           </div>
@@ -143,7 +143,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
               {m.content}
             </div>
           ) : (
-            <div key={i} className="max-w-[95%] rounded-xl bg-white/[0.05] border border-white/10 px-4 py-3 text-sm leading-relaxed text-slate-200 border-l-2 !border-l-[#D4AF37]">
+            <div key={i} className="max-w-[95%] rounded-xl bg-white/[0.05] border border-white/10 px-4 py-3 text-sm leading-relaxed text-slate-200 border-l-2 !border-l-gold">
               {m.content || (busy ? "Thinking…" : "")}
             </div>
           )
@@ -155,7 +155,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
                 key={s}
                 type="button"
                 onClick={(e) => void send(e as unknown as FormEvent, s)}
-                className="rounded-full border border-white/15 px-3.5 py-2 text-xs text-slate-300 hover:border-[#D4AF37]/60 hover:text-white transition-colors"
+                className="rounded-full border border-white/15 px-3.5 py-2 text-xs text-slate-300 hover:border-gold/60 hover:text-white transition-colors"
               >
                 {s}
               </button>
@@ -185,12 +185,12 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about anything…"
           aria-label="Ask the tutor"
-          className="min-h-[48px] flex-1 rounded-full border border-white/15 bg-white/[0.04] px-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#D4AF37]/60 focus:outline-none"
+          className="min-h-[48px] flex-1 rounded-full border border-white/15 bg-white/[0.04] px-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold/60 focus:outline-none"
         />
         <button
           type="submit"
           disabled={busy || !input.trim()}
-          className="min-h-[48px] shrink-0 rounded-full bg-[#D4AF37] px-5 text-sm font-semibold text-slate-950 hover:bg-[#c3a030] transition-colors disabled:opacity-40"
+          className="min-h-[48px] shrink-0 rounded-full bg-gold px-5 text-sm font-semibold text-slate-950 hover:bg-gold-hover transition-colors disabled:opacity-40"
         >
           Send
         </button>

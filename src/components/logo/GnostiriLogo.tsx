@@ -42,8 +42,8 @@ export function GnostiriMark({ className = "w-8 h-8", accent = "#D4AF37" }: Mark
 /** Full lockup: tile mark + serif wordmark. */
 export function GnostiriLogo({
   className = "",
-  markClassName = "w-9 h-9 text-[#D4AF37]",
-  wordClassName = "text-2xl font-serif font-bold text-[#D4AF37]",
+  markClassName = "w-9 h-9 text-gold",
+  wordClassName = "text-2xl font-serif font-bold text-gold",
 }: {
   className?: string;
   markClassName?: string;

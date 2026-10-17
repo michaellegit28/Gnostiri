@@ -19,7 +19,7 @@ export default async function LaunchPage() {
     return (
       <div className="min-h-screen bg-transparent text-slate-50 p-10 text-center">
         <p className="text-slate-400">The 1st launch gate is not active.</p>
-        <Link href="/" className="inline-flex mt-4 rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">
+        <Link href="/" className="inline-flex mt-4 rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
           Go home
         </Link>
       </div>
@@ -39,7 +39,7 @@ export default async function LaunchPage() {
     return (
       <div className="min-h-screen bg-transparent text-slate-50 p-10 text-center space-y-4">
         <p className="text-emerald-300 font-semibold">You already have launch access{benefactor ? " (benefactor)" : ""}.</p>
-        <Link href="/" className="inline-flex rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">
+        <Link href="/" className="inline-flex rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
           Enter Gnostiri
         </Link>
       </div>
@@ -57,7 +57,7 @@ export default async function LaunchPage() {
             <span>1st Launch · Limited Access</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            Gnostiri opens for <span className="text-[#D4AF37]">220 learners</span> first
+            Gnostiri opens for <span className="text-gold">220 learners</span> first
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-xl mx-auto">
             Full curriculum rebuilt. Exam practice in your board&apos;s real format. AI marking.
@@ -75,7 +75,7 @@ export default async function LaunchPage() {
               </p>
               <Link
                 href="/login"
-                className="inline-flex min-h-12 items-center rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 hover:bg-amber-400"
+                className="inline-flex min-h-12 items-center rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold"
               >
                 Sign in / Create account
               </Link>
@@ -90,7 +90,7 @@ export default async function LaunchPage() {
                 </span>
               </div>
               {!country && (
-                <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+                <div className="rounded-lg border border-gold/30 bg-gold/10 p-4">
                   <p className="text-sm text-amber-200 mb-3">
                     Tokens are region-locked. Set your country so your token can match it:
                   </p>

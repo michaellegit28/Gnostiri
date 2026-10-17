@@ -135,7 +135,7 @@ export default function FlexCarousel({
                   go(i);
                 }
               }}
-              className={`relative flex-1 cursor-pointer overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${reduced ? "" : transition} ${item.gradient ?? "bg-slate-800"}`}
+              className={`relative flex-1 cursor-pointer overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${reduced ? "" : transition} ${item.gradient ?? "bg-slate-800"}`}
               style={{
                 flexGrow: isActive ? 1 / Math.max(0.05, squeeze) : 1,
                 flexBasis: 0,
@@ -145,7 +145,7 @@ export default function FlexCarousel({
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                 {item.badge && (
-                  <span className="mb-2 inline-block rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-semibold text-[#D4AF37]">
+                  <span className="mb-2 inline-block rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-[11px] font-semibold text-gold">
                     {item.badge}
                   </span>
                 )}
@@ -161,7 +161,7 @@ export default function FlexCarousel({
                   <Link
                     href={item.href}
                     onClick={(e) => e.stopPropagation()}
-                    className="mt-3 inline-flex min-h-[44px] items-center rounded-lg bg-[#D4AF37] px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-[#c3a030]"
+                    className="mt-3 inline-flex min-h-[44px] items-center rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover"
                   >
                     Explore
                   </Link>
@@ -182,7 +182,7 @@ export default function FlexCarousel({
               setPaused(true);
             }}
             className={`h-2 min-h-[8px] rounded-full transition-all ${
-              i === active ? "w-8 bg-[#D4AF37]" : "w-2 bg-slate-700 hover:bg-slate-500"
+              i === active ? "w-8 bg-gold" : "w-2 bg-slate-700 hover:bg-slate-500"
             }`}
           />
         ))}

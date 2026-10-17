@@ -42,7 +42,7 @@ export default async function CoursePage({ params, searchParams }: { params: { c
 
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/university" className="hover:text-amber-400 transition-colors inline-flex items-center gap-1.5">
+          <Link href="/university" className="hover:text-gold transition-colors inline-flex items-center gap-1.5">
             <ArrowLeft className="w-4 h-4" /> University
           </Link>
           <span className="text-slate-600">/</span>
@@ -55,7 +55,7 @@ export default async function CoursePage({ params, searchParams }: { params: { c
           <div className="relative px-7 py-10 md:px-10 md:py-12 space-y-5">
             <div className="flex flex-wrap items-center gap-2">
               {course.code && (
-                <span className="font-mono text-xs tracking-[0.18em] text-[#D4AF37] px-2.5 py-1 rounded-md border border-amber-500/25 bg-amber-500/10">
+                <span className="font-mono text-xs tracking-[0.18em] text-gold px-2.5 py-1 rounded-md border border-gold/25 bg-gold/10">
                   {course.code}
                 </span>
               )}
@@ -134,7 +134,7 @@ export default async function CoursePage({ params, searchParams }: { params: { c
                   <div className="flex items-center justify-between gap-3">
                     <h3 className="text-lg md:text-xl font-semibold">
                       {lesson.title}{" "}
-                      {locked && <span className="ml-2 text-xs text-amber-400 align-middle">Premium</span>}
+                      {locked && <span className="ml-2 text-xs text-gold align-middle">Premium</span>}
                     </h3>
                     <span className="text-[11px] text-slate-500 shrink-0">~{lesson.estimatedMinutes} min</span>
                   </div>
@@ -179,32 +179,32 @@ export default async function CoursePage({ params, searchParams }: { params: { c
           {flatConcepts.length > 0 && (
             <Link
               href={`/university/${course.slug}/concepts`}
-              className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-[#D4AF37]/60 hover:text-white transition-colors"
+              className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-gold/60 hover:text-white transition-colors"
             >
               <Brain className="w-4 h-4 mr-2" /> Concept map
             </Link>
           )}
           <Link
             href={`/university/${course.slug}/exams`}
-            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-[#D4AF37]/50 px-6 py-3 font-semibold text-[#D4AF37] text-sm hover:bg-[#D4AF37]/10 transition-colors"
+            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-gold/50 px-6 py-3 font-semibold text-gold text-sm hover:bg-gold/10 transition-colors"
           >
             Exam hall
           </Link>
           <Link
             href="/university/transcript"
-            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-[#D4AF37]/60 hover:text-white transition-colors"
+            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-gold/60 hover:text-white transition-colors"
           >
             Transcript
           </Link>
         </div>
 
         {!premium && (
-          <aside className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.07] p-6">
+          <aside className="rounded-2xl border border-gold/30 bg-gold/[0.07] p-6">
             <strong className="text-amber-300">Unlock the full course</strong>
             <p className="text-slate-300 mt-1 text-sm">
               Premium unlocks every lesson, the full concept map, quizzes, certificates, and unlimited AI Tutor.
             </p>
-            <Link href="/pricing" className="inline-flex mt-3 rounded-lg bg-amber-500 px-4 py-2 font-semibold text-slate-950 text-sm">
+            <Link href="/pricing" className="inline-flex mt-3 rounded-lg bg-gold px-4 py-2 font-semibold text-slate-950 text-sm">
               View plans
             </Link>
           </aside>

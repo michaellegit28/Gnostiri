@@ -46,8 +46,8 @@ export default function TransitionModal({
       aria-labelledby="bridge-heading"
       className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#070b16]/95 p-4 backdrop-blur"
     >
-      <div className="w-full max-w-xl rounded-2xl border border-[#D4AF37]/40 bg-slate-950 px-6 py-10 text-center md:px-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+      <div className="w-full max-w-xl rounded-2xl border border-gold/40 bg-slate-950 px-6 py-10 text-center md:px-10">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
           Section complete
         </p>
         <h2 id="bridge-heading" className="mt-3 font-serif text-3xl font-bold text-slate-50">
@@ -78,7 +78,7 @@ export default function TransitionModal({
           <button
             type="button"
             onClick={onStartTheory}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#D4AF37] px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-[#c3a030] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             {primaryLabel}
           </button>

@@ -234,14 +234,14 @@ export default function StudyReaderClient({
           <nav className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-slate-400 overflow-x-auto py-1">
             <Link
               href={`/highschool/${examCode}`}
-              className="hover:text-amber-400 transition-colors whitespace-nowrap"
+              className="hover:text-gold transition-colors whitespace-nowrap"
             >
               {examName}
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-600 shrink-0" />
             <Link
               href={`/highschool/${examCode}/${subjectSlug}`}
-              className="hover:text-amber-400 transition-colors whitespace-nowrap"
+              className="hover:text-gold transition-colors whitespace-nowrap"
             >
               {subjectTitle}
             </Link>
@@ -271,7 +271,7 @@ export default function StudyReaderClient({
           className="flex items-center justify-between w-full text-sm font-medium text-slate-200 bg-slate-800/80 rounded-lg px-3.5 py-2"
         >
           <div className="flex items-center gap-2">
-            <List className="w-4 h-4 text-amber-500" />
+            <List className="w-4 h-4 text-gold" />
             <span>Topic: {topicTitle}</span>
           </div>
           <ChevronDown className={`w-4 h-4 transition-transform ${mobileTocOpen ? "rotate-180" : ""}`} />
@@ -288,7 +288,7 @@ export default function StudyReaderClient({
                   onClick={() => setMobileTocOpen(false)}
                   className={`block px-4 py-2 text-sm rounded-md transition-colors ${
                     isActive
-                      ? "bg-amber-500/10 text-amber-400 font-semibold"
+                      ? "bg-gold/10 text-gold font-semibold"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
                   }`}
                 >
@@ -305,7 +305,7 @@ export default function StudyReaderClient({
         {/* Desktop Left Sidebar TOC */}
         {sidebarOpen && (
           <aside className="hidden md:block w-72 shrink-0 border-r border-slate-800 pr-6 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-semibold text-amber-500 uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-semibold text-gold uppercase tracking-wider">
               <BookOpen className="w-4 h-4" />
               <span>{subjectTitle} Topics</span>
             </div>
@@ -318,7 +318,7 @@ export default function StudyReaderClient({
                     href={`/highschool/${examCode}/${subjectSlug}/${t.slug}/study`}
                     className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-all ${
                       isActive
-                        ? "bg-amber-500/10 text-amber-400 font-semibold border-l-2 border-amber-500"
+                        ? "bg-gold/10 text-gold font-semibold border-l-2 border-gold"
                         : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
                     }`}
                   >
@@ -377,12 +377,15 @@ export default function StudyReaderClient({
             }`}
           >
             {isCompleted ? <Check className="w-4 h-4 shrink-0" /> : <CheckCircle className="w-4 h-4 shrink-0" />}
-            <span className="truncate">{isCompleted ? "Completed ✓" : isMarking ? "Saving..." : "Mark Complete"}</span>
+            <span className="inline-flex items-center gap-1.5 truncate">
+              {isCompleted && <Check aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />}
+              {isCompleted ? "Completed" : isMarking ? "Saving..." : "Mark Complete"}
+            </span>
           </button>
 
           <Link
             href={`/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-amber-500 text-slate-950 hover:bg-amber-400 font-semibold text-xs md:text-sm transition-colors text-center"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-gold text-slate-950 hover:bg-gold font-semibold text-xs md:text-sm transition-colors text-center"
           >
             <HelpCircle className="w-4 h-4 shrink-0" />
             <span className="truncate">Practice Questions</span>

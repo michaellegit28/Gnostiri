@@ -48,7 +48,7 @@ export default function FormatPreviewCard({
       </dl>
       <Link
         href={href}
-        className="mt-5 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#D4AF37] px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-[#c3a030] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+        className="mt-5 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
       >
         Start practice
       </Link>
