@@ -25,6 +25,37 @@ const SNIPPETS = [
   },
 ];
 
+// Lesson 2 (Variables & types) worked examples.
+const SNIPPETS_L2 = [
+  {
+    name: "a variable that changes",
+    code: `age = 19\nprint("Age:", age)\nage = 20\nprint("Age now:", age)`,
+    expected: "Age: 19\nAge now: 20",
+  },
+  {
+    name: "telling the types apart",
+    code: `print(type(5))\nprint(type(3.14))\nprint(type("hello"))\nprint(type(True))`,
+    expected: "<class 'int'>\n<class 'float'>\n<class 'str'>\n<class 'bool'>",
+  },
+  {
+    name: "division is surprising",
+    code: `print(10 / 4)\nprint(10 // 4)\nprint(10 % 4)`,
+    expected: "2.5\n2\n2",
+  },
+  {
+    name: "converting between types",
+    code: `print("The number is " + str(42))\nprint(int("7") + 1)`,
+    expected: "The number is 42\n8",
+  },
+];
+
+// Lesson 2 MCQ/explanation claims.
+const CLAIMS_L2 = [
+  { name: "modulo remainder", code: `print(10 % 3)`, expected: "1" },
+  { name: "floor division rounds down", code: `print(7 // 2)`, expected: "3" },
+  { name: "type of a decimal", code: `print(type(3.14) is float)`, expected: "True" },
+];
+
 // Claims made in the lesson's MCQ explanations; each must hold in real Python.
 const CLAIMS = [
   { name: "quoted arithmetic prints literally", code: `print("6 * 7")`, expected: "6 * 7" },
@@ -55,16 +86,18 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-for (const s of SNIPPETS) {
-  test(`lesson 1 snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
+for (const s of [...SNIPPETS, ...SNIPPETS_L2]) {
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : "lesson 1";
+  test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
     assert.equal(r.stdout, s.expected, "lesson states this exact output");
   });
 }
 
-for (const c of CLAIMS) {
-  test(`lesson 1 claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
+for (const c of [...CLAIMS, ...CLAIMS_L2]) {
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : "lesson 1";
+  test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code);
     if (c.expectedError) {
       assert.ok(!r.ok, "expected this to raise, but it ran");
