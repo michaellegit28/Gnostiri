@@ -10,6 +10,7 @@ import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignme
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 import ConceptSpine from "@/components/university/ConceptSpine";
+import LessonRenderer from "@/components/university/LessonRenderer";
 import { ArrowLeft, BookOpen, Brain, Clock, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -143,21 +144,8 @@ export default async function CoursePage({ params, searchParams }: { params: { c
                       {lesson.title} includes guided examples and practice steps.
                     </div>
                   ) : (
-                    <div className="mt-4 space-y-3">
-                      {content.blocks?.map((block, i) => (
-                        <div key={i}>
-                          {block.type === "heading" ? (
-                            <h4 className="font-serif text-lg font-bold">{block.text}</h4>
-                          ) : block.type === "paragraph" ? (
-                            <p className="leading-relaxed text-slate-300">{block.text}</p>
-                          ) : block.type === "definition" ? (
-                            <p className="rounded-lg border border-teal-800 bg-teal-950/20 p-4 text-slate-300">
-                              <strong className="text-teal-300">{block.term}: </strong>
-                              {block.text}
-                            </p>
-                          ) : null}
-                        </div>
-                      ))}
+                    <div className="mt-4">
+                      <LessonRenderer content={content} />
                     </div>
                   )}
                   <div className="mt-4 pt-4 border-t border-slate-800/80">

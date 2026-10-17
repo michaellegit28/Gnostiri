@@ -74,7 +74,7 @@ const LESSON_1: LessonSeed = {
 // items are real and complete so the course is structurally sound; only the
 // long-form content blocks are pending authoring. needsCheck marks them.
 const LESSONS_2_TO_12: LessonSeed[] = [
-  { id: `${COURSE_ID}-lesson-2`, title: "Variables & types", module: 1, estimatedMinutes: 30, concept: { title: "Variables and types", slug: "variables-and-types", blooms: "understand", minutes: 30, prereq: ["what-is-a-program"] }, content: pending(2) },
+  { id: `${COURSE_ID}-lesson-2`, title: "Variables & types", module: 1, estimatedMinutes: 30, concept: { title: "Variables and types", slug: "variables-and-types", blooms: "understand", minutes: 30, prereq: ["what-is-a-program"] }, content: lesson2() },
   { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: pending(3) },
   { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: pending(4) },
   { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: pending(5) },
@@ -315,6 +315,244 @@ function lesson1(): LessonContent {
       {
         type: "paragraph",
         text: "Next: variables and types. Lesson 1 stored text under a label; the next lesson covers what else can be stored — whole numbers, decimals, truth values — and why the distinction changes what your instructions are allowed to do to them.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 2 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson2(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: name the four core data types you will meet most often; explain what is stored and what is reread when a variable is reused; predict whether an arithmetic expression yields an integer or a decimal; and convert comfortably between text and numbers without losing data.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 1 (What a program is). You need to be comfortable with the idea that a single equals sign stores a value under a label, and that quoted text is printed literally while unquoted expressions are worked out first.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Variable",
+        text: "A variable is a named box in memory. You put a value in it with a single equals sign, and you read whatever is currently inside whenever you mention the name. A variable holds one value, but that value can change.",
+      },
+      {
+        type: "definition",
+        term: "Type",
+        text: "The type of a value describes what kind of data it is — a whole number, a decimal, a chunk of text, or a truth value — and, crucially, what operations the language will allow you to perform on it.",
+      },
+      {
+        type: "paragraph",
+        text: "Python is strongly typed but dynamically typed. Strongly means you cannot, for example, add a number to text without a deliberate conversion. Dynamically means you do not declare a variable's type in advance; Python infers it from the value you put in. That inference is the reason the same variable name can later hold a completely different kind of value — which is useful and occasionally a trap.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "Three types carry most of the weight in a first course: integers, floats and strings. A string is any text, marked by quote marks. An integer is a whole number without a decimal point, while a float is a number that has one — even a mathematically whole number like 10.0 counts as a float. The distinction is not cosmetic: Python will happily give you an exact answer with integers but a slightly rounded-internally one with floats, and it will refuse outright to combine a string with a number.",
+      },
+      {
+        type: "paragraph",
+        text: "There is also a boolean type — True or False — which you will put to real use in the next lesson when you write conditions. For now, treat it as another kind of value a variable can hold.",
+      },
+      {
+        type: "paragraph",
+        text: "The single rule that prevents the most beginner errors is this: a variable is re-read every time it is mentioned. It holds whatever was put into it last. If a program stores 5 as score, then later stores 9 as score, then prints score, it prints 9 — the earlier 5 is gone, not waiting somewhere to be recalled.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: a variable that changes" },
+      {
+        type: "paragraph",
+        text: "This is the read-last-value rule in action. Two print statements mention the same variable, and the second letter of the output differs because the value inside the box was replaced in between.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `age = 19\nprint("Age:", age)\nage = 20\nprint("Age now:", age)`,
+        output: "Age: 19\nAge now: 20",
+        caption: "Storing 20 under age overwrites the stored 19, so the second print reads the newer value.",
+      },
+      {
+        type: "paragraph",
+        text: "Read each line as an instruction, not a statement of fact. The first two lines store 19 and print it. The third line replaces the box's contents with 20. The fourth line re-reads the box — which now holds 20 — and prints that. Nothing about a variable is static; you are issuing commands to a machine that remembers only what you most recently told it.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: telling the types apart" },
+      {
+        type: "paragraph",
+        text: "The built-in type() function reports what kind of value is stored. It is the fastest way to see whether a number has a decimal point or a piece of text is actually text.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `print(type(5))\nprint(type(3.14))\nprint(type("hello"))\nprint(type(True))`,
+        output: "<class 'int'>\n<class 'float'>\n<class 'str'>\n<class 'bool'>",
+        caption: "Each type knows what it is: int, float, str (string), bool (boolean).",
+      },
+      {
+        type: "paragraph",
+        text: "Notice the pattern: int for whole numbers, float for decimals, str for text, and bool for true/false. The type is not a label you assigned; Python derived it from how you wrote the value. The quote marks around hello are what made it a string — write hello without quotes and Python looks for a variable of that name instead, which is the lesson-1 NameError all over again.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: division is surprising" },
+      {
+        type: "paragraph",
+        text: "One division operator in Python behaves differently depending on how you write it. Understanding this now saves a whole class of off-by-one bug.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `print(10 / 4)\nprint(10 // 4)\nprint(10 % 4)`,
+        output: "2.5\n2\n2",
+        caption: "/ gives the exact decimal, // gives the whole-number quotient, % gives the remainder.",
+      },
+      {
+        type: "paragraph",
+        text: "A single slash always produces a float, even when the division is exact — so 10 / 4 is 2.5. The double slash is floor division, which rounds down to a whole number, so 10 // 4 is 2. The percent sign is the modulo operator, the remainder of that division, so 10 % 4 is 2. These three are the toolkit for the loop lesson, where you will repeatedly ask whether a number divides evenly or what is left over.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: converting between types" },
+      {
+        type: "paragraph",
+        text: "When you must join a number into a string, you convert explicitly. The names str(), int() and float() are your conversion tools.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `print("The number is " + str(42))\nprint(int("7") + 1)`,
+        output: "The number is 42\n8",
+        caption: "str(42) turns a number into text; int(\"7\") turns text into a number so arithmetic is allowed.",
+      },
+      {
+        type: "paragraph",
+        text: "The first line maps out the classic error: you cannot concatenate a string with an integer using the plus operator, because the two types are incompatible. Wrapping the number in str() converts it into text the string can join with. The second line does the reverse — int(\"7\") reads the digits as a number, so adding 1 gives 8 rather than appending the character to the text.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Adding a string and a number. print('Age: ' + age) fails with a TypeError when age is an integer. The fix is either convert with str(age) or use a comma in print to let Python place the values side by side without combining their types.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Confusing floor division with exact division. Writing total // count thinking it divides exactly gives the rounded-down result. If you want decimals, use a single slash; if you want integer division, the double slash is deliberate.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting a variable is re-read. Storing a new value does not leave the old one available. If you need to keep both, give them different names — a variable is a single box, not a pile.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming a whole number is an integer. Python treats 10.0 as a float, so a value that looks whole may still behave like a decimal during division and in type checks.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "After the two lines age = 19 and age = 20 run, what does print(age) show, and why?",
+        answer: "It shows 20, because a variable holds only the value most recently stored in it.",
+        explanation: "age = 20 overwrites the earlier 19. The variable is a single box, not a history — reading it gives the current contents, which is 20.",
+      },
+      {
+        type: "question",
+        prompt: "What is the value of 17 // 5, and how does it differ from 17 / 5?",
+        answer: "17 // 5 is 3 (floor division rounds down), while 17 / 5 is 3.4 (exact division gives a float).",
+        explanation: "The double slash discards the remainder and returns a whole number; the single slash preserves the decimal part and always returns a float.",
+      },
+      {
+        type: "question",
+        prompt: "Why does the expression \"Age: \" + age fail when age is 42, and what is the fix?",
+        answer: "It fails because a string and an integer cannot be combined with the plus operator; the fix is str(age) or using a comma in print.",
+        explanation: "The plus operator requires the same types on both sides. Converting the number to text with str() makes the concatenation legal.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which value is stored as a float in Python?",
+        options: ["5", "5.0", "\"5\"", "True"],
+        correctIndex: 1,
+        explanation: "A float is any number written with a decimal point. 5.0 is a float even though it is whole; 5 is an integer, \"5\" is a string, and True is a boolean.",
+      },
+      {
+        type: "mcq",
+        stem: "What does print(10 % 3) output?",
+        options: ["3", "1", "3.33", "0"],
+        correctIndex: 1,
+        explanation: "The modulo operator returns the remainder of the division. Ten divided by three is three with one left over, so 10 % 3 is 1.",
+      },
+      {
+        type: "mcq",
+        stem: "After score = 7 and then score = 9, what does score hold?",
+        options: ["7", "9", "16", "Both, depending on context"],
+        correctIndex: 1,
+        explanation: "Assignment replaces the box's contents. The later assignment stores 9, so that is what reading score returns. The 7 is gone.",
+      },
+      {
+        type: "mcq",
+        stem: "Which expression correctly joins a number into a sentence?",
+        options: ["print(\"Total: \" + total) where total is 5", "print(\"Total: \" + str(total)) where total is 5", "print(\"Total: \" - total) where total is 5", "print(str(\"Total: \") * total) where total is 5"],
+        correctIndex: 1,
+        explanation: "You cannot add a string and an integer, so converting the number with str() is required. Option A would raise a TypeError.",
+      },
+      {
+        type: "mcq",
+        stem: "What type does type(3.14) report?",
+        options: ["int", "float", "str", "bool"],
+        correctIndex: 1,
+        explanation: "3.14 has a decimal point, so Python assigns it the float type. Integers have no decimal point and are 'int'.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the output of print(7 // 2)?",
+        options: ["3.5", "3", "4", "1"],
+        correctIndex: 1,
+        explanation: "Floor division rounds the quotient down to the nearest whole number. Seven divided by two is three and a half, so 7 // 2 is 3.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of these is a valid variable name in Python?",
+        options: ["2nd_score", "my-score", "my_score", "my score"],
+        correctIndex: 2,
+        explanation: "Python names must start with a letter or underscore and can contain underscores but not hyphens, spaces, or a leading digit.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is print(int(\"7\") + 1) valid while print(\"7\" + 1) is not?",
+        options: ["Because int() is a list, not a function", "Because \"7\" is text and 1 is a number, so the plus operator has incompatible types; int(\"7\") converts the text to a number", "Because one uses quotes and the other does not, and quotes change precedence", "Because adding to a string is always forbidden, even after conversion"],
+        correctIndex: 1,
+        explanation: "The string \"7\" and the integer 1 cannot be added together. Wrapping the string in int() converts it to a number, so int(\"7\") + 1 is arithmetic and yields 8.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A variable is a named box holding one value, re-read each time it is mentioned, replaced by each new assignment. The core types are int, float, str and bool, inferred from the value you store. Mixed-type operations are disallowed unless you convert explicitly, and division offers a decimal, a whole-number, and a remainder form.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: input, output and operators. This lesson stored values and told you what Python thinks they are; the next one lets you ask the user for a value, print results, and combine values with the full set of arithmetic and comparison operators.",
       },
     ],
   };
