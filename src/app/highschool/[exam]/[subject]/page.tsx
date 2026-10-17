@@ -158,7 +158,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
 
                   <Link
                     href={`/highschool/${examination.code.toLowerCase()}/${subjectSlug}/${topicSlug}/quiz`}
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors"
                   >
                     <HelpCircle className="w-4 h-4" />
                     <span>Quiz</span>

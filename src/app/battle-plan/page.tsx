@@ -282,7 +282,7 @@ export default function BattlePlanPage() {
                         <div className="font-semibold text-slate-100 mt-1">{item.topic}</div>
                       </div>
                       <span
-                        className={`shrink-0 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${priorityStyle[item.priority]}`}
+                        className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border ${priorityStyle[item.priority]}`}
                       >
                         {item.priority === "high"
                           ? "Weak spot"
@@ -343,7 +343,7 @@ export default function BattlePlanPage() {
                             {item.subject} — {item.topic}
                           </span>
                           <span
-                            className={`shrink-0 text-[11px] font-semibold px-2 py-0.5 rounded-full border ${priorityStyle[item.priority]}`}
+                            className={`shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full border ${priorityStyle[item.priority]}`}
                           >
                             {item.kind}
                           </span>

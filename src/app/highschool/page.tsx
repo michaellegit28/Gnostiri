@@ -48,7 +48,7 @@ export default async function HighSchoolHub() {
               <h2 className="text-2xl font-serif font-bold mb-2">Exams</h2>
               <p className="text-slate-400 text-sm mb-6">Past papers by board and year — timed attempts with marking schemes.</p>
             </div>
-            <Link href="/highschool/exams" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+            <Link href="/highschool/exams" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
               Open exam banks
             </Link>
           </div>

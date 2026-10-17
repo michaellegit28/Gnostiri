@@ -253,7 +253,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
             </Link>
           )}
           {next ? (
-            <Link href={`/highschool/study/${subjectParam}/${next.slug}`} className="inline-flex items-center gap-1.5 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-gold">
+            <Link href={`/highschool/study/${subjectParam}/${next.slug}`} className="inline-flex items-center gap-1.5 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-gold-hover">
               Next topic: {next.title} <ArrowRight className="w-4 h-4" />
             </Link>
           ) : (

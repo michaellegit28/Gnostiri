@@ -61,7 +61,7 @@ export default function WaitlistForm() {
         />
         <button
           type="submit"
-          className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gold px-6 py-3 font-semibold text-slate-950 text-sm whitespace-nowrap transition-colors hover:bg-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gold px-6 py-3 font-semibold text-slate-950 text-sm whitespace-nowrap transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           Join the waitlist
         </button>

@@ -60,7 +60,7 @@ export default function LaunchRedeemForm() {
           type="button"
           onClick={() => void redeem()}
           disabled={busy || code.trim().length < 8}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold disabled:opacity-50"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover disabled:opacity-50"
         >
           {busy ? "Redeeming…" : "Redeem"}
         </button>

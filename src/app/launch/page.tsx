@@ -75,7 +75,7 @@ export default async function LaunchPage() {
               </p>
               <Link
                 href="/login"
-                className="inline-flex min-h-12 items-center rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold"
+                className="inline-flex min-h-12 items-center rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover"
               >
                 Sign in / Create account
               </Link>

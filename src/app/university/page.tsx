@@ -156,7 +156,7 @@ export default async function UniversityPage() {
                     {standards.map((s) => (
                       <span
                         key={`${s.authority}-${s.editionYear}`}
-                        className="text-[11px] font-medium text-slate-300 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full"
+                        className="text-xs font-medium text-slate-300 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full"
                       >
                         {s.authority} · {s.editionYear}
                       </span>
@@ -235,7 +235,7 @@ export default async function UniversityPage() {
                   <p className="text-slate-500 text-xs pl-2 leading-relaxed line-clamp-2">
                     {f.blurb}
                   </p>
-                  <div className="flex items-center gap-3 mt-4 pl-2 text-[11px] text-slate-500">
+                  <div className="flex items-center gap-3 mt-4 pl-2 text-xs text-slate-500">
                     {f.programmes.length > 0 && (
                       <span>{f.programmes.length} programme{f.programmes.length === 1 ? "" : "s"}</span>
                     )}
@@ -281,7 +281,7 @@ export default async function UniversityPage() {
                         {course.code || course.department}
                       </span>
                       {course.level && (
-                        <span className="text-[11px] font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
+                        <span className="text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
                           {course.level} level
                         </span>
                       )}
@@ -294,7 +294,7 @@ export default async function UniversityPage() {
                         {course.description}
                       </p>
                     )}
-                    <div className="flex items-center gap-3 pt-1 text-[11px] text-slate-500">
+                    <div className="flex items-center gap-3 pt-1 text-xs text-slate-500">
                       <span className="flex items-center gap-1.5">
                         <BookOpen className="w-3.5 h-3.5" /> {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
                       </span>
