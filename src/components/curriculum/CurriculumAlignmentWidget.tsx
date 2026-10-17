@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ShieldCheck } from "lucide-react";
+import { CircleDot, ShieldCheck } from "lucide-react";
 
 interface Track { id: string; name: string }
 interface Board { id: string; name: string; tracks: Track[] }
@@ -167,7 +167,8 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
         ) : data ? (
           <div className="space-y-1.5">
             <span aria-label={badgeLabel(data.tier, data.pending)} className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${badgeClass(data.tier)}`}>
-              {data.tier === "core" ? "🟢" : data.tier === "elective" ? "🟡" : "🔴"} {badgeLabel(data.tier, data.pending)}
+              <CircleDot aria-hidden="true" className="w-3 h-3" />
+              {badgeLabel(data.tier, data.pending)}
             </span>
             {data.verifiedDate && (
               <p className="flex items-center gap-1 text-[11px] text-slate-500">

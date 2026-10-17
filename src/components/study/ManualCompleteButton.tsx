@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 // Manual completion override with friction: quiz remains the recommended path.
 export default function ManualCompleteButton({ topicId, alreadyCompleted }: { topicId: string; alreadyCompleted: boolean }) {
@@ -9,7 +10,12 @@ export default function ManualCompleteButton({ topicId, alreadyCompleted }: { to
   const [busy, setBusy] = useState(false);
 
   if (done) {
-    return <span className="text-xs font-semibold text-emerald-400">✓ Marked complete</span>;
+    return (
+      <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400">
+        <Check aria-hidden="true" className="h-3.5 w-3.5" />
+        Marked complete
+      </span>
+    );
   }
 
   if (!confirming) {

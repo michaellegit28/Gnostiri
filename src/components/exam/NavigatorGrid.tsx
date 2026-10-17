@@ -1,5 +1,7 @@
 "use client";
 
+import { Flag } from "lucide-react";
+
 // NavigatorGrid — question navigator 1..N for the practice runner.
 // States never color-alone: every cell's aria-label carries its state text.
 
@@ -47,9 +49,7 @@ export default function NavigatorGrid({
           >
             {i + 1}
             {flagged[i] === true && (
-              <span aria-hidden="true" className="ml-0.5 text-xs">
-                ⚑
-              </span>
+              <Flag aria-hidden="true" className="ml-0.5 h-3 w-3" />
             )}
           </button>
         );

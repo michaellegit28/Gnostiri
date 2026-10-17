@@ -1,5 +1,7 @@
 "use client";
 
+import { Check, X } from "lucide-react";
+
 // OptionCard — one MCQ option as a large CBT button. `state` covers both the
 // pre-reveal pick (selected, brand gold) and post-reveal marking (correct emerald,
 // incorrect rose) driven by /api/quiz/answer reveals in the practice runner.
@@ -60,14 +62,10 @@ export default function OptionCard({
       </span>
       <span className="flex-1">{text}</span>
       {(state === "selected" || state === "correct") && (
-        <span aria-hidden="true" className="text-lg font-bold text-emerald-400">
-          ✓
-        </span>
+        <Check aria-hidden="true" className="h-5 w-5 text-emerald-400" />
       )}
       {state === "incorrect" && (
-        <span aria-hidden="true" className="text-lg font-bold text-rose-400">
-          ✗
-        </span>
+        <X aria-hidden="true" className="h-5 w-5 text-rose-400" />
       )}
     </button>
   );

@@ -30,11 +30,6 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
   return await signInWithPopup(requireAuth(), provider);
 };
 
-export const signInWithApple = async (): Promise<UserCredential> => {
-  const { OAuthProvider } = await import("firebase/auth");
-  return signInWithPopup(requireAuth(), new OAuthProvider("apple.com"));
-};
-
 export const signOut = async (): Promise<void> => {
   return await firebaseSignOut(requireAuth());
 };

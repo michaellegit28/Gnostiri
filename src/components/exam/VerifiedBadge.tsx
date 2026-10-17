@@ -1,3 +1,5 @@
+import { ShieldCheck, TriangleAlert } from "lucide-react";
+
 // VerifiedBadge — "Format Verified" card for every manifest surface.
 // Bound fields: lastVerified + syllabusUrl travel with the manifest (RULE 5).
 // formatLabel is optional: surfaces without board-level format data omit the row.
@@ -29,8 +31,8 @@ export default function VerifiedBadge({
           : "border-teal-500/30 bg-teal-500/[0.06]"
       }`}
     >
-      <p className="font-semibold text-slate-100">
-        <span aria-hidden="true">🎯 </span>
+      <p className="flex items-center gap-2 font-semibold text-slate-100">
+        <ShieldCheck aria-hidden="true" className="h-4 w-4 text-teal-400" />
         {board} ({code}) — Verified
       </p>
       {formatLabel != null && formatLabel !== "" && (
@@ -52,8 +54,9 @@ export default function VerifiedBadge({
           </>
         )}
       </p>
-      <p className="mt-1 text-xs text-slate-500">
-        <span aria-hidden="true">⚠️ </span>Always confirm with your syllabus.
+      <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+        <TriangleAlert aria-hidden="true" className="h-3.5 w-3.5" />
+        Always confirm with your syllabus.
       </p>
     </aside>
   );
