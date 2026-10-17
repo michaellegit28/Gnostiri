@@ -11,6 +11,14 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Brand gold (A4-4) — replaces hand-written #D4AF37 / #c3a030
+        gold: {
+          DEFAULT: "#D4AF37",
+          hover: "#c3a030",
+        },
+      },
+      letterSpacing: {
+        label: "0.2em",
       },
       fontFamily: {
         serif: ["var(--font-display)", "Georgia", "serif"],
