@@ -107,8 +107,8 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
     <div className="min-h-screen bg-transparent text-slate-100 p-4 md:p-10">
       <div className="max-w-4xl mx-auto space-y-6">
         <nav className="text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-amber-400">High School</Link> <span>→</span>{" "}
-          <Link href="/highschool/study" className="hover:text-amber-400">Study</Link> <span>→ {subject.name}</span>
+          <Link href="/highschool" className="hover:text-gold">High School</Link> <span>→</span>{" "}
+          <Link href="/highschool/study" className="hover:text-gold">Study</Link> <span>→ {subject.name}</span>
         </nav>
 
         <header className="space-y-1">
@@ -119,11 +119,11 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
         {resume && (
           <Link
             href={`/highschool/study/${subject.slug}/${resume.slug}`}
-            className="sticky top-2 z-20 block rounded-xl border border-amber-500/30 bg-slate-950/90 backdrop-blur p-3 hover:border-amber-400/60"
+            className="sticky top-2 z-20 block rounded-xl border border-gold/30 bg-slate-950/90 backdrop-blur p-3 hover:border-gold/60"
           >
             <div className="flex items-center justify-between gap-2">
               <span className="text-sm text-amber-200">Continue where you left off: <strong>{resume.title}</strong></span>
-              <ArrowRight className="w-4 h-4 text-amber-400 shrink-0" />
+              <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </div>
           </Link>
         )}
@@ -138,7 +138,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
               <option value="">All regions</option>
               {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
             </select>
-            <button className="rounded bg-amber-500 px-3 py-1.5 font-semibold text-slate-950" type="submit">Apply</button>
+            <button className="rounded bg-gold px-3 py-1.5 font-semibold text-slate-950" type="submit">Apply</button>
             {regionParam && <Link href={`/highschool/study/${subject.slug}`} className="rounded border border-slate-600 px-3 py-1.5">Clear</Link>}
             <span className="text-xs text-slate-500">Highlights topics marked core in that region&apos;s boards.</span>
           </form>
@@ -149,7 +149,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
             <li key={t.slug}>
               <Link
                 href={`/highschool/study/${subject.slug}/${t.slug}`}
-                className="block rounded-xl border border-slate-800 bg-slate-900/70 p-4 hover:border-amber-500/40 transition-colors"
+                className="block rounded-xl border border-slate-800 bg-slate-900/70 p-4 hover:border-gold/40 transition-colors"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3">
@@ -188,8 +188,8 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
 function StatusChip({ tone, label }: { tone: "ready" | "amber" | "gold" | "retry" | "muted"; label: string }) {
   const cls = {
     ready: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
-    amber: "bg-amber-500/10 text-amber-300 border-amber-500/30",
-    gold: "bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/30",
+    amber: "bg-gold/10 text-amber-300 border-gold/30",
+    gold: "bg-gold/10 text-gold border-gold/30",
     retry: "bg-red-500/10 text-red-300 border-red-500/30",
     muted: "bg-slate-800 text-slate-500 border-slate-700",
   }[tone];

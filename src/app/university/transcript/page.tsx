@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 const LEVELS: Record<string, { label: string; classes: string }> = {
   mastery: { label: "Mastery", classes: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300" },
   proficient: { label: "Proficient", classes: "bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300" },
-  developing: { label: "Developing", classes: "bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300" },
+  developing: { label: "Developing", classes: "bg-amber-100 text-amber-800 dark:bg-gold/15 dark:text-amber-300" },
 };
 
 export default async function TranscriptPage() {
@@ -60,7 +60,7 @@ export default async function TranscriptPage() {
           <div className="text-sm text-muted-foreground">Proficient</div>
         </div>
         <div className="rounded-2xl border bg-card p-5">
-          <div className="text-3xl font-bold text-amber-600 dark:text-amber-400">{stats.developing}</div>
+          <div className="text-3xl font-bold text-amber-600 dark:text-gold">{stats.developing}</div>
           <div className="text-sm text-muted-foreground">Developing</div>
         </div>
       </section>

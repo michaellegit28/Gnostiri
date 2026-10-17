@@ -39,8 +39,8 @@ export default function AnswerBooklet({
               type="button"
               onClick={() => onModeChange(m)}
               aria-pressed={mode === m}
-              className={`min-h-[44px] rounded-lg px-4 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
-                mode === m ? "bg-[#D4AF37] text-slate-950" : "text-slate-300 hover:text-white"
+              className={`min-h-[44px] rounded-lg px-4 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                mode === m ? "bg-gold text-slate-950" : "text-slate-300 hover:text-white"
               }`}
             >
               {m === "simulation" ? "Simulation mode" : "Planning mode"}
@@ -68,8 +68,8 @@ export default function AnswerBooklet({
         placeholder={mode === "simulation" ? "Write your answer…" : "Plan — intro · points · conclusion…"}
         className={
           mode === "simulation"
-            ? "min-h-[340px] w-full resize-y rounded-xl border border-slate-300 bg-white p-5 font-serif text-[15px] leading-8 text-slate-950 placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
-            : "min-h-[180px] w-full resize-y rounded-xl border border-dashed border-slate-600 bg-slate-900 p-4 text-[15px] leading-relaxed text-slate-100 placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+            ? "min-h-[340px] w-full resize-y rounded-xl border border-slate-300 bg-white p-5 font-serif text-[15px] leading-8 text-slate-950 placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            : "min-h-[180px] w-full resize-y rounded-xl border border-dashed border-slate-600 bg-slate-900 p-4 text-[15px] leading-relaxed text-slate-100 placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         }
         style={
           mode === "simulation"

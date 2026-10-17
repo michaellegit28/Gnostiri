@@ -347,7 +347,7 @@ export default function PracticeRunner({
             type="button"
             onClick={() => void startPractice()}
             disabled={busy}
-            className="w-full min-h-12 rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             {busy ? "Starting…" : "Start practice session"}
           </button>
@@ -388,14 +388,14 @@ export default function PracticeRunner({
                 <button
                   type="button"
                   onClick={() => setHintsOpen((p) => ({ ...p, [question.id]: !p[question.id] }))}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-400 border border-amber-500/30 bg-amber-500/10 rounded-full px-3 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold border border-gold/30 bg-gold/10 rounded-full px-3 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   aria-expanded={hintsOpen[question.id] ?? false}
                 >
                   <Lightbulb className="w-3.5 h-3.5" /> Hint
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${hintsOpen[question.id] ? "rotate-180" : ""}`} />
                 </button>
                 {hintsOpen[question.id] && (
-                  <p className="mt-2 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3 text-sm text-amber-200">
+                  <p className="mt-2 rounded-lg border border-gold/20 bg-gold/5 p-3 text-sm text-amber-200">
                     {question.hint}
                   </p>
                 )}
@@ -498,7 +498,7 @@ export default function PracticeRunner({
                 type="button"
                 onClick={() => void completeSection()}
                 disabled={busy}
-                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-amber-500 px-5 font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 {busy ? "Saving…" : sectionIndex < sections.length - 1 ? "Complete section" : "Finish & submit"}
               </button>
@@ -519,7 +519,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={advanceToNextSection}
-              className="w-full min-h-12 rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               Continue
             </button>
@@ -530,9 +530,9 @@ export default function PracticeRunner({
       {/* ---------- RESULTS ---------- */}
       {phase === "results" && breakdown && (
         <div className="space-y-5">
-          <div className="rounded-xl border border-[#D4AF37]/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">
+          <div className="rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Session complete — {topicTitle}</p>
-            <p className="text-3xl font-serif font-bold text-[#D4AF37]">
+            <p className="text-3xl font-serif font-bold text-gold">
               {breakdown.totalScore}/{breakdown.maxTotalScore} marks
             </p>
             <p className="text-sm text-slate-300">{breakdown.percentage}% overall (auto-scored sections)</p>
@@ -549,7 +549,7 @@ export default function PracticeRunner({
                       {s.score}/{s.maxScore} correct
                     </span>
                   ) : (
-                    <span className="text-xs text-amber-300 border border-amber-500/30 bg-amber-500/10 rounded-full px-2.5 py-1">
+                    <span className="text-xs text-amber-300 border border-gold/30 bg-gold/10 rounded-full px-2.5 py-1">
                       Self-assessment
                     </span>
                   )}
@@ -588,7 +588,7 @@ export default function PracticeRunner({
                                     className="h-4 w-4 accent-emerald-500"
                                   />
                                   <span className="text-slate-200">{mp.point}</span>
-                                  <span className="ml-auto text-xs text-amber-400 font-semibold shrink-0">{mp.marks} mk</span>
+                                  <span className="ml-auto text-xs text-gold font-semibold shrink-0">{mp.marks} mk</span>
                                 </label>
                               ))}
                             </div>
@@ -611,7 +611,7 @@ export default function PracticeRunner({
                                   )}
                                   <div>
                                     <span className="text-slate-200">{p.point}</span>
-                                    <span className="ml-2 text-xs font-semibold text-amber-400">{p.awarded}/{p.maxMarks}</span>
+                                    <span className="ml-2 text-xs font-semibold text-gold">{p.awarded}/{p.maxMarks}</span>
                                     {p.reason && <p className="text-xs text-slate-400">{p.reason}</p>}
                                   </div>
                                 </div>
@@ -660,7 +660,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-amber-500 px-5 font-semibold text-slate-950 hover:bg-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               <RefreshCw className="w-4 h-4" /> Practice again
             </button>

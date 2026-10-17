@@ -43,7 +43,7 @@ const EXAMS = [
 
 const priorityStyle: Record<string, string> = {
   high: "bg-rose-500/10 text-rose-300 border-rose-500/30",
-  medium: "bg-amber-500/10 text-amber-300 border-amber-500/30",
+  medium: "bg-gold/10 text-amber-300 border-gold/30",
   low: "bg-teal-500/10 text-teal-300 border-teal-500/30",
 };
 
@@ -138,7 +138,7 @@ export default function BattlePlanPage() {
     <main className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-4xl space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-amber-400 transition-colors">
+          <Link href="/highschool" className="hover:text-gold transition-colors">
             High School
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -146,8 +146,8 @@ export default function BattlePlanPage() {
         </nav>
 
         <header className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-semibold border border-[#D4AF37]/30">
-            <SectionMark variant="battle" className="w-4 h-4 text-[#D4AF37]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold border border-gold/30">
+            <SectionMark variant="battle" className="w-4 h-4 text-gold" />
             <span>Exam Battle Plan</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
@@ -162,14 +162,14 @@ export default function BattlePlanPage() {
         {loading ? (
           <p className="text-slate-400">Loading…</p>
         ) : !user ? (
-          <div className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="rounded-2xl border border-gold/30 bg-gold/10 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <LogIn className="w-5 h-5 text-amber-400" />
+              <LogIn className="w-5 h-5 text-gold" />
               <p className="text-sm text-slate-200">Sign in to build your personal battle plan.</p>
             </div>
             <Link
               href="/login"
-              className="px-5 py-2.5 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors"
+              className="px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
             >
               Sign In
             </Link>
@@ -207,7 +207,7 @@ export default function BattlePlanPage() {
               type="button"
               onClick={() => void generate()}
               disabled={busy}
-              className="inline-flex items-center gap-2 min-h-[48px] px-6 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-2 min-h-[48px] px-6 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors disabled:opacity-50"
             >
               <Swords className="w-4 h-4" />
               {busy ? "Building your mission…" : "Generate Battle Plan"}
@@ -221,10 +221,10 @@ export default function BattlePlanPage() {
         ) : (
           <div className="space-y-8">
             {/* Countdown + progress */}
-            <section className="relative overflow-hidden rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-b from-amber-950/40 via-slate-900 to-slate-900 p-6 md:p-8">
+            <section className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-b from-amber-950/40 via-slate-900 to-slate-900 p-6 md:p-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <CalendarDays className="w-8 h-8 text-[#D4AF37]" />
+                  <CalendarDays className="w-8 h-8 text-gold" />
                   <div>
                     <div className="text-3xl font-serif font-bold">
                       {daysLeft === null ? "—" : daysLeft === 0 ? "Today!" : `${daysLeft} days`}
@@ -244,7 +244,7 @@ export default function BattlePlanPage() {
               </div>
               <div className="mt-4 h-2.5 rounded-full bg-slate-800 overflow-hidden">
                 <div
-                  className="h-full bg-[#D4AF37] transition-all duration-500"
+                  className="h-full bg-gold transition-all duration-500"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -259,7 +259,7 @@ export default function BattlePlanPage() {
             {/* Today's mission */}
             <section className="space-y-4">
               <h2 className="text-xl font-bold flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-[#D4AF37]" />
+                <CheckCircle2 className="w-5 h-5 text-gold" />
                 Today&apos;s mission
               </h2>
               {today.length === 0 ? (
@@ -301,7 +301,7 @@ export default function BattlePlanPage() {
                       </Link>
                       <Link
                         href={`/highschool/${item.examCode}/${item.subjectSlug}/${item.topicSlug}/quiz`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg bg-[#D4AF37] hover:bg-[#c3a030] text-slate-950 text-sm font-semibold transition-colors"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 text-sm font-semibold transition-colors"
                       >
                         <HelpCircle className="w-4 h-4" />
                         Quiz

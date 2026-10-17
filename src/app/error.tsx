@@ -15,7 +15,7 @@ export default function RootError({ error, reset }: RootErrorProps) {
   return (
     <div className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 py-24 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
           Something interrupted learning
         </p>
         <h1 className="mt-4 font-serif text-3xl font-bold md:text-4xl">
@@ -34,7 +34,7 @@ export default function RootError({ error, reset }: RootErrorProps) {
           <button
             type="button"
             onClick={() => reset()}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#D4AF37] px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-[#c3a030] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Try again
           </button>

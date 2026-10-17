@@ -42,7 +42,7 @@ export default function StudySearch() {
         onBlur={() => setTimeout(() => setOpen(false), 150)}
         placeholder="Search subjects, topics, subtopics — try “mitosis”…"
         aria-label="Search study topics"
-        className="w-full rounded-full border border-slate-700 bg-slate-900/80 px-5 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-[#D4AF37] focus:outline-none"
+        className="w-full rounded-full border border-slate-700 bg-slate-900/80 px-5 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold focus:outline-none"
       />
       {open && hits.length > 0 && (
         <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-slate-700 bg-slate-950/95 backdrop-blur">

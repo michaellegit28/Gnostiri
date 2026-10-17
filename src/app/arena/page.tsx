@@ -8,13 +8,12 @@ export default function ArenaPage() {
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-3xl mx-auto text-center space-y-6">
-        <Trophy className="w-12 h-12 text-[#D4AF37] mx-auto" />
-        <p className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37]">Global Arena</p>
+        <Trophy className="w-12 h-12 text-gold mx-auto" />
+        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Global Arena</p>
         <p
           role="status"
-          aria-disabled="true"
           aria-label="Global Arena — coming soon"
-          className="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-amber-300"
+          className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-gold"
         >
           Coming soon
         </p>
@@ -24,7 +23,7 @@ export default function ArenaPage() {
           then tournaments, then live head-to-head battles.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link href="/highschool/study" className="px-6 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm">Train in High School</Link>
+          <Link href="/highschool/study" className="px-6 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm">Train in High School</Link>
           <Link href="/progress" className="px-6 py-3 rounded-lg border border-slate-600 text-sm">My progress</Link>
         </div>
       </div>

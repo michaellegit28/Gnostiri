@@ -24,7 +24,7 @@ export const tracking = {
 } as const;
 
 export const focusRing = {
-  gold: "focus-visible:ring-2 focus-visible:ring-[#D4AF37]",
+  gold: "focus-visible:ring-2 focus-visible:ring-gold",
   teal: "focus-visible:ring-2 focus-visible:ring-teal-400",
 } as const;
 

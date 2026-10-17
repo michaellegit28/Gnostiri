@@ -49,9 +49,9 @@ export default async function BoardPracticePage({ params, searchParams }: Practi
     <div className="min-h-screen bg-transparent text-slate-50 p-4 md:p-10">
       <div className="max-w-3xl mx-auto space-y-6">
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool/exams" className="hover:text-amber-400 transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={`/highschool/practice/${manifest.boardId}`} className="hover:text-amber-400 transition-colors">
+          <Link href={`/highschool/practice/${manifest.boardId}`} className="hover:text-gold transition-colors">
             {manifest.board} practice
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -77,7 +77,7 @@ export default async function BoardPracticePage({ params, searchParams }: Practi
             )}
           </div>
           <h1 className="text-3xl md:text-4xl font-serif font-bold">
-            {manifest.topic} <span className="text-[#D4AF37]">— {manifest.board} format</span>
+            {manifest.topic} <span className="text-gold">— {manifest.board} format</span>
           </h1>
           {manifest.notes && <p className="text-amber-300/90 text-sm">{manifest.notes}</p>}
         </header>
@@ -90,7 +90,7 @@ export default async function BoardPracticePage({ params, searchParams }: Practi
               {manifest.board} has not examined this topic in its current format, or its questions are
               still being tagged. Try another topic.
             </p>
-            <Link href={`/highschool/practice/${manifest.boardId}`} className="inline-flex rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">
+            <Link href={`/highschool/practice/${manifest.boardId}`} className="inline-flex rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
               More {manifest.board} topics
             </Link>
           </section>

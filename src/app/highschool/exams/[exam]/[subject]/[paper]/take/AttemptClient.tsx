@@ -125,7 +125,7 @@ export default function AttemptClient({
               timeUp
                 ? "border-rose-500/40 bg-rose-500/10 text-rose-300"
                 : remaining <= 300
-                  ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
+                  ? "border-gold/40 bg-gold/10 text-amber-300"
                   : "border-slate-700 bg-slate-950 text-slate-100"
             }`}
             aria-label="Time remaining"
@@ -201,7 +201,7 @@ export default function AttemptClient({
           <button
             disabled={!allAnswered || busy}
             onClick={() => void submitAnswers()}
-            className="min-h-12 w-full sm:w-auto rounded-lg bg-amber-500 px-6 font-semibold text-slate-950 disabled:opacity-50"
+            className="min-h-12 w-full sm:w-auto rounded-lg bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50"
           >
             {busy ? "Marking…" : "Submit attempt"}
           </button>
@@ -210,8 +210,8 @@ export default function AttemptClient({
           </p>
         </div>
       ) : (
-        <div className="space-y-5 rounded-xl border border-[#D4AF37]/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6">
-          <div className="text-3xl font-serif font-bold text-[#D4AF37]">
+        <div className="space-y-5 rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6">
+          <div className="text-3xl font-serif font-bold text-gold">
             {score}/{maxScore} marks
           </div>
           <p className="text-sm text-slate-300">
@@ -225,7 +225,7 @@ export default function AttemptClient({
               : "Sign in to save attempts and track your progress over time."}
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href={`${backUrl}/review`} className="rounded-lg bg-amber-500 px-5 py-3 font-semibold text-slate-950">
+            <Link href={`${backUrl}/review`} className="rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
               Review marking scheme
             </Link>
             <Link href={backUrl} className="rounded-lg border border-slate-700 px-5 py-3 font-semibold text-slate-200 hover:border-slate-500">

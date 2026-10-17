@@ -18,7 +18,7 @@ type OptionCardProps = {
 
 const TONE: Record<OptionState, string> = {
   idle: "border-slate-700 bg-slate-900/60 text-slate-100 hover:border-slate-500",
-  selected: "border-[#D4AF37] bg-[#D4AF37]/15 text-slate-50",
+  selected: "border-gold bg-gold/15 text-slate-50",
   correct: "border-emerald-500/60 bg-emerald-500/10 text-slate-50",
   incorrect: "border-rose-500/60 bg-rose-500/10 text-slate-50",
 };
@@ -44,18 +44,18 @@ export default function OptionCard({
       onClick={onSelect}
       aria-pressed={state === "selected"}
       aria-label={`Option ${letter}${STATE_LABEL[state]}: ${text}`}
-      className={`flex min-h-[56px] w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-[15px] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] disabled:cursor-default disabled:opacity-90 ${TONE[state]}`}
+      className={`flex min-h-[56px] w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-[15px] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:cursor-default disabled:opacity-90 ${TONE[state]}`}
     >
       <span
         aria-hidden="true"
         className={`inline-flex h-7 min-w-7 items-center justify-center rounded-md px-1.5 text-sm font-extrabold ${
           state === "selected"
-            ? "bg-[#D4AF37] text-slate-950"
+            ? "bg-gold text-slate-950"
             : state === "correct"
               ? "bg-emerald-500 text-slate-950"
               : state === "incorrect"
                 ? "bg-rose-500 text-slate-950"
-                : "bg-slate-800 text-[#D4AF37]"
+                : "bg-slate-800 text-gold"
         }`}
       >
         {letter}

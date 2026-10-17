@@ -27,11 +27,11 @@ export default function TutorPill() {
         onClick={() => setOpen(true)}
         aria-label="Open AI Tutor"
         aria-expanded={open}
-        className="fixed bottom-5 right-5 z-[60] flex min-h-[48px] min-w-[48px] items-center justify-center gap-2.5 rounded-full border border-[#D4AF37]/60 bg-slate-950/90 p-3 shadow-lg shadow-black/50 backdrop-blur-md hover:border-[#D4AF37] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] sm:pl-3 sm:pr-5 sm:py-2.5"
+        className="fixed bottom-5 right-5 z-[60] flex min-h-[48px] min-w-[48px] items-center justify-center gap-2.5 rounded-full border border-gold/60 bg-slate-950/90 p-3 shadow-lg shadow-black/50 backdrop-blur-md hover:border-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:pl-3 sm:pr-5 sm:py-2.5"
       >
         <span className="relative flex h-6 w-6 items-center justify-center" aria-hidden="true">
-          <span className="absolute inset-0 rounded-full border border-dashed border-[#D4AF37]/60" />
-          <span className="h-2 w-2 rounded-full bg-[#D4AF37]" />
+          <span className="absolute inset-0 rounded-full border border-dashed border-gold/60" />
+          <span className="h-2 w-2 rounded-full bg-gold" />
         </span>
         <span className="hidden text-left leading-tight sm:block">
           <span className="block text-sm font-bold text-slate-100">

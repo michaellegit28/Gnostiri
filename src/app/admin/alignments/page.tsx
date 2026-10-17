@@ -42,7 +42,7 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-6 md:p-10 max-w-7xl mx-auto space-y-10">
       <header>
-        <p className="text-[11px] uppercase tracking-[0.3em] text-amber-400">Admin</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Admin</p>
         <h1 className="text-3xl font-serif font-bold">Topic–Board Alignments</h1>
         <p className="text-slate-400 text-sm mt-1">Human-verified only. Default to elective when uncertain. verifiedDate is never null.</p>
       </header>
@@ -53,7 +53,7 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
           <label>Board <select name="board" defaultValue={fBoard} className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">All</option>{boards.map((b) => <option key={b.id} value={b.id}>{b.name} — {b.region.name}</option>)}</select></label>
           <label>Dept <select name="dept" defaultValue={fDept} className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">All</option>{departments.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
           <label>Tier <select name="tier" defaultValue={fTier} className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">All</option><option value="core">core</option><option value="elective">elective</option><option value="excluded">excluded</option></select></label>
-          <button className="px-3 py-1 rounded bg-amber-500 text-slate-950 font-semibold" type="submit">Filter</button>
+          <button className="px-3 py-1 rounded bg-gold text-slate-950 font-semibold" type="submit">Filter</button>
           <a href="/admin/alignments" className="px-3 py-1 rounded border border-slate-700">Clear</a>
         </form>
       </section>
@@ -109,7 +109,7 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
         <p className="text-xs text-slate-500">Entire batch rejected if any slug/board/tier invalid. Paste CSV then Import.</p>
         <CsvImporter />
       </section>
-      <section aria-label="Pending verification" className="border border-dashed border-amber-500/40 rounded-xl p-4">
+      <section aria-label="Pending verification" className="border border-dashed border-gold/40 rounded-xl p-4">
         <h2 className="font-bold">Pending Verification ({pending.length})</h2>
         <ul className="text-sm text-slate-300 list-disc ml-5 mt-2">
           {pending.map((t) => <li key={t.id}>{t.title} <span className="text-slate-500">({t.slug})</span></li>)}

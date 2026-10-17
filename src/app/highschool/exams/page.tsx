@@ -111,7 +111,7 @@ export default async function HighSchoolHubPage() {
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-amber-400 transition-colors">
+          <Link href="/highschool" className="hover:text-gold transition-colors">
             High School
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -125,7 +125,7 @@ export default async function HighSchoolHubPage() {
             <span>High School · Exams</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            Past papers, <span className="text-[#D4AF37]">every system</span>
+            Past papers, <span className="text-gold">every system</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Pick your country, choose your examination, and practice on real past
@@ -135,14 +135,14 @@ export default async function HighSchoolHubPage() {
 
         {/* Resume banner */}
         {recentActivity && (
-          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3 text-amber-300">
-              <History className="w-5 h-5 shrink-0 text-amber-400" />
+              <History className="w-5 h-5 shrink-0 text-gold" />
               <span className="text-sm font-medium">{recentActivity.label}</span>
             </div>
             <Link
               href={recentActivity.link}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg bg-gold hover:bg-gold text-slate-950 transition-colors shrink-0"
             >
               <span>Resume</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -167,20 +167,20 @@ export default async function HighSchoolHubPage() {
               {exams.map((exam) => (
                 <div
                   key={exam.id}
-                  className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-amber-500/40 transition-all duration-200 group shadow-lg"
+                  className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all duration-200 group shadow-lg"
                 >
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                      <h3 className="text-2xl font-serif font-bold text-slate-100 group-hover:text-amber-400 transition-colors">
+                      <h3 className="text-2xl font-serif font-bold text-slate-100 group-hover:text-gold transition-colors">
                         {exam.name.toUpperCase()}
                       </h3>
                       <div className="flex items-center gap-1.5">
                         <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
-                          <BookOpen className="w-3.5 h-3.5 text-amber-500" />
+                          <BookOpen className="w-3.5 h-3.5 text-gold" />
                           <span>{exam.subjectCount} Subjects</span>
                         </div>
                         <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
-                          <FileText className="w-3.5 h-3.5 text-amber-500" />
+                          <FileText className="w-3.5 h-3.5 text-gold" />
                           <span>{exam.paperCount} Paper{exam.paperCount === 1 ? "" : "s"}</span>
                         </div>
                       </div>
@@ -191,7 +191,7 @@ export default async function HighSchoolHubPage() {
                   </div>
                   <Link
                     href={`/highschool/exams/${exam.slug}`}
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold transition-colors"
                   >
                     <span>Open exam board</span>
                     <ArrowRight className="w-4 h-4" />
@@ -212,7 +212,7 @@ export default async function HighSchoolHubPage() {
           </p>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors"
+            className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
           >
             Get notified — it&apos;s free
           </Link>

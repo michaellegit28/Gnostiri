@@ -78,7 +78,7 @@ export default function SiteMenu() {
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className={`fixed top-6 right-4 z-[70] flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/15 bg-slate-950/80 backdrop-blur-md text-slate-200 hover:border-[#D4AF37]/60 hover:text-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${hidden && !open ? "-translate-y-28 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}
+        className={`fixed top-6 right-4 z-[70] flex min-h-[48px] min-w-[48px] items-center justify-center rounded-full border border-white/15 bg-slate-950/80 backdrop-blur-md text-slate-200 hover:border-gold/60 hover:text-white transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${hidden && !open ? "-translate-y-28 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"}`}
       >
         {open ? (
           <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -100,7 +100,7 @@ export default function SiteMenu() {
                 className="space-y-3 animate-[menu-rise_0.5s_ease-out_both]"
                 style={{ animationDelay: `${gi * 90}ms` }}
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
                   {group.label}
                 </p>
                 <ul className="divide-y divide-white/5 border-y border-white/5">
@@ -109,13 +109,13 @@ export default function SiteMenu() {
                       <Link
                         href={link.href}
                         aria-disabled={link.badge ? true : undefined}
-                        className="group flex items-center justify-between gap-4 rounded-lg py-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                        className="group flex items-center justify-between gap-4 rounded-lg py-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                       >
                         <span>
-                          <span className="block font-serif text-2xl font-bold text-slate-100 group-hover:text-[#D4AF37] transition-colors">
+                          <span className="block font-serif text-2xl font-bold text-slate-100 group-hover:text-gold transition-colors">
                             {link.title}
                             {link.badge && (
-                              <span className="ml-3 inline-block rounded-full border border-amber-500/40 bg-amber-500/10 px-2.5 py-0.5 align-middle font-sans text-xs font-semibold text-amber-300">
+                              <span className="ml-3 inline-block rounded-full border border-gold/40 bg-gold/10 px-2.5 py-0.5 align-middle font-sans text-xs font-semibold text-amber-300">
                                 {link.badge}
                               </span>
                             )}
@@ -124,7 +124,7 @@ export default function SiteMenu() {
                             {link.note}
                           </span>
                         </span>
-                        <span className="text-slate-600 group-hover:text-[#D4AF37] group-hover:translate-x-1 transition-all text-xl">
+                        <span className="text-slate-600 group-hover:text-gold group-hover:translate-x-1 transition-all text-xl">
                           →
                         </span>
                       </Link>
@@ -135,7 +135,7 @@ export default function SiteMenu() {
             ))}
             <Link
               href="/login"
-              className="flex min-h-[52px] items-center justify-center rounded-xl bg-[#D4AF37] px-6 font-semibold text-slate-950 hover:bg-[#c3a030] transition-colors"
+              className="flex min-h-[52px] items-center justify-center rounded-xl bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover transition-colors"
             >
               Enter Gnostiri
             </Link>

@@ -56,8 +56,8 @@ export default function SubmitConfirmModal({
             <dd className="text-2xl font-bold tabular-nums text-slate-200">{unanswered}</dd>
             <dt className="mt-1 text-[11px] uppercase tracking-widest text-slate-400">Open</dt>
           </div>
-          <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-3">
-            <dd className="text-2xl font-bold tabular-nums text-amber-300">{flagged}</dd>
+          <div className="rounded-xl border border-gold/40 bg-gold/10 p-3">
+            <dd className="text-2xl font-bold tabular-nums text-gold">{flagged}</dd>
             <dt className="mt-1 text-[11px] uppercase tracking-widest text-slate-400">Flagged</dt>
           </div>
         </dl>
@@ -88,7 +88,7 @@ export default function SubmitConfirmModal({
             <button
               type="button"
               onClick={onSubmit}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-[#D4AF37] px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-[#c3a030] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               {submitLabel}
             </button>

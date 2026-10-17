@@ -27,7 +27,7 @@ export default function ManualCompleteButton({ topicId, alreadyCompleted }: { to
   }
 
   return (
-    <div className="space-y-2 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-xs text-amber-200">
+    <div className="space-y-2 rounded-lg border border-gold/30 bg-gold/5 p-3 text-xs text-amber-200">
       <p>You can mark this complete, but taking the quiz locks in your progress and identifies gaps.</p>
       <div className="flex gap-2">
         <button
@@ -45,7 +45,7 @@ export default function ManualCompleteButton({ topicId, alreadyCompleted }: { to
               setBusy(false);
             }
           }}
-          className="rounded bg-amber-500 px-3 py-1 font-semibold text-slate-950 disabled:opacity-50"
+          className="rounded bg-gold px-3 py-1 font-semibold text-slate-950 disabled:opacity-50"
         >
           {busy ? "Saving…" : "Mark complete anyway"}
         </button>

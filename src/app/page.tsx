@@ -28,14 +28,14 @@ export default async function Home() {
       title: "University",
       description: "Deep dive into degree-level coursework, technical modules, and research.",
       numeral: "II",
-      rule: "via-[#D4AF37]/60",
+      rule: "via-gold/60",
       badge: "Coming soon",
-      badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+      badgeColor: "bg-gold/10 text-gold border-gold/20",
       link: "/university",
       icon: GraduationCap,
       tint: "from-amber-950/40 via-slate-900 to-slate-900",
-      iconColor: "text-[#D4AF37]",
-      glow: "hover:shadow-[#D4AF37]/10",
+      iconColor: "text-gold",
+      glow: "hover:shadow-gold/10",
     },
     {
       title: "Extras",
@@ -113,31 +113,31 @@ export default async function Home() {
         <nav aria-label="Primary" className="flex items-center gap-2 sm:gap-4">
           <Link
             href="/highschool"
-            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Explore
           </Link>
           <Link
             href="/university"
-            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             University
           </Link>
           <Link
             href="/tutor"
-            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Tutor
           </Link>
           <Link
             href="/progress"
-            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="hidden px-4 py-2 min-h-[48px] sm:inline-flex items-center rounded-lg text-sm text-slate-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Progress
           </Link>
           <Link
             href="/login"
-            className="px-5 py-2.5 min-h-[48px] inline-flex items-center text-sm font-medium rounded-lg bg-[#D4AF37] text-slate-950 hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
+            className="px-5 py-2.5 min-h-[48px] inline-flex items-center text-sm font-medium rounded-lg bg-gold text-slate-950 hover:bg-gold-hover transition-colors focus:ring-2 focus:ring-gold focus:outline-none"
           >
             Sign up free
           </Link>
@@ -189,7 +189,7 @@ export default async function Home() {
               <div className="mt-8 flex flex-col sm:flex-row items-center gap-3">
                 <Link
                   href="/highschool"
-                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
+                  className="inline-flex items-center justify-center min-h-[48px] px-8 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors focus:ring-2 focus:ring-gold focus:outline-none"
                 >
                   Start Learning Free
                 </Link>
@@ -213,7 +213,7 @@ export default async function Home() {
                 key={s.label}
                 className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-6 text-center"
               >
-                <dd className="font-serif text-3xl md:text-5xl font-bold text-[#D4AF37]">
+                <dd className="font-serif text-3xl md:text-5xl font-bold text-gold">
                   {s.value}
                 </dd>
                 <dt className="mt-2 text-[10px] md:text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
@@ -229,16 +229,16 @@ export default async function Home() {
         <section aria-label="AI Tutor" className="w-full">
           <Link
             href="/tutor"
-            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-r from-[#2a230f] via-slate-900 to-slate-950 p-6 md:p-8 transition-colors hover:border-[#D4AF37]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-gold/30 bg-gradient-to-r from-[#2a230f] via-slate-900 to-slate-950 p-6 md:p-8 transition-colors hover:border-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             <div className="flex items-center gap-4">
               <div className="p-3 bg-white/5 border border-white/10 rounded-xl">
-                <Sparkles className="w-6 h-6 text-[#D4AF37]" />
+                <Sparkles className="w-6 h-6 text-gold" />
               </div>
               <div>
                 <p className="font-serif text-xl font-bold text-slate-100">
                   Ask the AI Tutor{" "}
-                  <span className="ml-2 align-middle font-sans text-xs font-semibold px-3 py-1 rounded-full border bg-amber-500/10 text-amber-400 border-amber-500/20">
+                  <span className="ml-2 align-middle font-sans text-xs font-semibold px-3 py-1 rounded-full border bg-gold/10 text-gold border-gold/20">
                     New
                   </span>
                 </p>
@@ -247,7 +247,7 @@ export default async function Home() {
                 </p>
               </div>
             </div>
-            <span className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm whitespace-nowrap">
+            <span className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm whitespace-nowrap">
               Try the Tutor →
             </span>
           </Link>
@@ -256,7 +256,7 @@ export default async function Home() {
         {/* Domain Cards Section — the three doorways */}
         <section className="w-full space-y-8">
           <div className="space-y-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
               The three ways
             </p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-slate-100">
@@ -272,7 +272,7 @@ export default async function Home() {
               return (
                 <div
                   key={card.title}
-                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b ${card.tint} p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-lg hover:shadow-xl ${card.glow}`}
+                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b ${card.tint} p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 shadow-lg hover:shadow-xl ${card.glow}`}
                 >
                   <div className={`pointer-events-none absolute inset-x-8 top-0 h-[2px] bg-gradient-to-r from-transparent ${card.rule} to-transparent`} />
                   <div>
@@ -299,7 +299,7 @@ export default async function Home() {
 
                   <Link
                     href={card.link}
-                    className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-[#D4AF37] hover:bg-[#c3a030] text-slate-950 font-semibold text-sm transition-colors focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"
+                    className="w-full inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors focus:ring-2 focus:ring-gold focus:outline-none"
                   >
                     Enter {card.title}
                   </Link>
@@ -334,7 +334,7 @@ export default async function Home() {
                   key={item.step}
                   className="bg-slate-900/60 border border-slate-800 p-6 rounded-xl flex flex-col space-y-4"
                 >
-                  <div className="text-3xl font-serif font-extrabold text-[#D4AF37]">
+                  <div className="text-3xl font-serif font-extrabold text-gold">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-bold text-slate-200 flex items-center gap-2">
@@ -353,11 +353,11 @@ export default async function Home() {
 
         {/* Manifesto */}
         <section className="w-full max-w-4xl mx-auto text-center space-y-5 py-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
             The Gnostiri principle
           </p>
           <blockquote className="font-serif text-3xl md:text-5xl font-bold leading-tight text-slate-100">
-            Curiosity is the <span className="italic text-[#D4AF37]">only</span> prerequisite.
+            Curiosity is the <span className="italic text-gold">only</span> prerequisite.
           </blockquote>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto font-light">
             Not your grades, not your country, not your past. If you wonder about
@@ -369,7 +369,7 @@ export default async function Home() {
       <footer className="border-t border-slate-800 py-10 px-6 bg-transparent text-slate-400 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
-            <GnostiriLogo wordClassName="font-serif font-bold text-[#D4AF37] text-lg" markClassName="w-7 h-7 text-[#D4AF37]" />
+            <GnostiriLogo wordClassName="font-serif font-bold text-gold text-lg" markClassName="w-7 h-7 text-gold" />
             <span className="text-slate-600">|</span>
             <div className="flex items-center gap-4">
               <Link href="/highschool" className="hover:text-slate-200 transition-colors">

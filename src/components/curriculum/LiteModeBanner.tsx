@@ -28,7 +28,7 @@ export default function LiteModeBanner() {
   return (
     <div className="mb-4 rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm text-amber-200 flex items-center justify-between gap-3">
       <span>Slow connection or low-bandwidth region detected — switch to Lite Mode for text-only reading.</span>
-      <a href="?lite=1" className="shrink-0 rounded bg-amber-500 px-3 py-1 font-semibold text-slate-950">Lite Mode</a>
+      <a href="?lite=1" className="shrink-0 rounded bg-gold px-3 py-1 font-semibold text-slate-950">Lite Mode</a>
     </div>
   );
 }

@@ -33,7 +33,7 @@ export default async function RevisionPage() {
 
         {due.length === 0 ? (
           <div className="rounded-3xl border border-dashed border-white/15 bg-white/[0.02] p-10 text-center space-y-4">
-            <Sparkles className="w-8 h-8 text-[#D4AF37] mx-auto" />
+            <Sparkles className="w-8 h-8 text-gold mx-auto" />
             <h2 className="font-serif text-2xl font-bold">Nothing due right now</h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
               {user
@@ -50,7 +50,7 @@ export default async function RevisionPage() {
           <ul className="text-sm text-slate-400 space-y-2 leading-relaxed">
             <li>• Each review adjusts the concept&apos;s interval — correct and confident stretches the gap, a miss collapses it.</li>
             <li>• Only <strong className="text-slate-200">exam-condition</strong> demonstrations feed the mastery score.</li>
-            <li>• A concept becomes <strong className="text-[#D4AF37]">mastered</strong> after two exam-condition successes, on separate days.</li>
+            <li>• A concept becomes <strong className="text-gold">mastered</strong> after two exam-condition successes, on separate days.</li>
             <li>• Mastered concepts graduate to maintenance — they return rarely, but they never disappear.</li>
           </ul>
         </section>

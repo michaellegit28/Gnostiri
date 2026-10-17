@@ -115,7 +115,7 @@ export default function ProgressPage() {
     return (
       <div className="min-h-screen bg-transparent text-slate-50 flex items-center justify-center p-6">
         <div className="flex items-center gap-3 text-slate-400">
-          <Loader2 className="w-6 h-6 animate-spin text-amber-500" />
+          <Loader2 className="w-6 h-6 animate-spin text-gold" />
           <span>Loading dashboard...</span>
         </div>
       </div>
@@ -127,7 +127,7 @@ export default function ProgressPage() {
     return (
       <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12 flex items-center justify-center">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6 shadow-xl">
-          <div className="w-16 h-16 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto">
             <LogIn className="w-8 h-8" />
           </div>
           <div className="space-y-2">
@@ -141,7 +141,7 @@ export default function ProgressPage() {
           <div>
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-sm transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors w-full"
             >
               <span>Sign in or create an account</span>
               <ArrowRight className="w-4 h-4" />
@@ -166,7 +166,7 @@ export default function ProgressPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-800 pb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold mb-3">
             <BarChart3 className="w-4 h-4" />
             <span>Progress Analytics</span>
           </div>
@@ -186,7 +186,7 @@ export default function ProgressPage() {
             onClick={() => setActiveTab("highschool")}
             className={`flex min-h-[48px] items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
               activeTab === "highschool"
-                ? "border-amber-500 text-amber-400 bg-amber-500/5"
+                ? "border-gold text-gold bg-gold/5"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -200,7 +200,7 @@ export default function ProgressPage() {
             onClick={() => setActiveTab("university")}
             className={`flex min-h-[48px] items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
               activeTab === "university"
-                ? "border-amber-500 text-amber-400 bg-amber-500/5"
+                ? "border-gold text-gold bg-gold/5"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -214,7 +214,7 @@ export default function ProgressPage() {
             onClick={() => setActiveTab("extras")}
             className={`flex min-h-[48px] items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all whitespace-nowrap ${
               activeTab === "extras"
-                ? "border-amber-500 text-amber-400 bg-amber-500/5"
+                ? "border-gold text-gold bg-gold/5"
                 : "border-transparent text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -249,7 +249,7 @@ export default function ProgressPage() {
             ) : (
               <>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Current streak</p><p className="mt-2 text-3xl font-bold text-amber-400">{dashboardData?.streak || 0} days</p></div>
+                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Current streak</p><p className="mt-2 text-3xl font-bold text-gold">{dashboardData?.streak || 0} days</p></div>
                   <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Today’s plan</p>{dashboardData?.studyPlan ? <div className="mt-2"><p className="font-semibold">{dashboardData.studyPlan.items.length} study items</p><Link href="/study-plan" className="text-sm text-teal-300 underline">Edit plan</Link></div> : <Link href="/study-plan" className="mt-2 inline-block text-teal-300 underline">Create a study plan</Link>}</div>
                 </div>
                 {/* Weak & Strong Topics Grid */}
@@ -335,7 +335,7 @@ export default function ProgressPage() {
 
                 {/* Recent Quiz Attempts List */}
                 <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                  <div className="flex items-center gap-2.5 text-amber-400">
+                  <div className="flex items-center gap-2.5 text-gold">
                     <History className="w-5 h-5 shrink-0" />
                     <h2 className="text-lg font-serif font-semibold text-slate-100">
                       Recent Quiz Attempts
@@ -347,7 +347,7 @@ export default function ProgressPage() {
                       {dashboardData.recentAttempts.slice(0, 7).reverse().map((attempt) => (
                         <div key={attempt.id} className="flex h-full min-w-12 flex-col items-center justify-end gap-1">
                           <span className="text-[10px] text-slate-400">{attempt.accuracy}%</span>
-                          <div className="w-8 rounded-t bg-amber-500" style={{ height: `${Math.max(4, attempt.accuracy)}%` }} title={`${attempt.topicTitle}: ${attempt.accuracy}%`} />
+                          <div className="w-8 rounded-t bg-gold" style={{ height: `${Math.max(4, attempt.accuracy)}%` }} title={`${attempt.topicTitle}: ${attempt.accuracy}%`} />
                           <span className="max-w-16 truncate text-[10px] text-slate-500">{attempt.topicTitle}</span>
                         </div>
                       ))}

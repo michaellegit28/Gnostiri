@@ -13,7 +13,7 @@ export default async function HighSchoolHub() {
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-10">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/" className="rounded hover:text-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Home</Link>
+          <Link href="/" className="rounded hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Home</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
           <span className="text-slate-100 font-medium">High School</span>
         </nav>
@@ -24,7 +24,7 @@ export default async function HighSchoolHub() {
             <span>High School</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            Textbooks and exams, <span className="text-[#D4AF37]">one roof</span>
+            Textbooks and exams, <span className="text-gold">one roof</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Master {subjects} subjects in the study textbooks, then prove it on real past papers — WAEC, JAMB, Bagrut and more.
@@ -42,21 +42,21 @@ export default async function HighSchoolHub() {
               Open textbooks
             </Link>
           </div>
-          <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-8 hover:border-amber-500/40 transition-all">
+          <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-8 hover:border-gold/40 transition-all">
             <div>
-              <FileText className="w-8 h-8 text-amber-400 mb-4" />
+              <FileText className="w-8 h-8 text-gold mb-4" />
               <h2 className="text-2xl font-serif font-bold mb-2">Exams</h2>
               <p className="text-slate-400 text-sm mb-6">Past papers by board and year — timed attempts with marking schemes.</p>
             </div>
-            <Link href="/highschool/exams" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
+            <Link href="/highschool/exams" className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
               Open exam banks
             </Link>
           </div>
         </div>
 
         <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center">
-          <Trophy className="w-6 h-6 text-[#D4AF37] mx-auto mb-2" />
-          <p className="text-sm text-slate-400">Want to compete? <Link href="/arena" className="rounded text-amber-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">Global Arena</Link> hosts inter-school and inter-country contests.</p>
+          <Trophy className="w-6 h-6 text-gold mx-auto mb-2" />
+          <p className="text-sm text-slate-400">Want to compete? <Link href="/arena" className="rounded text-gold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Global Arena</Link> hosts inter-school and inter-country contests.</p>
         </section>
       </div>
     </div>

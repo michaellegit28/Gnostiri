@@ -75,12 +75,12 @@ export default async function UniversityPage() {
         <header className="relative overflow-hidden rounded-3xl border border-white/10">
           <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_85%_0%,rgba(212,175,55,0.14)_0%,rgba(20,27,44,0.9)_45%,#060814_100%)]" />
           <div className="relative px-8 py-14 md:px-14 md:py-20 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-xs font-semibold border border-amber-500/30">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-amber-300 text-xs font-semibold border border-gold/30">
               <GraduationCap className="w-4 h-4" />
               <span>Gnostiri University</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight max-w-3xl">
-              Study at <span className="text-[#D4AF37]">degree depth.</span>
+              Study at <span className="text-gold">degree depth.</span>
             </h1>
             <p className="text-slate-300 text-base md:text-lg max-w-2xl leading-relaxed">
               {faculties.length} {faculties.length === 1 ? "faculty" : "faculties"}. One concept map. Every course is built on a spine of
@@ -90,14 +90,14 @@ export default async function UniversityPage() {
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Link
                 href="#faculties"
-                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-7 py-3 rounded-xl bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-7 py-3 rounded-xl bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
               >
                 Explore the faculties <ArrowRight className="w-4 h-4" />
               </Link>
               {!premium && (
                 <Link
                   href="#waitlist"
-                  className="inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl border border-slate-600 text-slate-200 font-semibold text-sm hover:border-[#D4AF37]/60 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                  className="inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl border border-slate-600 text-slate-200 font-semibold text-sm hover:border-gold/60 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
                   Join the waitlist
                 </Link>
@@ -109,7 +109,7 @@ export default async function UniversityPage() {
                   key={s.label}
                   className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 backdrop-blur-sm"
                 >
-                  <dd className="font-serif text-2xl md:text-3xl font-bold text-[#D4AF37]">
+                  <dd className="font-serif text-2xl md:text-3xl font-bold text-gold">
                     {s.value}
                   </dd>
                   <dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
@@ -122,7 +122,7 @@ export default async function UniversityPage() {
         </header>
 
         {!premium && (
-          <aside id="waitlist" className="rounded-2xl border border-amber-500/30 bg-amber-500/[0.07] p-6 md:p-8 space-y-5 scroll-mt-24">
+          <aside id="waitlist" className="rounded-2xl border border-gold/30 bg-gold/[0.07] p-6 md:p-8 space-y-5 scroll-mt-24">
             <div>
               <strong className="text-amber-300 font-serif text-xl">Gnostiri Premium — coming soon</strong>
               <p className="text-slate-300 mt-2 text-sm max-w-2xl">
@@ -139,7 +139,7 @@ export default async function UniversityPage() {
         {programmes.length > 0 && (
           <section id="faculties" className="space-y-8">
             <div className="space-y-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
                 Degree programmes
               </p>
               <h2 className="text-3xl md:text-4xl font-serif font-bold">
@@ -172,7 +172,7 @@ export default async function UniversityPage() {
               {programmes.map((p) => (
                 <article
                   key={p.id}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/80 to-slate-950 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40"
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/80 to-slate-950 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
                 >
                   <div
                     className="absolute inset-x-10 top-0 h-[2px] opacity-70"
@@ -209,7 +209,7 @@ export default async function UniversityPage() {
         {/* Faculties — the full academic map */}
         <section className="space-y-8">
           <div className="space-y-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
               {faculties.length === 13 ? "The thirteen faculties" : "Our faculties"}
             </p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold">
@@ -259,7 +259,7 @@ export default async function UniversityPage() {
         {/* Courses */}
         <section className="space-y-8">
           <div className="space-y-3">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
               Open courses
             </p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold">
@@ -273,11 +273,11 @@ export default async function UniversityPage() {
               {courses.map((course) => (
                 <article
                   key={course.id}
-                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-slate-900/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 hover:shadow-xl hover:shadow-amber-500/5"
+                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-slate-900/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-gold/5"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="font-mono text-xs tracking-[0.15em] text-[#D4AF37]">
+                      <span className="font-mono text-xs tracking-[0.15em] text-gold">
                         {course.code || course.department}
                       </span>
                       {course.level && (
@@ -316,7 +316,7 @@ export default async function UniversityPage() {
                   ) : (
                     <Link
                       href={`/university/${course.slug}`}
-                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl bg-white/5 border border-white/15 px-5 py-3 font-semibold text-sm text-slate-100 group-hover:bg-[#D4AF37] group-hover:text-slate-950 group-hover:border-[#D4AF37] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl bg-white/5 border border-white/15 px-5 py-3 font-semibold text-sm text-slate-100 group-hover:bg-gold group-hover:text-slate-950 group-hover:border-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                     >
                       {premium ? "Open course" : "Preview course"}
                     </Link>
@@ -336,7 +336,7 @@ export default async function UniversityPage() {
               { icon: Trophy, title: "Verified mastery", body: "Demonstrate competence under exam conditions. Your transcript proves what you can do." },
             ].map((item) => (
               <div key={item.title} className="space-y-3">
-                <item.icon className="w-7 h-7 text-[#D4AF37]" />
+                <item.icon className="w-7 h-7 text-gold" />
                 <h3 className="font-serif text-xl font-bold">{item.title}</h3>
                 <p className="text-slate-400 text-sm leading-relaxed">{item.body}</p>
               </div>

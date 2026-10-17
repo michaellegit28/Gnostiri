@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Check } from "lucide-react";
 
 interface Q { id: string; questionText: string; options: string[]; }
 
@@ -40,19 +41,20 @@ export default function MasterQuizClient({ topicId, backHref, backLabel, questio
           <div className="mt-2 space-y-1">
             {q.options.map((o) => (
               <button type="button" key={o} disabled={score !== null} onClick={() => setPicked((p) => ({ ...p, [q.id]: o }))}
-                className={`block w-full text-left text-sm px-3 py-2 rounded-lg border transition-colors ${picked[q.id] === o ? "border-amber-500 bg-amber-500/10" : "border-slate-700 hover:border-slate-500"}`}>{o}</button>
+                className={`block w-full text-left text-sm px-3 py-2 rounded-lg border transition-colors ${picked[q.id] === o ? "border-gold bg-gold/10" : "border-slate-700 hover:border-slate-500"}`}>{o}</button>
             ))}
           </div>
           {results[q.id] && (
-            <p aria-live="polite" className={`mt-2 text-xs ${results[q.id].ok ? "text-emerald-400" : "text-red-400"}`}>
-              {results[q.id].ok ? "Correct ✓" : `Answer: ${results[q.id].correct}`} {results[q.id].why && <span className="text-slate-400">— {results[q.id].why}</span>}
+            <p aria-live="polite" className={`mt-2 flex items-center gap-1 text-xs ${results[q.id].ok ? "text-emerald-400" : "text-red-400"}`}>
+              {results[q.id].ok && <Check aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />}
+              {results[q.id].ok ? "Correct" : `Answer: ${results[q.id].correct}`} {results[q.id].why && <span className="text-slate-400">— {results[q.id].why}</span>}
             </p>
           )}
         </div>
       ))}
-      {score !== null && <p aria-live="polite" className="font-bold text-amber-400">Score: {score}/{questions.length}</p>}
+      {score !== null && <p aria-live="polite" className="font-bold text-gold">Score: {score}/{questions.length}</p>}
       <div className="flex gap-3">
-        {score === null && <button type="button" onClick={submit} disabled={busy} className="px-5 py-2.5 rounded-lg bg-amber-500 text-slate-950 font-semibold text-sm">{busy ? "Marking…" : "Submit"}</button>}
+        {score === null && <button type="button" onClick={submit} disabled={busy} className="px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm">{busy ? "Marking…" : "Submit"}</button>}
         <Link href={backHref} className="px-5 py-2.5 rounded-lg border border-slate-600 text-sm">Back to {backLabel}</Link>
       </div>
     </div>

@@ -44,7 +44,7 @@ function Block({ block }: { block: LessonBlock }) {
           {block.text}
         </h2>
       ) : (
-        <h3 className="font-serif text-xl font-semibold text-[#D4AF37] mt-6 mb-3">
+        <h3 className="font-serif text-xl font-semibold text-gold mt-6 mb-3">
           {block.text}
         </h3>
       );
@@ -56,8 +56,8 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "definition":
       return (
-        <div className="border border-[#D4AF37]/30 bg-[#D4AF37]/5 rounded-xl p-5 my-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-1">
+        <div className="border border-gold/30 bg-gold/5 rounded-xl p-5 my-6">
+          <div className="text-xs font-semibold uppercase tracking-wider text-gold mb-1">
             Key idea
           </div>
           <div className="font-bold text-slate-100 text-lg mb-2">{block.term}</div>
@@ -135,13 +135,13 @@ export default function DiscoveryReader({
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,#1b1440_0%,#0d0a24_50%,#060814_100%)]">
         <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">
           <nav className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm text-slate-400">
-            <Link href="/discovery" className="hover:text-[#D4AF37] transition-colors">
+            <Link href="/discovery" className="hover:text-gold transition-colors">
               Discovery
             </Link>
             {trail.map((t) => (
               <span key={t.id} className="flex items-center gap-1.5">
                 <span className="text-slate-600">/</span>
-                <Link href={`/discovery/${t.id}`} className="hover:text-[#D4AF37] transition-colors">
+                <Link href={`/discovery/${t.id}`} className="hover:text-gold transition-colors">
                   {t.title}
                 </Link>
               </span>
@@ -174,9 +174,9 @@ export default function DiscoveryReader({
                 onClick={() => setDepth(i)}
                 className={`shrink-0 min-h-[44px] px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
                   isActive
-                    ? "bg-[#D4AF37] text-slate-950 border-transparent"
+                    ? "bg-gold text-slate-950 border-transparent"
                     : available
-                      ? "bg-white/5 border-white/10 text-slate-200 hover:border-[#D4AF37]/50"
+                      ? "bg-white/5 border-white/10 text-slate-200 hover:border-gold/50"
                       : "bg-transparent border-white/5 text-slate-600 cursor-not-allowed"
                 }`}
               >
@@ -205,7 +205,7 @@ export default function DiscoveryReader({
             </p>
             <Link
               href={`/tutor?domain=extras&topicId=${encodeURIComponent(topicId)}`}
-              className="mt-5 inline-flex items-center gap-2 min-h-[48px] px-5 py-2.5 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors"
+              className="mt-5 inline-flex items-center gap-2 min-h-[48px] px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
             >
               <MessageSquare className="w-4 h-4" />
               Take me deeper
@@ -217,7 +217,7 @@ export default function DiscoveryReader({
         {subtopics.length > 0 && (
           <section className="mt-12 space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
-              <ArrowDown className="w-5 h-5 text-[#D4AF37]" />
+              <ArrowDown className="w-5 h-5 text-gold" />
               Go deeper
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -225,11 +225,11 @@ export default function DiscoveryReader({
                 <Link
                   key={c.id}
                   href={`/discovery/${c.id}`}
-                  className="group rounded-xl border border-white/10 bg-gradient-to-b from-violet-950/30 to-slate-900 p-5 hover:border-[#D4AF37]/40 transition-colors"
+                  className="group rounded-xl border border-white/10 bg-gradient-to-b from-violet-950/30 to-slate-900 p-5 hover:border-gold/40 transition-colors"
                 >
-                  <div className="font-semibold text-slate-100 group-hover:text-[#D4AF37] transition-colors flex items-center justify-between gap-2">
+                  <div className="font-semibold text-slate-100 group-hover:text-gold transition-colors flex items-center justify-between gap-2">
                     {c.title}
-                    <ArrowRight className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-[#D4AF37] group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </Link>
               ))}
@@ -262,16 +262,16 @@ export default function DiscoveryReader({
         <section className="mt-10 flex flex-col sm:flex-row gap-3 pb-16">
           <Link
             href={`/discovery/${topicId}/quiz`}
-            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-[#D4AF37] text-slate-950 font-semibold text-sm hover:bg-[#c3a030] transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
           >
             <HelpCircle className="w-4 h-4" />
             Test yourself
           </Link>
           <Link
             href={`/tutor?domain=extras&topicId=${encodeURIComponent(topicId)}`}
-            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg border border-white/15 text-slate-200 font-semibold text-sm hover:border-[#D4AF37]/60 transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg border border-white/15 text-slate-200 font-semibold text-sm hover:border-gold/60 transition-colors"
           >
-            <MessageSquare className="w-4 h-4 text-[#D4AF37]" />
+            <MessageSquare className="w-4 h-4 text-gold" />
             Ask the tutor
           </Link>
           {trail.length > 0 && (
