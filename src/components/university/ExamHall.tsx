@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback } from "react";
+import { Check } from "lucide-react";
 import type { ExamSession, ScoredSession, ExamFormat } from "@/lib/assessment";
 
 const FORMAT_LABEL: Record<ExamFormat, string> = {
@@ -213,7 +214,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                       aria-pressed={chosen}
                     >
                       <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${chosen ? "border-primary bg-primary text-primary-foreground" : ""}`}>
-                        {chosen ? "✓" : ""}
+                        {chosen && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
                       </span>
                       <span>{opt}</span>
                     </button>

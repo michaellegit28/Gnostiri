@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BadgeCheck } from "lucide-react";
 
 // FormatPreviewCard — selector result card. Papers = required paper count,
 // duration = Σ required durationMinutes (caller preformats). Links to the canonical
@@ -26,8 +27,8 @@ export default function FormatPreviewCard({
       aria-label={`Format preview: ${board}`}
       className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-7"
     >
-      <p className="font-serif text-xl font-bold text-slate-50">
-        <span aria-hidden="true">✅ </span>
+      <p className="flex items-center gap-2 font-serif text-xl font-bold text-slate-50">
+        <BadgeCheck aria-hidden="true" className="h-5 w-5 text-teal-400" />
         {board}
         {country != null && country !== "" ? ` — ${country}` : ""}
       </p>

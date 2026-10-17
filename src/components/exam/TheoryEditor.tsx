@@ -1,5 +1,7 @@
 "use client";
 
+import { Check } from "lucide-react";
+
 // TheoryEditor — Mode B plain writing surface. No formatting toolbar.
 // Values flow into the runner's sectionAnswers record, so the existing draft JSON
 // shape ({questionId, selectedAnswer}) is unchanged — completeSection posts them.
@@ -44,8 +46,9 @@ export default function TheoryEditor({
             </span>
           )}
           {saveState === "saved" && (
-            <span className="ml-2 text-emerald-300">
-              ✓ Saved{savedAt != null && savedAt !== "" ? ` · ${savedAt}` : ""}
+            <span className="ml-2 inline-flex items-center gap-1 text-emerald-300">
+              <Check aria-hidden="true" className="h-3.5 w-3.5" />
+              Saved{savedAt != null && savedAt !== "" ? ` · ${savedAt}` : ""}
             </span>
           )}
         </p>
