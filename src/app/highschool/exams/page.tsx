@@ -142,7 +142,7 @@ export default async function HighSchoolHubPage() {
             </div>
             <Link
               href={recentActivity.link}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg bg-gold hover:bg-gold text-slate-950 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 transition-colors shrink-0"
             >
               <span>Resume</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -191,7 +191,7 @@ export default async function HighSchoolHubPage() {
                   </div>
                   <Link
                     href={`/highschool/exams/${exam.slug}`}
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold transition-colors"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
                   >
                     <span>Open exam board</span>
                     <ArrowRight className="w-4 h-4" />

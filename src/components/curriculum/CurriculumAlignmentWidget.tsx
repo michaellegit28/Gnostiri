@@ -186,7 +186,7 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
             {data.board?.syllabusUrl && (
               <a href={data.board.syllabusUrl} target="_blank" rel="noreferrer" className="text-[11px] underline text-slate-400">Official syllabus PDF</a>
             )}
-            {data.pending && <p className="text-[11px] text-slate-500">Unverified — defaulted to elective per safety policy. Confirm with your syllabus.</p>}
+            {data.pending && <p className="text-xs text-slate-400">Unverified — defaulted to elective per safety policy. Confirm with your syllabus.</p>}
             <button
               className="text-[11px] underline text-slate-400"
               onClick={async () => {

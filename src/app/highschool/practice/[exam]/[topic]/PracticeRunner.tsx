@@ -347,7 +347,7 @@ export default function PracticeRunner({
             type="button"
             onClick={() => void startPractice()}
             disabled={busy}
-            className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-gold-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             {busy ? "Starting…" : "Start practice session"}
           </button>
@@ -498,7 +498,7 @@ export default function PracticeRunner({
                 type="button"
                 onClick={() => void completeSection()}
                 disabled={busy}
-                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold-hover disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 {busy ? "Saving…" : sectionIndex < sections.length - 1 ? "Complete section" : "Finish & submit"}
               </button>
@@ -519,7 +519,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={advanceToNextSection}
-              className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               Continue
             </button>
@@ -660,7 +660,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               <RefreshCw className="w-4 h-4" /> Practice again
             </button>

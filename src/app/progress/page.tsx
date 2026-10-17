@@ -141,7 +141,7 @@ export default function ProgressPage() {
           <div>
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors w-full"
             >
               <span>Sign in or create an account</span>
               <ArrowRight className="w-4 h-4" />
@@ -346,9 +346,9 @@ export default function ProgressPage() {
                     <div aria-label="Recent quiz accuracy chart" className="flex h-36 items-end gap-3 overflow-x-auto border-b border-slate-800 px-2 pb-2">
                       {dashboardData.recentAttempts.slice(0, 7).reverse().map((attempt) => (
                         <div key={attempt.id} className="flex h-full min-w-12 flex-col items-center justify-end gap-1">
-                          <span className="text-[10px] text-slate-400">{attempt.accuracy}%</span>
+                          <span className="text-[11px] text-slate-400">{attempt.accuracy}%</span>
                           <div className="w-8 rounded-t bg-gold" style={{ height: `${Math.max(4, attempt.accuracy)}%` }} title={`${attempt.topicTitle}: ${attempt.accuracy}%`} />
-                          <span className="max-w-16 truncate text-[10px] text-slate-500">{attempt.topicTitle}</span>
+                          <span className="max-w-16 truncate text-[11px] text-slate-500">{attempt.topicTitle}</span>
                         </div>
                       ))}
                     </div>

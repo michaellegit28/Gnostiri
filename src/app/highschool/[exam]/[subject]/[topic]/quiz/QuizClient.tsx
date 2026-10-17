@@ -98,7 +98,7 @@ export default function QuizClient({
           <div>
             <Link
               href={subjectHref}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors w-full"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to {subjectTitle}</span>
@@ -318,7 +318,7 @@ export default function QuizClient({
               </div>
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-lg bg-gold hover:bg-gold text-slate-950 font-semibold text-xs transition-colors shrink-0"
+                className="px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-xs transition-colors shrink-0"
               >
                 Sign In
               </Link>
@@ -350,7 +350,7 @@ export default function QuizClient({
 
             <Link
               href={subjectHref}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors"
             >
               <span>Back to {subjectTitle}</span>
             </Link>
@@ -495,7 +495,7 @@ export default function QuizClient({
               type="button"
               onClick={handleSubmitQuestion}
               disabled={!selectedOption || submittingAnswer}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold hover:bg-gold disabled:opacity-40 disabled:hover:bg-gold text-slate-950 font-semibold text-sm transition-colors"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover disabled:opacity-40 disabled:hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors"
             >
               Submit Answer
             </button>
@@ -513,7 +513,7 @@ export default function QuizClient({
             <button
               type="button"
               onClick={handleNextQuestion}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold hover:bg-gold text-slate-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
             >
               <span>{currentIndex < totalQuestions - 1 ? "Next Question" : "View Results"}</span>
               <ChevronRight className="w-4 h-4" />

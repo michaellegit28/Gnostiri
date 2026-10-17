@@ -385,7 +385,7 @@ export default function StudyReaderClient({
 
           <Link
             href={`/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-gold text-slate-950 hover:bg-gold font-semibold text-xs md:text-sm transition-colors text-center"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-gold text-slate-950 hover:bg-gold-hover font-semibold text-xs md:text-sm transition-colors text-center"
           >
             <HelpCircle className="w-4 h-4 shrink-0" />
             <span className="truncate">Practice Questions</span>

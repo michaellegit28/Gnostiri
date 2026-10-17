@@ -98,7 +98,7 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
               </div>
               <Link
                 href={`${base}/take`}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold transition-colors"
+                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
               >
                 Start timed attempt
               </Link>
