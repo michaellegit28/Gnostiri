@@ -1,0 +1,349 @@
+import Link from "next/link";
+import prisma from "@/lib/db";
+import { getCurrentUser } from "@/lib/server-auth";
+import { hasPremiumAccess } from "@/lib/entitlements";
+import { UNIVERSITY_OPEN } from "@/lib/access";
+import { GraduationCap, Sparkles, ArrowRight, BookOpen, Brain, Trophy } from "lucide-react";
+import WaitlistForm from "@/components/university/WaitlistForm";
+
+export const dynamic = "force-dynamic";
+
+export const metadata = {
+  title: "Gnostiri University — Study at degree depth",
+  description:
+    "Premium faculty-structured university courses: concept-first learning, clinical correlation, OSCE skills, and verified competency transcripts.",
+};
+
+export default async function UniversityPage() {
+  const user = await getCurrentUser();
+  const premium = user ? await hasPremiumAccess(user.id) : UNIVERSITY_OPEN;
+
+  const [faculties, courses, programmes, standards] = await Promise.all([
+    prisma.faculty.findMany({
+      where: { isPublished: true },
+      orderBy: { orderIndex: "asc" },
+      include: {
+        programmes: { where: { isPublished: true }, orderBy: { orderIndex: "asc" } },
+        courses: {
+          where: { domain: "university", isPublished: true },
+          select: { id: true, lessons: { select: { id: true } } },
+        },
+      },
+    }),
+    prisma.course.findMany({
+      where: { domain: "university", isPublished: true },
+      include: {
+        lessons: { orderBy: { orderIndex: "asc" }, select: { id: true, estimatedMinutes: true } },
+        concepts: { select: { id: true } },
+        faculty: { select: { accent: true, slug: true } },
+      },
+      orderBy: { title: "asc" },
+    }),
+    prisma.programme.findMany({
+      where: { isPublished: true },
+      include: { faculty: { select: { name: true, accent: true } } },
+      orderBy: { orderIndex: "asc" },
+    }),
+    prisma.curriculumStandard.findMany({
+      orderBy: { authority: "asc" },
+      select: { authority: true, editionYear: true, officialUrl: true },
+    }),
+  ]);
+
+  const totalLessons = courses.reduce((s, c) => s + c.lessons.length, 0);
+
+  const liveFaculties = faculties.filter(
+    (f) =>
+      f.programmes.length > 0 ||
+      f.courses.some((c) => c.lessons.length > 0)
+  );
+  const comingFaculties = faculties.filter(
+    (f) =>
+      f.programmes.length === 0 && f.courses.every((c) => c.lessons.length === 0)
+  );
+  const stats = [
+    { value: `${faculties.length}`, label: faculties.length === 1 ? "Faculty" : "Faculties" },
+    { value: `${programmes.length}`, label: programmes.length === 1 ? "Programme" : "Programmes" },
+    { value: `${courses.length}`, label: courses.length === 1 ? "Course" : "Courses" },
+    { value: `${totalLessons}`, label: totalLessons === 1 ? "Lesson" : "Lessons" },
+  ];
+
+  return (
+    <main className="min-h-screen bg-transparent text-slate-50">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:px-10 md:py-16 space-y-16">
+        {/* Hero */}
+        <header className="relative overflow-hidden rounded-3xl border border-white/10">
+          <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_85%_0%,rgba(212,175,55,0.14)_0%,rgba(20,27,44,0.9)_45%,#060814_100%)]" />
+          <div className="relative px-8 py-14 md:px-14 md:py-20 space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-amber-300 text-xs font-semibold border border-gold/30">
+              <GraduationCap className="w-4 h-4" />
+              <span>Gnostiri University</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight max-w-3xl">
+              Study at <span className="text-gold">degree depth.</span>
+            </h1>
+            <p className="text-slate-300 text-base md:text-lg max-w-2xl leading-relaxed">
+              {faculties.length} {faculties.length === 1 ? "faculty" : "faculties"}. One concept map. Every course is built on a spine of
+              connected concepts with clinical correlation, OSCE-grade skills, and a
+              verified competency transcript — not a completion badge.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <Link
+                href="#faculties"
+                className="inline-flex items-center justify-center min-h-[48px] gap-2 px-7 py-3 rounded-xl bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+              >
+                Explore the faculties <ArrowRight className="w-4 h-4" />
+              </Link>
+              {!premium && (
+                <Link
+                  href="#waitlist"
+                  className="inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl border border-slate-600 text-slate-200 font-semibold text-sm hover:border-gold/60 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                >
+                  Join the waitlist
+                </Link>
+              )}
+            </div>
+            <dl className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 max-w-3xl">
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 backdrop-blur-sm"
+                >
+                  <dd className="font-serif text-2xl md:text-3xl font-bold text-gold">
+                    {s.value}
+                  </dd>
+                  <dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    {s.label}
+                  </dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </header>
+
+        {!premium && (
+          <aside id="waitlist" className="rounded-2xl border border-gold/30 bg-gold/[0.07] p-6 md:p-8 space-y-5 scroll-mt-24">
+            <div>
+              <strong className="text-amber-300 font-serif text-xl">Gnostiri Premium — coming soon</strong>
+              <p className="text-slate-300 mt-2 text-sm max-w-2xl">
+                All university lessons, concept mastery tracking, and quizzes — plus
+                completion certificates and unlimited AI Tutor access (both coming soon).
+                Payments aren&apos;t live yet, so reserve your place instead.
+              </p>
+            </div>
+            <WaitlistForm />
+          </aside>
+        )}
+
+        {/* Programmes — the degree tracks */}
+        {programmes.length > 0 && (
+          <section id="faculties" className="space-y-8">
+            <div className="space-y-3">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+                Degree programmes
+              </p>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold">
+                Choose your path.
+              </h2>
+              <p className="text-slate-400 text-sm md:text-base max-w-2xl">
+                Each programme is mapped to a global accreditation baseline, with
+                regional overlays — so what you study matches your degree handbook
+                anywhere in the world.
+              </p>
+              {standards.length > 0 && (
+                <div className="space-y-2 pt-2">
+                  <div className="flex flex-wrap gap-2">
+                    {standards.map((s) => (
+                      <span
+                        key={`${s.authority}-${s.editionYear}`}
+                        className="text-xs font-medium text-slate-300 bg-white/[0.04] border border-white/10 px-3 py-1.5 rounded-full"
+                      >
+                        {s.authority} · {s.editionYear}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-400">
+                    Aligned with, not accredited by, these standards.
+                  </p>
+                </div>
+              )}
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {programmes.map((p) => (
+                <article
+                  key={p.id}
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/80 to-slate-950 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
+                >
+                  <div
+                    className="absolute inset-x-10 top-0 h-[2px] opacity-70"
+                    style={{ background: `linear-gradient(90deg, transparent, ${p.faculty?.accent || "#D4AF37"}, transparent)` }}
+                  />
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-xs font-mono tracking-[0.2em] text-slate-400">
+                      {p.degreeAwarded}
+                    </span>
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300">
+                      Flagship
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-serif font-bold mb-2">{p.name}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                    {p.description}
+                  </p>
+                  <div className="flex items-center gap-4 text-xs text-slate-400">
+                    <span className="flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5" /> {p.durationYears} years
+                    </span>
+                    {p.totalCredits && (
+                      <span className="flex items-center gap-1.5">
+                        <Trophy className="w-3.5 h-3.5" /> {p.totalCredits} credits
+                      </span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Faculties — the full academic map */}
+        <section className="space-y-8">
+          <div className="space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+              {faculties.length === 13 ? "The thirteen faculties" : "Our faculties"}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold">
+              A whole university, structured.
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {liveFaculties.map((f) => {
+              const lessonTotal = f.courses.reduce(
+                (s, c) => s + c.lessons.length,
+                0
+              );
+              return (
+                <div
+                  key={f.id}
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/25 hover:bg-white/[0.04]"
+                >
+                  <div
+                    className="absolute left-0 top-0 h-full w-[3px]"
+                    style={{ background: f.accent || "#D4AF37" }}
+                  />
+                  <h3 className="font-serif text-lg font-bold mb-1 pl-2">{f.name}</h3>
+                  <p className="text-slate-400 text-xs pl-2 leading-relaxed line-clamp-2">
+                    {f.blurb}
+                  </p>
+                  <div className="flex items-center gap-3 mt-4 pl-2 text-xs text-slate-400">
+                    {f.programmes.length > 0 && (
+                      <span>{f.programmes.length} programme{f.programmes.length === 1 ? "" : "s"}</span>
+                    )}
+                    {lessonTotal > 0 && <span>· {lessonTotal} lesson{lessonTotal === 1 ? "" : "s"}</span>}
+                    {f.courses.length === 0 && f.programmes.length === 0 && (
+                      <span className="text-slate-600 italic">Courses in preparation</span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {comingFaculties.length > 0 && (
+            <p className="text-sm text-slate-400">
+              <span className="font-semibold text-slate-300">Coming soon: </span>
+              {comingFaculties.map((f) => f.name).join(" · ")}
+            </p>
+          )}
+        </section>
+
+        {/* Courses */}
+        <section className="space-y-8">
+          <div className="space-y-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+              Open courses
+            </p>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold">
+              Begin with the foundations.
+            </h2>
+          </div>
+          {courses.length === 0 ? (
+            <p className="text-slate-400">Courses are being prepared. Please check back soon.</p>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {courses.map((course) => (
+                <article
+                  key={course.id}
+                  className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-slate-900/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-gold/5"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="font-mono text-xs tracking-[0.15em] text-gold">
+                        {course.code || course.department}
+                      </span>
+                      {course.level && (
+                        <span className="text-xs font-medium text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
+                          {course.level} level
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-xl font-serif font-bold leading-snug">
+                      {course.title}
+                    </h3>
+                    {course.description && (
+                      <p className="text-slate-400 text-sm leading-relaxed line-clamp-2">
+                        {course.description}
+                      </p>
+                    )}
+                    <div className="flex items-center gap-3 pt-1 text-xs text-slate-400">
+                      <span className="flex items-center gap-1.5">
+                        <BookOpen className="w-3.5 h-3.5" /> {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
+                      </span>
+                      {course.concepts.length > 0 && (
+                        <span className="flex items-center gap-1.5">
+                          <Brain className="w-3.5 h-3.5" /> {course.concepts.length} concepts
+                        </span>
+                      )}
+                      {course.credits != null && <span>· {course.credits} credits</span>}
+                    </div>
+                  </div>
+                  {course.lessons.length === 0 ? (
+                    <span
+                      aria-disabled="true"
+                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-700 px-5 py-3 font-semibold text-sm text-slate-400 cursor-not-allowed"
+                    >
+                      {course.concepts.length > 0 ? "Concepts only" : "Coming soon"}
+                    </span>
+                  ) : (
+                    <Link
+                      href={`/university/${course.slug}`}
+                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl bg-white/5 border border-white/15 px-5 py-3 font-semibold text-sm text-slate-100 group-hover:bg-gold group-hover:text-slate-950 group-hover:border-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    >
+                      {premium ? "Open course" : "Preview course"}
+                    </Link>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Pedagogy promise */}
+        <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/60 to-slate-950 p-10 md:p-14">
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { icon: Brain, title: "Concept-first", body: "Every course is a map of connected ideas. Learn why before how; the exam answers follow." },
+              { icon: Sparkles, title: "Clinically correlated", body: "Each preclinical concept ends in its clinical signature — the bridge traditional teaching skips." },
+              { icon: Trophy, title: "Verified mastery", body: "Demonstrate competence under exam conditions. Your transcript proves what you can do." },
+            ].map((item) => (
+              <div key={item.title} className="space-y-3">
+                <item.icon className="w-7 h-7 text-gold" />
+                <h3 className="font-serif text-xl font-bold">{item.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}

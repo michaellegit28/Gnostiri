@@ -1,0 +1,814 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AppDomain {
+  highschool
+  university
+  extras
+}
+
+model User {
+  id             String         @id @default(cuid())
+  firebaseUid    String         @unique
+  email          String         @unique
+  name           String?
+  avatar         String?
+  country        String?
+  createdAt      DateTime       @default(now())
+
+  profile        Profile?
+  subscriptions  Subscription[]
+  quizAttempts   QuizAttempt[]
+  progress       Progress[]
+  tutorSessions  TutorSession[]
+  studyPlans     StudyPlan[]
+  paperAttempts  PaperAttempt[]
+  enrollments    Enrollment[]
+  conceptMastery ConceptMastery[]
+  skillAttempts  SkillStationAttempt[]
+  transcripts    CompetencyTranscript[]
+  practiceSessions PracticeSession[]
+  assessmentSessions AssessmentSession[]
+  launchTokens LaunchToken[]
+}
+
+model Profile {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  currentDomain AppDomain @default(highschool)
+  streak        Int       @default(0)
+  lastActive    DateTime  @default(now())
+  preferredExam String?
+}
+
+model Subscription {
+  id           String      @id @default(cuid())
+  userId       String
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tier         String      @default("free") // 'free' | 'premium'
+  domainAccess AppDomain[]
+  expiresAt    DateTime?
+  provider     String?
+  status       String      @default("active")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  providerRef  String?     @unique
+  billingPeriod String     @default("monthly")
+}
+
+model Domain {
+  id                   String  @id @default(cuid())
+  slug                 String  @unique
+  name                 String
+  isPublic             Boolean @default(true)
+  requiresSubscription Boolean @default(false)
+}
+
+model Examination {
+  id          String      @id @default(cuid())
+  domain      AppDomain
+  name        String
+  code        String
+  slug        String      @unique
+  country     String?
+  syllabusUrl String?
+  lastVerified DateTime?
+  notes        String?
+  papers      ExamPaper[]
+  blueprint   ExaminationPaper[]
+  questionBoardTags QuestionBoardTag[]
+  practiceSessions PracticeSession[]
+}
+
+enum AlignmentTier {
+  core
+  elective
+  excluded
+}
+
+model Region {
+  id          String            @id @default(cuid())
+  name        String
+  isoCode     String            @unique
+  rtlLanguage Boolean           @default(false)
+  boards      CurriculumBoard[]
+}
+
+model CurriculumBoard {
+  id                 String                @id @default(cuid())
+  name               String
+  regionId           String
+  region             Region                @relation(fields: [regionId], references: [id], onDelete: Cascade)
+  officialSyllabusUrl String?
+  syllabusVersionYear Int?
+  lastAuditedDate    DateTime
+  tracks             StudyTrack[]
+  alignments         TopicBoardAlignment[]
+
+  @@index([regionId])
+}
+
+model Department {
+  id       String  @id @default(cuid())
+  name     String  @unique
+  iconSlug String?
+  topics   Topic[]
+  facultyId String?
+  faculty   Faculty? @relation(fields: [facultyId], references: [id], onDelete: SetNull)
+  programmes Programme[]
+}
+
+model StudyTrack {
+  id          String                @id @default(cuid())
+  boardId     String
+  board       CurriculumBoard       @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  alignments  TopicBoardAlignment[]
+
+  @@index([boardId])
+}
+
+model TopicBoardAlignment {
+  id                    String          @id @default(cuid())
+  topicId               String
+  topic                 Topic           @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  boardId               String
+  board                 CurriculumBoard @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  trackId               String?
+  track                 StudyTrack?     @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  tier                  AlignmentTier
+  languageOfInstruction String?
+  weightNotes           String?
+  verifiedDate          DateTime
+  verifiedBy            String?
+
+  @@unique([topicId, boardId, trackId])
+  @@index([topicId, boardId])
+  @@index([tier])
+  @@index([boardId])
+}
+
+model AlignmentAudit {
+  id            String   @id @default(cuid())
+  alignmentId   String
+  actorEmail    String?
+  action        String
+  previousValue Json?
+  newValue      Json?
+  createdAt     DateTime @default(now())
+
+  @@index([alignmentId])
+}
+
+model Topic {
+  id            String         @id @default(cuid())
+  domain        AppDomain
+  parentId      String?
+  parent        Topic?         @relation("TopicHierarchy", fields: [parentId], references: [id])
+  children      Topic[]        @relation("TopicHierarchy")
+  title         String
+  description   String?
+  orderIndex    Int            @default(0)
+  isPublished   Boolean        @default(true)
+  lessons       Lesson[]
+  questions     Question[]
+  quizAttempts  QuizAttempt[]
+  tutorSessions TutorSession[]
+  departmentId  String?
+  department    Department?    @relation(fields: [departmentId], references: [id])
+  slug          String?        @unique
+  lastAuditedDate DateTime?
+  needsVerification Boolean    @default(true)
+  alignments    TopicBoardAlignment[]
+  paperQuestions PaperQuestion[]
+  practiceSessions PracticeSession[]
+}
+
+model Lesson {
+  id               String    @id @default(cuid())
+  domain           AppDomain
+  topicId          String
+  topic            Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  title            String
+  content          Json
+  orderIndex       Int       @default(0)
+  estimatedMinutes Int       @default(10)
+}
+
+model Question {
+  id           String   @id @default(cuid())
+  domain       AppDomain
+  topicId      String
+  topic        Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  type         String   @default("mcq")
+  questionText String
+  options      Json
+  correctAnswer String
+  explanation  String?
+  difficulty   String   @default("medium")
+  sourceExam   String?
+  hint         String?
+  markingPoints Json?
+  boardTags    QuestionBoardTag[]
+}
+
+// One physical past paper: a board + subject + year + paper number (e.g. WAEC Biology 2024, Paper 2).
+model ExamPaper {
+  id               String         @id @default(cuid())
+  examinationId    String
+  examination      Examination    @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  subject          String
+  year             Int
+  paperNumber      String
+  durationMinutes  Int
+  totalMarks       Int
+  isPublished      Boolean        @default(true)
+  markingSchemeUrl String?
+  sourceUrl        String?
+  questions        PaperQuestion[]
+  attempts         PaperAttempt[]
+
+  @@unique([examinationId, subject, year, paperNumber])
+  @@index([examinationId, subject])
+  @@index([year])
+}
+
+// Questions inside a paper, in paper order. topicId cross-links a question back
+// to the curriculum tree so paper attempts feed weak-topic analytics.
+model PaperQuestion {
+  id            String    @id @default(cuid())
+  paperId       String
+  paper         ExamPaper @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  orderIndex     Int       @default(0)
+  questionText  String
+  options       Json
+  correctAnswer String
+  marks         Int       @default(1)
+  explanation   String?
+  topicId       String?
+  topic         Topic?    @relation(fields: [topicId], references: [id], onDelete: SetNull)
+
+  @@index([paperId])
+  @@index([topicId])
+}
+
+// A learner's sitting of a paper. mode: 'timed' (exam conditions) | 'open' (untimed practice).
+model PaperAttempt {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  paperId         String
+  paper           ExamPaper @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  mode            String    @default("timed") // 'timed' | 'open'
+  score           Int
+  maxScore        Int
+  answers         Json
+  durationSeconds Int
+  createdAt       DateTime  @default(now())
+
+  @@index([userId])
+  @@index([paperId])
+}
+
+model QuizAttempt {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain          AppDomain
+  topicId         String
+  topic           Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  score           Int
+  maxScore        Int
+  answers         Json
+  durationSeconds Int
+  createdAt       DateTime  @default(now())
+}
+
+model Progress {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain      AppDomain
+  entityType  String
+  entityId    String
+  status      String    @default("not_started") // 'not_started' | 'in_progress' | 'completed' | 'mastered'
+  accuracy    Float?
+  lastStudied DateTime  @default(now())
+}
+
+model TutorSession {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain    AppDomain
+  subjectId String?
+  topicId   String?
+  topic     Topic?    @relation(fields: [topicId], references: [id])
+  messages  Json
+  context   String?
+  createdAt DateTime  @default(now())
+}
+
+model StudyPlan {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domain      AppDomain
+  examDate    DateTime?
+  items       Json
+  isActive    Boolean   @default(true)
+  generatedBy String    @default("ai") // 'manual' | 'ai'
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  domain      AppDomain
+  slug        String
+  title       String
+  department  String
+  description String?
+  isPublished Boolean  @default(true)
+  lessons     CourseLesson[]
+  certificates Certificate[]
+  questions   CourseQuestion[]
+  quizAttempts CourseQuizAttempt[]
+  @@unique([domain, slug])
+
+  // --- Phase 0 academic identity ---
+  code         String?   // official handbook code, e.g. "ANA 201"
+  level        Int?      // 100..600
+  credits      Int?      // credit units / hours
+  semester     String?   // 'first' | 'second' | 'full'
+  programmeId  String?
+  programme    Programme? @relation(fields: [programmeId], references: [id], onDelete: SetNull)
+  facultyId    String?
+  faculty      Faculty?   @relation(fields: [facultyId], references: [id], onDelete: SetNull)
+  // Concept spine
+  modules      CourseModule[]
+  concepts     ConceptNode[]
+  // Clinical & skills layer
+  clinicalCases ClinicalCase[]
+  skillStations SkillStation[]
+  // Prerequisite chain (concept-level DAG lives on ConceptNode)
+  prerequisites CoursePrerequisite[] @relation("CoursePrereqOf")
+  prerequisiteFor CoursePrerequisite[] @relation("CoursePrerequisites")
+  // Assessment layer
+  assessmentItems AssessmentItem[]
+  assessmentSessions AssessmentSession[]
+  alignments    CurriculumAlignment[]
+  @@index([programmeId])
+  @@index([facultyId])
+  @@index([level])
+}
+
+model CourseQuestion {
+  id            String   @id @default(cuid())
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  domain        AppDomain @default(university)
+  questionText  String
+  options       Json
+  correctAnswer String
+  explanation   String?
+}
+
+model CourseQuizAttempt {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  domain    AppDomain @default(university)
+  score     Int
+  maxScore  Int
+  createdAt DateTime @default(now())
+}
+
+model CourseLesson {
+  id               String   @id @default(cuid())
+  courseId         String
+  domain           AppDomain @default(university)
+  course           Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title            String
+  content          Json
+  orderIndex       Int      @default(0)
+  estimatedMinutes Int      @default(10)
+  // Content governance: every seeded lesson starts as draft until a human
+  // signs it off. needsCheck marks anything the author was not certain of.
+  reviewStatus     String   @default("needs-human-review") // needs-human-review | draft | verified
+  needsCheck       Boolean  @default(false)
+  @@index([courseId])
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String
+  domain      AppDomain @default(university)
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  issuedAt    DateTime @default(now())
+  @@unique([userId, courseId])
+}
+
+model PaymentEvent {
+  id        String   @id @default(cuid())
+  eventId   String   @unique
+  provider  String
+  createdAt DateTime @default(now())
+}
+
+// =====================================================================
+// UNIVERSITY ACADEMIC STRUCTURE (Phase 0)
+// Faculty -> Department -> Programme -> Course -> Module -> ConceptNode
+// Every layer carries audit metadata; mastery is tracked per student.
+// =====================================================================
+
+model Faculty {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  blurb       String?
+  iconSlug    String?
+  accent      String?  // brand accent for premium UI theming
+  orderIndex  Int      @default(0)
+  isPublished Boolean  @default(true)
+  departments Department[]
+  programmes  Programme[]
+  courses     Course[]
+}
+
+model Programme {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  name           String   // "Medicine & Surgery (MBBS)"
+  degreeAwarded  String   // "MBBS" | "BSc" | "PharmD" | "LL.B"
+  facultyId      String
+  faculty        Faculty  @relation(fields: [facultyId], references: [id], onDelete: Cascade)
+  departmentId   String?
+  department     Department? @relation(fields: [departmentId], references: [id], onDelete: SetNull)
+  durationYears  Int      @default(5)
+  totalCredits   Int?
+  description    String?
+  iconSlug       String?
+  orderIndex     Int      @default(0)
+  isPublished    Boolean  @default(true)
+  courses        Course[]
+  enrollments    Enrollment[]
+  standards      CurriculumStandard[]
+  transcripts    CompetencyTranscript[]
+  @@index([facultyId])
+  @@index([departmentId])
+}
+
+// A student's enrollment in a programme (one degree at a time is typical,
+// but the model allows concurrent e.g. MBBS + elective diploma).
+model Enrollment {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  programmeId String
+  programme   Programme @relation(fields: [programmeId], references: [id], onDelete: Cascade)
+  level       Int      @default(100) // current level: 100..600
+  status      String   @default("active") // 'active' | 'completed' | 'withdrawn'
+  enrolledAt  DateTime @default(now())
+  @@unique([userId, programmeId])
+  @@index([userId])
+  @@index([programmeId])
+}
+
+// Official benchmark a programme maps to (NUC BMAS, MDCN, GMC/WFME, COREN...).
+// Reuses the "trust, never fake" discipline: lastAuditedDate is mandatory.
+model CurriculumStandard {
+  id              String   @id @default(cuid())
+  programmeId     String
+  programme       Programme @relation(fields: [programmeId], references: [id], onDelete: Cascade)
+  authority       String   // "National Universities Commission" | "MDCN" | "GMC"
+  editionYear     Int
+  officialUrl     String?
+  lastAuditedDate DateTime @default(now())
+  alignments      CurriculumAlignment[]
+  @@unique([programmeId, authority, editionYear])
+  @@index([programmeId])
+}
+
+// Maps one course onto one curriculum standard (reuse of the high-school
+// alignment-engine pattern, now at course granularity).
+model CurriculumAlignment {
+  id           String   @id @default(cuid())
+  courseId     String
+  course       Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  standardId   String
+  standard     CurriculumStandard @relation(fields: [standardId], references: [id], onDelete: Cascade)
+  moduleCode   String?  // the code the standard uses, e.g. "ANA 201"
+  mappingTier  String   @default("core") // 'core' | 'elective' | 'supplementary'
+  weightNotes  String?
+  verifiedDate DateTime @default(now())
+  verifiedBy   String?
+  @@unique([courseId, standardId])
+  @@index([courseId])
+  @@index([standardId])
+}
+
+// Course-level prerequisite edge. (Concept-level DAG lives on ConceptNode.)
+model CoursePrerequisite {
+  id             String @id @default(cuid())
+  courseId       String
+  course         Course @relation("CoursePrereqOf", fields: [courseId], references: [id], onDelete: Cascade)
+  prerequisiteId String
+  prerequisite   Course @relation("CoursePrerequisites", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+  @@unique([courseId, prerequisiteId])
+  @@index([courseId])
+  @@index([prerequisiteId])
+}
+
+// A concept cluster inside a course — a "module" of 3-8 concepts.
+model CourseModule {
+  id         String   @id @default(cuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title      String
+  slug       String
+  orderIndex Int      @default(0)
+  concepts   ConceptNode[]
+  @@unique([courseId, slug])
+  @@index([courseId])
+}
+
+// The atomic learnable unit — the spine of the pedagogy engine.
+// Prerequisites form a DAG; mastery is tracked per student.
+model ConceptNode {
+  id              String   @id @default(cuid())
+  courseId         String
+  course           Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  moduleId         String?
+  module           CourseModule? @relation(fields: [moduleId], references: [id], onDelete: SetNull)
+  title           String
+  slug            String
+  summary         String?
+  bloomsLevel     String   @default("understand") // remember|understand|apply|analyze|evaluate|create
+  estMinutes      Int      @default(15)
+  orderIndex      Int      @default(0)
+  isPublished     Boolean  @default(true)
+  // Concept-level prerequisite graph (the "how knowledge connects" map)
+  prerequisites   ConceptPrerequisite[] @relation("ConceptPrereqOf")
+  prerequisiteFor ConceptPrerequisite[] @relation("ConceptPrerequisites")
+  // Assessment layer
+  assessmentItems AssessmentItem[]
+  mastery         ConceptMastery[]
+  @@unique([courseId, slug])
+  @@index([courseId])
+  @@index([moduleId])
+}
+
+model ConceptPrerequisite {
+  id             String @id @default(cuid())
+  conceptId      String
+  concept        ConceptNode @relation("ConceptPrereqOf", fields: [conceptId], references: [id], onDelete: Cascade)
+  prerequisiteId String
+  prerequisite   ConceptNode @relation("ConceptPrerequisites", fields: [prerequisiteId], references: [id], onDelete: Cascade)
+  rationale      String? // why this concept must come first
+  @@unique([conceptId, prerequisiteId])
+  @@index([conceptId])
+  @@index([prerequisiteId])
+}
+
+// Per-student mastery of one concept — feeds spaced repetition + transcript.
+model ConceptMastery {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conceptId      String
+  concept        ConceptNode @relation(fields: [conceptId], references: [id], onDelete: Cascade)
+  status         String   @default("not_started") // not_started|in_progress|completed|mastered
+  masteryScore   Float?   // 0..1 — averaged over exam-condition demonstrations
+  attempts       Int      @default(0)
+  correctStreak  Int      @default(0)
+  lastReviewed   DateTime?
+  nextReviewDue  DateTime? // spaced-repetition scheduler
+  // SM-2 scheduling state
+  easeFactor     Float    @default(2.5)
+  intervalDays   Int      @default(0)
+  @@unique([userId, conceptId])
+  @@index([userId])
+  @@index([conceptId])
+}
+
+// Case-based / clinical correlation content block for a course.
+model ClinicalCase {
+  id             String   @id @default(cuid())
+  courseId       String
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title          String
+  vignette       String   @db.Text
+  presentation   String?  @db.Text
+  questions      Json
+  teachingPoints String?  @db.Text
+  difficulty     String   @default("medium")
+  orderIndex     Int      @default(0)
+  isPublished    Boolean  @default(true)
+  // Items authored from this case feed the exam simulator.
+  items          AssessmentItem[]
+  @@index([courseId])
+}
+
+// OSCE / practical skill station with ordered checklist steps.
+model SkillStation {
+  id             String   @id @default(cuid())
+  courseId       String
+  course         Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title          String
+  checklist      Json     // [{step, marks, mustPass}]
+  durationMinutes Int     @default(10)
+  orderIndex     Int      @default(0)
+  isPublished    Boolean  @default(true)
+  attempts       SkillStationAttempt[]
+  @@index([courseId])
+}
+
+model SkillStationAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stationId   String
+  station     SkillStation @relation(fields: [stationId], references: [id], onDelete: Cascade)
+  score       Int
+  maxScore    Int
+  checks      Json     // per-step awarded marks
+  feedback    String?
+  createdAt   DateTime @default(now())
+  @@index([userId])
+  @@index([stationId])
+}
+
+// One exam-grade item, authored from a course or a clinical case.
+// format: 'sba' | 'emq' | 'vignette' | 'short-answer'
+// Blueprint: the concept node the item tests, so exam results feed mastery.
+model AssessmentItem {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  courseId      String
+  course        Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  caseId        String?
+  case          ClinicalCase? @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  conceptId     String?
+  concept       ConceptNode? @relation(fields: [conceptId], references: [id], onDelete: SetNull)
+  format        String   @default("sba")
+  stem          String   @db.Text
+  options       Json     // string array for SBA/EMQ; null for short-answer
+  correctAnswer String?
+  explanation   String?
+  marks         Int      @default(1)
+  negativeMarks Float?   // null => no penalty; negative marking for SBA/EMQ
+  orderIndex    Int      @default(0)
+  isPublished   Boolean  @default(true)
+  difficulty    String   @default("medium")
+  reviewStatus  String   @default("needs-human-review") // needs-human-review | draft | verified
+  needsCheck    Boolean  @default(false)
+  sessions      AssessmentSession[] @relation("ItemSessions")
+  @@index([courseId])
+  @@index([caseId])
+  @@index([conceptId])
+}
+
+// One sitting of a scored exam — timed, blueprint-balanced, negative marking applied.
+model AssessmentSession {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId        String
+  course          Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title           String
+  mode            String   @default("timed") // 'timed' | 'open'
+  durationMinutes Int      @default(60)
+  startTime       DateTime?
+  endTime         DateTime?
+  answers         Json     // [{itemId, selected, freeText, marked, awarded}]
+  score           Float
+  maxScore        Float
+  negativeApplied Float
+  createdAt       DateTime @default(now())
+  items           AssessmentItem[] @relation("ItemSessions")
+  @@index([userId])
+  @@index([courseId])
+}
+
+// Verified competency record — the "transcript" a residency board would read.
+// Normalized lines (CompetencyLine) make it queryable; summary stays for the
+// portable snapshot.
+model CompetencyTranscript {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  programmeId String?
+  programme   Programme? @relation(fields: [programmeId], references: [id], onDelete: SetNull)
+  title       String
+  summary     Json     // concepts mastered, skills demonstrated, exam-readiness score
+  issuedAt    DateTime @default(now())
+  lines       CompetencyLine[]
+  @@unique([userId, programmeId])
+  @@index([userId])
+  @@index([programmeId])
+}
+
+// Normalized line of a competency transcript — queryable, not a blob.
+model CompetencyLine {
+  id           String   @id @default(cuid())
+  transcriptId String
+  transcript   CompetencyTranscript @relation(fields: [transcriptId], references: [id], onDelete: Cascade)
+  code         String   // "C1.1"
+  title        String
+  level        String   @default("developing") // developing | proficient | mastery
+  evidence     String?
+  awardedAt    DateTime @default(now())
+  @@index([transcriptId])
+}
+
+// Exam Blueprint Engine — Layer 2. One row per paper in a board's format
+// (e.g. WAEC P1 Objective, P2 Theory, P3 Practical). The manifest engine
+// hydrates RenderManifests from these; there is no separate config source.
+model ExaminationPaper {
+  id              String      @id @default(cuid())
+  examinationId   String
+  examination     Examination @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  paperId         String      // "P1"
+  paperName       String      // "Objective"
+  sequence        Int
+  delivery        String      // "CBT" | "PAPER" | "HYBRID" | "ORAL"
+  questionTypes   Json        // ["MCQ"] etc — uppercase per board profile
+  durationMinutes Int
+  marks           Int
+  applicability   Json        // ["all"] or subject categories e.g. ["sciences", "technical"]
+  required        Boolean     @default(true)
+  instructions    String?
+
+  @@unique([examinationId, paperId])
+  @@index([examinationId, sequence])
+}
+
+// Board tags attach curriculum questions to exam boards: the tier for that
+// board and which blueprint papers the question may appear in.
+model QuestionBoardTag {
+  id            String       @id @default(cuid())
+  questionId    String
+  question      Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  examinationId String
+  examination   Examination  @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  tier          String       @default("CORE") // 'CORE' | 'OPTIONAL' | 'NOT_EXAMINED'
+  paperIds      Json
+
+  @@unique([questionId, examinationId])
+  @@index([examinationId, tier])
+  @@index([questionId])
+}
+
+// Practice sessions enforce the section bridge lock server-side: sections
+// before currentSectionIndex are locked; drafts are only accepted for the
+// active section; submit grades the server-stored answers and closes it.
+model PracticeSession {
+  id                 String      @id @default(cuid())
+  userId             String?
+  user               User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examinationId      String
+  examination        Examination @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  topicId            String
+  topic              Topic       @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  subjectSlug        String
+  currentSectionIndex Int        @default(0)
+  status             String      @default("active") // 'active' | 'completed'
+  answers            Json        @default("{}")
+  expiresAt          DateTime?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([examinationId, topicId])
+}
+
+// 1st-launch access tokens: single-use, country-bound. Max 220 total, of
+// which max 20 are benefactor tier (launch access + university premium).
+// A token dies when consumed (usedById) or when its launch window ends.
+model LaunchToken {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  country   String    // ISO code, e.g. "NG" — token only redeems in this country
+  tier      String    @default("standard") // 'standard' | 'benefactor'
+  usedById  String?   @unique // single consumer — one token per user, atomic claim
+  usedAt    DateTime?
+  expiresAt DateTime?
+  note      String?
+  createdAt DateTime  @default(now())
+
+  user      User?     @relation(fields: [usedById], references: [id], onDelete: SetNull)
+
+  @@index([country, tier])
+  @@index([usedById])
+}
