@@ -12,6 +12,7 @@ import {
   Telescope,
 } from "lucide-react";
 import type { LessonBlock } from "@/types/lesson";
+import FilterChips from "@/components/ui/FilterChips";
 
 export const DEPTHS = ["Understand", "Explore", "Go Deeper", "Research"];
 
@@ -160,31 +161,29 @@ export default function DiscoveryReader({
       </div>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
-        {/* Depth tabs */}
-        <div className="flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Depth">
-          {DEPTHS.map((d, i) => {
-            const available = lessons.some((l) => l.depth === i);
-            const isActive = depth === i;
-            return (
-              <button
-                key={d}
-                role="tab"
-                aria-selected={isActive}
-                disabled={!available}
-                onClick={() => setDepth(i)}
-                className={`shrink-0 min-h-[44px] px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
-                  isActive
-                    ? "bg-gold text-slate-950 border-transparent"
-                    : available
-                      ? "bg-white/5 border-white/10 text-slate-200 hover:border-gold/50"
-                      : "bg-transparent border-white/5 text-slate-600 cursor-not-allowed"
-                }`}
-              >
-                {d}
-              </button>
-            );
-          })}
-        </div>
+        {/* Depth selector */}
+        <FilterChips
+          items={DEPTHS.map((d, i) => ({
+            value: String(i),
+            label: d,
+            disabled: !lessons.some((l) => l.depth === i),
+          }))}
+          value={String(depth)}
+          onChange={(v) => setDepth(Number(v))}
+          label="Depth"
+          variant="tabs"
+          idPrefix="depth"
+          panelId="depth-panel"
+        />
+
+        {/* Body — controlled by the depth tablist above */}
+        <div
+          id="depth-panel"
+          role="tabpanel"
+          aria-labelledby={`depth-${depth}`}
+          tabIndex={0}
+          className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-2xl"
+        >
 
         {/* Body */}
         {active ? (
@@ -212,6 +211,7 @@ export default function DiscoveryReader({
             </Link>
           </div>
         )}
+        </div>
 
         {/* Go deeper */}
         {subtopics.length > 0 && (

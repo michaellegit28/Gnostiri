@@ -1,7 +1,8 @@
 import prisma from "@/lib/db";
-import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
+import StatCard from "@/components/ui/StatCard";
+import TopicCard from "@/components/ui/TopicCard";
 
 export const dynamic = "force-dynamic";
 
@@ -59,10 +60,14 @@ export default async function ExtrasPage() {
 
       {/* Fields */}
       <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 space-y-8">
-        <dl className="flex flex-wrap gap-x-10 gap-y-4">
-          <div><dd className="font-serif text-3xl font-bold text-gold">{fields.length}</dd><dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Fields open</dt></div>
-          <div><dd className="font-serif text-3xl font-bold text-gold">{fields.reduce((s, f) => s + f.children.length, 0)}</dd><dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Trails to wander</dt></div>
-          <div><dd className="font-serif text-3xl font-bold text-gold">4</dd><dt className="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">Depth levels</dt></div>
+        <dl className="grid gap-4 sm:grid-cols-3">
+          <StatCard label="Fields open" value={fields.length} accent="gold" />
+          <StatCard
+            label="Trails to wander"
+            value={fields.reduce((s, f) => s + f.children.length, 0)}
+            accent="violet"
+          />
+          <StatCard label="Depth levels" value={DEPTHS.length} accent="gold" />
         </dl>
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Sparkles className="w-4 h-4 text-gold" />
@@ -70,29 +75,21 @@ export default async function ExtrasPage() {
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {fields.map((field) => (
-            <article
+            <TopicCard
               key={field.id}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-violet-950/40 via-slate-900 to-slate-950 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-gold/5"
-            >
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/50 to-transparent" />
-              <h2 className="font-serif text-2xl font-bold group-hover:text-gold transition-colors">
-                {field.title}
-              </h2>
-              <p className="mt-2 text-sm text-slate-400">
-                {field.children.length > 0
-                  ? `${field.children.length} paths to wander`
+              href={`/discovery/${field.id}`}
+              title={field.title}
+              tone="violet"
+              tag={field.children.length > 0 ? `${field.children.length} paths` : undefined}
+              blurb={
+                field.children.length > 0
+                  ? "Wander from one idea into the next"
                   : field.lessons.length > 0
                     ? "A guided trail with practice"
-                    : "New territory being charted"}
-              </p>
-              <Link
-                href={`/discovery/${field.id}`}
-                className="mt-5 inline-flex items-center gap-2 min-h-[44px] rounded-lg bg-white/5 border border-white/10 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-gold hover:text-slate-950 hover:border-transparent transition-colors"
-              >
-                Enter field
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </article>
+                    : "New territory being charted"
+              }
+              cta="Enter field"
+            />
           ))}
         </div>
         {fields.length === 0 && (
