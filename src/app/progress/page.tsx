@@ -16,6 +16,7 @@ import {
   Loader2,
   BarChart3,
 } from "lucide-react";
+import StatCard from "@/components/ui/StatCard";
 
 interface TopicSummary {
   topicId: string;
@@ -179,7 +180,7 @@ export default function ProgressPage() {
         </div>
 
         {/* Domain Switcher Tabs */}
-        <div className="flex border-b border-slate-800 gap-2 overflow-x-auto">
+        <div role="region" aria-label="Progress sections" tabIndex={0} className="flex border-b border-slate-800 gap-2 overflow-x-auto">
           <button
             type="button"
             aria-pressed={activeTab === "highschool"}
@@ -248,10 +249,29 @@ export default function ProgressPage() {
               </div>
             ) : (
               <>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Current streak</p><p className="mt-2 text-3xl font-bold text-gold">{dashboardData?.streak || 0} days</p></div>
-                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5"><p className="text-sm text-slate-400">Today’s plan</p>{dashboardData?.studyPlan ? <div className="mt-2"><p className="font-semibold">{dashboardData.studyPlan.items.length} study items</p><Link href="/study-plan" className="text-sm text-teal-300 underline">Edit plan</Link></div> : <Link href="/study-plan" className="mt-2 inline-block text-teal-300 underline">Create a study plan</Link>}</div>
-                </div>
+                <dl className="grid gap-4 sm:grid-cols-2">
+                  <StatCard
+                    label="Current streak"
+                    value={`${dashboardData?.streak || 0} days`}
+                    accent="gold"
+                  />
+                  <StatCard label="Today’s plan" value="" accent="teal">
+                    {dashboardData?.studyPlan ? (
+                      <span className="mt-1 block">
+                        <span className="block font-sans text-sm font-semibold text-slate-100">
+                          {dashboardData.studyPlan.items.length} study items
+                        </span>
+                        <Link href="/study-plan" className="text-sm text-teal-300 underline">
+                          Edit plan
+                        </Link>
+                      </span>
+                    ) : (
+                      <Link href="/study-plan" className="mt-1 inline-block text-sm text-teal-300 underline">
+                        Create a study plan
+                      </Link>
+                    )}
+                  </StatCard>
+                </dl>
                 {/* Weak & Strong Topics Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Weak Topics Card */}
@@ -343,12 +363,12 @@ export default function ProgressPage() {
                   </div>
 
                   {dashboardData?.recentAttempts?.length ? (
-                    <div aria-label="Recent quiz accuracy chart" className="flex h-36 items-end gap-3 overflow-x-auto border-b border-slate-800 px-2 pb-2">
+                    <div aria-hidden="true" className="flex h-36 items-end gap-3 overflow-x-auto border-b border-slate-800 px-2 pb-2">
                       {dashboardData.recentAttempts.slice(0, 7).reverse().map((attempt) => (
                         <div key={attempt.id} className="flex h-full min-w-12 flex-col items-center justify-end gap-1">
                           <span className="text-[11px] text-slate-400">{attempt.accuracy}%</span>
                           <div className="w-8 rounded-t bg-gold" style={{ height: `${Math.max(4, attempt.accuracy)}%` }} title={`${attempt.topicTitle}: ${attempt.accuracy}%`} />
-                          <span className="max-w-16 truncate text-[11px] text-slate-500">{attempt.topicTitle}</span>
+                          <span className="max-w-16 truncate text-[11px] text-slate-400">{attempt.topicTitle}</span>
                         </div>
                       ))}
                     </div>

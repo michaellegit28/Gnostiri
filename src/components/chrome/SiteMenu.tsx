@@ -120,7 +120,7 @@ export default function SiteMenu() {
                               </span>
                             )}
                           </span>
-                          <span className="mt-0.5 block text-sm text-slate-500">
+                          <span className="mt-0.5 block text-sm text-slate-400">
                             {link.note}
                           </span>
                         </span>

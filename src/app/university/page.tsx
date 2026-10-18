@@ -162,7 +162,7 @@ export default async function UniversityPage() {
                       </span>
                     ))}
                   </div>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-400">
                     Aligned with, not accredited by, these standards.
                   </p>
                 </div>
@@ -179,7 +179,7 @@ export default async function UniversityPage() {
                     style={{ background: `linear-gradient(90deg, transparent, ${p.faculty?.accent || "#D4AF37"}, transparent)` }}
                   />
                   <div className="flex items-center justify-between mb-5">
-                    <span className="text-xs font-mono tracking-[0.2em] text-slate-500">
+                    <span className="text-xs font-mono tracking-[0.2em] text-slate-400">
                       {p.degreeAwarded}
                     </span>
                     <span className="text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300">
@@ -190,7 +190,7 @@ export default async function UniversityPage() {
                   <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
                     {p.description}
                   </p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <div className="flex items-center gap-4 text-xs text-slate-400">
                     <span className="flex items-center gap-1.5">
                       <BookOpen className="w-3.5 h-3.5" /> {p.durationYears} years
                     </span>
@@ -232,10 +232,10 @@ export default async function UniversityPage() {
                     style={{ background: f.accent || "#D4AF37" }}
                   />
                   <h3 className="font-serif text-lg font-bold mb-1 pl-2">{f.name}</h3>
-                  <p className="text-slate-500 text-xs pl-2 leading-relaxed line-clamp-2">
+                  <p className="text-slate-400 text-xs pl-2 leading-relaxed line-clamp-2">
                     {f.blurb}
                   </p>
-                  <div className="flex items-center gap-3 mt-4 pl-2 text-xs text-slate-500">
+                  <div className="flex items-center gap-3 mt-4 pl-2 text-xs text-slate-400">
                     {f.programmes.length > 0 && (
                       <span>{f.programmes.length} programme{f.programmes.length === 1 ? "" : "s"}</span>
                     )}
@@ -294,7 +294,7 @@ export default async function UniversityPage() {
                         {course.description}
                       </p>
                     )}
-                    <div className="flex items-center gap-3 pt-1 text-xs text-slate-500">
+                    <div className="flex items-center gap-3 pt-1 text-xs text-slate-400">
                       <span className="flex items-center gap-1.5">
                         <BookOpen className="w-3.5 h-3.5" /> {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
                       </span>
@@ -309,7 +309,7 @@ export default async function UniversityPage() {
                   {course.lessons.length === 0 ? (
                     <span
                       aria-disabled="true"
-                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-700 px-5 py-3 font-semibold text-sm text-slate-500 cursor-not-allowed"
+                      className="mt-6 inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-700 px-5 py-3 font-semibold text-sm text-slate-400 cursor-not-allowed"
                     >
                       {course.concepts.length > 0 ? "Concepts only" : "Coming soon"}
                     </span>

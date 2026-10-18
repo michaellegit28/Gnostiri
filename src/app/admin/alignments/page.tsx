@@ -71,9 +71,9 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
                 const stale = age > 90;
                 return (
                   <tr key={a.id} className="border-t border-slate-800">
-                    <td className="p-3">{a.topic.title}<div className="text-xs text-slate-500">{a.topic.slug} {a.track ? `· ${a.track.name}` : "· all tracks"}</div></td>
-                    <td className="p-3">{a.board.name}<div className="text-xs text-slate-500">{a.board.region.name}</div></td>
-                    <td className="p-3"><span aria-label={`${a.tier} syllabus tier`} className={`px-2 py-0.5 rounded-full text-xs font-semibold ${pill(a.tier)}`}>{a.tier}</span></td>
+                    <td className="p-3">{a.topic.title}<div className="text-xs text-slate-400">{a.topic.slug} {a.track ? `· ${a.track.name}` : "· all tracks"}</div></td>
+                    <td className="p-3">{a.board.name}<div className="text-xs text-slate-400">{a.board.region.name}</div></td>
+                    <td className="p-3"><span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${pill(a.tier)}`}>{a.tier}</span></td>
                     <td className="p-3 text-xs">{new Date(a.verifiedDate).toISOString().slice(0, 10)}</td>
                     <td className="p-3 text-xs">{stale ? <span role="alert" className="text-red-400 font-bold">{age}d — review overdue</span> : <span>{age}d</span>}</td>
                     <td className="p-3">
@@ -101,12 +101,12 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
           <input name="weightNotes" placeholder="weight notes" className="bg-slate-900 border border-slate-700 rounded px-2 py-1" />
           <button className="px-3 py-1 rounded bg-emerald-500 text-slate-950 font-semibold" type="submit">Create</button>
         </form>
-        <p className="text-xs text-slate-500">Leave track empty = applies to all tracks. Core only with human verification.</p>
+        <p className="text-xs text-slate-400">Leave track empty = applies to all tracks. Core only with human verification.</p>
       </section>
 
       <section aria-label="CSV import" className="border border-slate-800 rounded-xl p-4 space-y-2">
         <h2 className="font-bold">Bulk CSV import (topic_slug,board_name,track_name,tier,weight_notes)</h2>
-        <p className="text-xs text-slate-500">Entire batch rejected if any slug/board/tier invalid. Paste CSV then Import.</p>
+        <p className="text-xs text-slate-400">Entire batch rejected if any slug/board/tier invalid. Paste CSV then Import.</p>
         <CsvImporter />
       </section>
       <section aria-label="Pending verification" className="border border-dashed border-gold/40 rounded-xl p-4">

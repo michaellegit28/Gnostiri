@@ -58,7 +58,7 @@ export default async function ConceptMapPage({ params }: { params: { course: str
             Every concept is a node; every prerequisite is an edge. Mastery flows along the
             spine — you cannot reach a node before its foundations stand.
           </p>
-          <div className="flex items-center gap-5 text-xs text-slate-500 pt-1">
+          <div className="flex items-center gap-5 text-xs text-slate-400 pt-1">
             <span>{flat.length} concepts</span>
             <span>·</span>
             <span>{edgeCount} prerequisite links</span>

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import useDialogFocus from "@/components/ui/useDialogFocus";
 import {
   ArrowRight,
   CheckCircle2,
@@ -107,6 +108,8 @@ export default function PracticeRunner({
     >
   >({});
   const [aiErrors, setAiErrors] = useState<Record<string, string>>({});
+
+  const transitionRef = useDialogFocus<HTMLDivElement>(phase === "transition");
 
   const section = sections[sectionIndex];
   const question = section?.questions[questionIndex];
@@ -351,7 +354,7 @@ export default function PracticeRunner({
           >
             {busy ? "Starting…" : "Start practice session"}
           </button>
-          <p className="text-xs text-slate-500 text-center">
+          <p className="text-xs text-slate-400 text-center">
             Sections advance in board order — once you move on, earlier sections lock (just like the real thing).
           </p>
         </div>
@@ -468,7 +471,7 @@ export default function PracticeRunner({
                   className="w-full rounded-lg border border-slate-700 bg-slate-950 p-4 text-sm leading-relaxed text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500/40"
                   placeholder="Write your answer here…"
                 />
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-400">
                   Your typed answers save with the session. The official marking scheme is revealed at the end for self-assessment.
                 </p>
               </div>
@@ -509,7 +512,14 @@ export default function PracticeRunner({
 
       {/* ---------- TRANSITION MODAL ---------- */}
       {phase === "transition" && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4" role="dialog" aria-modal="true">
+        <div
+          ref={transitionRef}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 focus:outline-none"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="transition-heading"
+          tabIndex={-1}
+        >
           <div className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900 p-8 text-center space-y-5">
             <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
             <h2 className="text-xl font-serif font-bold">{section?.transitionMessage ?? "Section complete."}</h2>
@@ -568,7 +578,7 @@ export default function PracticeRunner({
                           <p className="text-sm font-semibold text-slate-100">{mq?.questionText ?? ma.questionId}</p>
                           <div className="grid gap-2 text-sm">
                             <div className="rounded-lg border border-slate-700 bg-slate-900 p-3">
-                              <p className="text-xs uppercase tracking-wide text-slate-500 mb-1">Your answer</p>
+                              <p className="text-xs uppercase tracking-wide text-slate-400 mb-1">Your answer</p>
                               <p className="text-slate-300 whitespace-pre-wrap">{yourAnswer || "— not answered —"}</p>
                             </div>
                             <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-3">

@@ -305,7 +305,7 @@ export default function TechText({
         {text}
       </span>
       {labels && (
-        <span className="mt-2 block text-center text-xs uppercase tracking-[0.3em] text-slate-500">
+        <span className="mt-2 block text-center text-xs uppercase tracking-[0.3em] text-slate-400">
           {text}
         </span>
       )}

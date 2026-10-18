@@ -77,7 +77,7 @@ export default function AnswerBooklet({
             : undefined
         }
       />
-      <p aria-hidden="true" className="text-xs tabular-nums text-slate-500">
+      <p aria-hidden="true" className="text-xs tabular-nums text-slate-400">
         {countWords(value)} words · {value.length} chars
         {mode === "planning" ? " · not submitted" : ""}
       </p>

@@ -31,7 +31,7 @@ export default async function MasterQuizPage({ params }: { params: { subject: st
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-2xl mx-auto space-y-6">
         <nav className="text-sm text-slate-400"><Link href={backHref} className="hover:text-gold">{topic.title}</Link> <span>→ Quiz</span></nav>
-        <h1 className="font-serif text-3xl font-bold">{topic.title} quiz <span className="text-sm font-sans text-slate-500">· {topic.questions.length} past questions</span></h1>
+        <h1 className="font-serif text-3xl font-bold">{topic.title} quiz <span className="text-sm font-sans text-slate-400">· {topic.questions.length} past questions</span></h1>
         <MasterQuizClient topicId={topic.id} backHref={backHref} backLabel="chapter"
           questions={topic.questions.map((q) => ({ id: q.id, questionText: q.questionText, options: (q.options as unknown as string[]) || [] }))} />
       </div>

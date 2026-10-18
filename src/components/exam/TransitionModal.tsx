@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import useDialogFocus from "@/components/ui/useDialogFocus";
 
 // TransitionModal — the section bridge. Copy source: RenderManifest
 // section.transitionMessage (non-last sections; null on last → counts fallback).
@@ -39,12 +40,16 @@ export default function TransitionModal({
     return () => document.removeEventListener("keydown", onKey);
   }, [onReviewFlagged]);
 
+  const panelRef = useDialogFocus<HTMLDivElement>();
+
   return (
     <div
+      ref={panelRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="bridge-heading"
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#070b16]/95 p-4 backdrop-blur"
+      tabIndex={-1}
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#070b16]/95 p-4 backdrop-blur focus:outline-none"
     >
       <div className="w-full max-w-xl rounded-2xl border border-gold/40 bg-slate-950 px-6 py-10 text-center md:px-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">

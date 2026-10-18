@@ -161,20 +161,20 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
 
       <div aria-live="polite" className="pt-1">
         {!boardId ? (
-          <p className="text-xs text-slate-500">Select your country{region && region.boards.length > 1 ? " and board" : ""} to see syllabus alignment.</p>
+          <p className="text-xs text-slate-400">Select your country{region && region.boards.length > 1 ? " and board" : ""} to see syllabus alignment.</p>
         ) : loading ? (
-          <p className="text-xs text-slate-500">Checking syllabus…</p>
+          <p className="text-xs text-slate-400">Checking syllabus…</p>
         ) : data ? (
           <div className="space-y-1.5">
-            <span aria-label={badgeLabel(data.tier, data.pending)} className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${badgeClass(data.tier)}`}>
+            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${badgeClass(data.tier)}`}>
               <CircleDot aria-hidden="true" className="w-3 h-3" />
               {badgeLabel(data.tier, data.pending)}
             </span>
             {data.verifiedDate && (
-              <p className="flex items-center gap-1 text-[11px] text-slate-500">
-                <ShieldCheck className="w-3.5 h-3.5 text-slate-500" aria-hidden />
-                <span aria-label={`Verified ${new Date(data.verifiedDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}`}>
-                  🔵 Verified {new Date(data.verifiedDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+              <p className="flex items-center gap-1 text-xs text-slate-400">
+                <ShieldCheck className="w-3.5 h-3.5 text-slate-400" aria-hidden />
+                <span>
+                  Verified {new Date(data.verifiedDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                 </span>
               </p>
             )}

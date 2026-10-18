@@ -255,7 +255,7 @@ export default function QuizClient({
               <div className="text-3xl font-bold text-gold">
                 {score} / {totalQuestions}
               </div>
-              <div className="text-xs text-slate-500 mt-1">{accuracy}% Accuracy</div>
+              <div className="text-xs text-slate-400 mt-1">{accuracy}% Accuracy</div>
             </div>
 
             <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center">
@@ -386,7 +386,7 @@ export default function QuizClient({
             <span className="text-xs font-semibold uppercase tracking-wider text-gold">
               Question {currentIndex + 1} of {totalQuestions}
             </span>
-            <span className="text-xs text-slate-500 bg-slate-800 px-2.5 py-1 rounded-md uppercase font-mono">
+            <span className="text-xs text-slate-400 bg-slate-800 px-2.5 py-1 rounded-md uppercase font-mono">
               {currentQuestion.difficulty}
             </span>
           </div>

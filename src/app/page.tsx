@@ -276,7 +276,7 @@ export default async function Home() {
                 >
                   <div className={`pointer-events-none absolute inset-x-8 top-0 h-[2px] bg-gradient-to-r from-transparent ${card.rule} to-transparent`} />
                   <div>
-                    <div className="text-xs font-mono tracking-[0.25em] text-slate-500 mb-4">
+                    <div className="text-xs font-mono tracking-[0.25em] text-slate-400 mb-4">
                       {card.numeral}.
                     </div>
                     <div className="flex items-center justify-between mb-6">
@@ -395,7 +395,7 @@ export default async function Home() {
           <p className="font-reading italic text-slate-400 text-sm">
             Learning is not a place. It is a posture toward the world.
           </p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-400">
             © {new Date().getFullYear()} Gnostiri. High School is free, forever.
           </p>
         </div>

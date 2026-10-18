@@ -1403,7 +1403,7 @@ const DIAGRAMS: Record<string, () => React.JSX.Element> = {
 
 export function BioDiagram({ diagramId, caption }: { diagramId: string; caption: string }) {
   const D = DIAGRAMS[diagramId];
-  if (!D) return <p className="text-xs text-slate-500">[Diagram unavailable: {diagramId} — {caption}]</p>;
+  if (!D) return <p className="text-xs text-slate-400">[Diagram unavailable: {diagramId} — {caption}]</p>;
   return <D />;
 }
 

@@ -185,7 +185,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about anything…"
           aria-label="Ask the tutor"
-          className="min-h-[48px] flex-1 rounded-full border border-white/15 bg-white/[0.04] px-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold/60 focus:outline-none"
+          className="min-h-[48px] flex-1 rounded-full border border-white/15 bg-white/[0.04] px-4 text-sm text-slate-100 placeholder:text-slate-400 focus:border-gold/60 focus:outline-none"
         />
         <button
           type="submit"

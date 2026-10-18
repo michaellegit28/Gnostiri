@@ -45,7 +45,7 @@ export default function RootLayout({
             <SiteMenu />
             {children}
             <footer className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-6">
-              <p className="text-xs text-slate-500">Gnostiri — text-only Lite Mode hides heavy media.</p>
+              <p className="text-xs text-slate-400">Gnostiri — text-only Lite Mode hides heavy media.</p>
               <LiteModeToggle />
             </footer>
             <TutorPill />
