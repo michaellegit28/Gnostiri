@@ -113,7 +113,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
 
         <header className="space-y-1">
           <h1 className="text-3xl md:text-4xl font-serif font-bold">{subject.name}</h1>
-          <p className="text-sm text-slate-500">{topics.length} topics · {doneCount} complete</p>
+          <p className="text-sm text-slate-400">{topics.length} topics · {doneCount} complete</p>
         </header>
 
         {resume && (
@@ -140,7 +140,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
             </select>
             <button className="rounded bg-gold px-3 py-1.5 font-semibold text-slate-950" type="submit">Apply</button>
             {regionParam && <Link href={`/highschool/study/${subject.slug}`} className="rounded border border-slate-600 px-3 py-1.5">Clear</Link>}
-            <span className="text-xs text-slate-500">Highlights topics marked core in that region&apos;s boards.</span>
+            <span className="text-xs text-slate-400">Highlights topics marked core in that region&apos;s boards.</span>
           </form>
         </details>
 
@@ -200,7 +200,7 @@ function StatusChip({ tone, label }: { tone: "ready" | "amber" | "gold" | "retry
 function SubtopicChips({ subtopics }: { subtopics: string[] }) {
   const first = subtopics.slice(0, 3);
   return (
-    <div className="mt-2 flex flex-wrap gap-1 text-[11px] text-slate-500">
+    <div className="mt-2 flex flex-wrap gap-1 text-[11px] text-slate-400">
       {first.map((s) => (
         <span key={s} className="rounded border border-slate-800 bg-slate-950/60 px-1.5 py-0.5 truncate max-w-[220px]">{s}</span>
       ))}

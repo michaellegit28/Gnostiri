@@ -160,7 +160,7 @@ export default function AttemptClient({
               return (
                 <label
                   key={option}
-                  className={`flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border px-4 transition-colors ${
+                  className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-lg border px-4 transition-colors focus-within:ring-2 focus-within:ring-gold ${
                     results
                       ? isCorrectOption
                         ? "border-emerald-500/60 bg-emerald-500/10"

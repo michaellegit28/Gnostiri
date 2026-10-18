@@ -54,7 +54,7 @@ export default function VerifiedBadge({
           </>
         )}
       </p>
-      <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+      <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-400">
         <TriangleAlert aria-hidden="true" className="h-3.5 w-3.5" />
         Always confirm with your syllabus.
       </p>

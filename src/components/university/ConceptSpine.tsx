@@ -78,7 +78,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
         <h2 className="font-serif text-2xl font-bold flex items-center gap-2">
           <Brain className="w-6 h-6 text-gold" /> The concept spine
         </h2>
-        <span className="text-xs text-slate-500">{concepts.length} concepts</span>
+        <span className="text-xs text-slate-400">{concepts.length} concepts</span>
       </div>
 
       <div className="space-y-3">
@@ -97,7 +97,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
                   aria-expanded={open}
                 >
                   <span className="font-semibold text-sm md:text-base">{group.title}</span>
-                  <span className="flex items-center gap-3 text-xs text-slate-500">
+                  <span className="flex items-center gap-3 text-xs text-slate-400">
                     {group.items.length} concept{group.items.length === 1 ? "" : "s"}
                     <ChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
@@ -137,11 +137,11 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
                               {BLOOMS_LABEL[bloom] || bloom}
                             </span>
                             {concept.estMinutes != null && (
-                              <span className="text-[10px] text-slate-500">~{concept.estMinutes} min</span>
+                              <span className="text-[10px] text-slate-400">~{concept.estMinutes} min</span>
                             )}
                           </div>
                           {concept.summary && (
-                            <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                            <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
                               {concept.summary}
                             </p>
                           )}

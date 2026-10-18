@@ -80,7 +80,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between text-xs text-slate-500">
+      <div className="flex items-center justify-between text-xs text-slate-400">
         <span>
           Card {index + 1} of {due.length}
         </span>
@@ -106,13 +106,13 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
           </div>
 
           <div className="space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
               {current.courseTitle}
             </p>
             <h2 className="font-serif text-2xl md:text-3xl font-bold leading-snug">
               {current.title}
             </h2>
-            <p className="text-slate-500 text-sm">~{current.estMinutes} min · recall and apply</p>
+            <p className="text-slate-400 text-sm">~{current.estMinutes} min · recall and apply</p>
           </div>
 
           {result ? (

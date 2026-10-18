@@ -42,14 +42,14 @@ export default function StudySearch() {
         onBlur={() => setTimeout(() => setOpen(false), 150)}
         placeholder="Search subjects, topics, subtopics — try “mitosis”…"
         aria-label="Search study topics"
-        className="w-full rounded-full border border-slate-700 bg-slate-900/80 px-5 py-3 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold focus:outline-none"
+        className="w-full rounded-full border border-slate-700 bg-slate-900/80 px-5 py-3 text-sm text-slate-100 placeholder:text-slate-400 focus:border-gold focus:outline-none"
       />
       {open && hits.length > 0 && (
         <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-slate-700 bg-slate-950/95 backdrop-blur">
           {hits.map((h, i) => (
             <Link key={i} href={h.href} className="block px-4 py-2.5 text-sm hover:bg-slate-800/70">
               <span className="text-slate-100">{h.label}</span>
-              <span className="ml-2 text-xs text-slate-500">{h.subject}</span>
+              <span className="ml-2 text-xs text-slate-400">{h.subject}</span>
             </Link>
           ))}
         </div>

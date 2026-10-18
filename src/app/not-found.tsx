@@ -34,7 +34,7 @@ export default function NotFound() {
               <span className="block font-serif text-lg font-bold text-slate-100 group-hover:text-gold">
                 {door.title}
               </span>
-              <span className="mt-1 block text-sm text-slate-500">
+              <span className="mt-1 block text-sm text-slate-400">
                 {door.note}
               </span>
             </Link>

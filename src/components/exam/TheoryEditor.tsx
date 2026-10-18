@@ -52,7 +52,7 @@ export default function TheoryEditor({
             </span>
           )}
         </p>
-        <p aria-hidden="true" className="text-xs tabular-nums text-slate-500">
+        <p aria-hidden="true" className="text-xs tabular-nums text-slate-400">
           {words} words · {chars} chars
         </p>
       </div>

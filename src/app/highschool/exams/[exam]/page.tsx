@@ -146,7 +146,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
           groups.map((group, gi) => (
             <section key={group.subject} className="space-y-5">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-xs tracking-[0.25em] text-slate-500">
+                <span className="font-mono text-xs tracking-[0.25em] text-slate-400">
                   {String(gi + 1).padStart(2, "0")}
                 </span>
                 <FileText className="w-5 h-5 text-teal-300" />
@@ -156,7 +156,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                 >
                   {group.subject}
                 </Link>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-slate-400">
                   · {group.papers.length} paper{group.papers.length === 1 ? "" : "s"}
                 </span>
               </div>
@@ -185,7 +185,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                         <span>{paper.totalMarks} marks</span>
                       </div>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-500 group-hover:text-gold transition-colors">
+                    <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-400 group-hover:text-gold transition-colors">
                       Open paper →
                     </div>
                   </Link>

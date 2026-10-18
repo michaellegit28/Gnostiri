@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import useDialogFocus from "@/components/ui/useDialogFocus";
 
 // SubmitConfirmModal — pre-submit gate. Answered / open / flagged counts plus an
 // unsaved-draft warning for the theory path. Escape cancels (never submits).
@@ -35,13 +36,16 @@ export default function SubmitConfirmModal({
   }, [onCancel]);
 
   const unanswered = total - answered;
+  const panelRef = useDialogFocus<HTMLDivElement>();
 
   return (
     <div
+      ref={panelRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="submit-confirm-heading"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
+      tabIndex={-1}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm focus:outline-none"
     >
       <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-900 px-6 py-8 text-center">
         <h2 id="submit-confirm-heading" className="font-serif text-2xl font-bold text-slate-50">

@@ -275,7 +275,7 @@ export default function BattlePlanPage() {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <div className="text-xs text-slate-500">
+                        <div className="text-xs text-slate-400">
                           {item.subject} • {item.kind === "quiz" ? "Practice" : "Study"} •{" "}
                           {item.duration} min
                         </div>

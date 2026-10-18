@@ -89,7 +89,7 @@ export default async function StudyBoard() {
 
         {groups.map(({ key, label }) => (
           <section key={key} aria-label={label} className="space-y-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">{label}</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">{label}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {SUBJECTS.filter((s) => s.group === key).map((subject) => {
                 const Icon = ICONS[subject.icon] ?? BookOpen;
@@ -107,7 +107,7 @@ export default async function StudyBoard() {
                       </div>
                       <ProgressRing value={stats.total ? stats.done / stats.total : 0} />
                     </div>
-                    <p className="mt-3 text-xs text-slate-500">
+                    <p className="mt-3 text-xs text-slate-400">
                       {stats.total} topics · {stats.ready} chapters ready · <span className={stats.done ? "text-emerald-400" : ""}>{stats.done}/{stats.total} complete</span>
                     </p>
                   </Link>

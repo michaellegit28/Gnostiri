@@ -180,7 +180,7 @@ export default function ProgressPage() {
         </div>
 
         {/* Domain Switcher Tabs */}
-        <div className="flex border-b border-slate-800 gap-2 overflow-x-auto">
+        <div role="region" aria-label="Progress sections" tabIndex={0} className="flex border-b border-slate-800 gap-2 overflow-x-auto">
           <button
             type="button"
             aria-pressed={activeTab === "highschool"}
@@ -363,12 +363,12 @@ export default function ProgressPage() {
                   </div>
 
                   {dashboardData?.recentAttempts?.length ? (
-                    <div aria-label="Recent quiz accuracy chart" className="flex h-36 items-end gap-3 overflow-x-auto border-b border-slate-800 px-2 pb-2">
+                    <div aria-hidden="true" className="flex h-36 items-end gap-3 overflow-x-auto border-b border-slate-800 px-2 pb-2">
                       {dashboardData.recentAttempts.slice(0, 7).reverse().map((attempt) => (
                         <div key={attempt.id} className="flex h-full min-w-12 flex-col items-center justify-end gap-1">
                           <span className="text-[11px] text-slate-400">{attempt.accuracy}%</span>
                           <div className="w-8 rounded-t bg-gold" style={{ height: `${Math.max(4, attempt.accuracy)}%` }} title={`${attempt.topicTitle}: ${attempt.accuracy}%`} />
-                          <span className="max-w-16 truncate text-[11px] text-slate-500">{attempt.topicTitle}</span>
+                          <span className="max-w-16 truncate text-[11px] text-slate-400">{attempt.topicTitle}</span>
                         </div>
                       ))}
                     </div>

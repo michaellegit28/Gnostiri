@@ -59,7 +59,7 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
             <FileText className="w-6 h-6 text-teal-300" />
             <h1 className="text-3xl md:text-4xl font-serif font-bold">{subjectTitle}</h1>
           </div>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-400">
             {examination.name.toUpperCase()} · {subjectPapers.length} paper{subjectPapers.length === 1 ? "" : "s"}
           </span>
         </div>
@@ -92,7 +92,7 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
                   </div>
                 </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-500 group-hover:text-gold transition-colors">
+              <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-400 group-hover:text-gold transition-colors">
                 Open paper →
               </div>
             </Link>

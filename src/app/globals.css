@@ -53,3 +53,17 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
 /* Mini-TOC horizontal pill bar */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Respect the OS "reduce motion" setting — kill CSS animations/transitions.
+   Canvas/WebGL effects (GhostFibers, DarkVeil, FlexCarousel) already honour
+   the same media query in JS; this covers CSS-side motion globally. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -46,7 +46,7 @@ export default function StatCard({
       </dt>
       <dd className="relative mt-1 font-serif text-3xl font-bold text-slate-50">
         {value != null && value !== "" && <span className="block">{value}</span>}
-        {note && <span className="mt-1 block text-xs font-normal text-slate-500">{note}</span>}
+        {note && <span className="mt-1 block text-xs font-normal text-slate-400">{note}</span>}
         {children}
       </dd>
     </div>

@@ -231,7 +231,7 @@ export default function StudyReaderClient({
       <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-30 px-4 py-3 md:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Breadcrumbs: Exam > Subject > Topic */}
-          <nav className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-slate-400 overflow-x-auto py-1">
+          <nav aria-label="Breadcrumb" tabIndex={0} className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-slate-400 overflow-x-auto py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
             <Link
               href={`/highschool/${examCode}`}
               className="hover:text-gold transition-colors whitespace-nowrap"

@@ -96,7 +96,7 @@ export default async function CoursePage({ params, searchParams }: { params: { c
                 <CurriculumAlignmentWidget topicSlug={course.slug} lite={lite} />
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-5 pt-2 text-xs text-slate-500">
+            <div className="flex flex-wrap items-center gap-5 pt-2 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5" /> {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
               </span>
@@ -136,7 +136,7 @@ export default async function CoursePage({ params, searchParams }: { params: { c
                       {lesson.title}{" "}
                       {locked && <span className="ml-2 text-xs text-gold align-middle">Premium</span>}
                     </h3>
-                    <span className="text-[11px] text-slate-500 shrink-0">~{lesson.estimatedMinutes} min</span>
+                    <span className="text-[11px] text-slate-400 shrink-0">~{lesson.estimatedMinutes} min</span>
                   </div>
                   {locked ? (
                     <div className="mt-4 rounded-lg bg-slate-950 p-5 text-slate-400 blur-[2px] select-none">
