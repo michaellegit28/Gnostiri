@@ -66,6 +66,33 @@ Every code example is executed against Python 3.11 and the output shown is the
 memory). This is the single most important discipline: a student who copies the
 example gets exactly what the lesson says they will.
 
+## Status
+
+**COMPLETE — all 12 lessons authored** (commits 3e51fb6 → final, branch
+`agent-3/content-1`). `tests/lesson-python.test.mjs` has **78 passing
+cases**, one per worked example and per MCQ claim, all run against real
+Python 3.11. `tsc` 0 errors, `next lint` clean.
+
+| Lesson | Status | PY4E chapter |
+|---|---|---|
+| 1 What a program is | ✅ authored | 1 |
+| 2 Variables & types | ✅ authored | 2 |
+| 3 Input, output & operators | ✅ authored | 2 |
+| 4 Conditions | ✅ authored | 3 |
+| 5 Loops | ✅ authored | 5 |
+| 6 Logic & debugging basics | ✅ authored | 1 (debugging) |
+| 7 Functions | ✅ authored | 4 |
+| 8 Lists & dictionaries | ✅ authored | 8, 9 |
+| 9 Strings & files | ✅ authored | 6, 7 |
+| 10 Decomposition | ✅ authored | 4 (reuse) |
+| 11 Testing & debugging | ✅ authored | 1 (debugging) |
+| 12 Mini project | ✅ authored | 1, 10 (capstone) |
+
+Every lesson ships with `reviewStatus: "needs-human-review"` — none are
+marked verified by the seeder. A human sign-off is the remaining step before
+they are trusted as final.
+
+
 ## Governance
 
 - Every row is `reviewStatus: "needs-human-review"`.

@@ -84,7 +84,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: lesson9() },
   { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: lesson10() },
   { id: `${COURSE_ID}-lesson-11`, title: "Testing & debugging", module: 4, estimatedMinutes: 30, concept: { title: "Testing and debugging", slug: "testing-debugging", blooms: "evaluate", minutes: 30, prereq: ["decomposition"] }, content: lesson11() },
-  { id: `${COURSE_ID}-lesson-12`, title: "Mini project", module: 4, estimatedMinutes: 45, concept: { title: "Mini project", slug: "mini-project", blooms: "create", minutes: 45, prereq: ["testing-debugging"] }, content: pending(12) },
+  { id: `${COURSE_ID}-lesson-12`, title: "Mini project", module: 4, estimatedMinutes: 45, concept: { title: "Mini project", slug: "mini-project", blooms: "create", minutes: 45, prereq: ["testing-debugging"] }, content: lesson12() },
 ];
 
 const ALL_LESSONS = [LESSON_1, ...LESSONS_2_TO_12];
@@ -2632,6 +2632,235 @@ function lesson11(): LessonContent {
       {
         type: "paragraph",
         text: "Next: the mini project. This is where it all comes together — you will write a real, complete program that reads a file, counts words, and reports the result, using the functions, structures and loops you have built across the whole course. It is the capstone."
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 12 content — the capstone project. Original writing; runnable code
+// verified with Python 3. Builds a complete word-count program from the ideas
+// of every previous lesson, and ties it to PY4E ch.1 + ch.10 (tuples/capstone).
+// ---------------------------------------------------------------------------
+function lesson12(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this project you should be able to: write a complete program that reads a text file, counts how often each word appears, and reports the most common word and its count; explain how each part maps onto a lesson you have already completed; and trace the whole program so you can predict and verify its output.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Everything. This is the capstone. You need reading a file lesson 9, the counting idiom lesson 8, the loop lesson 5, and the decomposition mind-set lesson 10. If any of these is shaky, this is the place to go back and shore it up.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "paragraph",
+        text: "This program is the one PY4E opens its whole course with — counting the most common word in a piece of text — and by now you can build it yourself from the ideas you already have. It is not a new concept. It is the moment all the separate lessons snap together into one real, useful program. Notice that once you can count words, you can count almost anything: letters, tags, student scores, error types. The pattern is the same, and the pattern is the point.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "How to approach it" },
+      {
+        type: "paragraph",
+        text: "Do not try to write the whole program in one go. Build it one piece at a time, running each piece and checking the output, exactly as you practised in lesson 11. Here is the road map in four steps: first, read the file and print each line to confirm you are reading it at all. Second, split each line into words and print them, so you can see the text breaking apart. Third, feed each word into the counting dictionary and print the whole dictionary. Fourth, add the loop that finds the most common word. Each stage is testable and each builds on the last, so if something is wrong you know exactly which stage broke.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "The data — a small text file" },
+      {
+        type: "paragraph",
+        text: "For this project you will work on a short file so you can verify the answer by hand. Create words.txt with these three lines.",
+      },
+      {
+        type: "table",
+        headers: ["words.txt (create this file)"],
+        rows: [["the cat sat on the mat"], ["the dog chased the cat"], ["the cat ran home"]],
+      },
+      {
+        type: "paragraph",
+        text: "Before you run anything, count by hand: 'the' appears five times, 'cat' three times, and 'sat', 'on', 'mat', 'dog', 'chased', 'ran', 'home' once each. That manual count is your prediction — the reference the program's output must match. This is tracing and testing in action: you have an expected result before you run the program.",
+      },
+
+      { type: "heading", level: 2, text: "Stage 1 — read the file" },
+      {
+        type: "paragraph",
+        text: "First, prove you are reading the file. Open it, loop over it, and print each line stripped.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `for line in open("words.txt", "r"):\n    print(line.strip())`,
+        output: "the cat sat on the mat\nthe dog chased the cat\nthe cat ran home",
+        caption: "Stage 1 confirms the file is being read, one line at a time, with each newline trimmed.",
+      },
+
+      { type: "heading", level: 2, text: "Stage 2 — split into words" },
+      {
+        type: "paragraph",
+        text: "Next, break each line into individual words so you can see the raw material you are counting.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `for line in open("words.txt", "r"):\n    print(line.split())`,
+        output: "['the', 'cat', 'sat', 'on', 'the', 'mat']\n['the', 'dog', 'chased', 'the', 'cat']\n['the', 'cat', 'ran', 'home']",
+        caption: "Stage 2 turns each line into a list of words — you can now see exactly the tokens that will be counted.",
+      },
+
+      { type: "heading", level: 2, text: "Stage 3 — count the words" },
+      {
+        type: "paragraph",
+        text: "The heart of the program: run the counting idiom over every word in every line. Print the dictionary to check your hand count.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `counts = {}\nfor line in open("words.txt", "r"):\n    for w in line.split():\n        counts[w] = counts.get(w, 0) + 1\nprint(counts)`,
+        output: "{'the': 5, 'cat': 3, 'sat': 1, 'on': 1, 'mat': 1, 'dog': 1, 'chased': 1, 'ran': 1, 'home': 1}",
+        caption: "Stage 3 produces the full tally. Compare it against your manual count — this is your first verification.",
+      },
+      {
+        type: "paragraph",
+        text: "This is the exact idiom from lesson 8, wrapped in two nested loops: the outer one over the file's lines, the inner one over the words in each line. The dictionary counts holds every distinct word as a key and its frequency as a value. Compare this against your manual prediction: 'the' has 5, 'cat' has 3, and every other word has 1. If the program does not match, you have found a bug while it is still small.",
+      },
+
+      { type: "heading", level: 2, text: "Stage 4 — find the most common word" },
+      {
+        type: "paragraph",
+        text: "Now loop over the dictionary to find the word with the largest count. You track the best answer as you go.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `counts = {}\nfor line in open("words.txt", "r"):\n    for w in line.split():\n        counts[w] = counts.get(w, 0) + 1\n\ntop_word = None\ntop_count = None\nfor w, c in counts.items():\n    if top_count is None or c > top_count:\n        top_word = w\n        top_count = c\n\nprint("Total distinct words:", len(counts))\nprint("Most common word:", top_word, "appears", top_count, "times")`,
+        output: "Total distinct words: 9\nMost common word: the appears 5 times",
+        caption: "The final loop scans the dictionary, keeping the word with the highest count, and the program reports the result.",
+      },
+      {
+        type: "paragraph",
+        text: "The loop sets up two trackers, top_word and top_count, and starts with neither known. For each word and its count, it compares against the current best; if the new count is higher — or if nothing has been set yet — it remembers this word as the new best. This is the maximum-finding pattern, the same shape you used to sum a total, just deciding on a best rather than accumulating. The output confirms your hand count: nine distinct words and 'the' appearing five times.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Trying to write the whole program at once. Build it in the four stages above, running and checking after each. A bug in a ten-line version is trivial to find; a bug in a forty-line version is not.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Not stripping or splitting correctly. If words come back with trailing newlines, strip() each line first; if you want word tokens, use split() with no argument.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting to handle the empty dictionary. If the file has no lines, counts is empty, top_count stays None, and the program should report that gracefully rather than crash.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Comparing counts with < instead of > in the maximum-finding loop. The trackers start as None; ensure you use a comparison that keeps the larger count, and guard the first iteration.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Why build the program in four stages instead of one pass?",
+        answer: "Because each stage is independently testable. If something breaks, you know exactly which stage to inspect, and you have a manual prediction to verify each one.",
+        explanation: "Running a small, readable part and checking its output keeps the search space small — the lesson-11 approach applied to a whole project.",
+      },
+      {
+        type: "question",
+        prompt: "In the maximum-finding loop, why do the trackers start as None rather than a number like 0?",
+        answer: "Because a real count could conceivably be anything, and starting as None lets you detect the first iteration cleanly — 'if nothing is set yet, set it'.",
+        explanation: "Starting as None and guarding the first assignment avoids assuming a lower bound that might exclude legitimate counts.",
+      },
+      {
+        type: "question",
+        prompt: "What happens to the program if words.txt is empty?",
+        answer: "counts stays empty, the maximum loop never updates the trackers (staying None), and a well-written program reports it gracefully instead of crashing.",
+        explanation: "An empty input is an edge case worth handling — it exercises the guard in the maximum-finding loop and the empty-dictionary path.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What is the core data structure used to count word frequencies?",
+        options: ["A list", "A dictionary", "A string", "A loop only"],
+        correctIndex: 1,
+        explanation: "A dictionary maps each distinct word (key) to its frequency (value), which is exactly what counting requires.",
+      },
+      {
+        type: "mcq",
+        stem: "What does split() with no argument return?",
+        options: ["A single string", "A list of words split on whitespace", "A dictionary", "The line count"],
+        correctIndex: 1,
+        explanation: "split() on whitespace returns a list of the words. It is what turns each line into countable tokens.",
+      },
+      {
+        type: "mcq",
+        stem: "How does the counting idiom add a new word to the tally?",
+        options: ["It starts a new list", "counts.get(w, 0) returns the current tally or 0, then +1 stores it back", "It appends to a list", "It just prints w"],
+        correctIndex: 1,
+        explanation: "get(w, 0) safely reads the current count, defaulting to 0 for an unseen word, and +1 stores the incremented value under w.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the purpose of the second loop that scans counts.items()?",
+        options: ["To print every word", "To find the word with the largest count", "To delete the smaller counts", "To sort the dictionary"],
+        correctIndex: 1,
+        explanation: "That loop walks the word-count pairs and keeps the one with the highest value — the maximum-finding pattern.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is it important to verify the program against a manual count?",
+        options: ["It is a formality", "It is your expected output, so a mismatch immediately signals a bug", "It makes the program faster", "It is required syntax"],
+        correctIndex: 1,
+        explanation: "A hand count gives you a reference. Comparing it with the output is how you know the program is correct — the essence of testing.",
+      },
+      {
+        type: "mcq",
+        stem: "Which loop structure does the program use to read the whole file?",
+        options: ["A dictionary", "A for loop over the opened file, yielding one line per pass", "A while loop with a manual counter", "A function"],
+        correctIndex: 1,
+        explanation: "Iterating over an opened file yields each line in turn — the natural way to process a file line by line.",
+      },
+      {
+        type: "mcq",
+        stem: "If the program should handle an empty file safely, what must it check?",
+        options: ["That counts is not empty before finding a maximum", "That the file exists", "That split is called", "That print is available"],
+        correctIndex: 0,
+        explanation: "An empty dictionary means there is no 'most common word'. A graceful program checks the edge case rather than assuming a count exists.",
+      },
+      {
+        type: "mcq",
+        stem: "How does this capstone program relate to the earlier lessons?",
+        options: ["It is unrelated", "It combines file reading (9), the counting idiom (8), loops (5) and decomposition (10)", "It only uses lesson 1", "It is a wholly new concept"],
+        correctIndex: 1,
+        explanation: "The project is the integration of the whole course: reading, splitting, counting, and organising into a complete, testable program.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and what comes next" },
+      {
+        type: "paragraph",
+        text: "You built a complete word-count program from the ideas of every previous lesson: read a file, split it into words, count them in a dictionary, and find the most common. You verified each stage against a manual prediction. That is not just a program — it is a demonstration that the separate pieces of the course compose into something genuinely useful.",
+      },
+      {
+        type: "paragraph",
+        text: "Where the course goes from here: tuples let you sort the counted words (PY4E chapter 10), and from there the same counting idea extends to real data — scraping, parsing, and analysing text at scale. You have the foundation. Everything after this is this same pattern, applied to bigger and messier data.",
       },
     ],
   };

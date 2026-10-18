@@ -224,6 +224,22 @@ const CLAIMS_L11 = [
   { name: "assert fails and raises when false (caught)", code: `try:\n    assert 1 + 1 == 3\nexcept AssertionError:\n    print("fails")`, expected: "fails" },
 ];
 
+// Lesson 12 (Mini project / capstone) — the complete word-count program.
+const CAPSTONE_FILE = `open("words.txt", "w").write("the cat sat on the mat\\nthe dog chased the cat\\nthe cat ran home\\n")`;
+const CAPSTONE = `${CAPSTONE_FILE}\ncounts = {}\nfor line in open("words.txt", "r"):\n    for w in line.split():\n        counts[w] = counts.get(w, 0) + 1\n\ntop_word = None\ntop_count = None\nfor w, c in counts.items():\n    if top_count is None or c > top_count:\n        top_word = w\n        top_count = c\n\nprint("Total distinct words:", len(counts))\nprint("Most common word:", top_word, "appears", top_count, "times")`;
+
+const SNIPPETS_L12 = [
+  { name: "capstone stage 1 — read the file", code: `${CAPSTONE_FILE}\nfor line in open("words.txt", "r"):\n    print(line.strip())`, expected: "the cat sat on the mat\nthe dog chased the cat\nthe cat ran home" },
+  { name: "capstone stage 2 — split into words", code: `${CAPSTONE_FILE}\nfor line in open("words.txt", "r"):\n    print(line.split())`, expected: "['the', 'cat', 'sat', 'on', 'the', 'mat']\n['the', 'dog', 'chased', 'the', 'cat']\n['the', 'cat', 'ran', 'home']" },
+  { name: "capstone stage 3 — count the words", code: `${CAPSTONE_FILE}\ncounts = {}\nfor line in open("words.txt", "r"):\n    for w in line.split():\n        counts[w] = counts.get(w, 0) + 1\nprint(counts)`, expected: "{'the': 5, 'cat': 3, 'sat': 1, 'on': 1, 'mat': 1, 'dog': 1, 'chased': 1, 'ran': 1, 'home': 1}" },
+  { name: "capstone stage 4 — find the most common word", code: CAPSTONE, expected: "Total distinct words: 9\nMost common word: the appears 5 times" },
+];
+
+const CLAIMS_L12 = [
+  { name: "capstone reports the correct tally", code: CAPSTONE, expected: "Total distinct words: 9\nMost common word: the appears 5 times" },
+  { name: "empty file yields no most-common word gracefully", code: `open("words.txt", "w").write("")\ncounts = {}\nfor line in open("words.txt", "r"):\n    for w in line.split():\n        counts[w] = counts.get(w, 0) + 1\nprint("distinct:", len(counts))`, expected: "distinct: 0" },
+];
+
 const CLAIMS_L3 = [
   { name: "input type is a string", code: `x = input()\nprint(type(x) is str)`, expected: "True", stdin: "7\n" },
   { name: "string times int repeats", code: `x = input()\nprint(x * 3)`, expected: "777", stdin: "7\n" },
@@ -261,9 +277,9 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6, ...SNIPPETS_L7, ...SNIPPETS_L8, ...SNIPPETS_L9, ...SNIPPETS_L10, ...SNIPPETS_L11];
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6, ...SNIPPETS_L7, ...SNIPPETS_L8, ...SNIPPETS_L9, ...SNIPPETS_L10, ...SNIPPETS_L11, ...SNIPPETS_L12];
 for (const s of ALL_SNIPPETS) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : SNIPPETS_L7.includes(s) ? "lesson 7" : SNIPPETS_L8.includes(s) ? "lesson 8" : SNIPPETS_L9.includes(s) ? "lesson 9" : SNIPPETS_L10.includes(s) ? "lesson 10" : SNIPPETS_L11.includes(s) ? "lesson 11" : "lesson 1";
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : SNIPPETS_L7.includes(s) ? "lesson 7" : SNIPPETS_L8.includes(s) ? "lesson 8" : SNIPPETS_L9.includes(s) ? "lesson 9" : SNIPPETS_L10.includes(s) ? "lesson 10" : SNIPPETS_L11.includes(s) ? "lesson 11" : SNIPPETS_L12.includes(s) ? "lesson 12" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
@@ -271,9 +287,9 @@ for (const s of ALL_SNIPPETS) {
   });
 }
 
-const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6, ...CLAIMS_L7, ...CLAIMS_L8, ...CLAIMS_L9, ...CLAIMS_L10, ...CLAIMS_L11];
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6, ...CLAIMS_L7, ...CLAIMS_L8, ...CLAIMS_L9, ...CLAIMS_L10, ...CLAIMS_L11, ...CLAIMS_L12];
 for (const c of ALL_CLAIMS) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : CLAIMS_L7.includes(c) ? "lesson 7" : CLAIMS_L8.includes(c) ? "lesson 8" : CLAIMS_L9.includes(c) ? "lesson 9" : CLAIMS_L10.includes(c) ? "lesson 10" : CLAIMS_L11.includes(c) ? "lesson 11" : "lesson 1";
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : CLAIMS_L7.includes(c) ? "lesson 7" : CLAIMS_L8.includes(c) ? "lesson 8" : CLAIMS_L9.includes(c) ? "lesson 9" : CLAIMS_L10.includes(c) ? "lesson 10" : CLAIMS_L11.includes(c) ? "lesson 11" : CLAIMS_L12.includes(c) ? "lesson 12" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code, c.stdin);
     if (c.expectedError) {
