@@ -82,7 +82,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: lesson7() },
   { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: lesson8() },
   { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: lesson9() },
-  { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: pending(10) },
+  { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: lesson10() },
   { id: `${COURSE_ID}-lesson-11`, title: "Testing & debugging", module: 4, estimatedMinutes: 30, concept: { title: "Testing and debugging", slug: "testing-debugging", blooms: "evaluate", minutes: 30, prereq: ["decomposition"] }, content: pending(11) },
   { id: `${COURSE_ID}-lesson-12`, title: "Mini project", module: 4, estimatedMinutes: 45, concept: { title: "Mini project", slug: "mini-project", blooms: "create", minutes: 45, prereq: ["testing-debugging"] }, content: pending(12) },
 ];
@@ -2217,6 +2217,205 @@ function lesson9(): LessonContent {
       {
         type: "paragraph",
         text: "Next: decomposition. You have now used functions and data structures. The next lesson pulls them together into the higher-level skill of breaking a real problem into functions — the difference between writing a program and designing one.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 10 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson10(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: take a problem and break it into smaller functions; decide what each function takes in and hands back; assemble those functions into a working whole; and recognise the difference between writing a program and designing one.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 7, 8 and 9. You need functions and the data structures, and the capstone reading pattern — because decomposition is the skill of taking a program like that and organising it into named pieces you can reason about one at a time.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Decomposition",
+        text: "Decomposition is breaking a large problem into smaller, named pieces that each do one well-defined job. Instead of one long unbroken program, you get a set of functions, each with a clear input, a clear responsibility, and a clear output — and a small amount of code that calls them in order.",
+      },
+      {
+        type: "paragraph",
+        text: "This is the skill that separates someone who can write code from someone who can build software. A short program can be written as one long list, but a real program cannot — it would be a wall of text you can hardly read, and any change would ripple through it unpredictably. Decomposition is how you make a big program tractable: divide it so that you can understand, test, and fix one piece at a time.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the technique" },
+      {
+        type: "paragraph",
+        text: "The drive behind decomposition is simple: it is easier to think about small things than large ones. Each function should do one job and do it well. If you catch yourself saying a function \"does a few things\", that is the signal to split it — the moment a function's job needs an 'and' in its description, it probably should be two functions.",
+      },
+      {
+        type: "paragraph",
+        text: "Deciding the interface is the hard part. Before you write a function's body, decide what it needs as input and what it produces as output. If a function is meant to compute a grade from a score, its input is a score and its output is a grade. If it is meant to produce a sentence, its inputs are a name and a score, and its output is a string. Nailing down the parameters and the return type first is what makes the pieces fit together without surprises.",
+      },
+      {
+        type: "paragraph",
+        text: "There is an art to choosing the boundaries. A good decomposition has functions that are reusable and readable on their own. A bad one has functions that are too large, too small, or that depend on each other's internals. The test is usually this: can you read a function's name and what it returns and understand its job without reading its body? If yes, you have a clean boundary; if no, the piece is doing too much.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: a problem split into three small functions" },
+      {
+        type: "paragraph",
+        text: "A trivial greeting, but decomposed. Each function has one job, and a tiny bit of code assembles them.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def get_name():\n    return "Ada"\n\ndef make_greeting(name):\n    return "Hello, " + name + "!"\n\ndef print_greeting(greeting):\n    print(greeting)\n\nprint_greeting(make_greeting(get_name()))`,
+        output: "Hello, Ada!",
+        caption: "Each function does one thing; the last line passes each result to the next like an assembly line.",
+      },
+      {
+        type: "paragraph",
+        text: "Read the pieces separately. get_name produces a string. make_greeting takes a string and produces a longer string. print_greeting takes a string and shows it. No function knows how the others work — each just receives a value and hands one back. The final line composes them: get_name() is fed into make_greeting, whose result is fed into print_greeting. This is the whole idea: each piece is simple and testable on its own, and the whole program is just onesimplification of functions.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: a slightly more realistic decomposition" },
+      {
+        type: "paragraph",
+        text: "Grade a student using two functions. One computes a letter grade from a number; the other builds a readable summary. The summarising function calls the grading one.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def letter_grade(score):\n    if score >= 85:\n        return "A"\n    elif score >= 70:\n        return "B"\n    return "C"\n\ndef summarize(name, score):\n    return name + ": " + letter_grade(score)\n\nprint(summarize("Ada", 92))\nprint(summarize("Ben", 74))`,
+        output: "Ada: A\nBen: B",
+        caption: "letter_grade has one job — turn a score into a grade. summarize composes it into a sentence.",
+      },
+      {
+        type: "paragraph",
+        text: "Notice how the two functions divide the work. letter_grade is concerned only with the mapping from a number to a grade — it is the decision logic from lesson 4, wrapped up. summarize is concerned only with arranging a name and a grade into a readable sentence. Neither cares about the other's details. If the grading threshold changes, you edit letter_grade alone and summarize needs no change; if you want to show the grade differently, you edit summarize. Each piece is independent, which is exactly what makes the program understandable and maintainable.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Making one giant function. If a function's job needs an 'and' — 'it validates and formats and saves' — it is likely too big. Split it so each piece does one thing.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Not deciding inputs and outputs first. Writing a body before you know what it takes in and gives back leads to functions that don't compose. Decide the interface first.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Over-decomposing into tiny meaningless functions. A function that wraps a single print with a misleading name adds noise rather than clarity. Split where it clarifies, not for its own sake.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Duplicating logic instead of extracting a function. If the same calculation appears in two places, make it one function and call it from both — that is the reuse payoff of decomposition.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What is the main benefit of decomposition?",
+        answer: "It breaks a large problem into small, named pieces, each with one clear job, so you can understand, test and fix one piece at a time.",
+        explanation: "Small functions are easier to reason about. The whole program then becomes a simple composition of understandable parts.",
+      },
+      {
+        type: "question",
+        prompt: "What decision should you make before writing a function's body?",
+        answer: "Its interface — what it takes in as input and what it hands back as output.",
+        explanation: "Defining parameters and return value first is what lets pieces fit together. The body is then an implementation of a known contract.",
+      },
+      {
+        type: "question",
+        prompt: "How can you tell when a function is too big?",
+        answer: "When its job needs an 'and' in its description — when it does more than one thing.",
+        explanation: "A function doing multiple jobs is a signal to split it. Each function should do one thing and do it well.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What is decomposition?",
+        options: ["Breaking a large problem into smaller functions", "Running a program faster", "Making all code one function", "Removing functions"],
+        correctIndex: 0,
+        explanation: "Decomposition divides a problem into named pieces, each with a clear job, so the whole becomes a composition of simple parts.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the best first step after deciding what a problem needs to do?",
+        options: ["Write one giant function", "Identify the inputs and outputs each function needs", "Add more features", "Skip to testing"],
+        correctIndex: 1,
+        explanation: "Defining each function's interface (inputs and outputs) before its body is what makes the pieces compose cleanly.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the signal that a function is too big?",
+        options: ["It is more than five lines", "Its job has an 'and' in it, meaning it does more than one thing", "It contains a loop", "It returns a value"],
+        correctIndex: 1,
+        explanation: "A function should do one job. If the description of its job needs an 'and', it is doing more than one thing and should be split.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is 'reuse' a benefit of decomposition?",
+        options: ["It makes functions larger", "A calculation written once as a function can be called from many places", "It removes the need for loops", "It makes programs run faster"],
+        correctIndex: 1,
+        explanation: "Extracting a shared calculation into one function lets you call it wherever it is needed instead of duplicating the logic.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the trade-off to avoid when decomposing?",
+        options: ["Having too many functions", "Wrapping single trivial statements in misleadingly named functions", "Writing functions that loop", "Passing parameters"],
+        correctIndex: 1,
+        explanation: "Over-decomposition — tiny functions that each wrap a single statement — adds noise. Split where it clarifies, not for its own sake.",
+      },
+      {
+        type: "mcq",
+        stem: "In a decomposed program, how should functions relate to one another?",
+        options: ["Each should read the other's internals", "Each should take values in and hand values back, without depending on internals", "They should never call each other", "They must be identical"],
+        correctIndex: 1,
+        explanation: "Well-decomposed functions communicate only through their parameters and return values. Each is understandable in isolation.",
+      },
+      {
+        type: "mcq",
+        stem: "Which change is easiest to make if the grading thresholds change?",
+        options: ["Edit the summarize function", "Edit the letter_grade function, since it owns the score-to-grade logic", "Rewrite the whole program", "Add a new threshold to the main code"],
+        correctIndex: 1,
+        explanation: "letter_grade owns the mapping from score to grade, so the change is local. The rest of the program needs no modification.",
+      },
+      {
+        type: "mcq",
+        stem: "How does decomposition relate to the word-count program?",
+        options: ["It removes the dictionary", "It lets the reading, counting and printing live in separate named functions", "It replaces the loop with functions", "It makes counting unnecessary"],
+        correctIndex: 1,
+        explanation: "The capstone could be decomposed into distinct functions: read the file, count the words, report the result. Each is testable and reusable.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Decomposition is breaking a problem into one-job functions with clear inputs and outputs. Decide the interface before the body; keep each function doing one thing; and compose them so the whole program is a chain of understandable parts. This is what turns a wall of code into a design.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: testing & debugging. Lesson 10 organised your code into pieces; the next lesson shows you how to test each piece and find the bug when one of them misbehaves — moving from the debug technique of lesson 6 to a disciplined, build-your-own-tests approach.",
       },
     ],
   };

@@ -182,6 +182,24 @@ const CLAIMS_L9 = [
   { name: "strip trims a newline", code: `print(repr("hi\\n".strip()))`, expected: "'hi'" },
 ];
 
+// Lesson 10 (Decomposition) worked examples.
+const SNIPPETS_L10 = [
+  {
+    name: "a problem split into three small functions",
+    code: `def get_name():\n    return "Ada"\n\ndef make_greeting(name):\n    return "Hello, " + name + "!"\n\ndef print_greeting(greeting):\n    print(greeting)\n\nprint_greeting(make_greeting(get_name()))`,
+    expected: "Hello, Ada!",
+  },
+  {
+    name: "a more realistic decomposition",
+    code: `def letter_grade(score):\n    if score >= 85:\n        return "A"\n    elif score >= 70:\n        return "B"\n    return "C"\n\ndef summarize(name, score):\n    return name + ": " + letter_grade(score)\n\nprint(summarize("Ada", 92))\nprint(summarize("Ben", 74))`,
+    expected: "Ada: A\nBen: B",
+  },
+];
+
+const CLAIMS_L10 = [
+  { name: "functions compose by passing results", code: `def square(x):\n    return x * x\nprint(square(square(2)))`, expected: "16" },
+];
+
 const CLAIMS_L3 = [
   { name: "input type is a string", code: `x = input()\nprint(type(x) is str)`, expected: "True", stdin: "7\n" },
   { name: "string times int repeats", code: `x = input()\nprint(x * 3)`, expected: "777", stdin: "7\n" },
@@ -219,9 +237,9 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6, ...SNIPPETS_L7, ...SNIPPETS_L8, ...SNIPPETS_L9];
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6, ...SNIPPETS_L7, ...SNIPPETS_L8, ...SNIPPETS_L9, ...SNIPPETS_L10];
 for (const s of ALL_SNIPPETS) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : SNIPPETS_L7.includes(s) ? "lesson 7" : SNIPPETS_L8.includes(s) ? "lesson 8" : SNIPPETS_L9.includes(s) ? "lesson 9" : "lesson 1";
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : SNIPPETS_L7.includes(s) ? "lesson 7" : SNIPPETS_L8.includes(s) ? "lesson 8" : SNIPPETS_L9.includes(s) ? "lesson 9" : SNIPPETS_L10.includes(s) ? "lesson 10" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
@@ -229,9 +247,9 @@ for (const s of ALL_SNIPPETS) {
   });
 }
 
-const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6, ...CLAIMS_L7, ...CLAIMS_L8, ...CLAIMS_L9];
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6, ...CLAIMS_L7, ...CLAIMS_L8, ...CLAIMS_L9, ...CLAIMS_L10];
 for (const c of ALL_CLAIMS) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : CLAIMS_L7.includes(c) ? "lesson 7" : CLAIMS_L8.includes(c) ? "lesson 8" : CLAIMS_L9.includes(c) ? "lesson 9" : "lesson 1";
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : CLAIMS_L7.includes(c) ? "lesson 7" : CLAIMS_L8.includes(c) ? "lesson 8" : CLAIMS_L9.includes(c) ? "lesson 9" : CLAIMS_L10.includes(c) ? "lesson 10" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code, c.stdin);
     if (c.expectedError) {
