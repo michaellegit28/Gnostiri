@@ -76,7 +76,7 @@ const LESSON_1: LessonSeed = {
 const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-2`, title: "Variables & types", module: 1, estimatedMinutes: 30, concept: { title: "Variables and types", slug: "variables-and-types", blooms: "understand", minutes: 30, prereq: ["what-is-a-program"] }, content: lesson2() },
   { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: lesson3() },
-  { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: pending(4) },
+  { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: lesson4() },
   { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: pending(5) },
   { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: pending(6) },
   { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: pending(7) },
@@ -787,6 +787,239 @@ function lesson3(): LessonContent {
       {
         type: "paragraph",
         text: "Next: conditions. Lesson 3 ended with comparison operators producing True or False. The next lesson puts those booleans to work, letting your program choose between two different courses of action — the start of real decision-making.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 4 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson4(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: choose between two courses of action with if and else; chain several choices with elif; combine conditions with and, or and not; and correctly indent the blocks that belong to each branch (which is how Python knows which statements to include).",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 3 (Input, output & operators). You need comparison operators — >, <, ==, and the others — which produce True or False, and to be comfortable that a single equals stores while a double equals asks.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Conditional execution",
+        text: "Conditional execution is the ability of a program to run one block of statements on some decision and a different block on another — to make a choice, rather than always doing the same thing. It is the difference between a program that types out a script and a program that responds.",
+      },
+      {
+        type: "paragraph",
+        text: "So far every lesson you wrote has been a straight run of instructions: the program did everything, in order, every time. That is a monotone recitation. This lesson gives the program a fork in the road. When the program reaches an if statement, it evaluates a condition — an expression that is True or False — and, depending on the answer, follows one path or the other. This is what separates a calculator from a programme that can, say, grade an exam or decide whether a patient's reading is normal.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "The first thing to internalise is that a condition is just a value — a boolean. The if statement does not do anything special to the condition; it simply looks at whether it is True or False. This is why you can use a variable holding a boolean (like has_id = True directly as a condition) as easily as a comparison it produces. A condition is not a special phrase; it is an expression you already know how to write, now used in a decision.",
+      },
+      {
+        type: "paragraph",
+        text: "The second, and easily most confusing, thing is indentation. Python does not use braces to group statements the way many other languages do. It uses the indentation. Every statement indented further than the if line belongs to that branch, and the block ends when the indentation returns to its earlier level. This is not cosmetic. If you indent too little or too much, either the statements fall outside the branch (running regardless) or Python refuses to run at all with an IndentationError.",
+      },
+      {
+        type: "paragraph",
+        text: "The third thing is the order of an elif chain. Python checks the conditions top to bottom and runs the first one that is True, then skips the rest. The order matters: if you test a broad condition before a narrow one, the narrow one may never be reached. Putting the most specific test first is usually the safer habit.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: the first fork" },
+      {
+        type: "paragraph",
+        text: "A single if statement with an else. Exactly one of the two blocks runs — never both, never neither.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `x = 15\nif x > 10:\n    print("big")\nelse:\n    print("small")`,
+        output: "big",
+        caption: "x is 15, so the condition x > 10 is True and only the indented block under if runs.",
+      },
+      {
+        type: "paragraph",
+        text: "Read the colon on the if and else lines carefully — it is required and easy to drop. The statements inside each branch are indented. Because 15 is greater than 10, the condition is True, so Python runs the indented line print(\"big\") and skips the else block entirely. The else is not a thing that would run later; it is a fallback that runs only when the if condition is False.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: choosing from many with elif" },
+      {
+        type: "paragraph",
+        text: "When there are more than two possible outcomes, chain them. The first True condition wins and the rest are skipped.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `score = 72\nif score >= 85:\n    print("A")\nelif score >= 70:\n    print("B")\nelse:\n    print("C")`,
+        output: "B",
+        caption: "Score 72 is not 85 or above, but it is 70 or above, so the elif branch matches and prints B.",
+      },
+      {
+        type: "paragraph",
+        text: "Walk the chain. The first condition, score >= 85, is False, so Python ignores its block and moves on. The next, score >= 70, is True, so it runs print(\"B\") and then jumps past the rest — the else does not run, because an elif already matched. The chains read from the most demanding test to the least; if you flipped the order to test >= 70 first, an A student would get B, because the looser condition would match before the stricter one got a chance.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: combining conditions" },
+      {
+        type: "paragraph",
+        text: "To require two things at once, use and. To accept either one, use or. To invert a condition, use not.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `age = 20\nhas_id = True\nif age >= 18 and has_id:\n    print("Welcome")\nelse:\n    print("Entry denied")`,
+        output: "Welcome",
+        caption: "and means both must hold. Age 20 is 18 or over and has_id is True, so the whole condition is True.",
+      },
+      {
+        type: "paragraph",
+        text: "The boolean operators and and or combine smaller booleans into a bigger one. With and, the result is True only if both sides are True — that is the right choice for a rule where every condition must be met, like being both old enough and carrying identification. The not operator drops in front of an expression to flip it, so not mood == \"sad\" is True whenever mood is anything other than sad. These are not new kinds of condition; they are ways to build richer ones from the comparisons you already have.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: three outcomes from a sign" },
+      {
+        type: "paragraph",
+        text: "A classic branch: decide whether a number is positive, negative, or zero. Three branches, so it uses if, elif, and else together.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `n = -3\nif n > 0:\n    print("positive")\nelif n < 0:\n    print("negative")\nelse:\n    print("zero")`,
+        output: "negative",
+        caption: "-3 is not greater than 0, but it is less than 0, so the elif branch runs and prints negative.",
+      },
+      {
+        type: "paragraph",
+        text: "There is a careful point hidden here. If you had written two separate if statements instead of an if/elif, both could run for the same value. With if/elif, exactly one branch runs — the first matching one — and the rest are skipped. That is the whole difference between a chain of decisions and a set of independent checks, and it is often the source of a subtle bug where a value answers two conditions at once.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Dropping the colon at the end of the if, elif or else line. if x > 10 is a syntax error; you need if x > 10:. The colon is how Python knows a block is about to begin.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Mismatched indentation. All statements in a branch must line up at exactly the same indent. Mixing tabs and spaces, or indenting a statement by one level too far, breaks the block or raises IndentationError.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Using if/if instead of if/elif for an exclusive choice. Two separate ifs both evaluate, so a value that matches both runs both blocks. An elif chain runs only the first match.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Testing a broad condition before a narrow one. In an elif chain the first True wins, so a loose test earlier will swallow cases intended for a later, stricter one. Order the tests from the most specific to the least.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "If score is 60, what does this chain print, and why? if score >= 85: print('A') elif score >= 70: print('B') else: print('C')",
+        answer: "C. Neither 85 or above nor 70 or above matches, so the else fallback runs.",
+        explanation: "The chain checks top to bottom; only the first True condition runs. 60 fails both thresholds, so the else catches it.",
+      },
+      {
+        type: "question",
+        prompt: "What does the condition age >= 18 and has_id require to be True?",
+        answer: "Both sides must be True — the person must be 18 or over AND have identification.",
+        explanation: "The and operator is True only when every part is True. It is the right choice when a rule on a story must be met.",
+      },
+      {
+        type: "question",
+        prompt: "Why does Python require consistent indentation inside an if block?",
+        answer: "Because Python uses indentation, not braces, to decide which statements belong to a branch.",
+        explanation: "Indentation is grouping in Python. Statements must line up exactly, or they fall outside the branch and raise IndentationError.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which line correctly starts a conditional block?",
+        options: ["if x > 10:", "if x > 10", "if x > 10;", "if x > 10 then"],
+        correctIndex: 0,
+        explanation: "An if statement needs the condition followed by a colon, which signals the indented block. Missing the colon is a syntax error.",
+      },
+      {
+        type: "mcq",
+        stem: "What does and produce when one side is True and the other is False?",
+        options: ["True", "False", "It depends on the order", "An error"],
+        correctIndex: 1,
+        explanation: "and is True only when both sides are True. If either is False, the whole expression is False.",
+      },
+      {
+        type: "mcq",
+        stem: "In an if/elif/else chain, how many branches can run?",
+        options: ["All of them", "Exactly one", "Two at most", "None, the chain only evaluates"],
+        correctIndex: 1,
+        explanation: "The chain runs the first branch whose condition is True and skips the rest. Exactly one branch runs, and else catches the fallthrough case.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the correct way to check whether a number is at least 18?",
+        options: ["if age = 18", "if age == 18", "if age >= 18", "if age => 18"],
+        correctIndex: 2,
+        explanation: ">= means 'at least'. A single equals is assignment and == is equality, neither of which expresses 'at least'.",
+      },
+      {
+        type: "mcq",
+        stem: "What happens if the two statements in an if block are indented by different amounts?",
+        options: ["They still run, Python ignores indentation", "Python raises an IndentationError or treats them as separate blocks", "Only the first runs", "Python runs them in reverse"],
+        correctIndex: 1,
+        explanation: "Indentation defines the block in Python. Mismatched indentation either splits the block or raises IndentationError.",
+      },
+      {
+        type: "mcq",
+        stem: "How do you invert a condition, so that it is True when the original is False?",
+        options: ["Use != instead", "Use the not operator, e.g. not x > 0", "Swap the values", "Use &&"],
+        correctIndex: 1,
+        explanation: "The not operator flips a boolean. not x > 0 is True whenever x is not greater than zero.",
+      },
+      {
+        type: "mcq",
+        stem: "A student scores 90. Why does the chain below print C instead of A? if score >= 70: print('C') elif score >= 85: print('A')",
+        options: ["Because elif cannot follow a True branch", "Because the looser condition >= 70 matches first, so the stricter one is skipped", "Because score must be an integer", "Because elif is the wrong keyword"],
+        correctIndex: 1,
+        explanation: "The chain runs the first True condition and skips the rest. The loose >= 70 matches 90 before the strict >= 85 is ever tested.",
+      },
+      {
+        type: "mcq",
+        stem: "Which boolean operator would you use when a rule must satisfy ALL listed conditions?",
+        options: ["or", "and", "not", "+"],
+        correctIndex: 1,
+        explanation: "and requires every part to be True — the right choice for a rule like 'logged in AND premium AND active'.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A condition is just a boolean expression. if runs one block when it is True, else runs the fallback, and elif chains several mutually exclusive choices — running only the first match. Indentation groups the statements into each block, and and/or/not build richer conditions. Order your elif tests from most specific to least.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: loops. Lesson 4 gave your program the power to choose; the next lesson gives it the power to repeat — doing something many times, which is what computers are actually for, and the start of the word-count idea that runs through the whole PY4E course.",
       },
     ],
   };

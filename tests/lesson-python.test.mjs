@@ -80,6 +80,37 @@ const CLAIMS_L2 = [
   { name: "type of a decimal", code: `print(type(3.14) is float)`, expected: "True" },
 ];
 
+// Lesson 4 (Conditions) worked examples.
+const SNIPPETS_L4 = [
+  {
+    name: "the first fork",
+    code: `x = 15\nif x > 10:\n    print("big")\nelse:\n    print("small")`,
+    expected: "big",
+  },
+  {
+    name: "choosing from many with elif",
+    code: `score = 72\nif score >= 85:\n    print("A")\nelif score >= 70:\n    print("B")\nelse:\n    print("C")`,
+    expected: "B",
+  },
+  {
+    name: "combining conditions",
+    code: `age = 20\nhas_id = True\nif age >= 18 and has_id:\n    print("Welcome")\nelse:\n    print("Entry denied")`,
+    expected: "Welcome",
+  },
+  {
+    name: "three outcomes from a sign",
+    code: `n = -3\nif n > 0:\n    print("positive")\nelif n < 0:\n    print("negative")\nelse:\n    print("zero")`,
+    expected: "negative",
+  },
+];
+
+const CLAIMS_L4 = [
+  { name: "not inverts a condition", code: `print(not (5 > 3))`, expected: "False" },
+  { name: "exactly one branch runs in a chain", code: `x = 90\nif x >= 70:\n    print("loose")\nelif x >= 85:\n    print("strict")`, expected: "loose" },
+  { name: "and requires both true", code: `print(True and False)`, expected: "False" },
+  { name: "or requires one true", code: `print(True or False)`, expected: "True" },
+];
+
 const CLAIMS_L3 = [
   { name: "input type is a string", code: `x = input()\nprint(type(x) is str)`, expected: "True", stdin: "7\n" },
   { name: "string times int repeats", code: `x = input()\nprint(x * 3)`, expected: "777", stdin: "7\n" },
@@ -117,9 +148,9 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3];
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4];
 for (const s of ALL_SNIPPETS) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : "lesson 1";
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
@@ -127,9 +158,9 @@ for (const s of ALL_SNIPPETS) {
   });
 }
 
-const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3];
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4];
 for (const c of ALL_CLAIMS) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : "lesson 1";
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code, c.stdin);
     if (c.expectedError) {
