@@ -75,7 +75,7 @@ const LESSON_1: LessonSeed = {
 // long-form content blocks are pending authoring. needsCheck marks them.
 const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-2`, title: "Variables & types", module: 1, estimatedMinutes: 30, concept: { title: "Variables and types", slug: "variables-and-types", blooms: "understand", minutes: 30, prereq: ["what-is-a-program"] }, content: lesson2() },
-  { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: pending(3) },
+  { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: lesson3() },
   { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: pending(4) },
   { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: pending(5) },
   { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: pending(6) },
@@ -553,6 +553,240 @@ function lesson2(): LessonContent {
       {
         type: "paragraph",
         text: "Next: input, output and operators. This lesson stored values and told you what Python thinks they are; the next one lets you ask the user for a value, print results, and combine values with the full set of arithmetic and comparison operators.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 3 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson3(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: get a value from the user with input(); use the arithmetic and string operators correctly; predict the output of an expression using operator precedence; and convert user input into a number so it can be used in calculations.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 (Variables & types). You need to know that a variable stores one value under a label, and that integers, floats and strings behave differently and cannot be mixed without conversion.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Input",
+        text: "Input is data coming into your program from outside — the keyboard here, and later a file or a network. A program that only prints fixed text is a recording; a program that accepts input is a conversation.",
+      },
+      {
+        type: "definition",
+        term: "Operator",
+        text: "An operator is a symbol that produces a value from one or more other values — arithmetic symbols like + and *, string symbols like the + that joins text, and comparison symbols like > that produce a truth value.",
+      },
+      {
+        type: "paragraph",
+        text: "This lesson completes the three building blocks you have been assembling. Lesson 1 gave you output (print) and the idea of ordered instructions. Lesson 2 gave you storage (variables) and types. This lesson adds the other direction — input — and the operators that let you actually combine and transform what you have stored. With these three, you can already write programs that ask a question, compute an answer, and tell someone the answer. That is not a toy; it is the skeleton of almost everything you will write.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "The most important fact here is that input() always gives you a string. Whatever the person types — even if they type digits — arrives as text. This is why the arithmetic you learned does not just work: a variable holding the text \"7\" is not the number 7. If you try to multiply the text \"7\" by the number 3, Python will do something surprising rather than erroring, because the multiply operator is overloaded: on numbers it multiplies, on a string and an integer it repeats the string. So \"7\" * 3 gives \"777\", not 21. Learning to notice this is the entire point of the lesson.",
+      },
+      {
+        type: "paragraph",
+        text: "The second fact is precedence. An expression is not always read left to right; certain operators bind more tightly than others. Multiplication binds tighter than addition, so 2 + 3 * 4 is 2 + 12, not 5 * 4. Parentheses override everything. This is not a rule to memorise a table for; it is enough to remember that the two or three most common mistakes all come from assuming left-to-right.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: a program that listens" },
+      {
+        type: "paragraph",
+        text: "The program asks one question, waits for the user to type a name, and greets them. Notice there is a pause — the program does not print the greeting until the person presses Enter.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `name = input("What is your name? ")\nprint("Hello, " + name + "!")`,
+        output: "What is your name? Ada\nHello, Ada!",
+        caption: 'input() shows its prompt, waits for a line, and stores whatever was typed as a string.',
+      },
+      {
+        type: "paragraph",
+        text: "The line name = input(...) does two jobs in one: it calls input, which collects a line of text from the keyboard, and it stores the result under name. The string concatenation in the second line joins the greeting, the typed name, and the exclamation mark into one string. If the user typed Ada, Python builds the single string Hello, Ada! and prints it.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: operator precedence" },
+      {
+        type: "paragraph",
+        text: "Two expressions use the same numbers and operators but different grouping, and they produce different results. This is precedence doing real work.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `print(2 + 3 * 4)\nprint((2 + 3) * 4)`,
+        output: "14\n20",
+        caption: "Multiplication binds first, so 2 + 12 is 14; parentheses force the addition first, so 5 * 4 is 20.",
+      },
+      {
+        type: "paragraph",
+        text: "In the first line, * binds tighter than +, so Python multiplies 3 by 4 to get 12, then adds it to 2 to get 14. In the second, the parentheses change the grouping so 2 plus 3 is computed first to give 5, which is then multiplied by 4 to give 20. Same four symbols, same two numbers; only the order of operations differs.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: operators on strings" },
+      {
+        type: "paragraph",
+        text: "Some operators change meaning depending on what they are applied to. The plus sign joins two strings but multiplies a string by an integer.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `print("Py" + "thon")\nprint("ha" * 3)`,
+        output: "Python\nhahaha",
+        caption: 'On strings, + concatenates and * repeats. These are "operator overloading" — the same symbol doing different work.',
+      },
+      {
+        type: "paragraph",
+        text: "The plus sign joins Py and thon into Python — string concatenation, distinct from numeric addition. The asterisk repeats the string ha three times, giving hahaha. This overloading is why the turn of phrase \"a string times a number\" is not an error: it is a deliberate feature. It is also why the classic bug in example 4 happens — the same symbol means something sensible for a string and a number, but not what a beginner expects when the values are the wrong type.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: everything returns bool for comparisons" },
+      {
+        type: "paragraph",
+        text: "The comparison operators give back a truth value — True or False — which is a type of its own, the sort of thing the next lesson builds entire branches on.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `print(10 > 5)\nprint(10 < 5)\nprint(10 == 10)`,
+        output: "True\nFalse\nTrue",
+        caption: "The comparison operators produce a boolean: True or False.",
+      },
+      {
+        type: "paragraph",
+        text: "Each of these is an expression whose value is a boolean. Ten is greater than five is True, ten is less than five is False, and ten equals ten is True. Note the double equals sign for comparison — a single equals is assignment, and confusing the two is one of the most common beginner bugs. You are not storing 10 into 5; you are asking whether two things are equal.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting that input() returns a string. If the user types 7, you have the text \"7\". Multiplying it by 3 gives \"777\", not 21. Convert first with int() or float().",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Using a single equals sign for comparison. if x = 5 is assignment, not a question. Comparison is if x == 5. The equals used for comparison is always doubled.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Adding a string and a number. \"Age: \" + age fails when age is an integer. Convert with str(age) or use a comma so print places them side by side.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming left-to-right evaluation. 2 + 3 * 4 is 14 because multiplication binds first. If you want the sum computed before the product, add parentheses: (2 + 3) * 4.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A user types 7 in response to input(). What is the type of the value stored, and what does \"7\" * 3 give?",
+        answer: "The value is a string, so \"7\" * 3 repeats the text three times and gives \"777\", not 21.",
+        explanation: "input() always returns text. Because * on a string and an integer means repetition, you get the concatenated text rather than multiplication.",
+      },
+      {
+        type: "question",
+        prompt: "What is the output of print(2 + 3 * 4)?",
+        answer: "14.",
+        explanation: "Multiplication binds more tightly than addition, so Python computes 3 * 4 first (12) and then adds 2, giving 14.",
+      },
+      {
+        type: "question",
+        prompt: "Why does comparing with a single equals sign fail, and what is the correct symbol?",
+        answer: "A single equals is assignment and does not produce a comparison; the correct comparison symbol is the double equals, ==.",
+        explanation: "Assignment stores a value; comparison asks whether two values are equal. They are different operators and cannot be interchanged.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What does input() always return, regardless of what the user types?",
+        options: ["An integer", "A float", "A string", "A boolean"],
+        correctIndex: 2,
+        explanation: "input() always yields a string. Digits typed by the user arrive as text, so they must be converted before arithmetic.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the value of print(3 * 2 + 1)?",
+        options: ["9", "7", "6", "10"],
+        correctIndex: 1,
+        explanation: "Multiplication before addition gives 6 + 1, which is 7. Reading it left to right and getting 9 is the whole bug.",
+      },
+      {
+        type: "mcq",
+        stem: "What is printed by print(\"abc\" + \"def\")?",
+        options: ["abcdef", "abc def", "abc+def", "Error"],
+        correctIndex: 0,
+        explanation: "On strings the plus operator concatenates, joining abc and def into the single string abcdef.",
+      },
+      {
+        type: "mcq",
+        stem: "A user enters 10 into a program. Which line correctly stores the number 10 so it can be used in arithmetic?",
+        options: ["n = input()", "n = int(input())", "n = str(input())", "n = input() * 1"],
+        correctIndex: 1,
+        explanation: "input() returns \"10\" as text; wrapping it in int() converts it to the number 10. Otherwise multiplication would repeat the text.",
+      },
+      {
+        type: "mcq",
+        stem: "Which operator pair does comparison and produces a boolean?",
+        options: ["+ and *", "> and ==", "and and or", "+ and ="],
+        correctIndex: 1,
+        explanation: "The comparison operators, such as > and ==, evaluate to True or False. Plus and asterisk either add, concatenate, or repeat.",
+      },
+      {
+        type: "mcq",
+        stem: "What does \"ha\" * 3 produce?",
+        options: ["6", "hahaha", "ha3", "Error"],
+        correctIndex: 1,
+        explanation: "Multiplying a string by an integer repeats it. \"ha\" repeated three times is \"hahaha\".",
+      },
+      {
+        type: "mcq",
+        stem: "Why is 10 == 10 True but 10 = 10 invalid in a program?",
+        options: ["Because == is an arithmetic operator", "Because = is assignment, not comparison, so Python treats the line as an attempt to store into a value", "Because numbers cannot be compared", "Because = is a boolean operator"],
+        correctIndex: 1,
+        explanation: "The double equals asks whether two values are equal, yielding a boolean. A single equals assigns, and you cannot assign to a literal like 10.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the value of (5 + 3) * 2?",
+        options: ["13", "16", "11", "10"],
+        correctIndex: 1,
+        explanation: "Parentheses override precedence, so the addition gives 8, then doubling gives 16. Without them, multiplication first gives 11.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "input() reads a line of text as a string; print() writes output. Operators combine values: arithmetic on numbers, concatenation and repetition on strings, and comparison to produce a boolean. Precedence — multiplication before addition, parentheses overriding — decides the grouping. The single most important rule: convert input with int() or float() before arithmetic, because input is always text.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: conditions. Lesson 3 ended with comparison operators producing True or False. The next lesson puts those booleans to work, letting your program choose between two different courses of action — the start of real decision-making.",
       },
     ],
   };

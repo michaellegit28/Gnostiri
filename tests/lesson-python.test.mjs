@@ -49,11 +49,42 @@ const SNIPPETS_L2 = [
   },
 ];
 
-// Lesson 2 MCQ/explanation claims.
+// Lesson 3 (Input, output & operators) worked examples + claims.
+const SNIPPETS_L3 = [
+  {
+    name: "a program that listens",
+    code: `name = input()\nprint("Hello, " + name + "!")`,
+    expected: "Hello, Ada!",
+    stdin: "Ada\n",
+  },
+  {
+    name: "operator precedence",
+    code: `print(2 + 3 * 4)\nprint((2 + 3) * 4)`,
+    expected: "14\n20",
+  },
+  {
+    name: "operators on strings",
+    code: `print("Py" + "thon")\nprint("ha" * 3)`,
+    expected: "Python\nhahaha",
+  },
+  {
+    name: "comparison yields bool",
+    code: `print(10 > 5)\nprint(10 < 5)\nprint(10 == 10)`,
+    expected: "True\nFalse\nTrue",
+  },
+];
+
 const CLAIMS_L2 = [
   { name: "modulo remainder", code: `print(10 % 3)`, expected: "1" },
   { name: "floor division rounds down", code: `print(7 // 2)`, expected: "3" },
   { name: "type of a decimal", code: `print(type(3.14) is float)`, expected: "True" },
+];
+
+const CLAIMS_L3 = [
+  { name: "input type is a string", code: `x = input()\nprint(type(x) is str)`, expected: "True", stdin: "7\n" },
+  { name: "string times int repeats", code: `x = input()\nprint(x * 3)`, expected: "777", stdin: "7\n" },
+  { name: "int conversion enables arithmetic", code: `print(int("7") + 3)`, expected: "10" },
+  { name: "single equals is invalid assignment to a literal", code: `10 = 10`, expectedError: /SyntaxError/ },
 ];
 
 // Claims made in the lesson's MCQ explanations; each must hold in real Python.
@@ -73,9 +104,9 @@ const CLAIMS = [
   },
 ];
 
-function run(code) {
+function run(code, stdin) {
   try {
-    const out = execFileSync(PYTHON, ["-c", code], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    const out = execFileSync(PYTHON, ["-c", code], { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], input: stdin || "" });
     return { ok: true, stdout: out.replace(/\n$/, "") };
   } catch (e) {
     return { ok: false, stderr: (e.stderr || e.message || "").toString() };
@@ -86,19 +117,21 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-for (const s of [...SNIPPETS, ...SNIPPETS_L2]) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : "lesson 1";
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3];
+for (const s of ALL_SNIPPETS) {
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
-    const r = run(s.code);
+    const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
     assert.equal(r.stdout, s.expected, "lesson states this exact output");
   });
 }
 
-for (const c of [...CLAIMS, ...CLAIMS_L2]) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : "lesson 1";
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3];
+for (const c of ALL_CLAIMS) {
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
-    const r = run(c.code);
+    const r = run(c.code, c.stdin);
     if (c.expectedError) {
       assert.ok(!r.ok, "expected this to raise, but it ran");
       assert.ok(c.expectedError.test(r.stderr), `unexpected error: ${r.stderr}`);
