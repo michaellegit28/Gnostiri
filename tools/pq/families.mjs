@@ -18,6 +18,9 @@
 import { int, pick, shuffled } from "./engine.mjs";
 import { localeFor } from "./locales.mjs";
 
+/** "1 metre" not "1 metres" — the area family prints option labels. */
+const unit = (n) => (n === 1 ? "metre" : "metres");
+
 /** "solve ax + b = cx + d" — verified by substituting x back into both sides. */
 export const linearFamily = {
   id: "linear-two-sided",
@@ -78,14 +81,14 @@ export const areaFamily = {
     return { width, more, area };
   },
   answer(p) {
-    return `${p.width} metres`;
+    return `${p.width} ${unit(p.width)}`;
   },
   stem(p, locale) {
     const who = pick(globalThis.__pq_rng, locale.names);
-    return `${who} lays out a rectangular display. Its length is ${p.more} metres more than its width, and the total area is ${p.area} square metres. What is the width of the display?`;
+    return `${who} lays out a rectangular display. Its length is ${p.more} ${unit(p.more)} more than its width, and the total area is ${p.area} square metres. What is the width of the display?`;
   },
   distractors(p, r) {
-    const key = `${p.width} metres`;
+    const key = `${p.width} ${unit(p.width)}`;
     // Pool of plausible-but-wrong widths. widths can collide (e.g. w+more ===
     // w+2 when more is 2), so dedupe and top up until exactly 3 distinct values.
     const pool = [
@@ -98,14 +101,14 @@ export const areaFamily = {
       Math.max(1, p.width - 2),
     ]
       .filter((w) => w > 0 && w !== p.width)
-      .map((w) => `${w} metres`);
+      .map((w) => `${w} ${unit(w)}`);
     const out = [];
     for (const c of shuffled(r, pool)) {
       if (out.length === 3) break;
       if (c !== key && !out.includes(c)) out.push(c);
     }
     for (let extra = 1; out.length < 3; extra++) {
-      const c = `${p.width + extra} metres`;
+      const c = `${p.width + extra} ${unit(p.width + extra)}`;
       if (c !== key && !out.includes(c)) out.push(c);
     }
     return out;

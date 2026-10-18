@@ -1122,7 +1122,7 @@
   "options": [
    "11 metres",
    "12 metres",
-   "1 metres",
+   "1 metre",
    "2 metres"
   ],
   "correctAnswer": "2 metres",
@@ -1337,7 +1337,7 @@
   "questionText": "Tunde lays out a rectangular display. Its length is 3 metres more than its width, and the total area is 18 square metres. What is the width of the display?",
   "options": [
    "5 metres",
-   "1 metres",
+   "1 metre",
    "8 metres",
    "3 metres"
   ],
