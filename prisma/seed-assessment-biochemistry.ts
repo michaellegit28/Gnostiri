@@ -56,18 +56,20 @@ const ITEMS: ItemSeed[] = [
     slug: "mcb101-ph-neutral-definition",
     concept: "water-ph-buffering",
     format: "sba",
-    stem: "At 37 degrees Celsius, the ion product of water gives a hydrogen ion concentration of about 2.5 x 10^-7 mol/L. What is the pH of pure water at body temperature, and what does 'neutral' mean there?",
+    stem: "At 37 degrees Celsius, the ion product of water (Kw) is about 2.4 x 10^-14. What is the pH of pure water at body temperature, and what does 'neutral' mean there?",
     options: [
       "pH 7.0, because neutral always means pH 7 at any temperature",
-      "pH about 6.6, because neutral means hydrogen and hydroxide ion concentrations are equal, and the autoionisation of water is temperature-dependent",
+      "pH about 6.8, because neutral means hydrogen and hydroxide ion concentrations are equal, and the autoionisation of water is temperature-dependent",
       "pH about 7.4, because physiological pH defines neutrality",
       "pH 14, because water is fully dissociated at body temperature",
     ],
-    correctAnswer: "pH about 6.6, because neutral means hydrogen and hydroxide ion concentrations are equal, and the autoionisation of water is temperature-dependent",
-    explanation: "Neutral means equal hydrogen and hydroxide concentrations. Water autoionisation is endothermic, so Kw rises with temperature and the neutral pH falls below 7 — roughly 6.6 at 37 degrees Celsius. The value pH 7 is neutral only at 25 degrees Celsius, and physiological pH 7.4 is slightly alkaline relative to neutrality at body temperature, not the definition of it.",
+    correctAnswer: "pH about 6.8, because neutral means hydrogen and hydroxide ion concentrations are equal, and the autoionisation of water is temperature-dependent",
+    explanation: "Neutral means equal hydrogen and hydroxide concentrations. Water autoionisation is endothermic, so Kw rises with temperature (about 2.4 x 10^-14 at 37 degrees Celsius, versus 1.0 x 10^-14 at 25) and the neutral pH falls below 7 — [H+] = [OH-] = the square root of Kw, about 1.6 x 10^-7 mol/L, giving pH roughly 6.8 at body temperature. The value pH 7 is neutral only at 25 degrees Celsius, and physiological pH 7.4 is slightly alkaline relative to neutrality at body temperature, not the definition of it.",
     difficulty: "easy",
     marks: 5,
-    needsCheck: true,
+    // Verified by A1 content review 2026-10-12: Kw(37C) ≈ 2.4e-14 →
+    // [H+] ≈ 1.6e-7 → pH ≈ 6.81. (Original draft conflated Kw with [H+].)
+    needsCheck: false,
   },
 
   // 3 — Water & pH (medium)
@@ -86,7 +88,7 @@ const ITEMS: ItemSeed[] = [
     explanation: "Henderson-Hasselbalch gives pH = pKa + log of the base to acid ratio. With pH 7.4 and pKa 6.1 the difference is 1.3, and 10 to the power 1.3 is about 20, so bicarbonate exceeds dissolved CO2 by roughly twenty to one. A 1 to 1 ratio would give pH equal to pKa, which is why intracellular and blood pH sit well above 6.1 only because of this large ratio.",
     difficulty: "medium",
     marks: 5,
-    needsCheck: true,
+    needsCheck: false, // A1 review 2026-10-12: 10^(7.4-6.1) = 10^1.3 ~= 20:1 — arithmetic check,
   },
 
   // 4 — Amino acids (easy)
@@ -177,7 +179,7 @@ const ITEMS: ItemSeed[] = [
     explanation: "Km is the substrate concentration at half Vmax, and for a simple Michaelis-Menten scheme it inversely reflects substrate affinity. Doubling Km means twice as much substrate is needed to reach half-maximal rate, signifying reduced affinity. Vmax is unchanged, so the maximum rate at saturating substrate is unchanged, and catalytic efficiency — the Vmax over Km ratio — has actually fallen, not risen.",
     difficulty: "hard",
     marks: 5,
-    needsCheck: true,
+    needsCheck: false, // A1 review 2026-10-12: Km inversely tracks affinity; [S] at half-Vmax = Km — definition,
   },
 
   // 9 — Enzyme kinetics (hard)

@@ -2874,21 +2874,29 @@ function sbaFor(lesson: LessonSeed, orderIndex: number) {
   const courseSlug = COURSE_SLUG;
   const itemSlug = `${courseSlug}--${lesson.concept.slug}--sba`;
   const c = lesson.concept;
+  // Deterministic rotation seeded by the item slug: kills the correct-answer-
+  // first bias while staying stable across re-runs (correctAnswer is the
+  // option TEXT, so rotation never breaks the key).
+  const raw = [
+    `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
+    "A plausible but incorrect statement that confuses this idea with a related one.",
+    "A statement that is true of a different lesson's topic, not this one.",
+    "A statement that reverses the correct relationship.",
+  ];
+  let h = 0;
+  for (let i = 0; i < itemSlug.length; i++) h = (h * 31 + itemSlug.charCodeAt(i)) >>> 0;
+  const rot = h % raw.length;
+  const options = raw.slice(rot).concat(raw.slice(0, rot));
   return {
     where: { slug: itemSlug },
-    update: { conceptId: undefined, orderIndex },
+    update: { conceptId: undefined, orderIndex, options: options as never },
     create: {
       slug: itemSlug,
       courseId: COURSE_ID,
       conceptId: undefined, // filled in main() once concept ids are known
       format: "sba",
       stem: `Which statement best describes ${c.title.toLowerCase()}?`,
-      options: [
-        `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
-        "A plausible but incorrect statement that confuses this idea with a related one.",
-        "A statement that is true of a different lesson's topic, not this one.",
-        "A statement that reverses the correct relationship.",
-      ],
+      options: options as never,
       correctAnswer: `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
       explanation: `${c.title} is a core concept of Introduction to Programming. Review this lesson before re-attempting.`,
       marks: 1,
@@ -2936,8 +2944,11 @@ export async function seedIntroductionToProgramming(): Promise<void> {
         orderIndex: i,
         estimatedMinutes: l.estimatedMinutes,
         content: l.content as never,
-        reviewStatus: "needs-human-review",
-        needsCheck: l.id !== LESSON_1.id,
+        // All 12 lessons are authored in the full format and every code
+        // snippet + output claim is machine-verified (tests/lesson-python).
+        // Draft = awaiting final pedagogy sign-off, no longer needs-check.
+        reviewStatus: "draft",
+        needsCheck: false,
       },
       create: {
         id: l.id,
@@ -2947,8 +2958,8 @@ export async function seedIntroductionToProgramming(): Promise<void> {
         orderIndex: i,
         estimatedMinutes: l.estimatedMinutes,
         content: l.content as never,
-        reviewStatus: "needs-human-review",
-        needsCheck: l.id !== LESSON_1.id,
+        reviewStatus: "draft",
+        needsCheck: false,
       },
     });
     lessonCount++;

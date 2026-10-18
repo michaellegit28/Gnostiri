@@ -139,7 +139,7 @@ const ITEMS: ItemSeed[] = [
     explanation: "The equilibrium potential is by definition the membrane voltage at which the electrical and chemical driving forces on an ion cancel, giving zero net flux. At -90 mV potassium has no net movement, though individual ions still cross in both directions at equal rates. At any other voltage the ion moves down the resulting electrochemical gradient. The pump does not reverse; it continues to maintain the gradients that make the calculation possible.",
     difficulty: "medium",
     marks: 5,
-    needsCheck: true,
+    needsCheck: false, // A1 review 2026-10-12: net driving force is zero at the Nernst equilibrium potential — definition,
   },
 
   // 7 — Action potential (hard)

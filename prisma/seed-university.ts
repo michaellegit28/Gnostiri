@@ -212,21 +212,28 @@ async function main() {
       const k = c.concepts[i];
       const conceptId = slugToId.get(k.slug)!;
       const itemSlug = `${c.slug}--${k.slug}--sba`;
+      // Deterministic rotation seeded by the item slug: kills the correct-
+      // answer-first bias; correctAnswer is option TEXT so it stays valid.
+      const rawOpts = [
+        `A precise, correct definition of ${k.title.toLowerCase()} as covered in this concept.`,
+        "A plausible but incorrect distractor that confuses a related concept.",
+        "A statement that is true of a prerequisite topic, not of this concept.",
+        "A statement that reverses cause and effect.",
+      ];
+      let h = 0;
+      for (let ci = 0; ci < itemSlug.length; ci++) h = (h * 31 + itemSlug.charCodeAt(ci)) >>> 0;
+      const rot = h % rawOpts.length;
+      const shuffledOpts = rawOpts.slice(rot).concat(rawOpts.slice(0, rot));
       await prisma.assessmentItem.upsert({
         where: { slug: itemSlug },
-        update: { conceptId, orderIndex: i },
+        update: { conceptId, orderIndex: i, options: shuffledOpts as never },
         create: {
           slug: itemSlug,
           courseId: course.id,
           conceptId,
           format: "sba",
           stem: `Which statement best describes ${k.title.toLowerCase()}?`,
-          options: [
-            `A precise, correct definition of ${k.title.toLowerCase()} as covered in this concept.`,
-            "A plausible but incorrect distractor that confuses a related concept.",
-            "A statement that is true of a prerequisite topic, not of this concept.",
-            "A statement that reverses cause and effect.",
-          ],
+          options: shuffledOpts as never,
           correctAnswer: `A precise, correct definition of ${k.title.toLowerCase()} as covered in this concept.`,
           explanation: `${k.title} is a core concept of ${c.title}. Review the concept page before re-attempting.`,
           marks: 1,

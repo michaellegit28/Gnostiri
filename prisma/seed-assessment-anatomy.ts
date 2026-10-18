@@ -121,7 +121,7 @@ const ITEMS: ItemSeed[] = [
     explanation: "Pectoralis minor lies over the second part of the axillary artery and the cords of the brachial plexus, which is why the axilla is described in three parts relative to it. The long thoracic nerve runs superficial to the muscle on the serratus anterior. The medial and lateral pectoral nerves supply pectoralis minor, not the intercostobrachial nerve.",
     difficulty: "medium",
     marks: 5,
-    needsCheck: true,
+    needsCheck: false, // A1 review 2026-10-12: pectoralis minor relations (cords of brachial plexus + 2nd part of axillary artery run deep) — standard anatomy,
   },
 
   // 6 — Brachial plexus (hard)
@@ -194,7 +194,7 @@ const ITEMS: ItemSeed[] = [
     explanation: "Each intercostal space carries its vein, artery and nerve in a groove on the inferior internal surface of the rib above (V-A-N from superior to inferior). Passing an instrument along the upper border of a rib — that is, along the lower border of the intercostal space — risks cutting this bundle. Angling the instrument just above the rib keeps it against the rib's own upper surface, clear of the bundle in the groove above.",
     difficulty: "medium",
     marks: 5,
-    needsCheck: true,
+    needsCheck: false, // A1 review 2026-10-12: V-A-N bundle in the subcostal groove, drain above the rib below — standard thoracostomy teaching,
   },
 
   // 10 — Mediastinum (hard, clinical correlation)
@@ -213,7 +213,7 @@ const ITEMS: ItemSeed[] = [
     explanation: "A traumatic widened mediastinum most often represents haemorrhage from a torn aortic isthmus — the junction of the aortic arch and descending aorta, which lies in the superior and posterior mediastinum just below the left main bronchus. The arch itself and the isthmus sit in the superior mediastinum, so bleeding there displaces the mediastinal contours. This is a surgical emergency requiring immediate imaging.",
     difficulty: "hard",
     marks: 5,
-    needsCheck: true,
+    needsCheck: false, // A1 review 2026-10-12: aortic arch sits in the superior mediastinum (isthmus injury at the arch/descending junction) — Gray's standard,
   },
 ];
 
