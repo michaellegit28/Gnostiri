@@ -12,7 +12,7 @@
  */
 
 import { writeFileSync } from "node:fs";
-import { rng, seedFrom, difficultyFor, pick } from "./engine.mjs";
+import { rng, seedFrom, difficultyFor, numbersIn } from "./engine.mjs";
 import { localeFor } from "./locales.mjs";
 import { familyById } from "./families.mjs";
 
@@ -28,6 +28,7 @@ const track = arg("--locale", "NEUTRAL");
 const outPath = arg("--out", null);
 const subject = arg("--subject", "mathematics");
 const board = arg("--board", "JAMB");
+const coreOverride = arg("--core", null);
 
 const family = familyById(familyId);
 const locale = localeFor(track);
@@ -45,7 +46,9 @@ while (generated.length < count && attempts < count * 20) {
   const p = family.params(itemRng, difficulty);
   const key = family.answer(p);
 
-  // Distractors must be exactly 3, distinct, and never equal to the key.
+  // Distractors must be exactly 3, distinct, never equal to the key, and never
+  // merely a DIFFERENT SPELLING of the key (e.g. "0.10" vs "0.1") — an
+  // equivalent option makes the key ambiguous.
   let distractors = family.distractors(p, itemRng);
   if (distractors.length !== 3) {
     rejected.push({ i, reason: "distractor-count" });
@@ -54,6 +57,12 @@ while (generated.length < count && attempts < count * 20) {
   }
   if (new Set(distractors).size !== 3 || distractors.includes(key)) {
     rejected.push({ i, reason: "distractor-collision" });
+    i++;
+    continue;
+  }
+  const keyNumbers = numbersIn(key).sort((a, b) => a - b).join(",");
+  if (distractors.some((d) => numbersIn(d).sort((a, b) => a - b).join(",") === keyNumbers)) {
+    rejected.push({ i, reason: "distractor-equivalent-to-key" });
     i++;
     continue;
   }
@@ -78,16 +87,17 @@ while (generated.length < count && attempts < count * 20) {
     type: "mcq",
     questionText: family.stem(p, locale),
     options,
-    correctAnswer: key,
-    explanation: family.explanation(p, locale),
-    hint: family.hint(p),
-    difficulty,
-    sourceExam: "original-exam-style",
-    reviewStatus: "needs-human-review",
-    selfCheck: "passed",
-  });
-  i++;
-}
+      correctAnswer: key,
+      explanation: family.explanation(p, locale),
+      hint: family.hint(p),
+      difficulty,
+      sourceExam: "original-exam-style",
+      reviewStatus: "needs-human-review",
+      selfCheck: "passed",
+      ...(coreOverride ? { coreId: coreOverride } : {}),
+    });
+    i++;
+  }
 
 function shuffledOptions(r, items, key) {
   const out = items.slice();

@@ -1,0 +1,812 @@
+[
+ {
+  "id": "mathematics-zero-product-quadratic-ng-core-nsc2024-m1-q111NG-g1",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x − 8) = 0",
+  "options": [
+   "x = 0 or x = −8",
+   "x = 0 or x = 8",
+   "x = 8 only",
+   "x = 0 only"
+  ],
+  "correctAnswer": "x = 0 or x = 8",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x − 8 = 0 → x = 0 or x = 8.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-ng-core-nsc2024-m1-q111NG-g2",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x + 5) = 0",
+  "options": [
+   "x = −5 only",
+   "x = 0 or x = 5",
+   "x = 0 or x = −5",
+   "x = 0 or x = 6"
+  ],
+  "correctAnswer": "x = 0 or x = −5",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x + 5 = 0 → x = 0 or x = −5.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-ng-core-nsc2024-m1-q111NG-g3",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x + 9) = 0",
+  "options": [
+   "x = −9 only",
+   "x = 0 or x = −9",
+   "x = 0 or x = 10",
+   "x = 0 only"
+  ],
+  "correctAnswer": "x = 0 or x = −9",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x + 9 = 0 → x = 0 or x = −9.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-ng-core-nsc2024-m1-q111NG-g4",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x − 2) = 0",
+  "options": [
+   "x = 0 only",
+   "x = 0 or x = 2",
+   "x = 0 or x = −2",
+   "x = 0 or x = 3"
+  ],
+  "correctAnswer": "x = 0 or x = 2",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x − 2 = 0 → x = 0 or x = 2.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-ng-core-nsc2024-m1-q111NG-g5",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x − 8) = 0",
+  "options": [
+   "x = 0 or x = 8",
+   "x = 8 only",
+   "x = 0 only",
+   "x = 0 or x = 9"
+  ],
+  "correctAnswer": "x = 0 or x = 8",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x − 8 = 0 → x = 0 or x = 8.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-ng-core-nsc2024-m1-q111NG-g6",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x − 7) = 0",
+  "options": [
+   "x = 0 or x = 8",
+   "x = 0 or x = 7",
+   "x = 0 or x = −7",
+   "x = 0 only"
+  ],
+  "correctAnswer": "x = 0 or x = 7",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x − 7 = 0 → x = 0 or x = 7.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-gh-core-nsc2024-m1-q111GH-g1",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "GH"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x + 9) = 0",
+  "options": [
+   "x = 0 or x = −9",
+   "x = 0 or x = 10",
+   "x = 0 only",
+   "x = −9 only"
+  ],
+  "correctAnswer": "x = 0 or x = −9",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x + 9 = 0 → x = 0 or x = −9.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-gh-core-nsc2024-m1-q111GH-g2",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "GH"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x + 9) = 0",
+  "options": [
+   "x = −9 only",
+   "x = 0 or x = 10",
+   "x = 0 or x = −9",
+   "x = 0 only"
+  ],
+  "correctAnswer": "x = 0 or x = −9",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x + 9 = 0 → x = 0 or x = −9.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-gh-core-nsc2024-m1-q111GH-g3",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "GH"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x + 7) = 0",
+  "options": [
+   "x = −7 only",
+   "x = 0 or x = 7",
+   "x = 0 or x = 8",
+   "x = 0 or x = −7"
+  ],
+  "correctAnswer": "x = 0 or x = −7",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x + 7 = 0 → x = 0 or x = −7.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-zero-product-quadratic-gh-core-nsc2024-m1-q111GH-g4",
+  "coreId": "core-nsc2024-m1-q111",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "GH"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x(x − 9) = 0",
+  "options": [
+   "x = 0 only",
+   "x = 9 only",
+   "x = 0 or x = −9",
+   "x = 0 or x = 9"
+  ],
+  "correctAnswer": "x = 0 or x = 9",
+  "explanation": "Zero-product rule: either factor is zero, so x = 0 or x − 9 = 0 → x = 0 or x = 9.",
+  "hint": "Either factor can be zero.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ng-core-nsc2024-m1-q112NG-g1",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 2x² + 1 = 6x",
+  "options": [
+   "x = 2.82 or x = 0.18",
+   "x = 3.02 or x = 0.38",
+   "x = 0.68 or x = 0.18",
+   "x = 2.92 or x = 0.08"
+  ],
+  "correctAnswer": "x = 2.82 or x = 0.18",
+  "explanation": "Standard form: 2x² − 6x + 1 = 0. Quadratic formula: x = [6 ± √(6² − 8)]/(4) → x ≈ 2.82 or 0.18. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ng-core-nsc2024-m1-q112NG-g2",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 4x² + 1 = 6x",
+  "options": [
+   "x = 1.31 or x = 0.19",
+   "x = 1.51 or x = 0.39",
+   "x = 1.81 or x = 0.19",
+   "x = 1.31 or x = 2.31"
+  ],
+  "correctAnswer": "x = 1.31 or x = 0.19",
+  "explanation": "Standard form: 4x² − 6x + 1 = 0. Quadratic formula: x = [6 ± √(6² − 16)]/(8) → x ≈ 1.31 or 0.19. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ng-core-nsc2024-m1-q112NG-g3",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 4x² + 1 = 5x",
+  "options": [
+   "x = 1.20 or x = 0.45",
+   "x = 1.00 or x = 2.00",
+   "x = 1.10 or x = 0.15",
+   "x = 1.00 or x = 0.25"
+  ],
+  "correctAnswer": "x = 1.00 or x = 0.25",
+  "explanation": "Standard form: 4x² − 5x + 1 = 0. Quadratic formula: x = [5 ± √(5² − 16)]/(8) → x ≈ 1.00 or 0.25. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ng-core-nsc2024-m1-q112NG-g4",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 5x² + 1 = 9x",
+  "options": [
+   "x = 1.68 or x = 0.12",
+   "x = 1.68 or x = 2.68",
+   "x = 1.78 or x = 0.02",
+   "x = 2.18 or x = 0.12"
+  ],
+  "correctAnswer": "x = 1.68 or x = 0.12",
+  "explanation": "Standard form: 5x² − 9x + 1 = 0. Quadratic formula: x = [9 ± √(9² − 20)]/(10) → x ≈ 1.68 or 0.12. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ng-core-nsc2024-m1-q112NG-g5",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 5x² + 1 = 5x",
+  "options": [
+   "x = 0.72 or x = 1.72",
+   "x = 0.72 or x = 0.28",
+   "x = 0.78 or x = 0.28",
+   "x = 0.92 or x = 0.48"
+  ],
+  "correctAnswer": "x = 0.72 or x = 0.28",
+  "explanation": "Standard form: 5x² − 5x + 1 = 0. Quadratic formula: x = [5 ± √(5² − 20)]/(10) → x ≈ 0.72 or 0.28. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ng-core-nsc2024-m1-q112NG-g6",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 5x² + 1 = 8x",
+  "options": [
+   "x = 1.46 or x = 0.14",
+   "x = 1.56 or x = 0.04",
+   "x = 1.46 or x = 2.46",
+   "x = 1.96 or x = 0.14"
+  ],
+  "correctAnswer": "x = 1.46 or x = 0.14",
+  "explanation": "Standard form: 5x² − 8x + 1 = 0. Quadratic formula: x = [8 ± √(8² − 20)]/(10) → x ≈ 1.46 or 0.14. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ke-core-nsc2024-m1-q112KE-g1",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "KE"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 4x² + 1 = 5x",
+  "options": [
+   "x = 1.00 or x = 0.25",
+   "x = 1.00 or x = 2.00",
+   "x = 1.50 or x = 0.25",
+   "x = 0.75 or x = 0.25"
+  ],
+  "correctAnswer": "x = 1.00 or x = 0.25",
+  "explanation": "Standard form: 4x² − 5x + 1 = 0. Quadratic formula: x = [5 ± √(5² − 16)]/(8) → x ≈ 1.00 or 0.25. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ke-core-nsc2024-m1-q112KE-g2",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "KE"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 2x² + 1 = 8x",
+  "options": [
+   "x = 0.63 or x = 0.13",
+   "x = 4.37 or x = 0.13",
+   "x = 3.87 or x = 0.13",
+   "x = 4.07 or x = 0.33"
+  ],
+  "correctAnswer": "x = 3.87 or x = 0.13",
+  "explanation": "Standard form: 2x² − 8x + 1 = 0. Quadratic formula: x = [8 ± √(8² − 8)]/(4) → x ≈ 3.87 or 0.13. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ke-core-nsc2024-m1-q112KE-g3",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "KE"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 2x² + 1 = 3x",
+  "options": [
+   "x = 1.10 or x = 0.40",
+   "x = 1.00 or x = 0.50",
+   "x = 1.00 or x = 2.00",
+   "x = 1.20 or x = 0.70"
+  ],
+  "correctAnswer": "x = 1.00 or x = 0.50",
+  "explanation": "Standard form: 2x² − 3x + 1 = 0. Quadratic formula: x = [3 ± √(3² − 8)]/(4) → x ≈ 1.00 or 0.50. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-formula-2dp-ke-core-nsc2024-m1-q112KE-g4",
+  "coreId": "core-nsc2024-m1-q112",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "KE"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x (correct to TWO decimal places): 3x² + 1 = 5x",
+  "options": [
+   "x = 1.43 or x = 2.43",
+   "x = 1.43 or x = 0.23",
+   "x = 0.73 or x = 0.23",
+   "x = 1.93 or x = 0.23"
+  ],
+  "correctAnswer": "x = 1.43 or x = 0.23",
+  "explanation": "Standard form: 3x² − 5x + 1 = 0. Quadratic formula: x = [5 ± √(5² − 12)]/(6) → x ≈ 1.43 or 0.23. Machine-verified against the formula.",
+  "hint": "Rearrange to standard form, then the quadratic formula.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-ng-core-nsc2024-m1-q113NG-g1",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 2x − 35 > 0",
+  "options": [
+   "x < -7",
+   "x > 5 only",
+   "x < -7 or x > 5",
+   "x > -7 only"
+  ],
+  "correctAnswer": "x < -7 or x > 5",
+  "explanation": "Factorise: (x − 5)(x − -7) > 0, so the critical values are x = -7 and x = 5. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -7 or x > 5.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-ng-core-nsc2024-m1-q113NG-g2",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 3x − 28 > 0",
+  "options": [
+   "x > -7 only",
+   "x < -7 or x > 4",
+   "x > 4 only",
+   "x < -7"
+  ],
+  "correctAnswer": "x < -7 or x > 4",
+  "explanation": "Factorise: (x − 4)(x − -7) > 0, so the critical values are x = -7 and x = 4. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -7 or x > 4.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-ng-core-nsc2024-m1-q113NG-g3",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 1x − 6 > 0",
+  "options": [
+   "x < -3",
+   "x > 2 only",
+   "x < -3 or x > 2",
+   "x > -3 only"
+  ],
+  "correctAnswer": "x < -3 or x > 2",
+  "explanation": "Factorise: (x − 2)(x − -3) > 0, so the critical values are x = -3 and x = 2. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -3 or x > 2.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-ng-core-nsc2024-m1-q113NG-g4",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 2x − 15 > 0",
+  "options": [
+   "x < -5 or x > 3",
+   "x > 3 only",
+   "x > -5 only",
+   "x < -5"
+  ],
+  "correctAnswer": "x < -5 or x > 3",
+  "explanation": "Factorise: (x − 3)(x − -5) > 0, so the critical values are x = -5 and x = 3. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -5 or x > 3.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-ng-core-nsc2024-m1-q113NG-g5",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² − 3x − 18 > 0",
+  "options": [
+   "x < -3 or x > 6",
+   "x < -3",
+   "x > -3 only",
+   "x > 6 only"
+  ],
+  "correctAnswer": "x < -3 or x > 6",
+  "explanation": "Factorise: (x − 6)(x − -3) > 0, so the critical values are x = -3 and x = 6. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -3 or x > 6.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-ng-core-nsc2024-m1-q113NG-g6",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "NG"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 1x − 20 > 0",
+  "options": [
+   "x < -5 or x > 4",
+   "x > 4 only",
+   "x < -5",
+   "x > -5 only"
+  ],
+  "correctAnswer": "x < -5 or x > 4",
+  "explanation": "Factorise: (x − 4)(x − -5) > 0, so the critical values are x = -5 and x = 4. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -5 or x > 4.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-us-core-nsc2024-m1-q113US-g1",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "US"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 2x − 3 > 0",
+  "options": [
+   "x < -3 or x > 1",
+   "x > 1 only",
+   "x < -3",
+   "x > -3 only"
+  ],
+  "correctAnswer": "x < -3 or x > 1",
+  "explanation": "Factorise: (x − 1)(x − -3) > 0, so the critical values are x = -3 and x = 1. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -3 or x > 1.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-us-core-nsc2024-m1-q113US-g2",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "US"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 4x − 5 > 0",
+  "options": [
+   "x < -5 or x > 1",
+   "x > -5 only",
+   "x > 1 only",
+   "x < -5"
+  ],
+  "correctAnswer": "x < -5 or x > 1",
+  "explanation": "Factorise: (x − 1)(x − -5) > 0, so the critical values are x = -5 and x = 1. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -5 or x > 1.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-us-core-nsc2024-m1-q113US-g3",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "US"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² + 1x − 30 > 0",
+  "options": [
+   "x < -6",
+   "x > -6 only",
+   "x > 5 only",
+   "x < -6 or x > 5"
+  ],
+  "correctAnswer": "x < -6 or x > 5",
+  "explanation": "Factorise: (x − 5)(x − -6) > 0, so the critical values are x = -6 and x = 5. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -6 or x > 5.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mathematics-quadratic-inequality-us-core-nsc2024-m1-q113US-g4",
+  "coreId": "core-nsc2024-m1-q113",
+  "provenance": "original",
+  "variant": "B",
+  "track": [
+   "US"
+  ],
+  "domain": "highschool",
+  "topicSlug": "algebra-foundations",
+  "styleBoard": "JAMB",
+  "type": "mcq",
+  "questionText": "Solve for x: x² − 3x − 10 > 0",
+  "options": [
+   "x > 5 only",
+   "x < -2 or x > 5",
+   "x < -2",
+   "x > -2 only"
+  ],
+  "correctAnswer": "x < -2 or x > 5",
+  "explanation": "Factorise: (x − 5)(x − -2) > 0, so the critical values are x = -2 and x = 5. The parabola opens upward, so the product is positive OUTSIDE the roots: x < -2 or x > 5.",
+  "hint": "Critical values first, then test each region.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ }
+]

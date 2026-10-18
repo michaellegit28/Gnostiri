@@ -15,7 +15,7 @@
  *   verify(p, chosen)         -> re-derive and compare; boolean
  */
 
-import { int, pick, shuffled } from "./engine.mjs";
+import { int, pick, shuffled, numbersIn, toAsciiNumbers } from "./engine.mjs";
 import { localeFor } from "./locales.mjs";
 
 /** "1 metre" not "1 metres" — the area family prints option labels. */
@@ -118,7 +118,7 @@ export const areaFamily = {
   },
   hint: () => "Translate the sentence into length = width + k, then use area = width \u00d7 length.",
   verify(p, chosen) {
-    const w = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    const w = numbersIn(chosen)[0];
     return w * (w + p.more) === p.area;
   },
 };
@@ -220,7 +220,7 @@ export const motionFamily = {
   },
   hint: () => "Keep the units consistent: km/h multiplied by hours gives km.",
   verify(p, chosen) {
-    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    const v = numbersIn(chosen)[0];
     return Math.abs(v - p.speed * p.timeHours) < 1e-9;
   },
 };
@@ -259,7 +259,7 @@ export const ohmsLawFamily = {
   },
   hint: () => "Current = voltage divided by resistance.",
   verify(p, chosen) {
-    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    const v = numbersIn(chosen)[0];
     return Math.abs(v - p.voltage / p.resistance) < 1e-9;
   },
 };
@@ -298,7 +298,7 @@ export const moleFamily = {
   },
   hint: () => "Number of moles = mass divided by molar mass.",
   verify(p, chosen) {
-    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    const v = numbersIn(chosen)[0];
     return Math.abs(v - p.mass / p.molarMass) < 1e-9;
   },
 };
@@ -344,7 +344,7 @@ export const pythagorasFamily = {
   },
   hint: () => "Square both shorter sides, add, then take the square root.",
   verify(p, chosen) {
-    const v = Number(String(chosen).replace(/[^0-9]/g, ""));
+    const v = numbersIn(chosen)[0];
     return v * v === p.a * p.a + p.b * p.b;
   },
 };
@@ -402,7 +402,7 @@ export const simultaneousFamily = {
   },
   hint: () => "Make one variable match, subtract the equations, then back-substitute.",
   verify(p, chosen) {
-    const nums = String(chosen).match(/-?\d+/g) ?? [];
+    const nums = numbersIn(chosen);
     if (nums.length < 2) return false;
     const x = Number(nums[0]);
     const y = Number(nums[1]);
@@ -449,11 +449,154 @@ export const compoundInterestFamily = {
   },
   hint: () => "Compound interest multiplies the amount by (1 + rate) each year — it is not linear.",
   verify(p, chosen) {
-    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    const v = numbersIn(chosen)[0];
     const exact = p.principal * Math.pow(1 + p.rate / 100, p.years);
     return Math.abs(v - exact) <= 0.5;
   },
 };
+
+/**
+ * The three families below mirror the cores of A2's REAL official NSC batch
+ * (content/questions/nsc-official.batch1.json, Nov 2024 Maths P1 Q1.1.1-1.1.3),
+ * so generated variants can be bound to the SAME coreIds and slot into the
+ * global pool beside his hand-cloned items.
+ */
+
+/** x(x + k) = 0 — zero-product rule; matches core-nsc2024-m1-q111. */
+export const zeroProductFamily = {
+  id: "zero-product-quadratic",
+  topicSlug: "algebra-foundations",
+  label: "Zero-product rule on a factorable quadratic",
+  params(r) {
+    const k = int(r, 2, 9) * (r() < 0.5 ? -1 : 1);
+    return { k };
+  },
+  answer(p) {
+    return `x = 0 or x = ${p.k > 0 ? "\u2212" + p.k : Math.abs(p.k)}`;
+  },
+  stem(p) {
+    return `Solve for x: x(x ${p.k > 0 ? "+ " + p.k : "\u2212 " + Math.abs(p.k)}) = 0`;
+  },
+  distractors(p, r) {
+    const mag = Math.abs(p.k);
+    return shuffled(r, [
+      `x = 0 or x = ${p.k > 0 ? mag : "\u2212" + mag}`,
+      `x = 0 only`,
+      `x = ${p.k > 0 ? "\u2212" + mag : mag} only`,
+      `x = 0 or x = ${mag + 1}`,
+    ]).slice(0, 3);
+  },
+  explanation(p) {
+    return `Zero-product rule: either factor is zero, so x = 0 or x ${p.k > 0 ? "+ " + p.k : "\u2212 " + Math.abs(p.k)} = 0 \u2192 x = 0 or x = ${
+      p.k > 0 ? "\u2212" + p.k : Math.abs(p.k)
+    }.`;
+  },
+  hint: () => "Either factor can be zero.",
+  verify(p, chosen) {
+    // Roots of x(x + k) = 0 are {0, -k} — not {0, k}.
+    const expected = [0, -p.k].sort((a, b) => a - b);
+    const roots = numbersIn(chosen).sort((a, b) => a - b);
+    return roots.length === 2 && roots[0] === expected[0] && roots[1] === expected[1];
+  },
+};
+
+/** ax² + 1 = bx → quadratic formula, answers to TWO decimal places. */
+export const quadraticFormulaFamily = {
+  id: "quadratic-formula-2dp",
+  topicSlug: "algebra-foundations",
+  label: "Quadratic formula, roots to two decimal places",
+  params(r) {
+    const a = int(r, 2, 5);
+    // b must satisfy b^2 > 4a or the discriminant is negative and the roots
+    // are complex (which produced NaN keys and zero distractors).
+    const bMin = Math.floor(Math.sqrt(4 * a)) + 1;
+    const b = int(r, bMin, Math.max(bMin + 1, 10));
+    const disc = b * b - 4 * a;
+    return { a, b, disc };
+  },
+  answer(p) {
+    const [hi, lo] = rootsNumeric(p);
+    return `x = ${hi.toFixed(2)} or x = ${lo.toFixed(2)}`;
+  },
+  stem(p) {
+    return `Solve for x (correct to TWO decimal places): ${p.a}x\u00b2 + 1 = ${p.b}x`;
+  },
+  distractors(p, r) {
+    const [hi, lo] = rootsNumeric(p);
+    const key = `x = ${hi.toFixed(2)} or x = ${lo.toFixed(2)}`;
+    return shuffled(r, [
+      `x = ${hi.toFixed(2)} or x = ${(hi + 1).toFixed(2)}`,
+      `x = ${(lo + 0.5).toFixed(2)} or x = ${lo.toFixed(2)}`,
+      `x = ${(hi + 0.5).toFixed(2)} or x = ${lo.toFixed(2)}`,
+      `x = ${(hi + 0.1).toFixed(2)} or x = ${(lo - 0.1).toFixed(2)}`,
+      `x = ${(hi + 0.2).toFixed(2)} or x = ${(lo + 0.2).toFixed(2)}`,
+    ])
+      .filter((s) => s !== key)
+      .slice(0, 3);
+  },
+  explanation(p) {
+    const [hi, lo] = rootsNumeric(p);
+    return `Standard form: ${p.a}x\u00b2 \u2212 ${p.b}x + 1 = 0. Quadratic formula: x = [${p.b} \u00b1 \u221a(${p.b}\u00b2 \u2212 ${4 * p.a})]/(${2 * p.a}) \u2192 x \u2248 ${hi.toFixed(2)} or ${lo.toFixed(2)}. Machine-verified against the formula.`;
+  },
+  hint: () => "Rearrange to standard form, then the quadratic formula.",
+  verify(p, chosen) {
+    const nums = numbersIn(chosen);
+    if (nums.length < 2) return false;
+    const [hi, lo] = rootsNumeric(p);
+    return Math.abs(nums[0] - hi) < 0.005 && Math.abs(nums[1] - lo) < 0.005;
+  },
+};
+export const quadraticInequalityFamily = {
+  id: "quadratic-inequality",
+  topicSlug: "algebra-foundations",
+  label: "Quadratic inequality with factorable roots",
+  params(r) {
+    const r1 = int(r, 1, 8);
+    const r2 = -(int(r, 1, 8));
+    return { r1, r2, b: -(r1 + r2), c: r1 * r2 };
+  },
+  answer(p) {
+    return `x < ${Math.min(p.r1, p.r2)} or x > ${Math.max(p.r1, p.r2)}`;
+  },
+  stem(p) {
+    return `Solve for x: x\u00b2 ${p.b >= 0 ? "+ " + p.b : "\u2212 " + Math.abs(p.b)}x ${p.c >= 0 ? "+ " + p.c : "\u2212 " + Math.abs(p.c)} > 0`;
+  },
+  distractors(p, r) {
+    const lo = Math.min(p.r1, p.r2);
+    const hi = Math.max(p.r1, p.r2);
+    return shuffled(r, [
+      `${lo} < x < ${hi}`,
+      `x < ${lo}`,
+      `x > ${hi} only`,
+      `x > ${lo} only`,
+    ]).slice(0, 3);
+  },
+  explanation(p) {
+    const lo = Math.min(p.r1, p.r2);
+    const hi = Math.max(p.r1, p.r2);
+    return `Factorise: (x \u2212 ${p.r1})(x \u2212 ${p.r2}) > 0, so the critical values are x = ${lo} and x = ${hi}. The parabola opens upward, so the product is positive OUTSIDE the roots: x < ${lo} or x > ${hi}.`;
+  },
+  hint: () => "Critical values first, then test each region.",
+  verify(p, chosen) {
+    const lo = Math.min(p.r1, p.r2);
+    const hi = Math.max(p.r1, p.r2);
+    if (!String(chosen).includes(`x < ${lo}`) || !String(chosen).includes(`x > ${hi}`)) return false;
+    // Independent check: a point outside must satisfy the inequality, one inside must not.
+    const outside = lo - 1;
+    const inside = (lo + hi) / 2;
+    const f = (x) => x * x + p.b * x + p.c;
+    return f(outside) > 0 && f(inside) < 0;
+  },
+};
+
+/** Roots of ax² − bx + 1 = 0, largest first (verify() re-derives them). */
+function rootsNumeric(p) {
+  const hi = (p.b + Math.sqrt(p.disc)) / (2 * p.a);
+  const lo = (p.b - Math.sqrt(p.disc)) / (2 * p.a);
+  return [hi, lo];
+}
+
+/** x² + bx + c > 0 with factorable roots — matches core-nsc2024-m1-q113. */
 
 export const FAMILIES = [
   linearFamily,
@@ -465,6 +608,9 @@ export const FAMILIES = [
   pythagorasFamily,
   simultaneousFamily,
   compoundInterestFamily,
+  zeroProductFamily,
+  quadraticFormulaFamily,
+  quadraticInequalityFamily,
 ];
 
 export function familyById(id) {

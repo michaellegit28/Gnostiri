@@ -29,6 +29,20 @@ export function seedFrom(...parts) {
   return h >>> 0;
 }
 
+/**
+ * Normalise typographic minus (U+2212) to ASCII hyphen before any numeric
+ * parsing. Without this, "x = 0 or x = −5" parses as roots {0, 5} and a
+ * sign-flipped distractor verifies as CORRECT — exactly the kind of bug that
+ * ships a wrong key.
+ */
+export function toAsciiNumbers(text) {
+  return String(text).replace(/\u2212/g, "-").replace(/[−]/g, "-");
+}
+
+export function numbersIn(text) {
+  return (toAsciiNumbers(text).match(/-?\d+(\.\d+)?/g) ?? []).map(Number);
+}
+
 export function int(r, min, max) {
   return min + Math.floor(r() * (max - min + 1));
 }

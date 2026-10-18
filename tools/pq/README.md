@@ -50,6 +50,13 @@ node --test tools/pq/pq.test.mjs
 | `pythagoras-triple` | geometry-trigonometry | a\u00b2 + b\u00b2 = c\u00b2 on exact integer triples |
 | `simultaneous-linear-pair` | algebra-foundations | substituting BOTH equations (unique solution enforced) |
 | `compound-growth` | statistics-probability | P(1 + r)\u207f with tolerance |
+| `zero-product-quadratic` | algebra-foundations | roots of x(x + k) = 0 are exactly {0, \u2212k} |
+| `quadratic-formula-2dp` | algebra-foundations | re-deriving roots via the formula, 2dp tolerance |
+| `quadratic-inequality` | algebra-foundations | critical values + a test point inside/outside the roots |
+
+The last three mirror the cores of A2's real official NSC batch
+(`nsc-official.batch1.json`, Nov 2024 Maths P1 Q1.1.1\u20131.1.3) so generated
+variants can be bound to the SAME coreIds with `--core core-nsc2024-m1-q111`.
 
 ## Guarantees the pipeline enforces
 
