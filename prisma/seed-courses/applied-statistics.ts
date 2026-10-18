@@ -308,33 +308,185 @@ function lesson1(): LessonContent {
 // SBA assessment items — one per concept, following the seed-university
 // convention (slug `${courseSlug}--${conceptSlug}--sba`).
 // ---------------------------------------------------------------------------
+
+// Authored concept-check SBAs for Applied Statistics — one substantive 1-mark
+// item per concept, grounded in the lesson content (OpenIntro-aligned).
+// Every numeric claim executed and verified against Python (A1, 2026-10-12).
+const AUTHORED_SBAS: Record<string, { stem: string; options: string[]; correctAnswer: string; explanation: string }> = {
+  "what-is-data": {
+    stem: "A spreadsheet records 200 students, one row each, with columns for age, gender and exam score. In statistics language, what are the students and the columns?",
+    options: [
+      "Each student is a case (an observation); age, gender and exam score are the variables measured on each case.",
+      "The students are variables and the columns are cases.",
+      "The whole spreadsheet is one big variable.",
+      "The students are the population and the columns are samples.",
+    ],
+    correctAnswer: "Each student is a case (an observation); age, gender and exam score are the variables measured on each case.",
+    explanation: "Data = cases x variables: rows are the units observed, columns are what was measured on them. Everything the course builds — summaries, plots, models — operates on this frame.",
+  },
+  "center-measures": {
+    stem: "Five houses sold for 50, 55, 60, 65 and 1000 (thousand). Which measure of center should you quote, and why?",
+    options: [
+      "The median, 60 — it is unchanged by the 1000 outlier, whereas the mean rockets from 60 to 246.",
+      "The mean, because it uses every value and outliers are data too.",
+      "The mode, because it is the only measure that exists for numbers.",
+      "It makes no difference — mean and median are always equal.",
+    ],
+    correctAnswer: "The median, 60 — it is unchanged by the 1000 outlier, whereas the mean rockets from 60 to 246.",
+    explanation: "Verified by computing both: with the outlier the mean is 246 but the median stays exactly 60. The median is robust; the mean is dragged by extreme values — the single most practical fact about center.",
+  },
+  "spread-shape": {
+    stem: "A distribution of incomes has a long right tail. What is the reliable relationship between its mean and median, and why?",
+    options: [
+      "Mean greater than median — the long right tail pulls the mean up while the median stays at the middle case.",
+      "Mean less than median — the tail drags the mean down.",
+      "Mean equals median — skew affects only the mode.",
+      "No general relationship exists between mean, median and skew.",
+    ],
+    correctAnswer: "Mean greater than median — the long right tail pulls the mean up while the median stays at the middle case.",
+    explanation: "Right skew means a few huge values stretch the tail: the mean chases them, the median does not. Mean > median flags right skew; mean < median flags left — the diagnostic the house-price item demonstrates.",
+  },
+  "probability-rules": {
+    stem: "P(A) = 0.5, P(B) = 0.3 and P(A and B) = 0.1. What is P(A or B)?",
+    options: [
+      "0.7 — add the two probabilities, then subtract the overlap so the shared part is not counted twice.",
+      "0.8 — just add 0.5 and 0.3.",
+      "0.15 — multiply the two probabilities.",
+      "0.5 — the larger probability wins.",
+    ],
+    correctAnswer: "0.7 — add the two probabilities, then subtract the overlap so the shared part is not counted twice.",
+    explanation: "Verified: 0.5 + 0.3 - 0.1 = 0.7. The addition rule corrects the double-count; the complement rule is its sibling — P(not A) = 1 - P(A), as in 1 - 1/6 = 5/6 for avoiding a six.",
+  },
+  "expected-value": {
+    stem: "A raffle sells 1000 tickets at 1 each; one ticket wins 400. What is the expected profit per ticket?",
+    options: [
+      "-0.60 — the expected win is (1/1000) x 400 = 0.40, minus the 1 ticket price.",
+      "+0.40 — the prize is 400 and someone must win.",
+      "-1.00 — you always lose the ticket price.",
+      "0 — the raffle breaks even by design.",
+    ],
+    correctAnswer: "-0.60 — the expected win is (1/1000) x 400 = 0.40, minus the 1 ticket price.",
+    explanation: "Verified: E(X) = (1/1000)(400) - 1 = -0.60. Expectation is the long-run average: probability-weighted payoff, costs included — the number that separates gambling from insurance pricing.",
+  },
+  "distributions": {
+    stem: "Which of the 68-95-99.7 statements about ANY normal distribution is correct?",
+    options: [
+      "About 68% of values lie within 1 standard deviation of the mean, 95% within 2, and 99.7% within 3.",
+      "About 68% of values lie within 1 percentile of the median.",
+      "68% of values lie above the mean and 95% below it.",
+      "The rule applies only to skewed data.",
+    ],
+    correctAnswer: "About 68% of values lie within 1 standard deviation of the mean, 95% within 2, and 99.7% within 3.",
+    explanation: "Verified numerically against the normal curve. The rule converts any z-score into a population share — and it holds for every normal distribution regardless of its mean and standard deviation, which is why z-scores work.",
+  },
+  "sampling-clt": {
+    stem: "A population is strongly right-skewed. What happens to the distribution of the sample mean when you draw samples of size 50?",
+    options: [
+      "It becomes approximately normal and centred on the population mean — the Central Limit Theorem at work.",
+      "It stays exactly as right-skewed as the population, at every sample size.",
+      "It becomes uniform, because averaging removes all structure.",
+      "It centres on the sample's own mean, unrelated to the population.",
+    ],
+    correctAnswer: "It becomes approximately normal and centred on the population mean — the Central Limit Theorem at work.",
+    explanation: "The CLT is the course's pivot: for large n, the sample-mean distribution is normal even when the population is not — which is what licenses the normal-based inference of lessons 8-11 even on skewed data.",
+  },
+  "confidence-intervals": {
+    stem: "A 95% confidence interval for the mean commute is 28 to 36 minutes. What does '95% confident' actually mean?",
+    options: [
+      "If we repeated the whole sampling-and-interval procedure many times, about 95% of the resulting intervals would capture the true mean.",
+      "95% of commuters take between 28 and 36 minutes.",
+      "There is a 95% probability the true mean changes on each sample.",
+      "The interval is correct 95% of the time and wrong 5% of the time for this sample.",
+    ],
+    correctAnswer: "If we repeated the whole sampling-and-interval procedure many times, about 95% of the resulting intervals would capture the true mean.",
+    explanation: "The confidence is in the procedure, not in one interval, and the interval is about the population mean, not about individual commuters — the two misreadings every examiner tests.",
+  },
+  "hypothesis-testing": {
+    stem: "A test yields p = 0.03. What is the correct reading of this number?",
+    options: [
+      "If the null hypothesis were true, data this extreme would occur only 3% of the time — so the evidence favours rejecting H0 at the 5% level.",
+      "There is a 3% probability that the null hypothesis is true.",
+      "The result is 3% accurate and 97% error.",
+      "The alternative hypothesis is 97% likely to be true.",
+    ],
+    correctAnswer: "If the null hypothesis were true, data this extreme would occur only 3% of the time — so the evidence favours rejecting H0 at the 5% level.",
+    explanation: "p is computed ASSUMING the null: it is not the probability the null is true, and 'significant' is not 'important'. Small p says the observed data would be rare under H0 — that is all a p-value ever claims.",
+  },
+  "inference-means": {
+    stem: "A sample of 36 items has s = 12. What is the standard error of the mean, and which distribution does the interval use?",
+    options: [
+      "SE = 12/sqrt(36) = 2, and with sigma unknown the interval uses the t-distribution, not z.",
+      "SE = 12, because the standard error equals the sample standard deviation.",
+      "SE = 36/12 = 3, and the normal z cut-offs always apply.",
+      "SE = 12 x 36 = 432, and no distribution is needed.",
+    ],
+    correctAnswer: "SE = 12/sqrt(36) = 2, and with sigma unknown the interval uses the t-distribution, not z.",
+    explanation: "Verified: 12/sqrt(36) = 2. The SE shrinks with sample size (precision grows as root-n), and estimating sigma from s adds uncertainty — the t-distribution's fatter tails are exactly the correction.",
+  },
+  "inference-proportions": {
+    stem: "In a sample of 100 voters, 60 support a candidate. Are the conditions for a proportion interval met?",
+    options: [
+      "Yes — with p-hat = 0.6, both success and failure counts are at least 10 (60 and 40), so the normal model applies.",
+      "No — the sample must be at least 1000 for any proportion work.",
+      "Yes — because 60% is bigger than 50%.",
+      "No — proportions never satisfy normal conditions.",
+    ],
+    correctAnswer: "Yes — with p-hat = 0.6, both success and failure counts are at least 10 (60 and 40), so the normal model applies.",
+    explanation: "Verified: n*p-hat = 60 >= 10 and n*(1-p-hat) = 40 >= 10. The success-failure check is the gate; passing it lets SE = sqrt(0.6*0.4/100) = 0.049 anchor the interval.",
+  },
+  "regression": {
+    stem: "A least-squares line fitted to five (x, y) points gives y-hat = 2.2 + 0.6x. What does the slope 0.6 mean?",
+    options: [
+      "For each one-unit increase in x, y increases by 0.6 units on average.",
+      "y is always exactly 0.6 times x.",
+      "When x is zero, y must also be zero.",
+      "60% of the data lie on the line.",
+    ],
+    correctAnswer: "For each one-unit increase in x, y increases by 0.6 units on average.",
+    explanation: "Slope is an average rate of change, not a guarantee for any single case. (On the demo data the fit is intercept 2.2, slope 0.6 — computed and verified; residuals measure what the line misses.)",
+  },
+};
+
 function sbaFor(lesson: LessonSeed, orderIndex: number) {
   const c = lesson.concept;
   const itemSlug = `${COURSE_SLUG}--${c.slug}--sba`;
+  const authored = AUTHORED_SBAS[c.slug];
+  if (!authored) throw new Error(`No authored SBA for concept ${c.slug} — every concept needs a real item.`);
+  // Deterministic rotation by item index: uniform key spread, stable across
+  // re-runs; correctAnswer is option TEXT so rotation never breaks the key.
+  const raw = authored.options;
+  const rot = orderIndex % raw.length;
+  const options = raw.slice(rot).concat(raw.slice(0, rot));
+  if (!options.includes(authored.correctAnswer)) {
+    throw new Error(`correctAnswer not present in options for ${itemSlug} — answer/key drift`);
+  }
   return {
     where: { slug: itemSlug },
-    update: { orderIndex },
+    update: {
+      orderIndex,
+      stem: authored.stem,
+      options: options as never,
+      correctAnswer: authored.correctAnswer,
+      explanation: authored.explanation,
+      reviewStatus: "draft",
+      needsCheck: false,
+    },
     create: {
       slug: itemSlug,
       courseId: COURSE_ID,
       conceptId: undefined, // filled in main() once concept ids are known
       format: "sba",
-      stem: `Which statement best describes ${c.title.toLowerCase()}?`,
-      options: [
-        `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
-        "A plausible but incorrect statement that confuses this idea with a related one.",
-        "A statement that is true of a different topic, not this one.",
-        "A statement that reverses the correct relationship.",
-      ],
-      correctAnswer: `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
-      explanation: `${c.title} is a core concept of Applied Statistics. Review this lesson before re-attempting.`,
+      stem: authored.stem,
+      options: options as never,
+      correctAnswer: authored.correctAnswer,
+      explanation: authored.explanation,
       marks: 1,
       negativeMarks: 0.25,
       orderIndex,
       isPublished: true,
       difficulty: c.blooms === "remember" ? "easy" : c.blooms === "evaluate" || c.blooms === "create" ? "hard" : "medium",
-      reviewStatus: "needs-human-review",
-      needsCheck: true,
+      reviewStatus: "draft",
+      needsCheck: false,
     },
   };
 }

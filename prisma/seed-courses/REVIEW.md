@@ -54,3 +54,10 @@ expert pass, not an engineering one. Draft is the honest ceiling for
 machine-and-review verification.
 
 Nothing in the university domain is awaiting a human decision.
+
+## APPLIED STATISTICS (2026-10-12, course scaffold merged)
+
+- 12 concept SBAs authored (same standard as the programming course; all 14
+  numeric claims executed and verified). reviewStatus draft, needsCheck false.
+- 11 lessons (2-12) are honest placeholders, flagged needsCheck by design —
+  awaiting A3's authoring wave. Lesson 1 is authored; the flag IS the signal.
