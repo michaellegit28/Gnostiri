@@ -56,6 +56,24 @@ const LESSONS = [
       { name: "median of an even count averages the two middles", code: `s = sorted([2, 4, 6, 8])\nprint((s[1] + s[2]) / 2)`, expected: "5.0" },
     ],
   },
+  {
+    label: "lesson 3",
+    snippets: [
+      {
+        name: "spread of a tightly clustered set",
+        code: `data = [4, 5, 6, 7, 8]\nn = len(data)\nmean = sum(data) / n\nsvar = sum((x - mean) ** 2 for x in data) / (n - 1)\nsd = svar ** 0.5\nprint("mean:", mean)\nprint("sample sd:", round(sd, 4))`,
+        expected: "mean: 6.0\nsample sd: 1.5811",
+      },
+      {
+        name: "a single outlier tears the standard deviation",
+        code: `import statistics\n\ndef quartiles(data):\n    s = sorted(data)\n    n = len(s)\n    if n % 2 == 1:\n        lower = s[:n // 2]\n        upper = s[n // 2 + 1:]\n    else:\n        lower = s[:n // 2]\n        upper = s[n // 2:]\n    return statistics.median(lower), statistics.median(upper)\n\ndata = [4, 5, 6, 7, 8]\nq1, q3 = quartiles(data)\nprint("IQR without outlier:", q3 - q1)\n\ndata2 = data + [100]\nn = len(data2)\nmean = sum(data2) / n\nsvar = sum((x - mean) ** 2 for x in data2) / (n - 1)\nsd = svar ** 0.5\nq1, q3 = quartiles(data2)\nprint("sd with outlier:", round(sd, 4))\nprint("IQR with outlier:", q3 - q1)`,
+        expected: "IQR without outlier: 3.0\nsd with outlier: 38.4014\nIQR with outlier: 3",
+      },
+    ],
+    claims: [
+      { name: "variance of a small symmetric set", code: `data = [4, 5, 6, 7, 8]\nm = sum(data) / len(data)\nprint(sum((x - m) ** 2 for x in data) / (len(data) - 1))`, expected: "2.5" },
+    ],
+  },
 ];
 
 test("python3 is available for statistics verification", { skip: !existsSync("/usr/bin/python3") }, () => {

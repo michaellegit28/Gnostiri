@@ -73,7 +73,7 @@ const LESSON_1: LessonSeed = {
 // long-form content is pending authoring. needsCheck marks them.
 const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-2`, title: "Summarizing the center", module: 1, estimatedMinutes: 30, concept: { title: "Measures of center", slug: "center-measures", blooms: "understand", minutes: 30, prereq: ["what-is-data"] }, content: lesson2() },
-  { id: `${COURSE_ID}-lesson-3`, title: "Spread & shape", module: 1, estimatedMinutes: 35, concept: { title: "Spread and shape", slug: "spread-shape", blooms: "understand", minutes: 35, prereq: ["center-measures"] }, content: pending(3) },
+  { id: `${COURSE_ID}-lesson-3`, title: "Spread & shape", module: 1, estimatedMinutes: 35, concept: { title: "Spread and shape", slug: "spread-shape", blooms: "understand", minutes: 35, prereq: ["center-measures"] }, content: lesson3() },
   { id: `${COURSE_ID}-lesson-4`, title: "Probability rules", module: 2, estimatedMinutes: 35, concept: { title: "Probability rules", slug: "probability-rules", blooms: "understand", minutes: 35, prereq: ["spread-shape"] }, content: pending(4) },
   { id: `${COURSE_ID}-lesson-5`, title: "Random variables & expectation", module: 2, estimatedMinutes: 30, concept: { title: "Expected value", slug: "expected-value", blooms: "analyze", minutes: 30, prereq: ["probability-rules"] }, content: pending(5) },
   { id: `${COURSE_ID}-lesson-6`, title: "Distributions: binomial & normal", module: 2, estimatedMinutes: 40, concept: { title: "Random variable distributions", slug: "distributions", blooms: "analyze", minutes: 40, prereq: ["expected-value"] }, content: pending(6) },
@@ -503,6 +503,215 @@ function lesson2(): LessonContent {
       {
         type: "paragraph",
         text: "Next: spread & shape. Lesson 2 told you where the data sits; the next lesson tells you how far it stretches — variance, standard deviation, quartiles and the shape of a histogram — because two datasets can share a center and still be completely different.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 3 content — original writing, all numbers verified (Python 3).
+// ---------------------------------------------------------------------------
+function lesson3(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe what spread means for a numerical variable; compute the sample standard deviation and the interquartile range; and explain why the IQR is the spread measure that survives an outlier while the standard deviation is torn by one.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 (Summarizing the center). You need the mean and median, because spread is measured around the center and because the mean's sensitivity to outliers carries directly into the standard deviation.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Spread",
+        text: "Spread describes how far the observations sit from the center — whether they hug the middle tightly or stretch far out. Two datasets with the same mean can be wildly different, and spread is what tells them apart.",
+      },
+      {
+        type: "definition",
+        term: "Standard deviation",
+        text: "The standard deviation is the typical distance of the observations from the mean, measured in the same units as the data. A small value means the data clusters near the mean; a large value means it is widely scattered.",
+      },
+      {
+        type: "definition",
+        term: "Interquartile range (IQR)",
+        text: "The IQR is the distance between the first and third quartiles — the middle 50% of the data. Because it ignores the outer 25% on each side, it is far less affected by extreme outliers than the standard deviation.",
+      },
+      {
+        type: "paragraph",
+        text: "Center and spread together describe a numerical variable, and they answer different questions. The center tells you where the data is; the spread tells you how much it varies. When someone says your wait was 'about average', that is a center claim. When they add 'but it varies a lot', that is a spread claim. You want both, because a small spread means the average is trustworthy while a large spread means it is not — the average of a wildly varying quantity hides a lot.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the formula" },
+      {
+        type: "paragraph",
+        text: "The standard deviation is essentially an average of how far each value is from the mean. To keep the distances from cancelling out, you square them first (so negative distances become positive), average those squares, and then take the square root to undo the squaring. The sample version divides by n minus one rather than n, a small correction because you are estimating the spread of a whole population from just a sample — dividing by n would make the estimate a touch too small, especially for small samples.",
+      },
+      {
+        type: "paragraph",
+        text: "The IQR is computed differently and is much more robust. You split the sorted data into quarters, find the first quartile (the median of the lower half) and the third quartile (the median of the upper half), and subtract. Because the IQR ignores everything outside the middle half, an extreme value far off to one side does not change it at all. This is the same robustness that made the median the better center measure under skew — the IQR is its spread counterpart.",
+      },
+      {
+        type: "paragraph",
+        text: "So you now have a matching pair of rules. For a skewed distribution or one with extreme outliers, describe the center with the median and the spread with the IQR. For a roughly symmetric distribution with no wild values, the mean and the standard deviation are appropriate. Choosing the robust pair is not a minor detail; it is the difference between a summary that reflects the data and one that is dragged around by a single unlucky measurement.",
+      },
+
+      // --- Worked examples ---
+      { type: "heading", level: 2, text: "Worked example 1: spread of a tightly clustered set" },
+      {
+        type: "paragraph",
+        text: "Five wait times (in minutes) cluster around 6. This dataset has a small spread.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `data = [4, 5, 6, 7, 8]\nn = len(data)\nmean = sum(data) / n\nsvar = sum((x - mean) ** 2 for x in data) / (n - 1)\nsd = svar ** 0.5\nprint("mean:", mean)\nprint("sample sd:", round(sd, 4))`,
+        output: "mean: 6.0\nsample sd: 1.5811",
+        caption: "The mean is 6 and the typical distance from it is about 1.58 minutes — the data is tightly clustered.",
+      },
+      {
+        type: "paragraph",
+        text: "The mean is 6, and the standard deviation is about 1.58. Every value sits within a couple of minutes of the mean, so the standard deviation is small and the mean is a faithful, informative summary. That is the meaning of small spread: the value you are told about is close to what you will actually experience.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: how a single outlier tears the standard deviation" },
+      {
+        type: "paragraph",
+        text: "Add one extreme wait time — 100 minutes — to the same five values, and watch the standard deviation balloon while the IQR holds almost steady.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `import statistics\n\ndef quartiles(data):\n    s = sorted(data)\n    n = len(s)\n    if n % 2 == 1:\n        lower = s[:n // 2]\n        upper = s[n // 2 + 1:]\n    else:\n        lower = s[:n // 2]\n        upper = s[n // 2:]\n    return statistics.median(lower), statistics.median(upper)\n\ndata = [4, 5, 6, 7, 8]\nq1, q3 = quartiles(data)\nprint("IQR without outlier:", q3 - q1)\n\ndata2 = data + [100]\nn = len(data2)\nmean = sum(data2) / n\nsvar = sum((x - mean) ** 2 for x in data2) / (n - 1)\nsd = svar ** 0.5\nq1, q3 = quartiles(data2)\nprint("sd with outlier:", round(sd, 4))\nprint("IQR with outlier:", q3 - q1)`,
+        output: "IQR without outlier: 3.0\nsd with outlier: 38.4014\nIQR with outlier: 3",
+        caption: "Adding 100 sends the SD from 1.58 to 38.40 — a 24-fold jump — while the IQR stays exactly 3.",
+      },
+      {
+        type: "paragraph",
+        text: "The standard deviation squares the distance to the mean before averaging, so a value 94 minutes from the mean contributes a huge squared term and drags the SD up to 38.40. The IQR, by contrast, only cares about the values at the 25th and 75th percentiles. Adding one extreme at the top does not change either of those, so the IQR remains 3.0. This is the decisive difference: the standard deviation is a good measure when the data is well-behaved, but the IQR is the honest measure when outliers lurk.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Using the standard deviation on skewed or outlier-laden data. A single extreme value can swamp it. Reach for the IQR when outliers or strong skew are present.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Using n instead of n-1 for a sample standard deviation. When the data is a sample of a larger population, divide by n minus one, not n, so the estimate is not biased small.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting to sort before finding quartiles. Q1 and Q3 are positional, so the data must be in order first.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Confusing variance and standard deviation. The variance is the squared average distance, in squared units; the standard deviation is its square root and is in the original units, which is why it is the easier one to interpret.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Two datasets have the same mean of 50, but one has a standard deviation of 3 and the other 25. What does this difference tell you?",
+        answer: "The second dataset is much more spread out — its values sit much farther from the mean, so 50 is a far less reliable summary of it.",
+        explanation: "Spread measures how far values lie from the center. A larger standard deviation means greater scatter, so the center is a weaker representation.",
+      },
+      {
+        type: "question",
+        prompt: "Why does adding one huge outlier increase the standard deviation a lot but barely affect the IQR?",
+        answer: "Because the standard deviation uses every value (squaring the farthest distance, so an outlier contributes enormous weight), while the IQR only uses the middle 50% of values.",
+        explanation: "The SD is sensitive to the magnitude of extreme values, so one outlier swamps it. The IQR is positional and ignores the outer quarters, so it is robust.",
+      },
+      {
+        type: "question",
+        prompt: "When should you use the median and IQR instead of the mean and standard deviation?",
+        answer: "When the data is skewed or contains extreme outliers, because the mean and standard deviation are dragged toward the outliers.",
+        explanation: "The median and IQR are robust measures — they reflect the central mass, not a few extremes — so they are the honest summary for skewed data.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What does the standard deviation measure?",
+        options: ["The center of the data", "The typical distance from the mean", "The number of observations", "The largest value"],
+        correctIndex: 1,
+        explanation: "The standard deviation is the typical deviation from the mean, measured in the same units as the data.",
+      },
+      {
+        type: "mcq",
+        stem: "Which spread measure is most affected by a single extreme outlier?",
+        options: ["The IQR", "The standard deviation", "The median", "The mode"],
+        correctIndex: 1,
+        explanation: "The standard deviation uses every value and squares the distances, so an outlier contributes enormously. The IQR ignores the outer quarters.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the IQR?",
+        options: ["The range of the whole dataset", "The middle 50% — the distance between Q1 and Q3", "The mean squared deviation", "The largest minus the smallest quartile"],
+        correctIndex: 1,
+        explanation: "The IQR is Q3 minus Q1, covering the central half of the data and ignoring the extremes.",
+      },
+      {
+        type: "mcq",
+        stem: "Why do we divide by n-1 for a sample standard deviation?",
+        options: ["It is a typo", "Because a sample tends to underestimate its population's spread, so dividing by n-1 corrects the bias", "Because n-1 is always the count", "To make the number larger"],
+        correctIndex: 1,
+        explanation: "A sample spread is biased slightly small; dividing by n-1 rather than n corrects that, especially for small samples.",
+      },
+      {
+        type: "mcq",
+        stem: "A dataset has a large standard deviation. What does that imply?",
+        options: ["The values are close to the mean", "The values are widely scattered around the mean", "The mean is very small", "The data is symmetric"],
+        correctIndex: 1,
+        explanation: "Large spread means values sit far from the mean, so the mean is a less informative single summary.",
+      },
+      {
+        type: "mcq",
+        stem: "How do you locate Q1 and Q3?",
+        options: ["By taking the mean of all values", "By splitting the sorted data and finding the medians of the lower and upper halves", "By finding the maximum", "By dividing the total by four"],
+        correctIndex: 1,
+        explanation: "Quartiles are positional. Sort the data, then Q1 is the median of the lower half and Q3 the median of the upper half.",
+      },
+      {
+        type: "mcq",
+        stem: "Variance and standard deviation differ in that:",
+        options: ["Variance is in squared units, SD is in the data's units", "They are identical", "Variance is always smaller", "SD ignores outliers"],
+        correctIndex: 0,
+        explanation: "Variance is the average squared deviation (squared units); the standard deviation is its square root, restoring the original units.",
+      },
+      {
+        type: "mcq",
+        stem: "Which pair is most appropriate for describing a heavily right-skewed dataset?",
+        options: ["Mean and standard deviation", "Median and IQR", "Mean and IQR", "Mode and variance"],
+        correctIndex: 1,
+        explanation: "Skewed data calls for the robust pair — the median for center and the IQR for spread — because the mean and SD are pulled toward the tail.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Spread measures how far the data sits from its center. The standard deviation is the typical distance from the mean but is torn by outliers; the IQR is the middle 50% and is robust. Match the measure to the shape: symmetric data with the mean and standard deviation, skewed or outlier-laden data with the median and IQR.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: probability rules. Lessons 1-3 described data confidently; the next lessons model the uncertainty underneath it. Probability is the language of how likely events are, and it is the foundation for every inference tool still to come.",
       },
     ],
   };
