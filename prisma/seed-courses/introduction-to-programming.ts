@@ -78,7 +78,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: lesson3() },
   { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: lesson4() },
   { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: lesson5() },
-  { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: pending(6) },
+  { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: lesson6() },
   { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: pending(7) },
   { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: pending(8) },
   { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: pending(9) },
@@ -1270,6 +1270,239 @@ function lesson5(): LessonContent {
       {
         type: "paragraph",
         text: "Next: logic & debugging basics. Lesson 5 gave you repetition; the next lesson steps back and shows you how to read a tricky loop and find the errors when one does not do what you meant — the skill that turns a writer of small loops into someone who can untangle them.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 6 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson6(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: tell the three kinds of error apart — syntax, logic and semantic; trace a short loop by hand to predict its output; read an error message and use it to point you at the cause; and apply the four habits of debugging: read, run, ruminate, retreat.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 4 and 5 (Conditions and Loops). You need to be able to read an if/elif chain and a loop, because the whole point of this lesson is to predict what such code does — and to find the mistake when it does not.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Debugging",
+        text: "Debugging is the art of finding the cause of an error — and the first honest thing to know is that it is an art with a method, not a random guess. The error is repeatedly reported as an unexpected output or a stopped program; your job is to connect it back to the line of code that caused it.",
+      },
+      {
+        type: "paragraph",
+        text: "The best way to understand debugging is to understand what went wrong in the first place. Almost every bug is one of three kinds. A syntax error is a grammar mistake — the program cannot even be read. A logic error is a mistake in the order of steps — the program runs, but the steps are in the wrong sequence. A semantic error is a mistake in meaning — the steps are correct and in order, but they say something other than what you intended. Knowing which kind you are looking at tells you where to look.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the technique" },
+      {
+        type: "paragraph",
+        text: "The three error types are different enough that trying to fix them all the same way wastes time. A syntax error is the easiest. Python cannot understand the line at all, so it points at the exact spot — often the fix is a missing colon or a misplaced quote. The clue is that the program does not produce output; it refuses to run.",
+      },
+      {
+        type: "paragraph",
+        text: "A logic error is subtler because the program runs fine. The steps are all valid Python; they are simply in the wrong order. Remember the example of the water bottle: \"take a drink, put it in your backpack, walk to the library, then put the top back on.\" Every step is a sensible action, but the order makes the whole thing wrong. This kind of error gives no error message — the program runs and produces the wrong answer, which is why it is the hardest to notice.",
+      },
+      {
+        type: "paragraph",
+        text: "A semantic error is the cruelest. Every step is valid and in the right order, but a step says the wrong thing. You meant minutes but wrote seconds; you meant greater-than but wrote less-than. The program does exactly what you told it — the bug is that you told it the wrong thing. This is why debugging starts with going back to the problem itself, not just to the syntax.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: tracing a loop by hand" },
+      {
+        type: "paragraph",
+        text: "The habit that prevents the most logic bugs is tracing: walking through a loop line by line, keeping a running note of each variable, to predict what it prints before you run it.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `total = 0\nfor i in range(1, 4):\n    total = total + i\nprint("total =", total)`,
+        output: "total = 6",
+        caption: "Trace: i=1 total 0+1=1, i=2 total 1+2=3, i=3 total 3+3=6. The print confirms the mental trace.",
+      },
+      {
+        type: "paragraph",
+        text: "Read it one pass at a time. The loop visits i equal to 1, then 2, then 3 — remember range(1, 4) stops before 4. Each pass adds the current i onto the running total. First pass: 0 + 1 = 1. Second: 1 + 2 = 3. Third: 3 + 3 = 6. So total is 6 when the loop ends. Tracing like this, on paper, is the single best hedge against logic bugs: it forces you to predict the output, and if your prediction differs from what the program prints, you have found a bug before it ships.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: a syntax error and its message" },
+      {
+        type: "paragraph",
+        text: "Dropping the colon on a for line produces a syntax error — the program will not run at all. Learn to read the message as Python pointing at the spot it got confused.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `# This is a syntax error — the colon is missing.\nfor i in range(3):\n    print(i)`,
+        output: "File \"<stdin>\", line 2\n    for i in range(3)\n                      ^\nSyntaxError: invalid syntax",
+        caption: "The caret points at the missing colon. A syntax error means Python could not read the statement at all.",
+      },
+      {
+        type: "paragraph",
+        text: "The message tells you two things: the line number and the character it was confused about. Here it points right after the closing bracket, which is exactly where the colon should be. The instinct to fear error messages is worth unlearning. They are not judgments; they are Python saying, as politely as it can, \"I got as far as this and then I lost my place.\" Most syntax errors have one of a handful of causes: a missing colon, a missing or mismatched quote, a mismatched parenthesis, or a misspelt keyword.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: a logic error with no message" },
+      {
+        type: "paragraph",
+        text: "Here the program runs without complaint but does the wrong thing. The cause is ordering — the bottleneck of a logic bug: steps that are individually fine but in the wrong sequence.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `# Bug: the drink is taken before the lid is opened.\nstep = "put the lid on"\nprint("step 1:", "take a drink")\nprint("step 2:", step)`,
+        output: "step 1: take a drink\nstep 2: put the lid on",
+        caption: "Every line is valid Python, no error is raised — but the steps are badly ordered, so the result is nonsense.",
+      },
+      {
+        type: "paragraph",
+        text: "This is why logic errors are the dangerous ones. There is no traceback, no red text, no clue at all except that the output is wrong. The only way to catch it is to know what the output should be. That is why tracing and predicting are such central skills: if you have trained yourself to predict the output first, you will notice the moment the program disagrees with you.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: a semantic error — the wrong meaning" },
+      {
+        type: "paragraph",
+        text: "Here the code is valid and in a sensible order, but a value is recorded in the wrong unit. The program does exactly what you wrote — you just told it the wrong thing.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `# Bug: recorded seconds, but meant minutes.\nduration_seconds = 120\nprint("Duration in minutes:", duration_seconds // 60)`,
+        output: "Duration in minutes: 2",
+        caption: "The math is correct for 120 seconds. If you meant 120 minutes, the answer you wanted was 120 — the bug is in the value, not the code.",
+      },
+      {
+        type: "paragraph",
+        text: "Notice the code is clean and the answer is technically right for 120 seconds. Two minutes is the correct conversion of 120 seconds. The bug is that the input was a number of minutes, so dividing by 60 was the wrong operation entirely. A semantic error cannot be found by looking at the code alone — you must look at the problem, decide what the answer should be, and compare. This is why the best debuggers spend time at the start making sure they understood the question, not just the syntax.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Random-walk programming. Making random small changes hoping one fixes the bug can take forever. Before you change anything, have a hypothesis about which line is wrong and why.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming an error message is a judgement. It is not. It is a location and a clue. Read the line number and the caret first, then decide — the fix may even be a line earlier than where Python noticed.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Only reading, or only running, or only thinking. Each alone fails differently. Reading catches typos, running catches order, thinking catches meaning — you need all three.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Refusing to retreat. The best move, when a program is too tangled, is to undo your recent changes back to a version that worked. Copy it aside if you are squeamish, but get back to a known-good state.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A program runs but prints the wrong answer, with no error message. Which error type is this, and where do you look?",
+        answer: "A logic or semantic error. Because it runs, you trace the logic and re-read the problem to check the meaning — not just the syntax.",
+        explanation: "No traceback means the program was valid and ran. The wrong answer comes from either wrong ordering (logic) or wrong meaning (semantic), so you reason from the expected output backwards.",
+      },
+      {
+        type: "question",
+        prompt: "What is the first thing to read in a Python error message?",
+        answer: "The line number and the caret — where Python lost its place. The fix may lie at or before that point.",
+        explanation: "Error messages give a location. Reading it first turns a vague fear into a precise coordinate to investigate.",
+      },
+      {
+        type: "question",
+        prompt: "Why does tracing a loop by hand help prevent logic errors?",
+        answer: "Because it forces you to predict the output first, so the moment the program disagrees with your prediction you have located the bug.",
+        explanation: "Tracing builds an expected result. The mismatch between expectation and reality is the debugging signal, and it can only fire if you have an expectation.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which error is a mistake in the grammar of the code, so Python cannot even run it?",
+        options: ["Semantic error", "Logic error", "Syntax error", "Runtime error"],
+        correctIndex: 2,
+        explanation: "A syntax error means Python could not parse the statement. It usually throws a traceback at the offending line and produces no output at all.",
+      },
+      {
+        type: "mcq",
+        stem: "A program runs cleanly but the steps are in the wrong order. Which error is this?",
+        options: ["Syntax error", "Logic error", "Semantic error", "Input error"],
+        correctIndex: 1,
+        explanation: "A logic error has valid syntax but a flaw in the sequence of steps, so it runs and gives the wrong result with no error message.",
+      },
+      {
+        type: "mcq",
+        stem: "Which error is when the code is correct and ordered well, but does not do what you intended?",
+        options: ["Semantic error", "Syntax error", "Logic error", "Indentation error"],
+        correctIndex: 0,
+        explanation: "A semantic error is a mistake in meaning — valid steps with the wrong intent. The program does exactly what you wrote, which is not what you meant.",
+      },
+      {
+        type: "mcq",
+        stem: "Which habit is NOT part of effective debugging?",
+        options: ["Reading the code", "Running small experiments", "Ruminating on the likely cause", "Making random changes until it works"],
+        correctIndex: 3,
+        explanation: "Random-walk programming — blind changes without a hypothesis — can take forever. Effective debugging is reading, running, and thinking, each with a purpose.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is tracing a loop useful before running it?",
+        options: ["It makes the program faster", "It produces a predicted output to compare against the real one", "It prevents syntax errors", "It converts the loop into a function"],
+        correctIndex: 1,
+        explanation: "Tracing predicts the output. The prediction is the reference point that lets you notice when the program's behaviour is wrong.",
+      },
+      {
+        type: "mcq",
+        stem: "Where does a missing colon most likely show up?",
+        options: ["As a semantic error with no message", "As a syntax error, with a caret pointing at the spot", "As a logic error in the output", "It never errors"],
+        correctIndex: 1,
+        explanation: "A missing colon is a grammar mistake, so Python raises SyntaxError and points the caret at where the colon should be.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the first step when a program is too tangled to debug?",
+        options: ["Rewrite it completely from memory", "Retreat to a known-good version, then rebuild carefully", "Add more features", "Ignore the error"],
+        correctIndex: 1,
+        explanation: "Retreating — undoing changes back to a working state — gives you a solid footing to rebuild from, rather than debugging on top of a mess.",
+      },
+      {
+        type: "mcq",
+        stem: "You recorded a value in seconds but meant minutes. What kind of error is this, and what does it require to catch?",
+        options: ["Syntax error; fix the colon", "Logic error; reorder the lines", "Semantic error; re-examine the problem and the expected answer", "Syntax error; add a print"],
+        correctIndex: 2,
+        explanation: "The code is valid and ordered; the meaning is wrong. You catch it by comparing the output against what the answer should be, which means going back to the problem.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Bugs are one of three kinds: syntax (cannot be read), logic (wrong order), and semantic (wrong meaning). Reading, running, ruminating and retreating are the four debugging habits. Error messages are coordinates, not judgements; tracing gives you a predicted output to compare against; and the hardest errors are found by going back to the problem, not by staring at the code.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: functions. So far every program has been a single list of steps. The next lesson introduces the reuse pattern — write a set of instructions once, give it a name, and call it wherever it is needed — which is the whole idea of composing programs from pieces, and the topic you will keep returning to.",
       },
     ],
   };

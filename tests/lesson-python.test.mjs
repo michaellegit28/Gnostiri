@@ -120,9 +120,21 @@ const CLAIMS_L4 = [
   { name: "or requires one true", code: `print(True or False)`, expected: "True" },
 ];
 
+// Lesson 6 (Logic & debugging basics) worked examples.
+const SNIPPETS_L6 = [
+  { name: "tracing a loop by hand", code: `total = 0\nfor i in range(1, 4):\n    total = total + i\nprint("total =", total)`, expected: "total = 6" },
+  { name: "a logic error with no message", code: `step = "put the lid on"\nprint("step 1:", "take a drink")\nprint("step 2:", step)`, expected: "step 1: take a drink\nstep 2: put the lid on" },
+  { name: "semantic error — wrong unit", code: `duration_seconds = 120\nprint("Duration in minutes:", duration_seconds // 60)`, expected: "Duration in minutes: 2" },
+];
+
 const CLAIMS_L5 = [
   { name: "range excludes the stop value", code: `print(list(range(3)))`, expected: "[0, 1, 2]" },
   { name: "missing update causes an infinite loop (so we bound it)", code: `n = 0\ncount = 0\nwhile n < 5 and count < 3:\n    print(n)\n    count = count + 1`, expected: "0\n0\n0" },
+];
+
+const CLAIMS_L6 = [
+  { name: "missing colon is a SyntaxError", code: `for i in range(3)\n    print(i)`, expectedError: /SyntaxError/ },
+  { name: "trace total prediction", code: `total = 0\nfor i in range(1, 4):\n    total = total + i\nprint(total)`, expected: "6" },
 ];
 
 const CLAIMS_L3 = [
@@ -162,9 +174,9 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5];
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6];
 for (const s of ALL_SNIPPETS) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : "lesson 1";
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
@@ -172,9 +184,9 @@ for (const s of ALL_SNIPPETS) {
   });
 }
 
-const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5];
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6];
 for (const c of ALL_CLAIMS) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : "lesson 1";
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code, c.stdin);
     if (c.expectedError) {
