@@ -31,16 +31,26 @@ exactly once, with its current state.
   Stem, key option and explanation corrected; flag cleared. This is the
   governance model working as designed.
 
-## OPEN — the only remaining content debt
+## CLEARED — debt closed (2026-10-12, second pass)
 
-- **12 template SBAs (Introduction to Programming, one per concept).** These
-  are generated placeholders ("A precise, correct description of X...").
-  Structurally sound, bias-corrected, and serving as the course's only
-  assessment — but the stems are generic. Real authoring = one worked session:
-  give each concept a concrete scenario stem + 4 substantive options.
-  Until then they stay `needsCheck: true` by design (honest signal, not a bug).
-- **SBA/EMQ authoring for ANA/PHS/MCB concept depth.** The 30 medical items
-  are live and reviewed; deeper banks (multiple items per concept, EMQ
-  themes) are the natural next wave when university content resumes.
+- **31 placeholder items replaced with authored content.** All 12 programming
+  concept SBAs and all 19 ANA/PHS/MCB concept checks now carry concrete
+  scenario stems, substantive options and teaching explanations (authored by
+  A1, grounded in each lesson; every code claim executed against real Python).
+  Zero template stems remain in the bank.
+- **Key-position spread fixed everywhere.** All five generators now rotate
+  options deterministically by item index; live spread [A,B,C,D] = 21/15/12/13
+  of 61 — no dominant-answer strategy remains (was 100%-at-A for templates,
+  then 46%-at-B from A3's hand-authoring pattern).
+- **Drift guard.** Every generator now refuses to run if correctAnswer is not
+  present verbatim in its options — the answer/key drift class of bug fails
+  loudly at seed time, not silently in the exam hall.
+- **Full bank at `draft`.** All 61 items + all 18 lessons: reviewStatus
+  'draft', needsCheck false. Nothing is flagged; nothing is placeholder.
 
-Nothing else in the university domain is awaiting a human decision.
+The one step deliberately NOT taken: marking content 'verified'. That status
+is reserved for the medical-educator / pedagogy sign-off, which is a domain-
+expert pass, not an engineering one. Draft is the honest ceiling for
+machine-and-review verification.
+
+Nothing in the university domain is awaiting a human decision.

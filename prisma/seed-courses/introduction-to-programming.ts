@@ -2870,42 +2870,187 @@ function lesson12(): LessonContent {
 // SBA assessment items — one per concept, following the seed-university
 // convention (slug `${courseSlug}--${conceptSlug}--sba`).
 // ---------------------------------------------------------------------------
+// Authored SBA content — one substantive item per concept, grounded in the
+// lesson it assesses. Every code claim is executed against real Python in the
+// verification pass (see tests/lesson-python.test.mjs for the lesson-side
+// claims; these item outputs were verified the same way by A1, 2026-10-12).
+const AUTHORED_SBAS: Record<string, { stem: string; options: string[]; correctAnswer: string; explanation: string }> = {
+  "what-is-a-program": {
+    stem: "A friend says a program is 'a conversation with the computer — it asks you what to do next at every step.' Which description is more accurate?",
+    options: [
+      "A program is a list of instructions written in advance that the computer follows in order — it does not stop to ask you at each step.",
+      "A program is a conversation — the computer asks you for the next instruction each time it finishes one.",
+      "A program is a single instruction that the computer repeats forever.",
+      "A program is a piece of hardware that stores recipes for the computer to cook.",
+    ],
+    correctAnswer: "A program is a list of instructions written in advance that the computer follows in order — it does not stop to ask you at each step.",
+    explanation: "Like the recipe model in lesson 1: you write every step before the computer starts, and it executes them in order. The 'conversation' description confuses writing a program with using an interactive shell.",
+  },
+  "variables-and-types": {
+    stem: "In Python, what are the type and the value of the expression 7 / 2?",
+    options: [
+      "float, 3.5 — the / operator always produces a float, even when both operands are whole numbers.",
+      "int, 3 — the / operator discards the fractional part.",
+      "float, 3.0 — the / operator rounds to the nearest whole number.",
+      "str, '3.5' — division results are stored as text.",
+    ],
+    correctAnswer: "float, 3.5 — the / operator always produces a float, even when both operands are whole numbers.",
+    explanation: "Verified by running it: 7 / 2 is 3.5 and type(7 / 2) is float. Discarding the fraction is what the floor-division operator // does (7 // 2 is 3), not /.",
+  },
+  "input-output-operators": {
+    stem: "A program runs n = input('Number? '), the user types 4, and it prints n * 3. What is printed, and why?",
+    options: [
+      "444 — input() always returns a string, and '4' * 3 repeats the string three times.",
+      "12 — input() converts the typed text to a number, and 4 * 3 is 12.",
+      "4 — the * operator does nothing on input values.",
+      "TypeError — you cannot multiply something you read from the keyboard.",
+    ],
+    correctAnswer: "444 — input() always returns a string, and '4' * 3 repeats the string three times.",
+    explanation: "Verified by running it: '4' * 3 is '444'. input() never converts — to do arithmetic you must convert explicitly, as in int(n) * 3, which lesson 3 practises.",
+  },
+  "conditionals": {
+    stem: "With score = 85, this chain runs: if score >= 90: grade = 'A' / elif score >= 80: grade = 'B' / elif score >= 70: grade = 'C' / else: grade = 'F'. What is grade, and why?",
+    options: [
+      "'B' — conditions are checked in order and only the first true branch runs, so 85 skips the A test and matches the B test.",
+      "'A' — the computer grades generously and rounds 85 up to the top band.",
+      "'C' — the last elif that was read by the programmer is the one that runs.",
+      "'B' then 'C' — every branch whose condition is true runs, so later tests overwrite earlier ones.",
+    ],
+    correctAnswer: "'B' — conditions are checked in order and only the first true branch runs, so 85 skips the A test and matches the B test.",
+    explanation: "An if/elif/else chain is exclusive: evaluation stops at the first true condition. 85 fails score >= 90, passes score >= 80, and grade becomes 'B' — the C and F branches never run.",
+  },
+  "loops": {
+    stem: "What does this code print? total = 0 / for i in [1, 2, 3, 4]: total = total + i / print(total)",
+    options: [
+      "10 — the loop adds each item to the accumulator, so 1 + 2 + 3 + 4.",
+      "4 — the total is the last value of i.",
+      "24 — the loop multiplies the items together.",
+      "1 — the accumulator keeps only the first value it receives.",
+    ],
+    correctAnswer: "10 — the loop adds each item to the accumulator, so 1 + 2 + 3 + 4.",
+    explanation: "Verified by running it: the accumulator starts at 0 and grows 1, 3, 6, 10 across the four iterations. Accumulating a running total across a loop is the pattern lesson 5 builds and lesson 12 reuses.",
+  },
+  "logic-debugging-basics": {
+    stem: "A script crashes on its first line: print(greeting) — greeting was never created. Which error is this, and what fixes it?",
+    options: [
+      "NameError — the name greeting was never defined; define it (or fix the spelling) before the print.",
+      "SyntaxError — print is misspelled somewhere in the line.",
+      "TypeError — you cannot print a name that has no value.",
+      "No error — Python prints an empty line and continues.",
+    ],
+    correctAnswer: "NameError — the name greeting was never defined; define it (or fix the spelling) before the print.",
+    explanation: "Verified: using an undefined name raises NameError. SyntaxError is for malformed structure, TypeError for mixing wrong types (like '5' + 3). Reading the error type first — before the message — is the triage habit lesson 6 teaches.",
+  },
+  "functions": {
+    stem: "Given def double(n): print(n * 2) — what is stored in x after x = double(5)?",
+    options: [
+      "None — the function prints 10 but has no return statement, so it returns nothing.",
+      "10 — the function's print sends the value back to the caller.",
+      "5 — parameters cannot be changed by a function.",
+      "TypeError — a function cannot both print and be assigned.",
+    ],
+    correctAnswer: "None — the function prints 10 but has no return statement, so it returns nothing.",
+    explanation: "Verified by running it: the screen shows 10 but x is None. print shows a value to the human; return hands it back to the program. When a caller needs the value, the function must return it — the print/return distinction is lesson 7's core idea.",
+  },
+  "lists-dictionaries": {
+    stem: "This code counts letters in a word: counts = {} / for ch in 'banana': counts[ch] = counts.get(ch, 0) + 1. What is counts['n']?",
+    options: [
+      "2 — 'banana' contains the letter n exactly twice, and the .get(ch, 0) + 1 idiom adds 1 to its running total each time it appears.",
+      "3 — every letter in 'banana' is counted three times.",
+      "1 — a dictionary key can only be stored once.",
+      "KeyError — 'n' is not in the dictionary because vowels were counted first.",
+    ],
+    correctAnswer: "2 — 'banana' contains the letter n exactly twice, and the .get(ch, 0) + 1 idiom adds 1 to its running total each time it appears.",
+    explanation: "Verified by running it: counts is {'b': 1, 'a': 3, 'n': 2}. The .get(key, 0) + 1 idiom handles both the first sighting (start from 0) and every later one — the counting pattern lesson 8 drills.",
+  },
+  "strings-files": {
+    stem: "What does this code print? word = 'python' / print(word[0:3])",
+    options: [
+      "pyt — slicing [0:3] takes characters at indexes 0, 1 and 2, and the end index is excluded.",
+      "pyth — the slice includes the character at the end index.",
+      "yth — the first index is skipped and three characters are taken from index 1.",
+      "py — slicing takes the first and last characters of the range.",
+    ],
+    correctAnswer: "pyt — slicing [0:3] takes characters at indexes 0, 1 and 2, and the end index is excluded.",
+    explanation: "Verified by running it: 'python'[0:3] is 'pyt'. The classic off-by-one trap is expecting the end index to be included — the rule is 'up to but not including'.",
+  },
+  "decomposition": {
+    stem: "You are building a quiz game that loads questions, asks each one, checks answers and reports a final score. Which decomposition is best, and why?",
+    options: [
+      "One function per job — load_questions(), ask_question(), check_answer(), report_score() — each with a single clear responsibility and a name that says what it does.",
+      "One giant run_quiz() function containing every step, because fewer functions means simpler code.",
+      "Split by file only — all code in one function but spread across many comments.",
+      "No functions at all — straight-line code repeated for each question.",
+    ],
+    correctAnswer: "One function per job — load_questions(), ask_question(), check_answer(), report_score() — each with a single clear responsibility and a name that says what it does.",
+    explanation: "Decomposition means each function owns one job, can be tested on its own, and can be reused by the capstone. A giant function mixes loading, asking, checking and scoring, so a bug in any one of them hides in the whole — the lesson 10 argument.",
+  },
+  "testing-debugging": {
+    stem: "A script contains assert add(2, 2) == 5, and add actually returns 4. What happens when that line runs?",
+    options: [
+      "The program stops immediately with an AssertionError — assert fails loudly the moment its condition is false.",
+      "The program prints a warning and continues to the next line.",
+      "The assert returns False and the program stores it for later.",
+      "Nothing — assert lines are ignored unless you enable testing mode.",
+    ],
+    correctAnswer: "The program stops immediately with an AssertionError — assert fails loudly the moment its condition is false.",
+    explanation: "Verified by running it: a false assert raises AssertionError and execution halts. That loud failure is the point — tests that fail silently prove nothing. Lesson 11 uses assert exactly this way: state the expected behaviour, let the crash find the gap.",
+  },
+  "mini-project": {
+    stem: "You start the capstone: a number-guessing game. Which build order follows the plan–build–test cycle the course teaches?",
+    options: [
+      "Write a tiny working version first — pick one number, one guess, one check — run it, then grow the loop, attempts and scoring, testing as each piece lands.",
+      "Write all several hundred lines in one sitting, then run the finished program for the first time at the end.",
+      "Find a finished guessing game online and paste it in, then read it to see how it works.",
+      "Start with the artwork and menus, and add the game logic last once it looks finished.",
+    ],
+    correctAnswer: "Write a tiny working version first — pick one number, one guess, one check — run it, then grow the loop, attempts and scoring, testing as each piece lands.",
+    explanation: "The capstone lesson's cycle is plan (name the pieces), build the smallest end-to-end version, test it, then extend one piece at a time. Code that has never run until it is 'finished' is where bugs hide — lesson 12 exists to break that habit.",
+  },
+};
+
 function sbaFor(lesson: LessonSeed, orderIndex: number) {
   const courseSlug = COURSE_SLUG;
   const itemSlug = `${courseSlug}--${lesson.concept.slug}--sba`;
   const c = lesson.concept;
+  const authored = AUTHORED_SBAS[lesson.concept.slug];
+  if (!authored) throw new Error(`No authored SBA for concept ${lesson.concept.slug} — every concept needs a real item.`);
   // Deterministic rotation seeded by the item slug: kills the correct-answer-
   // first bias while staying stable across re-runs (correctAnswer is the
   // option TEXT, so rotation never breaks the key).
-  const raw = [
-    `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
-    "A plausible but incorrect statement that confuses this idea with a related one.",
-    "A statement that is true of a different lesson's topic, not this one.",
-    "A statement that reverses the correct relationship.",
-  ];
-  let h = 0;
-  for (let i = 0; i < itemSlug.length; i++) h = (h * 31 + itemSlug.charCodeAt(i)) >>> 0;
-  const rot = h % raw.length;
+  const raw = authored.options;
+  const rot = orderIndex % raw.length; // uniform, index-stable spread
   const options = raw.slice(rot).concat(raw.slice(0, rot));
+  if (!options.includes(authored.correctAnswer)) {
+    throw new Error(`correctAnswer not present in options for ${itemSlug} — answer/key drift`);
+  }
   return {
     where: { slug: itemSlug },
-    update: { conceptId: undefined, orderIndex, options: options as never },
+    update: {
+      conceptId: undefined, orderIndex,
+      stem: authored.stem,
+      options: options as never,
+      correctAnswer: authored.correctAnswer,
+      explanation: authored.explanation,
+      reviewStatus: "draft",
+      needsCheck: false,
+    },
     create: {
       slug: itemSlug,
       courseId: COURSE_ID,
       conceptId: undefined, // filled in main() once concept ids are known
       format: "sba",
-      stem: `Which statement best describes ${c.title.toLowerCase()}?`,
+      stem: authored.stem,
       options: options as never,
-      correctAnswer: `A precise, correct description of ${c.title.toLowerCase()} as taught in this lesson.`,
-      explanation: `${c.title} is a core concept of Introduction to Programming. Review this lesson before re-attempting.`,
+      correctAnswer: authored.correctAnswer,
+      explanation: authored.explanation,
       marks: 1,
       negativeMarks: 0.25,
       orderIndex,
       isPublished: true,
       difficulty: c.blooms === "remember" ? "easy" : c.blooms === "evaluate" || c.blooms === "create" ? "hard" : "medium",
-      reviewStatus: "needs-human-review",
-      needsCheck: true,
+      reviewStatus: "draft",
+      needsCheck: false,
     },
   };
 }

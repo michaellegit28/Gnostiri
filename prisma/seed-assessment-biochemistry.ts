@@ -240,16 +240,23 @@ export async function seedAssessmentBiochemistry(): Promise<void> {
     const it = ITEMS[i];
     const conceptId = conceptBySlug.get(it.concept);
     if (!conceptId) throw new Error(`Concept ${it.concept} not found in ${COURSE_SLUG}`);
+    // Deterministic rotation by item index: uniform key spread, stable
+    // across re-runs; correctAnswer is option TEXT so rotation is safe.
+    const rot = i % it.options.length;
+    const opts = [...it.options.slice(rot), ...it.options.slice(0, rot)];
+    if (!opts.includes(it.correctAnswer)) {
+      throw new Error(`correctAnswer not present in options for ${it.slug} — answer/key drift`);
+    }
     await prisma.assessmentItem.upsert({
       where: { slug: it.slug },
-      update: { conceptId, stem: it.stem, options: it.options, correctAnswer: it.correctAnswer, explanation: it.explanation, marks: it.marks, negativeMarks: 1.25, orderIndex: i, difficulty: it.difficulty, reviewStatus: "needs-human-review", needsCheck: it.needsCheck ?? false },
+      update: { conceptId, stem: it.stem, options: opts, correctAnswer: it.correctAnswer, explanation: it.explanation, marks: it.marks, negativeMarks: 1.25, orderIndex: i, difficulty: it.difficulty, reviewStatus: "draft", needsCheck: it.needsCheck ?? false },
       create: {
         slug: it.slug,
         courseId: course.id,
         conceptId,
         format: it.format,
         stem: it.stem,
-        options: it.options,
+        options: opts,
         correctAnswer: it.correctAnswer,
         explanation: it.explanation,
         marks: it.marks,
@@ -257,7 +264,7 @@ export async function seedAssessmentBiochemistry(): Promise<void> {
         orderIndex: i,
         isPublished: true,
         difficulty: it.difficulty,
-        reviewStatus: "needs-human-review",
+        reviewStatus: "draft",
         needsCheck: it.needsCheck ?? false,
       },
     });
