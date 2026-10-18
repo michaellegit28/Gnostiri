@@ -81,7 +81,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: lesson6() },
   { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: lesson7() },
   { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: lesson8() },
-  { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: pending(9) },
+  { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: lesson9() },
   { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: pending(10) },
   { id: `${COURSE_ID}-lesson-11`, title: "Testing & debugging", module: 4, estimatedMinutes: 30, concept: { title: "Testing and debugging", slug: "testing-debugging", blooms: "evaluate", minutes: 30, prereq: ["decomposition"] }, content: pending(11) },
   { id: `${COURSE_ID}-lesson-12`, title: "Mini project", module: 4, estimatedMinutes: 45, concept: { title: "Mini project", slug: "mini-project", blooms: "create", minutes: 45, prereq: ["testing-debugging"] }, content: pending(12) },
@@ -1974,6 +1974,249 @@ function lesson8(): LessonContent {
       {
         type: "paragraph",
         text: "Next: strings & files. Lesson 8 gave you structures to hold data; the next lesson shows you how to get text into them — slicing and splitting strings, then reading a file line by line — which closes the loop between stored data and the information you actually want to analyse.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 9 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson9(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: index and slice a string exactly as you index a list; split a line of text into words; open a file and read it line by line; and combine file reading with a dictionary to summarise the text inside — which is the capstone pattern you will complete in the final lesson.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 8 (Lists & dictionaries). A string is a lot like a list of characters, and file output is collected with the dictionary counting idiom — so you need both ideas already in hand.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "String",
+        text: "A string is a sequence of characters. It is indexed from zero like a list, and it comes with a rich set of methods for taking it apart — splitting on spaces, stripping whitespace, and finding substrings.",
+      },
+      {
+        type: "definition",
+        term: "File",
+        text: "A file is data stored in secondary memory that persists after the program ends. Opening it gives you a stream you can read line by line — the first step in turning raw text into information you can analyse.",
+      },
+      {
+        type: "paragraph",
+        text: "This lesson is where the course turns a corner. Everything so far worked on values you typed or computed. Files let your program work on the kind of data it exists to process: text someone stored, records from a database, paragraphs from a web page. And the strings you learned about in passing become the real work of the course — text that needs slicing, splitting, and counting. Combine the two — read a file, split each line, count words with a dictionary — and you have the core of the PY4E course in front of you.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "Strings are the common currency of this course, and they behave like the lists you already know. You index them from zero, you can take a slice s[1:4] to get a substring, and you can use a negative index to count from the end. The reason to care about slicing and splitting is that text almost never arrives in the shape you want. A line of a file like \"the cat sat\" is one contiguous string, but you usually want its component words — which is exactly what split() gives you.",
+      },
+      {
+        type: "paragraph",
+        text: "Files introduce the idea of a stream. When you open a file and loop over it, you get it line by line — the loop's variable is the whole line, including the newline character at the end. This is why stripping matters: a line read from a file often ends with a newline, and if you split without stripping, the last word on the line carries a trailing newline you did not intend. The strip() method removes surrounding whitespace and is the standard first move on every line you read.",
+      },
+      {
+        type: "paragraph",
+        text: "The final piece is the pattern that ties it all together: open the file, loop over its lines, split each line into words, and feed each word into the counting dictionary. This is a small program but it is the template for the whole field — reading text, breaking it into tokens, and summarising them. Everything after this lesson is variations on that idea.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: indexing and slicing a string" },
+      {
+        type: "paragraph",
+        text: "A string is a sequence of characters, indexed from zero and sliceable the way a list is.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `s = "Python"\nprint(s[0])\nprint(s[-1])\nprint(s[1:4])`,
+        output: "P\nn\nyth",
+        caption: "s[0] is the first character, s[-1] the last, and s[1:4] takes from index 1 up to but not including 4.",
+      },
+      {
+        type: "paragraph",
+        text: "Indexing a string is identical to indexing a list: you count from zero, and a negative index counts from the end, so s[-1] is the last character and s[-2] the second-to-last. A slice s[1:4] is like a substring — it takes the characters at positions 1, 2 and 3, stopping before 4. Once you have seen list indexing, string indexing is not a new idea, just a new thing to apply it to.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: splitting a line into words, and stripping" },
+      {
+        type: "paragraph",
+        text: "split() breaks a string on whitespace and returns a list of words. strip() removes surrounding whitespace — including a trailing newline.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `line = "the cat sat"\nwords = line.split()\nprint(len(words))\nprint(words[0])\nprint(repr("  hi \\n".strip()))`,
+        output: "3\nthe\n'hi'",
+        caption: "split() gives 3 words; strip() removes the spaces and newline around hi, leaving just hi.",
+      },
+      {
+        type: "paragraph",
+        text: "The split() method returns a list of the individual words, so the line \"the cat sat\" becomes a list of three strings and len(words) is 3. The strip() method peels off leading and trailing whitespace — spaces, tabs, newlines — which is why the third line, given \"  hi \\n\", yields exactly \"hi\". In real use, a line read from a file often arrives with a newline on the end, so stripping first is routine.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: reading a file line by line" },
+      {
+        type: "paragraph",
+        text: "To read a file, first create it. This example assumes a small file called words.txt with three lines. The open() call hands back a stream and the loop visits it one line at a time.",
+      },
+      {
+        type: "table",
+        headers: ["words.txt (create this file)"],
+        rows: [["the cat sat"], ["the dog ran"], ["the cat"]],
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `f = open("words.txt", "r")\nfor line in f:\n    print(line.strip())\nf.close()`,
+        output: "the cat sat\nthe dog ran\nthe cat",
+        caption: "Each line is printed after strip() removes its trailing newline. close() releases the file.",
+      },
+      {
+        type: "paragraph",
+        text: "open(\"words.txt\", \"r\") opens the file for reading; the second argument \"r\" is optional for reading but is good to be explicit about. The for loop reads the file one line at a time, with line bound to each full line including its newline. print(line.strip()) is why the output has no blank lines — it trims the newline before printing. Closing the file is polite and, in larger programs, essential so the file is not held open longer than needed.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: the capstone pattern — count words from a file" },
+      {
+        type: "paragraph",
+        text: "Now the payoff. Read the same file, split every line into words, and count each word with a dictionary. This is the small program PY4E opens its whole course with.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `counts = {}\nfor line in open("words.txt", "r"):\n    for w in line.split():\n        counts[w] = counts.get(w, 0) + 1\nprint(counts)`,
+        output: "{'the': 3, 'cat': 2, 'sat': 1, 'dog': 1, 'ran': 1}",
+        caption: "Two nested loops: outer over lines, inner over the words in each line, feeding the counting idiom.",
+      },
+      {
+        type: "paragraph",
+        text: "There are three pieces nested together. The outer loop reads each line of the file. For each line, the inner loop splits it into words and visits each one. Each word goes through the counting idiom from lesson 8 — get its current count or 0, add one, store it back. The result is a dictionary whose keys are all the distinct words and whose values are how many times each appeared. Read it slowly and you will see it is just the file-reading pattern wrapped around the counting pattern — and that this small program is the seed of the word-count project you will write in the final lesson.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Not stripping a line before splitting. A line read from a file keeps its newline, so the last word of each line has one attached. strip() trims it.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting to close the file. Forgetting f.close() may not break a small program, but it holds the file open and can cause problems. Prefer closing, or use a with block.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Confusing split with strip. split() breaks a string into a list of pieces; strip() only trims the surrounding whitespace. They do different jobs — usually used together.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Expecting a single split() argument to count words. split() with no argument splits on any whitespace and skips empties, which is usually right. Split on a single space to preserve empties, which is rarely what you want.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What is s[1:4] if s is \"Python\", and why does it include those particular characters?",
+        answer: "\"yth\" — the characters at positions 1, 2 and 3, because a slice stops before its end index.",
+        explanation: "Slicing s[1:4] is half-open: it includes index 1 up to but not including 4. So you get positions 1, 2 and 3, which are y, t and h.",
+      },
+      {
+        type: "question",
+        prompt: "Why does a line read from a file often need strip()?",
+        answer: "Because each line arrives with a trailing newline character, and strip() trims that surrounding whitespace.",
+        explanation: "File iteration returns lines ending in a newline. If you don't strip, the last token of the line carries the newline.",
+      },
+      {
+        type: "question",
+        prompt: "In the word-count capstone, what does the inner for w in line.split() do?",
+        answer: "It splits the current line into individual words and visits each one, so each word can be counted.",
+        explanation: "The outer loop gives lines; the inner loop breaks each line into words. Each word then feeds the counting dictionary.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What does \"Python\"[1:4] evaluate to?",
+        options: ["Pyt", "yth", "thon", "Python"],
+        correctIndex: 1,
+        explanation: "The slice is half-open, taking indices 1 to 3. Position 0 is P, 1 is y, 2 is t, 3 is h, so s[1:4] is yth.",
+      },
+      {
+        type: "mcq",
+        stem: "Which method turns \"the cat sat\" into a list of words?",
+        options: ["strip()", "split()", "splitlines()", "join()"],
+        correctIndex: 1,
+        explanation: "split() with no argument splits on whitespace, returning a list of words. strip() only trims edges.",
+      },
+      {
+        type: "mcq",
+        stem: "Why should you strip each line read from a file?",
+        options: ["strip() makes reading faster", "Lines retain a trailing newline, which you usually do not want", "strip() is required or the file won't open", "strip() removes punctuation"],
+        correctIndex: 1,
+        explanation: "File lines end with a newline. strip() trims it so the token is clean, especially before counting words.",
+      },
+      {
+        type: "mcq",
+        stem: "Which statement correctly opens a file for reading?",
+        options: ["open(\"words.txt\", \"r\")", "read(\"words.txt\")", "load(\"words.txt\")", "open(\"words.txt\", \"w\")"],
+        correctIndex: 0,
+        explanation: "open(name, \"r\") opens for reading. \"w\" opens for writing (and would overwrite), \"read\" and \"load\" are not the file-opening functions.",
+      },
+      {
+        type: "mcq",
+        stem: "In the inline for line in open(\"words.txt\", \"r\"):, what does the loop variable line hold?",
+        options: ["The whole file content at once", "One line of the file at a time, including its newline", "A list of all words", "A single character"],
+        correctIndex: 1,
+        explanation: "Iterating over an open file yields one line per pass, each line a string that includes its trailing newline.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the main purpose of the strip() method?",
+        options: ["To remove surrounding whitespace", "To split a string into words", "To count characters", "To open a file"],
+        correctIndex: 0,
+        explanation: "strip() trims leading and trailing whitespace. Once you have split, you may also need to strip edges — they are complementary.",
+      },
+      {
+        type: "mcq",
+        stem: "After the capstone program runs, what does its result dictionary contain?",
+        options: ["Each line of the file as a key", "Each distinct word as a key, and how often it appeared as its value", "The total number of characters", "A list of words in order"],
+        correctIndex: 1,
+        explanation: "The counting idiom maps every distinct word to its frequency. Keys are words; values are counts.",
+      },
+      {
+        type: "mcq",
+        stem: "Which two pieces does the capstone pattern combine?",
+        options: ["Loops and functions", "File-reading (open, loop lines) and the dictionary counting idiom", "Strings and numbers", "Print and return"],
+        correctIndex: 1,
+        explanation: "It reads a file line by line and feeds each split word through the counting dictionary — the two core ideas of this lesson and the last one.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A string is a sequence you index and slice like a list. split() breaks it into words, strip() trims surrounding whitespace, and open() lets you read a file line by line. The capstone — read a file, split each line, count words in a dictionary — links the last two lessons and is the heart of the whole course.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: decomposition. You have now used functions and data structures. The next lesson pulls them together into the higher-level skill of breaking a real problem into functions — the difference between writing a program and designing one.",
       },
     ],
   };
