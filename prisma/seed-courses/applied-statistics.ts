@@ -72,7 +72,7 @@ const LESSON_1: LessonSeed = {
 // items are real and complete so the course is structurally sound; only the
 // long-form content is pending authoring. needsCheck marks them.
 const LESSONS_2_TO_12: LessonSeed[] = [
-  { id: `${COURSE_ID}-lesson-2`, title: "Summarizing the center", module: 1, estimatedMinutes: 30, concept: { title: "Measures of center", slug: "center-measures", blooms: "understand", minutes: 30, prereq: ["what-is-data"] }, content: pending(2) },
+  { id: `${COURSE_ID}-lesson-2`, title: "Summarizing the center", module: 1, estimatedMinutes: 30, concept: { title: "Measures of center", slug: "center-measures", blooms: "understand", minutes: 30, prereq: ["what-is-data"] }, content: lesson2() },
   { id: `${COURSE_ID}-lesson-3`, title: "Spread & shape", module: 1, estimatedMinutes: 35, concept: { title: "Spread and shape", slug: "spread-shape", blooms: "understand", minutes: 35, prereq: ["center-measures"] }, content: pending(3) },
   { id: `${COURSE_ID}-lesson-4`, title: "Probability rules", module: 2, estimatedMinutes: 35, concept: { title: "Probability rules", slug: "probability-rules", blooms: "understand", minutes: 35, prereq: ["spread-shape"] }, content: pending(4) },
   { id: `${COURSE_ID}-lesson-5`, title: "Random variables & expectation", module: 2, estimatedMinutes: 30, concept: { title: "Expected value", slug: "expected-value", blooms: "analyze", minutes: 30, prereq: ["probability-rules"] }, content: pending(5) },
@@ -299,6 +299,210 @@ function lesson1(): LessonContent {
       {
         type: "paragraph",
         text: "Next: summarizing the center. Lesson 1 introduced variables; the next lesson shows how to summarise a numerical variable's typical value with the mean and the median — and why two very different answers often come from the same data.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 2 content — original writing, all numbers verified (Python 3).
+// ---------------------------------------------------------------------------
+function lesson2(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: compute the mean and median of a small dataset; explain what each measures and one meaningful thing they tell you differently; and recognise when a skewed distribution means you should reach for the median rather than the mean.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 1 (What is data & variables). You need to be able to tell a numerical variable from a categorical one, because the mean and median summarise numerical data only.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Mean",
+        text: "The mean is the arithmetic average — the total of all values divided by the count. It is the point where the data would balance if each observation weighed the same.",
+      },
+      {
+        type: "definition",
+        term: "Median",
+        text: "The median is the middle value once the data is sorted — the value with half the observations below it and half above (or the average of the two middles when there is an even count).",
+      },
+      {
+        type: "paragraph",
+        text: "Both measure the center of a numerical variable, but they answer different questions and respond differently to the shape of the data. The mean uses every value, so a single very large or very small observation can pull it hard. The median ignores the sizes of the extremes and only cares about position in the ordering, so it is largely unmoved by a single outlier. Choosing between them is one of the most consequential decisions in descriptive statistics, and it is driven by one thing: the shape, especially whether the data is skewed.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the arithmetic" },
+      {
+        type: "paragraph",
+        text: "For a perfectly symmetric distribution, the mean and the median agree, or nearly so. The mean is well-behaved because the values on each side tend to balance. But real datasets are rarely symmetric. House prices, incomes, and reaction times are all right-skewed: a few unusually large values stretch the right tail far out. Those large values pull the mean up, but they do not move the median because the median only cares about which value sits at the halfway point.",
+      },
+      {
+        type: "paragraph",
+        text: "The practical consequence is this: when data is skewed, the mean stops being a good description of a 'typical' value. Reported as a 'typical' price, it overstates the truth, because a handful of luxury properties drag the average well above what most people pay. The median is the honest summary of the center in that case. This is exactly why median house price is the figure reported in the news, not mean house price.",
+      },
+      {
+        type: "paragraph",
+        text: "A common beginner's misunderstanding is to assume the mean is always the 'right' average. It is a perfectly fine summary — for symmetric data. But the choice is a judgement about the data's shape, not a matter of which one is more rigorous. Both are rigorous; each is appropriate for a different situation, and knowing which is which is the skill.",
+      },
+
+      // --- Worked examples ---
+      { type: "heading", level: 2, text: "Worked example 1: center of a symmetric dataset" },
+      {
+        type: "paragraph",
+        text: "For roughly symmetric data the mean and median sit close together. Here they are identical.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `data = [4, 5, 5, 6, 6, 6, 7, 7, 8]\nn = len(data)\nmean = sum(data) / n\ns = sorted(data)\nif n % 2 == 1:\n    median = s[n // 2]\nelse:\n    median = (s[n // 2 - 1] + s[n // 2]) / 2\nprint("mean:", mean)\nprint("median:", median)`,
+        output: "mean: 6.0\nmedian: 6",
+        caption: "With a balanced, symmetric dataset, the mean and median both describe the center as 6.",
+      },
+      {
+        type: "paragraph",
+        text: "The values cluster around 6 and are spread fairly evenly on either side. The total is 54 across 9 observations, so the mean is 6. Sorted, the middle value (the fifth one) is also 6, so the median is 6. When the data is not skewed, the two measures agree and it does not matter much which you report.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: a skew pulls the mean away from the median" },
+      {
+        type: "paragraph",
+        text: "Add a single enormous value — an outlier — and watch how the mean jumps while the median barely changes. This is the whole reason the median exists.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `data = [200, 250, 260, 280, 900]\nn = len(data)\nmean = sum(data) / n\ns = sorted(data)\nif n % 2 == 1:\n    median = s[n // 2]\nelse:\n    median = (s[n // 2 - 1] + s[n // 2]) / 2\nprint("mean:", mean)\nprint("median:", median)\nprint("mean exceeds median by", round(mean - median, 1))`,
+        output: "mean: 378.0\nmedian: 260\nmean exceeds median by 118.0",
+        caption: "One high value (900) lifts the mean to 378, while the median stays at 260, the true center of the bulk of the data.",
+      },
+      {
+        type: "paragraph",
+        text: "Four of the five values are between 200 and 280 — they cluster tightly. The fifth, 900, is far to the right. The mean adds all five and divides by five, so the huge 900 drags the average up to 378 even though four of five values are below 280. The median simply finds the middle sorted value, which is 260, and is entirely unconcerned with how far 900 is from the rest. Median 260 is the honest 'typical' value here; mean 378 is the average torn toward the outlier.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Reporting the mean for heavily skewed data. A skewed distribution makes the mean misleading, torn toward the long tail. Describe the center with the median instead.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Sorting incorrectly. The median requires the data in order. Unsorted, the 'middle' is meaningless — always sort first.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting the even-count median. With an even number of observations, the median is the average of the two middle values, not either one alone.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming mean and median are interchangeable. They measure the center differently and diverge under skew. The choice is about the data's shape, not convenience.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A dataset has five values: 2, 3, 4, 5, 100. Why is the median a better summary of the center than the mean?",
+        answer: "Because the mean (22.8) is dragged upward by the single 100, while the median (4) sits at the middle of the four typical values.",
+        explanation: "One extreme value pulls the mean far from the mass of the data. The median ignores the size of that outlier and reports the central value of the rest.",
+      },
+      {
+        type: "question",
+        prompt: "How do you find the median when there is an even number of observations?",
+        answer: "Sort the data, then average the two middle values.",
+        explanation: "With an even count there is no single middle element, so the median is defined as the mean of the two central values.",
+      },
+      {
+        type: "question",
+        prompt: "When is the mean an appropriate measure of center?",
+        answer: "When the data is roughly symmetric — no strong skew or a few extreme outliers.",
+        explanation: "The mean uses every value and is only a fair representation when the values balance on each side, which is the symmetric case.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What is the mean of the data {10, 12, 14}?",
+        options: ["12", "13", "14", "36"],
+        correctIndex: 0,
+        explanation: "The mean is (10 + 12 + 14) / 3 = 36 / 3 = 12.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the median of {1, 3, 7, 9, 100}?",
+        options: ["7", "9", "24", "100"],
+        correctIndex: 0,
+        explanation: "Sorted, the middle (third) value is 7. The extreme 100 does not affect the median, only the mean.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the median of {2, 4, 6, 8}?",
+        options: ["4", "6", "5", "5.5"],
+        correctIndex: 2,
+        explanation: "Four values, so the median is the average of the two middles, 4 and 6, which is 5.",
+      },
+      {
+        type: "mcq",
+        stem: "House prices in a city are heavily right-skewed. Which is the best headline summary of a 'typical' price?",
+        options: ["The mean", "The median", "The mode", "The range"],
+        correctIndex: 1,
+        explanation: "For skewed data the mean is pulled up by a few expensive houses; the median reports the price at the middle of the distribution.",
+      },
+      {
+        type: "mcq",
+        stem: "Why does one large outlier have little effect on the median?",
+        options: ["It is excluded from the calculation", "The median depends only on position in the ordering, not the size of the extremes", "The median ignores the largest value by definition", "The median always equals the smallest value"],
+        correctIndex: 1,
+        explanation: "The median is the value at the halfway point. Its value is determined by which observation sits there, not by how far the largest is.",
+      },
+      {
+        type: "mcq",
+        stem: "Which statement about the mean is true?",
+        options: ["It is always a fair summary of the center", "It uses every observation, so it is sensitive to extremes", "It cannot be computed for a numerical variable", "It is always larger than the median"],
+        correctIndex: 1,
+        explanation: "The mean is sensitive to every value, including outliers, which is why it can be misleading under skew.",
+      },
+      {
+        type: "mcq",
+        stem: "A dataset is symmetric. Which is most likely true of its mean and median?",
+        options: ["They are far apart", "They are close in value", "The mean is always larger", "The median is undefined"],
+        correctIndex: 1,
+        explanation: "In symmetric data the tail pulls both measures equally, so the mean and median sit close together.",
+      },
+      {
+        type: "mcq",
+        stem: "To find a median, what must you do first?",
+        options: ["Compute the sum", "Add the values and divide by the count", "Sort the data", "Take the largest value"],
+        correctIndex: 2,
+        explanation: "The median is a positional measure, so the data must first be sorted into order.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The mean is the sum divided by the count and uses every value. The median is the middle value once sorted. They measure the same thing — the center — but the mean is sensitive to skew and outliers while the median is not. Summarise skewed data with the median and symmetric data with either.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: spread & shape. Lesson 2 told you where the data sits; the next lesson tells you how far it stretches — variance, standard deviation, quartiles and the shape of a histogram — because two datasets can share a center and still be completely different.",
       },
     ],
   };
