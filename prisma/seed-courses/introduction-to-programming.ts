@@ -83,7 +83,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: lesson8() },
   { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: lesson9() },
   { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: lesson10() },
-  { id: `${COURSE_ID}-lesson-11`, title: "Testing & debugging", module: 4, estimatedMinutes: 30, concept: { title: "Testing and debugging", slug: "testing-debugging", blooms: "evaluate", minutes: 30, prereq: ["decomposition"] }, content: pending(11) },
+  { id: `${COURSE_ID}-lesson-11`, title: "Testing & debugging", module: 4, estimatedMinutes: 30, concept: { title: "Testing and debugging", slug: "testing-debugging", blooms: "evaluate", minutes: 30, prereq: ["decomposition"] }, content: lesson11() },
   { id: `${COURSE_ID}-lesson-12`, title: "Mini project", module: 4, estimatedMinutes: 45, concept: { title: "Mini project", slug: "mini-project", blooms: "create", minutes: 45, prereq: ["testing-debugging"] }, content: pending(12) },
 ];
 
@@ -2416,6 +2416,222 @@ function lesson10(): LessonContent {
       {
         type: "paragraph",
         text: "Next: testing & debugging. Lesson 10 organised your code into pieces; the next lesson shows you how to test each piece and find the bug when one of them misbehaves — moving from the debug technique of lesson 6 to a disciplined, build-your-own-tests approach.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 11 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson11(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: write a simple assert-based test for a function; describe why automated tests beat eyeballing; use print-instrumentation to see what a loop is really doing; and do hypothesis-driven debugging — forming a guess and testing it rather than changing code at random.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 6 (debugging basics), Lesson 7 (functions) and Lesson 10 (decomposition). Testing makes the most sense once a program is split into functions, because each function is a unit you can test on its own.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Unit test",
+        text: "A unit test is a small, runnable check that a particular function produces the expected output for a given input. Your test is the contract: it says plainly what the function is supposed to do, in a form a computer can check for you.",
+      },
+      {
+        type: "paragraph",
+        text: "Lesson 6 showed you how to debug. This lesson makes it proactive: instead of waiting for a bug and then hunting it, you write checks that tell you the moment something stops being right. The deeply practical reason to test is that a function that works today may stop working after your next change. A test catches that. Eyeballing re-runs the whole program and relies on you noticing — a test is a permanent, instant, and precise reminder of what the function is supposed to do.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "The simplest way to write a test in Python is the assert statement. assert a function call equals an expected value; if it does, nothing happens and the program continues; if it does not, Python raises an AssertionError and stops. An assert is a way of writing down, in code, the statement \"I believe this is true\" — and having the computer verify it every time the program runs.",
+      },
+      {
+        type: "paragraph",
+        text: "Testing works best on well-decomposed functions, which is exactly what lesson 10 taught you to write. A small function with a clear input and output is easy to test: pick an input, state the expected output. If a program is one giant blob, you cannot test part of it — you can only run the whole thing and look at the final result, which hides which piece misbehaved. This is the payoff of decomposition: it makes testing possible, and testing makes correctness possible.",
+      },
+      {
+        type: "paragraph",
+        text: "Debugging in this framework becomes hypothesis-driven. When a test fails, you learn something before you change anything: which input produced the wrong output. That is a clue, and clues should narrow the search rather than invite a blind fix. Print-instrumentation — temporarily adding a print to see a variable's value — is the checkout tool. The discipline is: form a guess about the cause, test it with a targeted check, and only then change the code. This is the opposite of random-walk, the failure mode lesson 6 warned you about.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: a passing test" },
+      {
+        type: "paragraph",
+        text: "The simplest test. Write what the function should do, and have Python check it. If both asserts pass, nothing is printed — which is the point: silent success.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def add(a, b):\n    return a + b\n\nassert add(2, 3) == 5, "add(2, 3) should be 5"\nassert add(-1, 1) == 0, "add(-1, 1) should be 0"\nprint("all tests passed")`,
+        output: "all tests passed",
+        caption: "Each assert states an expectation. If every one is True, Python prints the confirmation; a failure raises AssertionError.",
+      },
+      {
+        type: "paragraph",
+        text: "The assert statement checks a condition. The message after the comma is what Python reports if the condition is False. Here both expectations hold — 2 + 3 is 5 and -1 + 1 is 0 — so both asserts pass silently and the program reaches the final print. Note that this tells you nothing new while the function is correct; it is insurance that pays off the moment you break it.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: a failing test surfaces the bug" },
+      {
+        type: "paragraph",
+        text: "Now the test is wrong about what the function should return, and Python tells you. Crucially, the error is caught here so we can read it as a message rather than a crash.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `try:\n    assert add(2, 3) == 6, "expected 6"\nexcept AssertionError as e:\n    print("caught:", e)`,
+        output: "caught: expected 6",
+        caption: "add(2, 3) is 5, not 6, so the assert fails and raises AssertionError with the message we wrote.",
+      },
+      {
+        type: "paragraph",
+        text: "The assert fails because 2 plus 3 is 5, not 6 — the expectation was wrong, not necessarily the function. The try/except is here only so we can show the message as text; in normal use, an uncaught AssertionError just stops the program at the failing line, which is precisely the signal you want: it tells you exactly which expectation did not hold, and the message is a note you wrote listing what you expected. That is a far more informative failure than \"the output looked wrong\".",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: print-instrumentation" },
+      {
+        type: "paragraph",
+        text: "When a function misbehaves and you are not sure where, add a print to watch it. Here we watch a search loop as it checks each element.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def find(words, target):\n    for i, w in enumerate(words):\n        print("checking", i, w)\n        if w == target:\n            return i\n    return -1\n\nprint("found at", find(["a", "b", "c"], "b"))`,
+        output: "checking 0 a\nchecking 1 b\nfound at 1",
+        caption: "The print shows each step as the loop runs, so you can see it reaches index 1 and returns it.",
+      },
+      {
+        type: "paragraph",
+        text: "The print is temporary scaffolding. It reveals what the loop is actually doing — here, that it compares element 0, then element 1, and matches at index 1, so it immediately returns. Without this, you might wonder whether the loop is even reaching the target. Printing a variable just before it matters is the fastest way to turn a guess into a certainty about what the code does. Once you have fixed the problem, remove the print.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Only testing the 'happy path'. If a function is supposed to handle an empty list or a zero, test those too. The edge cases are where bugs hide.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Leaving print-instrumentation in production. Prints used for debugging are scaffolding — remove them once the bug is found, or leave them fenced behind a logging level.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Random-walk debugging. Changing code without a hypothesis is the slowest possible approach. Form a guess, test it, then change — the lesson-6 failure mode.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Testing a whole program instead of a function. If the program is decomposed into functions, test each one. Testing the giant whole hides which piece is wrong.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What does an assert statement do?",
+        answer: "It checks that a condition is true; if it is false, it raises an AssertionError with a message you supply.",
+        explanation: "assert states an expectation. It raises when false, stopping the program at the failing line — the exact spot that violated the contract.",
+      },
+      {
+        type: "question",
+        prompt: "What is print-instrumentation, and when is it useful?",
+        answer: "Temporarily adding a print to watch a variable's value, useful when the program runs but behaves unexpectedly and you need to see what it is doing.",
+        explanation: "It turns a guess about the problem into a certainty about the code's actual behaviour. Like all scaffolding, it should be removed once the fix is in.",
+      },
+      {
+        type: "question",
+        prompt: "Why does testing work best on well-decomposed functions?",
+        answer: "Because a small function with a clear input and output is easy to test in isolation, whereas a monolithic program's failure state hides which part misbehaves.",
+        explanation: "Decomposition makes functions into testable units. Each can be checked independently, so a failing test localises the bug precisely.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "What does assert do when its condition is false?",
+        options: ["It prints False", "It raises an AssertionError with a message you provide", "It silently continues", "It returns 0"],
+        correctIndex: 1,
+        explanation: "assert stops the program with an AssertionError when the condition is False, carrying your message. It is the simplest automated check.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is an automated test better than eyeballing output?",
+        options: ["It is always faster to write", "It runs every time and checks exactly what you expected, instantly and precisely", "It makes code shorter", "It removes the need for functions"],
+        correctIndex: 1,
+        explanation: "A test is a permanent, automatic reminder of the contract. Eyeballing requires you to notice a wrong value; a test catches it deterministically.",
+      },
+      {
+        type: "mcq",
+        stem: "What is print-instrumentation?",
+        options: ["A way to make printing faster", "Temporarily adding a print to see what a variable is doing during a bug", "A built-in function for testing", "A type of loop"],
+        correctIndex: 1,
+        explanation: "Adding a targeted print reveals the program's actual behaviour. It is debugging scaffolding to be removed once the fix is found.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is an example of random-walk programming?",
+        options: ["Forming a hypothesis then testing it", "Changing code randomly until it works", "Writing an assert test", "Reading the error message first"],
+        correctIndex: 1,
+        explanation: "Random-walk is blind changes without a hypothesis — often slow and unreliable. Hypothesis-driven debugging is the disciplined alternative.",
+      },
+      {
+        type: "mcq",
+        stem: "What makes a function easy to test?",
+        options: ["Being large and complex", "Having a clear input and output, doing one job", "Printing its result", "Using global variables"],
+        correctIndex: 1,
+        explanation: "A small, single-job function with defined inputs and outputs is a clean unit to test: pick an input, state the output, assert it.",
+      },
+      {
+        type: "mcq",
+        stem: "When debugging, what should you do before changing code?",
+        options: ["Change the first likely line", "Form a hypothesis about the cause and design a check to test it", "Delete the function", "Add more features"],
+        correctIndex: 1,
+        explanation: "Hypothesis-driven debugging means guessing the cause and testing the guess before editing. The test result tells you whether your hypothesis was right.",
+      },
+      {
+        type: "mcq",
+        stem: "Why should you test edge cases, not just the normal case?",
+        options: ["Edge cases run faster", "Bugs most often hide at the boundaries, like empty collections or zero values", "Edge cases are required syntax", "They make tests longer"],
+        correctIndex: 1,
+        explanation: "The boundaries — empty lists, zero, negative, maximum values — are where a function's assumptions often break. Covering them is what makes a test valuable.",
+      },
+      {
+        type: "mcq",
+        stem: "Where should you leave print-instrumentation after fixing a bug?",
+        options: ["Permanently, it is harmless", "Remove it, since it was scaffolding for debugging", "In a database", "On every function"],
+        correctIndex: 1,
+        explanation: "Debug prints are temporary. Once the bug is fixed, remove them, or route them behind logging so they can be turned off.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Testing is proactive correctness: an assert states an expectation that Python verifies every run, best applied to small, single-job functions. Debugging is hypothesis-driven — form a guess, verify it with print-instrumentation, then change. Together, decomposed code plus tests give you a program you can change without fear.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: the mini project. This is where it all comes together — you will write a real, complete program that reads a file, counts words, and reports the result, using the functions, structures and loops you have built across the whole course. It is the capstone."
       },
     ],
   };
