@@ -32,5 +32,11 @@ export function getBoard(id) {
 }
 
 export function boardRegion(boardId) {
+  if (boardId === "sa") return "za";
+  if (boardId === "tz") return "tz";
   return "global";
+}
+
+export function isOfficialPastBoard(boardId) {
+  return boardId === "sa" || boardId === "tz";
 }

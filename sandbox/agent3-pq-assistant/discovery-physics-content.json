@@ -1,0 +1,1028 @@
+{
+  "schema": "agent3.discovery.content.v1",
+  "agent": "agent3-pq-assistant",
+  "domain": "extras",
+  "department": "physics",
+  "name": "Physics Lab",
+  "description": "Everything physics — every level, from foundations to the research frontier. Principles · Projects · Hypotheses · News.",
+  "version": "1.0.0",
+  "wipedJunkTopics": true,
+  "topics": [
+    {
+      "id": "physics",
+      "domain": "extras",
+      "parentId": null,
+      "title": "Physics Lab",
+      "slug": "physics",
+      "description": "The inaugural Discovery Lab. All levels of physics, every branch — principles, projects, hypotheses, and the latest news.",
+      "orderIndex": 0,
+      "isPublished": true,
+      "lessons": [
+        {
+          "id": "physics-welcome",
+          "title": "Welcome to the Physics Lab",
+          "orderIndex": 0,
+          "estimatedMinutes": 10,
+          "content": {
+            "blocks": [
+              {
+                "type": "heading",
+                "level": 2,
+                "text": "Welcome to the Physics Lab"
+              },
+              {
+                "type": "paragraph",
+                "text": "This is the inaugural Discovery Lab — a research space, not a classroom. Here you'll find every level of physics, from foundational measurement to the edges of quantum gravity and cosmology. Four modes guide your research: Principles (established knowledge), Projects (hands-on builds and experiments), Hypotheses (open questions and frontier ideas), and News (latest scientific developments)."
+              },
+              {
+                "type": "definition",
+                "term": "How to use the lab",
+                "text": "Pick a branch below. Each branch has levels (Foundations → Research). At each level, read the Principles, try a Project, ponder a Hypothesis, and check the News. Depth tabs (Understand → Explore → Go Deeper → Research) reveal more detail as you go."
+              },
+              {
+                "type": "callout",
+                "variant": "info",
+                "text": "Physics is first. Chemistry, Biology, Mathematics, and more labs open later. Everything here is live, verifiable, and sourced."
+              }
+            ]
+          }
+        }
+      ],
+      "children": [
+        {
+          "id": "physics-foundations",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Foundations",
+          "slug": "foundations",
+          "description": "Level 0 — Novice. Measurement, units, vectors, the scientific method, order-of-magnitude thinking.",
+          "orderIndex": 1,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "foundations-measurement",
+              "title": "Measurement & Units",
+              "orderIndex": 0,
+              "estimatedMinutes": 20,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Measurement & Units"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Physics begins with measurement. Every physical quantity has a magnitude and a unit. The SI system (Système International) defines seven base units: metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol), candela (cd). All other units are derived."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "SI Base Units",
+                    "text": "Length: metre (m); Mass: kilogram (kg); Time: second (s); Electric current: ampere (A); Thermodynamic temperature: kelvin (K); Amount of substance: mole (mol); Luminous intensity: candela (cd)."
+                  },
+                  {
+                    "type": "callout",
+                    "variant": "info",
+                    "text": "Significant figures reflect measurement precision. Never report more digits than your instrument justifies."
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "Project: Build a Pendulum Timer"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Materials: string, small dense mass (bob), stopwatch, ruler, protractor. Procedure: Vary string length L; time 10 oscillations for small angles (<10°); plot T² vs L. Expect slope = 4π²/g. This measures g without a scale."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Does the period depend on bob mass? Hypothesis: No — for a simple pendulum, T depends only on L and g. Test by swapping bobs of different mass at the same L."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "foundations-vectors",
+              "title": "Vectors & Scalars",
+              "orderIndex": 1,
+              "estimatedMinutes": 25,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Vectors & Scalars"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Scalars have magnitude only (mass, temperature, time). Vectors have magnitude and direction (displacement, velocity, force, acceleration). Vector addition uses the parallelogram rule or head-to-tail method; components resolve a vector into perpendicular axes."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Vector components",
+                    "text": "A vector A with magnitude A at angle θ from the x-axis: Aₓ = A cos θ, Aᵧ = A sin θ. Magnitude: |A| = √(Aₓ² + Aᵧ²). Direction: tan θ = Aᵧ/Aₓ."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Force table experiment: Three spring scales pull a ring to equilibrium. Verify vector sum ≈ 0. Record magnitudes and angles; compute components; check ΣFₓ ≈ 0 and ΣFᵧ ≈ 0."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can three forces of unequal magnitude produce equilibrium? Hypothesis: Yes — if they form a closed vector triangle (head-to-tail returns to start). Test on a force table."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-classical-mechanics",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Classical Mechanics",
+          "slug": "classical-mechanics",
+          "description": "Level 1 — Newtonian mechanics. Kinematics, dynamics, energy, momentum, rotation, gravitation.",
+          "orderIndex": 2,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "mech-kinematics",
+              "title": "Kinematics",
+              "orderIndex": 0,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Kinematics — Motion Without Causes"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Kinematics describes motion independent of its causes. Position x(t), velocity v = dx/dt, acceleration a = dv/dt. For constant acceleration: v = v₀ + at, x = x₀ + v₀t + ½at², v² = v₀² + 2aΔx."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Constant-acceleration equations",
+                    "text": "v = v₀ + at · Δx = v₀t + ½at² · v² = v₀² + 2aΔx · Δx = ½(v₀ + v)t"
+                  },
+                  {
+                    "type": "project",
+                    "text": "Galileo's ramp: Roll a ball down an inclined plane at different angles. Measure time to travel fixed distances. Verify distance ∝ t² (constant acceleration). Extract g_eff = g sin θ."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Aristotle claimed heavier objects fall faster. Hypothesis: In vacuum, all objects fall at the same acceleration regardless of mass. Test: drop a feather and a coin in an evacuated tube."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mech-newton",
+              "title": "Newton's Laws of Motion",
+              "orderIndex": 1,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Newton's Three Laws"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "1st: A body remains at rest or in uniform motion unless acted on by a net force (inertia). 2nd: F_net = ma — acceleration is proportional to net force and inversely proportional to mass. 3rd: For every action, there is an equal and opposite reaction (F₁₂ = −F₂₁)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Newton's Second Law",
+                    "text": "F_net = ma, where F_net is the vector sum of all forces on a body of mass m producing acceleration a."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Atwood machine: Two masses connected by a string over a pulley. Measure acceleration; compare with a = (m₁ − m₂)g / (m₁ + m₂). Vary mass difference and total mass."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Is mass the same quantity in F = ma (inertial mass) and in gravity (gravitational mass)? Hypothesis: Yes — the equivalence principle. Eötvös experiment tests this to high precision."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mech-energy",
+              "title": "Work, Energy & Power",
+              "orderIndex": 2,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Work, Energy & Power"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Work W = F·d cos θ. Kinetic energy K = ½mv². Potential energy (gravitational) U = mgh. Conservation of mechanical energy: K + U = constant (when only conservative forces act). Power P = W/t = F·v."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Conservative force",
+                    "text": "A force for which work depends only on endpoints, not path. Gravity and ideal springs are conservative; friction is not."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Pendulum energy: Measure bob height and speed at bottom of swing. Verify mgh = ½mv² (predicts v = √(2gh)). Time photogates at different heights."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can perpetual motion exist? Hypothesis: No — energy conservation forbids a machine that outputs more energy than it consumes. Any claim must identify the hidden energy source."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mech-momentum",
+              "title": "Momentum & Collisions",
+              "orderIndex": 3,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Momentum & Collisions"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Momentum p = mv. Impulse J = FΔt = Δp. Conservation of momentum: total p is constant in an isolated system. Collisions: elastic (K conserved) or inelastic (K not conserved; perfectly inelastic = bodies stick together)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Elastic collision (1D)",
+                    "text": "m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂ and ½m₁u₁² + ½m₂u₂² = ½m₁v₁² + ½m₂v₂². Solutions: v₁ = (m₁−m₂)u₁/(m₁+m₂) + 2m₂u₂/(m₁+m₂), v₂ = 2m₁u₁/(m₁+m₂) + (m₂−m₁)u₂/(m₁+m₂)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Collision carts: Two low-friction carts with velocity sensors and spring/magnet bumpers. Test elastic vs inelastic collisions. Verify momentum conservation; measure kinetic energy change."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "In a perfectly inelastic collision, kinetic energy is lost. Where does it go? Hypothesis: Deformation, heat, sound. Measure temperature rise of putty after impact."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mech-rotation",
+              "title": "Rotation & Angular Momentum",
+              "orderIndex": 4,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Rotation & Angular Momentum"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Angular position θ, angular velocity ω = dθ/dt, angular acceleration α = dω/dt. Torque τ = r × F. Moment of inertia I = Σmr². Rotational dynamics: τ_net = Iα. Rotational kinetic energy K_rot = ½Iω². Angular momentum L = Iω, conserved in isolated systems."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Moment of inertia",
+                    "text": "I = Σ mᵢrᵢ² — depends on mass distribution relative to axis. Solid cylinder: ½MR²; thin hoop: MR²; solid sphere: ⅖MR²."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Rotating stool + weights: Sit on a rotating stool holding dumbbells. Spin with arms extended, then pull weights in. Observe angular velocity increase — conservation of angular momentum (I decreases, ω increases)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Why do figure skaters spin faster pulling arms in? Hypothesis: L = Iω conserved; reducing I increases ω. Quantify: measure rotation rate before/after with a phone slow-mo."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mech-gravitation",
+              "title": "Gravitation",
+              "orderIndex": 5,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Gravitation"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Newton's law of universal gravitation: F = G m₁m₂ / r², where G = 6.674×10⁻¹¹ N·m²/kg². Gravitational field g = GM/r². Orbits: circular orbit speed v = √(GM/r); period T² = 4π²r³/(GM) (Kepler's third law). Escape velocity v_esc = √(2GM/r)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Escape velocity",
+                    "text": "Minimum speed to escape a body's gravity from radius r: v_esc = √(2GM/r). For Earth: ~11.2 km/s."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Cavendish-style experiment (qualitative): Use torsion balance with small masses to detect gravitational attraction between lead balls. Very weak force — needs isolation from air currents and vibrations."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Does gravity propagate instantly or at light speed? Hypothesis: At light speed (general relativity). Gravitational waves (LIGO, 2015) confirmed finite propagation speed c."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-thermodynamics",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Thermodynamics",
+          "slug": "thermodynamics",
+          "description": "Level 2 — Heat, temperature, laws of thermodynamics, entropy, statistical mechanics.",
+          "orderIndex": 3,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "thermo-laws",
+              "title": "Laws of Thermodynamics",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "The Four Laws of Thermodynamics"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Zeroth: If A = B and B = C in temperature, then A = C (defines temperature). First: ΔU = Q − W (energy conservation; heat added minus work done by system). Second: Entropy of an isolated system never decreases (ΔS ≥ 0). Third: As T → 0 K, entropy of a perfect crystal → constant (S → 0)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Entropy change",
+                    "text": "ΔS = ∫ dQ_rev / T — entropy change for a reversible process. For irreversible: ΔS > ∫ dQ / T."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Heat engine model: Use a temperature difference (hot/cold reservoirs) to run a Stirling or Stirling-like engine. Measure heat input, work output, cold-side heat. Compute efficiency η = W/Q_h and compare with Carnot η_max = 1 − T_c/T_h."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can entropy decrease locally? Hypothesis: Yes, but only at the cost of greater entropy increase elsewhere (refrigerators, living cells). The universe's total entropy still rises."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "thermo-entropy",
+              "title": "Entropy & the Arrow of Time",
+              "orderIndex": 1,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Entropy & the Arrow of Time"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Entropy measures disorder / multiplicity of microstates. Boltzmann: S = k_B ln W. The second law gives time a direction — broken eggs don't un-break, heat flows hot→cold, not reverse. This is the thermodynamic arrow of time."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Boltzmann entropy",
+                    "text": "S = k_B ln W, where W = number of microstates consistent with a macrostate, k_B = 1.381×10⁻²³ J/K."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Mixing entropy: Add a drop of food coloring to still water. Watch disorder increase spontaneously. Time-lapse the reverse (un-mixing) — never happens without external work."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Maxwell's demon: Can a clever being sort fast/slow molecules to decrease entropy? Hypothesis: No — the demon's information erasure costs entropy (Landauer's principle), saving the second law."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-electromagnetism",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Electromagnetism",
+          "slug": "electromagnetism",
+          "description": "Level 3 — Electrostatics, circuits, magnetism, induction, Maxwell's equations.",
+          "orderIndex": 4,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "em-electrostatics",
+              "title": "Electrostatics",
+              "orderIndex": 0,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Electrostatics"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Coulomb's law: F = k_e q₁q₂ / r², k_e = 8.99×10⁹ N·m²/C². Electric field E = F/q. Gauss's law: ∮E·dA = Q_enc/ε₀. Electric potential V, potential energy U = qV. Capacitance C = Q/V, capacitor energy U = ½CV²."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Gauss's law",
+                    "text": "The electric flux through a closed surface equals enclosed charge divided by ε₀: Φ_E = ∮E·dA = Q_enc/ε₀."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Leyden jar capacitor: Charge a homemade Leyden jar (glass jar with foil inside/out) with a Van de Graaff or static source. Measure spark length vs charge. Verify C = Q/V by discharge through electroscope."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Why does charge reside on conductor surfaces? Hypothesis: Like charges repel and move as far apart as possible — to the surface — until E = 0 inside the conductor (electrostatic equilibrium)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "em-circuits",
+              "title": "Electric Circuits",
+              "orderIndex": 1,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Electric Circuits"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Ohm's law: V = IR. Series: R_eq = ΣRᵢ, same current. Parallel: 1/R_eq = Σ(1/Rᵢ), same voltage. Kirchhoff's laws: ΣI_in = ΣI_out at a junction; ΣV around a loop = 0. Power P = IV = I²R = V²/R. RC circuits: τ = RC, charging V(t) = V₀(1 − e^(−t/RC))."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Kirchhoff's loop rule",
+                    "text": "Sum of potential differences around any closed loop = 0: ΣV = 0 (conservation of energy)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Voltage divider + RC timing: Build a resistor divider and an RC circuit. Measure charge/discharge curves with a multimeter/oscilloscope. Extract τ = RC and compare with component values."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Do electrons flow at light speed in wires? Hypothesis: No — drift velocity is ~mm/s; the electric field (and energy) propagates near light speed. Electrons drift slowly; the signal moves fast."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "em-maxwell",
+              "title": "Maxwell's Equations",
+              "orderIndex": 2,
+              "estimatedMinutes": 40,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Maxwell's Equations — The Foundation of Electromagnetism"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Gauss for E: ∇·E = ρ/ε₀. Gauss for B: ∇·B = 0 (no magnetic monopoles). Faraday: ∇×E = −∂B/∂t. Ampère-Maxwell: ∇×B = μ₀J + μ₀ε₀∂E/∂t. Together they predict electromagnetic waves traveling at c = 1/√(μ₀ε₀)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Speed of light from Maxwell",
+                    "text": "c = 1/√(μ₀ε₀) ≈ 2.998×10⁸ m/s — light is an electromagnetic wave."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Radio wave demo: Use an AM radio near a spark gap or computer monitor. Detect electromagnetic interference. Demonstrate that changing electric fields create changing magnetic fields and vice versa — propagating waves."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Are magnetic monopoles possible? Hypothesis: Gauss for B (∇·B = 0) says no, but grand unified theories predict them. None confirmed experimentally yet — an open hypothesis."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-optics-waves",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Optics & Waves",
+          "slug": "optics-waves",
+          "description": "Level 4 — Geometric optics, wave optics, spectroscopy, lasers and photonics.",
+          "orderIndex": 5,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "optics-wave-nature",
+              "title": "Wave Nature of Light",
+              "orderIndex": 0,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "The Wave Nature of Light"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Light is an electromagnetic wave. Speed c = fλ. Visible spectrum: ~380–750 nm. Interference (double slit: d sin θ = mλ), diffraction (single slit), polarization. Young's double-slit experiment established wave behavior (1801)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Double-slit interference",
+                    "text": "Bright fringes: d sin θ = mλ (m = 0, 1, 2, …). Dark fringes: d sin θ = (m + ½)λ. Fringe spacing Δy = λL/d on screen at distance L."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Laser double slit: Shine a laser through a double slit onto a screen. Measure fringe spacing; compute slit separation d = λL/Δy. Compare with manufacturer's spec."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Is light a wave or particle? Hypothesis: Both — wave-particle duality. Double-slit shows interference (wave) even when photons are sent one at a time (particle detection)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "optics-geometric",
+              "title": "Geometric Optics",
+              "orderIndex": 1,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Geometric Optics"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Light travels in straight lines (rays). Reflection: θ_i = θ_r. Refraction: n₁ sin θ₁ = n₂ sin θ₂ (Snell's law). Thin lens: 1/f = 1/d_o + 1/d_i; magnification m = −d_i/d_o. Mirrors: same equations with sign conventions."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Snell's law",
+                    "text": "n₁ sin θ₁ = n₂ sin θ₂ — light bends toward the normal when entering a higher-index medium."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Refractive index of water: Use a semicircular water tray and laser. Measure incident and refracted angles; compute n = sin θ₁ / sin θ₂. Expect ~1.33."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can light bend in a vacuum? Hypothesis: Yes — general relativity predicts gravitational lensing (mass curves spacetime). Confirmed by Eddington's 1919 eclipse expedition."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-quantum-mechanics",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Quantum Mechanics",
+          "slug": "quantum-mechanics",
+          "description": "Level 5 — Wave-particle duality, Schrödinger equation, quantum states, spin, quantum information.",
+          "orderIndex": 6,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "qm-duality",
+              "title": "Wave-Particle Duality",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Wave-Particle Duality"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Light behaves as particles (photons, E = hf) and matter behaves as waves (de Broglie λ = h/p). Photoelectric effect: E = hf − work function. Compton scattering confirms photon momentum. Davisson-Germer showed electron diffraction."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "De Broglie wavelength",
+                    "text": "λ = h / p = h / (mv) — every moving particle has an associated wavelength."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Photoelectric effect (simulated): Vary light frequency and intensity; measure stopping potential. Verify K_max = hf − φ and that intensity affects current, not electron energy."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Does the wavefunction collapse on measurement? Hypothesis: Multiple interpretations — Copenhagen (collapse), Many-Worlds (branching), Pilot-wave (guided). No experiment distinguishes them yet."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "qm-schroedinger",
+              "title": "The Schrödinger Equation",
+              "orderIndex": 1,
+              "estimatedMinutes": 40,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "The Schrödinger Equation"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "iℏ ∂ψ/∂t = Ĥψ — the time-dependent Schrödinger equation governs how the wavefunction ψ evolves. Ĥ = −(ℏ²/2m)∇² + V. Stationary states: Ĥψ = Eψ (time-independent). |ψ|² = probability density. Quantization emerges from boundary conditions."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Particle in a box",
+                    "text": "E_n = n²π²ℏ²/(2mL²), n = 1, 2, 3, … — energy is quantized because ψ must vanish at the walls."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Quantum well simulation: Solve the 1D Schrödinger equation numerically for an infinite square well and a harmonic oscillator. Plot eigenfunctions ψ_n and energy levels E_n."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Is the cat alive or dead before observation? Hypothesis (Schrödinger's cat): Superposition until measured — highlights the measurement problem. Still unresolved interpretively."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-relativity",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Relativity",
+          "slug": "relativity",
+          "description": "Level 6 — Special relativity, general relativity, black holes, cosmology.",
+          "orderIndex": 7,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "rel-special",
+              "title": "Special Relativity",
+              "orderIndex": 0,
+              "estimatedMinutes": 40,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Special Relativity"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Two postulates: (1) Laws of physics are identical in all inertial frames. (2) Light speed c is constant in vacuum for all observers. Consequences: time dilation Δt = γΔt₀, length contraction L = L₀/γ, relativity of simultaneity, E = mc², γ = 1/√(1 − v²/c²)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Lorentz factor",
+                    "text": "γ = 1/√(1 − v²/c²) — approaches infinity as v → c; ≈ 1 at everyday speeds."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Muon lifetime: Cosmic-ray muons created in upper atmosphere should decay before reaching ground (τ ≈ 2.2 μs). Time dilation lets them survive: observed flux matches γ-extended lifetime."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can anything travel faster than light? Hypothesis: No — information, matter, and energy are limited to c. Tachyons remain hypothetical (no evidence)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "rel-general",
+              "title": "General Relativity",
+              "orderIndex": 1,
+              "estimatedMinutes": 45,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "General Relativity"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Gravity is not a force — it's curved spacetime. Mass-energy tells spacetime how to curve; spacetime tells matter how to move. Einstein field equation: G_μν = 8πG/c⁴ T_μν. Predictions: Mercury's perihelion, gravitational lensing, gravitational redshift, black holes, gravitational waves, expanding universe."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Equivalence principle",
+                    "text": "Locally, acceleration is indistinguishable from gravity — no experiment in a closed lab can tell uniform gravity from uniform acceleration."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Gravitational lensing simulation: Use a lensing equation to compute deflection angle α = 4GM/(c²b) for light passing a mass M at impact parameter b. Plot Einstein ring radius for a galaxy cluster."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "What happens inside a black hole's event horizon? Hypothesis: General relativity predicts a singularity — but quantum gravity is likely needed. No observational access yet."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-nuclear-particle",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Nuclear & Particle Physics",
+          "slug": "nuclear-particle",
+          "description": "Level 7 — Radioactivity, the Standard Model, particle detectors, beyond the Standard Model.",
+          "orderIndex": 8,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "nuclear-radioactivity",
+              "title": "Radioactivity",
+              "orderIndex": 0,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Radioactivity"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Unstable nuclei decay: alpha (⁴He nucleus), beta (electron/positron + neutrino), gamma (high-energy photon). Decay law: N(t) = N₀e^(−λt), half-life T½ = ln 2 / λ. Activity A = λN. Binding energy from mass defect: E = Δmc²."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Half-life",
+                    "text": "Time for half the nuclei in a sample to decay: T½ = ln 2 / λ ≈ 0.693/λ."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Radiation detection: Use a Geiger counter with a safe radioactive source (e.g., smoke-detector americium-241). Measure counts vs distance (inverse square law) and vs shielding (paper/aluminum/lead for α/β/γ)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Is proton decay real? Hypothesis: Some grand unified theories predict proton lifetime ~10³⁴ years. Super-Kamiokande has seen nothing — setting lower limits."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "nuclear-standard-model",
+              "title": "The Standard Model",
+              "orderIndex": 1,
+              "estimatedMinutes": 40,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "The Standard Model of Particle Physics"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "17 fundamental particles: 6 quarks, 6 leptons (e, μ, τ + 3 neutrinos), 4 force bosons (photon, W±, Z, 8 gluons), Higgs boson. Forces: electromagnetic (QED), weak, strong (QCD); gravity not yet included. Mass comes from Higgs mechanism."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Standard Model particles",
+                    "text": "Quarks: up, down, charm, strange, top, bottom. Leptons: electron, muon, tau, 3 neutrinos. Bosons: photon, W+, W−, Z, gluons (×8), Higgs."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Particle zoo card sort: Sort known particles into fermions/bosons, matter/force, generations. Map which forces each particle feels (strong? weak? EM? gravity?)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "What is dark matter? Hypothesis: Not in the Standard Model — candidates include WIMPs, axions, sterile neutrinos. Direct detection experiments (LZ, XENONnT) have found nothing yet."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-astrophysics-cosmology",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Astrophysics & Cosmology",
+          "slug": "astrophysics-cosmology",
+          "description": "Level 8 — Stellar evolution, galaxies, dark matter & dark energy, the early universe.",
+          "orderIndex": 9,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "astro-stellar",
+              "title": "Stellar Evolution",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Stellar Evolution"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Stars form from collapsing gas clouds, fuse hydrogen in their cores (main sequence), then evolve based on mass. Low-mass stars: red giant → planetary nebula → white dwarf. High-mass stars: red supergiant → supernova → neutron star or black hole. Hertzsprung-Russell diagram plots luminosity vs temperature."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Hertzsprung-Russell diagram",
+                    "text": "Plot of stellar luminosity vs surface temperature (or color). Main sequence runs diagonally; red giants upper-right; white dwarfs lower-left."
+                  },
+                  {
+                    "type": "project",
+                    "text": "HR diagram from catalog data: Plot nearby stars (e.g., Hipparcos/Gaia) by B−V color vs absolute magnitude. Identify main sequence, giants, white dwarfs."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "What determines whether a star becomes a neutron star or black hole? Hypothesis: Core mass after supernova — roughly >3 M☉ collapses to black hole; 1.4–3 M☉ to neutron star (Tolman-Oppenheimer-Volkoff limit, uncertain)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "astro-cosmology",
+              "title": "Cosmology & the Early Universe",
+              "orderIndex": 1,
+              "estimatedMinutes": 40,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Cosmology & the Early Universe"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "The universe is expanding (Hubble: v = H₀d). Big Bang: hot dense state ~13.8 Gyr ago. Cosmic microwave background (CMB) at 2.725 K is relic radiation. Composition: ~5% ordinary matter, ~27% dark matter, ~68% dark energy. Accelerating expansion (supernovae, 1998)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Hubble parameter",
+                    "text": "H₀ ≈ 67–73 km/s/Mpc (tension between early-universe and local measurements — an open problem)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "CMB anisotropy exploration: Use Planck satellite data to plot temperature fluctuations across the sky. Identify the acoustic peak scale (~1°) that sets spatial flatness."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "What caused cosmic inflation? Hypothesis: A scalar inflaton field drove exponential expansion in the first ~10⁻³² s, explaining flatness, homogeneity, and primordial perturbations. Not yet directly detected."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-condensed-matter",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Condensed Matter",
+          "slug": "condensed-matter",
+          "description": "Level 9 — Crystal structure, band theory, superconductivity, soft matter.",
+          "orderIndex": 10,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "cm-band-theory",
+              "title": "Band Theory of Solids",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Band Theory of Solids"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "In solids, atomic orbitals overlap into energy bands. Band gap E_g separates valence band (filled) from conduction band (empty/partially filled). Conductors: overlapping or partially filled bands. Insulators: large E_g. Semiconductors: small E_g (~1 eV), doping controls carriers."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Band gap",
+                    "text": "Energy difference between the top of the valence band and the bottom of the conduction band. Silicon: E_g ≈ 1.1 eV; diamond: ~5.5 eV (insulator)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Diode IV curve: Measure current vs voltage for a silicon diode. Verify exponential forward behavior (Shockley equation) and reverse breakdown. Compare with LED (different E_g → different turn-on voltage)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can room-temperature superconductivity exist? Hypothesis: Yes — recent claims (retracted or disputed). The mechanism and upper Tc remain open."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "physics-mathematical-physics",
+          "domain": "extras",
+          "parentId": "physics",
+          "title": "Mathematical Physics",
+          "slug": "mathematical-physics",
+          "description": "Level 10 — Vector calculus, differential equations, group theory, numerical methods.",
+          "orderIndex": 11,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "mp-calculus",
+              "title": "Vector Calculus for Physics",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Vector Calculus for Physics"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Gradient (∇f), divergence (∇·F), curl (∇×F), Laplacian (∇²f). Divergence theorem: ∮F·dA = ∫(∇·F)dV. Stokes' theorem: ∮F·dr = ∫(∇×F)·dA. These underpin Maxwell's equations and fluid dynamics."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Laplacian",
+                    "text": "∇²f = ∂²f/∂x² + ∂²f/∂y² + ∂²f/∂z² — appears in Poisson's equation (∇²φ = −ρ/ε₀), heat equation, wave equation."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Numerical Laplacian: Compute ∇² on a grid using finite differences. Solve Poisson's equation for a point charge (potential φ = q/(4πε₀r)) and compare with analytic solution."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Are divergence and curl sufficient to describe any vector field? Hypothesis: Yes — Helmholtz theorem: a field is fixed by its divergence, curl, and boundary conditions."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "modes": {
+    "principles": "Established laws, theories, and fundamentals — what we know",
+    "projects": "Hands-on experiments, builds, and recreations — what we can do",
+    "hypotheses": "Open questions, frontier ideas, thought experiments — what we don't know yet",
+    "news": "Latest scientific developments, papers, breakthroughs — what's happening now"
+  },
+  "levels": [
+    "Foundations",
+    "Classical Mechanics",
+    "Thermodynamics",
+    "Electromagnetism",
+    "Optics & Waves",
+    "Quantum Mechanics",
+    "Relativity",
+    "Nuclear & Particle Physics",
+    "Astrophysics & Cosmology",
+    "Condensed Matter",
+    "Mathematical Physics"
+  ],
+  "depthTabs": ["Understand", "Explore", "Go Deeper", "Research"]
+}
