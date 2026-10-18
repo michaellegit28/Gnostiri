@@ -1,0 +1,13 @@
+node_modules
+package-lock.json
+bun.lock
+.gitignore
+.env*
+.dockerenv
+*.log
+*.tmp
+.gitkeep
+
+# Agent sandboxes - symlinks to isolate
+sandbox/**/.env
+sandbox/**/venv

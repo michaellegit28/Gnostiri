@@ -1,0 +1,62 @@
+{
+  "name": "gnostiri",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test:alignment": "node --test tests/alignment-engine.test.mjs",
+    "test:spaced-repetition": "node --test tests/spaced-repetition.test.mjs",
+    "test:assessment": "node --test tests/assessment.test.mjs",
+    "test:lesson-python": "node --test tests/lesson-python.test.mjs",
+    "test:assessment-seed": "node --test tests/assessment-seed.test.mjs",
+    "test:statistics-python": "node --test tests/statistics-python.test.mjs",
+    "postinstall": "prisma generate",
+    "agent:agent2": "python sandbox/agent2-pq-integrator/src/main.py",
+    "agent:agent3": "python sandbox/agent3-pq-assistant/src/main.py",
+    "agent:agent4": "python sandbox/agent4-uni-courses-builder/src/main.py",
+    "agent:orchestrate": "python orchestrator/scripts/orchestrator.py"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "axios": "^1.7.4",
+    "clsx": "^2.1.1",
+    "firebase": "^12.18.0",
+    "firebase-admin": "^14.3.0",
+    "lucide-react": "^0.436.0",
+    "next": "14.2.35",
+    "openai": "^4.56.0",
+    "paystack-api": "^2.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "stripe": "^16.8.0",
+    "tailwind-merge": "^2.5.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "postcss": "^8",
+    "prisma": "^5.22.0",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "overrides": {
+    "jwks-rsa": {
+      "jose": "4.15.9"
+    }
+  }
+}
