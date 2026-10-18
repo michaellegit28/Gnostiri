@@ -79,7 +79,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: lesson4() },
   { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: lesson5() },
   { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: lesson6() },
-  { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: pending(7) },
+  { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: lesson7() },
   { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: pending(8) },
   { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: pending(9) },
   { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: pending(10) },
@@ -1503,6 +1503,239 @@ function lesson6(): LessonContent {
       {
         type: "paragraph",
         text: "Next: functions. So far every program has been a single list of steps. The next lesson introduces the reuse pattern — write a set of instructions once, give it a name, and call it wherever it is needed — which is the whole idea of composing programs from pieces, and the topic you will keep returning to.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 7 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson7(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: wrap a set of steps in a function with def; pass values in as parameters and send a value back with return; describe why return and print are different jobs; and use a function as the first real tool for composing a program out of reusable pieces.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-6. You need variables, conditions and loops, and the debugging idea that a program is a sequence of steps. A function is precisely a named chunk of such steps, so those foundations all apply inside it.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Function",
+        text: "A function is a named block of instructions that you reuse by calling its name. Write a recipe once, and ask for it as many times as you like — no need to repeat the instructions. This is the 'reuse' building block that PY4E lists among the constructs every program uses.",
+      },
+      {
+        type: "paragraph",
+        text: "Up to now, every program you wrote was one long list. That is fine for a short program, but it does not scale. A function changes the relationship you have with your code. You stop thinking, \"what is the next line?\" and start thinking, \"what are the pieces of this problem?\" — and each piece becomes a function. This is the first step toward the decomposing mindset you will build in Module 4, and it is the single tool that makes longer programs possible at all.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "There are three things a function does, and they are easy to conflate. A function takes inputs — these are the parameters, the placeholders in its definition that get filled in each time you call it. A function does work — the block inside. And a function can hand back a result — the return value. Understanding that a function is a machine with inputs, a body, and an output is more useful than memorising the syntax.",
+      },
+      {
+        type: "paragraph",
+        text: "The distinction that trips up beginners most is return versus print. They look similar but are fundamentally different. print writes something to the screen; return hands a value back to whichever part of the program called the function, and that value can be used — stored, passed on, or returned again. A function that prints and a function that returns are not interchangeable. If you call a function in an arithmetic expression and it only prints, you will get an error, because a printing function hands back nothing (it returns None).",
+      },
+      {
+        type: "paragraph",
+        text: "Finally, understand the order of events. Python reads the def to learn the recipe, but it does not run the body when it reads the def. The body runs only when the function is called. This is why a function can be defined long before it is used, and why an error inside a function does not surface until you actually call it. Defining a function is writing a recipe; calling it is cooking.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: define and call" },
+      {
+        type: "paragraph",
+        text: "The simplest function. It takes nothing in, does one job, and is called twice — so the job happens twice, from a single recipe.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def greet():\n    print("Hello!")\n\ngreet()\ngreet()`,
+        output: "Hello!\nHello!",
+        caption: "The def writes the recipe; each greet() call runs it. The blank line between the def and the first call is a style convention.",
+      },
+      {
+        type: "paragraph",
+        text: "The def line names the function and ends with a colon, just like the control statements — the indented block that follows is its body. The function is not run here; it is merely defined. When Python reaches greet() later, it looks up the recipe and runs its body. This is why you see Hello! twice: the recipe was written once, and asking for it twice produced two greetings with no duplicated code.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: parameters" },
+      {
+        type: "paragraph",
+        text: "A function that takes two inputs and returns their sum. The values you pass in each call fill the placeholders named in the definition.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def add(a, b):\n    result = a + b\n    return result\n\nprint(add(3, 4))\nprint(add(10, 20))`,
+        output: "7\n30",
+        caption: "a and b are the parameters; 3 and 4 in the first call fill them, and the returned value is printed.",
+      },
+      {
+        type: "paragraph",
+        text: "When you call add(3, 4), Python stores 3 into the parameter a and 4 into b, runs the body, computes the sum, and returns it. The return sends 7 back out to wherever add(3, 4) was used — here to print. The second call does the same, with different values, giving 30. Notice the function is identical both times; only the inputs changed. That is the power of a parameter: one recipe, many values.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: return vs print" },
+      {
+        type: "paragraph",
+        text: "This function returns a built string rather than printing it. The caller decides what to do with the returned value — here, print it.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def describe(name, age):\n    return name + " is " + str(age)\n\nprint(describe("Ada", 19))`,
+        output: "Ada is 19",
+        caption: "return hands the string back; the print outside the function is what displays it.",
+      },
+      {
+        type: "paragraph",
+        text: "The function builds a string and returns it; it does not itself print anything. The print is outside, in the calling code. This separation is the point: a well-built function produces a value and lets the caller decide whether to print it, store it, or pass it along. It also shows why str(age) is needed — concatenating text with a number requires conversion, a lesson from earlier that still applies inside functions.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: a default argument" },
+      {
+        type: "paragraph",
+        text: "A parameter can be given a default. Call the function with one argument and the default is used; supply two and it is overridden.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `def power(base, exp=2):\n    return base ** exp\n\nprint(power(3))\nprint(power(2, 5))`,
+        output: "9\n32",
+        caption: "power(3) uses exp=2 to give 9; power(2, 5) overrides the default to give 32.",
+      },
+      {
+        type: "paragraph",
+        text: "The function can be called two ways because exp has a default of 2. The first call supplies only the base, so exp falls back to 2 and computes 3 squared, which is 9. The second call supplies both arguments, so the default is ignored and 2 to the power 5 is computed, giving 32. Defaults are a convenience, not a substitute for thinking: a default should be the most common value, so callers write less when the usual case applies.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Confusing return with print. Paint the difference: print writes to the screen and returns None; return hands a value back to the caller. A function that only prints cannot be used where a value is needed.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting the def body is not run until the call. Creating a function with def does not execute it. If you define a function and nothing happens, you have not called it.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Defining a parameter list but not using the returned value. A function that returns nothing gives None, so print(add(3,4)) inside an arithmetic step can produce unexpected None results.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Placing side effects (like print) inside a function that later needs to return data. Keep the function's job focused: if it computes a value, return it and let the caller handle output.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "When does the body of a function defined with def actually run?",
+        answer: "Only when the function is called, not when it is defined.",
+        explanation: "def writes the recipe; the body runs on each call. This is why an error inside a function surfaces only at the call site.",
+      },
+      {
+        type: "question",
+        prompt: "What is the difference between return and print?",
+        answer: "return hands a value back to the caller; print displays it on the screen. A function that only prints can still return None and cannot be used in arithmetic or stored directly.",
+        explanation: "return produces a value for the program to use; print is a side effect for the reader. They are different jobs.",
+      },
+      {
+        type: "question",
+        prompt: "What is the difference between a parameter and an argument?",
+        answer: "A parameter is the placeholder named in the function definition; an argument is the actual value passed in when you call it.",
+        explanation: "Parameters are named in def; arguments are the real values supplied at the call. They line up by position.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which keyword defines a function in Python?",
+        options: ["function", "def", "func", "repeat"],
+        correctIndex: 1,
+        explanation: "def is the keyword that defines a function. The body follows the colon and is indented.",
+      },
+      {
+        type: "mcq",
+        stem: "What does the return statement do?",
+        options: ["Displays text on the screen", "Hands a value back to the caller of the function", "Starts a loop", "Ends the entire program"],
+        correctIndex: 1,
+        explanation: "return sends a value out of the function to wherever it was called. It is not the same as print, which only writes to the screen.",
+      },
+      {
+        type: "mcq",
+        stem: "When is a function's body executed?",
+        options: ["When the def line is read", "Each time the function is called", "When the program starts", "Never, functions are declarative"],
+        correctIndex: 1,
+        explanation: "def only defines the recipe. The body runs on each call. Calling is what triggers execution.",
+      },
+      {
+        type: "mcq",
+        stem: "In def greet(name), what is name?",
+        options: ["An argument", "A parameter", "A return value", "A global variable"],
+        correctIndex: 1,
+        explanation: "name is a parameter — a placeholder in the definition. The value actually passed at the call site is the argument.",
+      },
+      {
+        type: "mcq",
+        stem: "What does a function that calls print but has no return produce when used in an assignment?",
+        options: ["The printed value", "None", "0", "An error always"],
+        correctIndex: 1,
+        explanation: "A function without a return statement returns None. Assigning its result gives None, not the printed output.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the main benefit of putting code in a function?",
+        options: ["It makes the program run faster", "It lets you reuse the recipe instead of rewriting it", "It removes the need for variables", "It fixes all bugs"],
+        correctIndex: 1,
+        explanation: "Functions enable reuse: write the recipe once and call it many times, which is the core of composing programs from pieces.",
+      },
+      {
+        type: "mcq",
+        stem: "Which arithmetic operator does power(base, exp) use to raise base to the exponent?",
+        options: ["*", "**", "^", "//"],
+        correctIndex: 1,
+        explanation: "** is the exponentiation operator. base ** exp raises base to the power of exp. The caret ^ is not exponentiation in Python.",
+      },
+      {
+        type: "mcq",
+        stem: "Why must a small helper function return a value rather than print it when its result feeds another calculation?",
+        options: ["Because print can only run once", "Because the caller needs the value, and print hands back None", "Because functions cannot print", "Because return is always faster"],
+        correctIndex: 1,
+        explanation: "To use a function's result in arithmetic, the function must return a usable value. print hands back None, so the calculation would receive None.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A function is a named, reusable block of steps: inputs come in as parameters, the body runs on each call, and return hands a value back to the caller. print and return are different jobs, and the body runs only at the call. Functions let you think in pieces, which is precisely the direction the course is heading.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: lists and dictionaries. Functions collect actions into named pieces; the next lesson collects values into named structures — lists for an ordered sequence, dictionaries for a set of key-value pairs — and shows the word-count idiom that is the heart of the PY4E course.",
       },
     ],
   };
