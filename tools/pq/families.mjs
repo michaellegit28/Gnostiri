@@ -172,7 +172,297 @@ export const percentFamily = {
   },
 };
 
-export const FAMILIES = [linearFamily, areaFamily, percentFamily];
+/** Distance = speed x time — verified by recomputing the product. */
+export const motionFamily = {
+  id: "speed-distance-time",
+  topicSlug: "mechanics",
+  label: "Uniform motion: distance from speed and time",
+  params(r, difficulty) {
+    const speed = int(r, difficulty === "easy" ? 4 : 5, difficulty === "hard" ? 14 : 9) * 10;
+    const time = int(r, difficulty === "easy" ? 2 : 1, difficulty === "hard" ? 6 : 4) * (r() < 0.5 ? 1 : 0.5);
+    return { speed, time: time === 0.5 ? "30 minutes" : `${time} hours`, timeHours: time };
+  },
+  answer(p) {
+    return `${p.speed * p.timeHours} km`;
+  },
+  stem(p, locale) {
+    return `A ${pick(globalThis.__pq_rng, ["bus", "lorry", "train", "car"])} leaves ${pick(
+      globalThis.__pq_rng,
+      locale.places,
+    )} travelling at a steady ${p.speed} km/h for ${p.time}. How far does it travel?`;
+  },
+  distractors(p, r) {
+    const key = p.speed * p.timeHours;
+    const pool = [
+      p.speed + p.timeHours,
+      p.speed - p.timeHours,
+      Math.round(p.speed * p.timeHours * 1.5),
+      Math.max(1, Math.round(p.speed * p.timeHours * 0.5)),
+      key + p.speed,
+      Math.max(1, key - p.speed),
+    ].filter((v) => v > 0 && v !== key);
+    const out = [];
+    for (const c of shuffled(r, pool)) {
+      if (out.length === 3) break;
+      if (!out.includes(c)) out.push(c);
+    }
+    for (let extra = 1; out.length < 3; extra++) {
+      const v = key + extra * 10;
+      if (v > 0 && !out.includes(v)) out.push(v);
+    }
+    return out.slice(0, 3).map((v) => `${v} km`);
+  },
+  explanation(p) {
+    return `Distance = speed x time = ${p.speed} km/h x ${p.timeHours} h = ${p.speed * p.timeHours} km.`;
+  },
+  hint: () => "Keep the units consistent: km/h multiplied by hours gives km.",
+  verify(p, chosen) {
+    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    return Math.abs(v - p.speed * p.timeHours) < 1e-9;
+  },
+};
+
+/** V = IR — verified by dividing the supply voltage by the resistance. */
+export const ohmsLawFamily = {
+  id: "ohms-law",
+  topicSlug: "electricity-magnetism",
+  label: "Ohm's law: current from voltage and resistance",
+  params(r) {
+    const current = int(r, 1, 9);
+    const resistance = int(r, 2, 12) * current * 5;
+    return { voltage: current * resistance, resistance, current };
+  },
+  answer(p) {
+    return `${p.current} A`;
+  },
+  stem(p) {
+    return `A ${p.voltage} V supply is connected across a ${p.resistance} \u03a9 resistor. What current flows through the circuit?`;
+  },
+  distractors(p, r) {
+    const out = [];
+    const pool = [p.current + 1, Math.max(1, p.current - 1), p.current * 2, p.current + 2, Math.max(1, p.current - 2)];
+    for (const c of shuffled(r, pool)) {
+      if (out.length === 3) break;
+      if (c > 0 && c !== p.current && !out.includes(c)) out.push(c);
+    }
+    for (let extra = 1; out.length < 3; extra++) {
+      const v = p.current + 2 + extra;
+      if (!out.includes(v)) out.push(v);
+    }
+    return out.slice(0, 3).map((v) => `${v} A`);
+  },
+  explanation(p) {
+    return `Ohm's law: I = V / R = ${p.voltage} V \u00f7 ${p.resistance} \u03a9 = ${p.current} A.`;
+  },
+  hint: () => "Current = voltage divided by resistance.",
+  verify(p, chosen) {
+    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    return Math.abs(v - p.voltage / p.resistance) < 1e-9;
+  },
+};
+
+/** n = m / M — verified by dividing mass by molar mass. */
+export const moleFamily = {
+  id: "mole-mass",
+  topicSlug: "stoichiometry-mole",
+  label: "Moles from mass and molar mass",
+  params(r) {
+    const molarMass = pick(r, [24, 32, 40, 56, 64, 100, 18]);
+    const moles = int(r, 1, 8);
+    return { molarMass, mass: molarMass * moles, moles };
+  },
+  answer(p) {
+    return `${p.moles} mol`;
+  },
+  stem(p) {
+    return `A sample of a compound with molar mass ${p.molarMass} g/mol has a mass of ${p.mass} g. How many moles does the sample contain?`;
+  },
+  distractors(p, r) {
+    const out = [];
+    const pool = [p.moles + 1, Math.max(1, p.moles - 1), p.moles * 2, p.moles + 2, Math.max(1, p.moles - 2)];
+    for (const c of shuffled(r, pool)) {
+      if (out.length === 3) break;
+      if (c > 0 && c !== p.moles && !out.includes(c)) out.push(c);
+    }
+    for (let extra = 1; out.length < 3; extra++) {
+      const v = p.moles + 2 + extra;
+      if (!out.includes(v)) out.push(v);
+    }
+    return out.slice(0, 3).map((v) => `${v} mol`);
+  },
+  explanation(p) {
+    return `n = m / M = ${p.mass} g \u00f7 ${p.molarMass} g/mol = ${p.moles} mol.`;
+  },
+  hint: () => "Number of moles = mass divided by molar mass.",
+  verify(p, chosen) {
+    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    return Math.abs(v - p.mass / p.molarMass) < 1e-9;
+  },
+};
+
+/**
+ * Pythagorean triples — built from exact integer triples so verification is
+ * integer arithmetic, never floating point.
+ */
+export const pythagorasFamily = {
+  id: "pythagoras-triple",
+  topicSlug: "geometry-trigonometry",
+  label: "Right-triangle side from an integer Pythagorean triple",
+  params(r) {
+    const triples = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 40, 41]];
+    const [a, b, c] = pick(r, triples);
+    const k = int(r, 1, 4);
+    return { a: a * k, b: b * k, c: c * k };
+  },
+  answer(p) {
+    return `${p.c} units`;
+  },
+  stem(p) {
+    return `A right-angled triangle has the two shorter sides measuring ${p.a} units and ${p.b} units. What is the length of the hypotenuse?`;
+  },
+  distractors(p, r) {
+    const out = [];
+    const pool = [
+      `${p.a + p.b} units`,
+      `${p.c + 1} units`,
+      `${Math.max(1, p.c - 1)} units`,
+      `${p.a + p.b + 1} units`,
+      `${p.b} units`,
+      `${p.c + 2} units`,
+    ];
+    for (const c of shuffled(r, pool)) {
+      if (out.length === 3) break;
+      if (c !== `${p.c} units` && !out.includes(c)) out.push(c);
+    }
+    return out;
+  },
+  explanation(p) {
+    return `Hypotenuse\u00b2 = ${p.a}\u00b2 + ${p.b}\u00b2 = ${p.a * p.a} + ${p.b * p.b} = ${p.c * p.c}, so the hypotenuse is ${p.c} units.`;
+  },
+  hint: () => "Square both shorter sides, add, then take the square root.",
+  verify(p, chosen) {
+    const v = Number(String(chosen).replace(/[^0-9]/g, ""));
+    return v * v === p.a * p.a + p.b * p.b;
+  },
+};
+
+/** Two linear equations, unique solution — verified by substituting BOTH. */
+export const simultaneousFamily = {
+  id: "simultaneous-linear-pair",
+  topicSlug: "algebra-foundations",
+  label: "Simultaneous linear equations",
+  params(r, difficulty) {
+    const x = int(r, 1, difficulty === "hard" ? 15 : 9);
+    const y = int(r, 1, difficulty === "hard" ? 15 : 9);
+    let a1 = int(r, 1, 5);
+    let b1 = int(r, 1, 5);
+    let a2 = int(r, 1, 5);
+    let b2 = int(r, 1, 5);
+    // Unique solution requires a non-zero determinant.
+    for (let guard = 0; guard < 30 && a1 * b2 - a2 * b1 === 0; guard++) {
+      a2 = int(r, 1, 5);
+      b2 = int(r, 1, 5);
+    }
+    if (a1 * b2 - a2 * b1 === 0) b2 = b1 + 1;
+    return { a1, b1, c1: a1 * x + b1 * y, a2, b2, c2: a2 * x + b2 * y, x, y };
+  },
+  answer(p) {
+    return `x = ${p.x}, y = ${p.y}`;
+  },
+  stem(p) {
+    return `Solve the simultaneous equations: ${p.a1}x + ${p.b1}y = ${p.c1} and ${p.a2}x + ${p.b2}y = ${p.c2}.`;
+  },
+  distractors(p, r) {
+    const key = `x = ${p.x}, y = ${p.y}`;
+    const out = [];
+    const pool = [
+      `x = ${p.y}, y = ${p.x}`,
+      `x = ${p.x + 1}, y = ${p.y}`,
+      `x = ${p.x}, y = ${p.y + 1}`,
+      `x = ${p.x + p.y}, y = ${p.x}`,
+      `x = ${Math.max(1, p.x - 1)}, y = ${p.y}`,
+      `x = ${p.x}, y = ${Math.max(1, p.y - 1)}`,
+    ];
+    for (const c of shuffled(r, pool)) {
+      if (out.length === 3) break;
+      if (c !== key && !out.includes(c)) out.push(c);
+    }
+    // Top up deterministically if the pool collapsed (small x/y values can).
+    for (let extra = 1; out.length < 3; extra++) {
+      const c = `x = ${p.x + extra}, y = ${p.y}`;
+      if (c !== key && !out.includes(c)) out.push(c);
+    }
+    return out;
+  },
+  explanation(p) {
+    return `Elimination or substitution gives x = ${p.x} and y = ${p.y}. Check both: ${p.a1}(${p.x}) + ${p.b1}(${p.y}) = ${p.c1} and ${p.a2}(${p.x}) + ${p.b2}(${p.y}) = ${p.c2}.`;
+  },
+  hint: () => "Make one variable match, subtract the equations, then back-substitute.",
+  verify(p, chosen) {
+    const nums = String(chosen).match(/-?\d+/g) ?? [];
+    if (nums.length < 2) return false;
+    const x = Number(nums[0]);
+    const y = Number(nums[1]);
+    return p.a1 * x + p.b1 * y === p.c1 && p.a2 * x + p.b2 * y === p.c2;
+  },
+};
+
+/** Compound growth — verified with a tolerance against the power formula. */
+export const compoundInterestFamily = {
+  id: "compound-growth",
+  topicSlug: "statistics-probability",
+  label: "Compound growth on an investment",
+  params(r) {
+    const principal = int(r, 2, 20) * 500;
+    const rate = pick(r, [5, 10, 20, 4, 8]);
+    const years = int(r, 2, 5);
+    return { principal, rate, years };
+  },
+  answer(p) {
+    return `${Math.round(p.principal * Math.pow(1 + p.rate / 100, p.years))}`;
+  },
+  stem(p, locale) {
+    return `${pick(globalThis.__pq_rng, locale.names)} invests ${p.principal} at ${p.rate}% compound interest per year. What is the value after ${p.years} years? (nearest whole unit)`;
+  },
+  distractors(p, r) {
+    const key = Math.round(p.principal * Math.pow(1 + p.rate / 100, p.years));
+    const simple = Math.round(p.principal * (1 + (p.rate / 100) * p.years));
+    const pool = [simple, key + p.principal, Math.round(key * 1.1), Math.max(1, key - p.principal)];
+    const out = [];
+    for (const c of shuffled(r, pool)) {
+      if (out.length === 3) break;
+      if (c > 0 && c !== key && !out.includes(c)) out.push(c);
+    }
+    for (let extra = 1; out.length < 3; extra++) {
+      const v = key + extra * 100;
+      if (v !== key && !out.includes(v)) out.push(v);
+    }
+    return out.slice(0, 3).map(String);
+  },
+  explanation(p) {
+    return `A = P(1 + r)^n = ${p.principal}(1 + ${p.rate / 100})^${p.years} = ${Math.round(
+      p.principal * Math.pow(1 + p.rate / 100, p.years),
+    )} (rounded).`;
+  },
+  hint: () => "Compound interest multiplies the amount by (1 + rate) each year — it is not linear.",
+  verify(p, chosen) {
+    const v = Number(String(chosen).replace(/[^0-9.]/g, ""));
+    const exact = p.principal * Math.pow(1 + p.rate / 100, p.years);
+    return Math.abs(v - exact) <= 0.5;
+  },
+};
+
+export const FAMILIES = [
+  linearFamily,
+  areaFamily,
+  percentFamily,
+  motionFamily,
+  ohmsLawFamily,
+  moleFamily,
+  pythagorasFamily,
+  simultaneousFamily,
+  compoundInterestFamily,
+];
 
 export function familyById(id) {
   const f = FAMILIES.find((x) => x.id === id);
