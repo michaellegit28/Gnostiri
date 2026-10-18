@@ -77,7 +77,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-2`, title: "Variables & types", module: 1, estimatedMinutes: 30, concept: { title: "Variables and types", slug: "variables-and-types", blooms: "understand", minutes: 30, prereq: ["what-is-a-program"] }, content: lesson2() },
   { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: lesson3() },
   { id: `${COURSE_ID}-lesson-4`, title: "Conditions", module: 2, estimatedMinutes: 30, concept: { title: "Conditional statements", slug: "conditionals", blooms: "understand", minutes: 30, prereq: ["input-output-operators"] }, content: lesson4() },
-  { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: pending(5) },
+  { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: lesson5() },
   { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: pending(6) },
   { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: pending(7) },
   { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: pending(8) },
@@ -1020,6 +1020,256 @@ function lesson4(): LessonContent {
       {
         type: "paragraph",
         text: "Next: loops. Lesson 4 gave your program the power to choose; the next lesson gives it the power to repeat — doing something many times, which is what computers are actually for, and the start of the word-count idea that runs through the whole PY4E course.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 5 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson5(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: repeat a block while a condition holds using while; iterate over a special collection with for; stop or skip ahead inside a loop with break and continue; and write the accumulate-a-total pattern that appears constantly in real programs.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 4 (Conditions). You need if/elif/else and the boolean operators, because a loop's repetition is governed by a condition of exactly the kind you just learned to write — and because break and continue make decisions inside each pass.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Repeated execution",
+        text: "Repeated execution, or iteration, lets a program do a block of work over and over — usually with the data changing each time. It is the whole reason we use computers: the tasks that bore humans are exactly the ones that are repetitive, and a loop makes the computer do them a million times without tiring.",
+      },
+      {
+        type: "paragraph",
+        text: "Until now, every program you wrote had a fixed number of steps. That is a significant limit. If you wanted to count to a thousand, or read every line of a file, or sum a list of unknown length, you could not write out each step by hand. A loop removes the limit. You describe the pattern once, and tell the computer how many times — or under what condition — to repeat it.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "There are two loop kinds in Python, and choosing between them is the first decision. A while loop keeps going as long as some condition is True — you do not know in advance how many passes there will be, you just know when to stop. A for loop marches through a known sequence — you usually know exactly how many items there are. Beginners reach for while as the default and then get stuck on the infinite loop; the habit worth building is to use for when you can, because it is harder to make a for loop run forever.",
+      },
+      {
+        type: "paragraph",
+        text: "The second thing to know is the accumulate pattern, which is the heart of nearly everything to come. Almost every loop you write will do one of two things: collect or accumulate. Collect means building up a new value each pass (a running total, a list of results). Accumulate means adding to something you started before the loop. Either way you must initialise an accumulator before the loop and then update it inside — two separate steps, and forgetting the first is a classic bug.",
+      },
+      {
+        type: "paragraph",
+        text: "Third: break and continue are exits, not the loop itself. break stops the loop immediately and jumps past it; continue skips the rest of the current pass and goes to the next one. They are sometimes overused. If you find yourself using break in every loop, there is usually a cleaner condition. But they are genuinely useful for the classic pattern of finding something and stopping the moment you find it.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: the while loop" },
+      {
+        type: "paragraph",
+        text: "Count from 0 to 4. The loop runs while n is less than 5, printing and then increasing n each pass, so it stops once n reaches 5.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `n = 0\nwhile n < 5:\n    print(n)\n    n = n + 1`,
+        output: "0\n1\n2\n3\n4",
+        caption: "Each pass prints n, then adds 1. When n becomes 5 the condition is False and the loop ends.",
+      },
+      {
+        type: "paragraph",
+        text: "Three parts make this work. There is an initialisation before the loop — n = 0 — so the condition has a value to test the first time. There is the condition itself, n < 5, which is re-checked at the start of every pass. And there is an update inside, n = n + 1, so that the condition eventually becomes False. Remove the update and the loop never ends — the condition stays True forever. Remove the initialisation and n does not exist when the loop first checks it.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: the for loop" },
+      {
+        type: "paragraph",
+        text: "The same counting, done with for. Here the sequence is supplied by range, so you do not manage your own counter.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `for i in range(3):\n    print(i)`,
+        output: "0\n1\n2",
+        caption: "range(3) produces 0, 1 and 2 — the for loop visits each in turn.",
+      },
+      {
+        type: "paragraph",
+        text: "range(3) is a sequence of three numbers: 0, 1 and 2. It stops before 3, which surprises people who expect it to include the last number. The for loop takes each value in the sequence, assigns it to the variable i, and runs the indented block. This is the loop you will use most — it reads naturally, it cannot accidentally miss its update, and it is very hard to make infinite.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: stopping early with break" },
+      {
+        type: "paragraph",
+        text: "Search the numbers 0 to 9 and stop the moment you reach 3. The loop looks like it should go to 9, but break cuts it off.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `for i in range(10):\n    if i == 3:\n        break\n    print(i)`,
+        output: "0\n1\n2",
+        caption: "When i becomes 3, break leaves the loop immediately, so 3 and later values are never printed.",
+      },
+      {
+        type: "paragraph",
+        text: "Notice the print comes after the if. When i reaches 3, the condition i == 3 is True, so break fires — it leaves the loop immediately without running the rest of that pass, which is the print. That is why 3 is not printed. This is the find-and-stop pattern: you test inside the loop, and the moment you find what you want, you break. If the print had gone before the if, 3 would have been printed first. Order matters.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: skipping one with continue" },
+      {
+        type: "paragraph",
+        text: "Print the numbers 0 to 4 but skip 2. continue jumps to the next pass without executing the lines after it.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `for i in range(5):\n    if i == 2:\n        continue\n    print(i)`,
+        output: "0\n1\n3\n4",
+        caption: "When i is 2, continue abandons that pass and moves to 3, so 2 is never printed.",
+      },
+      {
+        type: "paragraph",
+        text: "continue only skips the rest of the current iteration; it does not end the loop. When i is 2, the if matches and continue sends control back to the top of the loop with the next value, 3. Everything after the continue in that pass — the print — is skipped for 2 only. The loop still runs to completion for every other value. Where break is an exit, continue is a skip.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 5: the accumulate pattern" },
+      {
+        type: "paragraph",
+        text: "Sum the numbers 1 to 5. You start a total before the loop and add each number inside it.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `total = 0\nfor i in range(1, 6):\n    total = total + i\nprint("sum:", total)`,
+        output: "sum: 15",
+        caption: "total starts at 0 and adds 1, then 2, then 3, then 4, then 5, ending at 15.",
+      },
+      {
+        type: "paragraph",
+        text: "This is the pattern that appears in every data program you will write from now on. Before the loop, total = 0 initialises the accumulator — this is easy to forget, and if you do, total does not exist when the loop first tries to add to it. Inside the loop, total = total + i reads the current total, adds the new value, and stores the result back. Each pass the total grows. This same skeleton, with slight changes, is what counts words, finds maximums, and builds almost every summary in the PY4E course.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "An infinite loop. If the condition never becomes False — usually because the update is missing or inside an if — the loop runs forever. Make sure the body changes something that affects the condition.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting to initialise an accumulator before the loop. If you write total = total + i inside a loop without a total = 0 before it, Python raises a NameError the first time.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Off-by-one in range. range(5) gives 0..4, not 0..5. To include the last number, range(1, 6) — the stop value is exclusive.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Using while when a for would be safer. A for loop knows when to stop and cannot easily miss its update, so reach for it whenever you are stepping through a known sequence.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Why does the while loop below never end? n = 0 while n < 5: print(n)",
+        answer: "Because nothing changes n inside the loop, so n < 5 stays True forever — there is no update line.",
+        explanation: "A while loop relies on something in its body making the condition eventually False. Without n = n + 1, the condition never changes.",
+      },
+      {
+        type: "question",
+        prompt: "What values does range(3) visit, and which value is excluded?",
+        answer: "It visits 0, 1 and 2. The stop value 3 is excluded — range's upper bound is exclusive.",
+        explanation: "range(start, stop) goes up to but not including stop. To include a number, use a stop one greater.",
+      },
+      {
+        type: "question",
+        prompt: "In the accumulate pattern, why must the accumulator be set before the loop?",
+        answer: "Because the loop body reads and adds to total; if it is not defined before the first pass, Python raises a NameError.",
+        explanation: "An accumulator needs a starting value (usually 0) before the loop, then is updated inside. The two steps are separate and both required.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which loop repeats while a condition holds, and may not know how many times in advance?",
+        options: ["for", "while", "if", "def"],
+        correctIndex: 1,
+        explanation: "A while loop keeps going while its condition is True — suited to 'keep going until something changes'. A for loop steps through a known sequence.",
+      },
+      {
+        type: "mcq",
+        stem: "What does break do inside a loop?",
+        options: ["Skips the current pass and moves to the next", "Exits the loop immediately", "Pauses the program", "Restarts the loop from the top"],
+        correctIndex: 1,
+        explanation: "break ends the loop entirely and continues after it. The skip-one-pass behaviour is continue, not break.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the output of for i in range(4): print(i)?",
+        options: ["1 2 3 4", "0 1 2 3", "0 1 2 3 4", "1 2 3"],
+        correctIndex: 1,
+        explanation: "range(4) produces 0, 1, 2 and 3 — it stops one before the upper bound, so it visits four values starting at zero.",
+      },
+      {
+        type: "mcq",
+        stem: "Which code produces an infinite loop?",
+        options: ["for i in range(5): print(i)", "n = 0 while n < 5:", "while n < 5: n = n + 1", "for i in range(0,5): print(i)"],
+        correctIndex: 1,
+        explanation: "Without an update, n stays 0 forever, so n < 5 never becomes False. A for loop supplies its own sequence and cannot do this.",
+      },
+      {
+        type: "mcq",
+        stem: "A loop prints all values but must skip 4. Which keyword does it?",
+        options: ["break", "continue", "pass", "return"],
+        correctIndex: 1,
+        explanation: "continue skips the rest of the current pass and moves to the next value, so 4 is skipped but the loop finishes.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the accumulate-total skeleton in the right order?",
+        options: ["total = total + i inside the loop, with no total before it", "total = 0 before the loop, then total = total + i inside", "total = 0 inside the loop, reading it each pass", "i = 0 before the loop, then total = i"],
+        correctIndex: 1,
+        explanation: "Initialise the accumulator before the loop, then update it inside. Forgetting the initialisation gives a NameError.",
+      },
+      {
+        type: "mcq",
+        stem: "To sum the numbers from 1 to 5 inclusive, what range do you use?",
+        options: ["range(1, 5)", "range(1, 6)", "range(5)", "range(0, 5)"],
+        correctIndex: 1,
+        explanation: "The stop value is exclusive, so range(1, 6) visits 1, 2, 3, 4 and 5 — exactly the inclusive set. range(1, 5) would miss 5.",
+      },
+      {
+        type: "mcq",
+        stem: "Why does placing the print after the if matter in a break loop?",
+        options: ["It does not matter", "Because break ends the pass before the print runs, so the matched value is not printed", "Because print cannot follow if", "Because break skips the next pass"],
+        correctIndex: 1,
+        explanation: "break exits the loop at that moment, before any later statement in the same pass. So lines after the break are skipped for that value.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A loop repeats a block: while repeats while a condition holds, for steps through a sequence. break exits, continue skips a pass, and the accumulate pattern — initialise a total, then add each value inside — is the skeleton behind nearly every data program. Prefer for when you know the sequence, and always make sure something in a while body changes its condition.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: logic & debugging basics. Lesson 5 gave you repetition; the next lesson steps back and shows you how to read a tricky loop and find the errors when one does not do what you meant — the skill that turns a writer of small loops into someone who can untangle them.",
       },
     ],
   };

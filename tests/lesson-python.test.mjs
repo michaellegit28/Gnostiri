@@ -104,11 +104,25 @@ const SNIPPETS_L4 = [
   },
 ];
 
+// Lesson 5 (Loops) worked examples.
+const SNIPPETS_L5 = [
+  { name: "the while loop", code: `n = 0\nwhile n < 5:\n    print(n)\n    n = n + 1`, expected: "0\n1\n2\n3\n4" },
+  { name: "the for loop", code: `for i in range(3):\n    print(i)`, expected: "0\n1\n2" },
+  { name: "stopping early with break", code: `for i in range(10):\n    if i == 3:\n        break\n    print(i)`, expected: "0\n1\n2" },
+  { name: "skipping one with continue", code: `for i in range(5):\n    if i == 2:\n        continue\n    print(i)`, expected: "0\n1\n3\n4" },
+  { name: "the accumulate pattern", code: `total = 0\nfor i in range(1, 6):\n    total = total + i\nprint("sum:", total)`, expected: "sum: 15" },
+];
+
 const CLAIMS_L4 = [
   { name: "not inverts a condition", code: `print(not (5 > 3))`, expected: "False" },
   { name: "exactly one branch runs in a chain", code: `x = 90\nif x >= 70:\n    print("loose")\nelif x >= 85:\n    print("strict")`, expected: "loose" },
   { name: "and requires both true", code: `print(True and False)`, expected: "False" },
   { name: "or requires one true", code: `print(True or False)`, expected: "True" },
+];
+
+const CLAIMS_L5 = [
+  { name: "range excludes the stop value", code: `print(list(range(3)))`, expected: "[0, 1, 2]" },
+  { name: "missing update causes an infinite loop (so we bound it)", code: `n = 0\ncount = 0\nwhile n < 5 and count < 3:\n    print(n)\n    count = count + 1`, expected: "0\n0\n0" },
 ];
 
 const CLAIMS_L3 = [
@@ -148,9 +162,9 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4];
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5];
 for (const s of ALL_SNIPPETS) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : "lesson 1";
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
@@ -158,9 +172,9 @@ for (const s of ALL_SNIPPETS) {
   });
 }
 
-const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4];
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5];
 for (const c of ALL_CLAIMS) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : "lesson 1";
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code, c.stdin);
     if (c.expectedError) {
