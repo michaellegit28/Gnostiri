@@ -133,10 +133,13 @@ export default async function CoursePage({ params, searchParams }: { params: { c
               return (
                 <article key={lesson.id} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 md:p-7">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-lg md:text-xl font-semibold">
-                      {lesson.title}{" "}
+                    <Link
+                      href={`/university/${course.slug}/lessons/${lesson.id}`}
+                      className="text-lg md:text-xl font-semibold hover:text-gold transition-colors"
+                    >
+                      {lesson.title}
                       {locked && <span className="ml-2 text-xs text-gold align-middle">Premium</span>}
-                    </h3>
+                    </Link>
                     <span className="text-[11px] text-slate-500 shrink-0">~{lesson.estimatedMinutes} min</span>
                   </div>
                   {locked ? (
@@ -148,8 +151,14 @@ export default async function CoursePage({ params, searchParams }: { params: { c
                       <LessonRenderer content={content} />
                     </div>
                   )}
-                  <div className="mt-4 pt-4 border-t border-slate-800/80">
+                  <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
                     <CourseCompletionButton courseId={course.id} lessonId={lesson.id} locked={locked} />
+                    <Link
+                      href={`/university/${course.slug}/lessons/${lesson.id}`}
+                      className="text-sm font-medium text-[#D4AF37] hover:text-amber-300 transition-colors"
+                    >
+                      Open study page →
+                    </Link>
                   </div>
                 </article>
               );
