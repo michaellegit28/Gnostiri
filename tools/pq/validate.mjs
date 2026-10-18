@@ -38,6 +38,10 @@ for (const f of files) {
     console.error(`FAIL ${f}: unreadable JSON (${err.message})`);
     process.exit(1);
   }
+  if (!Array.isArray(parsed)) {
+    console.warn(`SKIP ${f}: not a question bank (expected a JSON array)`);
+    continue;
+  }
   for (const it of parsed) items.push({ ...it, __file: f });
 }
 

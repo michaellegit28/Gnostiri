@@ -44,6 +44,12 @@ node --test tools/pq/pq.test.mjs
 | `linear-two-sided` | algebra-foundations | substituting x back into both sides |
 | `rectangle-area-quadratic` | algebra-foundations | w(w + k) = area product |
 | `percent-increase-money` | statistics-probability | recomputing base x (1 + p%) |
+| `speed-distance-time` | mechanics | recomputing speed x time |
+| `ohms-law` | electricity-magnetism | recomputing V / R |
+| `mole-mass` | stoichiometry-mole | recomputing m / M |
+| `pythagoras-triple` | geometry-trigonometry | a\u00b2 + b\u00b2 = c\u00b2 on exact integer triples |
+| `simultaneous-linear-pair` | algebra-foundations | substituting BOTH equations (unique solution enforced) |
+| `compound-growth` | statistics-probability | P(1 + r)\u207f with tolerance |
 
 ## Guarantees the pipeline enforces
 
