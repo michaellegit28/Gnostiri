@@ -7,9 +7,9 @@
   "type": "mcq",
   "questionText": "The organelle in which aerobic respiration takes place is the",
   "options": [
+   "nucleus",
    "chloroplast",
    "mitochondrion",
-   "nucleus",
    "ribosome"
   ],
   "correctAnswer": "mitochondrion",
@@ -28,10 +28,10 @@
   "type": "mcq",
   "questionText": "Which structure is found in plant cells but NOT in animal cells?",
   "options": [
+   "chloroplast",
    "nucleus",
-   "cell membrane",
    "ribosome",
-   "chloroplast"
+   "cell membrane"
   ],
   "correctAnswer": "chloroplast",
   "explanation": "Chloroplasts carry out photosynthesis and occur only in plant (and algal) cells. Membranes, ribosomes and nuclei occur in both cell types.",
@@ -49,9 +49,9 @@
   "type": "mcq",
   "questionText": "The cell membrane is described as partially permeable because it",
   "options": [
+   "allows some substances to pass through but blocks others",
    "allows everything dissolved to pass freely",
    "is permeable only to gases",
-   "allows some substances to pass through but blocks others",
    "blocks all dissolved substances"
   ],
   "correctAnswer": "allows some substances to pass through but blocks others",
@@ -70,10 +70,10 @@
   "type": "mcq",
   "questionText": "Osmosis is best defined as the movement of",
   "options": [
-   "water from a dilute to a more concentrated solution through a partially permeable membrane",
-   "water against the gradient using energy",
+   "any solute from concentrated to dilute solution",
    "oxygen into the blood",
-   "any solute from concentrated to dilute solution"
+   "water against the gradient using energy",
+   "water from a dilute to a more concentrated solution through a partially permeable membrane"
   ],
   "correctAnswer": "water from a dilute to a more concentrated solution through a partially permeable membrane",
   "explanation": "Osmosis is a special case of diffusion: WATER molecules only, through a partially permeable membrane, down the water potential gradient — no energy spent. Option 3 describes active transport.",
@@ -113,9 +113,9 @@
   "questionText": "The cells produced at the end of mitosis are",
   "options": [
    "two cells with half the chromosome number",
+   "eight varied daughter cells",
    "four haploid gametes",
-   "two cells genetically identical to the parent",
-   "eight varied daughter cells"
+   "two cells genetically identical to the parent"
   ],
   "correctAnswer": "two cells genetically identical to the parent",
   "explanation": "Mitosis duplicates the chromosomes once and divides once: two diploid cells, genetically identical — growth and repair. Four varied haploid cells describe MEIOSIS.",
@@ -133,9 +133,9 @@
   "type": "mcq",
   "questionText": "Crossing over, which creates genetic variation, occurs during",
   "options": [
-   "cytokinesis",
-   "fertilisation",
    "mitosis, prophase",
+   "fertilisation",
+   "cytokinesis",
    "meiosis I, prophase I"
   ],
   "correctAnswer": "meiosis I, prophase I",
@@ -156,8 +156,8 @@
   "options": [
    "water leaves and the cell becomes plasmolysed",
    "solutes leave and the cell shrinks against the wall",
-   "no change occurs",
-   "water enters and the cell swells"
+   "water enters and the cell swells",
+   "no change occurs"
   ],
   "correctAnswer": "water leaves and the cell becomes plasmolysed",
   "explanation": "The external solution is hypertonic: water exits by osmosis, the cytoplasm pulls away from the wall — plasmolysis. In a dilute (hypotonic) solution the opposite happens, and the wall prevents bursting.",
@@ -175,10 +175,10 @@
   "type": "mcq",
   "questionText": "Cells remain microscopic mainly because",
   "options": [
-   "large cells cannot store enough water",
-   "as a cell grows its surface area-to-volume ratio falls, slowing exchange",
    "DNA cannot exceed a fixed length",
-   "the cell wall restricts all growth"
+   "as a cell grows its surface area-to-volume ratio falls, slowing exchange",
+   "the cell wall restricts all growth",
+   "large cells cannot store enough water"
   ],
   "correctAnswer": "as a cell grows its surface area-to-volume ratio falls, slowing exchange",
   "explanation": "Volume grows as the cube of size but surface area only as the square: a large cell cannot exchange materials fast enough across its membrane — the demand outruns the supply. Division resets the ratio.",
@@ -196,9 +196,9 @@
   "type": "mcq",
   "questionText": "Which statement correctly distinguishes meiosis from mitosis?",
   "options": [
+   "meiosis produces four haploid cells with new gene combinations",
    "meiosis keeps the chromosome number unchanged",
    "meiosis produces two identical diploid cells",
-   "meiosis produces four haploid cells with new gene combinations",
    "meiosis occurs in all body tissues"
   ],
   "correctAnswer": "meiosis produces four haploid cells with new gene combinations",
@@ -217,10 +217,10 @@
   "type": "mcq",
   "questionText": "The molecule that serves as the immediate energy currency of the cell is",
   "options": [
-   "glucose",
-   "ATP",
    "starch",
-   "DNA"
+   "glucose",
+   "DNA",
+   "ATP"
   ],
   "correctAnswer": "ATP",
   "explanation": "Respiration releases energy FROM glucose INTO ATP — the transferable currency every cell spends. Glucose is the fuel; ATP is the spendable charge.",
@@ -238,10 +238,10 @@
   "type": "mcq",
   "questionText": "The correct word equation for aerobic respiration is",
   "options": [
-   "oxygen → glucose + carbon dioxide",
-   "glucose + oxygen → carbon dioxide + water (+ energy)",
    "carbon dioxide + water → glucose + oxygen",
-   "glucose → lactic acid + energy"
+   "glucose + oxygen → carbon dioxide + water (+ energy)",
+   "glucose → lactic acid + energy",
+   "oxygen → glucose + carbon dioxide"
   ],
   "correctAnswer": "glucose + oxygen → carbon dioxide + water (+ energy)",
   "explanation": "Aerobic respiration oxidises glucose using oxygen, releasing CO₂, water and energy. Option 2 is photosynthesis REVERSED — the classic mix-up.",
@@ -259,10 +259,10 @@
   "type": "mcq",
   "questionText": "Photosynthesis takes place in the",
   "options": [
-   "vacuole",
-   "nucleus",
    "mitochondrion",
-   "chloroplast"
+   "vacuole",
+   "chloroplast",
+   "nucleus"
   ],
   "correctAnswer": "chloroplast",
   "explanation": "Chloroplasts contain chlorophyll, the pigment that traps light energy for photosynthesis. Mitochondria run the reverse process — respiration.",
@@ -280,10 +280,10 @@
   "type": "mcq",
   "questionText": "Which of the following is NOT a limiting factor of photosynthesis?",
   "options": [
-   "carbon dioxide concentration",
    "temperature",
-   "soil pH",
-   "light intensity"
+   "light intensity",
+   "carbon dioxide concentration",
+   "soil pH"
   ],
   "correctAnswer": "soil pH",
   "explanation": "The rate of photosynthesis plateaus at whichever input runs short: light, CO₂, or suitable temperature. Soil pH affects the ROOTS' health but does not directly set the photosynthetic rate.",
@@ -301,10 +301,10 @@
   "type": "mcq",
   "questionText": "Enzymes stop working above a certain temperature because",
   "options": [
-   "the substrate is used up",
-   "the active site loses its shape (denaturation)",
    "the enzyme dissolves",
-   "temperature slows all reactions equally"
+   "temperature slows all reactions equally",
+   "the active site loses its shape (denaturation)",
+   "the substrate is used up"
   ],
   "correctAnswer": "the active site loses its shape (denaturation)",
   "explanation": "Heat breaks the bonds holding the enzyme's 3-D shape; a deformed active site cannot bind the substrate. The enzyme is denatured — not 'killed' or 'used up'.",
@@ -323,9 +323,9 @@
   "questionText": "Anaerobic respiration in yeast cells produces",
   "options": [
    "protein and water",
-   "ethanol and carbon dioxide",
+   "glucose and oxygen",
    "lactic acid only",
-   "glucose and oxygen"
+   "ethanol and carbon dioxide"
   ],
   "correctAnswer": "ethanol and carbon dioxide",
   "explanation": "Yeast ferments sugar anaerobically into ethanol + CO₂ — the basis of brewing and baking. Muscle cells anaerobically produce LACTIC acid instead — know which organism gives which.",
@@ -343,10 +343,10 @@
   "type": "mcq",
   "questionText": "The role of chlorophyll in photosynthesis is to",
   "options": [
-   "store glucose",
-   "pump water up the stem",
    "absorb light energy",
-   "split into carbon dioxide"
+   "split into carbon dioxide",
+   "pump water up the stem",
+   "store glucose"
   ],
   "correctAnswer": "absorb light energy",
   "explanation": "Chlorophyll is the pigment that captures light energy, powering the reaction that builds glucose from CO₂ and water. It neither stores product nor moves water.",
@@ -366,8 +366,8 @@
   "options": [
    "enzymes are too small to bind twice",
    "substrates repel each other",
-   "the enzyme changes into the substrate",
-   "the active site has a shape complementary to that substrate alone"
+   "the active site has a shape complementary to that substrate alone",
+   "the enzyme changes into the substrate"
   ],
   "correctAnswer": "the active site has a shape complementary to that substrate alone",
   "explanation": "Specificity comes from geometry: only the matching substrate fits the active site (lock-and-key / induced fit). Change the shape — by heat or pH — and the fit is lost.",
@@ -385,10 +385,10 @@
   "type": "mcq",
   "questionText": "A sealed jar of pondweed is kept in darkness for 24 hours. The carbon dioxide concentration in the jar will",
   "options": [
-   "fall to zero",
-   "rise, because respiration continues without photosynthesis",
+   "fall, because respiration uses CO₂",
    "stay constant",
-   "fall, because respiration uses CO₂"
+   "fall to zero",
+   "rise, because respiration continues without photosynthesis"
   ],
   "correctAnswer": "rise, because respiration continues without photosynthesis",
   "explanation": "In darkness photosynthesis stops but respiration never does — the plant releases CO₂ continuously, so the jar's CO₂ climbs. In light, photosynthesis would exceed respiration and the reverse occurs.",
@@ -406,10 +406,10 @@
   "type": "mcq",
   "questionText": "The first stage of glucose breakdown in aerobic respiration occurs in the",
   "options": [
-   "vacuole",
-   "cytoplasm",
+   "cell wall",
    "nucleus",
-   "cell wall"
+   "vacuole",
+   "cytoplasm"
   ],
   "correctAnswer": "cytoplasm",
   "explanation": "Glycolysis — the splitting of glucose into pyruvate — happens in the CYTOPLASM; only afterwards do the reactions move into the mitochondrion for the main ATP yield.",
@@ -427,10 +427,10 @@
   "type": "mcq",
   "questionText": "The structure of a DNA molecule is described as a",
   "options": [
-   "single strand",
    "double helix",
    "triple ring",
-   "flat sheet"
+   "flat sheet",
+   "single strand"
   ],
   "correctAnswer": "double helix",
   "explanation": "DNA is two complementary strands coiled around each other — the double helix — held together by paired bases.",
@@ -469,10 +469,10 @@
   "type": "mcq",
   "questionText": "The molecule that carries the genetic code from the nucleus to the ribosome is",
   "options": [
+   "mRNA",
    "ATP",
-   "haemoglobin",
    "DNA",
-   "mRNA"
+   "haemoglobin"
   ],
   "correctAnswer": "mRNA",
   "explanation": "Transcription copies the gene into messenger RNA, which travels to the ribosome where its codons are translated into amino acids.",
@@ -491,9 +491,9 @@
   "questionText": "An organism with genotype Tt shows the dominant trait because",
   "options": [
    "the dominant allele masks the recessive allele",
+   "the recessive allele is stronger",
    "the alleles are identical",
-   "recessive alleles never exist",
-   "the recessive allele is stronger"
+   "recessive alleles never exist"
   ],
   "correctAnswer": "the dominant allele masks the recessive allele",
   "explanation": "Heterozygotes carry both alleles; the dominant one is expressed and the recessive is hidden — but still transmissible to offspring.",
@@ -511,10 +511,10 @@
   "type": "mcq",
   "questionText": "A cross between two heterozygous tall plants (Tt × Tt) gives a phenotypic ratio of",
   "options": [
-   "3 tall : 1 short",
-   "1 tall : 1 short",
+   "2 tall : 2 medium",
    "all short",
-   "2 tall : 2 medium"
+   "1 tall : 1 short",
+   "3 tall : 1 short"
   ],
   "correctAnswer": "3 tall : 1 short",
   "explanation": "Punnett: TT, Tt, Tt, tt — three genotypes show the dominant tall phenotype, one shows the recessive short. The classic monohybrid ratio.",
@@ -532,9 +532,9 @@
   "type": "mcq",
   "questionText": "A mutation is",
   "options": [
-   "a type of protein",
-   "a sudden change in the genetic material",
    "the normal passing of traits to offspring",
+   "a sudden change in the genetic material",
+   "a type of protein",
    "the pairing of adenine with thymine"
   ],
   "correctAnswer": "a sudden change in the genetic material",
@@ -553,9 +553,9 @@
   "type": "mcq",
   "questionText": "A zygote with XY sex chromosomes will normally develop into",
   "options": [
+   "a female",
    "both sexes",
    "neither — it will not develop",
-   "a female",
    "a male"
   ],
   "correctAnswer": "a male",
@@ -575,9 +575,9 @@
   "questionText": "A child shows a recessive trait that NEITHER parent displays. The most likely explanation is that",
   "options": [
    "the trait came from nutrition",
-   "one parent is homozygous dominant",
+   "both parents are heterozygous carriers",
    "mutations never pass to children",
-   "both parents are heterozygous carriers"
+   "one parent is homozygous dominant"
   ],
   "correctAnswer": "both parents are heterozygous carriers",
   "explanation": "Two carriers (Aa × Aa) each pass the recessive allele with probability ½ — a quarter of children show the recessive trait (aa) despite neither parent showing it.",
@@ -595,9 +595,9 @@
   "type": "mcq",
   "questionText": "A frameshift mutation, which alters every codon after it, is caused by",
   "options": [
+   "normal DNA replication",
    "substitution of one base for another",
    "insertion or deletion of a base",
-   "normal DNA replication",
    "crossing over"
   ],
   "correctAnswer": "insertion or deletion of a base",
@@ -616,10 +616,10 @@
   "type": "mcq",
   "questionText": "Translation — the assembly of amino acids into a protein — occurs at the",
   "options": [
-   "mitochondrion",
    "ribosome",
-   "nucleus",
-   "cell membrane"
+   "cell membrane",
+   "mitochondrion",
+   "nucleus"
   ],
   "correctAnswer": "ribosome",
   "explanation": "Translation reads the mRNA's codons at the RIBOSOME, matching transfer RNAs to build the polypeptide chain. Transcription happens in the nucleus; translation at the ribosome.",
@@ -638,9 +638,9 @@
   "questionText": "Bile, which emulsifies fats during digestion, is produced in the",
   "options": [
    "liver",
+   "small intestine",
    "stomach",
-   "pancreas",
-   "small intestine"
+   "pancreas"
   ],
   "correctAnswer": "liver",
   "explanation": "The liver produces bile (stored in the gall bladder), which EMULSIFIES fat — breaking it into droplets to enlarge the surface for lipase. It contains no digestive enzyme itself.",
@@ -658,10 +658,10 @@
   "type": "mcq",
   "questionText": "The functional unit of the kidney is the",
   "options": [
+   "alveolus",
    "ureter",
-   "nephron",
    "neuron",
-   "alveolus"
+   "nephron"
   ],
   "correctAnswer": "nephron",
   "explanation": "Each kidney holds about a million nephrons — the microscopic filters that produce urine from blood by ultrafiltration and selective reabsorption.",
@@ -679,10 +679,10 @@
   "type": "mcq",
   "questionText": "Gas exchange between the air and the blood takes place in the",
   "options": [
+   "bronchi",
    "alveoli",
-   "diaphragm",
    "trachea",
-   "bronchi"
+   "diaphragm"
   ],
   "correctAnswer": "alveoli",
   "explanation": "The alveoli are thin, moist, folded sacs wrapped in capillaries — oxygen diffuses in, CO₂ diffuses out, down concentration gradients.",
@@ -700,10 +700,10 @@
   "type": "mcq",
   "questionText": "The enzyme that digests starch into maltose is",
   "options": [
-   "pepsin",
    "lipase",
+   "amylase",
    "trypsin",
-   "amylase"
+   "pepsin"
   ],
   "correctAnswer": "amylase",
   "explanation": "Amylase breaks starch (a polysaccharide) into maltose; pepsin digests PROTEIN; lipase digests FATS. Matching enzyme to substrate is the tested skill.",
@@ -721,10 +721,10 @@
   "type": "mcq",
   "questionText": "Veins differ from arteries because veins",
   "options": [
-   "carry blood away from the heart at high pressure",
+   "have thick muscular walls only",
    "have valves and return blood to the heart at low pressure",
    "always carry oxygenated blood",
-   "have thick muscular walls only"
+   "carry blood away from the heart at high pressure"
   ],
   "correctAnswer": "have valves and return blood to the heart at low pressure",
   "explanation": "Arteries: thick, muscular, high pressure, AWAY from the heart. Veins: thinner, valved, low pressure, TOWARD the heart. The exception to remember: the pulmonary artery carries DEOXYGENATED blood.",
@@ -742,10 +742,10 @@
   "type": "mcq",
   "questionText": "The correct pathway of a reflex arc is",
   "options": [
-   "receptor → motor neurone → sensory neurone → effector",
-   "receptor → sensory neurone → relay neurone → motor neurone → effector",
    "effector → motor neurone → brain → receptor",
-   "sensory neurone → receptor → effector → relay neurone"
+   "receptor → motor neurone → sensory neurone → effector",
+   "sensory neurone → receptor → effector → relay neurone",
+   "receptor → sensory neurone → relay neurone → motor neurone → effector"
   ],
   "correctAnswer": "receptor → sensory neurone → relay neurone → motor neurone → effector",
   "explanation": "The stimulus is detected, the impulse travels sensory → relay (spinal cord) → motor, and the muscle or gland RESPONDS — all without waiting for the brain, which is why reflexes are fast.",
@@ -763,10 +763,10 @@
   "type": "mcq",
   "questionText": "Insulin lowers blood glucose by",
   "options": [
+   "converting glycogen into glucose",
    "increasing the heart rate",
-   "dissolving glucose in urine",
    "converting excess glucose into glycogen in the liver",
-   "converting glycogen into glucose"
+   "dissolving glucose in urine"
   ],
   "correctAnswer": "converting excess glucose into glycogen in the liver",
   "explanation": "Insulin (from pancreatic beta cells) tells the liver and muscles to STORE glucose as glycogen. Glucagon does the reverse — the two hormones hold blood glucose in a narrow band.",
@@ -785,9 +785,9 @@
   "questionText": "Alveoli are efficient gas-exchange surfaces because they are",
   "options": [
    "thick-walled and dry for protection",
+   "thin-walled, moist, enormously folded and wrapped in capillaries",
    "lined with cartilage",
-   "the largest structures in the lung",
-   "thin-walled, moist, enormously folded and wrapped in capillaries"
+   "the largest structures in the lung"
   ],
   "correctAnswer": "thin-walled, moist, enormously folded and wrapped in capillaries",
   "explanation": "Thin walls shorten the diffusion path; moisture dissolves the gases; folding multiplies area; capillaries maintain the concentration gradient — four features, one efficient exchange.",
@@ -806,9 +806,9 @@
   "questionText": "Damage to the insulin-producing beta cells of the pancreas will most directly cause",
   "options": [
    "a rise in blood glucose concentration",
-   "a fall in blood glucose",
    "the cessation of digestion",
-   "the loss of reflexes"
+   "the loss of reflexes",
+   "a fall in blood glucose"
   ],
   "correctAnswer": "a rise in blood glucose concentration",
   "explanation": "Without insulin, glucose cannot be stored and accumulates in the blood — diabetes mellitus. The treatment logic (injections) follows directly from the missing hormone.",
@@ -826,10 +826,10 @@
   "type": "mcq",
   "questionText": "Antidiuretic hormone (ADH) regulates blood water content by",
   "options": [
-   "dissolving salts in sweat",
-   "increasing water reabsorption in the kidney tubules",
+   "stimulating urine production directly",
    "speeding the heart rate",
-   "stimulating urine production directly"
+   "increasing water reabsorption in the kidney tubules",
+   "dissolving salts in sweat"
   ],
   "correctAnswer": "increasing water reabsorption in the kidney tubules",
   "explanation": "Dehydration → more ADH → the tubules reabsorb MORE water → concentrated urine. Overhydration suppresses ADH → dilute urine. A clean negative-feedback loop.",
@@ -848,9 +848,9 @@
   "questionText": "Every food chain begins with a",
   "options": [
    "producer",
-   "primary consumer",
+   "predator",
    "decomposer",
-   "predator"
+   "primary consumer"
   ],
   "correctAnswer": "producer",
   "explanation": "Producers (green plants, algae) capture sunlight into biomass — every other level feeds on that captured energy, directly or indirectly.",
@@ -868,10 +868,10 @@
   "type": "mcq",
   "questionText": "The variety of living organisms within an area is called its",
   "options": [
-   "community size",
-   "biodiversity",
+   "habitat",
    "population",
-   "habitat"
+   "community size",
+   "biodiversity"
   ],
   "correctAnswer": "biodiversity",
   "explanation": "Biodiversity = the variety of species (and their genes and ecosystems). High biodiversity means resilience; monoculture means fragility.",
@@ -889,8 +889,8 @@
   "type": "mcq",
   "questionText": "Which of the following is a BIOTIC factor in an ecosystem?",
   "options": [
-   "temperature",
    "soil pH",
+   "temperature",
    "predators",
    "rainfall"
   ],
@@ -910,10 +910,10 @@
   "type": "mcq",
   "questionText": "The main reason food chains rarely exceed four or five trophic levels is that",
   "options": [
-   "predators refuse to eat other predators",
    "producers die out at higher levels",
-   "decomposers block the chain",
-   "energy is lost as heat at each level, so too little remains"
+   "predators refuse to eat other predators",
+   "energy is lost as heat at each level, so too little remains",
+   "decomposers block the chain"
   ],
   "correctAnswer": "energy is lost as heat at each level, so too little remains",
   "explanation": "Roughly 90% of the energy is lost (heat, movement, excretion) at each transfer — by level five, ~0.1% remains. There is simply not enough energy to fund more links.",
@@ -932,9 +932,9 @@
   "questionText": "Bacteria and fungi that break down dead matter are called",
   "options": [
    "decomposers",
+   "autotrophs",
    "producers",
-   "primary consumers",
-   "autotrophs"
+   "primary consumers"
   ],
   "correctAnswer": "decomposers",
   "explanation": "Decomposers recycle the locked-up nutrients back into the soil — without them, the nutrient cycles would jam and the producers would starve.",
@@ -952,10 +952,10 @@
   "type": "mcq",
   "questionText": "According to natural selection, individuals with favourable traits",
   "options": [
-   "evolve into new species within one generation",
-   "survive and reproduce, passing their alleles to the next generation",
+   "avoid all competition",
    "change their traits during their lifetime",
-   "avoid all competition"
+   "evolve into new species within one generation",
+   "survive and reproduce, passing their alleles to the next generation"
   ],
   "correctAnswer": "survive and reproduce, passing their alleles to the next generation",
   "explanation": "Selection acts on existing variation: the best-suited survive and REPRODUCE — the mechanism is differential survival plus inheritance, not individual transformation.",
@@ -973,10 +973,10 @@
   "type": "mcq",
   "questionText": "The carrying capacity of a habitat is",
   "options": [
-   "the fastest growth rate of a population",
-   "the total weight of all predators",
    "the maximum population the habitat can sustain indefinitely",
-   "the number of species present"
+   "the number of species present",
+   "the fastest growth rate of a population",
+   "the total weight of all predators"
   ],
   "correctAnswer": "the maximum population the habitat can sustain indefinitely",
   "explanation": "Resources cap the population: beyond the carrying capacity, scarcity raises deaths until the population falls back — the plateau of the growth curve.",
@@ -994,10 +994,10 @@
   "type": "mcq",
   "questionText": "In the carbon cycle, plants remove carbon dioxide from the atmosphere mainly by",
   "options": [
-   "respiration",
+   "photosynthesis",
    "decomposition",
-   "transpiration",
-   "photosynthesis"
+   "respiration",
+   "transpiration"
   ],
   "correctAnswer": "photosynthesis",
   "explanation": "Photosynthesis pulls CO₂ into glucose. Respiration returns it — the two processes balance the cycle, disturbed lately by combustion of fossil fuels.",
@@ -1016,9 +1016,9 @@
   "questionText": "In predator–prey cycles, the predator population peak typically LAGS behind the prey peak because",
   "options": [
    "predator numbers rise only after more prey has been eaten and converted into offspring",
-   "predators reproduce instantly",
+   "the lag is a measurement error",
    "prey hide from counting",
-   "the lag is a measurement error"
+   "predators reproduce instantly"
   ],
   "correctAnswer": "predator numbers rise only after more prey has been eaten and converted into offspring",
   "explanation": "More prey means better-fed predators, whose numbers climb only after a reproduction delay — the classic out-of-phase oscillation of the lynx and hare curves.",
@@ -1057,9 +1057,9 @@
   "type": "mcq",
   "questionText": "Water and mineral salts are transported up the stem through the",
   "options": [
+   "stomata",
    "xylem",
    "phloem",
-   "stomata",
    "cambium"
   ],
   "correctAnswer": "xylem",
@@ -1078,10 +1078,10 @@
   "type": "mcq",
   "questionText": "Manufactured food is translocated through the",
   "options": [
-   "cuticle",
-   "xylem",
    "phloem",
-   "root hairs"
+   "xylem",
+   "root hairs",
+   "cuticle"
   ],
   "correctAnswer": "phloem",
   "explanation": "Phloem sieve tubes move sucrose from SOURCE (leaves) to SINK (roots, fruits) — in BOTH directions, unlike the one-way xylem stream.",
@@ -1099,10 +1099,10 @@
   "type": "mcq",
   "questionText": "Gaseous exchange in a leaf occurs mainly through the",
   "options": [
-   "xylem vessels",
-   " Flowers petals",
    "stomata",
-   "cuticle"
+   "cuticle",
+   " Flowers petals",
+   "xylem vessels"
   ],
   "correctAnswer": "stomata",
   "explanation": "Stomata — pores on the (usually lower) epidermis — admit CO₂ and release O₂ and water vapour, each opened and closed by its guard cells.",
@@ -1141,10 +1141,10 @@
   "type": "mcq",
   "questionText": "Transpiration is the",
   "options": [
-   "loss of water vapour from the leaves of a plant",
+   "absorption of light by chlorophyll",
    "uptake of minerals by the roots",
    "movement of food through the phloem",
-   "absorption of light by chlorophyll"
+   "loss of water vapour from the leaves of a plant"
   ],
   "correctAnswer": "loss of water vapour from the leaves of a plant",
   "explanation": "Transpiration is EVAPORATION from the leaf — the pull that drags the whole water column up the xylem. It is a side effect of open stomata, harnessed as the transport engine.",
@@ -1162,10 +1162,10 @@
   "type": "mcq",
   "questionText": "Auxin causes a shoot to bend toward light by",
   "options": [
-   "attracting water to the lit side only",
    "accumulating on the shaded side and elongating those cells",
+   "killing the cells on the dark side",
    "shrinking the cells on the lit side",
-   "killing the cells on the dark side"
+   "attracting water to the lit side only"
   ],
   "correctAnswer": "accumulating on the shaded side and elongating those cells",
   "explanation": "Auxin migrates away from the light; cells on the SHADED side elongate faster, so the tip curves toward the light — phototropism in one mechanism.",
@@ -1183,9 +1183,9 @@
   "type": "mcq",
   "questionText": "Pollination is the transfer of pollen from the",
   "options": [
+   "anther to the stigma",
    "ovule to the ovary",
    "stamen to the sepal",
-   "anther to the stigma",
    "stigma to the anther"
   ],
   "correctAnswer": "anther to the stigma",
@@ -1204,10 +1204,10 @@
   "type": "mcq",
   "questionText": "Which condition would INCREASE the rate of transpiration?",
   "options": [
-   "high atmospheric humidity",
-   "darkness",
    "covering the lower leaf surface with grease",
-   "increased wind speed around the leaves"
+   "increased wind speed around the leaves",
+   "darkness",
+   "high atmospheric humidity"
   ],
   "correctAnswer": "increased wind speed around the leaves",
   "explanation": "Wind sweeps humid air away from the stomata, steepening the water-vapour gradient. High humidity and greased stomata do the opposite; darkness usually closes the pores.",
@@ -1227,8 +1227,8 @@
   "options": [
    "stop, because photosynthesis lacks its carbon source",
    "increase, because CO₂ is absorbed faster",
-   "continue at the same rate",
-   "turn into oxygen only"
+   "turn into oxygen only",
+   "continue at the same rate"
   ],
   "correctAnswer": "stop, because photosynthesis lacks its carbon source",
   "explanation": "CO₂ is a raw material of photosynthesis; the absorber removes it, so the light reactions have nothing to fix and oxygen bubbles cease — a classic limiting-factor demonstration.",
@@ -1246,14 +1246,788 @@
   "type": "mcq",
   "questionText": "After fertilisation in a flowering plant, the ovule develops into the",
   "options": [
-   "stigma",
-   "seed",
+   "pollen grain",
    "fruit",
-   "pollen grain"
+   "stigma",
+   "seed"
   ],
   "correctAnswer": "seed",
   "explanation": "Fertilisation turns the OVULE into the SEED and the OVARY into the FRUIT — the two transformations every flowering-plant life-cycle question wants.",
   "hint": "Ovule → seed; ovary → fruit.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-cell-q1",
+  "topicSlug": "cell-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The organelle that packages and transports proteins out of the cell is the",
+  "options": [
+   "nucleolus",
+   "lysosome",
+   "Golgi body",
+   "ribosome"
+  ],
+  "correctAnswer": "Golgi body",
+  "explanation": "The Golgi body modifies, packages and dispatches proteins — the cell's post office. Ribosomes MAKE proteins; lysosomes digest waste.",
+  "hint": "The packaging and dispatch desk.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-cell-q2",
+  "topicSlug": "cell-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Diffusion is the movement of particles",
+  "options": [
+   "that always requires a carrier protein",
+   "from a region of higher to lower concentration, without using energy",
+   "from lower to higher concentration using energy",
+   "of water only, through a membrane"
+  ],
+  "correctAnswer": "from a region of higher to lower concentration, without using energy",
+  "explanation": "Diffusion is passive movement DOWN the concentration gradient — no ATP. Option 3 is osmosis (water only); option 2 is active transport.",
+  "hint": "Downhill and free.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-cell-q3",
+  "topicSlug": "cell-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "During mitosis, chromosomes line up at the cell's equator during",
+  "options": [
+   "anaphase",
+   "telophase",
+   "metaphase",
+   "prophase"
+  ],
+  "correctAnswer": "metaphase",
+  "explanation": "Metaphase = MIDDLE: chromosomes align on the equator before the spindle pulls them apart in anaphase.",
+  "hint": "Meta = middle.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-cell-q4",
+  "topicSlug": "cell-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Which cells in the human body would be expected to contain MANY mitochondria?",
+  "options": [
+   "skin surface cells",
+   "stored fat cells",
+   "mature red blood cells",
+   "muscle cells"
+  ],
+  "correctAnswer": "muscle cells",
+  "explanation": "Mitochondria supply ATP — muscle contracts constantly and demands enormous energy, so it is packed with them. Red blood cells even LOSE their mitochondria.",
+  "hint": "Which tissue burns the most energy?",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-cell-q5",
+  "topicSlug": "cell-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The significance of meiosis in sexual reproduction is that it",
+  "options": [
+   "doubles the chromosome number for strength",
+   "prevents any mutation",
+   "halves the chromosome number and introduces variation",
+   "produces identical copies of the parent"
+  ],
+  "correctAnswer": "halves the chromosome number and introduces variation",
+  "explanation": "Without meiosis, fertilisation would double the chromosome number every generation — and identical gametes would erase the variation that selection needs.",
+  "hint": "Half the number, full the variety.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-bioenergetics-q1",
+  "topicSlug": "bioenergetics-biochemistry",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The products of anaerobic respiration in HUMAN muscle are",
+  "options": [
+   "glucose and oxygen",
+   "ethanol and carbon dioxide",
+   "lactic acid and little energy",
+   "carbon dioxide and water only"
+  ],
+  "correctAnswer": "lactic acid and little energy",
+  "explanation": "Human muscle under oxygen debt produces LACTIC acid (the 'ache') and a small energy yield — the ethanol route belongs to yeast.",
+  "hint": "The ache after sprinting.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-bioenergetics-q2",
+  "topicSlug": "bioenergetics-biochemistry",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "An enzyme-controlled reaction slows dramatically when the pH moves far from the optimum because",
+  "options": [
+   "the substrate dissolves",
+   "the enzyme divides into two",
+   "the enzyme's active site is denatured by the unsuitable pH",
+   "pH has no effect on enzymes"
+  ],
+  "correctAnswer": "the enzyme's active site is denatured by the unsuitable pH",
+  "explanation": "Ionic charges holding the active site's shape depend on pH; move too far either way and the shape — and therefore the fit — is lost.",
+  "hint": "Shape again — pH bends it.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-bioenergetics-q3",
+  "topicSlug": "bioenergetics-biochemistry",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Which word equation represents PHOTOSYNTHESIS?",
+  "options": [
+   "glucose → lactic acid",
+   "oxygen + nitrogen → protein",
+   "glucose + oxygen → carbon dioxide + water",
+   "carbon dioxide + water → glucose + oxygen"
+  ],
+  "correctAnswer": "carbon dioxide + water → glucose + oxygen",
+  "explanation": "Photosynthesis BUILDS glucose from CO₂ and water using light — the reverse flow of respiration. Watch which side the energy sits on.",
+  "hint": "The plant BUILDS its food.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-bioenergetics-q4",
+  "topicSlug": "bioenergetics-biochemistry",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "At very LOW temperatures, enzyme-controlled reactions are slow because",
+  "options": [
+   "molecules have little kinetic energy, so collisions are rare",
+   "the enzyme is denatured",
+   "the substrate freezes solid",
+   "the active site widens"
+  ],
+  "correctAnswer": "molecules have little kinetic energy, so collisions are rare",
+  "explanation": "Cold does NOT denature — it just slows the dance: fewer, weaker collisions. Denaturation belongs to the HOT end of the curve.",
+  "hint": "Cold slows; heat breaks.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-bioenergetics-q5",
+  "topicSlug": "bioenergetics-biochemistry",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "A farmer adds nitrate fertiliser to a leafy crop such as cabbage. The expected effect is",
+  "options": [
+   "no effect on any part",
+   "faster leafy growth — nitrogen builds proteins and leaves",
+   "more flowers and fruits instead of leaves",
+   "smaller leaves but stronger roots"
+  ],
+  "correctAnswer": "faster leafy growth — nitrogen builds proteins and leaves",
+  "explanation": "Nitrogen feeds LEAFY growth (proteins, chlorophyll) — ideal for cabbages, wrong timing for fruit crops, where high N delays fruiting.",
+  "hint": "N is the leaf-maker.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-genetics-q1",
+  "topicSlug": "genetics-molecular-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "During protein synthesis, the sequence of bases in mRNA determines",
+  "options": [
+   "the colour of the cell",
+   "the order of amino acids in the protein",
+   "the number of mitochondria",
+   "the shape of the nucleus"
+  ],
+  "correctAnswer": "the order of amino acids in the protein",
+  "explanation": "Triplets of mRNA bases (codons) each specify one amino acid — the base sequence IS the protein recipe.",
+  "hint": "Code → sequence → protein.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-genetics-q2",
+  "topicSlug": "genetics-molecular-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "In RNA, the base that replaces thymine is",
+  "options": [
+   "guanine",
+   "uracil",
+   "adenine",
+   "cytosine"
+  ],
+  "correctAnswer": "uracil",
+  "explanation": "RNA swaps thymine for URACIL, pairing with adenine — the A-U pairing is RNA's signature difference from DNA.",
+  "hint": "The DNA T becomes RNA U.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-genetics-q3",
+  "topicSlug": "genetics-molecular-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Two heterozygous parents (Bb × Bb) have a child. The probability of a homozygous recessive child (bb) is",
+  "options": [
+   "1/2",
+   "3/4",
+   "1/4",
+   "1"
+  ],
+  "correctAnswer": "1/4",
+  "explanation": "Punnett: BB, Bb, Bb, bb — one of four outcomes is bb. The 3:1 PHENOTYPIC ratio hides this 1:2:1 GENOTYPIC ratio.",
+  "hint": "Draw the four boxes.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-genetics-q4",
+  "topicSlug": "genetics-molecular-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "A test cross is used to determine whether a dominant-phenotype organism is",
+  "options": [
+   "taller than average",
+   "male or female",
+   "mutated or normal",
+   "homozygous dominant or heterozygous"
+  ],
+  "correctAnswer": "homozygous dominant or heterozygous",
+  "explanation": "Cross it with the recessive form: any recessive offspring proves the unknown was HETEROZYGOUS. All dominant offspring suggests homozygous.",
+  "hint": "Cross with the recessive and read the offspring.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-genetics-q5",
+  "topicSlug": "genetics-molecular-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Sickle-cell anaemia persists in tropical populations because",
+  "options": [
+   "mosquitoes prefer non-carriers",
+   "the allele makes people stronger",
+   "carriers (AS) resist malaria, so the allele survives selection",
+   "hospitals preserve the allele"
+  ],
+  "correctAnswer": "carriers (AS) resist malaria, so the allele survives selection",
+  "explanation": "The heterozygote ADVANTAGE: carriers pay no anaemia price but gain malaria resistance — balancing selection keeps the allele in the population where malaria thrives.",
+  "hint": "The heterozygote wins in malarial zones.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-physiology-q1",
+  "topicSlug": "human-physiology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The enzyme pepsin works best in the stomach because the stomach is",
+  "options": [
+   "strongly acidic — pepsin's optimum pH is around 2",
+   "alkaline like the intestine",
+   "the warmest organ",
+   "free of water"
+  ],
+  "correctAnswer": "strongly acidic — pepsin's optimum pH is around 2",
+  "explanation": "Every enzyme has an optimum pH: pepsin's is ~2 (stomach acid); amylase prefers ~7. pH outside the optimum denatures or slows the enzyme.",
+  "hint": "Match the enzyme to its pH home.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-physiology-q2",
+  "topicSlug": "human-physiology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The pacemaker of the heart is located in the",
+  "options": [
+   "pulmonary vein",
+   "right atrium — the sino-atrial node",
+   "aorta",
+   "left ventricle"
+  ],
+  "correctAnswer": "right atrium — the sino-atrial node",
+  "explanation": "The SA node fires the rhythm that spreads across the atria — the heart's natural metronome, sitting in the right atrium's wall.",
+  "hint": "The spark starts in the right atrium.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-physiology-q3",
+  "topicSlug": "human-physiology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The role of haemoglobin in the blood is to",
+  "options": [
+   "transport oxygen",
+   "clot wounds",
+   "digest fats",
+   "fight infection"
+  ],
+  "correctAnswer": "transport oxygen",
+  "explanation": "Haemoglobin's iron binds oxygen in the lungs and releases it where concentration is low — the delivery truck of the circulation. Clotting is platelets' job; defence is white cells'.",
+  "hint": "The oxygen delivery truck.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-physiology-q4",
+  "topicSlug": "human-physiology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Villi in the small intestine increase absorption by",
+  "options": [
+   "storing undigested food",
+   "enormously increasing the surface area available for diffusion",
+   "pumping food against the gradient",
+   "producing digestive acid"
+  ],
+  "correctAnswer": "enormously increasing the surface area available for diffusion",
+  "explanation": "Millions of finger-shaped villi (each with microvilli) multiply the absorptive surface several-fold — the same surface-area logic as alveoli and root hairs.",
+  "hint": "Area is everything in absorption.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-physiology-q5",
+  "topicSlug": "human-physiology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Ultrafiltration in the nephron forces small molecules out of the blood at the",
+  "options": [
+   "bladder wall",
+   "glomerulus, under high blood pressure",
+   "ureter, under low pressure",
+   "collecting duct, by osmosis only"
+  ],
+  "correctAnswer": "glomerulus, under high blood pressure",
+  "explanation": "The glomerulus receives blood at high pressure; small molecules (water, glucose, urea, salts) are squeezed through into the tubule — cells and proteins stay behind.",
+  "hint": "High pressure squeezes the small stuff out.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-ecology-q1",
+  "topicSlug": "ecology-evolution",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "A community together with its physical environment forms a",
+  "options": [
+   "species",
+   "ecosystem",
+   "population",
+   "niche"
+  ],
+  "correctAnswer": "ecosystem",
+  "explanation": "Ecosystem = community (living) + habitat (non-living) functioning as one system. A population is ONE species in the area.",
+  "hint": "Living plus non-living, together.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-ecology-q2",
+  "topicSlug": "ecology-evolution",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "In the nitrogen cycle, the bacteria that convert atmospheric nitrogen into usable compounds live in",
+  "options": [
+   "the stomach of cattle",
+   "the leaves of maize",
+   "root nodules of legumes",
+   "freshwater streams"
+  ],
+  "correctAnswer": "root nodules of legumes",
+  "explanation": "Rhizobium in legume nodules fixes atmospheric nitrogen into compounds the plant uses — the reason legumes rotate into crop plans.",
+  "hint": "The bump on the bean root.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-ecology-q3",
+  "topicSlug": "ecology-evolution",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Which pyramid of numbers can be INVERTED (fewer at the base)?",
+  "options": [
+   "a grassland with many grass plants",
+   "a tree ecosystem with many insects feeding on it",
+   "a pond with countless algae",
+   "a wheat field with mice"
+  ],
+  "correctAnswer": "a tree ecosystem with many insects feeding on it",
+  "explanation": "ONE tree feeds thousands of insects — the pyramid of numbers flips because the producer is huge. Energy pyramids, however, can never invert.",
+  "hint": "One giant producer, many small feeders.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-ecology-q4",
+  "topicSlug": "ecology-evolution",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Two organisms competing for the SAME niche cannot both persist — this principle is",
+  "options": [
+   "saprophytism",
+   "succession",
+   "competitive exclusion",
+   "mutualism"
+  ],
+  "correctAnswer": "competitive exclusion",
+  "explanation": "Gause's principle: complete competitors cannot coexist — one out-competes the other to extinction (or the loser shifts its niche).",
+  "hint": "One niche, one winner.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-ecology-q5",
+  "topicSlug": "ecology-evolution",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Antibiotic resistance evolving in bacteria over decades is best explained by",
+  "options": [
+   "natural selection acting on random mutations — resistant bacteria survive and multiply",
+   "the antibiotic mutating into a weaker form",
+   "bacteria learning to avoid the drug",
+   "bacteria choosing to change their DNA"
+  ],
+  "correctAnswer": "natural selection acting on random mutations — resistant bacteria survive and multiply",
+  "explanation": "Mutations arise randomly; the DRUG does the selecting. The survivors multiply — evolution observed within a human lifetime, and the reason prescriptions must be completed.",
+  "hint": "The drug is the selector, not the inventor.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-plant-q1",
+  "topicSlug": "plant-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Root hairs absorb water efficiently because they",
+  "options": [
+   "contain chlorophyll",
+   "are waterproof",
+   "open and close like stomata",
+   "greatly increase the root's surface area and have thin walls"
+  ],
+  "correctAnswer": "greatly increase the root's surface area and have thin walls",
+  "explanation": "Thousands of microscopic hairs multiply the absorbing surface, and their thin walls shorten the diffusion path — the absorption equivalent of alveoli and villi.",
+  "hint": "Surface area wins again.",
+  "difficulty": "easy",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-plant-q2",
+  "topicSlug": "plant-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "The experiment showing that oxygen is produced during photosynthesis uses",
+  "options": [
+   "gravimetric weighing of a leaf",
+   "a potted plant in a dark cupboard",
+   "red litmus paper",
+   "a water plant collecting bubbles over an inverted funnel"
+  ],
+  "correctAnswer": "a water plant collecting bubbles over an inverted funnel",
+  "explanation": "An aquatic plant (Elodea) bubbles oxygen in the light; the gas relights a glowing splint — the classic evidence that photosynthesis releases oxygen.",
+  "hint": "Count the bubbles, test the gas.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-plant-q3",
+  "topicSlug": "plant-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "A leaf is destarched, then half-covered with foil and left in light for hours. The iodine test will show",
+  "options": [
+   "no starch anywhere",
+   "starch everywhere",
+   "starch only on the uncovered half — light is needed for photosynthesis",
+   "starch only under the foil"
+  ],
+  "correctAnswer": "starch only on the uncovered half — light is needed for photosynthesis",
+  "explanation": "Destarching empties the leaf; the covered half makes no starch (no light) and tests blue-black only where light reached — iodine's blue-black marks starch.",
+  "hint": "The foil is the control.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-plant-q4",
+  "topicSlug": "plant-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "Insect-pollinated flowers typically have",
+  "options": [
+   "bright petals, scent and sticky pollen",
+   "feathery stigmas",
+   "small dry lightweight pollen",
+   "no petals at all"
+  ],
+  "correctAnswer": "bright petals, scent and sticky pollen",
+  "explanation": "Insect flowers ADVERTISE (colour, scent, nectar) and their sticky pollen clings to visitors. Wind-pollinated flowers are the drab opposite: tiny, dry, airborne pollen and feathery stigmas.",
+  "hint": "Advertising costs colour and scent.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "mockbio2-plant-q5",
+  "topicSlug": "plant-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "mcq",
+  "questionText": "A germinating seed grows its shoot UPWARD even in darkness. This demonstrates",
+  "options": [
+   "phototropism",
+   "gravitropism — shoots grow against gravity regardless of light",
+   "transpiration pull",
+   "geotropism of roots"
+  ],
+  "correctAnswer": "gravitropism — shoots grow against gravity regardless of light",
+  "explanation": "In darkness no phototropism can act, yet the shoot still rises: shoots are negatively GRAVITROPIC (roots are positively gravitropic). Two tropisms, opposite signs.",
+  "hint": "One tropism down, the other up.",
+  "difficulty": "hard",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "theory-bio-q1",
+  "topicSlug": "cell-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "theory",
+  "paper": "P2",
+  "questionText": "(a) Define osmosis. (2 marks)\n(b) State three ways in which a plant cell differs from an animal cell. (3 marks)\n(c) State one function each of: (i) the cell membrane; (ii) the nucleus. (3 marks)",
+  "options": [],
+  "correctAnswer": "See model answer and marking points.",
+  "modelAnswer": "(a) Osmosis is the movement of water molecules from a region of higher water concentration (dilute solution) to a region of lower water concentration (more concentrated solution) through a partially permeable membrane.\n(b) A plant cell has a cellulose cell wall (absent in animal cells); it contains chloroplasts for photosynthesis (animal cells have none); it usually has a large central vacuole (animal cells have small or no vacuoles).\n(c) (i) The cell membrane controls the movement of substances into and out of the cell, being partially permeable. (ii) The nucleus contains the genetic material (DNA) and controls all the activities of the cell.",
+  "markingPoints": [
+   {
+    "point": "(a) movement of water molecules",
+    "marks": 1
+   },
+   {
+    "point": "(a) from dilute/higher water concentration to concentrated/lower water concentration",
+    "marks": 0.5
+   },
+   {
+    "point": "(a) through a partially permeable membrane",
+    "marks": 0.5
+   },
+   {
+    "point": "(b) cellulose cell wall present",
+    "marks": 1
+   },
+   {
+    "point": "(b) chloroplasts present",
+    "marks": 1
+   },
+   {
+    "point": "(b) large central vacuole present",
+    "marks": 1
+   },
+   {
+    "point": "(c) membrane: controls entry and exit of substances",
+    "marks": 1.5
+   },
+   {
+    "point": "(c) nucleus: contains DNA and controls cell activities",
+    "marks": 1.5
+   }
+  ],
+  "totalMarks": 8,
+  "hint": "Define precisely, then list the plant-only structures.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "theory-bio-q2",
+  "topicSlug": "ecology-evolution",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "theory",
+  "paper": "P2",
+  "questionText": "(a) What is a food chain? (2 marks)\n(b) Construct a food chain of four trophic levels using organisms from a freshwater pond, and name the trophic level of each organism. (4 marks)\n(c) Explain why the number of organisms generally decreases at each higher trophic level. (4 marks)",
+  "options": [],
+  "correctAnswer": "See model answer and marking points.",
+  "modelAnswer": "(a) A food chain is a sequence showing the flow of energy from one organism to the next through feeding, beginning with a producer.\n(b) Example: spirogyra (producer) → water flea (primary consumer) → small fish (secondary consumer) → heron (tertiary consumer). Producer = green plant that makes its own food; primary consumer = herbivore feeding on the producer; secondary consumer = carnivore feeding on the primary consumer; tertiary consumer = carnivore feeding on the secondary consumer.\n(c) Energy is lost at each level through respiration (heat), movement and excretion, and only about 10% passes to the next level; therefore the total energy available to support individuals shrinks with each level, so fewer organisms can be sustained higher up.",
+  "markingPoints": [
+   {
+    "point": "(a) sequence showing energy flow through feeding",
+    "marks": 1
+   },
+   {
+    "point": "(a) begins with a producer",
+    "marks": 1
+   },
+   {
+    "point": "(b) correct four-organism chain from a pond, in correct order",
+    "marks": 2
+   },
+   {
+    "point": "(b) trophic levels correctly named (producer, primary, secondary, tertiary consumer)",
+    "marks": 2
+   },
+   {
+    "point": "(c) energy lost at each level (respiration as heat, movement, excretion)",
+    "marks": 2
+   },
+   {
+    "point": "(c) less energy available → fewer organisms supported at higher levels",
+    "marks": 2
+   }
+  ],
+  "totalMarks": 10,
+  "hint": "Chain from producer upward; the energy arithmetic explains the shrinking numbers.",
+  "difficulty": "medium",
+  "sourceExam": "original-exam-style",
+  "reviewStatus": "needs-human-review",
+  "selfCheck": "passed"
+ },
+ {
+  "id": "theory-bio-q3",
+  "topicSlug": "genetics-molecular-biology",
+  "styleBoard": "WAEC",
+  "domain": "highschool",
+  "type": "theory",
+  "paper": "P2",
+  "questionText": "(a) State Mendel's law of segregation. (2 marks)\n(b) In humans, the allele for free earlobes (F) is dominant over the allele for attached earlobes (f). Using a genetic cross, determine the possible genotypes and phenotypes of the offspring of two heterozygous parents. (6 marks)\n(c) State two reasons why the study of genetics is important to human beings. (4 marks)",
+  "options": [],
+  "correctAnswer": "See model answer and marking points.",
+  "modelAnswer": "(a) Mendel's law of segregation: the two alleles of a gene separate (segregate) during the formation of gametes, so that each gamete receives only one allele of each pair.\n(b) Parents: Ff × Ff. Gametes: F and f from each parent. Offspring genotypes: FF (1), Ff (2), ff (1) — a genotypic ratio of 1 : 2 : 1. Phenotypes: FF and Ff show free earlobes (3), ff shows attached earlobes (1) — a phenotypic ratio of 3 free : 1 attached.\n(c) Genetics enables (i) the prediction and management of hereditary diseases (genetic counselling); (ii) the improvement of crops and livestock through selective breeding; (also acceptable: understanding paternity, forensic identification, development of gene therapy.)",
+  "markingPoints": [
+   {
+    "point": "(a) alleles separate during gamete formation",
+    "marks": 1
+   },
+   {
+    "point": "(a) each gamete receives only one allele",
+    "marks": 1
+   },
+   {
+    "point": "(b) parents identified as Ff × Ff with gametes F, f",
+    "marks": 2
+   },
+   {
+    "point": "(b) Punnett square/cross shows FF : Ff : Ff : ff",
+    "marks": 2
+   },
+   {
+    "point": "(b) phenotypic ratio 3 free : 1 attached stated",
+    "marks": 2
+   },
+   {
+    "point": "(c) any two valid reasons, e.g. genetic counselling/hereditary disease management",
+    "marks": 2
+   },
+   {
+    "point": "(c) e.g. crop and livestock improvement",
+    "marks": 2
+   }
+  ],
+  "totalMarks": 12,
+  "hint": "State the law, then Punnett the cross, then two applications.",
   "difficulty": "hard",
   "sourceExam": "original-exam-style",
   "reviewStatus": "needs-human-review",
