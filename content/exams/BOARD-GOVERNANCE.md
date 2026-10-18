@@ -1,5 +1,14 @@
 # BOARD GOVERNANCE — copyright posture, syllabus gate, cross-board rules
 
+## 0. THE HYBRID MODEL (owner directive, 2026-10-12 — supersedes §3 where they conflict)
+
+Official past questions are now IN the model for two boards:
+- **South Africa (NSC/Matric — DBE)** and **Tanzania (NECTA)**: governments publish openly — the REAL, UNEDITED text renders in the ZA and TZ tracks, tagged "Official Past Questions" with attribution.
+- **ALL other tracks (JAMB, WAEC, US, UK, future)**: receive CLONED VARIANTS of the same core problems — same concept, structure and difficulty, but completely original wording and re-seeded numbers (currency/names localised per track).
+- Every processed question becomes TWO versions bound by one coreId: Version A (official, ZA/TZ only) + Version B (original, global). Full rules: content/questions/DUAL-VERSION-WORKFLOW.md.
+- Schema ask to A1: Question model needs provenance, variant, coreId, track (or a metadata JSON column) for the binding.
+- LEGAL GUARDRAIL: Version B re-seeds NUMBERS as well as wording — same-numbers clones are thin-veil derivatives; fresh numbers + fresh wording are original, and the verification pipeline recomputes every new key.
+
 reviewStatus: needs-human-review
 
 ## 1. Pool + Papers economics (the owner's 1,000-question rule)
