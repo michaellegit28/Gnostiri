@@ -150,6 +150,21 @@ const CLAIMS_L7 = [
   { name: "def does not run the body until called", code: `x = 0\ndef f():\n    global x\n    x = 42\nprint(x)`, expected: "0" },
 ];
 
+// Lesson 8 (Lists & dictionaries) worked examples.
+const SNIPPETS_L8 = [
+  { name: "lists — build and index", code: `fruits = ["apple", "banana", "cherry"]\nprint(len(fruits))\nprint(fruits[0])\nprint(fruits[1])`, expected: "3\napple\nbanana" },
+  { name: "adding to a list and looping", code: `fruits = ["apple", "banana", "cherry"]\nfruits.append("mango")\nprint(len(fruits))\nfor f in fruits:\n    print(f)`, expected: "4\napple\nbanana\ncherry\nmango" },
+  { name: "dictionaries — look up by key and update", code: `ages = {"Ada": 19, "Gustav": 34}\nprint(ages["Ada"])\nages["Ada"] = 20\nprint(ages["Ada"])`, expected: "19\n20" },
+  { name: "the counting idiom", code: `counts = {}\nfor w in ["the", "cat", "the", "dog"]:\n    counts[w] = counts.get(w, 0) + 1\nprint(counts)`, expected: "{'the': 2, 'cat': 1, 'dog': 1}" },
+];
+
+const CLAIMS_L8 = [
+  { name: "list indexing starts at zero", code: `print(["a", "b", "c"][0])`, expected: "a" },
+  { name: "get returns the default for a missing key", code: `print({}.get("x", 99))`, expected: "99" },
+  { name: "bracket lookup of a missing key raises KeyError", code: `print({"a": 1}["b"])`, expectedError: /KeyError/ },
+  { name: "append modifies in place", code: `x = [1, 2]\nx.append(3)\nprint(len(x))`, expected: "3" },
+];
+
 const CLAIMS_L3 = [
   { name: "input type is a string", code: `x = input()\nprint(type(x) is str)`, expected: "True", stdin: "7\n" },
   { name: "string times int repeats", code: `x = input()\nprint(x * 3)`, expected: "777", stdin: "7\n" },
@@ -187,9 +202,9 @@ test("python3 is available for lesson verification", { skip: !existsSync("/usr/b
   assert.equal(run(`print("ok")`).stdout, "ok");
 });
 
-const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6, ...SNIPPETS_L7];
+const ALL_SNIPPETS = [...SNIPPETS, ...SNIPPETS_L2, ...SNIPPETS_L3, ...SNIPPETS_L4, ...SNIPPETS_L5, ...SNIPPETS_L6, ...SNIPPETS_L7, ...SNIPPETS_L8];
 for (const s of ALL_SNIPPETS) {
-  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : SNIPPETS_L7.includes(s) ? "lesson 7" : "lesson 1";
+  const lesson = SNIPPETS_L2.includes(s) ? "lesson 2" : SNIPPETS_L3.includes(s) ? "lesson 3" : SNIPPETS_L4.includes(s) ? "lesson 4" : SNIPPETS_L5.includes(s) ? "lesson 5" : SNIPPETS_L6.includes(s) ? "lesson 6" : SNIPPETS_L7.includes(s) ? "lesson 7" : SNIPPETS_L8.includes(s) ? "lesson 8" : "lesson 1";
   test(`${lesson} snippet: ${s.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(s.code, s.stdin);
     assert.ok(r.ok, `snippet failed to run: ${r.stderr}`);
@@ -197,9 +212,9 @@ for (const s of ALL_SNIPPETS) {
   });
 }
 
-const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6, ...CLAIMS_L7];
+const ALL_CLAIMS = [...CLAIMS, ...CLAIMS_L2, ...CLAIMS_L3, ...CLAIMS_L4, ...CLAIMS_L5, ...CLAIMS_L6, ...CLAIMS_L7, ...CLAIMS_L8];
 for (const c of ALL_CLAIMS) {
-  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : CLAIMS_L7.includes(c) ? "lesson 7" : "lesson 1";
+  const lesson = CLAIMS_L2.includes(c) ? "lesson 2" : CLAIMS_L3.includes(c) ? "lesson 3" : CLAIMS_L4.includes(c) ? "lesson 4" : CLAIMS_L5.includes(c) ? "lesson 5" : CLAIMS_L6.includes(c) ? "lesson 6" : CLAIMS_L7.includes(c) ? "lesson 7" : CLAIMS_L8.includes(c) ? "lesson 8" : "lesson 1";
   test(`${lesson} claim: ${c.name}`, { skip: !existsSync("/usr/bin/python3") }, () => {
     const r = run(c.code, c.stdin);
     if (c.expectedError) {

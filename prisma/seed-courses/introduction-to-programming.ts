@@ -80,7 +80,7 @@ const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-5`, title: "Loops", module: 2, estimatedMinutes: 35, concept: { title: "Loops and iteration", slug: "loops", blooms: "understand", minutes: 35, prereq: ["conditionals"] }, content: lesson5() },
   { id: `${COURSE_ID}-lesson-6`, title: "Logic & debugging basics", module: 2, estimatedMinutes: 30, concept: { title: "Logic and debugging basics", slug: "logic-debugging-basics", blooms: "analyze", minutes: 30, prereq: ["loops"] }, content: lesson6() },
   { id: `${COURSE_ID}-lesson-7`, title: "Functions", module: 3, estimatedMinutes: 35, concept: { title: "Functions", slug: "functions", blooms: "apply", minutes: 35, prereq: ["logic-debugging-basics"] }, content: lesson7() },
-  { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: pending(8) },
+  { id: `${COURSE_ID}-lesson-8`, title: "Lists & dictionaries", module: 3, estimatedMinutes: 35, concept: { title: "Lists and dictionaries", slug: "lists-dictionaries", blooms: "apply", minutes: 35, prereq: ["functions"] }, content: lesson8() },
   { id: `${COURSE_ID}-lesson-9`, title: "Strings & files", module: 3, estimatedMinutes: 35, concept: { title: "Strings and files", slug: "strings-files", blooms: "apply", minutes: 35, prereq: ["lists-dictionaries"] }, content: pending(9) },
   { id: `${COURSE_ID}-lesson-10`, title: "Decomposition", module: 4, estimatedMinutes: 30, concept: { title: "Decomposition", slug: "decomposition", blooms: "analyze", minutes: 30, prereq: ["strings-files"] }, content: pending(10) },
   { id: `${COURSE_ID}-lesson-11`, title: "Testing & debugging", module: 4, estimatedMinutes: 30, concept: { title: "Testing and debugging", slug: "testing-debugging", blooms: "evaluate", minutes: 30, prereq: ["decomposition"] }, content: pending(11) },
@@ -1736,6 +1736,244 @@ function lesson7(): LessonContent {
       {
         type: "paragraph",
         text: "Next: lists and dictionaries. Functions collect actions into named pieces; the next lesson collects values into named structures — lists for an ordered sequence, dictionaries for a set of key-value pairs — and shows the word-count idiom that is the heart of the PY4E course.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 8 content — original writing, all code verified runnable (Python 3).
+// ---------------------------------------------------------------------------
+function lesson8(): LessonContent {
+  return {
+    blocks: [
+      // --- Learning outcomes ---
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: build and index a list; add to a list and loop over it; build a dictionary and look values up by key; and use the dictionary get() + 1 idiom to count occurrences — the pattern that lies at the heart of the PY4E course.",
+      },
+
+      // --- Prerequisites ---
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 4, 5 and 7. You need conditions, loops, and the idea of a function — because a dictionary usually lives inside a loop you are iterating, and the counting pattern you will learn is the whole reason these structures exist.",
+      },
+
+      // --- Big idea ---
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "List",
+        text: "A list is an ordered collection of values you can index by position and loop over. It answers the question, \"what is at the third position?\".",
+      },
+      {
+        type: "definition",
+        term: "Dictionary",
+        text: "A dictionary is a set of key-value pairs you look up by key, not by position. It answers the question, \"what is the value associated with this label?\" — and it is the structure you use to count, group, and associate data.",
+      },
+      {
+        type: "paragraph",
+        text: "Until now, every variable you wrote held exactly one value. That is a real constraint: to store a list of names, you would have needed one variable per name. A list lets you hold many values in one box, ordered and addressable. A dictionary lets you hold many values but address them by a meaningful label rather than a number. These are the first two structures that let a program work with real collections of data — the raw material of everything from inventory to word counts.",
+      },
+
+      // --- Concept explanation (why before how) ---
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
+      {
+        type: "paragraph",
+        text: "Choose the structure by the question you need to ask. If you need to know the position, or to keep things in a defined order, use a list. If you need to look up a value by a label — a name, a word, an id — use a dictionary. Trying to use a dictionary as an ordered list, or a list as a lookup table, is the most common awkwardness. A dictionary has no meaningful 'third position' because it is ordered by insertion but not indexed that way; and a list has no fast 'find the value for Ada' mechanism because it has no keys.",
+      },
+      {
+        type: "paragraph",
+        text: "The second thing is that these structures are genuinely useful only when combined with a loop. A list is built to be iterated: for item in my_list. A dictionary is built to be used inside a loop where you accumulate something keyed by a label. The powerful pattern is the two together: a dictionary initialized before a loop, updated on each pass, keyed by whatever the loop encounters.",
+      },
+      {
+        type: "paragraph",
+        text: "The single most valuable idiom in the whole course is the counting pattern: counts[key] = counts.get(key, 0) + 1. It does three things at once: it asks the dictionary what count is currently there, with a default of 0 if the key has never been seen; it adds one to that; and it stores the result back under the same key. One line, and it turns a stream of data into a tally. You will use this repeatedly from now through the final project.",
+      },
+
+      // --- Worked examples with code ---
+      { type: "heading", level: 2, text: "Worked example 1: lists — build and index" },
+      {
+        type: "paragraph",
+        text: "A list is created with square brackets and indexed from zero. The index is a position, not a rank you count from one.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `fruits = ["apple", "banana", "cherry"]\nprint(len(fruits))\nprint(fruits[0])\nprint(fruits[1])`,
+        output: "3\napple\nbanana",
+        caption: "len() gives the number of items. Index 0 is the first, index 1 the second — counting starts at zero.",
+      },
+      {
+        type: "paragraph",
+        text: "The hard part for most beginners is the zero-based indexing. fruits[0] is the first element (apple), not the second. This is why loops that count through a list often go from 0 to len minus one, or why range(len(...)) looks one short. Once you accept that the first item lives at index 0, list indexing becomes predictable.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 2: adding to a list and looping" },
+      {
+        type: "paragraph",
+        text: "append grows a list in place, and a for loop visits each element. Two ways to see a list grow and be consumed.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `fruits = ["apple", "banana", "cherry"]\nfruits.append("mango")\nprint(len(fruits))\nfor f in fruits:\n    print(f)`,
+        output: "4\napple\nbanana\ncherry\nmango",
+        caption: "append adds to the end; the for loop then visits each fruit in the order they appear.",
+      },
+      {
+        type: "paragraph",
+        text: "append modifies the list in place and does not return a new one, which is why you write fruits.append(...) as a statement rather than assigning. The for loop is the natural way to consume a list — it visits each element in order, one per pass. This pairing — a list built by appending, then consumed by a for loop — is the backbone of collecting results.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 3: dictionaries — look up by key and update" },
+      {
+        type: "paragraph",
+        text: "A dictionary matches keys to values and is built with braces. Look up by key; set by assigning to that key.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `ages = {"Ada": 19, "Gustav": 34}\nprint(ages["Ada"])\nages["Ada"] = 20\nprint(ages["Ada"])`,
+        output: "19\n20",
+        caption: "ages[\"Ada\"] reads the value for that key; the next line updates it to 20.",
+      },
+      {
+        type: "paragraph",
+        text: "The key is the label, not a number. You ask for Ada and get 19. Assigning ages[\"Ada\"] = 20 replaces the value 19 with 20 under the same key. There is no 'first entry' or 'second entry' to worry about — you address a dictionary purely by its keys. If you asked for a key that does not exist, ages[\"Mina\"], Python would raise a KeyError, which is where the get() method in the next example comes in.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example 4: the counting idiom" },
+      {
+        type: "paragraph",
+        text: "Count how often each word appears. The dictionary tracks the tally, and a single line does the whole job per word.",
+      },
+      {
+        type: "code",
+        language: "python",
+        code: `counts = {}\nfor w in ["the", "cat", "the", "dog"]:\n    counts[w] = counts.get(w, 0) + 1\nprint(counts)`,
+        output: "{'the': 2, 'cat': 1, 'dog': 1}",
+        caption: "counts.get(w, 0) returns the current tally or 0 if unseen; adding 1 stores the new total under w.",
+      },
+      {
+        type: "paragraph",
+        text: "Walk the first word, the. counts is empty, so counts.get(\"the\", 0) returns the default 0. Add 1 and store, giving counts[\"the\"] = 1. The second word, cat, is unseen, so it also gets 1. When the appears again, counts.get(\"the\", 0) now returns 1 — the existing tally — add 1 to get 2, and store 2. Reading the statement as \"give me what's there, or 0, then add one and put it back\" makes it second nature. This one idiom is the engine of the word-count programme you will build at the end of the course.",
+      },
+
+      // --- Common mistakes ---
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting that list indexing starts at 0. fruits[1] is the second element, not the first. This off-by-one is the single most common list bug.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Looking up a missing key without a default. ages[\"Mina\"] raises a KeyError if Mina is not there. Use ages.get(\"Mina\", 0) to fall back gracefully.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Treating a dictionary like an ordered list. A dictionary is keyed by label, not indexed by position, so don't expect a 'third entry'.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Making a list rather than a dictionary for a lookup task. To count or to find-by-label, a dictionary is the right structure; a list only offers position.",
+      },
+
+      // --- Check questions ---
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What is the index of the first element of a list, and why does it surprise beginners?",
+        answer: "0. Because Python numbers from zero, so the first element is at index 0, not 1.",
+        explanation: "Zero-based indexing means a list of length n has indices 0 to n-1. The first element is fruits[0]. This is why loops counting from 0 are the norm.",
+      },
+      {
+        type: "question",
+        prompt: "Why does ages[\"Mina\"] raise an error while ages.get(\"Mina\", 0) does not?",
+        answer: "The bracket form raises KeyError for a missing key, while get() returns the provided default (0) instead.",
+        explanation: "get() is the safe lookup: it returns the default if the key is absent. The bracket form demands the key be present, raising KeyError otherwise.",
+      },
+      {
+        type: "question",
+        prompt: "In the counting idiom counts[w] = counts.get(w, 0) + 1, what does the 0 do?",
+        answer: "It is the default returned if w has never been seen, so the first occurrence starts counting from 1.",
+        explanation: "get(w, 0) returns 0 for an unseen key instead of erroring. Adding 1 gives 1, and storing that under w starts the tally.",
+      },
+
+      // --- MCQs ---
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which structure is best for counting how many times each word appears?",
+        options: ["A list", "A dictionary", "A variable", "A string"],
+        correctIndex: 1,
+        explanation: "A dictionary maps each word (key) to its count (value), which is exactly the counting task. A list cannot look up by word efficiently.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the index of the first element in a list?",
+        options: ["1", "0", "-1", "It depends on the list"],
+        correctIndex: 1,
+        explanation: "Python is zero-indexed, so the first element is at index 0. The last element is at index -1, but the first is always 0.",
+      },
+      {
+        type: "mcq",
+        stem: "Which method adds an element to the end of a list?",
+        options: ["add()", "append()", "push()", "insert()"],
+        correctIndex: 1,
+        explanation: "append() grows the list by adding an element to the end. It modifies the list in place rather than returning a new one.",
+      },
+      {
+        type: "mcq",
+        stem: "What does counts.get(\"x\", 0) return when \"x\" is not in counts?",
+        options: ["An error", "0", "None", "The whole dictionary"],
+        correctIndex: 1,
+        explanation: "get(key, default) returns the default when the key is absent, so it returns 0 here rather than raising KeyError.",
+      },
+      {
+        type: "mcq",
+        stem: "Which best describes a dictionary?",
+        options: ["An ordered list indexed by numbers", "A set of key-value pairs looked up by key", "A single value stored under one name", "A loop that repeats"],
+        correctIndex: 1,
+        explanation: "A dictionary maps keys to values and is accessed by key. Order is not its organising principle.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the result of counts.get(w, 0) + 1 in the counting idiom?",
+        options: ["The number of keys in counts", "The current count for w, plus one", "The total of all values", "A new list"],
+        correctIndex: 1,
+        explanation: "It reads the current tally for w (or 0 if unseen) and adds one — the increment for this occurrence. The result is stored back under w.",
+      },
+      {
+        type: "mcq",
+        stem: "To read a value from a dictionary and handle a missing key gracefully, which form is correct?",
+        options: ["ages[\"Mina\"]", "ages.get(\"Mina\", 0)", "ages.pop(\"Mina\")", "ages.keys()"],
+        correctIndex: 1,
+        explanation: "get() returns a default for a missing key. The bracket form raises KeyError, and keys() lists keys rather than fetching a value.",
+      },
+      {
+        type: "mcq",
+        stem: "Why are lists and dictionaries best combined with loops?",
+        options: ["Loops make them faster", "Many real tasks build or scan the data, which requires iterating", "Structures forbid loops", "They cannot store more than one value"],
+        correctIndex: 1,
+        explanation: "The typical pattern is to build a structure by appending during a loop, then consume it by iterating. The loop is what does the work; the structure holds the results.",
+      },
+
+      // --- Summary & next ---
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A list is an ordered, position-addressable collection; a dictionary is a set of key-value pairs looked up by key. Choose the structure by the question you must answer. The counting idiom — counts[key] = counts.get(key, 0) + 1 — is the single most important pattern, and you will reach for it constantly.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: strings & files. Lesson 8 gave you structures to hold data; the next lesson shows you how to get text into them — slicing and splitting strings, then reading a file line by line — which closes the loop between stored data and the information you actually want to analyse.",
       },
     ],
   };
