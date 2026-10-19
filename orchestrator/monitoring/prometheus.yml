@@ -1,0 +1,5 @@
+# Grafana dashboards for agent monitoring
+# Metrics to collect:
+# - Build success/failure rates
+# - Agent response times
+# - Git push status

@@ -1,0 +1,51 @@
+{
+  "schema": "agent3.copyright.region-legal-tags.v1",
+  "agent": "agent3-pq-assistant",
+  "tags": {
+    "sa": {
+      "region": "South Africa",
+      "legalTag": "official-government-open",
+      "copyrightRegime": "state copyright — Copyright Act 98 of 1978, 50 years from publication",
+      "officialTrack": true,
+      "board": "NSC (DBE)",
+      "useCondition": "attribution + recommended written DBE permission for verbatim republication"
+    },
+    "tz": {
+      "region": "Tanzania",
+      "legalTag": "official-government-open",
+      "copyrightRegime": "Copyright and Neighbouring Rights Act 1999, government works 50 years from publication",
+      "officialTrack": true,
+      "board": "NECTA (CSEE)",
+      "useCondition": "attribution + recommended written NECTA permission for verbatim republication"
+    },
+    "ng": {
+      "region": "Nigeria",
+      "legalTag": "commercial-copyright",
+      "copyrightRegime": "Copyright Act 2022, life + 70 / government works 70 years from publication",
+      "officialTrack": false,
+      "boards": ["JAMB (UTME)", "WAEC", "NECO"],
+      "useCondition": "original JAMB-style / WAEC-style generation only; no verbatim past-question use without licence"
+    },
+    "gh": {
+      "region": "Ghana",
+      "legalTag": "commercial-copyright",
+      "copyrightRegime": "Copyright Act 2005 (Act 690)",
+      "officialTrack": false,
+      "boards": ["WASSCE (WAEC Ghana)"],
+      "useCondition": "original WASSCE-style generation only"
+    },
+    "ke": {
+      "region": "Kenya",
+      "legalTag": "commercial-copyright",
+      "copyrightRegime": "Copyright Act 2001; KNEC vests exam copyright",
+      "officialTrack": false,
+      "boards": ["KCSE (KNEC)"],
+      "useCondition": "original KCSE-style generation only; KNEC papers not officially published openly"
+    }
+  },
+  "defaultTag": {
+    "legalTag": "unevaluated",
+    "officialTrack": false,
+    "useCondition": "Agent 3 audit required before any past-question content enters the `official` track"
+  }
+}

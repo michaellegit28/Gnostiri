@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  pq-integrator:
+    build: ./sandbox/agent2-pq-integrator
+    volumes:
+      - ./content:/content
+      - ./sandbox/agent2-pq-integrator/src:/app/src
+    working_dir: /app
+    command: ["python", "src/main.py"]
+
+  pq-assistant:
+    build: ./sandbox/agent3-pq-assistant
+    volumes:
+      - ./sandbox/agent3-pq-assistant/src:/app/src
+    working_dir: /app
+    command: ["python", "src/main.py"]
+
+  uni-courses-builder:
+    build: ./sandbox/agent4-uni-courses-builder
+    volumes:
+      - ./sandbox/agent4-uni-courses-builder/src:/app/src
+    working_dir: /app
+    command: ["python", "src/main.py"]
+
+  orchestrator:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["python", "orchestrator/scripts/orchestrator.py"]

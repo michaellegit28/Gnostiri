@@ -1,0 +1,412 @@
+{
+  "schema": "agent3.discovery.content.v1",
+  "agent": "agent3-pq-assistant",
+  "domain": "extras",
+  "department": "neuroscience",
+  "name": "Neuroscience Lab",
+  "description": "The brain and nervous system — from neurons and synapses to circuits, cognition, and consciousness. Principles · Projects · Hypotheses · News.",
+  "version": "1.0.0",
+  "topics": [
+    {
+      "id": "neuroscience",
+      "domain": "extras",
+      "parentId": null,
+      "title": "Neuroscience Lab",
+      "slug": "neuroscience",
+      "description": "Everything neuroscience, every level — from single neurons to neural circuits, systems, cognition, and the frontiers of consciousness.",
+      "orderIndex": 2,
+      "isPublished": true,
+      "lessons": [
+        {
+          "id": "neuroscience-welcome",
+          "title": "Welcome to the Neuroscience Lab",
+          "orderIndex": 0,
+          "estimatedMinutes": 10,
+          "content": {
+            "blocks": [
+              {
+                "type": "heading",
+                "level": 2,
+                "text": "Welcome to the Neuroscience Lab"
+              },
+              {
+                "type": "paragraph",
+                "text": "Neuroscience studies the nervous system — how neurons signal, how circuits compute, how the brain gives rise to mind and behavior. Four modes guide your research: Principles (established knowledge), Projects (dissections, models, recordings), Hypotheses (open questions about consciousness and computation), and News (latest papers and discoveries)."
+              },
+              {
+                "type": "definition",
+                "term": "How to use the lab",
+                "text": "Pick a branch below. Each branch has levels. Read Principles, try a Project, ponder a Hypothesis, and check News. Depth tabs (Understand → Explore → Go Deeper → Research) reveal more detail."
+              },
+              {
+                "type": "callout",
+                "variant": "info",
+                "text": "Physics was the first lab. Neuroscience is second. More labs open later."
+              }
+            ]
+          }
+        }
+      ],
+      "children": [
+        {
+          "id": "ns-cellular-molecular",
+          "domain": "extras",
+          "parentId": "neuroscience",
+          "title": "Cellular & Molecular Neuroscience",
+          "slug": "cellular-molecular",
+          "description": "Neurons, glia, ion channels, synapses, neurotransmitters, signaling.",
+          "orderIndex": 0,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "ns-neuron-structure",
+              "title": "The Neuron",
+              "orderIndex": 0,
+              "estimatedMinutes": 25,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "The Neuron — Structure & Function"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "A neuron has four main parts: dendrites (receive signals), cell body/soma (integrates), axon (conducts action potential), and axon terminals (release neurotransmitters). Myelin sheaths (from oligodendrocytes/Schwann cells) speed conduction via saltatory propagation at Nodes of Ranvier."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Neuron parts",
+                    "text": "Dendrites: input. Soma: integration + nucleus. Axon: output cable. Axon hillock: spike initiation zone. Terminals: synaptic output."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Build a neuron model: Use pipe cleaners (dendrites), foam ball (soma), string (axon), beads (terminals). Label each part and trace signal direction (dendrite → soma → axon → terminal)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Why do neurons have branching dendrites but a single axon? Hypothesis: Dendrites collect thousands of inputs; one axon ensures a single, consistent output to downstream cells."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "ns-action-potential",
+              "title": "The Action Potential",
+              "orderIndex": 1,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "The Action Potential"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Neurons signal with electrical spikes — action potentials. At rest, the membrane is polarized (~−70 mV). Depolarization to threshold (~−55 mV) opens voltage-gated Na⁺ channels → rapid depolarization (~+30 mV) → K⁺ channels open → repolarization → hyperpolarization → refractory period. All-or-none: once threshold is reached, the spike fires fully."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Action potential phases",
+                    "text": "Resting → Threshold → Depolarization (Na⁺ in) → Repolarization (K⁺ out) → Hyperpolarization → Refractory period."
+                  },
+                  {
+                    "type": "principle",
+                    "term": "All-or-none law",
+                    "text": "An action potential either fires fully or not at all — there are no partial spikes. Stronger stimuli increase firing rate, not spike size."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Cockroach leg / worm preparation: Record extracellular spikes from an invertebrate nerve cord using a DIY amplifier (SpikerBox-style). Touch a sensory hair → observe spikes on a phone oscilloscope app."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Why the refractory period? Hypothesis: It prevents backward propagation of the spike and limits maximum firing frequency (~1 kHz)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "ns-synapse",
+              "title": "Synapses & Neurotransmitters",
+              "orderIndex": 2,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Synapses & Neurotransmitters"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Synapses are junctions where neurons communicate. Electrical synapses (gap junctions) are fast and bidirectional. Chemical synapses: presynaptic terminal releases neurotransmitter into the synaptic cleft; binds receptors on the postsynaptic cell. Major neurotransmitters: glutamate (excitatory), GABA (inhibitory), dopamine, serotonin, acetylcholine, norepinephrine."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Excitatory vs inhibitory",
+                    "text": "Glutamate → depolarizes (EPSP). GABA/glycine → hyperpolarizes (IPSP). Summation of EPSPs/IPSPs at the axon hillock decides whether the postsynaptic cell spikes."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Neurotransmitter card sort: Sort neurotransmitters into excitatory/inhibitory/modulatory, and match each to a function (dopamine: reward/movement; serotonin: mood/sleep; ACh: muscle/memory)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "How do antidepressants work if serotonin changes in hours but mood improves in weeks? Hypothesis: Downstream receptor adaptation and neuroplasticity, not just transmitter levels."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "ns-circuits-systems",
+          "domain": "extras",
+          "parentId": "neuroscience",
+          "title": "Circuits & Systems Neuroscience",
+          "slug": "circuits-systems",
+          "description": "Neural circuits, sensory systems, motor control, brain regions, networks.",
+          "orderIndex": 1,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "ns-sensory-vision",
+              "title": "Vision: Retina to Cortex",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Vision — From Photons to Perception"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Light hits the retina: photoreceptors (rods: dim light; cones: color) → bipolar cells → ganglion cells → optic nerve → LGN (thalamus) → primary visual cortex (V1). Retinal processing already computes contrast, edges, and motion before signals reach the brain. V1 detects orientation and spatial frequency; higher areas process faces, objects, motion."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Receptive field",
+                    "text": "The region of sensory space that, when stimulated, drives a neuron. V1 simple cells have oriented, elongated receptive fields (edge detectors)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Afterimage demo: Stare at a colored square for 30 seconds, then look at a white wall. You see the complementary color — opponent-process cells in retina/LGN are fatigued, revealing the opponent channel."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "How does V1 bind color, orientation, and motion into one object? Hypothesis: Feature integration via synchronized neural oscillations (gamma band, ~40 Hz). The binding problem remains debated."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "ns-motor",
+              "title": "Motor Control",
+              "orderIndex": 1,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Motor Control"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Motor hierarchy: spinal reflexes (fastest, local) → brainstem (posture, locomotion) → motor cortex + cerebellum + basal ganglia (voluntary movement, coordination, learning). Upper motor neurons (cortex) → lower motor neurons (spinal cord → muscle). The stretch reflex (knee jerk) is the simplest circuit: sensory → spinal interneuron → motor neuron → muscle."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Motor unit",
+                    "text": "One lower motor neuron plus all the muscle fibers it innervates. Small units for fine control (eye, fingers); large units for power (quadriceps)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Knee-jerk reflex: Tap the patellar tendon; observe leg kick. It's monosynaptic (sensory → motor neuron in spinal cord) — no brain needed. Compare reaction time to a voluntary button press."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Why do we have both cerebellum and basal ganglia for movement? Hypothesis: Cerebellum = timing, coordination, error correction; basal ganglia = action selection, gating, habit learning."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "ns-cognition",
+          "domain": "extras",
+          "parentId": "neuroscience",
+          "title": "Cognition & Behavior",
+          "slug": "cognition",
+          "description": "Memory, learning, attention, language, emotion, decision-making.",
+          "orderIndex": 2,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "ns-memory",
+              "title": "Memory & Learning",
+              "orderIndex": 0,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Memory & Learning"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Memory systems: sensory (milliseconds), short-term/working (seconds, ~7 items), long-term (years). Long-term splits into declarative (facts/events, hippocampal-dependent) and procedural (skills, habits, striatal). Learning = synaptic plasticity: long-term potentiation (LTP, strengthening) and long-term depression (LTD, weakening). Hebb's rule: 'cells that fire together, wire together.'"
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Hebbian plasticity",
+                    "text": "When neuron A repeatedly helps fire neuron B, the synapse A→B strengthens. Cellular basis of associative learning."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Human memory span test: Read digit strings of increasing length to a friend; find their forward digit span (typically 5–9). Test recall after distraction — working memory fades fast without rehearsal."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Where is a specific memory stored? Hypothesis: Engram — distributed across cell assemblies, with hippocampus as index for declarative memories (systems consolidation to cortex over time)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "ns-emotion",
+              "title": "Emotion & Reward",
+              "orderIndex": 1,
+              "estimatedMinutes": 30,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Emotion & Reward"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Key structures: amygdala (threat, fear conditioning), nucleus accumbens + ventral tegmental area (reward, dopamine), prefrontal cortex (regulation, top-down control), insula (interoception, gut feelings). Dopamine signals reward prediction error — not pleasure itself, but 'better than expected' learning signals."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Reward prediction error",
+                    "text": "Dopamine bursts when reward exceeds prediction; dips when expected reward is omitted. This drives learning (Rescorla-Wagner model)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Pavlovian conditioning (human): Pair a neutral tone with a puff of air to the eye. After pairings, tone alone triggers blink. Measure trials to acquisition and extinction."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Is addiction a learning disorder? Hypothesis: Drugs hijack the dopamine prediction-error system, creating pathological learned associations between cues and reward."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "ns-frontiers",
+          "domain": "extras",
+          "parentId": "neuroscience",
+          "title": "Frontiers & Consciousness",
+          "slug": "frontiers",
+          "description": "Consciousness, brain-computer interfaces, neurodevelopment, disorders, AI-brain comparisons.",
+          "orderIndex": 3,
+          "isPublished": true,
+          "lessons": [
+            {
+              "id": "ns-consciousness",
+              "title": "Consciousness",
+              "orderIndex": 0,
+              "estimatedMinutes": 40,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Consciousness — The Hard Problem"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Consciousness has two aspects: easy problems (attention, integration, reportability, sleep/wake cycles — mechanistic) and the hard problem (why does processing feel like something? qualia). Leading theories: Global Workspace Theory (information broadcast to a 'theater'), Integrated Information Theory (consciousness = integrated information, Φ), Higher-Order Thought (awareness requires meta-representation). Neural correlates: posterior hot zone, prefrontal-parietal networks."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Neural correlates of consciousness (NCC)",
+                    "text": "The minimal neural mechanisms sufficient for any specific conscious experience — e.g., V1 activity correlates with visual awareness, but isn't sufficient alone."
+                  },
+                  {
+                    "type": "project",
+                    "text": "Binocular rivalry demo: Show different images to each eye (red/blue glasses). Perception flips spontaneously — consciousness selects one input despite constant sensory input. Record flip rate."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Could a digital computer be conscious? Hypothesis: Integrated Information Theory says maybe (if Φ is high); functionalists say yes (if it implements the right computations); biological naturalists say no (needs specific biology). Open question."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "ns-bci",
+              "title": "Brain-Computer Interfaces",
+              "orderIndex": 1,
+              "estimatedMinutes": 35,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "Brain-Computer Interfaces (BCI)"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "BCIs read neural signals and translate them into commands. Non-invasive: EEG (scalp, millisecond timing, poor spatial resolution). Invasive: Utah arrays, Neuropixels (single-unit, high resolution, surgical risk). Applications: prosthetic control, communication for locked-in patients, sensory restoration (cochlear/retinal implants)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "EEG",
+                    "text": "Electroencephalography — measures summed electrical activity of cortical neurons via scalp electrodes. Good temporal resolution (~ms), poor spatial resolution (~cm)."
+                  },
+                  {
+                    "type": "project",
+                    "text": "EEG alpha demo: Use an OpenBCI or Muse headset. Eyes closed → strong alpha (8–12 Hz) over occipital cortex; eyes open → alpha suppressed (visual input desynchronizes alpha)."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "text": "Can BCI restore speech directly from thought? Hypothesis: Yes — recent studies decode attempted speech from motor cortex/sensorimotor signals at word-per-minute rates. Still early-stage."
+                  }
+                ]
+              }
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ],
+  "modes": {
+    "principles": "Established laws, theories, and fundamentals — what we know",
+    "projects": "Hands-on experiments, dissections, recordings — what we can do",
+    "hypotheses": "Open questions, frontier ideas, thought experiments — what we don't know yet",
+    "news": "Latest scientific developments, papers, breakthroughs — what's happening now"
+  },
+  "levels": [
+    "Cellular & Molecular Neuroscience",
+    "Circuits & Systems Neuroscience",
+    "Cognition & Behavior",
+    "Frontiers & Consciousness"
+  ],
+  "depthTabs": ["Understand", "Explore", "Go Deeper", "Research"]
+}

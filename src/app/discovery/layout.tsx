@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Discovery — Keep Going Deeper | Gnostiri",
+  title: "Discovery Lab — Research Physics | Gnostiri",
   description:
-    "Beyond the curriculum: professional certifications, practical skills, and elective topics.",
+    "The Discovery Lab is Gnostiri's research space. Physics is the first lab — every level, every branch: Principles, Projects, Hypotheses, News.",
 };
 
 export default function DiscoveryLayout({
