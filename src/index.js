@@ -1,3 +1,4 @@
+import { writeFileSync } from "node:fs";
 import {
   listBoards,
   generateBoardSet,
@@ -5,7 +6,10 @@ import {
   SUBJECTS,
   getQuestionPair,
   isOfficialPastBoard,
+  getBoard,
+  boardRegion,
 } from "./integrator.js";
+import { generateSubject, GENERATORS } from "./generator.js";
 
 const [cmd, ...args] = process.argv.slice(2);
 
@@ -83,6 +87,72 @@ switch (cmd) {
     break;
   }
 
+  case "generate": {
+    const boardId = args[0] || "jamb";
+    const subject = args[1];
+    const count = parseInt(args[2] || "500", 10);
+    const outIdx = args.indexOf("--out");
+    const outFile = outIdx >= 0 ? args[outIdx + 1] : null;
+
+    if (!subject || !GENERATORS[subject]) {
+      console.error(`Unknown subject: ${subject || "(none)"}. Valid: ${Object.keys(GENERATORS).join(", ")}`);
+      process.exit(1);
+    }
+    const board = getBoard(boardId);
+    if (!board) {
+      console.error(`Unknown board: ${boardId}`);
+      process.exit(1);
+    }
+
+    const useOfficial = isOfficialPastBoard(boardId);
+    const region = boardRegion(boardId);
+    const generated = generateSubject(subject, count);
+
+    const records = generated.map((q) => {
+      const v = useOfficial ? q.versions.official : q.versions.global;
+      return {
+        id: `${boardId}-${q.id}`,
+        coreId: q.coreId,
+        provenance: useOfficial ? "official" : "original",
+        variant: useOfficial ? "A" : "B",
+        track: [region.toUpperCase()],
+        styleBoard: boardId.toUpperCase(),
+        domain: "highschool",
+        type: "mcq",
+        questionText: v.text,
+        options: v.options,
+        correctAnswer: v.answer,
+        hint: q.core.formula,
+        difficulty: q.core.difficulty,
+        sourceExam: `${boardId}-generated-${subject}`,
+        reviewStatus: useOfficial ? "needs-human-review" : "generated",
+      };
+    });
+
+    let invalid = 0;
+    for (const r of records) {
+      if (!r.options.includes(r.correctAnswer)) invalid++;
+    }
+    if (invalid > 0) {
+      console.error(`Validation failed: ${invalid} questions have answer not in options`);
+      process.exit(1);
+    }
+
+    console.log(`Generated ${records.length} ${useOfficial ? "official (A)" : "cloned-variant (B)"} questions for ${board.name} / ${subject}`);
+    if (outFile) {
+      writeFileSync(outFile, JSON.stringify(records, null, 2) + "\n");
+      console.log(`Wrote ${outFile}`);
+    } else {
+      records.slice(0, 5).forEach((r, i) => {
+        console.log(`\nQ${i + 1}: ${r.questionText}`);
+        r.options.forEach((o, oi) => console.log(`  ${String.fromCharCode(65 + oi)}. ${o}`));
+        console.log(`  A: ${r.correctAnswer}`);
+      });
+      if (records.length > 5) console.log(`\n... and ${records.length - 5} more (use --out <file> to save)`);
+    }
+    break;
+  }
+
   case "all": {
     const count = parseInt(args[0] || "3", 10);
     const sets = generateAllBoards({ count });
@@ -102,13 +172,14 @@ switch (cmd) {
     console.log("  boards                    List all 27 exam boards (SA & TZ = official)");
     console.log("  subjects                  List high school subjects");
     console.log("  questions <board> [count] Generate questions (default jamb, 5)");
+    console.log("  generate <board> <subject> [count] [--out file]");
+    console.log("                           Generate schema-valid bank (default 500)");
     console.log("  pair <questionId>         Show Version A (official) vs Version B (cloned)");
     console.log("  all [count]               Generate for all boards (default 3 each)");
     console.log("");
     console.log("Examples:");
     console.log("  node src/index.js questions jamb 6");
-    console.log("  node src/index.js questions waec 6");
-    console.log("  node src/index.js questions sa 6");
+    console.log("  node src/index.js generate jamb math 500 --out content/questions/jamb-math.json");
     console.log("  node src/index.js pair m001");
     process.exit(1);
   }
