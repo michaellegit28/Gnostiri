@@ -3,22 +3,31 @@ import {
   generateBoardSet,
   generateAllBoards,
   SUBJECTS,
-  getQuestionVariant,
-  boardRegion,
+  getQuestionPair,
+  isOfficialPastBoard,
 } from "./integrator.js";
 
 const [cmd, ...args] = process.argv.slice(2);
+
+function printQuestion(q, i) {
+  console.log(`Q${i + 1} [${q.subject}] (${q.core.difficulty}) — ${q.version}:`);
+  console.log(`   ${q.text}`);
+  if (q.options && q.options.length) {
+    q.options.forEach((opt, oi) => console.log(`   ${String.fromCharCode(65 + oi)}. ${opt}`));
+  }
+  console.log(`   A: ${q.answer}`);
+  if (q.attribution) console.log(`   [${q.attribution}]`);
+  if (q.disclaimer) console.log(`   [${q.disclaimer}]`);
+  console.log("");
+}
 
 switch (cmd) {
   case "boards": {
     console.log(`High School Exam Boards (${listBoards().length}):`);
     listBoards().forEach((b, i) => {
-      console.log(
-        `  ${i + 1}. ${b.name} (${b.id}) — ${b.region}, ${b.level}`
-      );
+      const tag = isOfficialPastBoard(b.id) ? "  [OFFICIAL PAST QUESTIONS]" : "";
+      console.log(`  ${i + 1}. ${b.name} (${b.id}) — ${b.region}, ${b.level}${tag}`);
     });
-    console.log("");
-    console.log("All boards receive cloned-variant questions only.");
     break;
   }
 
@@ -29,23 +38,13 @@ switch (cmd) {
   }
 
   case "questions": {
-    const boardId = args[0] || "aqa";
+    const boardId = args[0] || "jamb";
     const count = parseInt(args[1] || "5", 10);
     try {
       const set = generateBoardSet(boardId, { count });
-      console.log(
-        `\nPQ Set for ${set.board.name} (${set.board.level}, ${set.board.region})`
-      );
-      console.log(
-        `Version: ${set.tag} | Region: ${set.region} | Generated: ${set.generatedAt} | Questions: ${set.count}\n`
-      );
-      set.questions.forEach((q, i) => {
-        console.log(
-          `Q${i + 1} [${q.subject}] (${q.core.difficulty}) — ${q.version}:`
-        );
-        console.log(`   ${q.text}`);
-        console.log(`   A: ${q.answer}\n`);
-      });
+      console.log(`\nPQ Set for ${set.board.name} (${set.board.level}, ${set.board.region})`);
+      console.log(`Version: ${set.tag} | Generated: ${set.generatedAt} | Questions: ${set.count}\n`);
+      set.questions.forEach((q, i) => printQuestion(q, i));
     } catch (e) {
       console.error(e.message);
       process.exit(1);
@@ -53,36 +52,44 @@ switch (cmd) {
     break;
   }
 
-  case "variant": {
+  case "pair": {
     const questionId = args[0];
     if (!questionId) {
-      console.error("Usage: node src/index.js variant <questionId>");
+      console.error("Usage: node src/index.js pair <questionId>");
       process.exit(1);
     }
-    const v = getQuestionVariant(questionId);
-    if (!v) {
+    const pair = getQuestionPair(questionId);
+    if (!pair) {
       console.error(`Question not found: ${questionId}`);
       process.exit(1);
     }
-    console.log(`\nCloned variant for ${questionId}\n`);
-    console.log(`  ${v.text}`);
-    console.log(`  A: ${v.answer}`);
-    console.log(`  Tag: ${v.tag} | Region: ${v.region}`);
-    console.log(`  Core: ${v.core.formula} | ${v.core.structure}\n`);
+    console.log(`\nQuestion pair for ${questionId}\n`);
+    console.log(`Version A — OFFICIAL (South Africa / Tanzania):`);
+    console.log(`  ${pair.official.text}`);
+    if (pair.official.options && pair.official.options.length) {
+      pair.official.options.forEach((opt, i) => console.log(`  ${String.fromCharCode(65 + i)}. ${opt}`));
+    }
+    console.log(`  A: ${pair.official.answer}`);
+    console.log(`  Tag: ${pair.official.tag}`);
+    console.log(`  Attestation: ${pair.official.attestation}\n`);
+    console.log(`Version B — CLONED VARIANT (JAMB / WAEC / global):`);
+    console.log(`  ${pair.global.text}`);
+    if (pair.global.options && pair.global.options.length) {
+      pair.global.options.forEach((opt, i) => console.log(`  ${String.fromCharCode(65 + i)}. ${opt}`));
+    }
+    console.log(`  A: ${pair.global.answer}`);
+    console.log(`  Tag: ${pair.global.tag}`);
+    console.log(`  Core: ${pair.global.core.formula} | ${pair.global.core.structure}\n`);
     break;
   }
 
   case "all": {
     const count = parseInt(args[0] || "3", 10);
     const sets = generateAllBoards({ count });
-    console.log(
-      `\nGenerated PQ sets for all ${sets.length} boards (${count} questions each)\n`
-    );
+    console.log(`\nGenerated PQ sets for all ${sets.length} boards (${count} questions each)\n`);
     sets.forEach((s) => {
       console.log(`## ${s.board.name} — ${s.tag} (${s.count} questions)`);
-      s.questions.forEach((q) => {
-        console.log(`  - [${q.version}] ${q.text}`);
-      });
+      s.questions.forEach((q) => console.log(`  - [${q.version}] ${q.text}`));
       console.log("");
     });
     break;
@@ -92,20 +99,17 @@ switch (cmd) {
     console.log("Usage: node src/index.js <command> [args]");
     console.log("");
     console.log("Commands:");
-    console.log("  boards              List all exam boards");
-    console.log("  subjects            List high school subjects");
-    console.log(
-      "  questions <board> [count]  Generate cloned-variant questions for a board (default aqa, 5)"
-    );
-    console.log(
-      "  variant <questionId>  Show the cloned variant for a question"
-    );
-    console.log("  all [count]         Generate cloned variants for all boards (default 3 each)");
+    console.log("  boards                    List all 27 exam boards (SA & TZ = official)");
+    console.log("  subjects                  List high school subjects");
+    console.log("  questions <board> [count] Generate questions (default jamb, 5)");
+    console.log("  pair <questionId>         Show Version A (official) vs Version B (cloned)");
+    console.log("  all [count]               Generate for all boards (default 3 each)");
     console.log("");
-    console.log("Example: node src/index.js questions sa 6");
-    console.log("Example: node src/index.js questions tz 6");
-    console.log("Example: node src/index.js questions edexcel 6");
-    console.log("Example: node src/index.js variant m001");
+    console.log("Examples:");
+    console.log("  node src/index.js questions jamb 6");
+    console.log("  node src/index.js questions waec 6");
+    console.log("  node src/index.js questions sa 6");
+    console.log("  node src/index.js pair m001");
     process.exit(1);
   }
 }

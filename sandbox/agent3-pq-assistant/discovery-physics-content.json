@@ -4,9 +4,14 @@
   "domain": "extras",
   "department": "physics",
   "name": "Physics Lab",
-  "description": "Everything physics — every level, from foundations to the research frontier. Principles · Projects · Hypotheses · News.",
-  "version": "1.0.0",
-  "wipedJunkTopics": true,
+  "description": "Deep conceptual physics — from first principles to the research frontier. Beyond school formulas: interpretations, open problems, and the studies behind the equations.",
+  "version": "2.0.0",
+  "depthTabs": [
+    "Understand",
+    "Explore",
+    "Go Deeper",
+    "Research"
+  ],
   "topics": [
     {
       "id": "physics",
@@ -14,7 +19,7 @@
       "parentId": null,
       "title": "Physics Lab",
       "slug": "physics",
-      "description": "The inaugural Discovery Lab. All levels of physics, every branch — principles, projects, hypotheses, and the latest news.",
+      "description": "The inaugural Discovery Lab. Deep conceptual physics at every level — foundations, interpretations, open problems, and the studies behind the equations.",
       "orderIndex": 0,
       "isPublished": true,
       "lessons": [
@@ -32,17 +37,25 @@
               },
               {
                 "type": "paragraph",
-                "text": "This is the inaugural Discovery Lab — a research space, not a classroom. Here you'll find every level of physics, from foundational measurement to the edges of quantum gravity and cosmology. Four modes guide your research: Principles (established knowledge), Projects (hands-on builds and experiments), Hypotheses (open questions and frontier ideas), and News (latest scientific developments)."
+                "text": "This lab is not a classroom. School physics teaches you how to calculate; this lab teaches you how to think about what the calculations mean. Every branch contains deep conceptual studies — the interpretations, open problems, and frontier ideas that standard curricula skip."
               },
               {
                 "type": "definition",
-                "term": "How to use the lab",
-                "text": "Pick a branch below. Each branch has levels (Foundations → Research). At each level, read the Principles, try a Project, ponder a Hypothesis, and check the News. Depth tabs (Understand → Explore → Go Deeper → Research) reveal more detail as you go."
+                "term": "Four research modes",
+                "text": "Principles: established laws and their conceptual meaning. Projects: hands-on builds and experiments. Hypotheses: open questions and frontier ideas. News: latest scientific developments."
               },
               {
                 "type": "callout",
                 "variant": "info",
-                "text": "Physics is first. Chemistry, Biology, Mathematics, and more labs open later. Everything here is live, verifiable, and sourced."
+                "text": "Start anywhere. Depth tabs (Understand → Explore → Go Deeper → Research) reveal more conceptual layers as you progress."
+              },
+              {
+                "type": "research",
+                "text": "Wigner was struck that mathematics invented with no reference to the physical world repeatedly turns out to describe it with astonishing precision — a puzzle that still frames how we think about physical law.",
+                "citation": "Wigner, E. P. (1960). The Unreasonable Effectiveness of Mathematics in the Natural Sciences. Communications on Pure and Applied Mathematics, 13(1), 1–14.",
+                "term": "Why physics is unusual",
+                "doi": "10.1002/cpa.3160130102",
+                "url": "https://doi.org/10.1002/cpa.3160130102"
               }
             ]
           }
@@ -53,82 +66,143 @@
           "id": "physics-foundations",
           "domain": "extras",
           "parentId": "physics",
-          "title": "Foundations",
+          "title": "Foundations of Physics",
           "slug": "foundations",
-          "description": "Level 0 — Novice. Measurement, units, vectors, the scientific method, order-of-magnitude thinking.",
+          "description": "What is physics? Measurement, uncertainty, models vs reality, the scientific method, and why equations are maps, not territory.",
           "orderIndex": 1,
           "isPublished": true,
           "lessons": [
             {
-              "id": "foundations-measurement",
-              "title": "Measurement & Units",
+              "id": "foundations-what-is-physics",
+              "title": "What Is Physics?",
               "orderIndex": 0,
-              "estimatedMinutes": 20,
+              "estimatedMinutes": 25,
+              "depth": 0,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Measurement & Units"
+                    "type": "principle",
+                    "term": "Physics as modeling",
+                    "text": "Physics does not describe reality directly — it builds models. An equation is a map, not the territory. Newton's laws, Schrödinger's equation, Einstein's field equations are all models with domains of validity. A model works until it doesn't; then we need a new one.",
+                    "equation": "model → prediction → observation → refinement"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Physics begins with measurement. Every physical quantity has a magnitude and a unit. The SI system (Système International) defines seven base units: metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol), candela (cd). All other units are derived."
+                    "text": "School physics presents equations as truth. Deep physics asks: under what conditions does this model hold? Where does it break? Classical mechanics works for everyday objects but fails at atomic scales and near light speed. Quantum mechanics works for atoms but we still don't agree on what it says about reality. General relativity works for galaxies and black holes but not for the early universe or quantum scales."
                   },
                   {
-                    "type": "definition",
-                    "term": "SI Base Units",
-                    "text": "Length: metre (m); Mass: kilogram (kg); Time: second (s); Electric current: ampere (A); Thermodynamic temperature: kelvin (K); Amount of substance: mole (mol); Luminous intensity: candela (cd)."
+                    "type": "principle",
+                    "term": "The map-territory distinction",
+                    "text": "The map is not the territory. Equations predict observations; they do not necessarily tell us what 'is' happening beneath. This distinction is the root of the quantum measurement problem and the interpretation crisis."
                   },
                   {
-                    "type": "callout",
-                    "variant": "info",
-                    "text": "Significant figures reflect measurement precision. Never report more digits than your instrument justifies."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Project: Build a Pendulum Timer"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Materials: string, small dense mass (bob), stopwatch, ruler, protractor. Procedure: Vary string length L; time 10 oscillations for small angles (<10°); plot T² vs L. Expect slope = 4π²/g. This measures g without a scale."
+                    "type": "project",
+                    "term": "Model-building exercise",
+                    "text": "Pick a everyday phenomenon (a pendulum, a cooling cup, a bouncing ball). Build three models: (1) a simple school model, (2) a more detailed model including friction/air resistance, (3) a model including quantum or relativistic corrections. Compare predictions. Where does each model fail?"
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Does the period depend on bob mass? Hypothesis: No — for a simple pendulum, T depends only on L and g. Test by swapping bobs of different mass at the same L."
+                    "term": "Is there a final theory?",
+                    "text": "Hypothesis: Physics may never reach a 'final theory' — each model may be an approximation valid in a domain, with no end in sight. Status: Open debate. Some physicists (string theorists) seek a theory of everything; others think reality is layered with no bottom."
+                  },
+                  {
+                    "type": "news-item",
+                    "term": "Effective field theory revolution",
+                    "text": "Modern physics increasingly views theories as 'effective' — valid at certain energy scales, with new physics emerging at higher scales. This mindset, formalized in the 1970s-80s, changed how particle physicists think about the Standard Model and quantum gravity. Source: Wilsonian effective field theory (1970s), modern reviews (2020s)."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Anderson argued that the reductionist hope — that knowing the fundamental laws lets you reconstruct everything — is false. At every scale of complexity, genuinely new laws emerge. This is why condensed matter, chemistry, and biology are not 'just applied particle physics'.",
+                    "citation": "Anderson, P. W. (1972). More Is Different: Broken symmetry and the nature of the hierarchical structure of science. Science, 177(4047), 393–396.",
+                    "term": "Physics comes in levels",
+                    "doi": "10.1126/science.177.4047.393",
+                    "url": "https://doi.org/10.1126/science.177.4047.393"
                   }
                 ]
               }
             },
             {
-              "id": "foundations-vectors",
-              "title": "Vectors & Scalars",
+              "id": "foundations-measurement-uncertainty",
+              "title": "Measurement & Uncertainty",
               "orderIndex": 1,
-              "estimatedMinutes": 25,
+              "estimatedMinutes": 30,
+              "depth": 1,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Vectors & Scalars"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Scalars have magnitude only (mass, temperature, time). Vectors have magnitude and direction (displacement, velocity, force, acceleration). Vector addition uses the parallelogram rule or head-to-tail method; components resolve a vector into perpendicular axes."
+                    "type": "principle",
+                    "term": "What is a measurement?",
+                    "text": "In classical physics, measurement reveals a pre-existing value. In quantum mechanics, this assumption breaks — a measurement may create the value it reveals. This is not just 'instrument imprecision'; it is a structural feature of quantum theory that school physics glosses over."
                   },
                   {
                     "type": "definition",
-                    "term": "Vector components",
-                    "text": "A vector A with magnitude A at angle θ from the x-axis: Aₓ = A cos θ, Aᵧ = A sin θ. Magnitude: |A| = √(Aₓ² + Aᵧ²). Direction: tan θ = Aᵧ/Aₓ."
+                    "term": "Uncertainty principle",
+                    "text": "Δx·Δp ≥ ℏ/2 — not a limit on measurement quality, but a fundamental constraint on what properties can simultaneously be definite. It arises from wave-particle duality, not from clumsy instruments."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "School physics treats uncertainty as experimental error (parallax, reaction time, instrument resolution). Deep physics treats uncertainty as ontological — nature itself may not possess simultaneous definite values for conjugate variables. The question becomes: does the particle have a position before we measure it, or does the measurement bring it into being?"
                   },
                   {
                     "type": "project",
-                    "text": "Force table experiment: Three spring scales pull a ring to equilibrium. Verify vector sum ≈ 0. Record magnitudes and angles; compute components; check ΣFₓ ≈ 0 and ΣFᵧ ≈ 0."
+                    "term": "Single-slit diffraction uncertainty",
+                    "text": "Shine a laser through a variable slit onto a screen. Narrow the slit: the spot spreads wider (Δx decreases, Δp increases). Measure spot width vs slit width; verify Δx·Δp roughly constant. This is not instrument error — it is wave nature."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Can three forces of unequal magnitude produce equilibrium? Hypothesis: Yes — if they form a closed vector triangle (head-to-tail returns to start). Test on a force table."
+                    "term": "Hidden variables?",
+                    "text": "Hypothesis: Maybe particles do have definite positions and momenta, but we cannot access them (hidden variables). Bell's theorem (1964) and subsequent experiments (Aspect 1982, loophole-free tests 2015) suggest local hidden variables cannot explain quantum results. Non-local hidden variables (Bohmian mechanics) remain possible. Status: Experimentally constrained, interpretively open."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Weak measurements let experimenters probe how much a measurement disturbs a quantum system. They confirmed Ozawa's revised relation and directly violated Heisenberg's original measurement–disturbance bound — showing 'uncertainty' is subtler than the textbook slogan.",
+                    "citation": "Rozema, L. A., et al. (2012). Violation of Heisenberg's Measurement-Disturbance Relationship by Weak Measurements. Physical Review Letters, 109, 100404.",
+                    "term": "Uncertainty is not clumsiness",
+                    "doi": "10.1103/PhysRevLett.109.100404",
+                    "url": "https://doi.org/10.1103/PhysRevLett.109.100404"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "foundations-scientific-method",
+              "title": "The Scientific Method — Myth & Reality",
+              "orderIndex": 2,
+              "estimatedMinutes": 25,
+              "depth": 2,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Falsification vs confirmation",
+                    "text": "Popper: science progresses by falsification, not confirmation. A theory is scientific only if it makes risky predictions that could prove it wrong. School physics presents theories as accumulated truth; deep physics presents them as surviving attempts at falsification."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Thomas Kuhn showed science proceeds through paradigms — normal science within a framework, then crisis when anomalies accumulate, then revolution (paradigm shift). Physics examples: Newtonian → Einsteinian (relativity), classical → quantum. The shift is not just adding equations; it is changing what questions are meaningful."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Theory-ladenness of observation",
+                    "text": "What we 'observe' depends on our theoretical framework. Two physicists looking at the same cloud-chamber track see different things: one sees a particle path, another sees a probability-amplitude interaction."
+                  },
+                  {
+                    "type": "project",
+                    "term": "Anomaly hunting",
+                    "text": "Find an anomaly in established physics (e.g., the Hubble tension, the muon g-2 discrepancy, the proton radius puzzle). Map the anomaly → proposed explanations → experiments that could resolve it. Practice thinking like a crisis-era physicist."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Is physics approaching a crisis?",
+                    "text": "Hypothesis: Multiple simultaneous anomalies (dark matter, dark energy, quantum gravity, measurement problem, Hubble tension) may signal a pre-revolutionary state. Status: Speculative; some see normal puzzle-solving, others see paradigm crisis."
+                  },
+                  {
+                    "type": "research",
+                    "text": "The Open Science Collaboration repeated 100 published psychology experiments with high power. Only 36% of replications found significant results and effect sizes roughly halved — a landmark, direct measurement of how shaky single-study findings can be.",
+                    "citation": "Open Science Collaboration (2015). Estimating the reproducibility of psychological science. Science, 349(6251), aac4716.",
+                    "term": "Replication under the microscope",
+                    "doi": "10.1126/science.aac4716",
+                    "url": "https://doi.org/10.1126/science.aac4716"
                   }
                 ]
               }
@@ -142,198 +216,134 @@
           "parentId": "physics",
           "title": "Classical Mechanics",
           "slug": "classical-mechanics",
-          "description": "Level 1 — Newtonian mechanics. Kinematics, dynamics, energy, momentum, rotation, gravitation.",
+          "description": "Beyond F=ma: Lagrangian and Hamiltonian mechanics, chaos, determinism, symmetry, and the principle of least action.",
           "orderIndex": 2,
           "isPublished": true,
           "lessons": [
             {
-              "id": "mech-kinematics",
-              "title": "Kinematics",
+              "id": "mech-least-action",
+              "title": "The Principle of Least Action",
               "orderIndex": 0,
-              "estimatedMinutes": 30,
-              "content": {
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Kinematics — Motion Without Causes"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Kinematics describes motion independent of its causes. Position x(t), velocity v = dx/dt, acceleration a = dv/dt. For constant acceleration: v = v₀ + at, x = x₀ + v₀t + ½at², v² = v₀² + 2aΔx."
-                  },
-                  {
-                    "type": "definition",
-                    "term": "Constant-acceleration equations",
-                    "text": "v = v₀ + at · Δx = v₀t + ½at² · v² = v₀² + 2aΔx · Δx = ½(v₀ + v)t"
-                  },
-                  {
-                    "type": "project",
-                    "text": "Galileo's ramp: Roll a ball down an inclined plane at different angles. Measure time to travel fixed distances. Verify distance ∝ t² (constant acceleration). Extract g_eff = g sin θ."
-                  },
-                  {
-                    "type": "hypothesis",
-                    "text": "Aristotle claimed heavier objects fall faster. Hypothesis: In vacuum, all objects fall at the same acceleration regardless of mass. Test: drop a feather and a coin in an evacuated tube."
-                  }
-                ]
-              }
-            },
-            {
-              "id": "mech-newton",
-              "title": "Newton's Laws of Motion",
-              "orderIndex": 1,
               "estimatedMinutes": 35,
+              "depth": 1,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Newton's Three Laws"
+                    "type": "principle",
+                    "term": "Least action",
+                    "text": "Nature does not follow forces step by step; it minimizes (or extremizes) the action S = ∫L dt, where L = T − V (kinetic minus potential). The path a system takes is the one that makes the action stationary. This is not a calculation trick — it is a deep statement about how nature chooses."
                   },
                   {
                     "type": "paragraph",
-                    "text": "1st: A body remains at rest or in uniform motion unless acted on by a net force (inertia). 2nd: F_net = ma — acceleration is proportional to net force and inversely proportional to mass. 3rd: For every action, there is an equal and opposite reaction (F₁₂ = −F₂₁)."
+                    "text": "School physics starts with forces (F = ma). Deep physics starts with action. The principle of least action is more fundamental: it works for fields (electromagnetism, gravity, quantum field theory), for relativity, and for quantum mechanics (path integral formulation). Newton's laws emerge from it in the classical limit."
                   },
                   {
                     "type": "definition",
-                    "term": "Newton's Second Law",
-                    "text": "F_net = ma, where F_net is the vector sum of all forces on a body of mass m producing acceleration a."
+                    "term": "Euler-Lagrange equation",
+                    "text": "d/dt(∂L/∂q̇) − ∂L/∂q = 0 — the condition for stationary action. Generalized coordinates q make this work for any system (pendulums, fields, strings)."
                   },
                   {
                     "type": "project",
-                    "text": "Atwood machine: Two masses connected by a string over a pulley. Measure acceleration; compare with a = (m₁ − m₂)g / (m₁ + m₂). Vary mass difference and total mass."
+                    "term": "Brachistochrone",
+                    "text": "Find the curve of fastest descent between two points under gravity. Use variational calculus or numerical optimization. Verify it is a cycloid, not a straight line. This is where the calculus of variations was born (Bernoulli, 1696)."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Is mass the same quantity in F = ma (inertial mass) and in gravity (gravitational mass)? Hypothesis: Yes — the equivalence principle. Eötvös experiment tests this to high precision."
+                    "term": "Teleology in physics?",
+                    "text": "Hypothesis: Least action looks like nature 'knows' the future (it picks the optimal path). Is this teleology? Resolution: the action principle is equivalent to local differential equations; no future knowledge needed. But the conceptual tension remains. Status: Resolved mathematically, philosophically intriguing."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Feynman showed that the classical action is not a curiosity — it is the phase of the quantum amplitude. The path of least action dominates because nearby paths add constructively. This is the bridge from classical mechanics to the path integral.",
+                    "citation": "Feynman, R. P. (1948). Space-Time Approach to Non-Relativistic Quantum Mechanics. Reviews of Modern Physics, 20(2), 367–387.",
+                    "term": "Action becomes the quantum rule",
+                    "doi": "10.1103/RevModPhys.20.367",
+                    "url": "https://doi.org/10.1103/RevModPhys.20.367"
                   }
                 ]
               }
             },
             {
-              "id": "mech-energy",
-              "title": "Work, Energy & Power",
+              "id": "mech-lagrangian-hamiltonian",
+              "title": "Lagrangian & Hamiltonian Mechanics",
+              "orderIndex": 1,
+              "estimatedMinutes": 40,
+              "depth": 2,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Symmetry → conservation",
+                    "text": "Noether's theorem (1918): every continuous symmetry of the action corresponds to a conserved quantity. Time-translation symmetry → energy conservation. Space-translation symmetry → momentum conservation. Rotational symmetry → angular momentum conservation. This is one of the deepest results in physics."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Hamiltonian mechanics reformulates physics in terms of position and momentum (phase space). The Hamiltonian H = T + V generates time evolution. Phase space trajectories never cross — determinism is geometric. This formulation is the bridge to quantum mechanics (operators replace Poisson brackets) and statistical mechanics (phase space volumes)."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Poisson brackets",
+                    "text": "{f, g} = Σ(∂f/∂q ∂g/∂p − ∂f/∂p ∂g/∂q) — the classical analog of quantum commutators. The classical equations become df/dt = {f, H} + ∂f/∂t."
+                  },
+                  {
+                    "type": "project",
+                    "term": "Double pendulum chaos",
+                    "text": "Build or simulate a double pendulum. For small angles it is predictable; for large angles it is chaotic — nearby initial conditions diverge exponentially. Measure the Lyapunov time (how long before prediction fails). This is deterministic chaos: no randomness, yet unpredictable."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Is the universe deterministic?",
+                    "text": "Hypothesis: Classical mechanics is deterministic (Laplace's demon), but chaos makes long-term prediction practically impossible. Quantum mechanics adds indeterminism. Is the universe fundamentally deterministic or not? Status: Interpretational (Everett says deterministic; Copenhagen says not)."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Dirac asked what replaces the classical Lagrangian in quantum mechanics. His answer — a quantum action whose phase connects states — directly inspired Feynman's path-integral formulation and remains a cornerstone of modern quantum theory and quantum field theory.",
+                    "citation": "Dirac, P. A. M. (1933). The Lagrangian in Quantum Mechanics. Physikalische Zeitschrift der Sowjetunion, 3, 64–72.",
+                    "term": "The Lagrangian goes quantum",
+                    "url": "https://www.informationphilosopher.com/solutions/scientists/dirac/Lagrangian_1933.pdf"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mech-chaos-determinism",
+              "title": "Chaos & Determinism",
               "orderIndex": 2,
               "estimatedMinutes": 30,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Work, Energy & Power"
+                    "type": "principle",
+                    "term": "Sensitive dependence",
+                    "text": "Chaotic systems have sensitive dependence on initial conditions — the 'butterfly effect.' Two trajectories starting arbitrarily close diverge exponentially: δ(t) ≈ δ₀e^(λt). This limits predictability even in fully deterministic systems."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Work W = F·d cos θ. Kinetic energy K = ½mv². Potential energy (gravitational) U = mgh. Conservation of mechanical energy: K + U = constant (when only conservative forces act). Power P = W/t = F·v."
+                    "text": "Weather, three-body problems, double pendulums, fluid turbulence — all chaotic. This does not mean 'random'; it means unpredictable beyond a horizon. The three-body problem (Sun-Earth-Moon) has no general closed-form solution; its chaotic nature was discovered by Poincaré (1890), undermining the clockwork-universe ideal."
                   },
                   {
                     "type": "definition",
-                    "term": "Conservative force",
-                    "text": "A force for which work depends only on endpoints, not path. Gravity and ideal springs are conservative; friction is not."
+                    "term": "Strange attractor",
+                    "text": "In dissipative chaotic systems, trajectories settle onto a fractal-shaped attractor in phase space (e.g., Lorenz attractor). The system is bounded yet never repeats exactly."
                   },
                   {
                     "type": "project",
-                    "text": "Pendulum energy: Measure bob height and speed at bottom of swing. Verify mgh = ½mv² (predicts v = √(2gh)). Time photogates at different heights."
+                    "term": "Logistic map",
+                    "text": "Iterate xₙ₊₁ = rxₙ(1−xₙ) for r from 2.5 to 4. Plot bifurcation diagram: stable point → period doubling → chaos → windows of order. This simple equation shows the route to chaos."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Can perpetual motion exist? Hypothesis: No — energy conservation forbids a machine that outputs more energy than it consumes. Any claim must identify the hidden energy source."
-                  }
-                ]
-              }
-            },
-            {
-              "id": "mech-momentum",
-              "title": "Momentum & Collisions",
-              "orderIndex": 3,
-              "estimatedMinutes": 30,
-              "content": {
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Momentum & Collisions"
+                    "term": "Does chaos undermine scientific prediction?",
+                    "text": "Hypothesis: Chaotic systems impose a fundamental prediction horizon, not just a practical one (because initial conditions can never be known exactly). Status: Accepted in practice; philosophical implications debated."
                   },
                   {
-                    "type": "paragraph",
-                    "text": "Momentum p = mv. Impulse J = FΔt = Δp. Conservation of momentum: total p is constant in an isolated system. Collisions: elastic (K conserved) or inelastic (K not conserved; perfectly inelastic = bodies stick together)."
-                  },
-                  {
-                    "type": "definition",
-                    "term": "Elastic collision (1D)",
-                    "text": "m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂ and ½m₁u₁² + ½m₂u₂² = ½m₁v₁² + ½m₂v₂². Solutions: v₁ = (m₁−m₂)u₁/(m₁+m₂) + 2m₂u₂/(m₁+m₂), v₂ = 2m₁u₁/(m₁+m₂) + (m₂−m₁)u₂/(m₁+m₂)."
-                  },
-                  {
-                    "type": "project",
-                    "text": "Collision carts: Two low-friction carts with velocity sensors and spring/magnet bumpers. Test elastic vs inelastic collisions. Verify momentum conservation; measure kinetic energy change."
-                  },
-                  {
-                    "type": "hypothesis",
-                    "text": "In a perfectly inelastic collision, kinetic energy is lost. Where does it go? Hypothesis: Deformation, heat, sound. Measure temperature rise of putty after impact."
-                  }
-                ]
-              }
-            },
-            {
-              "id": "mech-rotation",
-              "title": "Rotation & Angular Momentum",
-              "orderIndex": 4,
-              "estimatedMinutes": 35,
-              "content": {
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Rotation & Angular Momentum"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Angular position θ, angular velocity ω = dθ/dt, angular acceleration α = dω/dt. Torque τ = r × F. Moment of inertia I = Σmr². Rotational dynamics: τ_net = Iα. Rotational kinetic energy K_rot = ½Iω². Angular momentum L = Iω, conserved in isolated systems."
-                  },
-                  {
-                    "type": "definition",
-                    "term": "Moment of inertia",
-                    "text": "I = Σ mᵢrᵢ² — depends on mass distribution relative to axis. Solid cylinder: ½MR²; thin hoop: MR²; solid sphere: ⅖MR²."
-                  },
-                  {
-                    "type": "project",
-                    "text": "Rotating stool + weights: Sit on a rotating stool holding dumbbells. Spin with arms extended, then pull weights in. Observe angular velocity increase — conservation of angular momentum (I decreases, ω increases)."
-                  },
-                  {
-                    "type": "hypothesis",
-                    "text": "Why do figure skaters spin faster pulling arms in? Hypothesis: L = Iω conserved; reducing I increases ω. Quantify: measure rotation rate before/after with a phone slow-mo."
-                  }
-                ]
-              }
-            },
-            {
-              "id": "mech-gravitation",
-              "title": "Gravitation",
-              "orderIndex": 5,
-              "estimatedMinutes": 30,
-              "content": {
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Gravitation"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Newton's law of universal gravitation: F = G m₁m₂ / r², where G = 6.674×10⁻¹¹ N·m²/kg². Gravitational field g = GM/r². Orbits: circular orbit speed v = √(GM/r); period T² = 4π²r³/(GM) (Kepler's third law). Escape velocity v_esc = √(2GM/r)."
-                  },
-                  {
-                    "type": "definition",
-                    "term": "Escape velocity",
-                    "text": "Minimum speed to escape a body's gravity from radius r: v_esc = √(2GM/r). For Earth: ~11.2 km/s."
-                  },
-                  {
-                    "type": "project",
-                    "text": "Cavendish-style experiment (qualitative): Use torsion balance with small masses to detect gravitational attraction between lead balls. Very weak force — needs isolation from air currents and vibrations."
-                  },
-                  {
-                    "type": "hypothesis",
-                    "text": "Does gravity propagate instantly or at light speed? Hypothesis: At light speed (general relativity). Gravitational waves (LIGO, 2015) confirmed finite propagation speed c."
+                    "type": "research",
+                    "text": "Lorenz's numerical model of convection produced nonperiodic solutions that diverged wildly from tiny changes in initial conditions. This is the founding paper of deterministic chaos — and it quietly ended the dream of long-range weather prediction.",
+                    "citation": "Lorenz, E. N. (1963). Deterministic Nonperiodic Flow. Journal of the Atmospheric Sciences, 20(2), 130–141.",
+                    "term": "The original butterfly effect",
+                    "doi": "10.1175/1520-0469(1963)020<0130:DNF>2.0.CO;2",
+                    "url": "https://doi.org/10.1175/1520-0469(1963)020<0130:DNF>2.0.CO;2"
                   }
                 ]
               }
@@ -347,70 +357,92 @@
           "parentId": "physics",
           "title": "Thermodynamics",
           "slug": "thermodynamics",
-          "description": "Level 2 — Heat, temperature, laws of thermodynamics, entropy, statistical mechanics.",
+          "description": "Entropy, the arrow of time, statistical mechanics, Maxwell's demon, phase transitions, and emergence.",
           "orderIndex": 3,
           "isPublished": true,
           "lessons": [
             {
-              "id": "thermo-laws",
-              "title": "Laws of Thermodynamics",
+              "id": "thermo-arrow-of-time",
+              "title": "Entropy & the Arrow of Time",
               "orderIndex": 0,
               "estimatedMinutes": 35,
+              "depth": 2,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "The Four Laws of Thermodynamics"
+                    "type": "principle",
+                    "term": "The second law",
+                    "text": "Entropy of an isolated system never decreases: ΔS ≥ 0. This gives time a direction — the thermodynamic arrow. Broken eggs don't un-break, heat flows hot→cold, not reverse. The past is different from the future because entropy was lower in the past."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Zeroth: If A = B and B = C in temperature, then A = C (defines temperature). First: ΔU = Q − W (energy conservation; heat added minus work done by system). Second: Entropy of an isolated system never decreases (ΔS ≥ 0). Third: As T → 0 K, entropy of a perfect crystal → constant (S → 0)."
+                    "text": "School physics presents entropy as 'disorder.' Deep physics: entropy counts microstates consistent with a macrostate (Boltzmann: S = k_B ln W). The puzzle: why was the early universe in such a low-entropy state? This is the deepest question in cosmology — the origin of the thermodynamic arrow."
                   },
                   {
                     "type": "definition",
-                    "term": "Entropy change",
-                    "text": "ΔS = ∫ dQ_rev / T — entropy change for a reversible process. For irreversible: ΔS > ∫ dQ / T."
+                    "term": "Boltzmann entropy",
+                    "text": "S = k_B ln W — entropy is proportional to the logarithm of the number of microstates compatible with the observed macrostate."
                   },
                   {
                     "type": "project",
-                    "text": "Heat engine model: Use a temperature difference (hot/cold reservoirs) to run a Stirling or Stirling-like engine. Measure heat input, work output, cold-side heat. Compute efficiency η = W/Q_h and compare with Carnot η_max = 1 − T_c/T_h."
+                    "term": "Mixing entropy",
+                    "text": "Add dye to still water and time-lapse the spreading. Reverse it? Never spontaneously. This is statistical, not absolute: given enough time, a fluctuation could un-mix (Poincaré recurrence), but the timescale exceeds the age of the universe."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Can entropy decrease locally? Hypothesis: Yes, but only at the cost of greater entropy increase elsewhere (refrigerators, living cells). The universe's total entropy still rises."
+                    "term": "Maxwell's demon",
+                    "text": "Hypothesis: A demon sorting fast/slow molecules could decrease entropy, violating the second law. Resolution (Landauer, 1961; Bennett, 1982): erasing the demon's memory costs at least k_B T ln 2 per bit — entropy is saved. Status: Resolved theoretically; experimentally verified (2010s)."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Using a single colloidal particle in a double-well trap, researchers watched heat dissipation approach the Landauer bound as erasure time grew. It is a direct experimental tie between information and thermodynamics — and a resolution of Maxwell's demon.",
+                    "citation": "Bérut, A., et al. (2012). Experimental verification of Landauer's principle linking information and thermodynamics. Nature, 483(7388), 187–189.",
+                    "term": "Maxwell's demon measured",
+                    "doi": "10.1038/nature10872",
+                    "url": "https://doi.org/10.1038/nature10872"
                   }
                 ]
               }
             },
             {
-              "id": "thermo-entropy",
-              "title": "Entropy & the Arrow of Time",
+              "id": "thermo-statistical",
+              "title": "Statistical Mechanics & Emergence",
               "orderIndex": 1,
-              "estimatedMinutes": 30,
+              "estimatedMinutes": 35,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Entropy & the Arrow of Time"
+                    "type": "principle",
+                    "term": "Emergence",
+                    "text": "Macroscopic behavior (pressure, temperature, phase transitions) emerges from microscopic rules without any single atom 'intending' it. Temperature is not a property of one atom; it is a statistical property of ~10²³ atoms. This is emergence: new laws at new scales."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Entropy measures disorder / multiplicity of microstates. Boltzmann: S = k_B ln W. The second law gives time a direction — broken eggs don't un-break, heat flows hot→cold, not reverse. This is the thermodynamic arrow of time."
+                    "text": "Phase transitions are the paradigmatic emergence: water freezes at 0°C, magnets lose magnetism at the Curie temperature. Near criticality, systems become scale-invariant — fluctuations at all sizes. This universality (same critical exponents for fluids and magnets) is one of the great unification ideas in physics (Wilson, 1970s)."
                   },
                   {
                     "type": "definition",
-                    "term": "Boltzmann entropy",
-                    "text": "S = k_B ln W, where W = number of microstates consistent with a macrostate, k_B = 1.381×10⁻²³ J/K."
+                    "term": "Partition function",
+                    "text": "Z = Σᵢ e^(−Eᵢ/k_BT) — encodes all thermodynamic information; from it derive energy, entropy, free energy, heat capacity."
                   },
                   {
                     "type": "project",
-                    "text": "Mixing entropy: Add a drop of food coloring to still water. Watch disorder increase spontaneously. Time-lapse the reverse (un-mixing) — never happens without external work."
+                    "term": "Ising model simulation",
+                    "text": "Simulate a 2D grid of spins (up/down) with nearest-neighbor interaction. Vary temperature; observe spontaneous magnetization below T_c. This is the canonical model of emergence and phase transitions."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Maxwell's demon: Can a clever being sort fast/slow molecules to decrease entropy? Hypothesis: No — the demon's information erasure costs entropy (Landauer's principle), saving the second law."
+                    "term": "Are laws scale-dependent?",
+                    "text": "Hypothesis: Different physical laws govern different scales (effective field theory). Is there a scale at which laws stop changing — a fundamental scale? Status: Open (Planck scale? beyond?)."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Anderson's essay is the canonical argument for emergence: macroscopic systems display sharp, singular phase transitions and broken symmetries that are invisible in the microscopic laws. Thermodynamics is not 'just' mechanics any more than life is 'just' chemistry.",
+                    "citation": "Anderson, P. W. (1972). More Is Different: Broken symmetry and the nature of the hierarchical structure of science. Science, 177(4047), 393–396.",
+                    "term": "More is different",
+                    "doi": "10.1126/science.177.4047.393",
+                    "url": "https://doi.org/10.1126/science.177.4047.393"
                   }
                 ]
               }
@@ -424,102 +456,92 @@
           "parentId": "physics",
           "title": "Electromagnetism",
           "slug": "electromagnetism",
-          "description": "Level 3 — Electrostatics, circuits, magnetism, induction, Maxwell's equations.",
+          "description": "Maxwell's equations, gauge symmetry, electromagnetic waves, relativity, and the unification of electricity and magnetism.",
           "orderIndex": 4,
           "isPublished": true,
           "lessons": [
             {
-              "id": "em-electrostatics",
-              "title": "Electrostatics",
-              "orderIndex": 0,
-              "estimatedMinutes": 30,
-              "content": {
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Electrostatics"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Coulomb's law: F = k_e q₁q₂ / r², k_e = 8.99×10⁹ N·m²/C². Electric field E = F/q. Gauss's law: ∮E·dA = Q_enc/ε₀. Electric potential V, potential energy U = qV. Capacitance C = Q/V, capacitor energy U = ½CV²."
-                  },
-                  {
-                    "type": "definition",
-                    "term": "Gauss's law",
-                    "text": "The electric flux through a closed surface equals enclosed charge divided by ε₀: Φ_E = ∮E·dA = Q_enc/ε₀."
-                  },
-                  {
-                    "type": "project",
-                    "text": "Leyden jar capacitor: Charge a homemade Leyden jar (glass jar with foil inside/out) with a Van de Graaff or static source. Measure spark length vs charge. Verify C = Q/V by discharge through electroscope."
-                  },
-                  {
-                    "type": "hypothesis",
-                    "text": "Why does charge reside on conductor surfaces? Hypothesis: Like charges repel and move as far apart as possible — to the surface — until E = 0 inside the conductor (electrostatic equilibrium)."
-                  }
-                ]
-              }
-            },
-            {
-              "id": "em-circuits",
-              "title": "Electric Circuits",
-              "orderIndex": 1,
-              "estimatedMinutes": 30,
-              "content": {
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Electric Circuits"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Ohm's law: V = IR. Series: R_eq = ΣRᵢ, same current. Parallel: 1/R_eq = Σ(1/Rᵢ), same voltage. Kirchhoff's laws: ΣI_in = ΣI_out at a junction; ΣV around a loop = 0. Power P = IV = I²R = V²/R. RC circuits: τ = RC, charging V(t) = V₀(1 − e^(−t/RC))."
-                  },
-                  {
-                    "type": "definition",
-                    "term": "Kirchhoff's loop rule",
-                    "text": "Sum of potential differences around any closed loop = 0: ΣV = 0 (conservation of energy)."
-                  },
-                  {
-                    "type": "project",
-                    "text": "Voltage divider + RC timing: Build a resistor divider and an RC circuit. Measure charge/discharge curves with a multimeter/oscilloscope. Extract τ = RC and compare with component values."
-                  },
-                  {
-                    "type": "hypothesis",
-                    "text": "Do electrons flow at light speed in wires? Hypothesis: No — drift velocity is ~mm/s; the electric field (and energy) propagates near light speed. Electrons drift slowly; the signal moves fast."
-                  }
-                ]
-              }
-            },
-            {
               "id": "em-maxwell",
-              "title": "Maxwell's Equations",
-              "orderIndex": 2,
+              "title": "Maxwell's Equations — The Unification",
+              "orderIndex": 0,
               "estimatedMinutes": 40,
+              "depth": 2,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Maxwell's Equations — The Foundation of Electromagnetism"
+                    "type": "principle",
+                    "term": "Field concept",
+                    "text": "Faraday introduced the field: space itself carries physical states (electric and magnetic fields), not just action-at-a-distance. Maxwell gave the field dynamics. A changing E-field creates a B-field; a changing B-field creates an E-field — they sustain each other and propagate as waves at speed c = 1/√(μ₀ε₀)."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Gauss for E: ∇·E = ρ/ε₀. Gauss for B: ∇·B = 0 (no magnetic monopoles). Faraday: ∇×E = −∂B/∂t. Ampère-Maxwell: ∇×B = μ₀J + μ₀ε₀∂E/∂t. Together they predict electromagnetic waves traveling at c = 1/√(μ₀ε₀)."
+                    "text": "School physics treats E and B as separate. Deep physics: they are aspects of one electromagnetic field, and their mixing depends on the observer's motion — this motivated special relativity. Einstein's 1905 paper was titled 'On the Electrodynamics of Moving Bodies.'"
                   },
                   {
                     "type": "definition",
-                    "term": "Speed of light from Maxwell",
-                    "text": "c = 1/√(μ₀ε₀) ≈ 2.998×10⁸ m/s — light is an electromagnetic wave."
+                    "term": "Maxwell's equations (differential)",
+                    "text": "∇·E = ρ/ε₀ · ∇·B = 0 · ∇×E = −∂B/∂t · ∇×B = μ₀J + μ₀ε₀∂E/∂t"
                   },
                   {
                     "type": "project",
-                    "text": "Radio wave demo: Use an AM radio near a spark gap or computer monitor. Detect electromagnetic interference. Demonstrate that changing electric fields create changing magnetic fields and vice versa — propagating waves."
+                    "term": "Electromagnetic induction",
+                    "text": "Move a magnet through a coil; measure induced current (Faraday's law). Rotate a coil in a magnetic field; measure AC output (generator principle). These are the same phenomenon viewed from different frames — relativity in miniature."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Are magnetic monopoles possible? Hypothesis: Gauss for B (∇·B = 0) says no, but grand unified theories predict them. None confirmed experimentally yet — an open hypothesis."
+                    "term": "Are fields real?",
+                    "text": "Hypothesis: Are electromagnetic fields physical entities or just calculational tools? In quantum field theory, fields are fundamental (particles are field excitations). In classical EM, they are convenient. Status: QFT says fields are real."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Hertz generated and detected fast electrical oscillations, showing that energy travels as electromagnetic waves through space — a direct experimental confirmation of Maxwell's predictions, including the finite speed of propagation.",
+                    "citation": "Hertz, H. (1887). Ueber sehr schnelle electrische Schwingungen. Annalen der Physik, 267(7), 421–448.",
+                    "term": "Maxwell confirmed in the lab",
+                    "doi": "10.1002/andp.18872670707",
+                    "url": "https://doi.org/10.1002/andp.18872670707"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "em-gauge",
+              "title": "Gauge Symmetry",
+              "orderIndex": 1,
+              "estimatedMinutes": 40,
+              "depth": 4,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Gauge invariance",
+                    "text": "The electromagnetic potential A_μ is not directly observable — only E and B are. You can transform A_μ → A_μ + ∂_μχ without changing physics. This redundancy (gauge symmetry) is not a flaw; it is the structure from which forces emerge. Requiring local gauge invariance forces the existence of the photon (and, in Yang-Mills, the weak and strong force bosons)."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "This is perhaps the deepest principle in modern physics: interactions arise from demanding that symmetries hold locally (at every point in spacetime). The Standard Model is built entirely on gauge symmetry: U(1) for electromagnetism, SU(2) for weak force, SU(3) for strong force."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Aharonov-Bohm effect",
+                    "text": "Electrons passing around a region with zero B-field but non-zero A-vector show phase shifts — the potential A is physically real after all (confirmed experimentally, 1960s-80s)."
+                  },
+                  {
+                    "type": "project",
+                    "term": "Gauge transformation",
+                    "text": "Take the Lagrangian of a charged particle in EM. Apply a local phase transformation ψ → e^(ieχ(x))ψ. Show that the Lagrangian is only invariant if you introduce A_μ transforming as A_μ → A_μ + ∂_μχ/e — deriving the electromagnetic interaction from symmetry alone."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Gauge symmetry — fundamental or emergent?",
+                    "text": "Hypothesis: Is gauge symmetry a fundamental feature of reality, or an emergent approximation? Some approaches (e.g., entanglement-based emergence of gauge fields) suggest it may emerge from quantum information. Status: Frontier research."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Yang and Mills demanded that the invariance of nuclear isospin hold locally. The price was a new field — a direct ancestor of the gauge fields of the Standard Model. This paper turned gauge symmetry from a curiosity into the organizing principle of particle physics.",
+                    "citation": "Yang, C. N., & Mills, R. L. (1954). Conservation of Isotopic Spin and Isotopic Gauge Invariance. Physical Review, 96(1), 191–195.",
+                    "term": "Gauge invariance as a principle",
+                    "doi": "10.1103/PhysRev.96.191",
+                    "url": "https://doi.org/10.1103/PhysRev.96.191"
                   }
                 ]
               }
@@ -533,70 +555,92 @@
           "parentId": "physics",
           "title": "Optics & Waves",
           "slug": "optics-waves",
-          "description": "Level 4 — Geometric optics, wave optics, spectroscopy, lasers and photonics.",
+          "description": "Wave-particle duality, interference, diffraction, quantum optics, and the nature of light.",
           "orderIndex": 5,
           "isPublished": true,
           "lessons": [
             {
-              "id": "optics-wave-nature",
-              "title": "Wave Nature of Light",
+              "id": "optics-dual-slit",
+              "title": "The Double-Slit & Wave-Particle Duality",
               "orderIndex": 0,
-              "estimatedMinutes": 30,
+              "estimatedMinutes": 35,
+              "depth": 1,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "The Wave Nature of Light"
+                    "type": "principle",
+                    "term": "Complementarity",
+                    "text": "Bohr's complementarity: light behaves as a wave or as particles depending on how you measure it — but never both at once in the same experiment. Which-path information destroys interference. This is not a limitation of apparatus; it is structural."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Light is an electromagnetic wave. Speed c = fλ. Visible spectrum: ~380–750 nm. Interference (double slit: d sin θ = mλ), diffraction (single slit), polarization. Young's double-slit experiment established wave behavior (1801)."
+                    "text": "The double-slit experiment is the heart of quantum mystery. Even with single photons sent one at a time, an interference pattern builds up — each photon interferes with itself. If you place detectors at the slits to learn which path each photon took, the interference vanishes. Feynman called this 'the only mystery' in quantum mechanics."
                   },
                   {
                     "type": "definition",
-                    "term": "Double-slit interference",
-                    "text": "Bright fringes: d sin θ = mλ (m = 0, 1, 2, …). Dark fringes: d sin θ = (m + ½)λ. Fringe spacing Δy = λL/d on screen at distance L."
+                    "term": "Wave-particle duality",
+                    "text": "Light and matter exhibit both wave and particle properties. De Broglie wavelength: λ = h/p applies to electrons, atoms, even large molecules (fullerenes, 1999)."
                   },
                   {
                     "type": "project",
-                    "text": "Laser double slit: Shine a laser through a double slit onto a screen. Measure fringe spacing; compute slit separation d = λL/Δy. Compare with manufacturer's spec."
+                    "term": "Single-photon double-slit",
+                    "text": "Use a laser at very low intensity (single photons), a double slit, and a sensitive detector. Build up the interference pattern one photon at a time. Then add which-path detectors; watch interference disappear. This is the canonical quantum experiment."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Is light a wave or particle? Hypothesis: Both — wave-particle duality. Double-slit shows interference (wave) even when photons are sent one at a time (particle detection)."
+                    "term": "What goes through both slits?",
+                    "text": "Hypothesis: What is it that passes through both slits and interferes with itself? Copenhagen: the wavefunction (not a physical object). Pilot-wave: the particle plus a guiding wave. Many-worlds: the particle splits into branches. Status: Interpretational."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Tonomura's team sent single electrons through a biprism and recorded the arrival of each one. Individually random, the dots accumulated into a clean interference pattern — the double-slit thought experiment finally captured on film.",
+                    "citation": "Tonomura, A., et al. (1989). Demonstration of single-electron buildup of an interference pattern. American Journal of Physics, 57(2), 117–120.",
+                    "term": "One electron at a time",
+                    "doi": "10.1119/1.16104",
+                    "url": "https://doi.org/10.1119/1.16104"
                   }
                 ]
               }
             },
             {
-              "id": "optics-geometric",
-              "title": "Geometric Optics",
+              "id": "optics-quantum-optics",
+              "title": "Quantum Optics",
               "orderIndex": 1,
-              "estimatedMinutes": 30,
+              "estimatedMinutes": 35,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Geometric Optics"
+                    "type": "principle",
+                    "term": "Photons",
+                    "text": "Light comes in discrete quanta (photons), E = hf. The photoelectric effect (Einstein, 1905) showed light's particle nature; the Compton effect showed photon momentum. But a single photon can be in a superposition of paths, polarizations, and frequencies."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Light travels in straight lines (rays). Reflection: θ_i = θ_r. Refraction: n₁ sin θ₁ = n₂ sin θ₂ (Snell's law). Thin lens: 1/f = 1/d_o + 1/d_i; magnification m = −d_i/d_o. Mirrors: same equations with sign conventions."
+                    "text": "Quantum optics studies light and its interaction with matter at the quantum level: single photons, entangled photons, squeezed light, quantum cryptography. This is where the second quantum revolution happens — using quantum effects as technology, not just understanding them."
                   },
                   {
                     "type": "definition",
-                    "term": "Snell's law",
-                    "text": "n₁ sin θ₁ = n₂ sin θ₂ — light bends toward the normal when entering a higher-index medium."
+                    "term": "Hong-Ou-Mandel effect",
+                    "text": "Two indistinguishable photons entering a beam splitter always exit together (bunching) — a purely quantum interference effect with no classical analog."
                   },
                   {
                     "type": "project",
-                    "text": "Refractive index of water: Use a semicircular water tray and laser. Measure incident and refracted angles; compute n = sin θ₁ / sin θ₂. Expect ~1.33."
+                    "term": "Polarization entanglement (simulated)",
+                    "text": "Simulate two entangled photons in polarization. Measure correlations at different angles; verify violation of Bell's inequality (CHSH value > 2). This is the experimental signature of non-locality."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Can light bend in a vacuum? Hypothesis: Yes — general relativity predicts gravitational lensing (mass curves spacetime). Confirmed by Eddington's 1919 eclipse expedition."
+                    "term": "Is the photon a particle?",
+                    "text": "Hypothesis: Is a photon a little ball of light, or an excitation of the electromagnetic field? QFT: field excitation (the photon is a quantized mode). Pop-physics: particle. Status: Field view is standard in modern physics."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Aspect, Dalibard and Roger switched their analyzers at ~50 MHz, faster than a photon could travel between them. The measured correlations still violated Bell's inequalities by 5 standard deviations, closing the 'communication' loophole of the era.",
+                    "citation": "Aspect, A., Dalibard, J., & Roger, G. (1982). Experimental Test of Bell's Inequalities Using Time-Varying Analyzers. Physical Review Letters, 49(25), 1804–1807.",
+                    "term": "Entanglement tested by fast switches",
+                    "doi": "10.1103/PhysRevLett.49.1804",
+                    "url": "https://doi.org/10.1103/PhysRevLett.49.1804"
                   }
                 ]
               }
@@ -610,70 +654,135 @@
           "parentId": "physics",
           "title": "Quantum Mechanics",
           "slug": "quantum-mechanics",
-          "description": "Level 5 — Wave-particle duality, Schrödinger equation, quantum states, spin, quantum information.",
+          "description": "Foundations: measurement problem, interpretations (Copenhagen, many-worlds, pilot-wave, collapse), Bell's theorem, entanglement, decoherence.",
           "orderIndex": 6,
           "isPublished": true,
           "lessons": [
             {
-              "id": "qm-duality",
-              "title": "Wave-Particle Duality",
+              "id": "qm-measurement-problem",
+              "title": "The Measurement Problem",
               "orderIndex": 0,
-              "estimatedMinutes": 35,
+              "estimatedMinutes": 45,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Wave-Particle Duality"
+                    "type": "principle",
+                    "term": "Two dynamical laws",
+                    "text": "Quantum mechanics has two evolution rules: (1) Schrödinger equation — smooth, deterministic, linear evolution of the wavefunction; (2) measurement — sudden, random, non-linear collapse to a definite outcome. The measurement problem: when and how does collapse happen? What counts as a 'measurement'? Is the measuring device quantum or classical?"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Light behaves as particles (photons, E = hf) and matter behaves as waves (de Broglie λ = h/p). Photoelectric effect: E = hf − work function. Compton scattering confirms photon momentum. Davisson-Germer showed electron diffraction."
+                    "text": "If the measuring device is itself quantum (it is made of atoms), then system + device should evolve by Schrödinger's equation — producing entanglement, not collapse: (|↑⟩ + |↓⟩) ⊗ |ready⟩ → |↑⟩⊗|up⟩ + |↓⟩⊗|down⟩. But we see one outcome, not a superposition of outcomes. Where did the other go?"
                   },
                   {
                     "type": "definition",
-                    "term": "De Broglie wavelength",
-                    "text": "λ = h / p = h / (mv) — every moving particle has an associated wavelength."
+                    "term": "Schrödinger's cat",
+                    "text": "A cat in a box with a quantum-triggered poison. Until observed, is the cat in a superposition of alive and dead? This thought experiment (1935) highlights the absurdity of applying quantum rules to macroscopic objects without a collapse mechanism."
                   },
                   {
                     "type": "project",
-                    "text": "Photoelectric effect (simulated): Vary light frequency and intensity; measure stopping potential. Verify K_max = hf − φ and that intensity affects current, not electron energy."
+                    "term": "Wigner's friend",
+                    "text": "Analyze the Wigner's friend thought experiment: Wigner's friend measures a qubit inside a lab; Wigner outside treats the whole lab as quantum. Do they assign different states? Recent variants (Frauchiger-Renner, 2018) suggest contradictions if single-outcome assumptions hold. Status: Active research."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Does the wavefunction collapse on measurement? Hypothesis: Multiple interpretations — Copenhagen (collapse), Many-Worlds (branching), Pilot-wave (guided). No experiment distinguishes them yet."
+                    "term": "Interpretations compared",
+                    "text": "Copenhagen: collapse is fundamental, classical/quantum cut. Many-worlds: no collapse; all outcomes exist in branching universes. Pilot-wave (de Broglie-Bohm): particles have definite positions guided by a wave; non-local but deterministic. Objective collapse (GRW): spontaneous random collapses modify Schrödinger's equation. QBism: quantum states represent personal beliefs. Status: No consensus after 100 years."
+                  },
+                  {
+                    "type": "research",
+                    "text": "A six-photon experiment realised the extended Wigner's-friend scenario and violated the associated Bell-type inequality by five standard deviations. If locality and free choice hold, observers cannot share a single set of definite facts — the measurement problem, made experimental.",
+                    "citation": "Proietti, M., et al. (2019). Experimental test of local observer independence. Science Advances, 5(9), eaaw9832.",
+                    "term": "Wigner's friend, realised",
+                    "doi": "10.1126/sciadv.aaw9832",
+                    "url": "https://doi.org/10.1126/sciadv.aaw9832"
                   }
                 ]
               }
             },
             {
-              "id": "qm-schroedinger",
-              "title": "The Schrödinger Equation",
+              "id": "qm-bell-entanglement",
+              "title": "Bell's Theorem & Entanglement",
               "orderIndex": 1,
               "estimatedMinutes": 40,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "The Schrödinger Equation"
+                    "type": "principle",
+                    "term": "Non-locality",
+                    "text": "Bell's theorem (1964): no theory that is both local and realistic can reproduce all quantum predictions. Entangled particles show correlations stronger than any classical system allows. Experiments (Aspect 1982, loophole-free 2015, 2022 Nobel Prize) confirm quantum non-locality."
                   },
                   {
                     "type": "paragraph",
-                    "text": "iℏ ∂ψ/∂t = Ĥψ — the time-dependent Schrödinger equation governs how the wavefunction ψ evolves. Ĥ = −(ℏ²/2m)∇² + V. Stationary states: Ĥψ = Eψ (time-independent). |ψ|² = probability density. Quantization emerges from boundary conditions."
+                    "text": "This does not allow faster-than-light communication (no-signaling theorem). But it means the universe is not locally real in the classical sense. Einstein's 'spooky action at a distance' is real — but it is correlation, not controllable signaling."
                   },
                   {
                     "type": "definition",
-                    "term": "Particle in a box",
-                    "text": "E_n = n²π²ℏ²/(2mL²), n = 1, 2, 3, … — energy is quantized because ψ must vanish at the walls."
+                    "term": "CHSH inequality",
+                    "text": "|E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′)| ≤ 2 for local realistic theories; quantum mechanics predicts up to 2√2 ≈ 2.828. Experiments confirm the quantum value."
                   },
                   {
                     "type": "project",
-                    "text": "Quantum well simulation: Solve the 1D Schrödinger equation numerically for an infinite square well and a harmonic oscillator. Plot eigenfunctions ψ_n and energy levels E_n."
+                    "term": "Bell test simulation",
+                    "text": "Simulate entangled spin-1/2 pairs measured at angles a, a′, b, b′. Compute correlation E(a,b) = −cos(a−b). Verify CHSH violation. This reproduces the core of the 2022 Nobel Prize-winning experiments."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Is the cat alive or dead before observation? Hypothesis (Schrödinger's cat): Superposition until measured — highlights the measurement problem. Still unresolved interpretively."
+                    "term": "Superdeterminism?",
+                    "text": "Hypothesis: Could Bell tests be avoided if measurement settings are not free (superdeterminism)? Status: Logically possible but widely considered unscientific (undermines experimental method)."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Entangled electron spins were separated by 1.3 km and measured with fast random basis choices, closing the detection and locality loopholes simultaneously. The CHSH bound was exceeded (S = 2.42 ± 0.20), ruling out broad classes of local-realist theories.",
+                    "citation": "Hensen, B., et al. (2015). Loophole-free Bell inequality violation using electron spins separated by 1.3 kilometres. Nature, 526(7575), 682–686.",
+                    "term": "Loophole-free Bell test",
+                    "doi": "10.1038/nature15759",
+                    "url": "https://doi.org/10.1038/nature15759"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "qm-decoherence",
+              "title": "Decoherence & Emergence of Classicality",
+              "orderIndex": 2,
+              "estimatedMinutes": 35,
+              "depth": 4,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Decoherence",
+                    "text": "When a quantum system interacts with its environment, phase information leaks into the environment. The system appears to 'collapse' into definite states — but the full system+environment remains in superposition. Decoherence explains why we don't see macroscopic superpositions, but does not by itself solve the measurement problem (it explains appearance of collapse, not single outcomes)."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Decoherence is extremely fast for macroscopic objects (10⁻²⁰ seconds or faster). This is why cats are not seen in superposition: the environment 'monitors' them continuously. Decoherence + many-worlds = a popular resolution; decoherence + Copenhagen = incomplete."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Pointer states",
+                    "text": "States that are robust against environmental monitoring — they survive decoherence. These are the 'classical' states we observe (position for dust grains, not superpositions of position)."
+                  },
+                  {
+                    "type": "project",
+                    "term": "Decoherence simulation",
+                    "text": "Simulate a qubit coupled to an environment of many other qubits. Track the system's off-diagonal density-matrix elements (coherence) decaying to zero over time. Plot decoherence rate vs environment size."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Does decoherence solve measurement?",
+                    "text": "Hypothesis: Decoherence explains the appearance of classicality but not the single definite outcome — you still need an interpretation (many-worlds, collapse, etc.). Status: Widely accepted as necessary but not sufficient."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Zurek's review develops einselection: the environment monitors certain observables and destroys interference between the corresponding 'pointer states'. This selection is why macroscopic objects are never found in Schrödinger-cat superpositions, and it grounds the emergence of classical reality.",
+                    "citation": "Zurek, W. H. (2003). Decoherence, einselection, and the quantum origins of the classical. Reviews of Modern Physics, 75(3), 715–775.",
+                    "term": "Why the world looks classical",
+                    "doi": "10.1103/RevModPhys.75.715",
+                    "url": "https://doi.org/10.1103/RevModPhys.75.715"
                   }
                 ]
               }
@@ -687,7 +796,7 @@
           "parentId": "physics",
           "title": "Relativity",
           "slug": "relativity",
-          "description": "Level 6 — Special relativity, general relativity, black holes, cosmology.",
+          "description": "Special & general relativity, spacetime curvature, black holes, cosmology, the problem of time.",
           "orderIndex": 7,
           "isPublished": true,
           "lessons": [
@@ -696,29 +805,40 @@
               "title": "Special Relativity",
               "orderIndex": 0,
               "estimatedMinutes": 40,
+              "depth": 2,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Special Relativity"
+                    "type": "principle",
+                    "term": "Two postulates",
+                    "text": "(1) Laws of physics are identical in all inertial frames. (2) The speed of light in vacuum is constant for all observers, regardless of motion. From these: time dilation, length contraction, relativity of simultaneity, E = mc², and the unification of space and time into spacetime."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Two postulates: (1) Laws of physics are identical in all inertial frames. (2) Light speed c is constant in vacuum for all observers. Consequences: time dilation Δt = γΔt₀, length contraction L = L₀/γ, relativity of simultaneity, E = mc², γ = 1/√(1 − v²/c²)."
+                    "text": "Relativity of simultaneity is the hardest concept: two events simultaneous for one observer are not simultaneous for another moving relative to the first. There is no universal 'now.' Time is the fourth dimension, but with a crucial minus sign in the metric (− + + +), making it unlike space."
                   },
                   {
                     "type": "definition",
-                    "term": "Lorentz factor",
-                    "text": "γ = 1/√(1 − v²/c²) — approaches infinity as v → c; ≈ 1 at everyday speeds."
+                    "term": "Lorentz transformation",
+                    "text": "t′ = γ(t − vx/c²), x′ = γ(x − vt), γ = 1/√(1−v²/c²) — mixes space and time; preserves the spacetime interval ds² = −c²dt² + dx² + dy² + dz²."
                   },
                   {
                     "type": "project",
-                    "text": "Muon lifetime: Cosmic-ray muons created in upper atmosphere should decay before reaching ground (τ ≈ 2.2 μs). Time dilation lets them survive: observed flux matches γ-extended lifetime."
+                    "term": "Muon lifetime",
+                    "text": "Cosmic-ray muons (τ ≈ 2.2 μs) are created 15 km up; at near-light speed they should decay before reaching ground. Time dilation (γ ≈ 10–100) extends their lifetime enough to be detected. Verify with actual cosmic-ray data."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Can anything travel faster than light? Hypothesis: No — information, matter, and energy are limited to c. Tachyons remain hypothetical (no evidence)."
+                    "term": "Is there a preferred frame?",
+                    "text": "Hypothesis: Is there a universal 'now' or preferred frame hidden by relativity? Some quantum gravity approaches suggest Lorentz violation at Planck scale. Status: No evidence; relativity holds to extraordinary precision."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Einstein abolished absolute simultaneity and the luminiferous ether, deriving the Lorentz transformations from just two postulates: the principle of relativity and the constancy of light speed. Its consequences — time dilation, length contraction, E = mc² — reshaped physics.",
+                    "citation": "Einstein, A. (1905). Zur Elektrodynamik bewegter Körper. Annalen der Physik, 322(10), 891–921.",
+                    "term": "The founding paper",
+                    "doi": "10.1002/andp.19053221004",
+                    "url": "https://doi.org/10.1002/andp.19053221004"
                   }
                 ]
               }
@@ -728,29 +848,78 @@
               "title": "General Relativity",
               "orderIndex": 1,
               "estimatedMinutes": 45,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "General Relativity"
+                    "type": "principle",
+                    "term": "Spacetime tells matter how to move",
+                    "text": "Gravity is not a force; it is curvature of spacetime. Matter and energy tell spacetime how to curve; spacetime tells matter how to move (Wheeler's summary). Objects follow geodesics — the straightest possible paths in curved spacetime."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Gravity is not a force — it's curved spacetime. Mass-energy tells spacetime how to curve; spacetime tells matter how to move. Einstein field equation: G_μν = 8πG/c⁴ T_μν. Predictions: Mercury's perihelion, gravitational lensing, gravitational redshift, black holes, gravitational waves, expanding universe."
+                    "text": "Einstein field equation: G_μν = 8πG/c⁴ T_μν — spacetime curvature (left) equals energy-momentum (right). Predictions verified: Mercury's perihelion, gravitational lensing (1919), gravitational redshift, frame-dragging, gravitational waves (LIGO, 2015), black hole imaging (EHT, 2019)."
                   },
                   {
                     "type": "definition",
                     "term": "Equivalence principle",
-                    "text": "Locally, acceleration is indistinguishable from gravity — no experiment in a closed lab can tell uniform gravity from uniform acceleration."
+                    "text": "Locally, gravity is indistinguishable from acceleration. No experiment in a sealed lab can distinguish uniform gravity from uniform acceleration. This led Einstein to curved spacetime."
                   },
                   {
                     "type": "project",
-                    "text": "Gravitational lensing simulation: Use a lensing equation to compute deflection angle α = 4GM/(c²b) for light passing a mass M at impact parameter b. Plot Einstein ring radius for a galaxy cluster."
+                    "term": "Gravitational lensing",
+                    "text": "Compute light deflection α = 4GM/(c²b) for light grazing a mass M at impact parameter b. For the Sun: 1.75 arcseconds. Plot Einstein rings for galaxy clusters using real lensing data."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "What happens inside a black hole's event horizon? Hypothesis: General relativity predicts a singularity — but quantum gravity is likely needed. No observational access yet."
+                    "term": "Black hole interior",
+                    "text": "Hypothesis: What happens inside a black hole's event horizon? GR predicts a singularity (curvature → infinity). Quantum gravity likely resolves it, but we have no observational access. Status: Open — quantum gravity needed."
+                  },
+                  {
+                    "type": "research",
+                    "text": "On 14 September 2015 LIGO detected the merger of two black holes 1.3 billion light-years away — the first direct detection of gravitational waves, matching general relativity's waveform prediction at >5σ. Space-time itself had been observed to ripple.",
+                    "citation": "Abbott, B. P., et al. (LIGO & Virgo Collaborations) (2016). Observation of Gravitational Waves from a Binary Black Hole Merger. Physical Review Letters, 116, 061102.",
+                    "term": "Gravity heard, not seen",
+                    "doi": "10.1103/PhysRevLett.116.061102",
+                    "url": "https://doi.org/10.1103/PhysRevLett.116.061102"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "rel-problem-of-time",
+              "title": "The Problem of Time",
+              "orderIndex": 2,
+              "estimatedMinutes": 35,
+              "depth": 5,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Time in QM vs GR",
+                    "text": "In quantum mechanics, time is an external classical parameter — universal, absolute, flows the same for all. In general relativity, time is part of spacetime — relative, curved, flow depends on observer and gravity. These are incompatible. Quantum gravity must resolve this, but no one knows how yet."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "In canonical quantum gravity (Wheeler-DeWitt equation), the wavefunction of the universe does not depend on time at all: ĤΨ = 0. Time seems to disappear. Is time fundamental or emergent? This is the problem of time — one of the deepest conceptual issues in physics."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Wheeler-DeWitt equation",
+                    "text": "Ĥ|Ψ⟩ = 0 — the Hamiltonian constraint of quantum gravity; the universe's wavefunction is an eigenstate of zero energy. No external time parameter."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Emergent time",
+                    "text": "Hypothesis: Time is not fundamental but emerges from entanglement (Page-Wootters mechanism: correlations between subsystems define time) or from thermodynamics. Status: Speculative frontier."
+                  },
+                  {
+                    "type": "research",
+                    "text": "The Event Horizon Telescope resolved the shadow of M87*'s supermassive black hole at the scale where strong-field gravity dominates. The ring is consistent with a Kerr black hole — probing precisely the regime where 'time' as a global notion breaks down.",
+                    "citation": "Event Horizon Telescope Collaboration (2019). First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole. The Astrophysical Journal Letters, 875(1), L1.",
+                    "term": "Imaging the event horizon",
+                    "doi": "10.3847/2041-8213/ab0ec7",
+                    "url": "https://doi.org/10.3847/2041-8213/ab0ec7"
                   }
                 ]
               }
@@ -764,70 +933,92 @@
           "parentId": "physics",
           "title": "Nuclear & Particle Physics",
           "slug": "nuclear-particle",
-          "description": "Level 7 — Radioactivity, the Standard Model, particle detectors, beyond the Standard Model.",
+          "description": "Standard Model, symmetries, Higgs mechanism, neutrino oscillations, beyond the Standard Model.",
           "orderIndex": 8,
           "isPublished": true,
           "lessons": [
             {
-              "id": "nuclear-radioactivity",
-              "title": "Radioactivity",
+              "id": "np-standard-model",
+              "title": "The Standard Model",
               "orderIndex": 0,
-              "estimatedMinutes": 30,
+              "estimatedMinutes": 40,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Radioactivity"
+                    "type": "principle",
+                    "term": "Gauge symmetry as force",
+                    "text": "The Standard Model is built on gauge symmetry SU(3)×SU(2)×U(1). Forces are not 'things exchanged' in the naive sense; they arise from requiring local symmetry. The photon (U(1)), W/Z bosons (SU(2)), and gluons (SU(3)) are gauge bosons. Matter particles are fermions in representations of these groups."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Unstable nuclei decay: alpha (⁴He nucleus), beta (electron/positron + neutrino), gamma (high-energy photon). Decay law: N(t) = N₀e^(−λt), half-life T½ = ln 2 / λ. Activity A = λN. Binding energy from mass defect: E = Δmc²."
+                    "text": "17 fundamental particles: 6 quarks, 6 leptons, 4 force bosons (photon, W⁺, W⁻, Z, 8 gluons), Higgs boson. Gravity is not included. The Standard Model is incredibly precise (electron magnetic moment to 1 part in 10¹²) but incomplete — no dark matter, no neutrino mass mechanism, no quantum gravity, no matter-antimatter asymmetry explanation."
                   },
                   {
                     "type": "definition",
-                    "term": "Half-life",
-                    "text": "Time for half the nuclei in a sample to decay: T½ = ln 2 / λ ≈ 0.693/λ."
+                    "term": "Higgs mechanism",
+                    "text": "The Higgs field permeates space; particles acquire mass by interacting with it. The Higgs boson is an excitation of this field (discovered 2012 at LHC)."
                   },
                   {
                     "type": "project",
-                    "text": "Radiation detection: Use a Geiger counter with a safe radioactive source (e.g., smoke-detector americium-241). Measure counts vs distance (inverse square law) and vs shielding (paper/aluminum/lead for α/β/γ)."
+                    "term": "Particle classification",
+                    "text": "Classify the 17 Standard Model particles by: fermion/boson, generation, charge, color, which forces they feel. Map the symmetry groups (SU(3) color, SU(2) weak, U(1) EM) to particles."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Is proton decay real? Hypothesis: Some grand unified theories predict proton lifetime ~10³⁴ years. Super-Kamiokande has seen nothing — setting lower limits."
+                    "term": "Beyond the Standard Model",
+                    "text": "Hypothesis: What lies beyond? Supersymmetry? Extra dimensions? Grand unification? Technicolor? The LHC has found no BSM particles yet. Status: Active experimental search."
+                  },
+                  {
+                    "type": "research",
+                    "text": "ATLAS reported a new neutral boson at 126.0 ± 0.4 GeV with 5.9σ significance, compatible with the Standard Model Higgs. Together with CMS, this completed the Standard Model's particle roster and confirmed the mechanism that gives particles mass.",
+                    "citation": "ATLAS Collaboration (2012). Observation of a new particle in the search for the Standard Model Higgs boson with the ATLAS detector at the LHC. Physics Letters B, 716(1), 1–29.",
+                    "term": "The Higgs discovered",
+                    "doi": "10.1016/j.physletb.2012.08.020",
+                    "url": "https://doi.org/10.1016/j.physletb.2012.08.020"
                   }
                 ]
               }
             },
             {
-              "id": "nuclear-standard-model",
-              "title": "The Standard Model",
+              "id": "np-neutrino",
+              "title": "Neutrino Oscillations",
               "orderIndex": 1,
-              "estimatedMinutes": 40,
+              "estimatedMinutes": 30,
+              "depth": 4,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "The Standard Model of Particle Physics"
+                    "type": "principle",
+                    "term": "Neutrino flavor change",
+                    "text": "Neutrinos come in three flavors (electron, muon, tau) but are not mass eigenstates. As a neutrino propagates, its flavor oscillates — it can change from electron to muon neutrino en route. This requires neutrinos to have mass, which the original Standard Model did not predict."
                   },
                   {
                     "type": "paragraph",
-                    "text": "17 fundamental particles: 6 quarks, 6 leptons (e, μ, τ + 3 neutrinos), 4 force bosons (photon, W±, Z, 8 gluons), Higgs boson. Forces: electromagnetic (QED), weak, strong (QCD); gravity not yet included. Mass comes from Higgs mechanism."
+                    "text": "The solar neutrino problem (1960s-2000s): experiments detected only 1/3 of expected solar neutrinos. Resolution: electron neutrinos oscillated to other flavors en route. Confirmed by Super-Kamiokande, SNO (2001-2002, Nobel Prize 2015)."
                   },
                   {
                     "type": "definition",
-                    "term": "Standard Model particles",
-                    "text": "Quarks: up, down, charm, strange, top, bottom. Leptons: electron, muon, tau, 3 neutrinos. Bosons: photon, W+, W−, Z, gluons (×8), Higgs."
+                    "term": "Pontecorvo-Maki-Nakagawa-Sakata matrix",
+                    "text": "The PMNS matrix mixes neutrino flavor and mass eigenstates, with mixing angles and a CP-violating phase (possibly related to matter-antimatter asymmetry via leptogenesis)."
                   },
                   {
                     "type": "project",
-                    "text": "Particle zoo card sort: Sort known particles into fermions/bosons, matter/force, generations. Map which forces each particle feels (strong? weak? EM? gravity?)."
+                    "term": "Oscillation probability",
+                    "text": "Compute P(νₑ → ν_μ) = sin²(2θ) sin²(1.27 Δm² L/E) for solar and atmospheric parameters. Plot oscillation probability vs distance/energy."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "What is dark matter? Hypothesis: Not in the Standard Model — candidates include WIMPs, axions, sterile neutrinos. Direct detection experiments (LZ, XENONnT) have found nothing yet."
+                    "term": "Majorana vs Dirac neutrinos",
+                    "text": "Hypothesis: Are neutrinos their own antiparticles (Majorana)? Neutrinoless double-beta decay experiments (nEXO, LEGEND, CUPID) seek to answer this. Status: Open."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Super-Kamiokande observed a zenith-angle-dependent deficit of atmospheric muon neutrinos, consistent with νμ↔ντ oscillations. Oscillation requires non-zero neutrino mass — the first clear crack in the Standard Model, and a Nobel-winning discovery.",
+                    "citation": "Fukuda, Y., et al. (Super-Kamiokande Collaboration) (1998). Evidence for Oscillation of Atmospheric Neutrinos. Physical Review Letters, 81(8), 1562–1566.",
+                    "term": "Neutrinos have mass",
+                    "doi": "10.1103/PhysRevLett.81.1562",
+                    "url": "https://doi.org/10.1103/PhysRevLett.81.1562"
                   }
                 ]
               }
@@ -841,70 +1032,141 @@
           "parentId": "physics",
           "title": "Astrophysics & Cosmology",
           "slug": "astrophysics-cosmology",
-          "description": "Level 8 — Stellar evolution, galaxies, dark matter & dark energy, the early universe.",
+          "description": "Dark matter, dark energy, inflation, CMB, Hubble tension, black holes, the fate of the universe.",
           "orderIndex": 9,
           "isPublished": true,
           "lessons": [
             {
-              "id": "astro-stellar",
-              "title": "Stellar Evolution",
+              "id": "astro-dark-matter",
+              "title": "Dark Matter",
               "orderIndex": 0,
               "estimatedMinutes": 35,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Stellar Evolution"
+                    "type": "principle",
+                    "term": "Missing mass",
+                    "text": "Galaxies rotate too fast for their visible mass (Vera Rubin, 1970s). Galaxy clusters (Zwicky, 1930s) need more mass than seen. Gravitational lensing (Bullet Cluster, 2006) shows mass separated from visible matter. Something invisible but gravitationally active dominates: ~27% of the universe."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Stars form from collapsing gas clouds, fuse hydrogen in their cores (main sequence), then evolve based on mass. Low-mass stars: red giant → planetary nebula → white dwarf. High-mass stars: red supergiant → supernova → neutron star or black hole. Hertzsprung-Russell diagram plots luminosity vs temperature."
+                    "text": "Dark matter candidates: WIMPs, axions, sterile neutrinos, primordial black holes, modified gravity (MOND, TeVeS). Direct detection experiments (LZ, XENONnT, PandaX) have found nothing. The Bullet Cluster strongly favors particle dark matter over modified gravity, but is not conclusive."
                   },
                   {
                     "type": "definition",
-                    "term": "Hertzsprung-Russell diagram",
-                    "text": "Plot of stellar luminosity vs surface temperature (or color). Main sequence runs diagonally; red giants upper-right; white dwarfs lower-left."
+                    "term": "Rotation curve",
+                    "text": "Orbital velocity of stars vs distance from galactic center. Visible matter predicts v ∝ 1/√r at large r; observed v is roughly flat — implying a dark matter halo."
                   },
                   {
                     "type": "project",
-                    "text": "HR diagram from catalog data: Plot nearby stars (e.g., Hipparcos/Gaia) by B−V color vs absolute magnitude. Identify main sequence, giants, white dwarfs."
+                    "term": "Rotation curve analysis",
+                    "text": "Use SPARC galaxy data: plot observed rotation curves vs visible-matter predictions. Fit with dark matter halo profiles (NFW, Burkert) or MOND. Compare goodness of fit."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "What determines whether a star becomes a neutron star or black hole? Hypothesis: Core mass after supernova — roughly >3 M☉ collapses to black hole; 1.4–3 M☉ to neutron star (Tolman-Oppenheimer-Volkoff limit, uncertain)."
+                    "term": "Particle or modified gravity?",
+                    "text": "Hypothesis: Is dark matter a particle or a modification of gravity? Status: Particle dark matter is mainstream but unconfirmed; modified gravity survives in some forms."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Rubin and Ford measured the rotation curve of Andromeda out to 24 kpc and found velocities staying high where visible mass predicted a falloff. The missing mass — inferred but unseen — became the modern case for dark matter.",
+                    "citation": "Rubin, V. C., & Ford, W. K. (1970). Rotation of the Andromeda Nebula from a Spectroscopic Survey of Emission Regions. The Astrophysical Journal, 159, 379–403.",
+                    "term": "Galaxies rotate too fast",
+                    "doi": "10.1086/150317",
+                    "url": "https://doi.org/10.1086/150317"
                   }
                 ]
               }
             },
             {
-              "id": "astro-cosmology",
-              "title": "Cosmology & the Early Universe",
+              "id": "astro-dark-energy",
+              "title": "Dark Energy & Accelerating Expansion",
               "orderIndex": 1,
-              "estimatedMinutes": 40,
+              "estimatedMinutes": 35,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Cosmology & the Early Universe"
+                    "type": "principle",
+                    "term": "Acceleration",
+                    "text": "Type Ia supernovae (1998) showed the universe's expansion is accelerating, not slowing. Something (~68% of the universe) drives this: dark energy. The simplest explanation: a cosmological constant (vacuum energy). But the observed value is 10¹²⁰ times smaller than quantum field theory predicts — the worst prediction in physics."
                   },
                   {
                     "type": "paragraph",
-                    "text": "The universe is expanding (Hubble: v = H₀d). Big Bang: hot dense state ~13.8 Gyr ago. Cosmic microwave background (CMB) at 2.725 K is relic radiation. Composition: ~5% ordinary matter, ~27% dark matter, ~68% dark energy. Accelerating expansion (supernovae, 1998)."
+                    "text": "The cosmological constant problem: QFT predicts vacuum energy from zero-point fluctuations; the predicted value vastly exceeds observation. Either QFT is wrong about vacuum energy, something cancels it, or we misunderstand gravity. Unsolved."
                   },
                   {
                     "type": "definition",
-                    "term": "Hubble parameter",
-                    "text": "H₀ ≈ 67–73 km/s/Mpc (tension between early-universe and local measurements — an open problem)."
+                    "term": "Equation of state w",
+                    "text": "P = wρc². Cosmological constant: w = −1. Quintessence: w > −1 (dynamic). Phantom: w < −1 (Big Rip). Current data: w ≈ −1 (consistent with cosmological constant)."
                   },
                   {
                     "type": "project",
-                    "text": "CMB anisotropy exploration: Use Planck satellite data to plot temperature fluctuations across the sky. Identify the acoustic peak scale (~1°) that sets spatial flatness."
+                    "term": "Hubble diagram",
+                    "text": "Plot supernova redshift vs distance (modulus). Verify acceleration. Compare with ΛCDM prediction. Use Pantheon+ or Union3 data."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "What caused cosmic inflation? Hypothesis: A scalar inflaton field drove exponential expansion in the first ~10⁻³² s, explaining flatness, homogeneity, and primordial perturbations. Not yet directly detected."
+                    "term": "Is dark energy real?",
+                    "text": "Hypothesis: Could acceleration be an observational artifact or sign of inhomogeneity rather than dark energy? Status: Mainstream accepts dark energy; alternatives not ruled out."
+                  },
+                  {
+                    "type": "research",
+                    "text": "The High-z Supernova Search Team found distant Type Ia supernovae fainter than expected — evidence that cosmic expansion is speeding up, driven by a positive cosmological constant or dark energy.",
+                    "citation": "Riess, A. G., et al. (1998). Observational Evidence from Supernovae for an Accelerating Universe and a Cosmological Constant. The Astronomical Journal, 116(3), 1009–1038.",
+                    "term": "The universe accelerates",
+                    "doi": "10.1086/300499",
+                    "url": "https://doi.org/10.1086/300499"
+                  },
+                  {
+                    "type": "research",
+                    "text": "The Supernova Cosmology Project reached the same conclusion from 42 high-redshift supernovae: the data favour a non-zero, positive cosmological constant at 99% confidence. Two teams, one revolution.",
+                    "citation": "Perlmutter, S., et al. (1999). Measurements of Ω and Λ from 42 High-Redshift Supernovae. The Astrophysical Journal, 517(2), 565–586.",
+                    "term": "Independent confirmation",
+                    "doi": "10.1086/307221",
+                    "url": "https://doi.org/10.1086/307221"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "astro-hubble-tension",
+              "title": "Hubble Tension",
+              "orderIndex": 2,
+              "estimatedMinutes": 30,
+              "depth": 4,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Two values of H₀",
+                    "text": "The Hubble constant (current expansion rate) measured two ways disagrees at ~5–6σ: local (Cepheids + supernovae): ~73 km/s/Mpc; early-universe (CMB + ΛCDM): ~67 km/s/Mpc. If real, ΛCDM is incomplete — new physics (early dark energy, modified gravity, neutrino species) may be needed."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "This is one of the hottest problems in cosmology (2020s). Systematics in local measurements? New physics in early universe? Independent measurements (gravitational waves as standard sirens, tip of red giant branch) are being used to arbitrate."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "New physics?",
+                    "text": "Hypothesis: The Hubble tension signals physics beyond ΛCDM. Status: Active debate; no consensus yet."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Using 70 LMC Cepheids calibrated to 1%, Riess et al. found H₀ = 74.03 ± 1.42 km/s/Mpc — 4.4σ higher than the CMB value. The discrepancy is now called the Hubble tension.",
+                    "citation": "Riess, A. G., et al. (2019). Large Magellanic Cloud Cepheid Standards Provide a 1% Foundation for the Determination of the Hubble Constant. The Astrophysical Journal, 876(1), 85.",
+                    "term": "Local expansion rate",
+                    "doi": "10.3847/1538-4357/ab1422",
+                    "url": "https://doi.org/10.3847/1538-4357/ab1422"
+                  },
+                  {
+                    "type": "research",
+                    "text": "Planck's final full-mission data infer H₀ = 67.4 ± 0.5 km/s/Mpc within base ΛCDM — a value in significant (3.6σ) tension with local measurements, leaving the tension unresolved and eagerly contested.",
+                    "citation": "Planck Collaboration (2020). Planck 2018 results. VI. Cosmological parameters. Astronomy & Astrophysics, 641, A6.",
+                    "term": "The CMB's answer",
+                    "doi": "10.1051/0004-6361/201833910",
+                    "url": "https://doi.org/10.1051/0004-6361/201833910"
                   }
                 ]
               }
@@ -918,38 +1180,100 @@
           "parentId": "physics",
           "title": "Condensed Matter",
           "slug": "condensed-matter",
-          "description": "Level 9 — Crystal structure, band theory, superconductivity, soft matter.",
+          "description": "Band theory, superconductivity, topological phases, emergence, quantum materials.",
           "orderIndex": 10,
           "isPublished": true,
           "lessons": [
             {
               "id": "cm-band-theory",
-              "title": "Band Theory of Solids",
+              "title": "Band Theory & Emergence",
               "orderIndex": 0,
               "estimatedMinutes": 35,
+              "depth": 3,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Band Theory of Solids"
+                    "type": "principle",
+                    "term": "More is different",
+                    "text": "Anderson's dictum (1972): at each level of complexity, entirely new properties appear. Condensed matter is the science of emergence — solids behave in ways not deducible from single atoms alone. Band theory, superconductivity, magnetism, topological phases all emerge from ~10²³ interacting electrons."
                   },
                   {
                     "type": "paragraph",
-                    "text": "In solids, atomic orbitals overlap into energy bands. Band gap E_g separates valence band (filled) from conduction band (empty/partially filled). Conductors: overlapping or partially filled bands. Insulators: large E_g. Semiconductors: small E_g (~1 eV), doping controls carriers."
+                    "text": "Band theory: electrons in a crystal form bands (allowed energies) separated by gaps. Conductors: partially filled bands. Insulators: large gaps. Semiconductors: small gaps (~1 eV), doping controls carriers. This underpins all modern electronics."
                   },
                   {
                     "type": "definition",
-                    "term": "Band gap",
-                    "text": "Energy difference between the top of the valence band and the bottom of the conduction band. Silicon: E_g ≈ 1.1 eV; diamond: ~5.5 eV (insulator)."
+                    "term": "Quasiparticle",
+                    "text": "An electron in a crystal behaves as if it has an effective mass m* (different from bare mass) due to interactions with the lattice. Quasiparticles are dressed particles — emergence at the single-particle level."
                   },
                   {
                     "type": "project",
-                    "text": "Diode IV curve: Measure current vs voltage for a silicon diode. Verify exponential forward behavior (Shockley equation) and reverse breakdown. Compare with LED (different E_g → different turn-on voltage)."
+                    "term": "Tight-binding simulation",
+                    "text": "Simulate electrons on a 1D/2D lattice with hopping parameter t. Plot band structure E(k). Show band gaps opening with periodic potential. This is the essence of band theory."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Can room-temperature superconductivity exist? Hypothesis: Yes — recent claims (retracted or disputed). The mechanism and upper Tc remain open."
+                    "term": "Topological phases",
+                    "text": "Hypothesis: Can matter have phases characterized by topology (not symmetry)? Topological insulators, quantum Hall effect, Majorana zero modes — yes. Status: Active research, some realized experimentally."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Novoselov and Geim isolated single-atom-thick graphite films and showed a strong electric-field effect, with a tiny gap between valence and conductance bands. Graphene's Dirac-like band structure made abstract band theory directly visible and tunable.",
+                    "citation": "Novoselov, K. S., et al. (2004). Electric Field Effect in Atomically Thin Carbon Films. Science, 306(5696), 666–669.",
+                    "term": "A two-dimensional electron world",
+                    "doi": "10.1126/science.1102896",
+                    "url": "https://doi.org/10.1126/science.1102896"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "cm-superconductivity",
+              "title": "Superconductivity",
+              "orderIndex": 1,
+              "estimatedMinutes": 35,
+              "depth": 4,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "BCS theory",
+                    "text": "Bardeen-Cooper-Schrieffer (1957): electrons form Cooper pairs via phonon-mediated attraction; pairs condense into a single quantum state; resistance drops to exactly zero; magnetic fields are expelled (Meissner effect). This is macroscopic quantum phenomena — a visible quantum state."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "High-temperature superconductors (cuprates, 1986) are not explained by BCS. Mechanism still debated after ~40 years. Room-temperature superconductivity claims (2023, LK-99) were not reproduced — the search continues."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Order parameter",
+                    "text": "The superconducting gap Δ is the order parameter; it breaks a symmetry (gauge symmetry) spontaneously. This is the condensed-matter analog of the Higgs mechanism."
+                  },
+                  {
+                    "type": "project",
+                    "term": "Meissner effect",
+                    "text": "Demonstrate magnetic levitation over a superconductor (YBCO with liquid nitrogen). Measure critical temperature where resistance drops. This is quantum mechanics at human scale."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Room-temperature superconductor?",
+                    "text": "Hypothesis: Is room-temperature, ambient-pressure superconductivity possible? Claims (LK-99, 2023) not replicated. Theoretical upper limits unknown. Status: Open."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Bardeen, Cooper and Schrieffer explained superconductivity as paired electrons (Cooper pairs) bound by phonon exchange, predicting an energy gap, the isotope effect, and a Meissner effect in agreement with experiment — a triumph of many-body theory.",
+                    "citation": "Bardeen, J., Cooper, L. N., & Schrieffer, J. R. (1957). Theory of Superconductivity. Physical Review, 108(5), 1175–1204.",
+                    "term": "The microscopic theory",
+                    "doi": "10.1103/PhysRev.108.1175",
+                    "url": "https://doi.org/10.1103/PhysRev.108.1175"
+                  },
+                  {
+                    "type": "research",
+                    "text": "Bednorz and Müller found an abrupt drop in resistivity in a barium–lanthanum–copper oxide near 30 K — the first high-temperature superconductor, igniting a field that still lacks a complete theory and won them the Nobel Prize within a year.",
+                    "citation": "Bednorz, J. G., & Müller, K. A. (1986). Possible high-Tc superconductivity in the Ba−La−Cu−O system. Zeitschrift für Physik B Condensed Matter, 64(2), 189–193.",
+                    "term": "The high-temperature surprise",
+                    "doi": "10.1007/BF01303701",
+                    "url": "https://doi.org/10.1007/BF01303701"
                   }
                 ]
               }
@@ -963,38 +1287,92 @@
           "parentId": "physics",
           "title": "Mathematical Physics",
           "slug": "mathematical-physics",
-          "description": "Level 10 — Vector calculus, differential equations, group theory, numerical methods.",
+          "description": "Differential geometry, group theory, path integrals, the unreasonable effectiveness of mathematics.",
           "orderIndex": 11,
           "isPublished": true,
           "lessons": [
             {
-              "id": "mp-calculus",
-              "title": "Vector Calculus for Physics",
+              "id": "mp-differential-geometry",
+              "title": "Differential Geometry of Spacetime",
               "orderIndex": 0,
-              "estimatedMinutes": 35,
+              "estimatedMinutes": 40,
+              "depth": 4,
               "content": {
                 "blocks": [
                   {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "Vector Calculus for Physics"
+                    "type": "principle",
+                    "term": "Geometry as physics",
+                    "text": "General relativity replaced the gravitational force with geometry. But geometry goes deeper: gauge theories (electromagnetism, weak, strong) are also geometric — connections on fiber bundles. Physics is increasingly expressed as geometry: general relativity = spacetime geometry; gauge theory = internal space geometry."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Gradient (∇f), divergence (∇·F), curl (∇×F), Laplacian (∇²f). Divergence theorem: ∮F·dA = ∫(∇·F)dV. Stokes' theorem: ∮F·dr = ∫(∇×F)·dA. These underpin Maxwell's equations and fluid dynamics."
+                    "text": "Differential geometry provides the language: manifolds, metrics, connections, curvature, torsion, fibers. The same mathematics that describes curved spacetime describes the Standard Model's internal symmetries. This geometric unification is profound but incomplete (gravity is geometry of spacetime; other forces are geometry of internal spaces — different kinds of geometry)."
                   },
                   {
                     "type": "definition",
-                    "term": "Laplacian",
-                    "text": "∇²f = ∂²f/∂x² + ∂²f/∂y² + ∂²f/∂z² — appears in Poisson's equation (∇²φ = −ρ/ε₀), heat equation, wave equation."
+                    "term": "Curvature",
+                    "text": "Riemann curvature tensor R^ρ_{σμν} measures how much parallel transport around a loop fails to return a vector to itself. In GR, this is sourced by energy-momentum."
                   },
                   {
                     "type": "project",
-                    "text": "Numerical Laplacian: Compute ∇² on a grid using finite differences. Solve Poisson's equation for a point charge (potential φ = q/(4πε₀r)) and compare with analytic solution."
+                    "term": "Geodesic on a sphere",
+                    "text": "Compute geodesics (great circles) on a 2-sphere using the metric. Show that parallel transport around a spherical triangle rotates a vector by the enclosed solid angle — curvature is tangible."
                   },
                   {
                     "type": "hypothesis",
-                    "text": "Are divergence and curl sufficient to describe any vector field? Hypothesis: Yes — Helmholtz theorem: a field is fixed by its divergence, curl, and boundary conditions."
+                    "term": "Is spacetime fundamental?",
+                    "text": "Hypothesis: Spacetime may be emergent from something more primitive (quantum entanglement, quantum error correction, tensor networks — 'it from qubit'). Status: Highly speculative frontier (AdS/CFT, ER=EPR)."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Gravity Probe B's cryogenic gyroscopes measured the geodetic and frame-dragging precessions predicted by general relativity — confirming that orbiting gyroscopes feel the curvature and the dragging of spacetime itself, exactly as differential geometry describes.",
+                    "citation": "Everitt, C. W. F., et al. (2011). Gravity Probe B: Final Results of a Space Experiment to Test General Relativity. Physical Review Letters, 106, 221101.",
+                    "term": "Curved spacetime, measured",
+                    "doi": "10.1103/PhysRevLett.106.221101",
+                    "url": "https://doi.org/10.1103/PhysRevLett.106.221101"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mp-path-integral",
+              "title": "Path Integrals",
+              "orderIndex": 1,
+              "estimatedMinutes": 40,
+              "depth": 4,
+              "content": {
+                "blocks": [
+                  {
+                    "type": "principle",
+                    "term": "Sum over histories",
+                    "text": "Feynman's path integral: a particle does not take one path; it takes all paths, each weighted by e^(iS/ℏ). The classical path is the stationary phase (constructive interference). This formulation connects quantum mechanics to statistical mechanics (replace iℏ with k_BT) and quantum field theory."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Path integrals make the principle of least action intuitive: quantum mechanics is classical mechanics with interference. They are the standard tool in QFT and are central to modern approaches to quantum gravity."
+                  },
+                  {
+                    "type": "definition",
+                    "term": "Propagator",
+                    "text": "K(x_f, t_f; x_i, t_i) = ∫ D[x(t)] e^(iS[x]/ℏ) — the amplitude to go from (x_i,t_i) to (x_f,t_f), summing over all paths."
+                  },
+                  {
+                    "type": "project",
+                    "term": "Double-slit path integral",
+                    "text": "Compute the double-slit amplitude using path integrals: sum over paths through slit 1 and slit 2; show interference from relative phase e^(iS₁/ℏ) vs e^(iS₂/ℏ). This derives interference from least action."
+                  },
+                  {
+                    "type": "hypothesis",
+                    "term": "Do all paths exist?",
+                    "text": "Hypothesis: In path integrals, do all histories literally exist (many-worlds flavor), or is it a calculational device? Status: Interpretational."
+                  },
+                  {
+                    "type": "research",
+                    "text": "Feynman reformulated quantum mechanics by assigning each possible path a phase e^{iS/ℏ} and summing amplitudes over all paths. The classical trajectory emerges where phases add constructively — the basis of modern quantum field theory.",
+                    "citation": "Feynman, R. P. (1948). Space-Time Approach to Non-Relativistic Quantum Mechanics. Reviews of Modern Physics, 20(2), 367–387.",
+                    "term": "Sum over histories",
+                    "doi": "10.1103/RevModPhys.20.367",
+                    "url": "https://doi.org/10.1103/RevModPhys.20.367"
                   }
                 ]
               }
@@ -1012,7 +1390,7 @@
     "news": "Latest scientific developments, papers, breakthroughs — what's happening now"
   },
   "levels": [
-    "Foundations",
+    "Foundations of Physics",
     "Classical Mechanics",
     "Thermodynamics",
     "Electromagnetism",
@@ -1023,6 +1401,5 @@
     "Astrophysics & Cosmology",
     "Condensed Matter",
     "Mathematical Physics"
-  ],
-  "depthTabs": ["Understand", "Explore", "Go Deeper", "Research"]
+  ]
 }

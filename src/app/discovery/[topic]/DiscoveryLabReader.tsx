@@ -167,6 +167,35 @@ function Block({ block }: { block: LessonBlock }) {
           <div className="text-slate-200 font-reading leading-relaxed">{block.text}</div>
         </div>
       );
+    case "research": {
+      const href = block.url ?? (block.doi ? `https://doi.org/${block.doi}` : undefined);
+      return (
+        <div className="border border-white/10 rounded-xl p-5 my-6 bg-[radial-gradient(120%_120%_at_0%_0%,rgba(212,175,55,0.08),transparent)]">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gold mb-1">
+            <Microscope className="w-4 h-4" />
+            From the literature{block.term ? ` · ${block.term}` : ""}
+          </div>
+          <div className="text-slate-200 font-reading leading-relaxed">{block.text}</div>
+          <div className="mt-3 border-t border-white/10 pt-3 text-sm">
+            <span className="text-slate-100 font-medium">{block.citation}</span>
+            {href && (
+              <>
+                {" "}
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-gold hover:text-gold-hover underline underline-offset-2"
+                >
+                  {block.doi ? `doi:${block.doi}` : "source"}
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </a>
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
     case "callout":
       return block.variant === "info" ? (
         <div className="border border-sky-500/30 bg-sky-950/20 text-sky-200 rounded-xl p-5 my-6 leading-relaxed">

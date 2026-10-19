@@ -8,7 +8,7 @@
 
 ## 1. Vision
 
-Discovery is the reason Gnostiri is alive. It is not a curriculum — it is a **research lab**. Physics is the first and inaugural lab; every other domain (chemistry, biology, math, etc.) can be added later as new labs. All current "junk topics" (electives, certifications, miscellaneous skills) are wiped out.
+Discovery is the reason Gnostiri is alive. It is not a curriculum — it is a **research lab**. Physics is the first lab; neuroscience is the second. Chemistry, Biology, Mathematics, Astronomy, Computer Science can be added later as new labs. All current "junk topics" (electives, certifications, miscellaneous skills) are wiped out.
 
 The lab has four research modes:
 1. **Principles** — established laws, theories, fundamentals (what we know)
@@ -172,10 +172,30 @@ No other agent's content is in `extras/discovery` — this is Agent 3's lane.
 ## 8. Next Steps (implementation order)
 
 1. ✅ Plan document (this file)
-2. Create `sandbox/agent3-pq-assistant/discovery-physics-content.json` — full content tree
-3. Rebuild `src/app/discovery/page.tsx` — lab overview
-4. Rebuild `src/app/discovery/layout.tsx` — lab metadata
-5. Rebuild `src/app/discovery/[topic]/page.tsx` — branch/lesson reader with lab modes
-6. Add `news` and `projects` and `hypotheses` content blocks
-7. Soft-delete junk `extras` topics (set `isPublished = false`)
-8. Verify no other agent files modified
+2. ✅ Create `sandbox/agent3-pq-assistant/discovery-physics-content.json` — full content tree (v2.0.0, 11 branches, 28 lessons)
+3. ✅ Rebuild `src/app/discovery/page.tsx` — lab overview
+4. ✅ Rebuild `src/app/discovery/layout.tsx` — lab metadata
+5. ✅ Rebuild `src/app/discovery/[topic]/page.tsx` — branch/lesson reader with lab modes
+6. ✅ Add `principle`/`project`/`hypothesis`/`news-item` content blocks + reader
+7. ✅ Soft-delete junk `extras` topics (set `isPublished = false`) — `retireLegacyExtras()`
+8. ✅ Add `research` block type — real, citable studies (verified DOIs) per lesson
+9. ✅ Neuroscience Lab content (`discovery-neuroscience-content.json`) — second lab
+10. ✅ Integrate seeding into canonical `prisma/seed.ts` via `prisma/discovery-seed-lib.ts`
+11. ✅ Verify no other agent files modified
+
+### Real studies (step 8)
+
+Every physics lesson carries a `research` block citing an actual, web-verified study
+(`doi` + `url`), e.g. Bérut 2012 (Landauer), Hensen 2015 (loophole-free Bell),
+Tonomura 1989 (single-electron double slit), LIGO 2016, Riess 1998/2019, Planck 2018,
+BCS 1957, EHT 2019, ATLAS 2012, Super-Kamiokande 1998. 31 blocks, 30 with DOIs;
+1 primary historical source (Dirac 1933) linked by stable URL. No fabricated citations.
+
+### Seeding integration (step 10)
+
+- `prisma/discovery-seed-lib.ts` — side-effect-free `seedDiscoveryPhysics()`,
+  `seedDiscoveryNeuroscience()`, `retireLegacyExtras()`.
+- `prisma/seed.ts` (canonical `prisma db seed`) now retires legacy extras and seeds both labs.
+- Standalone runners retained: `prisma/seed-discovery-physics.ts`, `seed-discovery-neuroscience.ts`.
+- Content stays the single source of truth in this sandbox; the lib reads it by relative path.
+

@@ -14,7 +14,7 @@ const MODES = [
   { id: "news", label: "News", desc: "Latest scientific developments", accent: "sky", icon: "Newspaper" },
 ] as const;
 
-const FUTURE_LABS = ["Chemistry", "Biology", "Mathematics", "Astronomy", "Neuroscience", "Computer Science"];
+const FUTURE_LABS = ["Chemistry", "Biology", "Mathematics", "Astronomy", "Computer Science"];
 
 interface LabTopic {
   id: string;
@@ -27,23 +27,14 @@ interface LabTopic {
 }
 
 export default async function DiscoveryPage() {
-  const [physics, otherFields] = await Promise.all([
-    prisma.topic.findFirst({
-      where: { domain: "extras", title: "Physics Lab", isPublished: true, parentId: null },
-      include: {
-        children: { where: { domain: "extras", isPublished: true }, orderBy: { orderIndex: "asc" } },
-        lessons: { where: { domain: "extras" }, orderBy: { orderIndex: "asc" } },
-      },
-    }),
-    prisma.topic.findMany({
-      where: { domain: "extras", isPublished: true, parentId: null, NOT: { title: "Physics Lab" } },
-      include: {
-        children: { where: { domain: "extras", isPublished: true } },
-        lessons: { where: { domain: "extras" } },
-      },
-      orderBy: { orderIndex: "asc" },
-    }),
-  ]);
+  const labs: LabTopic[] = await prisma.topic.findMany({
+    where: { domain: "extras", isPublished: true, parentId: null },
+    include: {
+      children: { where: { domain: "extras", isPublished: true }, orderBy: { orderIndex: "asc" } },
+      lessons: { where: { domain: "extras" }, orderBy: { orderIndex: "asc" } },
+    },
+    orderBy: { orderIndex: "asc" },
+  });
 
   return (
     <main className="min-h-screen bg-transparent text-slate-50">
@@ -59,12 +50,11 @@ export default async function DiscoveryPage() {
             <span>The Discovery Lab</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            Research <span className="text-gold">physics</span>
+            Research <span className="text-gold">everything</span>
           </h1>
           <p className="text-slate-300/90 text-base md:text-lg max-w-2xl mx-auto font-light">
-            Everything physics, every level — from first principles to the research
-            frontier. Principles · Projects · Hypotheses · News. Physics is the first
-            lab; more fields open later.
+            Research labs for every field — physics, neuroscience, and more. Principles ·
+            Projects · Hypotheses · News. Physics was first; neuroscience opens second.
           </p>
 
           {/* Research modes */}
@@ -88,82 +78,58 @@ export default async function DiscoveryPage() {
             ))}
           </div>
 
-          {/* Physics entry — front and center */}
-          {physics && (
+          {/* Open labs */}
+          {labs.length > 0 && (
             <div className="mt-10">
-              <LinkLabCard
-                href={`/discovery/${physics.slug}`}
-                title={physics.title}
-                blurb={physics.description ?? "Enter the physics research lab"}
-                tag={`${physics.children.length} branches · ${physics.lessons.length} lessons`}
-                accent="gold"
-                primary
-              />
+              <div className="flex justify-between items-end mb-4">
+                <h2 className="text-xl font-serif font-bold text-slate-100">Open labs</h2>
+                <span className="text-xs text-slate-400">{labs.length} lab{labs.length === 1 ? "" : "s"} open</span>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {labs.map((lab) => (
+                  <LinkLabCard
+                    key={lab.id}
+                    href={`/discovery/${lab.slug}`}
+                    title={lab.title}
+                    blurb={lab.description ?? "Enter the research lab"}
+                    tag={`${lab.children.length} branches · ${lab.lessons.length} lessons`}
+                    accent="gold"
+                    primary={lab === labs[0]}
+                  />
+                ))}
+              </div>
             </div>
           )}
         </div>
       </div>
 
-      {/* Labs */}
-      <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 space-y-10">
-        <section className="space-y-5">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs tracking-[0.25em] text-slate-400">01</span>
-            <Compass className="w-5 h-5 text-gold" />
-            <h2 className="text-xl md:text-2xl font-serif font-bold">Inaugural Lab — Physics</h2>
-            <span className="text-xs text-slate-400">· first lab to open</span>
-          </div>
-          <p className="text-slate-400 text-sm max-w-xl">
-            All levels of physics, every branch — from foundations to quantum gravity.
-            Four research modes in every branch.
-          </p>
-          {physics ? (
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {physics.children.map((branch) => (
-                <TopicCard
-                  key={branch.id}
-                  href={`/discovery/${physics.slug}/${branch.slug ?? branch.id}`}
-                  title={branch.title}
-                  tone="gold"
-                  tag={`${branch.children.length} paths`}
-                  blurb={branch.lessons.length > 0 ? `${branch.lessons.length} lessons` : "Branch being charted"}
-                  cta="Enter branch"
-                />
-              ))}
+      {/* Future labs (placeholders) */}
+      <section className="max-w-6xl mx-auto px-6 py-12 md:py-16 space-y-10">
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-xs tracking-[0.25em] text-slate-400">02</span>
+          <Telescope className="w-5 h-5 text-slate-500" />
+          <h2 className="text-xl md:text-2xl font-serif font-bold text-slate-300">Labs coming next</h2>
+          <span className="text-xs text-slate-500">· more fields opening</span>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+          {FUTURE_LABS.map((lab) => (
+            <div
+              key={lab}
+              className="rounded-xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center text-slate-500 text-sm font-medium"
+            >
+              <Microscope className="w-6 h-6 mx-auto mb-2 opacity-40" />
+              {lab}
             </div>
-          ) : (
-            <p className="text-slate-400">Physics lab content is being seeded. Check back soon.</p>
-          )}
-        </section>
+          ))}
+        </div>
+      </section>
 
-        {/* Future labs (placeholders) */}
-        <section className="space-y-5">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs tracking-[0.25em] text-slate-400">02</span>
-            <Telescope className="w-5 h-5 text-slate-500" />
-            <h2 className="text-xl md:text-2xl font-serif font-bold text-slate-300">Labs coming next</h2>
-            <span className="text-xs text-slate-500">· physics opens first</span>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {FUTURE_LABS.map((lab) => (
-              <div
-                key={lab}
-                className="rounded-xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center text-slate-500 text-sm font-medium"
-              >
-                <Microscope className="w-6 h-6 mx-auto mb-2 opacity-40" />
-                {lab}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Stats */}
-        <dl className="grid gap-4 sm:grid-cols-3">
-          <StatCard label="Labs open" value={1} accent="gold" />
-          <StatCard label="Physics branches" value={physics?.children.length ?? 0} accent="teal" />
-          <StatCard label="Research modes" value={MODES.length} accent="violet" />
-        </dl>
-      </div>
+      {/* Stats */}
+      <dl className="max-w-6xl mx-auto px-6 py-12 grid gap-4 sm:grid-cols-3">
+        <StatCard label="Labs open" value={labs.length} accent="gold" />
+        <StatCard label="Total branches" value={labs.reduce((s, l) => s + l.children.length, 0)} accent="teal" />
+        <StatCard label="Research modes" value={MODES.length} accent="violet" />
+      </dl>
     </main>
   );
 }

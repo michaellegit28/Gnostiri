@@ -1,4 +1,4 @@
-import { EXAM_BOARDS, listBoards, getBoard, boardRegion } from "./boards.js";
+import { EXAM_BOARDS, listBoards, getBoard, boardRegion, isOfficialPastBoard } from "./boards.js";
 import {
   SUBJECTS,
   QUESTION_BANK,
@@ -19,6 +19,7 @@ export function generateBoardSet(boardId, options = {}) {
   const count = options.count || 5;
   const subject = options.subject || null;
   const region = boardRegion(boardId);
+  const useOfficial = isOfficialPastBoard(boardId);
 
   const subjects = subject ? [subject] : SUBJECTS;
   let questions = [];
@@ -37,8 +38,8 @@ export function generateBoardSet(boardId, options = {}) {
   return {
     board,
     region,
-    version: "global",
-    tag: "Cloned Variant",
+    version: useOfficial ? "official" : "global",
+    tag: useOfficial ? "Official Past Questions" : "Cloned Variant",
     generatedAt: new Date().toISOString(),
     count: selected.length,
     questions: selected,
@@ -49,10 +50,13 @@ export function generateAllBoards(options = {}) {
   return EXAM_BOARDS.map((b) => generateBoardSet(b.id, options));
 }
 
-export function getQuestionVariant(questionId) {
+export function getQuestionPair(questionId) {
   const q = getAllQuestions().find((x) => x.id === questionId);
   if (!q) return null;
-  return getVersion(q, "ng");
+  return {
+    official: getVersion(q, "sa"),
+    global: getVersion(q, "jamb"),
+  };
 }
 
-export { listBoards, getBoard, boardRegion, SUBJECTS };
+export { listBoards, getBoard, boardRegion, isOfficialPastBoard, SUBJECTS };

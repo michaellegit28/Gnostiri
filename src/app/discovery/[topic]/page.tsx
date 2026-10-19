@@ -17,7 +17,11 @@ export default async function DiscoveryTopicPage({
 }) {
   const lite = searchParams?.lite === "1";
   const topic = await prisma.topic.findFirst({
-    where: { id: params.topic, domain: "extras", isPublished: true },
+    where: {
+      domain: "extras",
+      isPublished: true,
+      OR: [{ id: params.topic }, { slug: params.topic }],
+    },
     include: {
       lessons: { where: { domain: "extras" }, orderBy: { orderIndex: "asc" } },
     },
@@ -60,7 +64,7 @@ export default async function DiscoveryTopicPage({
     title: l.title,
     depth: Math.min(l.orderIndex ?? i, 3),
     blocks: ((l.content as unknown as { blocks?: LessonBlock[] } | undefined)?.blocks ?? []).filter((b) =>
-      ["heading", "paragraph", "definition", "example", "callout", "table", "principle", "project", "hypothesis", "news-item"].includes(b.type)
+      ["heading", "paragraph", "definition", "example", "callout", "table", "principle", "project", "hypothesis", "news-item", "research"].includes(b.type)
     ),
   }));
 

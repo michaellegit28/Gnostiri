@@ -19,6 +19,11 @@ export const EXAM_BOARDS = [
   { id: "vce", name: "VCE (Victoria)", region: "Australia", level: "Year 12" },
   { id: "bacc", name: "French Baccalaureate", region: "France", level: "Baccalaureate" },
   { id: "lc", name: "Leaving Certificate", region: "Ireland", level: "Leaving Cert" },
+  { id: "jamb", name: "JAMB (UTME)", region: "NG", level: "University Entrance" },
+  { id: "waec", name: "WAEC (WASSCE)", region: "NG/WA", level: "West African Senior School" },
+  { id: "neco", name: "NECO", region: "NG", level: "Senior School Certificate" },
+  { id: "kcse", name: "KCSE (KNEC)", region: "KE", level: "Kenya Certificate of Secondary" },
+  { id: "wassce", name: "WASSCE (Ghana)", region: "GH", level: "West African Senior School" },
   { id: "sa", name: "South Africa NSC (CAPS / DBE)", region: "ZA", level: "Matric (Grade 12)" },
   { id: "tz", name: "Tanzania NECTA", region: "TZ", level: "CSEE / ACSEE" },
 ];

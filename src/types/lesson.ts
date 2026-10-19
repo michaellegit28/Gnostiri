@@ -35,6 +35,14 @@ export type LessonBlock =
       source?: string;
       date?: string;
       metadata?: { date?: string };
+    }
+  | {
+      type: "research";
+      term?: string;
+      text: string;
+      citation: string;
+      doi?: string;
+      url?: string;
     };
 
 export type LessonContent = {
