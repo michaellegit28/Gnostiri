@@ -1,0 +1,70 @@
+{
+  "schema": "agent3.copyright.attestation.v1",
+  "generatedAt": "2026-10-18",
+  "agent": "agent3-pq-assistant",
+  "scope": "official past-question boards permitted for the `official` provenance track",
+  "boards": {
+    "sa-nsc": {
+      "board": "National Senior Certificate (NSC / Matric)",
+      "country": "South Africa",
+      "region": "sa",
+      "authority": "Department of Basic Education (DBE)",
+      "provenance": "official",
+      "publicationStatus": "open",
+      "sourceUrls": [
+        "https://www.education.gov.za/Curriculum/NationalSeniorCertificate(NSC)Examinations.aspx",
+        "https://www.education.gov.za/Programmes/NationalSeniorCertificate(NSC)Examinations/tabid/617/Default.aspx"
+      ],
+      "copyrightBasis": "South African Copyright Act 98 of 1978 — state works vest copyright in the state; term 50 years from first publication",
+      "openPublication": true,
+      "attributionRequired": true,
+      "riskTier": "medium-low",
+      "notes": "DBE publishes NSC papers + marking memos openly for exam-prep use. Open publication != republication licence: verbal attribution alone does not clear copyright. Best practice: written permission from DBE before hosting verbatim papers; link-first where possible.",
+      "attestationText": "Source: National Senior Certificate past papers, Department of Basic Education, South Africa (education.gov.za). Used with attribution for educational exam preparation."
+    },
+    "tz-necta": {
+      "board": "Certificate of Secondary Education Examination (CSEE)",
+      "country": "Tanzania",
+      "region": "tz",
+      "authority": "National Examinations Council of Tanzania (NECTA)",
+      "provenance": "official",
+      "publicationStatus": "open",
+      "sourceUrls": [
+        "https://www.necta.go.tz/",
+        "https://onlinesys.necta.go.tz/"
+      ],
+      "copyrightBasis": "Tanzania Copyright and Neighbouring Rights Act, 1999 (Act No. 7) — government works protected; term 50 years from publication",
+      "openPublication": true,
+      "attributionRequired": true,
+      "riskTier": "medium-low",
+      "notes": "NECTA publishes past papers openly on necta.go.tz / onlinesys.necta.go.tz. Same caveat as SA: open access is not a republication licence; request written permission from NECTA before verbatim hosting.",
+      "attestationText": "Source: NECTA past papers, National Examinations Council of Tanzania (necta.go.tz). Used with attribution for educational exam preparation."
+    }
+  },
+  "excludedFromOfficialTrack": [
+    {
+      "board": "JAMB (UTME)",
+      "country": "Nigeria",
+      "reason": "Past questions sold commercially by JAMB; not openly published; verbatim use requires licence",
+      "recommendedTrack": "original (JAMB-style generation only)"
+    },
+    {
+      "board": "WAEC/NECO",
+      "country": "Nigeria/West Africa",
+      "reason": "WAEC sells official past-question packs; asserts copyright; NECO papers not officially published openly",
+      "recommendedTrack": "original (WAEC-style generation only)"
+    },
+    {
+      "board": "IB / Cambridge International / College Board AP / SEAB",
+      "reason": "Commercial exam boards with active copyright enforcement; past papers sold or restricted-access",
+      "recommendedTrack": "original (board-style generation only)"
+    }
+  ],
+  "legalPrinciples": [
+    "Exam questions are literary works protected by copyright in virtually all jurisdictions.",
+    "Free/open availability on a board website != licence to republish; always check terms of use.",
+    "Attribution is not permission — it does not cure infringement unless paired with an open licence (e.g. CC, open-government licence).",
+    "Facts, syllabus topics, and learning outcomes are not copyrightable: original JAMB-style / WAEC-style generation is safe as long as questions are not copied or adapted verbatim from actual papers.",
+    "Adapting a real past question = derivative work — same clearance required as verbatim copy."
+  ]
+}

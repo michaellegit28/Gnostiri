@@ -13,7 +13,11 @@
     "test:lesson-python": "node --test tests/lesson-python.test.mjs",
     "test:assessment-seed": "node --test tests/assessment-seed.test.mjs",
     "test:statistics-python": "node --test tests/statistics-python.test.mjs",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "agent:agent2": "python sandbox/agent2-pq-integrator/src/main.py",
+    "agent:agent3": "python sandbox/agent3-pq-assistant/src/main.py",
+    "agent:agent4": "python sandbox/agent4-uni-courses-builder/src/main.py",
+    "agent:orchestrate": "python orchestrator/scripts/orchestrator.py"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

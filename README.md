@@ -1,28 +1,57 @@
-# Gnostiri
+# Gnostiri - Exam Prep Platform
 
-AI-powered learning platform. Built with Next.js (App Router), TypeScript, Tailwind CSS, Prisma, and Firebase Auth.
+## Architecture
 
-## Setup
+### Agents (Sandbox Isolation)
+- **Agent 1**: Orchestrator - Workflow management, CI/CD, monitoring
+- **Agent 2**: PQ Integrator - Past Question processor and validator
+- **Agent 3**: PQ Assistant - Question preparation helper  
+- **Agent 4**: University Courses Builder - Curriculum structure generator
 
-1. Copy `.env.example` to `.env` and fill in real secrets (never commit `.env`).
-2. Install dependencies: `npm install`
-3. Generate Prisma client: `npx prisma generate`
-4. For a fresh local database, apply schema changes with `npx prisma migrate deploy`. The connected Supabase production database is managed with Supabase migrations; apply production SQL from the matching files in `prisma/migrations/` through Supabase so its migration history stays in sync.
-5. Seed the curriculum and catalogs: `npx prisma db seed`
-6. Run dev server: `npm run dev`
+### Isolated Work Trees
+Each agent has its own sandboxed environment:
+- `sandbox/agent2-pq-integrator/`
+- `sandbox/agent3-pq-assistant/`
+- `sandbox/agent4-uni-courses-builder/`
 
-## Stack
+### Shared Resources (Read-only for agents)
+- `shared/schemas/` - JSON schemas for question validation
+- `shared/utils/` - Common helper functions
+- `shared/models/` - Database models
 
-- Next.js 14 (App Router) + TypeScript + Tailwind CSS
-- Prisma ORM
-- Firebase Auth (email/password, Google, and Apple) with verified HTTP-only server sessions
-- Supabase PostgreSQL through Prisma; the server is the only database access layer
-- Upstash Redis rate limits, OpenAI Tutor, Stripe, Paystack, and Razorpay (configure keys in `.env`)
+## Usage
 
-## Payment webhooks
+### Running Agents
+```bash
+# Agent 2 - Validate PQ JSON
+npm run agent:agent2 -- content/questions/example.json
 
-Configure provider webhooks at `/api/payments/webhook/stripe`, `/api/payments/webhook/paystack`, and `/api/payments/webhook/razorpay`. Premium access is activated only from verified payment events. Add the matching provider credentials and webhook secrets to the server environment before enabling checkout. Paystack signatures use its secret key; Stripe and Razorpay use their configured webhook secrets.
+# Agent 3 - Format question for student
+npm run agent:agent3 -- "Question text" "Subject" "Exam"
 
-## PWA
+# Agent 4 - Generate course outline
+npm run agent:agent4 -- "Course Name" "lesson1, lesson2, lesson3"
 
-The app manifest and service worker make Gnostiri installable and cache viewed `/study` pages for offline reading. Quiz submissions, sign-in, and checkout require a connection.
+# Orchestrate all
+npm run agent:orchestrate
+```
+
+### Development
+```bash
+npm run dev      # Start dev server
+npm run build    # Build production
+npm run lint     # Lint code
+```
+
+## Security
+
+- Agents cannot modify each other's work trees
+- `.env` files are gitignored
+- CI/CD requires GitHub token for commits
+
+## Adding Agents
+
+1. Create sandbox directory: `sandbox/agent-new/`
+2. Add Dockerfile, requirements.txt, src/main.py
+3. Add to package.json scripts
+4. Add to orchestrator.py AGENTS dict

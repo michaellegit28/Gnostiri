@@ -1,0 +1,103 @@
+{
+  "schema": "agent3.copyright.syllabus-gate.v1",
+  "agent": "agent3-pq-assistant",
+  "generatedAt": "2026-10-18",
+  "note": "Board → allowed master topics. Papers may only draw questions whose topicSlug appears here. Syllabus-strict gate enforced at paper assembly (build time).",
+  "gates": {
+    "za-nsc": {
+      "board": "NSC / Matric",
+      "country": "South Africa",
+      "syllabusSource": "Department of Basic Education (DBE) — National Senior Certificate curriculum",
+      "allowedTopicSlugs": [
+        "algebra-foundations",
+        "functions-and-graphs",
+        "calculus",
+        "probability",
+        "statistics",
+        "euclidean-geometry",
+        "analytical-geometry",
+        "trigonometry",
+        "measurement",
+        "finance-growth"
+      ],
+      "reviewStatus": "needs-human-review"
+    },
+    "tz-necta": {
+      "board": "NECTA (CSEE)",
+      "country": "Tanzania",
+      "syllabusSource": "NECTA — CSEE syllabus",
+      "allowedTopicSlugs": [
+        "algebra-foundations",
+        "functions-and-graphs",
+        "calculus",
+        "probability",
+        "statistics",
+        "euclidean-geometry",
+        "analytical-geometry",
+        "trigonometry",
+        "measurement",
+        "sets-and-logic"
+      ],
+      "reviewStatus": "needs-human-review"
+    },
+    "ng-jamb": {
+      "board": "JAMB (UTME)",
+      "country": "Nigeria",
+      "syllabusSource": "JAMB UTME syllabus",
+      "allowedTopicSlugs": [
+        "algebra-foundations",
+        "functions-and-graphs",
+        "calculus",
+        "probability",
+        "statistics",
+        "euclidean-geometry",
+        "analytical-geometry",
+        "trigonometry",
+        "measurement",
+        "matrices-and-determinants"
+      ],
+      "reviewStatus": "needs-human-review"
+    },
+    "ng-waec": {
+      "board": "WAEC",
+      "country": "Nigeria/West Africa",
+      "syllabusSource": "WAEC — WASSCE syllabus",
+      "allowedTopicSlugs": [
+        "algebra-foundations",
+        "functions-and-graphs",
+        "calculus",
+        "probability",
+        "statistics",
+        "euclidean-geometry",
+        "analytical-geometry",
+        "trigonometry",
+        "measurement",
+        "vectors",
+        "sets"
+      ],
+      "reviewStatus": "needs-human-review"
+    },
+    "ke-kned": {
+      "board": "KNEC (KCSE)",
+      "country": "Kenya",
+      "syllabusSource": "KNEC — KCSE syllabus",
+      "allowedTopicSlugs": [
+        "algebra-foundations",
+        "functions-and-graphs",
+        "calculus",
+        "probability",
+        "statistics",
+        "euclidean-geometry",
+        "analytical-geometry",
+        "trigonometry",
+        "matrices",
+        "vectors"
+      ],
+      "reviewStatus": "needs-human-review"
+    }
+  },
+  "defaultGate": {
+    "allowedTopicSlugs": [],
+    "condition": "No topics allowed until Agent 3 audit completes syllabus mapping."
+  }
+}

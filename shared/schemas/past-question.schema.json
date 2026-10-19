@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PastQuestion",
+  "type": "object",
+  "required": ["id", "coreId", "questionText", "options", "correctAnswer"],
+  "properties": {
+    "id": {"type": "string"},
+    "coreId": {"type": "string"},
+    "provenance": {"type": "string", "enum": ["official", "original"]},
+    "variant": {"type": "string", "enum": ["A", "B"]},
+    "track": {"type": "array", "items": {"type": "string"}},
+    "topicSlug": {"type": "string"},
+    "styleBoard": {"type": "string"},
+    "domain": {"type": "string"},
+    "type": {"type": "string", "enum": ["mcq", "essay"]},
+    "questionText": {"type": "string"},
+    "options": {"type": "array", "items": {"type": "string"}},
+    "correctAnswer": {"type": "string"},
+    "explanation": {"type": "string"},
+    "hint": {"type": "string"},
+    "difficulty": {"type": "string", "enum": ["easy", "medium", "hard"]},
+    "sourceExam": {"type": "string"},
+    "reviewStatus": {"type": "string"}
+  }
+}
