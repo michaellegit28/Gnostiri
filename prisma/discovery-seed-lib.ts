@@ -70,7 +70,7 @@ export async function seedDiscoveryContent(
         topicId,
         orderIndex: lesson.orderIndex,
         estimatedMinutes: lesson.estimatedMinutes,
-        content: lesson.content,
+        content: JSON.parse(JSON.stringify(lesson.content)),
       },
       create: {
         id: lesson.id,
@@ -79,7 +79,7 @@ export async function seedDiscoveryContent(
         topicId,
         orderIndex: lesson.orderIndex,
         estimatedMinutes: lesson.estimatedMinutes,
-        content: lesson.content,
+        content: JSON.parse(JSON.stringify(lesson.content)),
       },
     });
     lessons += 1;
