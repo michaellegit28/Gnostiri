@@ -36,15 +36,9 @@ function arg(flag, fallback) {
   return i === -1 ? fallback : process.argv[i + 1];
 }
 
-/** Stable, unique coreId per family instance. */
+/** Stable, unique coreId per family instance (hash of the full parameter set). */
 function coreIdFor(family, p) {
-  if (family.kind === "recall") {
-    return `${family.id}:r${(seedFrom(p.row.stemText) >>> 0).toString(36)}`;
-  }
-  const vals = Object.values(p)
-    .map((v) => String(v).replace(/[^0-9a-zA-Z]/g, ""))
-    .join("_");
-  return `${family.id}:${vals}`;
+  return `${family.id}:${(seedFrom(JSON.stringify(p)) >>> 0).toString(36)}`;
 }
 
 function normText(s) {
@@ -292,7 +286,29 @@ const PLAN = {
     bank: "content/questions/english.json",
     files: ["content/questions/english.json"],
     a4: [],
-    fill: [],
+    fill: [
+      "concord-subject-verb",
+      "question-tag",
+      "article-choice",
+      "pronoun-case",
+      "sentence-type",
+      "punctuation-join",
+      "reported-speech",
+      "noun-plurals",
+      "verb-past-tense",
+      "synonyms-nearest",
+      "antonyms-opposite",
+      "idioms-meaning",
+      "phrasal-verbs",
+      "preposition-collocation",
+      "oral-vowel-sounds",
+      "oral-stress",
+      "word-class-function",
+      "letter-format",
+      "summary-writing",
+      "oral-consonants",
+      "spelling-rules",
+    ],
   },
   economics: { bank: "content/questions/economics.json", files: [], a4: [], fill: [] },
   government: { bank: "content/questions/government.json", files: [], a4: [], fill: [] },
