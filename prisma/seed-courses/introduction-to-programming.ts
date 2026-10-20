@@ -609,6 +609,10 @@ function lesson3(): LessonContent {
         type: "paragraph",
         text: "The line name = input(...) does two jobs in one: it calls input, which collects a line of text from the keyboard, and it stores the result under name. The string concatenation in the second line joins the greeting, the typed name, and the exclamation mark into one string. If the user typed Ada, Python builds the single string Hello, Ada! and prints it.",
       },
+      {
+        type: "paragraph",
+        text: "Read the output block as a terminal transcript: the word Ada sits on the prompt line because the terminal echoes what you type, while the program itself writes only the prompt and the greeting. That distinction matters when you predict output — the program never writes the input back, it only stores it.",
+      },
 
       { type: "heading", level: 2, text: "Worked example 2: operator precedence" },
       {
@@ -1334,8 +1338,8 @@ function lesson6(): LessonContent {
       {
         type: "code",
         language: "python",
-        code: `# This is a syntax error — the colon is missing.\nfor i in range(3):\n    print(i)`,
-        output: "File \"<stdin>\", line 2\n    for i in range(3)\n                      ^\nSyntaxError: invalid syntax",
+        code: `# This is a syntax error — the colon is missing.\nfor i in range(3)\n    print(i)`,
+        output: "  File \"<stdin>\", line 2\n    for i in range(3)\n                     ^\nSyntaxError: expected ':'",
         caption: "The caret points at the missing colon. A syntax error means Python could not read the statement at all.",
       },
       {
@@ -2480,7 +2484,7 @@ function lesson11(): LessonContent {
       {
         type: "code",
         language: "python",
-        code: `try:\n    assert add(2, 3) == 6, "expected 6"\nexcept AssertionError as e:\n    print("caught:", e)`,
+        code: `def add(a, b):\n    return a + b\n\ntry:\n    assert add(2, 3) == 6, "expected 6"\nexcept AssertionError as e:\n    print("caught:", e)`,
         output: "caught: expected 6",
         caption: "add(2, 3) is 5, not 6, so the assert fails and raises AssertionError with the message we wrote.",
       },
