@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * FilterChips — a row of pill toggles. Controlled: the parent owns the value.
  * Two semantics, same visuals:

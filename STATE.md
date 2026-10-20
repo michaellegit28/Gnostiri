@@ -161,3 +161,26 @@ syllabus alignment, and every generated MCQ key.
   Question has no columns for it. Version B (all global tracks, incl. JAMB) is
   what ships; Version A needs the schema migration + NSC/NECTA transcription
   queue (A2, next round).
+
+## Integration fix session (2026-10-20, A1 — cont.)
+
+Root causes found and fixed:
+
+1. **JAMB questions invisible (the "same issue")** — the highschool pages resolve
+   topics by constructed id (`jamb-{subject}` / `jamb-{subject}-{topic}`); the
+   round-2 integration had mapped bank slugs onto master-syllabus topics, so all
+   6,000 sat OUTSIDE the jamb hierarchy (0 questions reachable on JAMB pages).
+   Fixed: repoint-raw/IN-list migration placed all 6,000 into the hierarchy
+   (existing jamb children matched by concept, new children created for
+   unmatched families, monolithic subjects got jamb-{subject}-full-syllabus);
+   4 orphan topics removed. tools/pq/integrate-banks.mjs rewritten (v2) to
+   encode the hierarchy so future bank runs seed correctly.
+2. **University course pages broken (the "same issue")** —
+   src/app/university/[course]/page.tsx rendered <Link onClick> in a server
+   component ("Event handlers cannot be passed to Client Component props"),
+   which aborted the course page render after the header (digest error, no
+   module/lesson nav anywhere). Fixed by removing the handler; FilterChips.tsx
+   marked "use client" to match its actual semantics. Verified locally:
+   0 digest errors, modules render, lesson/concepts pages 200.
+3. Lesson: next build does NOT exercise force-dynamic pages — runtime smoke
+   tests against the deployed URL are now part of the A1 integration checklist.

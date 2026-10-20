@@ -251,7 +251,6 @@ export default async function CoursePage({
                   <Link
                     href={`/university/${course.slug}/concepts`}
                     className="rounded text-xs font-medium text-gold underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                    onClick={(e) => e.stopPropagation()}
                   >
                     Full map →
                   </Link>
