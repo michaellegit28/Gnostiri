@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Brain, ChevronDown, CheckCircle2, Circle, Lock } from "lucide-react";
+import { Brain, ChevronDown, CheckCircle2, Circle } from "lucide-react";
 
 interface ConceptLite {
   id: string;
@@ -123,7 +123,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
                           ) : isLast ? (
                             <CheckCircle2 className="w-5 h-5 text-gold" />
                           ) : (
-                            <Lock className="w-5 h-5 text-slate-600" />
+                            <Circle className="w-5 h-5 text-slate-600" />
                           )}
                         </span>
                         <div className="min-w-0 flex-1">

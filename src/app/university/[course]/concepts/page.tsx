@@ -70,8 +70,9 @@ export default async function ConceptMapPage({ params }: { params: { course: str
         <ConceptSpine concepts={flat} modules={course.modules} />
 
         <p className="text-xs text-slate-600 leading-relaxed border-t border-slate-800/80 pt-6">
-          The concept map is the planning backbone for the spaced-repetition scheduler and the
-          competency transcript — both arrive with the pedagogy engine in a later phase.
+          The concept map is the planning backbone behind the spaced-repetition scheduler and the
+          competency transcript: lessons are taught in spine order, and a concept can be scheduled
+          only once its foundations stand.
         </p>
       </div>
     </main>
