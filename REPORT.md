@@ -118,3 +118,148 @@ both — the seed file was untracked and survived, and I re-applied the type. No
 work was lost. Flagging because it means uncommitted shared-file edits in this
 checkout are not safe from peer agents; wiring this seed in via a commit would
 protect it.
+
+---
+
+# Agent 3 — Discovery Builder (branch `agent-3/discovery-r1`)
+
+Two commits. `node_modules` was re-linked from the main clone after the
+interrupted session's fresh install; **no seed was run and no database was
+touched** — the seeder is authored only.
+
+## 1. Block renderer extension — commit `73ce147`
+
+`src/app/discovery/[topic]/DiscoveryReader.tsx` and `src/app/discovery/[topic]/page.tsx`.
+
+### Coverage — all 10 `LessonBlock` types
+
+| Type | Renderer | Notes |
+|---|---|---|
+| `heading` | inline | `level` 2 → `<h2>` slate-100 serif; 3 → `<h3>` gold |
+| `paragraph` | inline | `font-reading`, 1.8 leading |
+| `definition` | inline | gold "Key idea" card, bold term + text |
+| `example` | inline | violet left-rule "See it in action" |
+| `callout` | inline | **now iconified** — `Info` (sky) for `info`, `AlertTriangle` (rose) for `warning`, each with a labelled heading |
+| `table` | inline | overflow-x scroll, `thead`/`tbody` divide |
+| `code` | `CodeCard` | language chip, `caption`, `<pre><code>`, separate emerald "Output" panel |
+| `question` | `QuestionCard` | hidden until "Reveal the answer" is pressed; then answer + `explanation`; `aria-expanded`/`aria-controls` on a `useId` region |
+| `mcq` | `McqCard` | options are selectable buttons; on pick, per-option correct/picked tone, `role="status"` live region announces "Correct —" / "Not quite —" plus the key letter and explanation |
+| `diagram` | inline | dashed placeholder with `diagramId` + always-rendered `caption` |
+
+### Accessibility
+
+- `QuestionCard` reveal is a real disclosure: `aria-expanded` tracks state and
+  `aria-controls` points at the answer region (id from `useId`).
+- `McqCard` options sit in a `role="group"` labelled with the stem, each button
+  carries `aria-pressed`, and the post-pick feedback is a polite live region so
+  a screen reader hears the result without focus moving.
+- All interactive targets keep the 44px minimum hit height used elsewhere on the
+  discovery pages.
+
+### Robustness
+
+- `Block`'s `default` branch is now an exhaustiveness guard
+  (`const exhaustive: never = block`). If a type is added to `LessonBlock` the
+  build fails until a case handles it — this is what stops the renderer gap
+  described in the section above from recurring.
+- `MCQ_LETTERS` was replaced by `letterFor(index)` (`String.fromCharCode`), so
+  an mcq with more than four options no longer silently loses its last options.
+- `correctIndex` is clamped into range before use, so a legacy row with an
+  out-of-range key shows a letter rather than crashing.
+- `page.tsx`'s inline 6-type allowlist was extracted to
+  `toLessonBlocks()` and extended to all 10 types — the filter itself is
+  unchanged in spirit, still dropping unknown shapes from legacy rows.
+
+`npx tsc --noEmit`: 0 errors. `next lint` on both changed files: clean.
+
+## 2. Discovery seed — commit `4dd5445`
+
+`prisma/seed-courses/discovery-curiosity.ts` (new, ~1400 lines).
+
+### Field
+
+| Row | Id | Notes |
+|---|---|---|
+| Field topic | `discovery-curiosity` | title "Curiosity Trails", slug `curiosity-trails`, `parentId: null`, `orderIndex: 5`, `isPublished: true` |
+
+`orderIndex 5` lands it last: the five generic extras roots occupy 0–4.
+
+### Trails
+
+| Row | Id | Parent | Order |
+|---|---|---|---|
+| Trail | `discovery-curiosity-scale` | `discovery-curiosity` | 0 |
+| Trail | `discovery-curiosity-sky` | `discovery-curiosity` | 1 |
+
+### Lessons — 8, `orderIndex` carries the depth level
+
+| Id | Depth | Title |
+|---|---|---|
+| `discovery-curiosity-scale-lesson` | 0 Understand | How small is small? |
+| `discovery-curiosity-scale-lesson-explore` | 1 Explore | The planet you are standing on |
+| `discovery-curiosity-scale-lesson-deeper` | 2 Go Deeper | Stars and the spaces between |
+| `discovery-curiosity-scale-lesson-research` | 3 Research | Galaxies, light-years, and looking back in time |
+| `discovery-curiosity-sky-lesson` | 0 Understand | What light is made of |
+| `discovery-curiosity-sky-lesson-explore` | 1 Explore | The air between us and space |
+| `discovery-curiosity-sky-lesson-deeper` | 2 Go Deeper | Why blue wins, and why not violet |
+| `discovery-curiosity-sky-lesson-research` | 3 Research | Sunsets, red moons, and other skies |
+
+**Every one of the 8 lessons contains all 10 block types**, so each depth
+exercises every renderer from commit `73ce147`.
+
+### Quiz questions — 6 (extras domain, `type: "mcq"`)
+
+`discovery-curiosity-scale-q1`, `-q2`, `-q3`;
+`discovery-curiosity-sky-q1`, `-q2`, `-q3`.
+Three per trail, easy/medium/hard. 18 inline `mcq` blocks are also carried
+inside the lesson content (2–3 per depth).
+
+### Totals
+
+1 field + 2 trails + **8 published lessons** + **6 quiz questions**.
+
+### Conventions followed from `introduction-to-programming.ts`
+
+- Exported `seedDiscoveryCuriosity()` plus the `process.argv[1]` CLI guard.
+- Every write is an `upsert` with identical `update` and `create` payloads on a
+  stable id, so re-running refreshes in place and never duplicates.
+- No hardcoded `id` outside the seed constants; `content` cast via `as never`
+  because `Lesson.content` is `Json`.
+- Answer-key drift is a `throw`, not a silent overwrite —
+  `balancedContent`/`rotatedOptions` prove the key survives rotation before
+  writing.
+
+### Factual verification
+
+A temporary harness (deleted before commit) ran **189 checks, 0 failures**:
+
+- **9 Python snippets executed against `python3`**; every claimed `output`
+  matched byte for byte. The light-travel-time, Rayleigh 1/λ⁴, air-mass
+  (Kasten–Young) and light-year derivations are all computed, not typed.
+- **All 18 inline `mcq` keys** confirmed to point at the true statement.
+- **All 6 quiz keys** confirmed present in their own options.
+- Structural checks on every block: heading `level ∈ {2,3}`, callout variants,
+  table row widths equal to header counts, `correctIndex` in range, `diagram`
+  ids present, block counts.
+
+Answer-position spread: stored positions come out **A5 B9 C4 D6** via a
+deterministic FNV-1a rotation (the authoring bias over the 18 inline MCQs was
+A2 B10 C6 D0). No explanation in the file names an option letter, so rotation
+cannot break a key — and `QuizClient` matches on the trimmed, case-folded
+option *text*, not an index, which is why this is safe for the question rows
+too.
+
+### ⚠️ Human-review flags
+
+- `needsVerification: true` on the field topic and **both trail topics**. The
+  seeder never marks a row verified.
+- **Note for A1:** `Lesson` and `Question` have **no `reviewStatus` column** in
+  `prisma/schema.prisma` — only `CourseLesson` and `AssessmentItem` do (added
+  in the university lane above). So the topic-level `needsVerification` flag is
+  the single human-review marker for the extras domain, and it is deliberately
+  set while `isPublished` is true: the trail is browsable now, and review is
+  tracked separately. **If you want per-lesson/per-question review status in
+  extras, that is a schema migration** — not something this seeder can express.
+- `lastAuditedDate` is deliberately left unset on the discovery rows: there has
+  been no audit to date it.
+
