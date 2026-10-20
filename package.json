@@ -12,7 +12,9 @@
     "test:assessment": "node --test tests/assessment.test.mjs",
     "test:lesson-python": "node --test tests/lesson-python.test.mjs",
     "test:assessment-seed": "node --test tests/assessment-seed.test.mjs",
+    "test:mbbs-spine": "node --test tests/mbbs-spine.test.mjs",
     "test:statistics-python": "node --test tests/statistics-python.test.mjs",
+    "seed:mbbs": "ts-node prisma/seed-courses/mbbs/index.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {

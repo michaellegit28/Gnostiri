@@ -4,208 +4,299 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { hasPremiumAccess } from "@/lib/entitlements";
 import { UNIVERSITY_OPEN } from "@/lib/access";
-import { LessonContent } from "@/types/lesson";
-import CourseCompletionButton from "@/components/CourseCompletionButton";
+import { ArrowLeft, ArrowRight, Brain, Clock, Sparkles } from "lucide-react";
+import ModuleLessonNav, { type NavLesson, type NavModule } from "@/components/university/ModuleLessonNav";
+import ProgressOverview from "@/components/university/ProgressOverview";
 import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
-import ConceptSpine from "@/components/university/ConceptSpine";
-import LessonRenderer from "@/components/university/LessonRenderer";
-import { ArrowLeft, BookOpen, Brain, Clock, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
-export default async function CoursePage({ params, searchParams }: { params: { course: string }; searchParams?: { lite?: string } }) {
+/**
+ * Course overview — one page, three things: what the course is, where the
+ * learner is in it, and how to get to the next lesson.
+ *
+ * The module → lesson spine is the primary navigation (ModuleLessonNav), the
+ * concept map is a secondary view of how the subject connects, and the
+ * assessment routes sit in one compact row at the foot.
+ */
+export default async function CoursePage({
+  params,
+  searchParams,
+}: {
+  params: { course: string };
+  searchParams?: { lite?: string };
+}) {
   const lite = searchParams?.lite === "1";
   const course = await prisma.course.findFirst({
     where: { slug: params.course, domain: "university", isPublished: true },
     include: {
-      lessons: { orderBy: { orderIndex: "asc" } },
-      modules: { orderBy: { orderIndex: "asc" }, include: { concepts: { orderBy: { orderIndex: "asc" } } } },
-      concepts: { orderBy: { orderIndex: "asc" } },
+      lessons: {
+        orderBy: { orderIndex: "asc" },
+        select: { id: true, title: true, orderIndex: true, estimatedMinutes: true, needsCheck: true },
+      },
+      modules: {
+        orderBy: { orderIndex: "asc" },
+        include: {
+          concepts: {
+            orderBy: { orderIndex: "asc" },
+            include: { prerequisites: { select: { prerequisiteId: true } } },
+          },
+        },
+      },
+      concepts: {
+        orderBy: { orderIndex: "asc" },
+        include: { prerequisites: { select: { prerequisiteId: true } } },
+      },
       clinicalCases: { where: { isPublished: true }, orderBy: { orderIndex: "asc" } },
+      programme: { select: { name: true, degreeAwarded: true, slug: true } },
       faculty: { select: { name: true, accent: true } },
-      programme: { select: { name: true, degreeAwarded: true } },
     },
   });
   if (!course) notFound();
+
   const user = await getCurrentUser();
   const premium = user ? await hasPremiumAccess(user.id) : UNIVERSITY_OPEN;
 
   const totalMinutes = course.lessons.reduce((s, l) => s + l.estimatedMinutes, 0);
-  const flatConcepts = course.concepts.length > 0 ? course.concepts : course.modules.flatMap((m) => m.concepts);
+  const authoredCount = course.lessons.filter((l) => !l.needsCheck).length;
+  const flatConcepts =
+    course.concepts.length > 0
+      ? course.concepts
+      : course.modules.flatMap((m) => m.concepts);
+  const edgeCount = flatConcepts.reduce((s, c) => s + c.prerequisites.length, 0);
+
+  // Lessons are not attached to modules directly — the seed aligns each lesson
+  // to the concept at the same orderIndex, and the concept carries its module.
+  // That alignment is what groups the module → lesson spine here.
+  const lessonModuleId = new Map<string, string>();
+  for (const concept of flatConcepts) {
+    if (concept.moduleId) lessonModuleId.set(`order-${concept.orderIndex}`, concept.moduleId);
+  }
+  const moduleIdOfLesson = (lesson: { orderIndex: number }) => lessonModuleId.get(`order-${lesson.orderIndex}`) ?? null;
+
+  const navLessons: NavLesson[] = course.lessons.map((l) => ({
+    id: l.id,
+    title: l.title,
+    orderIndex: l.orderIndex,
+    estimatedMinutes: l.estimatedMinutes,
+    needsCheck: l.needsCheck,
+  }));
+
+  const navModules: NavModule[] = course.modules.map((m) => ({
+    id: m.id,
+    title: m.title,
+    orderIndex: m.orderIndex,
+    lessons: navLessons.filter((l) => moduleIdOfLesson(l) === m.id),
+  }));
+  const orphanLessons: NavLesson[] = navLessons.filter((l) => moduleIdOfLesson(l) == null);
+
+  // Progress continues where it stopped: the first lesson not yet complete.
+  let completedLessonIds: string[] = [];
+  if (user) {
+    const rows = await prisma.progress.findMany({
+      where: { userId: user.id, domain: "university", entityType: "courseLesson", status: "completed" },
+      select: { entityId: true },
+    });
+    const done = new Set(rows.map((r) => r.entityId));
+    completedLessonIds = course.lessons.filter((l) => done.has(l.id)).map((l) => l.id);
+  }
+  const doneSet = new Set(completedLessonIds);
+  const nextLesson = course.lessons.find((l) => !doneSet.has(l.id)) ?? course.lessons[0];
+  const nextModule = nextLesson ? navModules.find((m) => m.lessons.some((l) => l.id === nextLesson.id)) : undefined;
+
+  const [catalogueLessons, catalogueCourses] = await Promise.all([
+    prisma.courseLesson.count({
+      where: { course: { domain: "university", isPublished: true } },
+    }),
+    prisma.course.count({ where: { domain: "university", isPublished: true } }),
+  ]);
 
   return (
     <main className="min-h-screen bg-transparent text-slate-100">
-      <div className="mx-auto max-w-5xl px-6 py-10 md:py-14 space-y-10">
+      <div className="mx-auto max-w-6xl px-6 py-10 md:py-14 space-y-10">
         <LiteModeBanner />
 
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/university" className="hover:text-gold transition-colors inline-flex items-center gap-1.5">
-            <ArrowLeft className="w-4 h-4" /> University
+        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-400">
+          <Link
+            href="/university"
+            className="inline-flex items-center gap-1.5 rounded transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden /> University
           </Link>
-          <span className="text-slate-600">/</span>
-          <span className="text-slate-300 truncate max-w-[55vw]">{course.title}</span>
+          <span className="text-slate-600" aria-hidden>/</span>
+          <span className="truncate text-slate-300">{course.title}</span>
         </nav>
 
-        {/* Header */}
+        {/* Course header */}
         <header className="relative overflow-hidden rounded-3xl border border-white/10">
           <div className="absolute inset-0 bg-[radial-gradient(110%_100%_at_90%_0%,rgba(212,175,55,0.12)_0%,rgba(20,27,44,0.9)_45%,#060814_100%)]" />
-          <div className="relative px-7 py-10 md:px-10 md:py-12 space-y-5">
+          <div className="relative space-y-5 px-6 py-9 md:px-10 md:py-11">
             <div className="flex flex-wrap items-center gap-2">
               {course.code && (
-                <span className="font-mono text-xs tracking-[0.18em] text-gold px-2.5 py-1 rounded-md border border-gold/25 bg-gold/10">
+                <span className="rounded-md border border-gold/25 bg-gold/10 px-2.5 py-1 font-mono text-xs tracking-[0.18em] text-gold">
                   {course.code}
                 </span>
               )}
+              {course.department && (
+                <span className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300">
+                  {course.department}
+                </span>
+              )}
               {course.level != null && (
-                <span className="text-[11px] font-medium text-slate-300 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/50">
+                <span className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300">
                   {course.level} level
                 </span>
               )}
               {course.credits != null && (
-                <span className="text-[11px] font-medium text-slate-300 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/50">
+                <span className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-slate-300">
                   {course.credits} credits
                 </span>
               )}
               {course.semester && (
-                <span className="text-[11px] font-medium capitalize text-slate-300 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/50">
+                <span className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium capitalize text-slate-300">
                   {course.semester} semester
                 </span>
               )}
+              <CurriculumAlignmentWidget topicSlug={course.slug} lite={lite} />
+            </div>
+
+            <div className="space-y-3">
               {course.programme && (
-                <span className="text-[11px] font-medium text-slate-300 px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700/50">
+                <p className="text-sm text-teal-300">
                   {course.programme.degreeAwarded} · {course.programme.name}
-                </span>
+                </p>
+              )}
+              <h1 className="font-serif text-3xl font-bold tracking-tight md:text-5xl">{course.title}</h1>
+              {course.description && (
+                <p className="max-w-3xl text-base leading-relaxed text-slate-400">{course.description}</p>
               )}
             </div>
-            <div className="flex items-start justify-between gap-4">
-              <div className="space-y-3">
-                <p className="text-teal-400 text-sm">{course.department}</p>
-                <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight">
-                  {course.title}
-                </h1>
-                {course.description && (
-                  <p className="text-slate-400 text-base max-w-2xl leading-relaxed">
-                    {course.description}
-                  </p>
-                )}
+
+            <dl className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-400">
+              <div className="flex items-center gap-1.5">
+                <dt className="sr-only">Lessons</dt>
+                <Clock className="h-3.5 w-3.5" aria-hidden />
+                <dd>
+                  {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"} · ~
+                  {Math.max(1, Math.round(totalMinutes / 60))}h
+                </dd>
               </div>
-              <div className="shrink-0 hidden sm:block">
-                <CurriculumAlignmentWidget topicSlug={course.slug} lite={lite} />
+              <div className="flex items-center gap-1.5">
+                <dt className="sr-only">Authored lessons</dt>
+                <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                <dd>
+                  {authoredCount} fully authored
+                  {authoredCount < course.lessons.length && (
+                    <span className="text-amber-400/80"> · {course.lessons.length - authoredCount} in preparation</span>
+                  )}
+                </dd>
               </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-5 pt-2 text-xs text-slate-400">
-              <span className="flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5" /> {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
-              </span>
               {flatConcepts.length > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Brain className="w-3.5 h-3.5" /> {flatConcepts.length} concepts
-                </span>
-              )}
-              {totalMinutes > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5" /> ~{Math.max(1, Math.round(totalMinutes / 60))}h
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <dt className="sr-only">Concepts</dt>
+                  <Brain className="h-3.5 w-3.5" aria-hidden />
+                  <dd>
+                    {flatConcepts.length} concept{flatConcepts.length === 1 ? "" : "s"} · {edgeCount} prerequisite links
+                  </dd>
+                </div>
               )}
               {course.clinicalCases.length > 0 && (
-                <span className="flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" /> {course.clinicalCases.length} clinical case{course.clinicalCases.length === 1 ? "" : "s"}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <dt className="sr-only">Clinical cases</dt>
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                  <dd>
+                    {course.clinicalCases.length} clinical case{course.clinicalCases.length === 1 ? "" : "s"}
+                  </dd>
+                </div>
               )}
-            </div>
+            </dl>
+
+            {nextLesson && (
+              <div className="pt-2">
+                <Link
+                  href={`/university/${course.slug}/lessons/${nextLesson.id}`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                >
+                  {doneSet.size > 0 ? "Continue where you left off" : "Start the first lesson"}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+                <p className="mt-2 text-xs text-slate-500">
+                  {nextModule ? `${nextModule.title} · ` : ""}{nextLesson.title} · ~{nextLesson.estimatedMinutes} min
+                </p>
+              </div>
+            )}
           </div>
         </header>
 
-        {/* Concept spine — the map of how knowledge connects */}
-        {flatConcepts.length > 0 && <ConceptSpine concepts={flatConcepts} modules={course.modules} lite={lite} />}
+        {/* Progress + contents, side by side on wide screens */}
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+          <section className="space-y-6">
+            <ProgressOverview
+              courseId={course.id}
+              lessonCount={course.lessons.length}
+              totalUniversityLessons={catalogueLessons}
+              totalUniversityCourses={catalogueCourses}
+              userId={user?.id ?? null}
+            />
+            {flatConcepts.length > 0 && (
+              <details className="group rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+                <summary className="flex cursor-pointer items-center justify-between gap-3 rounded text-sm font-semibold text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+                  <span className="flex items-center gap-2">
+                    <Brain className="h-4 w-4 text-gold" aria-hidden />
+                    Concept spine
+                  </span>
+                  <Link
+                    href={`/university/${course.slug}/concepts`}
+                    className="rounded text-xs font-medium text-gold underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Full map →
+                  </Link>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-slate-400">
+                  {flatConcepts.length} connected concepts, held together by {edgeCount} prerequisite
+                  links. The spine is the order the lessons are taught in and the map behind the
+                  spaced-repetition scheduler.
+                </p>
+              </details>
+            )}
+          </section>
 
-        {/* Lessons */}
-        <section className="space-y-5">
-          <h2 className="font-serif text-2xl font-bold">Lessons</h2>
-          <div className="space-y-4">
-            {course.lessons.map((lesson, index) => {
-              const locked = !premium && index > 0;
-              const content = lesson.content as unknown as LessonContent;
-              return (
-                <article key={lesson.id} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 md:p-7">
-                  <div className="flex items-center justify-between gap-3">
-                    <Link
-                      href={`/university/${course.slug}/lessons/${lesson.id}`}
-                      className="text-lg md:text-xl font-semibold hover:text-gold transition-colors"
-                    >
-                      {lesson.title}
-                      {locked && <span className="ml-2 text-xs text-gold align-middle">Premium</span>}
-                    </Link>
-                    <span className="text-[11px] text-slate-500 shrink-0">~{lesson.estimatedMinutes} min</span>
-                  </div>
-                  {locked ? (
-                    <div className="mt-4 rounded-lg bg-slate-950 p-5 text-slate-400 blur-[2px] select-none">
-                      {lesson.title} includes guided examples and practice steps.
-                    </div>
-                  ) : (
-                    <div className="mt-4">
-                      <LessonRenderer content={content} />
-                    </div>
-                  )}
-                  <div className="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
-                    <CourseCompletionButton courseId={course.id} lessonId={lesson.id} locked={locked} />
-                    <Link
-                      href={`/university/${course.slug}/lessons/${lesson.id}`}
-                      className="text-sm font-medium text-[#D4AF37] hover:text-amber-300 transition-colors"
-                    >
-                      Open study page →
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
+          <ModuleLessonNav
+            courseSlug={course.slug}
+            modules={navModules}
+            orphanLessons={orphanLessons}
+            completedLessonIds={completedLessonIds}
+            defaultOpenModuleId={nextModule?.id ?? null}
+          />
+        </div>
 
-        <div className="flex flex-wrap gap-3">
+        {/* Assessment routes — one compact row */}
+        <nav aria-label="Assessments" className="flex flex-wrap gap-3 border-t border-white/5 pt-8">
           <Link
             href={`/university/${course.slug}/quiz`}
-            className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-teal-500 px-6 py-3 font-semibold text-slate-950 text-sm hover:bg-teal-400 transition-colors"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-teal-500/40 bg-teal-500/10 px-5 py-2.5 text-sm font-semibold text-teal-200 transition-colors hover:bg-teal-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
           >
             Course quiz
           </Link>
-          {flatConcepts.length > 0 && (
+          <Link
+            href={`/university/${course.slug}/concepts`}
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          >
+            Concept map
+          </Link>
+          {!premium && (
             <Link
-              href={`/university/${course.slug}/concepts`}
-              className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-gold/60 hover:text-white transition-colors"
+              href="/pricing"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
-              <Brain className="w-4 h-4 mr-2" /> Concept map
+              Premium — full access
             </Link>
           )}
-          <Link
-            href={`/university/${course.slug}/exams`}
-            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-gold/50 px-6 py-3 font-semibold text-gold text-sm hover:bg-gold/10 transition-colors"
-          >
-            Exam hall
-          </Link>
-          <Link
-            href="/university/transcript"
-            className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-gold/60 hover:text-white transition-colors"
-          >
-            Transcript
-          </Link>
-        </div>
-
-        {!premium && (
-          <aside className="rounded-2xl border border-gold/30 bg-gold/[0.07] p-6">
-            <strong className="text-amber-300">Unlock the full course</strong>
-            <p className="text-slate-300 mt-1 text-sm">
-              Premium unlocks every lesson, the full concept map, quizzes, certificates, and unlimited AI Tutor.
-            </p>
-            <Link href="/pricing" className="inline-flex mt-3 rounded-lg bg-gold px-4 py-2 font-semibold text-slate-950 text-sm">
-              View plans
-            </Link>
-          </aside>
-        )}
+        </nav>
 
         <AlignmentDisclaimer />
       </div>
