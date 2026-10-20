@@ -95,8 +95,15 @@ for (const rel of targets) {
   const mix = {};
 
   rows.forEach((q, i) => {
+    const isTheory = q.type === "theory";
     for (const k of REQUIRED) {
+      // Theory rows carry modelAnswer/markingPoints in place of options/explanation
+      // (matching nsc-official.batch1.json and the seeded theory items).
+      if (isTheory && (k === "explanation" || k === "options")) continue;
       if (q[k] === undefined || q[k] === null || q[k] === "") errors.push(`${where(i)} (${q.id ?? "?"}): missing field ${k}`);
+    }
+    if (isTheory && !(typeof q.modelAnswer === "string" && q.modelAnswer.trim())) {
+      errors.push(`${where(i)}: theory rows need a modelAnswer`);
     }
     if (q.reviewStatus !== "needs-human-review") {
       errors.push(`${where(i)}: reviewStatus must be needs-human-review, got "${q.reviewStatus}"`);

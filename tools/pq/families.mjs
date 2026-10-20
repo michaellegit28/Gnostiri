@@ -29,65 +29,10 @@ import { families as accountingFamilies } from "./families-accounting.mjs";
 import { families as geographyFamilies } from "./families-geography.mjs";
 import { families as agricultureFamilies } from "./families-agriculture.mjs";
 import { families as literatureFamilies } from "./families-literature.mjs";
+export { recallFamily, parseNum, pool3 } from "./families-support.mjs";
 
 /** "1 metre" not "1 metres" — the area family prints option labels. */
 const unit = (n) => (n === 1 ? "metre" : "metres");
-
-/**
- * Recall family factory — curated knowledge tables (non-computational subjects:
- * biology facts, English lexis, government, literature...).
- *
- * A recall item cannot re-derive its answer arithmetically the way a
- * computational family does, so the independent check is a SECOND, separately
- * authored answer copy (proofKey): the generator only ever sees `key` while the
- * verifier compares against `proofKey`. Any disagreement between the two drops
- * the item — a hallucinated or inconsistent key can never ship. Structural
- * guarantees (exactly 3 distinct distractors, never the key, non-empty
- * explanation) are enforced at family-build time, not at generation time.
- *
- * rows: [stemText, key, [distractor, distractor, distractor], explanation, proofKey]
- */
-export function recallFamily({ id, topicSlug, label, hint, rows }) {
-  const built = [];
-  for (const row of rows) {
-    if (!Array.isArray(row) || row.length < 5) continue;
-    const [stemText, key, ds, expl, proofKey] = row;
-    const distractors = [...new Set(ds ?? [])];
-    if (typeof stemText !== "string" || !stemText.trim()) continue;
-    if (typeof key !== "string" || !key.trim()) continue;
-    if (typeof expl !== "string" || !expl.trim()) continue;
-    if (distractors.length !== 3 || distractors.includes(key)) continue;
-    built.push({ stemText, key, distractors, expl, proofKey });
-  }
-  return {
-    id,
-    topicSlug,
-    label,
-    kind: "recall",
-    rowCount: built.length,
-    params(r) {
-      return { row: pick(r, built) };
-    },
-    answer(p) {
-      return p.row.key;
-    },
-    stem(p) {
-      return p.row.stemText;
-    },
-    distractors(p) {
-      return p.row.distractors;
-    },
-    explanation(p) {
-      return p.row.expl;
-    },
-    hint: () => hint ?? "",
-    verify(p, chosen) {
-      // Independent re-derivation: the answer must match the separately
-      // authored proof copy, and must never be one of the distractors.
-      return chosen === p.row.proofKey && !p.row.distractors.includes(chosen);
-    },
-  };
-}
 
 /** "solve ax + b = cx + d" — verified by substituting x back into both sides. */
 export const linearFamily = {
