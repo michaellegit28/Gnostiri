@@ -138,3 +138,11 @@ with no human reading the text. All rows carry reviewStatus
 "needs-human-review" — nothing is marked "verified". Human review queue:
 MBBS module-1 lessons, 224 needsCheck placeholders, literature-in-english
 syllabus alignment, and every generated MCQ key.
+
+## Session log (2026-10-20, A1)
+
+- Round 2 complete and pushed to main: 12 flat JAMB banks (6,000 MCQs, machine-verified keys, all needs-human-review), 9-subject MBBS spine + university UX rebuild, physics-first discovery (7 trails × 4 depths, typed theory prompts, no quizzes).
+- Production DB: master-statistics-probability-q2 IQR ambiguity patched (stem states exclusive convention, key unchanged). All seeds re-run — counts in STATE.md above.
+- Discovery legacy quiz cleanup: 12 leftover `extras`/`disco-*` quiz Question rows deleted per owner directive ("no quiz in discovery"). Fresh extras quiz rows: 0.
+- Known gap for next round: Version A (official ZA/TZ) counterparts — 0 of 6,000 JAMB coreIds have an official transcription yet; NSC/NECTA transcription queue is A2's next lane.
+- Production DB is on the Supabase transaction pooler (port 6543) — all scripted DB access must use `?pgbouncer=true&connection_limit=1` on DATABASE_URL.
