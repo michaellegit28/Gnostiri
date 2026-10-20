@@ -407,7 +407,24 @@ const PLAN = {
       "settlement-population",
     ],
   },
-  "agricultural-science": { bank: "content/questions/agricultural-science.json", files: [], a4: [], fill: [] },
+  "agricultural-science": {
+    bank: "content/questions/agricultural-science.json",
+    files: [],
+    a4: [],
+    fill: [
+      "percentage-germination",
+      "stocking-rate",
+      "feed-ration-percentage",
+      "plant-population",
+      "dose-calculation",
+      "land-area-rectangle",
+      "soil-science",
+      "crop-production",
+      "pests-and-diseases",
+      "livestock-husbandry",
+      "agricultural-economics",
+    ],
+  },
   "literature-in-english": { bank: "content/questions/literature-in-english.json", files: [], a4: [], fill: [] },
 };
 
