@@ -425,7 +425,25 @@ const PLAN = {
       "agricultural-economics",
     ],
   },
-  "literature-in-english": { bank: "content/questions/literature-in-english.json", files: [], a4: [], fill: [] },
+  "literature-in-english": {
+    bank: "content/questions/literature-in-english.json",
+    files: [],
+    a4: [],
+    fill: [
+      "device-in-quoted-line",
+      "literary-genres",
+      "novel-elements",
+      "drama-elements",
+      "poetry-forms",
+      "figures-of-speech",
+      "oral-literature",
+      "literary-terms",
+      "african-literature",
+      "poem-analysis",
+      "registers-and-style",
+      "literary-movements",
+    ],
+  },
 };
 
 /** Per-item content patches applied at migration (documented in the report). */
