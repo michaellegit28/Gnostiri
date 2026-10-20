@@ -17,9 +17,11 @@ const prisma = new PrismaClient();
  * lesson ids course-programming-lesson-1..12, so re-running updates content
  * in place and never duplicates rows.
  *
- * Governance: every lesson ships with reviewStatus "needs-human-review" and
- * needsCheck true until a human author signs it off. Nothing here is ever
- * marked "verified" by the seeder.
+ * Governance: every row ships with reviewStatus "needs-human-review" — nothing
+ * is ever marked "verified" by the seeder. needsCheck is false for all 12
+ * lessons and all 12 SBA items because their content is fully authored and
+ * every code output is machine-verified (tests/lesson-python.test.mjs); the
+ * rows still await a human read before reviewStatus graduates.
  */
 
 const COURSE_SLUG = "introduction-to-programming";
@@ -70,9 +72,9 @@ const LESSON_1: LessonSeed = {
   content: lesson1(),
 };
 
-// Placeholder lessons 2-12. The concept spine, prerequisite edges and SBA
-// items are real and complete so the course is structurally sound; only the
-// long-form content blocks are pending authoring. needsCheck marks them.
+// Lessons 2-12 — fully authored in the same format as lesson 1 (see the
+// lessonN() functions below). The concept spine, prerequisite edges and SBA
+// items are real and complete so the course is structurally sound.
 const LESSONS_2_TO_12: LessonSeed[] = [
   { id: `${COURSE_ID}-lesson-2`, title: "Variables & types", module: 1, estimatedMinutes: 30, concept: { title: "Variables and types", slug: "variables-and-types", blooms: "understand", minutes: 30, prereq: ["what-is-a-program"] }, content: lesson2() },
   { id: `${COURSE_ID}-lesson-3`, title: "Input, output & operators", module: 1, estimatedMinutes: 30, concept: { title: "Input, output and operators", slug: "input-output-operators", blooms: "apply", minutes: 30, prereq: ["variables-and-types"] }, content: lesson3() },
@@ -88,22 +90,6 @@ const LESSONS_2_TO_12: LessonSeed[] = [
 ];
 
 const ALL_LESSONS = [LESSON_1, ...LESSONS_2_TO_12];
-
-// ---------------------------------------------------------------------------
-// Placeholder content for lessons 2-12 (real content authored after review).
-// ---------------------------------------------------------------------------
-function pending(n: number): LessonContent {
-  return {
-    blocks: [
-      { type: "heading", level: 2, text: `Lesson ${n}` },
-      {
-        type: "callout",
-        variant: "info",
-        text: "This lesson's full content is awaiting authoring. The concept, prerequisite edges and its assessment item are already in place, so the course spine is complete and the exam builder will include this concept.",
-      },
-    ],
-  };
-}
 
 // ---------------------------------------------------------------------------
 // LESSON 1 content — original writing, all code verified runnable (Python 3).
@@ -2662,12 +2648,17 @@ function lesson12(): LessonContent {
       // --- Big idea ---
       { type: "heading", level: 2, text: "The big idea" },
       {
+        type: "definition",
+        term: "Capstone project",
+        text: "A capstone is a final project that integrates every skill from the course into one working program. Nothing in it is a new concept — it is all the separate lessons, composed.",
+      },
+      {
         type: "paragraph",
         text: "This program is the one PY4E opens its whole course with — counting the most common word in a piece of text — and by now you can build it yourself from the ideas you already have. It is not a new concept. It is the moment all the separate lessons snap together into one real, useful program. Notice that once you can count words, you can count almost anything: letters, tags, student scores, error types. The pattern is the same, and the pattern is the point.",
       },
 
       // --- Concept explanation (why before how) ---
-      { type: "heading", level: 2, text: "How to approach it" },
+      { type: "heading", level: 2, text: "Why this matters before the syntax" },
       {
         type: "paragraph",
         text: "Do not try to write the whole program in one go. Build it one piece at a time, running each piece and checking the output, exactly as you practised in lesson 11. Here is the road map in four steps: first, read the file and print each line to confirm you are reading it at all. Second, split each line into words and print them, so you can see the text breaking apart. Third, feed each word into the counting dictionary and print the whole dictionary. Fourth, add the loop that finds the most common word. Each stage is testable and each builds on the last, so if something is wrong you know exactly which stage broke.",
@@ -2689,7 +2680,7 @@ function lesson12(): LessonContent {
         text: "Before you run anything, count by hand: 'the' appears five times, 'cat' three times, and 'sat', 'on', 'mat', 'dog', 'chased', 'ran', 'home' once each. That manual count is your prediction — the reference the program's output must match. This is tracing and testing in action: you have an expected result before you run the program.",
       },
 
-      { type: "heading", level: 2, text: "Stage 1 — read the file" },
+      { type: "heading", level: 2, text: "Worked example 1: stage 1 — read the file" },
       {
         type: "paragraph",
         text: "First, prove you are reading the file. Open it, loop over it, and print each line stripped.",
@@ -2702,7 +2693,7 @@ function lesson12(): LessonContent {
         caption: "Stage 1 confirms the file is being read, one line at a time, with each newline trimmed.",
       },
 
-      { type: "heading", level: 2, text: "Stage 2 — split into words" },
+      { type: "heading", level: 2, text: "Worked example 2: stage 2 — split into words" },
       {
         type: "paragraph",
         text: "Next, break each line into individual words so you can see the raw material you are counting.",
@@ -2715,7 +2706,7 @@ function lesson12(): LessonContent {
         caption: "Stage 2 turns each line into a list of words — you can now see exactly the tokens that will be counted.",
       },
 
-      { type: "heading", level: 2, text: "Stage 3 — count the words" },
+      { type: "heading", level: 2, text: "Worked example 3: stage 3 — count the words" },
       {
         type: "paragraph",
         text: "The heart of the program: run the counting idiom over every word in every line. Print the dictionary to check your hand count.",
@@ -2732,7 +2723,7 @@ function lesson12(): LessonContent {
         text: "This is the exact idiom from lesson 8, wrapped in two nested loops: the outer one over the file's lines, the inner one over the words in each line. The dictionary counts holds every distinct word as a key and its frequency as a value. Compare this against your manual prediction: 'the' has 5, 'cat' has 3, and every other word has 1. If the program does not match, you have found a bug while it is still small.",
       },
 
-      { type: "heading", level: 2, text: "Stage 4 — find the most common word" },
+      { type: "heading", level: 2, text: "Worked example 4: stage 4 — find the most common word" },
       {
         type: "paragraph",
         text: "Now loop over the dictionary to find the word with the largest count. You track the best answer as you go.",
@@ -2853,7 +2844,7 @@ function lesson12(): LessonContent {
       },
 
       // --- Summary & next ---
-      { type: "heading", level: 2, text: "Summary and what comes next" },
+      { type: "heading", level: 2, text: "Summary and next" },
       {
         type: "paragraph",
         text: "You built a complete word-count program from the ideas of every previous lesson: read a file, split it into words, count them in a dictionary, and find the most common. You verified each stage against a manual prediction. That is not just a program — it is a demonstration that the separate pieces of the course compose into something genuinely useful.",
@@ -3032,7 +3023,7 @@ function sbaFor(lesson: LessonSeed, orderIndex: number) {
       options: options as never,
       correctAnswer: authored.correctAnswer,
       explanation: authored.explanation,
-      reviewStatus: "draft",
+      reviewStatus: "needs-human-review",
       needsCheck: false,
     },
     create: {
@@ -3049,7 +3040,7 @@ function sbaFor(lesson: LessonSeed, orderIndex: number) {
       orderIndex,
       isPublished: true,
       difficulty: c.blooms === "remember" ? "easy" : c.blooms === "evaluate" || c.blooms === "create" ? "hard" : "medium",
-      reviewStatus: "draft",
+      reviewStatus: "needs-human-review",
       needsCheck: false,
     },
   };
@@ -3091,8 +3082,10 @@ export async function seedIntroductionToProgramming(): Promise<void> {
         content: l.content as never,
         // All 12 lessons are authored in the full format and every code
         // snippet + output claim is machine-verified (tests/lesson-python).
-        // Draft = awaiting final pedagogy sign-off, no longer needs-check.
-        reviewStatus: "draft",
+        // needsCheck is false because the content is complete, but the row
+        // still awaits a human read: reviewStatus stays needs-human-review
+        // (the seeder never marks anything "verified").
+        reviewStatus: "needs-human-review",
         needsCheck: false,
       },
       create: {
@@ -3103,7 +3096,7 @@ export async function seedIntroductionToProgramming(): Promise<void> {
         orderIndex: i,
         estimatedMinutes: l.estimatedMinutes,
         content: l.content as never,
-        reviewStatus: "draft",
+        reviewStatus: "needs-human-review",
         needsCheck: false,
       },
     });
