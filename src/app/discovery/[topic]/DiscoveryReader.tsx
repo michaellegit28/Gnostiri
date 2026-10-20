@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import type { LessonBlock } from "@/types/lesson";
 import FilterChips from "@/components/ui/FilterChips";
+import TheoryPrompt from "@/components/discovery/TheoryPrompt";
 
 export const DEPTHS = ["Understand", "Explore", "Go Deeper", "Research"];
 
@@ -39,6 +40,8 @@ interface DiscoveryReaderProps {
   lessons: DepthLesson[];
   subtopics: TrailLink[];
   siblings: TrailLink[];
+  /** Only legacy extras topics that still own Question rows show the quiz door. */
+  hasQuiz: boolean;
 }
 
 function Block({ block }: { block: LessonBlock }) {
@@ -141,6 +144,14 @@ function Block({ block }: { block: LessonBlock }) {
         <QuestionCard
           prompt={block.prompt}
           answer={block.answer}
+          explanation={block.explanation}
+        />
+      );
+    case "theory":
+      return (
+        <TheoryPrompt
+          prompt={block.prompt}
+          modelAnswer={block.modelAnswer}
           explanation={block.explanation}
         />
       );
@@ -349,6 +360,7 @@ export default function DiscoveryReader({
   lessons,
   subtopics,
   siblings,
+  hasQuiz,
 }: DiscoveryReaderProps) {
   const [depth, setDepth] = useState(0);
   const active = lessons.find((l) => l.depth === depth) ?? null;
@@ -486,13 +498,15 @@ export default function DiscoveryReader({
 
         {/* Practice + tutor */}
         <section className="mt-10 flex flex-col sm:flex-row gap-3 pb-16">
-          <Link
-            href={`/discovery/${topicId}/quiz`}
-            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
-          >
-            <HelpCircle className="w-4 h-4" />
-            Test yourself
-          </Link>
+          {hasQuiz && (
+            <Link
+              href={`/discovery/${topicId}/quiz`}
+              className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+            >
+              <HelpCircle className="w-4 h-4" />
+              Test yourself
+            </Link>
+          )}
           <Link
             href={`/tutor?domain=extras&topicId=${encodeURIComponent(topicId)}`}
             className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg border border-white/15 text-slate-200 font-semibold text-sm hover:border-gold/60 transition-colors"
