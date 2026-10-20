@@ -352,7 +352,7 @@
    "blind": "C",
    "note": "blind solve says option \"C\", key marks \"A\"",
    "needsCheck": true,
-   "verdict": "VERDICT: AMBIGUOUS — key (IQR=6) follows the standard exclusive-median convention (Q1=2, Q3=8); the blind solve used the include-median convention (Q1=3, Q3=7 → IQR=4). Both are taught. Recommendation: accept the key BUT reword the question to state the convention, or replace. needsCheck: true."
+   "verdict": "VERDICT: AMBIGUOUS — key (IQR=6) follows the standard exclusive-median convention (Q1=2, Q3=8); the blind solve used the include-median convention (Q1=3, Q3=7 → IQR=4). Both are taught. Recommendation: accept the key BUT reword the question to state the convention, or replace. needsCheck: true. || RESOLUTION (r1, 2026-10-20): rewording DELIVERED in content/questions/master-stats-q2-reword.json — stem now states the exclusive (median-excluded) convention explicitly; key unchanged (IQR = 6). NOT applied to the DB yet (master bank is DB-only; Agent 1 applies). needsCheck stays true."
   },
   {
    "id": "master-stats-q9",
@@ -608,7 +608,7 @@
    "reviewStatus": "needs-human-review",
    "status": "mismatch",
    "note": "blind solve says option \"C\", key marks \"A\"",
-   "verdict": "VERDICT: AMBIGUOUS — key (IQR=6) follows the standard exclusive-median convention (Q1=2, Q3=8); the blind solve used the include-median convention (Q1=3, Q3=7 → IQR=4). Both are taught. Recommendation: accept the key BUT reword the question to state the convention, or replace. needsCheck: true.",
+   "verdict": "VERDICT: AMBIGUOUS — key (IQR=6) follows the standard exclusive-median convention (Q1=2, Q3=8); the blind solve used the include-median convention (Q1=3, Q3=7 → IQR=4). Both are taught. Recommendation: accept the key BUT reword the question to state the convention, or replace. needsCheck: true. || RESOLUTION (r1, 2026-10-20): rewording DELIVERED in content/questions/master-stats-q2-reword.json — stem now states the exclusive (median-excluded) convention explicitly; key unchanged (IQR = 6). NOT applied to the DB yet (master bank is DB-only; Agent 1 applies). needsCheck stays true.",
    "needsCheck": true
   },
   {
