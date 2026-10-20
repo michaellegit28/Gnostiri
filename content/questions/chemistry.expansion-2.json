@@ -107,7 +107,7 @@
       "23.4 mol/dm³"
     ],
     "correctAnswer": "0.40 mol/dm³",
-    "explanation": "Step 1: n = 5.85 ÷ 58.5 = 0.10 mol. Step 2: V = 250 cm³ = 0.25 dm³. Step 3: c = n ÷ V = 0.10 ÷ 0.25 = 0.40 mol/dm³. The answer 0.0004 mol/dm³ leaves the volume in cm³; 2.34 g/dm³ is the mass concentration with the wrong units; 23.4 mol/dm³ divides mass by volume without using Mr.",
+    "explanation": "Step 1: n = 5.85 ÷ 58.5 = 0.10 mol. Step 2: V = 250 cm³ = 0.25 dm³. Step 3: c = n ÷ V = 0.10 ÷ 0.25 = 0.40 mol/dm³. The answer 0.0004 mol/dm³ leaves the volume in cm³ (0.10 ÷ 250); 23.4 mol/dm³ divides the MASS by the volume so that Mr is never used (5.85 ÷ 0.25); 2.34 g/dm³ is the mass concentration per 100 cm³ rather than per dm³ (5.85 ÷ 250 × 100) — right idea, wrong unit.",
     "difficulty": "medium",
     "sourceExam": "original-exam-style",
     "reviewStatus": "needs-human-review",
@@ -164,7 +164,7 @@
       "35%"
     ],
     "correctAnswer": "70%",
-    "explanation": "Step 1: n(Mg) = 12.0 ÷ 24 = 0.50 mol, so 0.50 mol of MgO is expected. Step 2: theoretical mass = 0.50 × 40 = 20.0 g. Step 3: yield = 14.0 ÷ 20.0 × 100 = 70%. The answer 140% inverts the division (20 ÷ 14); 58% divides the actual yield by the mass of the reactant instead of the theoretical product mass; 35% halves the correct fraction.",
+    "explanation": "Step 1: n(Mg) = 12.0 ÷ 24 = 0.50 mol, so 0.50 mol of MgO is expected. Step 2: theoretical mass = 0.50 × 40 = 20.0 g. Step 3: yield = 14.0 ÷ 20.0 × 100 = 70%. The answer 140% inverts the division (20 ÷ 14); 58% divides the actual yield by the mass of the reactant (14 ÷ 24) instead of the theoretical product mass; 35% divides the actual yield by the relative formula mass (14 ÷ 40).",
     "difficulty": "hard",
     "sourceExam": "original-exam-style",
     "reviewStatus": "needs-human-review",
@@ -183,7 +183,7 @@
       "42.7 g"
     ],
     "correctAnswer": "21.3 g",
-    "explanation": "Step 1: n(Al) = 6.0 ÷ 27 = 0.222 mol. Step 2: mole ratio Al : Cu = 2 : 3, so n(Cu) = 0.222 × 3 ÷ 2 = 0.333 mol. Step 3: m = 0.333 × 64 = 21.3 g. The answer 14.2 g uses a 1 : 1 ratio; 28.4 g inverts the ratio (3 : 2); 42.7 g uses n(Cu) = 3 × n(Al) instead of 1.5 × n(Al).",
+    "explanation": "Step 1: n(Al) = 6.0 ÷ 27 = 0.222 mol. Step 2: mole ratio Al : Cu = 2 : 3, so n(Cu) = 0.222 × 3 ÷ 2 = 0.333 mol. Step 3: m = 0.333 × 64 = 21.3 g. The answer 14.2 g uses a 1 : 1 ratio; 28.4 g multiplies by 2 instead of 1.5 (reading the ratio backwards as 2Cu per Al); 42.7 g uses n(Cu) = 3 × n(Al), leaving out the division by the 2 in front of Al.",
     "difficulty": "medium",
     "sourceExam": "original-exam-style",
     "reviewStatus": "needs-human-review",
@@ -658,7 +658,7 @@
       "0.125 mol/dm³"
     ],
     "correctAnswer": "0.125 mol/dm³",
-    "explanation": "Step 1: n(NaOH) = 0.100 × 0.0250 = 0.00250 mol. Step 2: HCl + NaOH is 1 : 1, so n(HCl) = 0.00250 mol. Step 3: c = 0.00250 ÷ 0.0200 = 0.125 mol/dm³. The answer 0.080 mol/dm³ inverts the volume ratio; 0.200 mol/dm³ doubles the amount as if the reaction were 2 : 1; 0.025 mol/dm³ forgets to divide by the acid volume.",
+    "explanation": "Step 1: n(NaOH) = 0.100 × 0.0250 = 0.00250 mol. Step 2: HCl + NaOH is 1 : 1, so n(HCl) = 0.00250 mol. Step 3: c = 0.00250 ÷ 0.0200 = 0.125 mol/dm³. The answer 0.080 mol/dm³ inverts the volume ratio (0.100 × 20 ÷ 25); 0.200 mol/dm³ doubles the amount as if the reaction were 2 : 1; 0.025 mol/dm³ writes the acid volume as 0.1 dm³ instead of 0.0200, a slipped decimal.",
     "difficulty": "medium",
     "sourceExam": "original-exam-style",
     "reviewStatus": "needs-human-review",
