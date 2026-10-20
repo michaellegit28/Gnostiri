@@ -58,6 +58,16 @@ const SNIPPETS_L3 = [
     stdin: "Ada\n",
   },
   {
+    // The exact seed snippet, prompt and all. The lesson shows the output as
+    // an interactive session ("What is your name? Ada" then "Hello, Ada!")
+    // because the terminal echoes the typed characters; the program itself
+    // writes only the prompt (no newline) and the greeting — asserted here.
+    name: "a program that listens (exact seed snippet, raw stdout)",
+    code: `name = input("What is your name? ")\nprint("Hello, " + name + "!")`,
+    expected: "What is your name? Hello, Ada!",
+    stdin: "Ada\n",
+  },
+  {
     name: "operator precedence",
     code: `print(2 + 3 * 4)\nprint((2 + 3) * 4)`,
     expected: "14\n20",
