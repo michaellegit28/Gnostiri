@@ -17,7 +17,7 @@ import { AlertTriangle, BookOpen, CheckCircle2, FileCode2, Info, Lightbulb, Tabl
  * answer feedback is announced via a polite live region.
  */
 
-const MCQ_OPTIONS = ["A", "B", "C", "D"];
+const MCQ_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 function CodeBlock({ language, code, output, caption }: { language: string; code: string; output?: string; caption?: string }) {
   return (
@@ -112,6 +112,8 @@ function McqBlock({ stem, options, correctIndex, explanation }: { stem: string; 
   const answered = selected !== null;
   const safeCorrect = correctIndex >= 0 && correctIndex < options.length ? correctIndex : 0;
   const isCorrect = selected === safeCorrect;
+  // Every option is rendered — never silently dropped — and each gets a letter,
+  // falling back to its 1-based number past Z.
   const letters = options.map((_, i) => MCQ_OPTIONS[i] ?? String(i + 1));
 
   return (
@@ -243,7 +245,7 @@ function renderBlock(block: LessonBlock, key: number) {
         <McqBlock
           key={key}
           stem={block.stem}
-          options={block.options.slice(0, 4)}
+          options={block.options}
           correctIndex={block.correctIndex}
           explanation={block.explanation}
         />
