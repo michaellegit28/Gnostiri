@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import prisma from "@/lib/db";
-import type { LessonContent } from "@/types/lesson";
+import type { LessonBlock, LessonContent } from "@/types/lesson";
 import DiscoveryReader from "./DiscoveryReader";
 import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
@@ -8,6 +8,30 @@ import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
+
+const LESSON_BLOCK_TYPES: LessonBlock["type"][] = [
+  "heading",
+  "paragraph",
+  "definition",
+  "example",
+  "callout",
+  "table",
+  "code",
+  "question",
+  "mcq",
+  "diagram",
+];
+
+/** Keep only well-formed blocks of a known type — legacy rows may carry stray shapes. */
+function toLessonBlocks(content: unknown): LessonBlock[] {
+  const blocks = (content as LessonContent | null | undefined)?.blocks;
+  if (!Array.isArray(blocks)) return [];
+  return blocks.filter((b): b is LessonBlock => {
+    if (typeof b !== "object" || b === null) return false;
+    const type = (b as { type?: unknown }).type;
+    return typeof type === "string" && (LESSON_BLOCK_TYPES as readonly string[]).includes(type);
+  });
+}
 
 export default async function ExtrasTopicPage({ params, searchParams }: { params: { topic: string }; searchParams?: { lite?: string } }) {
   const lite = searchParams?.lite === "1";
@@ -54,9 +78,7 @@ export default async function ExtrasTopicPage({ params, searchParams }: { params
     id: l.id,
     title: l.title,
     depth: Math.min(l.orderIndex ?? i, 3),
-    blocks: ((l.content as unknown as LessonContent | undefined)?.blocks ?? []).filter((b) =>
-      ["heading", "paragraph", "definition", "example", "callout", "table"].includes(b.type)
-    ),
+    blocks: toLessonBlocks(l.content),
   }));
 
   return (
