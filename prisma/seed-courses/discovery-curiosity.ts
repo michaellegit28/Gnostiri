@@ -108,7 +108,7 @@ const SCALE_TRAIL: TrailSeed = {
   order: 0,
   branch: "Astrophysics & cosmology",
   description:
-    "From the inside of a proton to the edge of the observable universe, in one sitting — every rung verified against a measured value.",
+    "From the inside of a proton to the edge of the observable universe, in one sitting — every rung tied to a measured value.",
   depths: [
     {
       suffix: "-lesson",
