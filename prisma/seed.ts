@@ -1,6 +1,10 @@
 // Note: This seed script should be executed with "npx prisma db seed" once a real database is connected.
 
 import { PrismaClient, AppDomain } from "@prisma/client";
+import { seedIntroductionToProgramming } from "./seed-courses/introduction-to-programming";
+import { seedAppliedStatistics } from "./seed-courses/applied-statistics";
+import { seedDiscoveryCuriosity } from "./seed-courses/discovery-curiosity";
+import { seedMbbs } from "./seed-courses/mbbs/index";
 
 const prisma = new PrismaClient();
 
@@ -363,7 +367,7 @@ async function main() {
     const id = `extras-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "")}`;
     await prisma.topic.upsert({ where: { id }, update: { title, domain: "extras", parentId: null, orderIndex: index, isPublished: true }, create: { id, title, domain: "extras", orderIndex: index } });
     await prisma.lesson.upsert({ where: { id: `${id}-lesson` }, update: { title, domain: "extras", topicId: id }, create: { id: `${id}-lesson`, title, domain: "extras", topicId: id, estimatedMinutes: 10, content: { blocks: [{ type: "heading", level: 2, text: title }, { type: "paragraph", text: `Explore the foundations of ${title.toLowerCase()} through clear explanations and examples.` }] } } });
-    await prisma.question.upsert({ where: { id: `${id}-question` }, update: { domain: "extras", topicId: id, questionText: `Which is a good way to build understanding of ${title.toLowerCase()}?`, options: ["Ask questions and apply ideas", "Avoid examples", "Memorize unrelated details", "Skip practice"], correctAnswer: "Ask questions and apply ideas", explanation: "Active practice and applying ideas help develop understanding." }, create: { id: `${id}-question`, domain: "extras", topicId: id, questionText: `Which is a good way to build understanding of ${title.toLowerCase()}?`, options: ["Ask questions and apply ideas", "Avoid examples", "Memorize unrelated details", "Skip practice"], correctAnswer: "Ask questions and apply ideas", explanation: "Active practice and applying ideas help develop understanding." } });
+    // No quizzes in discovery — extras carries conceptual/typed-theory prompts only.
   }
 
   // ---- Discovery deep chain: Physics → Mechanics → Motion → Forces → Energy ----
@@ -560,13 +564,13 @@ async function main() {
         create: { id: `${item.id}-lesson-explore`, title: item.exploreTitle ?? "Explore", domain: "extras", topicId: item.id, orderIndex: 1, estimatedMinutes: 6, content: { blocks: item.exploreBlocks } },
       });
     }
-    const q = item.question;
-    await prisma.question.upsert({
-      where: { id: q.id },
-      update: { domain: "extras", topicId: item.id, questionText: q.questionText, options: q.options, correctAnswer: q.correctAnswer, explanation: q.explanation },
-      create: { id: q.id, domain: "extras", topicId: item.id, questionText: q.questionText, options: q.options, correctAnswer: q.correctAnswer, explanation: q.explanation },
-    });
   }
+
+  // ---- Course seeds (idempotent; all rows ship needs-human-review) ----
+  await seedIntroductionToProgramming();
+  await seedAppliedStatistics();
+  await seedDiscoveryCuriosity();
+  await seedMbbs();
 
   console.log("Database seed completed successfully.");
 }
