@@ -1,0 +1,1142 @@
+[
+  {
+    "id": "exp2-cell-q1",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Which structure is found in a plant cell but NOT in an animal cell?",
+    "options": [
+      "a cell membrane",
+      "a mitochondrion",
+      "a ribosome",
+      "a cell wall"
+    ],
+    "correctAnswer": "a cell wall",
+    "explanation": "Plant cells have a rigid cellulose cell wall outside the cell membrane, which animal cells lack. Both cell types have membranes, mitochondria and ribosomes, so those features cannot be used to tell them apart.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q2",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "The basic unit of life, according to cell theory, is",
+    "options": [
+      "the tissue",
+      "the organelle",
+      "the molecule",
+      "the cell"
+    ],
+    "correctAnswer": "the cell",
+    "explanation": "Cell theory states that all living things are made of cells, that the cell is the basic unit of structure and function, and that all cells come from other cells. Tissues, organelles and molecules are all smaller or larger levels of organisation, not the basic unit.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q3",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Which organelle is the site of protein synthesis?",
+    "options": [
+      "mitochondrion",
+      "ribosome",
+      "Golgi apparatus",
+      "lysosome"
+    ],
+    "correctAnswer": "ribosome",
+    "explanation": "Ribosomes read mRNA and join amino acids into a polypeptide chain. Mitochondria release energy in respiration, the Golgi apparatus modifies and packages proteins after they are made, and lysosomes digest worn-out material.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q4",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Diffusion is the net movement of",
+    "options": [
+      "water from high to low water potential",
+      "particles from a region of higher concentration to one of lower concentration",
+      "particles against a concentration gradient using ATP",
+      "particles from lower to higher concentration"
+    ],
+    "correctAnswer": "particles from a region of higher concentration to one of lower concentration",
+    "explanation": "Diffusion is the passive spreading of any solute down its own concentration gradient, needing no ATP. Water moving from high to low water potential is osmosis; moving particles against the gradient using ATP is active transport; and net movement is always down the gradient, never up it.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q5",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Osmosis is the movement of water",
+    "options": [
+      "through a fully permeable membrane",
+      "through a partially permeable membrane from high to low water potential",
+      "against its water potential gradient using energy",
+      "from low to high solute concentration"
+    ],
+    "correctAnswer": "through a partially permeable membrane from high to low water potential",
+    "explanation": "Osmosis needs a partially (selectively) permeable membrane and moves water passively from a dilute solution (high water potential) to a concentrated one (low water potential). A fully permeable membrane lets solutes through, so diffusion rather than osmosis occurs; water never moves against its potential gradient using energy.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q6",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Which process requires ATP released by respiration?",
+    "options": [
+      "uptake of mineral ions by root hair cells against a concentration gradient",
+      "diffusion of oxygen into a cell",
+      "osmosis of water into a root hair cell",
+      "movement of water vapour out of a leaf"
+    ],
+    "correctAnswer": "uptake of mineral ions by root hair cells against a concentration gradient",
+    "explanation": "Only active transport needs ATP — it moves particles up a concentration gradient. Diffusion and osmosis are passive and need no energy, and water vapour leaves the leaf by transpiration driven by evaporation, not by respiration.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q7",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "A cube-shaped cell measures 1 mm along each edge. Its surface area to volume ratio is",
+    "options": [
+      "1 : 6",
+      "2 : 1",
+      "6 : 1",
+      "12 : 1"
+    ],
+    "correctAnswer": "6 : 1",
+    "explanation": "Surface area = 6 × (1 mm)² = 6 mm²; volume = (1 mm)³ = 1 mm³; so the ratio is 6 : 1. Writing 1 : 6 inverts surface area and volume; 2 : 1 uses only one face of the cube; 12 : 1 counts the cube's edges (a 1 mm cube has 12 edges), not its surface.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q8",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Which statement about mitosis is correct?",
+    "options": [
+      "It halves the chromosome number",
+      "It produces four daughter cells",
+      "It produces two genetically identical nuclei with the same chromosome number",
+      "It creates genetic variation between the cells"
+    ],
+    "correctAnswer": "It produces two genetically identical nuclei with the same chromosome number",
+    "explanation": "Mitosis copies each chromosome exactly and splits the cell once, giving two identical nuclei — the basis of growth and repair. Halving the chromosome number and producing four cells is meiosis; genetic variation comes from meiosis, not mitosis.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q9",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "Root hair cells absorb mineral ions by active transport. Which feature best supports that activity?",
+    "options": [
+      "many mitochondria supplying ATP",
+      "a large vacuole storing water",
+      "a thin cellulose cell wall",
+      "a very small surface area"
+    ],
+    "correctAnswer": "many mitochondria supplying ATP",
+    "explanation": "Active transport is powered by ATP, so root hair cells are packed with mitochondria. A large vacuole stores water and supports the cell, a thin wall shortens the diffusion distance, and a large — not small — surface area increases absorption; none of these alone supplies the energy needed.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-cell-q10",
+    "domain": "highschool",
+    "topicSlug": "cell-biology",
+    "type": "mcq",
+    "questionText": "In a multicellular organism, differentiation means that cells",
+    "options": [
+      "become specialised in structure and function because different genes are switched on",
+      "lose half of their chromosomes",
+      "divide by meiosis instead of mitosis",
+      "all divide at exactly the same rate"
+    ],
+    "correctAnswer": "become specialised in structure and function because different genes are switched on",
+    "explanation": "Every cell of an organism carries the same genes, but differentiation switches some on and others off, producing specialised cells such as nerve or muscle cells. Cells do not lose genes or chromosomes in differentiation, they divide by mitosis like body cells, and they do not all divide at one fixed rate.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q1",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "In a DNA molecule, adenine always pairs with",
+    "options": [
+      "thymine",
+      "cytosine",
+      "guanine",
+      "uracil"
+    ],
+    "correctAnswer": "thymine",
+    "explanation": "Base pairing is complementary: A pairs with T (two hydrogen bonds) and C pairs with G (three hydrogen bonds). Uracil replaces thymine in RNA, not in DNA, so it never pairs with adenine in a DNA molecule.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q2",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "A human body (somatic) cell has 46 chromosomes. A human gamete has",
+    "options": [
+      "23",
+      "46",
+      "92",
+      "22"
+    ],
+    "correctAnswer": "23",
+    "explanation": "Gametes are haploid: meiosis halves the chromosome number to 23 so that fertilisation restores 46. Answering 46 describes a body cell; 92 is a doubled (tetraploid) count; 22 is the number of non-sex chromosomes in a gamete, missing the sex chromosome.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q3",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "A gene is best described as",
+    "options": [
+      "a whole chromosome",
+      "a sequence of amino acids",
+      "a section of DNA that codes for a protein",
+      "a specialised type of cell"
+    ],
+    "correctAnswer": "a section of DNA that codes for a protein",
+    "explanation": "A gene is a length of DNA whose base sequence specifies one polypeptide. A chromosome carries very many genes; a sequence of amino acids is the protein the gene codes for, not the gene itself; and cells carry genes rather than being a kind of gene.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q4",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "Three bases on a messenger RNA strand are called",
+    "options": [
+      "an anticodon",
+      "a gene",
+      "a codon",
+      "an allele"
+    ],
+    "correctAnswer": "a codon",
+    "explanation": "On mRNA a group of three bases is a codon and it specifies one amino acid. The matching three bases on a transfer RNA molecule form the anticodon; a gene is a much longer coding stretch; and an allele is an alternative version of a gene.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q5",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "During transcription",
+    "options": [
+      "two identical DNA molecules are made from one",
+      "amino acids are joined together at a ribosome",
+      "a complementary strand of mRNA is assembled from a DNA template",
+      "mRNA is copied from another mRNA strand"
+    ],
+    "correctAnswer": "a complementary strand of mRNA is assembled from a DNA template",
+    "explanation": "Transcription makes an mRNA copy of one DNA strand in the nucleus. Making two identical DNA molecules is replication; joining amino acids is translation at the ribosome; and mRNA is never copied from mRNA.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q6",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "Two heterozygous parents (Bb × Bb) are crossed. The expected ratio of GENOTYPES in the offspring is",
+    "options": [
+      "3 : 1",
+      "1 : 1",
+      "9 : 3 : 3 : 1",
+      "1 BB : 2 Bb : 1 bb"
+    ],
+    "correctAnswer": "1 BB : 2 Bb : 1 bb",
+    "explanation": "A 2 × 2 Punnett square gives four equally likely combinations: BB once, Bb twice and bb once, so the genotype ratio is 1 : 2 : 1. 3 : 1 is the PHENOTYPE ratio (three dominant to one recessive) that results from the same cross; 1 : 1 is a test cross (Bb × bb); and 9 : 3 : 3 : 1 is a dihybrid cross.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q7",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "The sex of a human child is determined by",
+    "options": [
+      "the egg, which may carry either an X or a Y chromosome",
+      "the mother's diet during pregnancy",
+      "the number of recessive alleles inherited",
+      "the sperm, which may carry either an X or a Y chromosome"
+    ],
+    "correctAnswer": "the sperm, which may carry either an X or a Y chromosome",
+    "explanation": "Every egg carries an X chromosome, while half of all sperm carry X and half carry Y; the combination (XX female or XY male) therefore depends on which sperm fertilises the egg. Eggs can only carry X, and neither diet nor allele counts influence sex determination.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q8",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "Which single change in a gene is most likely to have the greatest effect on the protein produced?",
+    "options": [
+      "substitution of one base near the end of the gene",
+      "insertion of one base near the start of the gene",
+      "a substitution that does not change the amino acid coded for",
+      "a change in a non-coding intron"
+    ],
+    "correctAnswer": "insertion of one base near the start of the gene",
+    "explanation": "Inserting a base shifts the reading frame, so every codon from that point on is read differently — a frameshift that usually destroys the protein. A substitution near the end affects only the last amino acids, a same-sense substitution changes nothing, and a change in a non-coding region is not translated at all.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q9",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "In a population of 1000 individuals, 16% show a recessive phenotype. The frequency of the recessive allele (q) is",
+    "options": [
+      "0.16",
+      "0.6",
+      "0.32",
+      "0.4"
+    ],
+    "correctAnswer": "0.4",
+    "explanation": "Under Hardy–Weinberg, q² is the frequency of the recessive phenotype: q² = 0.16, so q = √0.16 = 0.4 (and the dominant allele frequency p = 1 − 0.4 = 0.6). Answering 0.16 mistakes the phenotype frequency for the allele frequency; 0.6 is p, the dominant allele frequency, not q; and 0.32 is double the phenotype frequency (2 × 0.16), a doubling slip rather than an allele frequency at all.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-genetics-q10",
+    "domain": "highschool",
+    "topicSlug": "genetics-molecular-biology",
+    "type": "mcq",
+    "questionText": "An inherited condition appears in children born to two unaffected parents, and affects boys and girls equally. The most likely pattern of inheritance is",
+    "options": [
+      "autosomal dominant",
+      "autosomal recessive",
+      "X-linked dominant",
+      "sex-linked recessive"
+    ],
+    "correctAnswer": "autosomal recessive",
+    "explanation": "Unaffected parents who produce affected children are both carriers, which points to a recessive allele; equal numbers of boys and girls are affected, so the gene cannot be on a sex chromosome. A dominant condition would appear in every generation, X-linked dominant conditions would show affected fathers passing them to all daughters, and sex-linked recessive traits affect males far more often than females.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q1",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "In a food chain, the organism that converts light energy into chemical energy is the",
+    "options": [
+      "primary consumer",
+      "producer",
+      "secondary consumer",
+      "decomposer"
+    ],
+    "correctAnswer": "producer",
+    "explanation": "Producers (green plants and algae) photosynthesise, capturing light energy in glucose. Primary and secondary consumers only transfer energy they have eaten, and decomposers break down dead material, none of them converting light energy into chemical energy.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q2",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "Decomposers return nutrients to the soil because they",
+    "options": [
+      "photosynthesise using sunlight",
+      "break down dead organisms and waste material",
+      "eat living plants only",
+      "fix nitrogen inside root nodules"
+    ],
+    "correctAnswer": "break down dead organisms and waste material",
+    "explanation": "Bacteria and fungi secrete enzymes that digest dead matter, releasing mineral ions back into the soil. Photosynthesis is done by producers, eating living plants describes herbivores, and nitrogen fixation is the role of specific bacteria in root nodules, not decomposers in general.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q3",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "In the food chain grass → rabbit → fox, the fox is a",
+    "options": [
+      "secondary consumer",
+      "primary consumer",
+      "producer",
+      "tertiary consumer"
+    ],
+    "correctAnswer": "secondary consumer",
+    "explanation": "Consumers are counted by how many steps they sit from the producer: the rabbit is the primary consumer and the fox, which eats the rabbit, is the secondary consumer. A tertiary consumer would eat the fox, and no consumer is a producer.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q4",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "Only about 10% of the energy at one trophic level passes to the next because energy is",
+    "options": [
+      "destroyed as it moves through the food chain",
+      "not available in sunlight after the producer level",
+      "removed by predators in the final level",
+      "lost in respiration, excretion and in uneaten or undigested parts"
+    ],
+    "correctAnswer": "lost in respiration, excretion and in uneaten or undigested parts",
+    "explanation": "Much of the energy eaten is used in respiration and lost as heat, some is egested in faeces and some is locked in parts that are never eaten. Energy is never destroyed, sunlight keeps supplying the first trophic level, and nothing is removed at the end of a chain.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q5",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "Carbon is returned to the atmosphere mainly by",
+    "options": [
+      "respiration and the combustion of fossil fuels",
+      "photosynthesis",
+      "feeding by herbivores",
+      "absorption of carbon dioxide by the oceans"
+    ],
+    "correctAnswer": "respiration and the combustion of fossil fuels",
+    "explanation": "Respiration releases carbon dioxide from every living organism, and burning fossil fuels releases the carbon locked in them for millions of years. Photosynthesis removes carbon dioxide rather than returning it, feeding only transfers carbon between organisms, and ocean absorption is a sink, not a source.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q6",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "Nitrogen gas from the air is converted into a form that plants can use by",
+    "options": [
+      "denitrifying bacteria in waterlogged soil",
+      "decomposers breaking down dead leaves",
+      "lightning, which is the only route",
+      "nitrogen-fixing bacteria, some of which live in root nodules"
+    ],
+    "correctAnswer": "nitrogen-fixing bacteria, some of which live in root nodules",
+    "explanation": "Nitrogen-fixing bacteria convert N₂ into ammonia and then nitrates that roots can absorb. Denitrifying bacteria do the reverse, turning nitrates back into nitrogen gas; decomposers recycle nitrogen already inside dead matter; and lightning does fix nitrogen naturally but is by no means the only route — bacteria fix far more.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q7",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "A population grows in a J-shaped (exponential) curve when",
+    "options": [
+      "resources are unlimited and there is no predation",
+      "resources are strictly limited",
+      "the carrying capacity has been reached",
+      "the death rate exceeds the birth rate"
+    ],
+    "correctAnswer": "resources are unlimited and there is no predation",
+    "explanation": "Unlimited food and space and freedom from predators let every individual breed at its maximum rate, so numbers rise faster and faster. Limited resources or a reached carrying capacity produce an S-shaped curve that levels off, and when deaths exceed births the population falls.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q8",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "Allopatric speciation occurs when",
+    "options": [
+      "two species interbreed freely in the same habitat",
+      "a single mutation changes one individual",
+      "a population is split by a geographic barrier and the separated groups evolve differently",
+      "individuals behave differently and become new species"
+    ],
+    "correctAnswer": "a population is split by a geographic barrier and the separated groups evolve differently",
+    "explanation": "A physical barrier (a river, a mountain range, a sea) separates one population, so different mutations and selection pressures act on each group until they can no longer interbreed — allopatric means 'different homeland'. Free interbreeding keeps gene pools mixed, a single mutation changes only one individual, and behaviour alone does not create new species.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q9",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "Natural selection requires that",
+    "options": [
+      "individuals change during their lifetime to suit the environment",
+      "all mutation is beneficial",
+      "there is heritable variation and individuals differ in reproductive success",
+      "every individual in a population mutates at once"
+    ],
+    "correctAnswer": "there is heritable variation and individuals differ in reproductive success",
+    "explanation": "Selection needs individuals to differ genetically, those differences to be inherited, and some variants to leave more offspring than others. Traits acquired during a lifetime are not inherited; most mutations are harmful or neutral; and spontaneous identical mutation across a population is not required.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-ecology-q10",
+    "domain": "highschool",
+    "topicSlug": "ecology-evolution",
+    "type": "mcq",
+    "questionText": "The competitive exclusion principle states that",
+    "options": [
+      "two species always share a resource equally",
+      "two species competing for the same limiting resource cannot coexist indefinitely",
+      "the stronger competitor always becomes extinct",
+      "competition raises the population of both species"
+    ],
+    "correctAnswer": "two species competing for the same limiting resource cannot coexist indefinitely",
+    "explanation": "If two species need exactly the same limiting resource, one is always slightly more efficient and eventually out-competes the other, which must then move, switch diet or die out. Sharing a resource equally is rare, the better competitor wins rather than loses, and competition generally reduces rather than raises numbers.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q1",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "Deoxygenated blood is pumped from the heart to the lungs by the",
+    "options": [
+      "left ventricle",
+      "right atrium",
+      "right ventricle",
+      "left atrium"
+    ],
+    "correctAnswer": "right ventricle",
+    "explanation": "The right ventricle pumps blood into the pulmonary artery towards the lungs. The left ventricle pumps oxygenated blood to the whole body, and the atria only receive blood and pass it into the ventricles below them.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q2",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "In the lungs, oxygen enters the blood by",
+    "options": [
+      "active transport",
+      "osmosis",
+      "diffusion across the walls of the alveoli",
+      "digestion"
+    ],
+    "correctAnswer": "diffusion across the walls of the alveoli",
+    "explanation": "Oxygen moves down its concentration gradient from the alveolar air into the blood, a passive process needing no energy. Active transport works against gradients using ATP, osmosis moves water rather than gases, and digestion breaks down food, not gases.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q3",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "Insulin lowers blood glucose concentration by causing",
+    "options": [
+      "the liver to break glycogen down into glucose",
+      "cells to stop respiring",
+      "the gut to stop absorbing glucose",
+      "cells to take up glucose and the liver to store it as glycogen"
+    ],
+    "correctAnswer": "cells to take up glucose and the liver to store it as glycogen",
+    "explanation": "Insulin stimulates muscle and liver cells to absorb glucose, and the liver converts the surplus into glycogen for storage, which lowers the blood glucose level. Glucagon has the opposite effect and releases glucose from glycogen; respiration continues in all living cells; and absorption from the gut is not switched off by insulin.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q4",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "Which component of the blood transports oxygen?",
+    "options": [
+      "red blood cells",
+      "plasma",
+      "white blood cells",
+      "platelets"
+    ],
+    "correctAnswer": "red blood cells",
+    "explanation": "Red blood cells contain haemoglobin, which binds oxygen in the lungs and releases it in respiring tissues. Plasma carries dissolved substances including some carbon dioxide, white blood cells fight infection, and platelets clot blood — none of them carry oxygen.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q5",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "Most digested food is absorbed into the blood in the",
+    "options": [
+      "stomach",
+      "large intestine",
+      "oesophagus",
+      "small intestine"
+    ],
+    "correctAnswer": "small intestine",
+    "explanation": "The small intestine is lined with villi that give an enormous surface area for absorbing digested nutrients. The stomach mainly digests protein, the large intestine absorbs water and minerals rather than most digested food, and the oesophagus only transports food to the stomach.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q6",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "In the kidney, filtration of the blood takes place at",
+    "options": [
+      "the collecting duct, where glucose is reabsorbed",
+      "the loop of Henle, where urea is produced",
+      "the glomerulus, where water and small solutes leave the blood",
+      "the bladder, where urine is stored"
+    ],
+    "correctAnswer": "the glomerulus, where water and small solutes leave the blood",
+    "explanation": "High pressure in the glomerulus forces water, glucose, salts and urea out of the capillaries into the capsule; useful substances are reabsorbed later, along the tubules. The collecting duct adjusts water, urea is produced in the liver (not the kidney), and the bladder only stores urine.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q7",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "In body temperature regulation, negative feedback means that",
+    "options": [
+      "a rise in temperature triggers responses that raise it further",
+      "a rise in temperature triggers responses that bring it back down",
+      "the body ignores small changes in temperature",
+      "only cooling of the body can trigger a response"
+    ],
+    "correctAnswer": "a rise in temperature triggers responses that bring it back down",
+    "explanation": "A negative feedback loop reverses any change: when temperature rises, sweating and vasodilation cool the body, and when it falls, shivering and vasoconstriction warm it. Responses that amplified the change would be positive feedback and would be fatal in temperature control; both directions are monitored, and small changes do trigger a correction.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q8",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "During inhalation (breathing in)",
+    "options": [
+      "the diaphragm relaxes and domes upward",
+      "the pressure in the chest rises above atmospheric pressure",
+      "the rib cage moves down and in",
+      "the diaphragm contracts and flattens, the ribs move up and out, and the pressure in the chest falls"
+    ],
+    "correctAnswer": "the diaphragm contracts and flattens, the ribs move up and out, and the pressure in the chest falls",
+    "explanation": "The contracting diaphragm flattens and the intercostal muscles lift the ribs, so the chest volume grows, pressure falls below atmospheric pressure, and air is drawn in. A relaxing, doming diaphragm and ribs moving down and in describe exhalation, and air only moves out when lung pressure is above atmospheric.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q9",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "At a synapse, a nerve impulse crosses the gap to the next neurone because",
+    "options": [
+      "the electrical signal jumps across the gap unchanged",
+      "a neurotransmitter diffuses across the gap and starts a new impulse",
+      "the two axons fuse together during the impulse",
+      "the gap closes up completely"
+    ],
+    "correctAnswer": "a neurotransmitter diffuses across the gap and starts a new impulse",
+    "explanation": "The arriving impulse makes the first neurone release neurotransmitter, which diffuses across the synaptic cleft and binds to receptors on the next neurone, generating a fresh impulse there. Electrical signals cannot cross the fluid gap directly, the neurones never fuse, and the gap does not close — the delay at each synapse is why synapses slow transmission.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-humanphys-q10",
+    "domain": "highschool",
+    "topicSlug": "human-physiology",
+    "type": "mcq",
+    "questionText": "Compared with a nervous response, a hormonal (endocrine) response is",
+    "options": [
+      "slower, longer lasting and carried in the blood",
+      "faster, shorter lasting and carried along neurones",
+      "carried as an electrical impulse in the blood",
+      "identical in speed but longer lasting"
+    ],
+    "correctAnswer": "slower, longer lasting and carried in the blood",
+    "explanation": "Hormones are chemicals released into the bloodstream and carried to target organs, so the response takes seconds to hours and wears off slowly. Nerves carry fast, precise impulses that act in milliseconds; blood does not carry electrical impulses, and hormonal responses are not identical in speed to nervous ones.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q1",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "The correct balanced equation for photosynthesis is",
+    "options": [
+      "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O",
+      "CO₂ + H₂O → C₆H₁₂O₆ + O₂",
+      "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂",
+      "6CO₂ + 6H₂O → C₆H₁₂O₆"
+    ],
+    "correctAnswer": "6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂",
+    "explanation": "Six molecules of carbon dioxide and six of water make one glucose and release six oxygen molecules, balancing both carbon (6) and hydrogen (12) atoms on each side. The first wrong option is the equation for aerobic respiration, the second is not balanced (1 C and 2 H cannot make 6 C and 12 H), and the third omits the oxygen released.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q2",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "Chlorophyll absorbs light most strongly in which parts of the spectrum?",
+    "options": [
+      "green only",
+      "all wavelengths equally",
+      "red and blue",
+      "ultraviolet only"
+    ],
+    "correctAnswer": "red and blue",
+    "explanation": "Chlorophyll absorbs red and blue light and reflects green, which is why leaves look green. Green light is largely reflected rather than used, no pigment absorbs all wavelengths equally, and ultraviolet light is not used by chlorophyll for photosynthesis.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q3",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "Transpiration is the loss of water vapour from",
+    "options": [
+      "the leaves, mainly through the stomata",
+      "the roots, mainly through the root hairs",
+      "the flowers, mainly through the petals",
+      "the stem, mainly through the bark"
+    ],
+    "correctAnswer": "the leaves, mainly through the stomata",
+    "explanation": "Water evaporates from the wet mesophyll inside the leaf and diffuses out through the stomata; this is transpiration. Roots absorb water rather than losing it as vapour, petals lose a negligible amount, and bark is largely impermeable because of its corky layers.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q4",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "At low light intensity, with carbon dioxide and temperature both plentiful, photosynthesis is limited by",
+    "options": [
+      "carbon dioxide concentration",
+      "light intensity",
+      "temperature",
+      "water availability"
+    ],
+    "correctAnswer": "light intensity",
+    "explanation": "The limiting factor is whichever factor is in shortest supply: here light is scarce while carbon dioxide and temperature are already above the level the enzymes can use. Raising carbon dioxide or temperature cannot increase the rate until more light is supplied, and water is not the shortage in this situation.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q5",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "Xylem tissue transports",
+    "options": [
+      "sucrose and amino acids in all directions",
+      "sucrose from the leaves to the roots only",
+      "dissolved food away from the leaves only",
+      "water and mineral ions upwards from the roots"
+    ],
+    "correctAnswer": "water and mineral ions upwards from the roots",
+    "explanation": "Xylem vessels are dead, hollow tubes that carry water and dissolved minerals from root to leaf. Sugars and amino acids are moved by phloem in translocation, which is bidirectional and not restricted to the leaf-to-root direction.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q6",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "Guard cells open a stoma by",
+    "options": [
+      "becoming flaccid as water leaves the cells",
+      "contracting like muscle cells",
+      "losing turgor during photosynthesis",
+      "becoming turgid, so the thin outer walls stretch more than the thick inner walls"
+    ],
+    "correctAnswer": "becoming turgid, so the thin outer walls stretch more than the thick inner walls",
+    "explanation": "When guard cells take up water they swell and curve apart, opening the pore, because their inner walls are thickened and stretch less than the outer walls. Flaccid guard cells close the stoma, plant cells have no muscle-like contractile fibres, and photosynthesis uses water inside the cell rather than making guard cells lose turgor.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q7",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "On a graph of photosynthesis rate against light intensity, once increasing light no longer raises the rate, the factor now limiting the rate is most likely",
+    "options": [
+      "light intensity, however high it goes",
+      "carbon dioxide concentration or temperature",
+      "the amount of chlorophyll, which has run out",
+      "water, which can never limit the rate"
+    ],
+    "correctAnswer": "carbon dioxide concentration or temperature",
+    "explanation": "The rate has levelled off because light is already in excess, so the shortage is now carbon dioxide or temperature, which the Calvin cycle enzymes depend on. Light cannot be limiting once extra light gives no extra rate; chlorophyll is not 'used up' but absorbs continuously; and water can limit photosynthesis in drought, so it is never excluded.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q8",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "Auxin makes a shoot bend towards a light source because it",
+    "options": [
+      "accumulates on the lit side, making cells elongate faster",
+      "accumulates on the shaded side, making those cells elongate more",
+      "is destroyed by light so the shoot stops growing",
+      "prevents cell division on the shaded side"
+    ],
+    "correctAnswer": "accumulates on the shaded side, making those cells elongate more",
+    "explanation": "Light moves auxin to the shaded side, where the higher concentration stimulates faster elongation; the shaded side therefore grows more than the lit side and the shoot bends towards the light. Auxin is not destroyed by light, it does not block growth on the shaded side, and it does not accumulate on the lit side.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q9",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "During germination, the stored food in a seed is mobilised because",
+    "options": [
+      "water is absorbed and the hormone gibberellin stimulates amylase enzymes",
+      "sunlight heats the seed coat and melts the food",
+      "chlorophyll forms before the shoot appears",
+      "the seed absorbs carbon dioxide from the air"
+    ],
+    "correctAnswer": "water is absorbed and the hormone gibberellin stimulates amylase enzymes",
+    "explanation": "Water uptake triggers gibberellin release, which switches on amylase in the aleurone layer; amylase digests stored starch to maltose and glucose for the growing embryo. Sunlight is not needed to start germination (many seeds germinate in the dark), chlorophyll appears only after the shoot reaches light, and seeds absorb oxygen rather than carbon dioxide in germination.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-plant-q10",
+    "domain": "highschool",
+    "topicSlug": "plant-biology",
+    "type": "mcq",
+    "questionText": "Yellowing between the veins that appears on the OLDEST leaves first suggests a deficiency of",
+    "options": [
+      "magnesium, a component of chlorophyll",
+      "calcium, which is needed for cell walls",
+      "iron, whose lack yellows the oldest leaves",
+      "nitrate, which yellows the whole leaf uniformly"
+    ],
+    "correctAnswer": "magnesium, a component of chlorophyll",
+    "explanation": "Magnesium is part of the chlorophyll molecule and is mobile in the plant, so the plant withdraws it from old leaves first to supply new growth, leaving interveinal chlorosis that starts at the bottom. Calcium deficiency shows up in growing points, iron is immobile so its deficiency appears in young leaves first, and nitrate deficiency yellows the whole leaf rather than leaving the veins green.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q1",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "Enzymes are biological catalysts, which means they",
+    "options": [
+      "are used up in the reaction they speed up",
+      "only slow reactions down",
+      "work only outside living cells",
+      "speed up reactions and are not used up themselves"
+    ],
+    "correctAnswer": "speed up reactions and are not used up themselves",
+    "explanation": "A catalyst lowers the activation energy so the reaction runs faster, and because it is regenerated it can be reused many times. Catalysts are not consumed, they never slow a reaction down, and enzymes work inside cells as well as outside them.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q2",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "The word equation for aerobic respiration is",
+    "options": [
+      "carbon dioxide + water → glucose + oxygen",
+      "glucose → ethanol + carbon dioxide",
+      "glucose + carbon dioxide → water + oxygen",
+      "glucose + oxygen → carbon dioxide + water"
+    ],
+    "correctAnswer": "glucose + oxygen → carbon dioxide + water",
+    "explanation": "Aerobic respiration oxidises glucose completely: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O, releasing energy for the cell. The second option is photosynthesis reversed; the third is anaerobic fermentation in yeast; the fourth has the reactants and products scrambled and is not a real reaction.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q3",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "ATP stores energy in",
+    "options": [
+      "the bonds between carbon atoms in the sugar",
+      "hydrogen bonds between base pairs",
+      "high-energy phosphate bonds",
+      "the shape of the adenine ring only"
+    ],
+    "correctAnswer": "high-energy phosphate bonds",
+    "explanation": "ATP is adenosine triphosphate: energy is released when the terminal phosphate bond is hydrolysed to form ADP and an inorganic phosphate. Carbon–carbon bonds in the sugar, hydrogen bonds between bases and the adenine ring are not the energy store ATP is used for.",
+    "difficulty": "easy",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q4",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "The lock-and-key model of enzyme action states that the enzyme's active site",
+    "options": [
+      "fits any substrate small enough to enter it",
+      "has a shape complementary to one specific substrate",
+      "changes shape to fit many different substrates",
+      "is identical in every enzyme"
+    ],
+    "correctAnswer": "has a shape complementary to one specific substrate",
+    "explanation": "The active site is a precise three-dimensional pocket that fits one substrate (or group of closely related substrates), which is why enzymes are specific. Not every small molecule fits — shape matters; changing shape to fit many substrates is the induced-fit refinement, not lock-and-key; and active sites differ between enzymes.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q5",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "An enzyme stops working above its optimum temperature because",
+    "options": [
+      "the bonds holding its shape break, so the active site changes shape",
+      "the substrate evaporates",
+      "the enzyme is used up by the heat",
+      "the pH falls to zero"
+    ],
+    "correctAnswer": "the bonds holding its shape break, so the active site changes shape",
+    "explanation": "Heat breaks hydrogen and ionic bonds that maintain the tertiary structure, so the active site is denatured and the substrate no longer fits. The substrate does not evaporate in solution, an enzyme is not consumed by high temperature, and pH is a separate factor that does not automatically fall to zero.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q6",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "During vigorous exercise, muscles respire anaerobically in order to",
+    "options": [
+      "produce carbon dioxide and water",
+      "use up more oxygen than is available",
+      "keep releasing energy without oxygen, forming lactic acid",
+      "store extra ATP for later"
+    ],
+    "correctAnswer": "keep releasing energy without oxygen, forming lactic acid",
+    "explanation": "When oxygen cannot be delivered fast enough, glucose is broken down to lactic acid, releasing a little ATP so contraction can continue; the lactic acid is later oxidised, creating the oxygen debt. Aerobic respiration produces carbon dioxide and water, anaerobic respiration does not 'store' ATP, and it is triggered precisely because oxygen is short.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q7",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "An enzyme-catalysed reaction slows sharply when the pH moves away from its optimum because",
+    "options": [
+      "the substrate concentration falls automatically",
+      "acid destroys enzyme molecules completely",
+      "hydrogen or hydroxide ions disturb the bonds that hold the active site's shape",
+      "the water potential of the solution drops to zero"
+    ],
+    "correctAnswer": "hydrogen or hydroxide ions disturb the bonds that hold the active site's shape",
+    "explanation": "Optimum pH is a mild acidity or alkalinity; outside it, H⁺ or OH⁻ ions interfere with ionic and hydrogen bonds, changing the active site shape and lowering the rate. Substrate concentration is independent of pH, acid does not destroy the enzyme outright at moderate pH (it denatures it reversibly or irreversibly depending on severity), and water potential does not fall to zero.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q8",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "A 1 cm³ cube of potato produces oxygen more slowly in hydrogen peroxide than an equal mass of diced potato because the cube has",
+    "options": [
+      "less catalase in total",
+      "a higher temperature than the dice",
+      "more starch blocking the reaction",
+      "a smaller surface area to volume ratio, so less enzyme is exposed to the peroxide"
+    ],
+    "correctAnswer": "a smaller surface area to volume ratio, so less enzyme is exposed to the peroxide",
+    "explanation": "Catalase sits in the potato cells, and a cube has far less exposed surface per unit volume than the same mass cut into dice, so fewer enzyme molecules meet the substrate at once. A single intact cube contains the same total catalase as the dice cut from it, temperature is unchanged by shape, and starch does not block catalase.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q9",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "In a eukaryotic cell, the Krebs cycle and the electron transport chain take place in the",
+    "options": [
+      "cytoplasm",
+      "mitochondrion",
+      "chloroplast",
+      "nucleus"
+    ],
+    "correctAnswer": "mitochondrion",
+    "explanation": "The Krebs cycle runs in the mitochondrial matrix and the electron transport chain on the inner mitochondrial membrane, which is why cells that respire hard are packed with mitochondria. Glycolysis does occur in the cytoplasm, chloroplasts run photosynthesis, and the nucleus stores and copies DNA.",
+    "difficulty": "hard",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  },
+  {
+    "id": "exp2-bioenergy-q10",
+    "domain": "highschool",
+    "topicSlug": "bioenergetics-biochemistry",
+    "type": "mcq",
+    "questionText": "Which reagent test identifies protein?",
+    "options": [
+      "Biuret reagent, which turns purple/lilac",
+      "iodine solution, which turns blue-black",
+      "Benedict's solution, which turns brick red",
+      "the ethanol emulsion test, which turns cloudy"
+    ],
+    "correctAnswer": "Biuret reagent, which turns purple/lilac",
+    "explanation": "Biuret reagent (alkaline copper sulfate) detects peptide bonds and gives a purple or lilac colour with protein. Iodine detects starch, Benedict's detects reducing sugars such as glucose, and the ethanol emulsion test detects lipids — each of those would be the wrong test for a protein sample.",
+    "difficulty": "medium",
+    "sourceExam": "original-exam-style",
+    "reviewStatus": "needs-human-review",
+    "selfCheck": "passed"
+  }
+]
