@@ -146,3 +146,18 @@ syllabus alignment, and every generated MCQ key.
 - Discovery legacy quiz cleanup: 12 leftover `extras`/`disco-*` quiz Question rows deleted per owner directive ("no quiz in discovery"). Fresh extras quiz rows: 0.
 - Known gap for next round: Version A (official ZA/TZ) counterparts — 0 of 6,000 JAMB coreIds have an official transcription yet; NSC/NECTA transcription queue is A2's next lane.
 - Production DB is on the Supabase transaction pooler (port 6543) — all scripted DB access must use `?pgbouncer=true&connection_limit=1` on DATABASE_URL.
+
+## Integration session (2026-10-20, A1 — banks to production)
+
+- tools/pq/integrate-banks.mjs (new, idempotent): seeds the 12 flat JAMB banks
+  into questions, mapping topicSlug -> Topic.slug (creating the 4 missing
+  topics: atomic-structure, periodicity, acids-bases-salts,
+  literature-in-english). **Ran against production: 6,000 inserted, 0 skipped.
+  Total highschool questions now 6,653 (653 pre-existing + 6,000 JAMB).**
+- Discovery promoted physics-first: discovery-curiosity orderIndex 0 (the face
+  of discovery); 7 legacy quiz-based disco-* topics + their 8 lessons removed
+  (their quiz rows were already deleted). extras topics remaining: 13.
+- Dual-version metadata (coreId/variant/provenance/track) remains JSON-side:
+  Question has no columns for it. Version B (all global tracks, incl. JAMB) is
+  what ships; Version A needs the schema migration + NSC/NECTA transcription
+  queue (A2, next round).
