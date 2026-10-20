@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import Link from "next/link";
 import {
+  AlertTriangle,
   ArrowDown,
   ArrowLeft,
   ArrowRight,
+  CheckCircle2,
   Compass,
+  FileCode2,
   HelpCircle,
+  Info,
   MessageSquare,
   Telescope,
 } from "lucide-react";
@@ -76,12 +80,24 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "callout":
       return block.variant === "info" ? (
-        <div className="border border-sky-500/30 bg-sky-950/20 text-sky-200 rounded-xl p-5 my-6 leading-relaxed">
-          {block.text}
+        <div className="my-6 flex items-start gap-3 border border-sky-500/30 bg-sky-950/20 text-sky-200 rounded-xl p-5 leading-relaxed">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" />
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-sky-400 mb-1">
+              Note
+            </div>
+            {block.text}
+          </div>
         </div>
       ) : (
-        <div className="border border-rose-500/30 bg-rose-950/20 text-rose-200 rounded-xl p-5 my-6 leading-relaxed">
-          {block.text}
+        <div className="my-6 flex items-start gap-3 border border-rose-500/30 bg-rose-950/20 text-rose-200 rounded-xl p-5 leading-relaxed">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-rose-400" />
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-rose-400 mb-1">
+              Watch out
+            </div>
+            {block.text}
+          </div>
         </div>
       );
     case "table":
@@ -111,9 +127,219 @@ function Block({ block }: { block: LessonBlock }) {
           </table>
         </div>
       );
-    default:
-      return null;
+    case "code":
+      return (
+        <CodeCard
+          language={block.language}
+          code={block.code}
+          output={block.output}
+          caption={block.caption}
+        />
+      );
+    case "question":
+      return (
+        <QuestionCard
+          prompt={block.prompt}
+          answer={block.answer}
+          explanation={block.explanation}
+        />
+      );
+    case "mcq":
+      return (
+        <McqCard
+          stem={block.stem}
+          options={block.options}
+          correctIndex={block.correctIndex}
+          explanation={block.explanation}
+        />
+      );
+    case "diagram":
+      return (
+        <div className="my-6 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center text-sm text-slate-500">
+          Diagram unavailable — {block.diagramId}
+          <span className="mt-1 block text-slate-600">{block.caption}</span>
+        </div>
+      );
+    default: {
+      // Exhaustiveness guard: if a block type is ever added to LessonBlock,
+      // this line fails to compile until a case handles it above.
+      const exhaustive: never = block;
+      return exhaustive;
+    }
   }
+}
+
+/** A, B, C … — mcq options are conventionally lettered from index 0. */
+function letterFor(index: number): string {
+  return String.fromCharCode(65 + Math.min(Math.max(index, 0), 25));
+}
+
+/** Code with exact output — the cosmic-theme twin of the university code block. */
+function CodeCard({
+  language,
+  code,
+  output,
+  caption,
+}: {
+  language: string;
+  code: string;
+  output?: string;
+  caption?: string;
+}) {
+  return (
+    <figure className="my-6 overflow-hidden rounded-xl border border-white/10 bg-[#0a0a1a]">
+      <figcaption className="flex flex-wrap items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-2">
+        <span className="flex items-center gap-1.5 rounded-md border border-gold/30 bg-gold/10 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-gold">
+          <FileCode2 className="h-3 w-3" />
+          {language}
+        </span>
+        {caption && <span className="text-xs text-slate-400">{caption}</span>}
+      </figcaption>
+      <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed text-slate-200">
+        <code>{code}</code>
+      </pre>
+      {output && (
+        <div className="border-t border-white/10 bg-white/[0.02] px-4 py-3">
+          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-emerald-400">
+            <CheckCircle2 className="h-3 w-3" /> Output
+          </div>
+          <pre className="overflow-x-auto font-mono text-sm leading-relaxed text-emerald-300/90">
+            <code>{output}</code>
+          </pre>
+        </div>
+      )}
+    </figure>
+  );
+}
+
+/** Question with an inline reveal — answer stays hidden until asked for. */
+function QuestionCard({
+  prompt,
+  answer,
+  explanation,
+}: {
+  prompt: string;
+  answer: string;
+  explanation?: string;
+}) {
+  const [revealed, setRevealed] = useState(false);
+  const answerId = useId();
+  return (
+    <div className="my-6 rounded-xl border border-violet-400/30 bg-violet-950/20 p-5">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-violet-300">
+        <CheckCircle2 className="h-3.5 w-3.5" /> Check yourself
+      </div>
+      <p className="text-slate-200 font-reading leading-relaxed">{prompt}</p>
+      {revealed ? (
+        <div
+          id={answerId}
+          className="mt-3 space-y-2 border-t border-violet-400/20 pt-3"
+        >
+          <p className="text-slate-300 font-reading leading-relaxed">
+            <span className="font-semibold text-gold">Answer: </span>
+            {answer}
+          </p>
+          {explanation && (
+            <p className="text-sm text-slate-400 leading-relaxed">{explanation}</p>
+          )}
+          <button
+            type="button"
+            onClick={() => setRevealed(false)}
+            aria-expanded={true}
+            aria-controls={answerId}
+            className="min-h-[44px] text-xs font-semibold text-violet-300 underline hover:text-violet-200"
+          >
+            Hide answer
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setRevealed(true)}
+          aria-expanded={false}
+          aria-controls={answerId}
+          className="mt-3 min-h-[44px] rounded-lg border border-violet-400/40 px-4 py-2 text-sm font-semibold text-violet-200 hover:border-gold/60 hover:text-gold transition-colors"
+        >
+          Reveal the answer
+        </button>
+      )}
+    </div>
+  );
+}
+
+/** MCQ with selectable options — the correct option and explanation are revealed on pick. */
+function McqCard({
+  stem,
+  options,
+  correctIndex,
+  explanation,
+}: {
+  stem: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+}) {
+  const [picked, setPicked] = useState<number | null>(null);
+  const revealed = picked !== null;
+  // Defensive clamp: legacy rows may carry a key outside the option range.
+  const keyIndex = Math.min(Math.max(correctIndex, 0), Math.max(options.length - 1, 0));
+  return (
+    <div className="my-6 rounded-xl border border-gold/30 bg-gold/5 p-5">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+        <HelpCircle className="h-3.5 w-3.5" /> Quick check
+      </div>
+      <p className="text-slate-100 font-reading font-medium leading-relaxed">{stem}</p>
+      <div className="mt-3 space-y-2" role="group" aria-label={stem}>
+        {options.map((option, index) => {
+          const isCorrect = index === keyIndex;
+          const isPicked = picked === index;
+          const tone = !revealed
+            ? "border-white/10 bg-white/5 text-slate-300 hover:border-gold/40"
+            : isCorrect
+              ? "border-gold/60 bg-gold/10 text-gold"
+              : isPicked
+                ? "border-rose-500/40 bg-rose-950/20 text-rose-200"
+                : "border-white/10 bg-white/[0.02] text-slate-500";
+          const chip = !revealed
+            ? "bg-white/10 text-slate-400"
+            : isCorrect
+              ? "bg-gold text-slate-950"
+              : isPicked
+                ? "bg-rose-500/80 text-white"
+                : "bg-white/5 text-slate-600";
+          return (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setPicked(index)}
+              aria-pressed={isPicked}
+              className={`flex w-full items-start gap-3 rounded-lg border px-3 py-2.5 text-left text-sm transition-colors ${tone}`}
+            >
+              <span
+                className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${chip}`}
+              >
+                {letterFor(index)}
+              </span>
+              <span className="font-reading leading-relaxed">{option}</span>
+            </button>
+          );
+        })}
+      </div>
+      {revealed && (
+        <p
+          role="status"
+          aria-live="polite"
+          className="mt-3 text-sm text-slate-400 leading-relaxed"
+        >
+          <span className="font-semibold text-gold">
+            {picked === keyIndex ? "Correct — " : "Not quite — "}
+            the answer is {letterFor(keyIndex)}.{" "}
+          </span>
+          {explanation}
+        </p>
+      )}
+    </div>
+  );
 }
 
 export default function DiscoveryReader({
