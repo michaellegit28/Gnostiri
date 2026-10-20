@@ -213,15 +213,15 @@
   "domain": "highschool",
   "topicSlug": "waves-optics",
   "type": "mcq",
-  "questionText": "A ray strikes a plane mirror at 35° to the mirror surface. The angle between the incident ray and the reflected ray is",
+  "questionText": "A ray of light strikes a plane mirror at an angle of incidence of 35° (measured from the normal). The angle between the incident ray and the reflected ray is",
   "options": [
    "35°",
    "55°",
    "70°",
-   "145°"
+   "110°"
   ],
   "correctAnswer": "70°",
-  "explanation": "Angles are measured from the NORMAL: the incident ray makes 90° − 35° = 55° with the normal. Reflection gives an equal 55° on the other side. Between the rays: 55 + 55 = 110? No — wait: the angle between incident and reflected rays = 55° + 55° = 110°. Hmm — 35° to the SURFACE means 55° to the normal, so the total between the rays is 110°.",
+  "explanation": "The angle of incidence is measured from the NORMAL, so the incident ray makes 35° with the normal. The law of reflection gives an equal 35° for the reflected ray on the other side of the normal, so the angle between the two rays is 35° + 35° = 70°. The answer 35° names the angle of incidence only and forgets that reflection doubles it; 55° is the complement 90° − 35° (the surface-vs-normal confusion); 110° comes from measuring the 35° from the mirror SURFACE instead of the normal (55° + 55° = 110°).",
   "difficulty": "easy",
   "sourceExam": "original-exam-style",
   "reviewStatus": "needs-human-review",
