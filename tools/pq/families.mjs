@@ -17,6 +17,19 @@
 
 import { int, pick, shuffled } from "./engine.mjs";
 import { localeFor } from "./locales.mjs";
+import { families as mathsFamilies } from "./families-maths.mjs";
+import { families as physicsFamilies } from "./families-physics.mjs";
+import { families as chemistryFamilies } from "./families-chemistry.mjs";
+import { families as biologyFamilies } from "./families-biology.mjs";
+import { families as englishFamilies } from "./families-english.mjs";
+import { families as economicsFamilies } from "./families-economics.mjs";
+import { families as governmentFamilies } from "./families-government.mjs";
+import { families as commerceFamilies } from "./families-commerce.mjs";
+import { families as accountingFamilies } from "./families-accounting.mjs";
+import { families as geographyFamilies } from "./families-geography.mjs";
+import { families as agricultureFamilies } from "./families-agriculture.mjs";
+import { families as literatureFamilies } from "./families-literature.mjs";
+export { recallFamily, parseNum, pool3 } from "./families-support.mjs";
 
 /** "1 metre" not "1 metres" — the area family prints option labels. */
 const unit = (n) => (n === 1 ? "metre" : "metres");
@@ -465,6 +478,18 @@ export const FAMILIES = [
   pythagorasFamily,
   simultaneousFamily,
   compoundInterestFamily,
+  ...mathsFamilies,
+  ...physicsFamilies,
+  ...chemistryFamilies,
+  ...biologyFamilies,
+  ...englishFamilies,
+  ...economicsFamilies,
+  ...governmentFamilies,
+  ...commerceFamilies,
+  ...accountingFamilies,
+  ...geographyFamilies,
+  ...agricultureFamilies,
+  ...literatureFamilies,
 ];
 
 export function familyById(id) {
