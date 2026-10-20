@@ -18,6 +18,7 @@ const LESSON_BLOCK_TYPES: LessonBlock["type"][] = [
   "table",
   "code",
   "question",
+  "theory",
   "mcq",
   "diagram",
 ];
@@ -81,6 +82,13 @@ export default async function ExtrasTopicPage({ params, searchParams }: { params
     blocks: toLessonBlocks(l.content),
   }));
 
+  // Discovery is physics-first reading: the Curiosity Trails carry no quiz
+  // rows at all, so the quiz door only shows for legacy extras topics that
+  // still own Question rows.
+  const quizCount = await prisma.question.count({
+    where: { topicId: topic.id, domain: "extras" },
+  });
+
   return (
     <div className="mx-auto max-w-6xl px-4 md:px-8 py-6 space-y-4">
       <LiteModeBanner />
@@ -99,6 +107,7 @@ export default async function ExtrasTopicPage({ params, searchParams }: { params
         lessons={lessons}
         subtopics={subtopics}
         siblings={siblings}
+        hasQuiz={quizCount > 0}
       />
       <AlignmentDisclaimer lastAudited={topic.lastAuditedDate ? new Date(topic.lastAuditedDate).toISOString().slice(0, 10) : null} />
     </div>
