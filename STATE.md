@@ -1,4 +1,4 @@
-# Gnostiri — STATE.md (2026-10-11)
+# Gnostiri — STATE.md (2026-10-20)
 
 Live URL: gnostiri.vercel.app · Repo: github.com/michaellegit28/Gnostiri · Branch: main
 
@@ -81,14 +81,37 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 
 ## Agent ownership
 
-| Agent | Lane | Branch |
+| Agent | Lane | Branch (round 2) |
 |---|---|---|
-| A1 (orchestrator) | open-exam, deployment, migrations, CI | agent-1/* |
-| A2 (study expert) | curriculum content, past papers | agent-2/* |
-| A3 (university) | university/**, mastery, assessment | agent-3/* |
-| A4 (UI/UX) | patches only → queue → A1 applies | patches-ready-for-agent1/ |
+| A1 (orchestrator) | merges, seeds wiring, DB patches, CI | agent-1/* |
+| A2 (questions) | content/questions/**, tools/pq/** — 12 flat JAMB banks × 500 (6,000 dual-version MCQs) | agent-2/jamb-banks-r2 |
+| A3 (discovery) | src/app/discovery/**, prisma/seed-courses/discovery-* — physics-first research trails (7 trails × 4 depths), typed theory prompts, NO quizzes | agent-3/discovery-physics-r2 |
+| A4 (university) | university/** — 9-subject MBBS spine + UX rebuild | agent-4/university-rebuild-r2 |
 
-Mailboxes: /tmp/Gnostiri/inbox/agent[1-4]/AGENT-MESSAGES.md
+Mailboxes: /tmp/opencode/mailbox/agent[1-4]/AGENT-MESSAGES.md
+
+## Hybrid past-question model (owner directive, round 2)
+
+Every past question exists in TWO versions bound by one coreId:
+- **Version A — Official**: real unedited NSC (Matric, ZA) / NECTA (TZ) text, rendered only in
+  ZA/TZ tracks, tagged "Official past question" with DBE/NECTA attribution.
+- **Version B — Cloned variant**: fully rewritten original wording + fresh numbers + local skin
+  (₦/$/…), rendered in ALL other tracks (JAMB, WAEC, US, UK). Same concept/structure/difficulty.
+Spec: content/questions/DUAL-VERSION-WORKFLOW.md · tooling: tools/pq/* (families carry independent
+verifiers — a wrong key is dropped, never shipped) · audit: tools/pq/audit-banks.mjs.
+
+## Discovery = physics-first research (owner directive)
+
+No quizzes in discovery. Logical/conceptual prompts with a keyboard typing space (`theory` block
++ src/components/discovery/TheoryPrompt.tsx). 7 physics trails (mechanics, thermodynamics,
+waves, optics, E&M, quantum, cosmology) × 4 research depths. Seeded to production.
+
+## University = MBBS first, US standard (owner directive)
+
+Rebuilt simple/user-friendly, mature & premium. Nine MBBS subjects (ANAT, PHYS, BCHM, PATH, PHRM,
+MED, SURG, OBGY, PEDS) + Introduction to Programming and Applied Statistics as core courses.
+All seeded to production; all rows needs-human-review, nothing "verified". Seeded 2026-10-20:
+13 courses · 57 modules · 303 concept nodes · 307 course lessons · 109 assessment items.
 
 ## Open blockers
 
@@ -97,20 +120,21 @@ Mailboxes: /tmp/Gnostiri/inbox/agent[1-4]/AGENT-MESSAGES.md
 2. **Payments not wired** — all provider keys empty; no revenue possible
 3. **Google sign-in DISABLED** — Firebase provider not enabled; domain auth
    fixed by A1 but user must enable the provider in Firebase console
-4. **A4 patches 06 + 07 need rebase** — they target a pre-AI-marking
-   PracticeRunner.tsx; A4 notified
-5. **No real past-paper content** — exam bank has only demo papers + 50
-   pilot maths questions; S-5 (WAEC transcription) is the November critical path
-6. **Secrets exposed in chat** — GitHub PAT, Vercel token, Atria key,
-   Firebase service-account key all need rotation at project completion
-7. **Admin alignment panel dead** — ADMIN_EMAILS is empty
-8. **No CI history yet** — workflow just created, needs one PR to validate
+4. **Version A gap in the JAMB banks** — 0 of 6,000 JAMB coreIds yet have an
+   official ZA/TZ Version A counterpart (G13); official NSC/NECTA transcription
+   queue owned by A2 next round
+5. **Secrets exposed in chat** — GitHub PAT, Vercel token, Atria key,
+   Firebase service-account key, Supabase DB password all need rotation at
+   project completion
+6. **Admin alignment panel dead** — ADMIN_EMAILS is empty
+7. **No CI history yet** — workflow just created, needs one PR to validate
 
 ## Content that went live without independent review
 
-All A2 content (22 topic rebuilds, 55 rapid-revision summaries, 50 pilot
-questions) was committed by A2 and pushed by A1 after automated checks
-(tsc, lint, test:alignment) but with no human reading the lesson text.
-All A3 code was committed by A1 after automated checks but without line-by-line
-review of A3's business logic. A4's patches 01-05 were applied by A1 after
-`git apply --check` and tsc — no visual browser testing of any A4 component.
+Round-2 content (6,000 JAMB MCQs, MBBS spine, discovery trails, programming
+course) was committed by the agents and pushed by A1 after automated checks
+(tsc, lint, full test suite, generator verifiers, python3 output checks) but
+with no human reading the text. All rows carry reviewStatus
+"needs-human-review" — nothing is marked "verified". Human review queue:
+MBBS module-1 lessons, 224 needsCheck placeholders, literature-in-english
+syllabus alignment, and every generated MCQ key.
