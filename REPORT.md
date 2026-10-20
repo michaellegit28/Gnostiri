@@ -263,3 +263,114 @@ too.
 - `lastAuditedDate` is deliberately left unset on the discovery rows: there has
   been no audit to date it.
 
+---
+
+# Agent 3 — Discovery Builder, Round 2 (branch `agent-3/discovery-physics-r2`)
+
+Owner directive: discovery rebuilt as physics-first research. Three commits.
+**No seed was run, no database was touched** — the seeder is authored only.
+
+## 1. Theory block + TheoryPrompt — commit `a5f152c`
+
+| File | Change |
+|---|---|
+| `src/types/lesson.ts` | new `LessonBlock` variant: `{ type: "theory"; prompt: string; modelAnswer: string; explanation?: string }` |
+| `src/components/discovery/TheoryPrompt.tsx` | **new component** |
+| `src/app/discovery/[topic]/DiscoveryReader.tsx` | `case "theory"` in the `Block` switch, next to the exhaustiveness guard; quiz door gated on `hasQuiz` |
+| `src/app/discovery/[topic]/page.tsx` | `theory` added to `LESSON_BLOCK_TYPES`; `prisma.question.count` per topic passed as `hasQuiz` |
+
+**TheoryPrompt** mirrors the highschool theory wall (`TheoryEditor.tsx` +
+`AnswerBooklet.tsx`): a real `<textarea>` with generous keyboard space
+(`rows={12}`, `min-h-[280px]`, `spellCheck`) and a live word/char count, plus
+the QuestionCard disclosure pattern — "Reveal model answer" with
+`aria-expanded`/`aria-controls` on a `useId` region, toggle back to "Hide".
+Discovery's dark cosmic + gold language throughout (gold-tinted panel,
+`font-reading`, focus-visible gold ring, 44px hit height). The other two
+`LessonBlock` consumers (`LessonRenderer`, `StudyReaderClient`) already
+`return null` on unknown types, so the shared type addition compiles clean
+in their lanes — tsc 0 errors, lint clean.
+
+**Quiz gating:** discovery carries no quizzes, so the "Test yourself" door now
+renders only when the topic actually owns Question rows (`hasQuiz`). The
+rebuilt Curiosity Trails own none → no door. Legacy extras topics that still
+have question rows keep theirs (flagging below: this is the deliberate
+minimal-fit to the directive).
+
+## 2. Rebuilt seed — commit `ed2b2ee` — `prisma/seed-courses/discovery-curiosity.ts`
+
+### Trail map — 7 trails × 4 depths = 28 published lessons
+
+| # | Trail (id) | Physics branch | Research-depth primer centres on |
+|---|---|---|---|
+| 1 | The Scale Ladder (`-scale`) | astrophysics & cosmology | 46 Gly comoving radius; Hubble's law; critical density ρc = 3H²/8πG |
+| 2 | Why the Sky Is Blue (`-sky`) | waves & optics (light) | Rayleigh (λ⁻⁴) vs Mie; Beer–Lambert reddening model; polarisation (Arago) |
+| 3 | The Rules of Motion (`-motion`) | mechanics | Newton's Moon test: a = 4π²r/T² = 2.724×10⁻³ m/s² vs g/(r/R)² = 3,605 vs 3,640 |
+| 4 | Why Heat Never Flows Uphill (`-heat`) | thermodynamics | Kelvin–Planck/Carnot ceiling; Boltzmann S = k ln W; Landauer kT ln 2; Maxwell's demon resolved |
+| 5 | The Life of a Wave (`-wave`) | waves (mechanical) | d'Alembert's wave equation; deep-water dispersion; Fourier harmonics; Schrödinger's debt |
+| 6 | The Invisible Current (`-current`) | electricity & magnetism | Maxwell's displacement current; c = 1/√(ε₀μ₀) = 2.998×10⁸ m/s; Hertz 1887 |
+| 7 | Why the Atom Is Not a Tiny Solar System (`-quantum`) | modern/quantum | Planck→Bohr→de Broglie→Schrödinger; α = 1/137.036; Bell 1964 / Aspect 1982 |
+
+- **No quizzes.** The six round-1 quiz Question rows
+  (`discovery-curiosity-scale-q1..q3`, `-sky-q1..q3`) are retired by stable id
+  via `question.deleteMany` on every seed run (no-op on a fresh DB). Every
+  lesson is kept.
+- **28 theory prompts** (one per lesson, plus extras), 18 inline `question`
+  blocks and 24 inline `mcq` blocks are the only question carriers.
+- **Research depths** carry derivations, orders of magnitude and primary
+  references (Principia 1687, Carnot 1824, Boltzmann 1877, Maxwell 1865,
+  Schrödinger 1926, Bell 1964 …) — not school summaries.
+- **Block-type coverage:** all 11 block types are exercised in every lesson
+  except that the research depths of trails 3–7 deliberately carry **no `mcq`**
+  — a research primer does not end in multiple choice; the theory prompt is
+  the check there. Trails 1–2 kept their round-1 research-depth mcqs.
+- Idempotent upserts on stable ids throughout (unchanged convention);
+  `needsVerification: true` on the field topic and all 7 trail topics.
+
+## 3. Verification counts
+
+Temporary harness (`prisma/seed-courses/verify-curiosity.ts`, deleted before
+commit) + project checks:
+
+| Check | Result |
+|---|---|
+| Python code blocks executed via `python3` | **31/31** byte-identical to the claimed output |
+| Computed prose claims (recomputed in python3, matched to text) | **29/29** |
+| Structural checks (heading levels, callout variants, table row widths, `correctIndex` range, diagram ids, theory shapes) | **0 failures** across 28 lessons |
+| Trails / lessons / theory prompts | 7 / 28 / 28 |
+| `npx tsc --noEmit` (whole project) | **0 errors** |
+| `next lint` on changed files | clean |
+| `npm run test:assessment` | **7/7 pass** |
+| `npm run test:spaced-repetition` | **7/7 pass** |
+| `npm run test:alignment` | **13/13 pass** |
+
+The harness caught six real errors before commit, all fixed: a wrong Hubble-rate
+digit (2.269e-18 → 2.268e-18), the fine-structure constant to six decimals
+(0.007297, not 0.007296 — my typo), a sound-speed code block using M = 0.029
+instead of 0.0289642 (342.9 vs 343.2 m/s, and the temperature rows), the
+1 C "weight" comparison (916,208 tonnes, not 900 — 9000× typo), Mach 1 at
+cruising altitude (299 m/s/87%, not 295/86%), and the human-scale log-midpoint
+claim in Trail 1 (humans sit 10 powers above an atom and 26 below the
+observable universe — nearer the small end, not at the midpoint; the
+midpoint of 10⁻¹⁵…10²⁶ is 10⁸ m).
+
+## ⚠️ Human-review flags
+
+- `needsVerification: true` on the field topic and **all seven trail topics**.
+  The seeder never marks a row verified. `Lesson` has no `reviewStatus`
+  column, so topic-level `needsVerification` remains the single review flag
+  for extras (schema migration if per-lesson flags are wanted).
+- **The retired quiz rows only disappear when this seeder is next run.**
+  Production still holds the six Question rows until A1 runs it; nothing was
+  executed here.
+- **Quiz-door gating is my minimal reading of "no quizzes in discovery":**
+  `DiscoveryReader`'s "Test yourself" link now renders only for topics that
+  still own Question rows (the legacy `disco-*` chain in `prisma/seed.ts`
+  keeps theirs). If the owner wants the discovery quiz page/route removed
+  wholesale, that is a one-line follow-up in the reader and route.
+- Research depths of trails 3–7 omit `mcq` by design (see above); if the
+  reviewer prefers strict per-lesson block parity, adding one mcq per depth
+  is mechanical.
+- `lastAuditedDate` remains unset on all discovery rows: no audit has
+  happened. All physics content needs a domain-expert read before the
+  `needsVerification` flags come off.
+
