@@ -92,7 +92,7 @@ function instantiate(family, seedText, i, subject) {
 }
 
 /** Generate up to n verified, in-bank-unique items for one family. */
-function generate(family, seedText, n, seenCores, seenStems, subject) {
+function generate(family, seedText, n, seenCores, seenStems, subject, idCounter) {
   const items = [];
   const drops = { verifier: 0, distractors: 0, collision: 0, duplicate: 0 };
   let i = 0;
@@ -122,7 +122,7 @@ function generate(family, seedText, n, seenCores, seenStems, subject) {
     seenCores.add(coreId);
     seenStems.add(stem);
     items.push({
-      id: `${subject}-${family.id}-g${i}`,
+      id: `${subject}-${family.id}-g${++idCounter.n}`,
       coreId,
       provenance: "original",
       variant: "B",
@@ -205,7 +205,28 @@ const PLAN = {
       "content/questions/chemistry.expansion-2.json",
     ],
     a4: ["mole-mass"],
-    fill: [],
+    fill: [
+      "mass-from-moles",
+      "moles-from-gas-volume",
+      "volume-from-moles",
+      "molar-concentration",
+      "titration-moles",
+      "dilution-molarity",
+      "percent-composition",
+      "empirical-formula",
+      "limiting-reagent",
+      "percentage-yield",
+      "ph-from-h-plus",
+      "neutralisation-enthalpy",
+      "faraday-electrolysis",
+      "oxidation-state",
+      "isotope-ram",
+      "electron-configuration",
+      "moles-from-particles",
+      "equilibrium-constant",
+      "bond-enthalpy-change",
+      "solubility-mass",
+    ],
   },
   mathematics: {
     bank: "content/questions/mathematics.json",
@@ -331,6 +352,7 @@ async function main() {
     let need = TARGET - bank.length;
     if (need < 0) need = 0;
     const famStats = {};
+    const idCounter = { n: 0 };
     let round = 0;
     while (need > 0 && round < 12) {
       round++;
@@ -339,7 +361,7 @@ async function main() {
         if (need <= 0) break;
         const family = familyById(famId);
         const seedText = `jamb-r${round}`;
-        const { items, drops } = generate(family, seedText, Math.min(need, 14), seenCores, seenStems, subject);
+        const { items, drops } = generate(family, seedText, Math.min(need, 14), seenCores, seenStems, subject, idCounter);
         const kept = items.slice(0, need);
         const trimmed = items.length - kept.length;
         for (const it of kept) bank.push(it);
