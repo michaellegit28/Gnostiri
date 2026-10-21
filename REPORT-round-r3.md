@@ -126,30 +126,73 @@ Per-topic and per-subject question counts now come from the tree
 |---|---|
 | `npx tsc --noEmit` | 0 errors |
 | `next lint` (changed dirs) | clean |
-| `next build` (branch) | successful — BUILD_ID written; the pristine `main` checkout behaves identically in this sandbox |
-| `node --test` (all suites) | **141 pass / 0 fail**, incl. 7 new `tests/board-taxonomy.test.mjs` |
-| Vercel branch deploy | **READY** ("Deployment has completed", GitHub status, sha 3301003) |
+| `next build` (branch, and the merged tip) | successful — BUILD_ID written; the pristine `main` checkout behaves identically in this sandbox |
+| `node --test` (all suites) | **161 pass / 0 fail** (8 in the new `tests/board-taxonomy.test.mjs`; the other 153 pre-existing) |
+| Vercel branch deploy | **READY** (sha 3301003) |
+| Vercel production deploy | **READY** (merge 4a8c582, then fix-forward 36f4af2 → main bcc1aa6) |
+| Live smoke, gnostiri.vercel.app | 30 URLs 200, no RSC digest errors, expected content present — see below |
 
 Local page-level smoke could not be run: there is no `DATABASE_URL` in this
 agent's shell, a local PostgreSQL cannot start (no `/dev/shm`, no SysV shared
 memory; docker is unresponsive), and the Vercel **branch preview is
-SSO-protected**. Live smoke of the same URLs on `gnostiri.vercel.app` is the
-verification that replaces it (see §5).
+SSO-protected**. Live smoke on production replaced it, and it caught a real bug
+(§5).
 
-### Counts to re-verify once the tag pass runs
+### Live numbers (gnostiri.vercel.app, after deploy)
 
-- `/highschool/exams/jamb`: 6,000 practice questions · 12 subjects
-  (Mathematics 500/8 topics, English Language 500/7, Physics 500/7, Chemistry 500/7,
-  Biology 500/7, Economics 500/2, Accounting 500/1, Agricultural Science 500/1,
-  Commerce 500/1, Geography 500/1, Government 500/1, Literature in English 500/1)
-  · 44 topics (all captured from the live `/highschool/jamb` hub before any change).
-- `/highschool/exams/waec`: 13 practice questions (Mathematics 10, Biology 3) ·
-  5 subjects · 26 topics — English/Physics/Chemistry are real syllabus
-  structure with no questions loaded yet, shown honestly as 0.
-- `/highschool/exams/neco`: 0 practice questions · 5 subjects · 26 topics —
-  honest empty state; its 113 tagged curriculum questions still show on the
-  practice picker (they live on `master-*` topics).
-- `/cbt/setup?board=jamb` selects **10 of the 12** subjects.
+- `/highschool/exams/jamb`: **"JAMB (UTME) practice bank — 6,000 practice
+  questions across 12 subjects and 44 topics"**; subject grid — Mathematics
+  500/8 topics, English Language 500/7, Physics 500/7, Chemistry 500/7, Biology
+  500/7, Economics 500/2, Accounting 500/1, Agricultural Science 500/1, Commerce
+  500/1, Geography 500/1, Government 500/1, Literature in English 500/1;
+  "Start CBT simulation → Open CBT setup", "Practice by topic", "Paper structure
+  in the practice engine: UTME, 2h, 400 marks", "Past-paper digitization in
+  progress — 6,000 practice questions are live…".
+- **Every one of the 44 per-topic counts was checked against that topic's own
+  quiz page ("Question 1 of N"): 44/44 equal, per-topic sum = 6,000.**
+- `/api/questions?boardId=jamb&topicId=jamb-mathematics-linear-equations` →
+  **246 questions** (was `{"questions":[]}`); `jamb-accounting-full-syllabus` →
+  500; `jamb-agriculture-full-syllabus` → 500; `jamb-literature-in-english-full-syllabus`
+  → 500; `jamb-mathematics-calculus` → 48.
+- `/highschool/exams/waec`: **13 practice questions across 5 subjects and 26
+  topics** (Mathematics 10, Biology 3; English/Physics/Chemistry are real
+  syllabus structure with 0 questions, shown honestly) + honest digitization
+  status + both entry points.
+- `/highschool/exams/neco`: **0 practice questions across 5 subjects and 26
+  topics**, CBT entry labelled in preparation, honest past-paper status.
+- Preparing boards (`sat`, `ap`, `maneb`, `cbse`, `icse`, `nsc-matric`, `necta`,
+  `kcse`, `cambridge`, `aqa`, `edexcel`): **"In preparation"** — no fabrication.
+- All 12 JAMB subject pages 200 with Study/Quiz links; all 88 topic links 200.
+- `/highschool/practice/jamb`: **339 questions tagged to this board's papers
+  across 6 subjects**, topics grouped correctly (Mathematics, Physics,
+  Chemistry, Biology, …), honest per-topic counts.
+- `/cbt` and `/cbt/setup?board=jamb`: unchanged — 6,000 questions, 10 subjects
+  (see §4.1).
+
+---
+
+## 5. The bug the live smoke caught (and the fix)
+
+Crucially, the live smoke found a defect the local checks could not:
+
+**1 of the 44 JAMB topic links was dead.** The JAMB agriculture topic is
+`jamb-agriculture-full-syllabus` whose parent is `jamb-agricultural-science` —
+the id does **not** extend the parent id, so the board page's
+`child.id.slice(parent.id.length + 1)` produced the nonsense slug `abus` and
+linked to `/highschool/jamb/agricultural-science/abus/*`, which renders an empty
+shell. 43 of 44 links were count-exact against their quiz pages; this one was
+off by 500.
+
+Fix (`topicSlugOf` in `src/app/highschool/exams/[exam]/topic-slug.ts`, used by
+the board page, the subject page and the study TOC, plus a two-step resolution
+in the quiz page): constructed ids keep their remainder; legacy ids keep the
+**full** id, which every topic page accepts. Re-verified live: **44/44 links
+resolve and 44/44 counts equal the quiz totals.**
+
+Two pre-existing honest empty states were confirmed correct, not bugs:
+`No questions available yet` renders for topics that genuinely have none
+(quadratic-equations, work-energy-and-power, …).
+
 
 ---
 
