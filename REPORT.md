@@ -680,3 +680,85 @@ midpoint of 10⁻¹⁵…10²⁶ is 10⁸ m).
   happened. All physics content needs a domain-expert read before the
   `needsVerification` flags come off.
 
+
+---
+
+# Agent 3 — Live smoke suite (`tools/smoke.mjs`)
+
+Round: smoke-suite-r1 · branch `agent-3/smoke-suite-r1` (from main `d38f741`) ·
+commit `2a22810` · pushed to origin. Discovery remains deprioritized — nothing
+under `src/app/discovery/**` or `prisma/seed-courses/discovery-curiosity.ts`
+was touched; `/discovery` is smoke-checked read-only only.
+
+## 1. What was built
+
+`tools/smoke.mjs` — zero-dependency Node script (built-in `fetch`, no new
+packages). Probes a CATALOGUE of route expectations and exits non-zero on any
+failure:
+
+- **status 200** (a redirect where 200 is expected fails, with its Location)
+- **zero RSC error digests** — `"digest":"…"`, `NEXT_NOT_FOUND`,
+  `NEXT_REDIRECT`, "Internal Server Error" text. Markers and digests are tested
+  against a normalized copy of the HTML because React SSR splits adjacent
+  text/expression nodes with `<!-- -->` and the RSC payload escapes quotes
+  (`\"digest\":\"…\"`)
+- **required content markers** per route (loose regexes — no flaky exact counts)
+- **API probes** — JSON shape, array length range, plus the
+  correctAnswer-never-reaches-the-client invariant on every probe
+
+Usage:
+
+```
+node tools/smoke.mjs                                        # http://localhost:3000
+SMOKE_URL=https://gnostiri.vercel.app node tools/smoke.mjs  # any live target
+node tools/smoke.mjs --url http://localhost:3111
+```
+
+Catalogue is data — agents extend by appending `{ path, name?, markers, api? }`
+entries. 20 routes seeded: home, both hubs, both boards, both practice pickers,
+JAMB physics study+quiz, the 5 CBT routes, university index + course,
+discovery, login, plus `/api/questions` and `POST /api/cbt/session` probes.
+
+## 2. Results
+
+**Production (https://gnostiri.vercel.app): 19/20 pass, 1 fail.**
+
+- FAIL `GET /api/questions?boardId=jamb&topicId=jamb-physics-motion-and-kinematics`
+  → HTTP 200 but `questions: []`. Same 0 for `topicId=jamb-physics` and
+  `jamb-english` — zero board-tagged JAMB questions on every probe, and
+  `/highschool/practice/jamb` renders its empty state. Cause: the route filters
+  `questionBoardTags: { some: { examinationId: jamb, tier ≠ NOT_EXAMINED } }`;
+  the 6,000-question `jamb-*` topic tree carries no `QuestionBoardTag` rows, so
+  practice/study serve nothing while `/cbt` (which queries the tree directly)
+  serves all of it — proven by the passing `POST /api/cbt/session` probe and
+  the live `/cbt/session` page. **Agent 2's lane** (jamb-unification-r1);
+  reported to the agent-2 mailbox with route + symptom + cause.
+- `/cbt/session?board=jamb&mode=simulation` is healthy live — false-failed the
+  first suite run on a bad marker (`Submit Exam` renders only on the LAST
+  question); marker fixed to `Mark for review` + board name. First-run false
+  positives also revealed that Next 14 embeds the not-found JSX in every page's
+  RSC payload — not a failure signal, now normalized away.
+
+**Local production server (`npx next build && npx next start`): build succeeded;
+run blocked by environment.** No `DATABASE_URL` exists in this shell (only
+`.env.example`), so every DB-touching route emitted RSC error digests —
+15/20 failed with `"digest":"…"`, 5/20 passed (login, cbt results/review
+headers, home, highschool hub). This is the suite doing its job — a missing env
+var that would otherwise ship as silent white screens. Needs the Supabase
+pooler URL (`?pgbouncer=true&connection_limit=1`) passed in, same block agent 2
+reported.
+
+## 3. Gates
+
+- `npx tsc --noEmit` — 0 errors
+- `npx next lint` — clean (tools/ is outside the lint scope; no app files changed)
+- Exit codes proven both directions: exit 0 on all-pass (verified against a
+  throwaway local mock serving the catalogue), exit 1 on failure (verified
+  against prod and against an unreachable host)
+- Rebase-first: branch was cut from `origin/main` head `d38f741`, fetched, no
+  rebase needed, pushed (`2a22810`)
+- Clean-clone verification: fresh `git clone` of the branch (no `node_modules`)
+  runs the suite against prod with identical results — zero-dependency claim holds
+- Vercel: no token in this environment; production deployment confirmed live and
+  serving (all prod smoke requests answered). Commit touches `tools/` only —
+  outside the Next build, no deploy impact.
