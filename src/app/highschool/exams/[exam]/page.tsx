@@ -6,6 +6,7 @@ import { BookOpen, ChevronRight, Clock, FileText, HelpCircle, MonitorPlay, Targe
 import { boardBySlug, EXAM_CLASSES } from "@/lib/exam-bank";
 import { presetFor } from "@/lib/cbt/config";
 import { paperUrl, subjectSlugOf } from "@/lib/papers";
+import { topicSlugOf } from "./topic-slug";
 
 export const dynamic = "force-dynamic";
 
@@ -118,7 +119,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
     list.push({
       id: child.id,
       title: child.title,
-      topicSlug: child.id.slice(child.parentId.length + 1),
+      topicSlug: topicSlugOf(child.id, child.parentId),
       questionCount: 0,
     });
     childrenByParent.set(child.parentId, list);

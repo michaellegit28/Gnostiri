@@ -143,3 +143,32 @@ test("the board API serves a board's own tree without a tag, and never NOT_EXAMI
   assert.ok(/NOT:\s*\{\s*boardTags:/.test(src), "NOT_EXAMINED must be excluded on both paths");
   assert.ok(!/correctAnswer/.test(src), "the key must never be selected");
 });
+
+test("topic links resolve for legacy ids that do not extend their parent", () => {
+  // The round-3 live smoke found /highschool/jamb/agricultural-science/abus/*
+  // — a dead URL built by slicing jamb-agriculture-full-syllabus against its
+  // parent jamb-agricultural-science. The helper must fall back to the full id.
+  const src = readFileSync(Q("src/app/highschool/exams/[exam]/topic-slug.ts"), "utf8");
+  const js = ts.transpileModule(src, {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
+  }).outputText;
+  const factory = new Function("exports", `${js}\nreturn exports.topicSlugOf;`);
+  const topicSlugOf = factory({});
+
+  // normal constructed ids
+  assert.equal(topicSlugOf("jamb-mathematics-linear-equations", "jamb-mathematics"), "linear-equations");
+  assert.equal(topicSlugOf("jamb-accounting-full-syllabus", "jamb-accounting"), "full-syllabus");
+  // legacy ids: the remainder is meaningless, the full id must be kept
+  assert.equal(
+    topicSlugOf("jamb-agriculture-full-syllabus", "jamb-agricultural-science"),
+    "jamb-agriculture-full-syllabus"
+  );
+  // and every page that renders a topic slug must go through the helper
+  for (const path of [
+    "src/app/highschool/exams/[exam]/page.tsx",
+    "src/app/highschool/[exam]/[subject]/page.tsx",
+  ]) {
+    const page = readFileSync(Q(path), "utf8");
+    assert.ok(page.includes("topicSlugOf("), `${path} must derive slugs through the helper`);
+  }
+});
