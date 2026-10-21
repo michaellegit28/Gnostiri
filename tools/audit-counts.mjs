@@ -679,14 +679,17 @@ function printDefects() {
 
 // ─── main ───────────────────────────────────────────────────────────────────
 async function main() {
-  console.log(c.bold(`\naudit-counts — ${BASE_URL}`));
-  console.log(
-    c.dim(
-      `surfaces: ${WANT_DB ? "db + " : ""}board-html · picker-html · hub · api/questions · cbt` +
-        (NO_API ? " (api probes off)" : "") +
-        (ALLOW_TAG_GAP ? " · tag-gap tolerated" : ""),
-    ),
-  );
+  if (!JSON_OUT) {
+    console.log(c.bold(`\naudit-counts — ${BASE_URL}`));
+    console.log(
+      c.dim(
+        `surfaces: ${WANT_DB ? "db + " : ""}board-html · picker-html · hub · api/questions · cbt` +
+          (NO_API ? " (api probes off)" : "") +
+          (ALLOW_TAG_GAP ? " · tag-gap tolerated" : ""),
+      ),
+    );
+
+  }
 
   const boardFilter = flag("boards");
   const boards = boardFilter
@@ -698,8 +701,10 @@ async function main() {
   }
 
   const db = await dbSurface(boards).catch((err) => ({ available: false, reason: err.message }));
-  if (!db.available) console.log(c.dim(`db surface: ${db.reason ?? "unavailable"}`));
-  else console.log(c.green("db surface: postgres topic tree connected"));
+  if (!JSON_OUT) {
+    if (!db.available) console.log(c.dim(`db surface: ${db.reason ?? "unavailable"}`));
+    else console.log(c.green("db surface: postgres topic tree connected"));
+  }
 
   // hub + cbt payload are shared across boards — fetch once.
   let hubHtml = "";
@@ -825,11 +830,13 @@ async function main() {
   }
 
   const failed = defects.filter((d) => d.severity !== "WARN").length;
-  console.log(
-    failed === 0
-      ? c.green(c.bold(`\nAUDIT PASS — every surface agrees (${records.length} boards)`))
-      : c.red(c.bold(`\nAUDIT FAIL — ${failed} blocking defect(s) across ${records.length} boards`)),
-  );
+  if (!JSON_OUT) {
+    console.log(
+      failed === 0
+        ? c.green(c.bold(`\nAUDIT PASS — every surface agrees (${records.length} boards)`))
+        : c.red(c.bold(`\nAUDIT FAIL — ${failed} blocking defect(s) across ${records.length} boards`)),
+    );
+  }
   process.exit(failed === 0 ? 0 : 1);
 }
 
