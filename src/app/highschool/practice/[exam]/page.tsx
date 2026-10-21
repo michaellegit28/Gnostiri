@@ -10,7 +10,7 @@ interface PickerPageProps {
   params: { exam: string };
 }
 
-const EXAM_CODE_PREFIXES = ["waec", "jamb", "neco", "wassce-ghana", "kcse", "nsc-matric"];
+const EXAM_CODE_PREFIXES = ["waec", "jamb", "neco", "kcse", "nsc-matric", "necta", "maneb", "cbse", "icse", "cambridge", "aqa", "edexcel", "sat", "ap"];
 
 function subjectSlugForTopic(id: string, slug: string | null): string | null {
   const bySlug = slug ? topicBySlug(slug) : null;

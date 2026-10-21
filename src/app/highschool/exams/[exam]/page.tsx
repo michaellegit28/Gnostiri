@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import { BellPlus, ChevronRight, Clock, FileText, Target } from "lucide-react";
 import { paperUrl, subjectSlugOf } from "@/lib/papers";
+import { boardBySlug, EXAM_CLASSES } from "@/lib/exam-bank";
 
 export const dynamic = "force-dynamic";
 
@@ -61,6 +62,8 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
     notFound();
   }
 
+  const registryBoard = boardBySlug(examSlug);
+
   const blueprintCount = await prisma.examinationPaper.count({
     where: { examinationId: examination.id },
   });
@@ -109,6 +112,23 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
             {examination.country ? `${examination.country} — ` : ""}
             {groups.length} subject{groups.length === 1 ? "" : "s"}, {examination.papers.length} published paper{examination.papers.length === 1 ? "" : "s"}.
           </p>
+          {registryBoard && (
+            <div className="flex flex-wrap items-center justify-center gap-1.5 pt-1">
+              <span className="text-[11px] font-semibold text-slate-300 bg-white/5 px-2 py-0.5 rounded-md border border-white/10">
+                Class: {EXAM_CLASSES[registryBoard.examClass].short}
+              </span>
+              {registryBoard.formats.map((f) => (
+                <span key={f} className="text-[11px] font-medium text-teal-200 bg-teal-500/10 px-2 py-0.5 rounded-md border border-teal-500/20">
+                  {f}
+                </span>
+              ))}
+              {registryBoard.paperTypes.length > 0 && (
+                <span className="text-[11px] font-medium text-slate-300 bg-white/5 px-2 py-0.5 rounded-md border border-white/10">
+                  Papers: {registryBoard.paperTypes.join(" · ")}
+                </span>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Board-format practice */}

@@ -72,7 +72,7 @@ export const CBT_BOARDS: Record<string, CbtBoardPreset> = {
   sat: {
     code: "sat",
     slug: "sat",
-    name: "SAT",
+    name: "College Board — Digital SAT",
     tagline: "US college admissions — adaptive Reading & Writing + Math.",
     maxSubjectSlots: 2,
     sim: null,
@@ -81,10 +81,22 @@ export const CBT_BOARDS: Record<string, CbtBoardPreset> = {
     theoryCapable: false,
     status: "preparing",
   },
+  ap: {
+    code: "ap",
+    slug: "ap",
+    name: "College Board — AP Exams",
+    tagline: "US Advanced Placement — hybrid digital MCQ + free response.",
+    maxSubjectSlots: 1,
+    sim: null,
+    practice: { countOptions: [10, 25], durationOptionsMinutes: [15, 30] },
+    scoring: { kind: "percent", maxTotal: 100, grades: [] },
+    theoryCapable: true,
+    status: "preparing",
+  },
 };
 
 /** Boards that appear on the exam-select grid, in display order. */
-export const CBT_BOARD_ORDER = ["jamb", "waec", "neco", "sat"];
+export const CBT_BOARD_ORDER = ["jamb", "sat", "ap"];
 
 export function presetFor(code: string): CbtBoardPreset | null {
   return CBT_BOARDS[code.toLowerCase()] ?? null;

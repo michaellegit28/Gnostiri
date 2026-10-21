@@ -5,6 +5,7 @@
 import "server-only";
 import prisma from "@/lib/db";
 import { presetFor } from "./config";
+import { boardsInClass } from "@/lib/exam-bank";
 
 export interface CbtBoardCard {
   code: string;
@@ -51,9 +52,12 @@ export async function listCbtBoards(): Promise<CbtBoardCard[]> {
     select: { code: true, slug: true, name: true, country: true },
   });
 
+  const cbtSlugs = new Set(boardsInClass("cbt").map((b) => b.slug));
   const cards: CbtBoardCard[] = [];
   for (const exam of exams) {
+    if (!cbtSlugs.has(exam.slug)) continue; // the CBT grid mirrors the registry's CBT class
     const preset = presetFor(exam.code);
+    if (!preset) continue;
     const prefix = `${exam.code}-`;
     const topics = await prisma.topic.findMany({
       where: { id: { startsWith: prefix }, domain: "highschool" },
@@ -65,11 +69,6 @@ export async function listCbtBoards(): Promise<CbtBoardCard[]> {
       : 0;
     const subjectCount = topicIds.filter((id) => !id.slice(prefix.length).includes("-")).length;
 
-    if (!preset) continue; // only preset boards appear on the CBT grid (SAT is static)
-    if (questionCount === 0 && exam.code === "sat") {
-      cards.push({ code: exam.code, slug: exam.slug, name: preset.name, country: exam.country, questionCount: 0, subjectCount: 0, status: "preparing" });
-      continue;
-    }
     cards.push({
       code: exam.code,
       slug: exam.slug,
@@ -79,10 +78,6 @@ export async function listCbtBoards(): Promise<CbtBoardCard[]> {
       subjectCount,
       status: questionCount > 0 ? "live" : "preparing",
     });
-  }
-  // SAT isn't an Examination row yet — synthesize its card so the grid matches the spec.
-  if (!cards.some((c) => c.code === "sat")) {
-    cards.push({ code: "sat", slug: "sat", name: "SAT", country: "United States", questionCount: 0, subjectCount: 0, status: "preparing" });
   }
   return cards;
 }

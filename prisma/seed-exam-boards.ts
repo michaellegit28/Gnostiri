@@ -47,19 +47,8 @@ const BOARD_PROFILES: {
   { slug: "waec", name: "WAEC (WASSCE)", code: "waec", country: "Nigeria", notes: "Transitioning to hybrid CBT: MCQs on-screen, theory answers in booklets.", formatConfig: WAEC_FORMAT },
   { slug: "neco", name: "NECO (SSCE)", code: "neco", country: "Nigeria", formatConfig: WAEC_FORMAT },
   {
-    slug: "wassce-ghana",
-    name: "WASSCE (Ghana)",
-    code: "wassce-gh",
-    country: "Ghana",
-    formatConfig: [
-      { paperId: "P1", paperName: "Objective", sequence: 1, delivery: "PAPER", questionTypes: ["MCQ"], durationMinutes: 40, marks: 40, applicability: ["all"], required: true, instructions: "Answer ALL questions in this section." },
-      { paperId: "P2", paperName: "Essay/Theory", sequence: 2, delivery: "PAPER", questionTypes: ["THEORY"], durationMinutes: 140, marks: 100, applicability: ["all"], required: true },
-      { paperId: "P3", paperName: "Practical", sequence: 3, delivery: "PAPER", questionTypes: ["PRACTICAL"], durationMinutes: 180, marks: 40, applicability: ["sciences"], required: false },
-    ],
-  },
-  {
     slug: "kcse",
-    name: "KCSE",
+    name: "KNEC (KCSE)",
     code: "kcse",
     country: "Kenya",
     formatConfig: [
@@ -70,7 +59,7 @@ const BOARD_PROFILES: {
   },
   {
     slug: "nsc-matric",
-    name: "NSC (Matric)",
+    name: "DBE (NSC / Matric)",
     code: "nsc",
     country: "South Africa",
     formatConfig: [
@@ -119,7 +108,37 @@ async function main() {
       });
     }
   }
-  console.log(`✓ ${boardIds.length} board profiles (JAMB, WAEC, NECO, WASSCE-Ghana, KCSE, NSC)`);
+  console.log(`✓ ${boardIds.length} board profiles (JAMB, WAEC, NECO, KNEC-KCSE, DBE-NSC)`);
+
+  // 1b. Registry boards without verified blueprint formats yet — Examination
+  // rows only (repo convention: no blueprint until the format data is
+  // verified). They appear on the hub as "In preparation" until content lands.
+  const REGISTRY_BOARDS = [
+    { slug: "sat", name: "College Board — Digital SAT", code: "sat", country: "United States" },
+    { slug: "ap", name: "College Board — AP Exams", code: "ap", country: "United States" },
+    { slug: "maneb", name: "MANEB (MSCE / JCE)", code: "maneb", country: "Malawi" },
+    { slug: "cbse", name: "CBSE", code: "cbse", country: "India" },
+    { slug: "icse", name: "ICSE", code: "icse", country: "India" },
+    { slug: "necta", name: "NECTA (CSEE / ACSEE)", code: "necta", country: "Tanzania" },
+    { slug: "cambridge", name: "Cambridge (CAIE)", code: "cambridge", country: "United Kingdom" },
+    { slug: "aqa", name: "AQA", code: "aqa", country: "United Kingdom" },
+    { slug: "edexcel", name: "Edexcel", code: "edexcel", country: "United Kingdom" },
+  ];
+  for (const board of REGISTRY_BOARDS) {
+    await prisma.examination.upsert({
+      where: { slug: board.slug },
+      update: { name: board.name, code: board.code, country: board.country, domain: "highschool" },
+      create: { slug: board.slug, name: board.name, code: board.code, country: board.country, domain: "highschool" },
+    });
+  }
+  console.log(`✓ ${REGISTRY_BOARDS.length} registry boards created (preparing, no blueprint yet)`);
+
+  // 1c. Retirement — boards outside the owner's registry are removed with all
+  // dependents (papers, blueprints, tags, practice sessions cascade).
+  for (const retired of ["demo", "wassce-ghana"]) {
+    const gone = await prisma.examination.deleteMany({ where: { slug: retired } });
+    if (gone.count > 0) console.log(`✓ retired board: ${retired}`);
+  }
 
   // 2. Cross-board CORE tagging: curriculum MCQ questions serve every board's
   // first MCQ paper. Curriculum content is board-agnostic; boards package it.

@@ -184,3 +184,16 @@ Root causes found and fixed:
    0 digest errors, modules render, lesson/concepts pages 200.
 3. Lesson: next build does NOT exercise force-dynamic pages — runtime smoke
    tests against the deployed URL are now part of the A1 integration checklist.
+
+## Exam bank rebuild (2026-10-20, A1)
+
+- Owner's global board registry implemented in src/lib/exam-bank.ts — the single
+  source of truth: three format classes (CBT · Objective+Theory · Written Theory+Short Answer).
+- Seed (prisma/seed-exam-boards.ts): 9 boards created (Digital SAT, AP, MANEB, CBSE,
+  ICSE, NECTA, Cambridge, AQA, Edexcel — preparing, no blueprint until formats verified);
+  KNEC (KCSE) + DBE (NSC / Matric) renamed; **demo + wassce-ghana retired (cascade)**.
+  Production now carries exactly the 14 registry boards.
+- Hub (/highschool/exams) rebuilt: class-grouped sections with honest coverage
+  (practice Qs / papers), format chips, written-paper classification chips on board pages.
+- CBT flow aligned: /cbt grid mirrors the CBT class (JAMB live; Digital SAT + AP preparing);
+  practice prefixes extended to all new board codes.
