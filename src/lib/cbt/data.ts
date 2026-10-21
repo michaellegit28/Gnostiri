@@ -67,7 +67,10 @@ export async function listCbtBoards(): Promise<CbtBoardCard[]> {
     const questionCount = topicIds.length
       ? await prisma.question.count({ where: { topicId: { in: topicIds } } })
       : 0;
-    const subjectCount = topicIds.filter((id) => !id.slice(prefix.length).includes("-")).length;
+    // Direct children of the board root = subject roots (hyphen-counting was wrong).
+    const subjectCount = await prisma.topic.count({
+      where: { id: { startsWith: prefix }, domain: "highschool", parentId: exam.code.toLowerCase() },
+    });
 
     cards.push({
       code: exam.code,
@@ -82,23 +85,44 @@ export async function listCbtBoards(): Promise<CbtBoardCard[]> {
   return cards;
 }
 
-/** Subjects (topic roots) with real question coverage for a board. */
-export async function boardSubjects(code: string): Promise<CbtSubjectOption[]> {
-  const prefix = `${code}-`;
-  const roots = await prisma.topic.findMany({
-    where: { id: { startsWith: prefix }, domain: "highschool", parentId: { not: null } },
-    // subject roots are jamb-{subject} — they have a parent (the board root)
-    select: { id: true, title: true },
-  });
-  const subjectRoots = roots.filter((t) => !t.id.slice(prefix.length).includes("-"));
-  const out: CbtSubjectOption[] = [];
-  for (const root of subjectRoots) {
-    const descendants = await prisma.topic.findMany({
-      where: { OR: [{ id: root.id }, { id: { startsWith: `${root.id}-` } }] },
+/**
+ * All topic ids under a subject root — by PARENT EDGE, not id prefix.
+ * Prefix matching silently misses children whose slug diverges from the
+ * parent's (agricultural-science owns "jamb-agriculture-full-syllabus"), which
+ * hid 500 questions from CBT practice until this replaced it.
+ */
+async function descendantTopicIds(rootId: string): Promise<string[]> {
+  const ids = [rootId];
+  let frontier = [rootId];
+  for (let depth = 0; depth < 4 && frontier.length > 0; depth++) {
+    const children = await prisma.topic.findMany({
+      where: { parentId: { in: frontier } },
       select: { id: true },
     });
+    const next = children.map((c) => c.id).filter((id) => !ids.includes(id));
+    if (!next.length) break;
+    ids.push(...next);
+    frontier = next;
+  }
+  return ids;
+}
+
+/** Subjects (topic roots) with real question coverage for a board. */
+export async function boardSubjects(code: string): Promise<CbtSubjectOption[]> {
+  // Subject roots are the DIRECT CHILDREN of the board root topic (id === code).
+  // Hyphen-counting the suffix would drop multi-word subjects — it hid
+  // agricultural-science and literature-in-english (1,000 questions) until this
+  // parent-based detection replaced it.
+  const boardRootId = code.toLowerCase();
+  const subjectRoots = await prisma.topic.findMany({
+    where: { id: { startsWith: `${boardRootId}-` }, domain: "highschool", parentId: boardRootId },
+    select: { id: true, title: true },
+  });
+  const out: CbtSubjectOption[] = [];
+  for (const root of subjectRoots) {
+    const descendants = await descendantTopicIds(root.id);
     const count = await prisma.question.count({
-      where: { topicId: { in: descendants.map((d) => d.id) } },
+      where: { topicId: { in: descendants } },
     });
     if (count > 0) out.push({ topicId: root.id, title: root.title, questionCount: count });
   }
@@ -109,12 +133,9 @@ export async function boardSubjects(code: string): Promise<CbtSubjectOption[]> {
 export async function sampleSubjectQuestions(code: string, subjectTopicId: string, n: number): Promise<CbtSubjectPaper | null> {
   const root = await prisma.topic.findUnique({ where: { id: subjectTopicId }, select: { id: true, title: true } });
   if (!root || !root.id.startsWith(`${code}-`)) return null;
-  const descendants = await prisma.topic.findMany({
-    where: { OR: [{ id: root.id }, { id: { startsWith: `${root.id}-` } }] },
-    select: { id: true },
-  });
+  const descendants = await descendantTopicIds(root.id);
   const ids = await prisma.question.findMany({
-    where: { topicId: { in: descendants.map((d) => d.id) }, type: "mcq" },
+    where: { topicId: { in: descendants }, type: "mcq" },
     select: { id: true },
   });
   // Fisher–Yates over a copy, seeded by nothing (true random per session)

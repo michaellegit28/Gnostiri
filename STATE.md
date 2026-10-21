@@ -197,3 +197,16 @@ Root causes found and fixed:
   (practice Qs / papers), format chips, written-paper classification chips on board pages.
 - CBT flow aligned: /cbt grid mirrors the CBT class (JAMB live; Digital SAT + AP preparing);
   practice prefixes extended to all new board codes.
+
+## Night session (orchestrator, 2026-10-21)
+
+- Repaired 42 AssessmentItem rows in production from reviewStatus "draft" →
+  needs-human-review (seed had been fixed by agent 4; live rows had not been).
+- cbt/data.ts subject detection rewritten: parent-edge BFS replaces hyphen
+  counting (subject roots) and prefix matching (descendant topics). The old
+  logic hid agricultural-science + literature-in-english as subjects (10 of 12
+  in pickers) AND hid agriculture's 500 questions from CBT entirely, because
+  jamb-agriculture-full-syllabus does not share its parent's id prefix.
+  All 12 subjects x 500 = 6,000 now reachable; JAMB CBT card reports 12.
+- Killed a day-long hung tag-boards dry-run (per-row upserts over the pooler are
+  unusable at this scale; single-statement approach documented for agent 5).
