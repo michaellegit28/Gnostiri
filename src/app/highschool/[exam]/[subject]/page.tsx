@@ -59,6 +59,18 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     },
   });
 
+  // Question counts come from the topic tree itself, so the subject page, the
+  // board page and /cbt all report the same numbers.
+  const questionCountsByTopic = new Map<string, number>();
+  if (topics.length) {
+    const rows = await prisma.question.groupBy({
+      by: ["topicId"],
+      where: { topicId: { in: topics.map((t) => t.id) } },
+      _count: { _all: true },
+    });
+    for (const row of rows) questionCountsByTopic.set(row.topicId, row._count._all);
+  }
+
   // Fetch logged-in user's progress if session cookie exists
   const progressMap = new Map<string, { accuracy: number; status: string }>();
   const user = await getCurrentUser();
@@ -80,6 +92,8 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
         });
       }
   }
+
+  const totalQuestions = topics.reduce((sum, t) => sum + (questionCountsByTopic.get(t.id) ?? 0), 0);
 
   return (
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
@@ -103,6 +117,9 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
           </h1>
           <p className="mt-2 text-slate-400 text-base">
             Explore syllabus topics, lesson materials, and past question practice.
+            {totalQuestions > 0 && (
+              <> {totalQuestions.toLocaleString()} question{totalQuestions === 1 ? "" : "s"} in this subject.</>
+            )}
           </p>
         </div>
 
@@ -129,6 +146,13 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                   <div>
                     <h2 className="text-lg font-semibold text-slate-100">{topic.title}</h2>
                     <div className="mt-2 flex items-center gap-4 text-xs text-slate-400">
+                      <div className="flex items-center gap-1">
+                        <HelpCircle className="w-3.5 h-3.5 text-teal-400" />
+                        <span>
+                          {questionCountsByTopic.get(topic.id) ?? 0} question
+                          {questionCountsByTopic.get(topic.id) === 1 ? "" : "s"}
+                        </span>
+                      </div>
                       <div className="flex items-center gap-1">
                         <CheckCircle2
                           className={`w-3.5 h-3.5 ${

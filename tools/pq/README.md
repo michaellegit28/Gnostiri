@@ -2,8 +2,10 @@
 
 Built for A2's `EXPANSION-PLAN.md` Track A: one concept template x seeded
 parameter variations = a family of genuinely distinct, machine-verified
-questions. Nothing here authorises content or touches the DB — it only emits
-bank JSON in the exact schema already used by the content pipeline.
+questions. The authoring tools emit bank JSON in the exact schema already used
+by the content pipeline. Two DB-touching tools live here too (they are additive
+and idempotent): `integrate-banks.mjs` loads bank JSON into the questions table
+and the `jamb-*` topic tree, and `tag-boards.mjs` unifies the board taxonomies.
 
 ## Files
 
@@ -16,6 +18,8 @@ bank JSON in the exact schema already used by the content pipeline.
 | `dual-version.mjs` | Version A (official, verbatim + attribution) + Version B (cloned variant) bound to one `coreId` |
 | `validate.mjs` | The gates: structure, key-in-options, coreId pairing, ZA/TZ-only official, A→B leakage, locale markers, answer-position bias, difficulty mix |
 | `pq.test.mjs` | 9 regression tests (`node --test tools/pq/pq.test.mjs`) |
+| `integrate-banks.mjs` | Seeds bank JSON into `questions` + the `jamb-*` topic hierarchy (idempotent) |
+| `tag-boards.mjs` | ONE taxonomy: tags every question in a live board's topic tree `CORE` on that board's first MCQ paper (additive + idempotent) |
 
 ## Usage
 
@@ -35,6 +39,15 @@ node tools/pq/validate.mjs content/questions/*.json
 
 # Tests
 node --test tools/pq/pq.test.mjs
+
+# Unify the board taxonomies (round 3): dry-run first, always.
+# Every question in the jamb/waec/neco topic trees gets a board tag, so
+# /api/questions, /highschool/practice/[exam], /cbt and the board page all
+# agree. Additive only — existing tags (incl. NOT_EXAMINED) are never touched.
+DATABASE_URL="postgresql://…:6543/postgres?pgbouncer=true&connection_limit=1" \
+  node tools/pq/tag-boards.mjs
+DATABASE_URL="postgresql://…:6543/postgres?pgbouncer=true&connection_limit=1" \
+  node tools/pq/tag-boards.mjs --apply
 ```
 
 ## Current families
