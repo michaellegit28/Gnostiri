@@ -2,7 +2,7 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
-import { BookOpen, FileText, ArrowRight, ChevronRight, History, Globe2, BellPlus } from "lucide-react";
+import { BookOpen, FileText, ArrowRight, ChevronRight, History, Globe2, BellPlus, MonitorPlay } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -132,6 +132,21 @@ export default async function HighSchoolHubPage() {
             papers — new systems open every term.
           </p>
         </div>
+
+        {/* Full CBT simulation CTA */}
+        <Link
+          href="/cbt"
+          className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-gold/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        >
+          <span className="flex items-center gap-3">
+            <MonitorPlay className="h-5 w-5 shrink-0 text-gold" aria-hidden />
+            <span>
+              <span className="block font-serif text-base font-bold text-slate-100">Full exam simulation — CBT mode</span>
+              <span className="block text-xs text-slate-400">Real timers, board-style scoring, one-hand navigation.</span>
+            </span>
+          </span>
+          <ArrowRight className="h-4 w-4 shrink-0 text-slate-500" aria-hidden />
+        </Link>
 
         {/* Resume banner */}
         {recentActivity && (
