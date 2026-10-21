@@ -4209,7 +4209,7 @@ const MODULE_TWO_SBAS: SbaSeed[] = [
       "The diagonal is about 1.5 cm shorter, and it is measured because the obstetric conjugate cannot be reached",
       "The diagonal is about 1.5 cm longer, and it is measured because the obstetric conjugate ends on a point that is not palpable",
       "The two are identical in length, but the diagonal is easier to name",
-      "The diagonal is about 3 cm longer, and it is measured because the obstetric conjugate lies inside the iliac bone",
+      "The diagonal is about 2 cm shorter, and it is measured because the obstetric conjugate reaches beyond the pelvic brim",
     ],
     correctAnswer:
       "The diagonal is about 1.5 cm longer, and it is measured because the obstetric conjugate ends on a point that is not palpable",
