@@ -61,6 +61,9 @@ export default async function UniversityIndexPage() {
     0,
   );
   const degreeProgramme = mbbs[0]?.programme;
+  // Any lesson still in preparation keeps the notify anchor relevant — a course
+  // page "Get notified" link resolves here, for signed-in and anonymous alike.
+  const inPreparation = totalLessons > authoredLessons;
 
   return (
     <main className="min-h-screen bg-transparent text-slate-50">
@@ -241,16 +244,19 @@ export default async function UniversityIndexPage() {
           </section>
         )}
 
-        {!premium && (
+        {(!premium || inPreparation) && (
           <aside
             id="waitlist"
             className="space-y-5 rounded-2xl border border-gold/30 bg-gold/[0.07] p-6 scroll-mt-24 md:p-8"
           >
             <div>
-              <strong className="font-serif text-xl text-amber-300">Study the whole degree</strong>
+              <strong className="font-serif text-xl text-amber-300">
+                {premium ? "New lessons, as they open" : "Study the whole degree"}
+              </strong>
               <p className="mt-2 max-w-2xl text-sm text-slate-300">
-                Every lesson of the MBBS degree, the concept map behind it, and the competency
-                transcript. Payments are not live yet — reserve your place instead.
+                {premium
+                  ? `${authoredLessons} of ${totalLessons} catalogue lessons are published so far — each one reviewed before it ships. Leave an address and hear about each release.`
+                  : "Every lesson of the MBBS degree, the concept map behind it, and the competency transcript. Payments are not live yet — reserve your place instead."}
               </p>
             </div>
             <WaitlistForm />

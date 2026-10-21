@@ -50,19 +50,35 @@ export default async function LessonPage({ params }: PageProps) {
   // through it, the module this lesson belongs to.
   const concept = course.concepts.find((c) => c.orderIndex === lesson.orderIndex);
   const parentModule = concept?.moduleId ? course.modules.find((m) => m.id === concept.moduleId) : undefined;
-  const moduleLessons = parentModule
-    ? course.lessons.filter((l) => {
-        const c = course.concepts.find((x) => x.orderIndex === l.orderIndex);
-        return c?.moduleId === parentModule.id;
-      })
-    : course.lessons;
-  const positionInModule = moduleLessons.findIndex((l) => l.id === lesson.id);
+  const moduleOfLesson = (l: { orderIndex: number }) =>
+    course.concepts.find((x) => x.orderIndex === l.orderIndex)?.moduleId ?? null;
+
+  // The module → lesson spine, in teaching order. Lessons whose concept has no
+  // module are kept as a trailing group, so every lesson stays reachable.
+  const moduleGroups = course.modules
+    .map((m) => ({ id: m.id, title: m.title, lessons: course.lessons.filter((l) => moduleOfLesson(l) === m.id) }))
+    .filter((g) => g.lessons.length > 0);
+  const ungrouped = course.lessons.filter((l) => moduleOfLesson(l) == null);
+  if (ungrouped.length > 0) moduleGroups.push({ id: "ungrouped", title: "Further lessons", lessons: ungrouped });
+  const groupIndex = moduleGroups.findIndex((g) => g.lessons.some((l) => l.id === lesson.id));
+  const group = moduleGroups[groupIndex];
+  const groupLessons = group?.lessons ?? course.lessons;
+  const positionInModule = groupLessons.findIndex((l) => l.id === lesson.id);
   const positionInCourse = course.lessons.findIndex((l) => l.id === lesson.id);
 
-  const nextLesson =
-    course.lessons.find((l) => l.orderIndex === (lesson.orderIndex ?? 0) + 1) ??
-    course.lessons[course.lessons.indexOf(course.lessons.find((l) => l.id === lesson.id)!) + 1];
-  const prevLesson = course.lessons.find((l) => l.orderIndex === (lesson.orderIndex ?? 0) - 1);
+  // Prev / next walk the spine: within the module first, then across a module
+  // boundary with the destination named, so the student always knows where the
+  // link goes before taking it.
+  const nextInModule = groupLessons[positionInModule + 1];
+  const nextModuleGroup = moduleGroups[groupIndex + 1];
+  const nextLesson = nextInModule ?? nextModuleGroup?.lessons[0];
+  const nextLabel = nextInModule ? "Next lesson" : nextModuleGroup ? "Next module" : null;
+  const nextSub = nextInModule ? nextInModule.title : nextModuleGroup ? nextModuleGroup.title : null;
+  const prevInModule = groupLessons[positionInModule - 1];
+  const prevModuleGroup = moduleGroups[groupIndex - 1];
+  const prevLesson = prevInModule ?? prevModuleGroup?.lessons[prevModuleGroup.lessons.length - 1];
+  const prevLabel = prevInModule ? "Previous lesson" : prevModuleGroup ? "Previous module" : null;
+  const prevSub = prevInModule ? prevInModule.title : prevModuleGroup ? prevModuleGroup.title : null;
 
   const user = await getCurrentUser();
   const conceptId = concept?.id;
@@ -113,7 +129,7 @@ export default async function LessonPage({ params }: PageProps) {
             {parentModule && (
               <span className="text-slate-400">
                 {parentModule.title}
-                {positionInModule >= 0 && ` · lesson ${positionInModule + 1} of ${moduleLessons.length}`}
+                {positionInModule >= 0 && ` · lesson ${positionInModule + 1} of ${groupLessons.length}`}
               </span>
             )}
             {concept && (
@@ -163,18 +179,42 @@ export default async function LessonPage({ params }: PageProps) {
             </p>
           )}
           <div className="mt-6 border-t border-white/5 pt-5">
-            <CourseCompletionButton courseId={course.id} lessonId={lesson.id} locked={false} />
+            {lesson.needsCheck ? (
+              // A tracked placeholder is not completable — progress is never
+              // faked on content that has not been written yet.
+              <p className="text-sm text-slate-400">
+                This lesson is still being written. Marking a lesson complete opens once its teaching
+                content is published — the course spine below always shows what is ready now.
+              </p>
+            ) : user ? (
+              <CourseCompletionButton courseId={course.id} lessonId={lesson.id} locked={false} />
+            ) : (
+              <p className="text-sm text-slate-400">
+                <Link
+                  href="/login"
+                  className="rounded font-semibold text-gold underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                >
+                  Sign in
+                </Link>{" "}
+                to mark this lesson complete and track it on your transcript.
+              </p>
+            )}
           </div>
         </div>
 
-        {/* Prev / Next — the plain keyboard path: Tab, then Enter */}
+        {/* Prev / Next — the plain keyboard path: Tab, then Enter. Within the
+            module first; across a module boundary the destination is named. */}
         <nav aria-label="Lesson navigation" className="flex items-center justify-between gap-3 border-t border-white/5 pt-6">
-          {prevLesson ? (
+          {prevLesson && prevLabel ? (
             <Link
               href={`/university/${course.slug}/lessons/${prevLesson.id}`}
               className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg text-sm text-slate-400 transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
-              <ArrowLeft className="h-4 w-4" aria-hidden /> Previous lesson
+              <ArrowLeft className="h-4 w-4" aria-hidden />
+              <span className="text-left">
+                <span className="block">{prevLabel}</span>
+                {prevSub && <span className="block text-[11px] text-slate-500">{prevSub}</span>}
+              </span>
             </Link>
           ) : (
             <Link
@@ -184,12 +224,16 @@ export default async function LessonPage({ params }: PageProps) {
               <ArrowLeft className="h-4 w-4" aria-hidden /> Course contents
             </Link>
           )}
-          {nextLesson ? (
+          {nextLesson && nextLabel ? (
             <Link
               href={`/university/${course.slug}/lessons/${nextLesson.id}`}
-              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg text-sm font-semibold text-gold transition-colors hover:text-amber-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg text-right text-sm font-semibold text-gold transition-colors hover:text-amber-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
-              Next lesson <ChevronRight className="h-4 w-4" aria-hidden />
+              <span>
+                <span className="block">{nextLabel}</span>
+                {nextSub && <span className="block text-[11px] font-normal text-slate-400">{nextSub}</span>}
+              </span>
+              <ChevronRight className="h-4 w-4" aria-hidden />
             </Link>
           ) : (
             <Link

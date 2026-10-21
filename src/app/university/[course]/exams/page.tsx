@@ -1,6 +1,7 @@
 import { ExamHall } from "@/components/university/ExamHall";
 import prisma from "@/lib/db";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -28,6 +29,23 @@ export default async function ExamPage({ params, searchParams }: PageProps) {
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-12">
+      <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-sm text-slate-400">
+        <Link
+          href="/university"
+          className="inline-flex items-center rounded transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        >
+          University
+        </Link>
+        <span className="text-slate-600" aria-hidden>/</span>
+        <Link
+          href={`/university/${slug}`}
+          className="rounded transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        >
+          {course.title}
+        </Link>
+        <span className="text-slate-600" aria-hidden>/</span>
+        <span className="text-slate-300">Exam hall</span>
+      </nav>
       <header className="border-b pb-8">
         <p className="text-sm font-medium uppercase tracking-widest text-primary">Exam Hall</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{course.title}</h1>

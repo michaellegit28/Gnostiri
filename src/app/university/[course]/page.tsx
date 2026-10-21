@@ -85,12 +85,16 @@ export default async function CoursePage({
     needsCheck: l.needsCheck,
   }));
 
-  const navModules: NavModule[] = course.modules.map((m) => ({
-    id: m.id,
-    title: m.title,
-    orderIndex: m.orderIndex,
-    lessons: navLessons.filter((l) => moduleIdOfLesson(l) === m.id),
-  }));
+  const navModules: NavModule[] = course.modules.map((m) => {
+    const lessons = navLessons.filter((l) => moduleIdOfLesson(l) === m.id);
+    return {
+      id: m.id,
+      title: m.title,
+      orderIndex: m.orderIndex,
+      lessons,
+      authoredCount: lessons.filter((l) => !l.needsCheck).length,
+    };
+  });
   const orphanLessons: NavLesson[] = navLessons.filter((l) => moduleIdOfLesson(l) == null);
 
   // Progress continues where it stopped: the first lesson not yet complete.
@@ -214,18 +218,39 @@ export default async function CoursePage({
               )}
             </dl>
 
-            {nextLesson && (
+            {nextLesson && authoredCount > 0 && (
               <div className="pt-2">
                 <Link
                   href={`/university/${course.slug}/lessons/${nextLesson.id}`}
                   className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
-                  {doneSet.size > 0 ? "Continue where you left off" : "Start the first lesson"}
+                  {doneSet.size > 0
+                    ? `Continue — lesson ${course.lessons.indexOf(nextLesson) + 1} of ${course.lessons.length}`
+                    : "Start here — lesson 1"}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <p className="mt-2 text-xs text-slate-500">
                   {nextModule ? `${nextModule.title} · ` : ""}{nextLesson.title} · ~{nextLesson.estimatedMinutes} min
                 </p>
+              </div>
+            )}
+
+            {/* Nothing authored yet: say so plainly — never lead a student into
+                a spine where every lesson is a placeholder. */}
+            {authoredCount === 0 && (
+              <div className="max-w-2xl rounded-xl border border-amber-500/30 bg-amber-500/[0.06] p-5">
+                <p className="font-serif text-lg font-bold text-amber-200">This course is being written</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                  The full structure is in place — every module, concept and lesson slot is real — but no
+                  teaching content has been published yet. We are authoring it now, one reviewed lesson at
+                  a time.
+                </p>
+                <Link
+                  href="/university#waitlist"
+                  className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-amber-200 transition-colors hover:bg-gold/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                >
+                  Get notified when lessons open <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
               </div>
             )}
           </div>
@@ -269,6 +294,7 @@ export default async function CoursePage({
             modules={navModules}
             orphanLessons={orphanLessons}
             completedLessonIds={completedLessonIds}
+            nextLessonId={nextLesson?.id ?? null}
             defaultOpenModuleId={nextModule?.id ?? null}
           />
         </div>
@@ -286,6 +312,12 @@ export default async function CoursePage({
             className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Concept map
+          </Link>
+          <Link
+            href={`/university/${course.slug}/exams`}
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          >
+            Exam hall
           </Link>
           {!premium && (
             <Link

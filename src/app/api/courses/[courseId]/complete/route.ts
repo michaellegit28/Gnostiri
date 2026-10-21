@@ -9,6 +9,16 @@ export async function POST(req: NextRequest, { params }: { params: { courseId: s
   const { lessonId } = await req.json();
   const course = await prisma.course.findFirst({ where: { id: params.courseId, domain: "university" }, include: { lessons: { orderBy: { orderIndex: "asc" } } } });
   if (!course || !course.lessons.some((lesson) => lesson.id === lessonId)) return NextResponse.json({ error: "Lesson not found" }, { status: 404 });
+  // A tracked placeholder is not a lesson a student can finish: its spine
+  // position is real, its teaching content is not written yet, and marking it
+  // complete would fake progress. Completion opens when the content is authored.
+  const target = course.lessons.find((lesson) => lesson.id === lessonId)!;
+  if (target.needsCheck) {
+    return NextResponse.json(
+      { error: "This lesson is still being written — placeholder lessons cannot be marked complete." },
+      { status: 409 },
+    );
+  }
   const premium = await hasPremiumAccess(user.id);
   if (!premium && course.lessons[0]?.id !== lessonId) return NextResponse.json({ error: "Premium required" }, { status: 403 });
   const progressId = `course-${user.id}-${lessonId}`;

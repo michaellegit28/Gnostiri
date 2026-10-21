@@ -1,6 +1,8 @@
 import { getCurrentUser } from "@/lib/server-auth";
 import { buildTranscript } from "@/lib/assessment";
 import prisma from "@/lib/db";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,8 +23,21 @@ export default async function TranscriptPage() {
   if (!user) {
     return (
       <main className="mx-auto max-w-3xl px-4 py-16">
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-400">
+          <Link href="/university" className="inline-flex items-center gap-1.5 rounded transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+            <ArrowLeft className="h-4 w-4" aria-hidden /> University
+          </Link>
+          <span className="mx-2 text-slate-600" aria-hidden>/</span>
+          <span className="text-slate-300">Transcript</span>
+        </nav>
         <h1 className="text-2xl font-bold">Competency Transcript</h1>
         <p className="mt-4 text-muted-foreground">Sign in to view your competency record.</p>
+        <Link
+          href="/login"
+          className="mt-5 inline-flex min-h-[44px] items-center rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        >
+          Sign in to continue
+        </Link>
       </main>
     );
   }

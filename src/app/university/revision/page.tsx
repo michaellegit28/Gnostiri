@@ -1,7 +1,8 @@
 import { getCurrentUser } from "@/lib/server-auth";
 import { getDueConcepts } from "@/lib/spaced-repetition";
 import RevisionQueue from "@/components/university/RevisionQueue";
-import { Brain, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, Brain, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,17 @@ export default async function RevisionPage() {
   return (
     <main className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto max-w-4xl px-6 py-10 md:py-14 space-y-10">
+        <nav aria-label="Breadcrumb" className="text-sm text-slate-400">
+          <Link
+            href="/university"
+            className="inline-flex items-center gap-1.5 rounded transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden /> University
+          </Link>
+          <span className="mx-2 text-slate-600" aria-hidden>/</span>
+          <span className="text-slate-300">Revision queue</span>
+        </nav>
+
         <header className="space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-semibold border border-violet-500/30">
             <Brain className="w-4 h-4" />
@@ -40,6 +52,12 @@ export default async function RevisionPage() {
                 ? "Study a course and its concepts will appear here on their schedule. Mastery is earned by demonstrating a concept under exam conditions — twice, on separate days."
                 : "Sign in and study a course; the scheduler begins tracking each concept&apos;s forgetting curve the moment you touch it."}
             </p>
+            <Link
+              href="/university"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            >
+              Browse the courses
+            </Link>
           </div>
         ) : (
           <RevisionQueue due={due} />

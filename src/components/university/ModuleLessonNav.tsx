@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { BookOpen, CheckCircle2, ChevronDown, Clock, CircleDashed } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronDown, Clock, CircleDashed, ArrowRight } from "lucide-react";
 
 /**
  * ModuleLessonNav — the course → module → lesson spine of a course page.
@@ -27,6 +27,8 @@ export interface NavModule {
   title: string;
   orderIndex: number;
   lessons: NavLesson[];
+  /** How many of this module's lessons carry authored (non-placeholder) content. */
+  authoredCount?: number;
 }
 
 interface ModuleLessonNavProps {
@@ -36,6 +38,8 @@ interface ModuleLessonNavProps {
   orphanLessons?: NavLesson[];
   completedLessonIds?: string[];
   currentLessonId?: string;
+  /** The first uncompleted lesson — shown as the obvious next action. */
+  nextLessonId?: string | null;
   /** Open this module first (the one holding the current or next lesson). */
   defaultOpenModuleId?: string | null;
 }
@@ -46,6 +50,7 @@ export default function ModuleLessonNav({
   orphanLessons = [],
   completedLessonIds = [],
   currentLessonId,
+  nextLessonId,
   defaultOpenModuleId,
 }: ModuleLessonNavProps) {
   const firstOpen = defaultOpenModuleId ?? modules[0]?.id ?? null;
@@ -102,6 +107,13 @@ export default function ModuleLessonNav({
       {groups.map((group, gi) => {
         const isOpen = open === group.id;
         const done = group.lessons.filter((l) => completed.has(l.id)).length;
+        const authored = group.lessons.filter((l) => !l.needsCheck).length;
+        const authoredLabel =
+          group.authoredCount == null
+            ? null
+            : group.authoredCount === group.lessons.length
+              ? "all authored"
+              : `${group.authoredCount} of ${group.lessons.length} authored`;
         return (
           <section
             key={group.id}
@@ -123,6 +135,7 @@ export default function ModuleLessonNav({
                 <span className="block font-semibold text-sm text-slate-100">{group.title}</span>
                 <span className="mt-0.5 block text-xs text-slate-400">
                   {group.lessons.length} lesson{group.lessons.length === 1 ? "" : "s"}
+                  {authoredLabel ? ` · ${authoredLabel}` : ""}
                   {done > 0 ? ` · ${done} done` : ""}
                 </span>
               </span>
@@ -147,6 +160,7 @@ export default function ModuleLessonNav({
                 {group.lessons.map((lesson, li) => {
                   const isDone = completed.has(lesson.id);
                   const isCurrent = lesson.id === currentLessonId;
+                  const isNext = !isDone && lesson.id === nextLessonId;
                   return (
                     <li key={lesson.id}>
                       <Link
@@ -165,6 +179,11 @@ export default function ModuleLessonNav({
                             <span className="inline-flex items-center gap-1">
                               <Clock className="h-3 w-3" aria-hidden /> {lesson.estimatedMinutes} min
                             </span>
+                            {isNext && (
+                              <span className="inline-flex items-center gap-1 font-semibold text-gold">
+                                <ArrowRight className="h-3 w-3" aria-hidden /> Next up
+                              </span>
+                            )}
                             {lesson.needsCheck && (
                               <span className="inline-flex items-center gap-1 text-amber-400/80">
                                 <CircleDashed className="h-3 w-3" aria-hidden /> In preparation
