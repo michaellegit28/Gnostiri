@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
+import { topicSlugOf } from "@/app/highschool/exams/[exam]/topic-slug";
 import { ChevronRight, Clock, CheckCircle2, BookOpen, HelpCircle } from "lucide-react";
 
 interface SubjectPageProps {
@@ -126,7 +127,9 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
         {/* Topic List */}
         <div className="space-y-4">
           {topics.map((topic, index) => {
-            const topicSlug = topic.id.replace(`${subjectTopic.id}-`, "");
+            // Legacy ids may not extend the subject id — keep the full id so the
+            // link resolves (the topic pages accept either form).
+            const topicSlug = topicSlugOf(topic.id, subjectTopic.id);
             const estimatedMinutes = topic.lessons[0]?.estimatedMinutes ?? 10;
 
             const userProgress = progressMap.get(topic.id);

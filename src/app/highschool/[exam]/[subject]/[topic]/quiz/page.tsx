@@ -13,9 +13,13 @@ export default async function QuizPage({ params }: QuizPageProps) {
   const subjectTopicId = `${examination.code.toLowerCase()}-${subjectSlug}`;
   const subjectTopic = await prisma.topic.findFirst({ where: { domain: "highschool", id: subjectTopicId } });
   if (!subjectTopic) notFound();
-  const topicId = `${subjectTopic.id}-${topicSlug}`;
-  const currentTopic = await prisma.topic.findFirst({ where: { domain: "highschool", id: topicId, parentId: subjectTopic.id } });
+  // Legacy topic ids may not extend the subject id — accept either form.
+  const constructedId = `${subjectTopic.id}-${topicSlug}`;
+  const currentTopic =
+    (await prisma.topic.findFirst({ where: { domain: "highschool", id: constructedId, parentId: subjectTopic.id } })) ??
+    (await prisma.topic.findFirst({ where: { domain: "highschool", id: topicSlug, parentId: subjectTopic.id } }));
   if (!currentTopic) notFound();
+  const topicId = currentTopic.id;
   const questionsData = await prisma.question.findMany({ where: { domain: "highschool", topicId: currentTopic.id }, orderBy: { id: "asc" } });
   const questions: QuestionItem[] = questionsData.map((question) => ({
     id: question.id,

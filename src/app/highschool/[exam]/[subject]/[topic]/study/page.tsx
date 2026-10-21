@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import prisma from "@/lib/db";
 import { LessonContent } from "@/types/lesson";
+import { topicSlugOf } from "@/app/highschool/exams/[exam]/topic-slug";
 import StudyReaderClient from "./StudyReaderClient";
 
 interface StudyPageProps {
@@ -59,13 +60,13 @@ export default async function StudyPage({ params, searchParams }: StudyPageProps
 
   const topics = topicsData.map((t) => ({
     id: t.id,
-    slug: t.id.replace(`${subjectTopic.id}-`, ""),
+    // Legacy ids may not extend the subject id; the full id stays a valid slug.
+    slug: topicSlugOf(t.id, subjectTopic.id),
     title: t.title,
+    lastAuditedDate: t.lastAuditedDate,
   }));
 
-  const currentTopic = topicsData.find(
-    (t) => t.id.replace(`${subjectTopic.id}-`, "") === topicSlug
-  );
+  const currentTopic = topics.find((t) => t.slug === topicSlug);
 
   if (!currentTopic) {
     notFound();
