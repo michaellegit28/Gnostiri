@@ -15,7 +15,8 @@
     "test:mbbs-spine": "node --test tests/mbbs-spine.test.mjs",
     "test:statistics-python": "node --test tests/statistics-python.test.mjs",
     "seed:mbbs": "ts-node prisma/seed-courses/mbbs/index.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "test:university-structure": "node --test tests/university-structure.test.mjs"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",

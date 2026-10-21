@@ -672,7 +672,7 @@ function sbaFor(lesson: LessonSeed, orderIndex: number) {
       options: options as never,
       correctAnswer: authored.correctAnswer,
       explanation: authored.explanation,
-      reviewStatus: "draft",
+      reviewStatus: "needs-human-review",
       needsCheck: false,
     },
     create: {
@@ -689,7 +689,7 @@ function sbaFor(lesson: LessonSeed, orderIndex: number) {
       orderIndex,
       isPublished: true,
       difficulty: c.blooms === "remember" ? "easy" : c.blooms === "evaluate" || c.blooms === "create" ? "hard" : "medium",
-      reviewStatus: "draft",
+      reviewStatus: "needs-human-review",
       needsCheck: false,
     },
   };
