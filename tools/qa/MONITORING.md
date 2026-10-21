@@ -78,6 +78,20 @@ Every defect printed as `route · symptom · hypothesis` so it can be pasted str
 `--allow-tag-gap` downgrades `TREE_VS_TAG` from a failure to a warning. It exists only for a
 deliberate, documented transition; it is **not** part of the standing schedule.
 
+### Production tuning (measured)
+
+Production is slow — DB-backed routes take 2–12s depending on cold-start state. At the default
+concurrency of 8, requests queue behind each other and the 30s timeout trips, producing
+`request failed — TypeError: fetch failed` flakes that are **not** defects. Use:
+
+```bash
+SMOKE_CONCURRENCY=4 SMOKE_TIMEOUT_MS=60000 SMOKE_URL=https://gnostiri.vercel.app node tools/smoke.mjs
+```
+
+Local `next start` is the opposite: it is fast but every DB route fails without `DATABASE_URL`, and
+the suite reports those as RSC digests — which is correct, that is the detector doing its job
+against a real production server rather than a fixture.
+
 ## Required environment
 
 - `SMOKE_URL` — the origin under test (defaults to `http://localhost:3000`).
