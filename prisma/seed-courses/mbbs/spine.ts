@@ -294,11 +294,11 @@ export async function seedMbbsCourse(subject: SubjectSeed): Promise<SubjectCount
   for (let i = 0; i < subject.lessons.length; i++) {
     const l = subject.lessons[i];
     const moduleSlug = subject.modules[l.module - 1].slug;
-    const module = await prisma.courseModule.findUnique({
+    const moduleRow = await prisma.courseModule.findUnique({
       where: { courseId_slug: { courseId, slug: moduleSlug } },
     });
-    if (!module) throw new Error(`${subject.slug}: module ${moduleSlug} missing`);
-    await prisma.conceptNode.update({ where: { id: slugToId.get(l.concept.slug)! }, data: { moduleId: module.id } });
+    if (!moduleRow) throw new Error(`${subject.slug}: module ${moduleSlug} missing`);
+    await prisma.conceptNode.update({ where: { id: slugToId.get(l.concept.slug)! }, data: { moduleId: moduleRow.id } });
   }
 
   // --- lessons, 1:1 with concepts by orderIndex ---
