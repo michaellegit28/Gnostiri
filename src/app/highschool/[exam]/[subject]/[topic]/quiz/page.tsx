@@ -20,7 +20,17 @@ export default async function QuizPage({ params }: QuizPageProps) {
     (await prisma.topic.findFirst({ where: { domain: "highschool", id: topicSlug, parentId: subjectTopic.id } }));
   if (!currentTopic) notFound();
   const topicId = currentTopic.id;
-  const questionsData = await prisma.question.findMany({ where: { domain: "highschool", topicId: currentTopic.id }, orderBy: { id: "asc" } });
+  // RULE 4 — a question this board marks NOT_EXAMINED never reaches a learner,
+  // here or on any other surface. The predicate matches src/lib/board-bank.ts,
+  // so the quiz header's "Question 1 of N" always equals the board-page count.
+  const questionsData = await prisma.question.findMany({
+    where: {
+      domain: "highschool",
+      topicId: currentTopic.id,
+      NOT: { boardTags: { some: { examinationId: examination.id, tier: "NOT_EXAMINED" } } },
+    },
+    orderBy: { id: "asc" },
+  });
   const questions: QuestionItem[] = questionsData.map((question) => ({
     id: question.id,
     questionText: question.questionText,

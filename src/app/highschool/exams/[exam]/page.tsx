@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import { BookOpen, ChevronRight, Clock, FileText, HelpCircle, MonitorPlay, Target } from "lucide-react";
 import { boardBySlug, EXAM_CLASSES } from "@/lib/exam-bank";
+import { boardTopicQuestionCounts, totalOf } from "@/lib/board-bank";
 import { presetFor } from "@/lib/cbt/config";
 import { paperUrl, subjectSlugOf } from "@/lib/papers";
 import { topicSlugOf } from "./topic-slug";
@@ -125,15 +126,14 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
     childrenByParent.set(child.parentId, list);
   }
 
-  const treeTopicIds = [...subjectTopics.map((s) => s.id), ...childTopics.map((c) => c.id)];
+  // ONE bank definition (src/lib/board-bank.ts): per-topic counts straight from
+  // the shared tree helper, RULE 4 applied. The hero count, every subject and
+  // topic card, the practice-engine sentence and the practice picker all read
+  // this same map, so no two surfaces can print different numbers again.
+  const treeCounts = await boardTopicQuestionCounts(boardCode, examination.id);
   const countsByTopic = new Map<string, number>();
-  if (treeTopicIds.length) {
-    const rows = await prisma.question.groupBy({
-      by: ["topicId"],
-      where: { topicId: { in: treeTopicIds } },
-      _count: { _all: true },
-    });
-    for (const row of rows) countsByTopic.set(row.topicId, row._count._all);
+  if (treeCounts) {
+    treeCounts.forEach((counts, topicId) => countsByTopic.set(topicId, totalOf(counts)));
   }
 
   const coverage: SubjectCoverage[] = subjectTopics.map((subject) => {
@@ -155,10 +155,10 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
   const treeQuestionCount = coverage.reduce((sum, s) => sum + s.questionCount, 0);
   const treeTopicCount = coverage.reduce((sum, s) => sum + s.topics.length, 0);
 
-  // Questions actually served by the board-format practice engine (tag-based).
-  const practiceCount = await prisma.question.count({
-    where: { boardTags: { some: { examinationId: examination.id, tier: { not: "NOT_EXAMINED" } } } },
-  });
+  // The board-format practice engine's bank IS the topic tree (the blueprint
+  // manifest serves it paper by paper). The practice card therefore prints the
+  // SAME number as the hero — that agreement is the unification.
+  const practiceCount = treeQuestionCount;
 
   // Group published papers by subject, newest year first.
   const bySubject = new Map<string, PaperSummary[]>();
@@ -272,9 +272,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                   Practice by topic
                 </div>
                 <p className="text-sm text-slate-400 mt-1">
-                  {hasPractice
-                    ? `Board-format sessions on this board's topics — ${practiceCount.toLocaleString()} question${practiceCount === 1 ? "" : "s"} in the practice engine.`
-                    : "Topic practice for this board is still being loaded."}
+                  {`Board-format sessions on this board's topics — ${practiceCount.toLocaleString()} question${practiceCount === 1 ? "" : "s"} in the practice engine.`}
                 </p>
               </div>
             </div>
