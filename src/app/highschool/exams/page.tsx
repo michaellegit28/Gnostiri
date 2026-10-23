@@ -3,14 +3,20 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { ArrowRight, BookOpen, FileText, History, BellPlus, MonitorPlay, HelpCircle } from "lucide-react";
 import { EXAM_BANK, EXAM_CLASSES, EXAM_CLASS_ORDER, type ExamBankBoard } from "@/lib/exam-bank";
+import { countBoardQuestions } from "@/lib/board-bank";
 
 export const dynamic = "force-dynamic";
 
 /**
  * Open Exam Bank — grouped by FORMAT CLASS (CBT · Objective+Theory · Written),
  * exactly as the owner's global board registry defines it. Coverage counts are
- * honest: subjects from the topic tree, papers from the paper bank, practice
- * questions from board tags.
+ * honest and derive from the ONE bank definition (src/lib/board-bank.ts):
+ * subjects from the topic tree, papers from the paper bank, practice questions
+ * from the board's own topic tree. The hub chip, the board page's
+ * practice-engine sentence and the practice picker therefore always print the
+ * same number — the old hub counted board tags with no tier filter while the
+ * picker excluded NOT_EXAMINED rows, which is how the 340-vs-339 defect was
+ * born.
  */
 export default async function HighSchoolHubPage() {
   const examinations = await prisma.examination.findMany({
@@ -27,7 +33,9 @@ export default async function HighSchoolHubPage() {
     const [subjects, papers, questions] = await Promise.all([
       prisma.topic.count({ where: { domain: "highschool", parentId: board.code.toLowerCase() } }),
       prisma.examPaper.count({ where: { examinationId: exam.id, isPublished: true } }),
-      prisma.questionBoardTag.count({ where: { examinationId: exam.id } }),
+      // The board's bank is its own topic tree — the same helper the board page
+      // and the practice picker use, so no two surfaces can disagree.
+      countBoardQuestions(board.code.toLowerCase(), exam.id),
     ]);
     coverage.set(board.slug, { subjects, papers, questions });
   }

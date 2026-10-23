@@ -3,6 +3,7 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { SUBJECTS, topicBySlug } from "@/lib/curriculum";
 import { ChevronRight, ClipboardCheck, HelpCircle, FlaskConical } from "lucide-react";
+import { boardTopicQuestionCounts, totalOf, type TopicTypeCounts } from "@/lib/board-bank";
 
 export const dynamic = "force-dynamic";
 
@@ -17,12 +18,6 @@ interface SubjectRoot {
   slug: string;
   title: string;
   id: string;
-}
-
-interface TopicCounts {
-  mcq: number;
-  theory: number;
-  practical: number;
 }
 
 /** Group a topic under its subject, preferring the board's own topic tree. */
@@ -54,9 +49,11 @@ function resolveSubject(
   return null;
 }
 
-// Board practice picker: every topic with board-tagged questions for this exam
-// board, grouped by subject, with per-type counts. Subjects come from the
-// board's topic tree first, so the picker agrees with /cbt and the board page.
+// Board practice picker: every topic in the board's own {code}-* topic tree
+// with questions, grouped by subject, with per-type counts. Counts come from
+// the ONE shared bank definition (src/lib/board-bank.ts), so this picker, the
+// board page, the exams hub, /api/questions and the blueprint manifest always
+// agree. Tags are no longer the bank source.
 export default async function BoardPracticePickerPage({ params }: PickerPageProps) {
   const examination = await prisma.examination.findFirst({
     where: {
@@ -68,26 +65,21 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
 
   const boardCode = examination.code.toLowerCase();
 
-  const tagged = await prisma.question.findMany({
-    where: {
-      boardTags: { some: { examinationId: examination.id, tier: { not: "NOT_EXAMINED" } } },
-    },
-    select: { topicId: true, type: true },
-  });
+  // ONE bank definition (src/lib/board-bank.ts): the board's own {code}-*
+  // topic tree IS the bank — the same helper the board page and the exams hub
+  // read, the same tree /cbt serves. Board tags are no longer the bank source:
+  // before the unification this picker served only the ~340 tag-tagged subset
+  // and hid the other 5,661 tree questions from JAMB practice.
+  const countsByTopic = await boardTopicQuestionCounts(boardCode, examination.id);
 
-  const countsByTopic = new Map<string, TopicCounts>();
-  for (const q of tagged) {
-    const entry = countsByTopic.get(q.topicId) ?? { mcq: 0, theory: 0, practical: 0 };
-    if (q.type === "theory") entry.theory += 1;
-    else if (q.type === "practical") entry.practical += 1;
-    else entry.mcq += 1;
-    countsByTopic.set(q.topicId, entry);
-  }
-
-  const topics = await prisma.topic.findMany({
-    where: { id: { in: Array.from(countsByTopic.keys()) } },
-    select: { id: true, title: true, slug: true },
-  });
+  const countedTopicIds = countsByTopic ? Array.from(countsByTopic.keys()) : [];
+  const topics = countedTopicIds.length
+    ? await prisma.topic.findMany({
+        where: { id: { in: countedTopicIds } },
+        orderBy: { id: "asc" },
+        select: { id: true, title: true, slug: true, parentId: true },
+      })
+    : [];
 
   // The board's own topic tree: {code} root -> {code}-{subject} subjects.
   const rootTopic = await prisma.topic.findFirst({
@@ -104,7 +96,7 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
       ).map((t) => ({ slug: t.id.slice(boardCode.length + 1), title: t.title, id: t.id }))
     : [];
 
-  const groups = new Map<string, { title: string; topics: { id: string; title: string; counts: TopicCounts }[] }>();
+  const groups = new Map<string, { title: string; topics: { id: string; title: string; counts: TopicTypeCounts }[] }>();
   const order: string[] = [];
   for (const root of subjectRoots) {
     if (!groups.has(root.slug)) {
@@ -119,8 +111,19 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
     }
   }
 
+  let totalQuestions = 0;
   for (const topic of topics) {
-    const subject = resolveSubject(topic.id, topic.slug, boardCode, subjectRoots);
+    const counts = countsByTopic?.get(topic.id);
+    if (!counts) continue;
+    // The topic's PARENT edge is the authoritative subject link — legacy ids do
+    // not always extend their parent id (jamb-agriculture-full-syllabus hangs
+    // off jamb-agricultural-science), which is how 500 questions once fell out
+    // of a subject grouping. resolveSubject stays as the fallback for topics
+    // that live outside the board tree.
+    const parentRoot = topic.parentId ? subjectRoots.find((root) => root.id === topic.parentId) : null;
+    const subject = parentRoot
+      ? { slug: parentRoot.slug, title: parentRoot.title }
+      : resolveSubject(topic.id, topic.slug, boardCode, subjectRoots);
     if (!subject) continue;
     let group = groups.get(subject.slug);
     if (!group) {
@@ -128,12 +131,13 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
       groups.set(subject.slug, group);
       order.push(subject.slug);
     }
-    group.topics.push({ id: topic.id, title: topic.title, counts: countsByTopic.get(topic.id)! });
+    group.topics.push({ id: topic.id, title: topic.title, counts });
+    // the stated total is the sum of the rendered cards, so the two can never
+    // drift apart (the audit's PICKER_SELF check reads exactly this pair)
+    totalQuestions += totalOf(counts);
   }
 
   const subjectOrder = order.filter((slug) => (groups.get(slug)?.topics.length ?? 0) > 0);
-
-  const totalTagged = tagged.length;
 
   return (
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
@@ -158,9 +162,9 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
             the exact durations and marks of each section.
             {examination.lastVerified ? " Board format verified." : ""}
           </p>
-          {totalTagged > 0 && (
+          {totalQuestions > 0 && (
             <p className="text-xs text-slate-500">
-              {totalTagged.toLocaleString()} question{totalTagged === 1 ? "" : "s"} tagged to this board&apos;s papers across{" "}
+              {totalQuestions.toLocaleString()} question{totalQuestions === 1 ? "" : "s"} tagged to this board&apos;s papers across{" "}
               {subjectOrder.length} subject{subjectOrder.length === 1 ? "" : "s"}.
             </p>
           )}
@@ -170,8 +174,8 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
           <section className="rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-8 text-center space-y-3">
             <ClipboardCheck className="w-8 h-8 text-slate-500 mx-auto" />
             <p className="text-slate-400 text-sm">
-              No topics are tagged for {examination.name.toUpperCase()} practice yet. Content lands here as
-              topics are rebuilt and tagged.
+              {examination.name.toUpperCase()} has no practice questions in its topic tree yet — they
+              land here as the board&apos;s syllabus tree is built and tagged.
             </p>
           </section>
         ) : (
