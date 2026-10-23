@@ -1,0 +1,905 @@
+{
+  "board": {
+    "slug": "waec",
+    "name": "WAEC (WASSCE)"
+  },
+  "provenance": "original",
+  "provenanceNote": "Authored by Gnostiri — an original, exam-style practice paper modelled on the WAEC (WASSCE) format. Not an official WAEC past paper.",
+  "disclaimer": true,
+  "reviewStatus": "needs-human-review",
+  "crossBoardNote": "Writing NECO? The WAEC and NECO syllabi cover the same material — these questions prepare you for both.",
+  "papers": [
+    {
+      "id": "waec-biology-2026-p1",
+      "subject": "Biology",
+      "year": 2026,
+      "paperNumber": "Paper 1 (Objective)",
+      "durationMinutes": 60,
+      "totalMarks": 50,
+      "onScreenForm": "single-select",
+      "instructions": "Answer ALL questions. Each question carries one mark.",
+      "questions": [
+        {
+          "orderIndex": 1,
+          "questionText": "The basic structural and functional unit of life is the",
+          "options": [
+            "cell",
+            "tissue",
+            "organ",
+            "organ system"
+          ],
+          "correctAnswer": "cell",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The cell is the smallest unit that carries out all life processes; tissues, organs and systems are built from cells."
+        },
+        {
+          "orderIndex": 2,
+          "questionText": "Which organelle is often described as the powerhouse of the cell?",
+          "options": [
+            "Nucleus",
+            "Mitochondrion",
+            "Ribosome",
+            "Chloroplast"
+          ],
+          "correctAnswer": "Mitochondrion",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Most of the ATP in aerobic eukaryotic cells is produced in the mitochondrion."
+        },
+        {
+          "orderIndex": 3,
+          "questionText": "Photosynthesis takes place in which organelle of a plant cell?",
+          "options": [
+            "Mitochondrion",
+            "Nucleus",
+            "Chloroplast",
+            "Vacuole"
+          ],
+          "correctAnswer": "Chloroplast",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Chloroplasts contain chlorophyll, which traps light energy for photosynthesis."
+        },
+        {
+          "orderIndex": 4,
+          "questionText": "Which organelle modifies, sorts and packages proteins for secretion?",
+          "options": [
+            "Ribosome",
+            "Lysosome",
+            "Vacuole",
+            "Golgi apparatus"
+          ],
+          "correctAnswer": "Golgi apparatus",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The Golgi apparatus processes proteins from the endoplasmic reticulum and packages them into vesicles."
+        },
+        {
+          "orderIndex": 5,
+          "questionText": "Root hair cells absorb water from the soil mainly by",
+          "options": [
+            "diffusion",
+            "osmosis",
+            "active transport",
+            "plasmolysis"
+          ],
+          "correctAnswer": "osmosis",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Water moves across a partially permeable membrane from weaker to stronger solution — osmosis."
+        },
+        {
+          "orderIndex": 6,
+          "questionText": "The movement of molecules from a region of higher concentration to a region of lower concentration is called",
+          "options": [
+            "diffusion",
+            "osmosis",
+            "active transport",
+            "transpiration"
+          ],
+          "correctAnswer": "diffusion",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Diffusion is the net movement of particles down a concentration gradient; it needs no energy."
+        },
+        {
+          "orderIndex": 7,
+          "questionText": "Which of the following is NOT a characteristic of all living things?",
+          "options": [
+            "Respiration",
+            "Excretion",
+            "Photosynthesis",
+            "Growth"
+          ],
+          "correctAnswer": "Photosynthesis",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Photosynthesis is carried out only by organisms with chlorophyll; respiration, excretion and growth occur in all living things."
+        },
+        {
+          "orderIndex": 8,
+          "questionText": "Carbohydrates are finally digested to",
+          "options": [
+            "amino acids",
+            "fatty acids",
+            "glycerol",
+            "glucose"
+          ],
+          "correctAnswer": "glucose",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Starch is broken down step by step to maltose and finally to glucose."
+        },
+        {
+          "orderIndex": 9,
+          "questionText": "The digestion of protein begins in the",
+          "options": [
+            "mouth",
+            "stomach",
+            "duodenum",
+            "colon"
+          ],
+          "correctAnswer": "stomach",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Gastric juice contains pepsin, which begins protein digestion in the stomach."
+        },
+        {
+          "orderIndex": 10,
+          "questionText": "Bile is produced by the",
+          "options": [
+            "liver",
+            "pancreas",
+            "gall bladder",
+            "stomach"
+          ],
+          "correctAnswer": "liver",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The liver makes bile; the gall bladder only stores and concentrates it."
+        },
+        {
+          "orderIndex": 11,
+          "questionText": "The enzyme in saliva that acts on cooked starch is",
+          "options": [
+            "pepsin",
+            "lipase",
+            "amylase",
+            "renin"
+          ],
+          "correctAnswer": "amylase",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Salivary amylase (ptyalin) begins starch digestion in the mouth."
+        },
+        {
+          "orderIndex": 12,
+          "questionText": "Absorption of digested food occurs mainly in the",
+          "options": [
+            "stomach",
+            "colon",
+            "oesophagus",
+            "ileum"
+          ],
+          "correctAnswer": "ileum",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The ileum is lined with villi that give a huge surface area for absorbing digested food."
+        },
+        {
+          "orderIndex": 13,
+          "questionText": "Villi in the small intestine increase the surface area for",
+          "options": [
+            "digestion",
+            "absorption",
+            "egestion",
+            "excretion"
+          ],
+          "correctAnswer": "absorption",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Millions of villi multiply the intestinal surface area so digested food is absorbed faster."
+        },
+        {
+          "orderIndex": 14,
+          "questionText": "Anaerobic respiration in human muscles produces",
+          "options": [
+            "lactic acid",
+            "ethanol",
+            "urea",
+            "pyruvate only"
+          ],
+          "correctAnswer": "lactic acid",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "When oxygen is short, muscle cells convert glucose to lactic acid, which causes fatigue."
+        },
+        {
+          "orderIndex": 15,
+          "questionText": "Aerobic respiration in eukaryotic cells takes place mainly in the",
+          "options": [
+            "ribosomes",
+            "nucleus",
+            "mitochondria",
+            "chloroplasts"
+          ],
+          "correctAnswer": "mitochondria",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The Krebs cycle and oxidative phosphorylation — the aerobic stages — occur in the mitochondria."
+        },
+        {
+          "orderIndex": 16,
+          "questionText": "Gaseous exchange in mammals occurs in the",
+          "options": [
+            "bronchus",
+            "trachea",
+            "pleural cavity",
+            "alveoli"
+          ],
+          "correctAnswer": "alveoli",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The alveoli have thin, moist walls surrounded by capillaries — the actual site of gas exchange."
+        },
+        {
+          "orderIndex": 17,
+          "questionText": "Oxygen is transported in the blood mainly by the",
+          "options": [
+            "red blood cells",
+            "white blood cells",
+            "platelets",
+            "plasma"
+          ],
+          "correctAnswer": "red blood cells",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Haemoglobin in red blood cells combines reversibly with oxygen to carry it round the body."
+        },
+        {
+          "orderIndex": 18,
+          "questionText": "The largest artery in the human body is the",
+          "options": [
+            "vena cava",
+            "aorta",
+            "pulmonary artery",
+            "coronary artery"
+          ],
+          "correctAnswer": "aorta",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The aorta leaves the left ventricle and distributes oxygenated blood to the whole body."
+        },
+        {
+          "orderIndex": 19,
+          "questionText": "Blood entering the right atrium of the heart is",
+          "options": [
+            "oxygenated",
+            "mixed arterial",
+            "deoxygenated",
+            "plasma-rich lymph"
+          ],
+          "correctAnswer": "deoxygenated",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The vena cavae return deoxygenated blood from the body into the right atrium."
+        },
+        {
+          "orderIndex": 20,
+          "questionText": "Which valve prevents the backflow of blood into the left atrium?",
+          "options": [
+            "Tricuspid valve",
+            "Semilunar valve",
+            "Aortic valve",
+            "Bicuspid (mitral) valve"
+          ],
+          "correctAnswer": "Bicuspid (mitral) valve",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "The bicuspid valve guards the opening between the left atrium and left ventricle."
+        },
+        {
+          "orderIndex": 21,
+          "questionText": "Excretion is the removal from the body of",
+          "options": [
+            "undigested food",
+            "metabolic waste products",
+            "excess water only",
+            "sweat only"
+          ],
+          "correctAnswer": "metabolic waste products",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Excretion removes wastes of metabolism such as carbon dioxide, urea and excess water and salts; egesting faeces is not excretion."
+        },
+        {
+          "orderIndex": 22,
+          "questionText": "The main nitrogenous waste excreted in human urine is",
+          "options": [
+            "urea",
+            "uric acid",
+            "ammonia",
+            "creatinine alone"
+          ],
+          "correctAnswer": "urea",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The liver converts excess amino acids to urea, which the kidneys excrete in urine."
+        },
+        {
+          "orderIndex": 23,
+          "questionText": "Filtration of the blood in the kidney takes place at the",
+          "options": [
+            "loop of Henle",
+            "collecting duct",
+            "glomerulus",
+            "ureter"
+          ],
+          "correctAnswer": "glomerulus",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "High pressure in the glomerulus forces small molecules out of the blood into Bowman's capsule."
+        },
+        {
+          "orderIndex": 24,
+          "questionText": "The functional unit of the kidney is the",
+          "options": [
+            "neuron",
+            "glomerulus",
+            "ureter",
+            "nephron"
+          ],
+          "correctAnswer": "nephron",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Each kidney contains about a million nephrons, each able to filter blood and form urine."
+        },
+        {
+          "orderIndex": 25,
+          "questionText": "Insulin lowers the concentration of",
+          "options": [
+            "blood glucose",
+            "blood calcium",
+            "blood plasma",
+            "oxygen in plasma"
+          ],
+          "correctAnswer": "blood glucose",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Insulin helps the liver and muscles store glucose as glycogen, lowering blood glucose."
+        },
+        {
+          "orderIndex": 26,
+          "questionText": "Adrenaline is secreted by the",
+          "options": [
+            "thyroid gland",
+            "adrenal glands",
+            "pituitary gland",
+            "pancreas"
+          ],
+          "correctAnswer": "adrenal glands",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The adrenal glands sit on top of the kidneys and prepare the body for fight or flight."
+        },
+        {
+          "orderIndex": 27,
+          "questionText": "The growth of a shoot towards light is called",
+          "options": [
+            "geotropism",
+            "hydrotropism",
+            "phototropism",
+            "thigmotropism"
+          ],
+          "correctAnswer": "phototropism",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Photo- refers to light: a shoot bending towards light shows phototropism."
+        },
+        {
+          "orderIndex": 28,
+          "questionText": "The junction across which impulses pass from one neuron to another is the",
+          "options": [
+            "dendrite",
+            "axon",
+            "myelin sheath",
+            "synapse"
+          ],
+          "correctAnswer": "synapse",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "At a synapse, transmitter chemicals carry the signal across the tiny gap between neurons."
+        },
+        {
+          "orderIndex": 29,
+          "questionText": "Voluntary actions such as writing are controlled by the",
+          "options": [
+            "cerebellum",
+            "cerebrum",
+            "medulla oblongata",
+            "spinal cord"
+          ],
+          "correctAnswer": "cerebrum",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The cerebrum — especially its motor areas — initiates conscious, voluntary actions."
+        },
+        {
+          "orderIndex": 30,
+          "questionText": "The part of the brain that maintains balance and posture is the",
+          "options": [
+            "cerebellum",
+            "cerebrum",
+            "hypothalamus",
+            "corpus callosum"
+          ],
+          "correctAnswer": "cerebellum",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The cerebellum coordinates muscle activity, balance and posture."
+        },
+        {
+          "orderIndex": 31,
+          "questionText": "Breathing and heartbeat are controlled by the",
+          "options": [
+            "cerebellum",
+            "cerebrum",
+            "medulla oblongata",
+            "thalamus"
+          ],
+          "correctAnswer": "medulla oblongata",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "The medulla oblongata is the vital centre controlling involuntary breathing, heartbeat and blood vessel diameter."
+        },
+        {
+          "orderIndex": 32,
+          "questionText": "The functional unit of the nervous system is the",
+          "options": [
+            "nephron",
+            "axon",
+            "dendrite",
+            "neuron"
+          ],
+          "correctAnswer": "neuron",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "A neuron (nerve cell) is the unit that generates and conducts impulses."
+        },
+        {
+          "orderIndex": 33,
+          "questionText": "Blood glucose concentration is regulated by the hormones",
+          "options": [
+            "insulin and glucagon",
+            "insulin only",
+            "thyroxine and adrenaline",
+            "ADH and oxytocin"
+          ],
+          "correctAnswer": "insulin and glucagon",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Insulin lowers blood glucose and glucagon raises it — antagonistic control."
+        },
+        {
+          "orderIndex": 34,
+          "questionText": "Which joint permits movement in all directions?",
+          "options": [
+            "Hinge joint",
+            "Pivot joint",
+            "Ball and socket joint",
+            "Gliding joint"
+          ],
+          "correctAnswer": "Ball and socket joint",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The ball of one bone fits the socket of another, as in the hip and shoulder, allowing rotation in every plane."
+        },
+        {
+          "orderIndex": 35,
+          "questionText": "The bone matrix is made hard by the deposit of",
+          "options": [
+            "sodium salts",
+            "calcium salts",
+            "potassium salts",
+            "iron salts"
+          ],
+          "correctAnswer": "calcium salts",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Calcium phosphate and related calcium salts mineralise bone, making it rigid."
+        },
+        {
+          "orderIndex": 36,
+          "questionText": "The biceps and triceps of the arm are described as",
+          "options": [
+            "synergistic muscles",
+            "involuntary muscles",
+            "smooth muscles",
+            "antagonistic muscles"
+          ],
+          "correctAnswer": "antagonistic muscles",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "They work in opposition: one contracts while the other relaxes, straightening or bending the arm."
+        },
+        {
+          "orderIndex": 37,
+          "questionText": "The male gamete in humans is the",
+          "options": [
+            "ovum",
+            "spermatozoon",
+            "zygote",
+            "foetus"
+          ],
+          "correctAnswer": "spermatozoon",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Spermatozoa (sperm cells) are the male gametes produced in the testes."
+        },
+        {
+          "orderIndex": 38,
+          "questionText": "Fertilisation in humans normally occurs in the",
+          "options": [
+            "oviduct (fallopian tube)",
+            "uterus",
+            "ovary",
+            "cervix"
+          ],
+          "correctAnswer": "oviduct (fallopian tube)",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Sperm meet the egg in the oviduct; the zygote then moves to the uterus to implant."
+        },
+        {
+          "orderIndex": 39,
+          "questionText": "The average length of the human menstrual cycle is",
+          "options": [
+            "21 days",
+            "30 days",
+            "28 days",
+            "35 days"
+          ],
+          "correctAnswer": "28 days",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "A typical menstrual cycle lasts about 28 days, counted from the first day of one menstruation to the next."
+        },
+        {
+          "orderIndex": 40,
+          "questionText": "Which of the following is a barrier method of contraception?",
+          "options": [
+            "contraceptive pill",
+            "IUD",
+            "vasectomy",
+            "condom"
+          ],
+          "correctAnswer": "condom",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "A condom physically blocks sperm from reaching the egg; the pill, IUD and vasectomy work by other means."
+        },
+        {
+          "orderIndex": 41,
+          "questionText": "The part of the flower that produces pollen grains is the",
+          "options": [
+            "stigma",
+            "anther",
+            "filament",
+            "ovary"
+          ],
+          "correctAnswer": "anther",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Pollen grains form in the anthers, which sit on filaments at the top of the stamens."
+        },
+        {
+          "orderIndex": 42,
+          "questionText": "The transfer of pollen grains from the anther to the stigma is called",
+          "options": [
+            "pollination",
+            "fertilisation",
+            "germination",
+            "dispersal"
+          ],
+          "correctAnswer": "pollination",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Pollination is the transfer; fertilisation happens later, when the male and female nuclei fuse."
+        },
+        {
+          "orderIndex": 43,
+          "questionText": "When a homozygous tall plant is crossed with a dwarf plant and all the F1 plants are tall, tallness is described as",
+          "options": [
+            "recessive",
+            "sex-linked",
+            "dominant",
+            "codominant"
+          ],
+          "correctAnswer": "dominant",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The character that shows in the F1 offspring masks the other one and is dominant."
+        },
+        {
+          "orderIndex": 44,
+          "questionText": "The genotype Tt is described as",
+          "options": [
+            "homozygous dominant",
+            "homozygous recessive",
+            "hemizygous",
+            "heterozygous"
+          ],
+          "correctAnswer": "heterozygous",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Two different alleles for a gene (T and t) make the organism heterozygous."
+        },
+        {
+          "orderIndex": 45,
+          "questionText": "The observable characteristics of an organism make up its",
+          "options": [
+            "genotype",
+            "phenotype",
+            "karyotype",
+            "genome"
+          ],
+          "correctAnswer": "phenotype",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Phenotype is what you can see or measure; genotype is the hidden genetic makeup."
+        },
+        {
+          "orderIndex": 46,
+          "questionText": "The sex chromosomes of a normal human male are",
+          "options": [
+            "XY",
+            "XX",
+            "XO",
+            "YY"
+          ],
+          "correctAnswer": "XY",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "A male carries one X and one Y chromosome; females carry XX."
+        },
+        {
+          "orderIndex": 47,
+          "questionText": "Colour blindness in humans is an example of a",
+          "options": [
+            "sex-influenced character",
+            "chromosomal mutation",
+            "sex-linked character",
+            "somatic mutation"
+          ],
+          "correctAnswer": "sex-linked character",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "The gene for colour vision sits on the X chromosome with no allele on the Y, so the trait is X-linked."
+        },
+        {
+          "orderIndex": 48,
+          "questionText": "Persons of blood group O are described as universal",
+          "options": [
+            "recipients",
+            "carriers",
+            "antibody producers",
+            "donors"
+          ],
+          "correctAnswer": "donors",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Group O red cells carry no A or B antigens, so they can be given to any group — group O people are universal donors."
+        },
+        {
+          "orderIndex": 49,
+          "questionText": "The first trophic level of a food chain is occupied by",
+          "options": [
+            "producers",
+            "herbivores",
+            "primary carnivores",
+            "decomposers"
+          ],
+          "correctAnswer": "producers",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Green plants, as producers, trap the energy that supports every other level of the chain."
+        },
+        {
+          "orderIndex": 50,
+          "questionText": "Organisms that break down dead organic matter into simpler substances are called",
+          "options": [
+            "producers",
+            "parasites",
+            "decomposers",
+            "predators"
+          ],
+          "correctAnswer": "decomposers",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Bacteria and fungi are decomposers: they decay dead matter and release minerals back to the soil."
+        }
+      ]
+    },
+    {
+      "id": "waec-biology-2026-p2",
+      "subject": "Biology",
+      "year": 2026,
+      "paperNumber": "Paper 2 (Theory)",
+      "durationMinutes": 140,
+      "totalMarks": 100,
+      "onScreenForm": "candidate-answer-set",
+      "instructions": "Answer ALL five questions. Each question carries 20 marks; the marking scheme shows how the marks are allocated.",
+      "questions": [
+        {
+          "orderIndex": 1,
+          "questionText": "1. Describe the digestion of starch in the human alimentary canal from the mouth to the ileum, naming the enzymes involved and the final product. [20 marks]",
+          "marks": 20,
+          "options": [
+            "Salivary amylase in the mouth starts starch → maltose; the acid of the stomach stops starch digestion; pancreatic amylase in the duodenum continues starch → maltose; maltase on the ileum wall converts maltose → glucose; glucose is absorbed into the villi capillaries.",
+            "Pepsin in the stomach converts starch to maltose, and lipase in the ileum converts it to glucose.",
+            "Salivary amylase converts starch straight to glucose in the mouth, and it is absorbed in the stomach.",
+            "Bile emulsifies starch in the duodenum and trypsin converts it to glycogen in the liver."
+          ],
+          "correctAnswer": "Salivary amylase in the mouth starts starch → maltose; the acid of the stomach stops starch digestion; pancreatic amylase in the duodenum continues starch → maltose; maltase on the ileum wall converts maltose → glucose; glucose is absorbed into the villi capillaries.",
+          "modelAnswer": "Digestion of starch begins in the mouth, where salivary amylase converts some cooked starch to maltose. In the stomach the hydrochloric acid stops amylase working, so little starch digestion occurs there. In the duodenum, pancreatic amylase continues the breakdown of starch to maltose, and the intestinal enzymes (maltase) on the villi complete the change to glucose. Glucose is then absorbed through the villi into the blood capillaries of the villi and carried to the liver.",
+          "markingPoints": [
+            {
+              "point": "Correct start in the mouth with salivary amylase acting on starch",
+              "marks": 4
+            },
+            {
+              "point": "No starch digestion in the stomach (acid stops the enzyme)",
+              "marks": 3
+            },
+            {
+              "point": "Pancreatic amylase in the duodenum continues starch → maltose",
+              "marks": 4
+            },
+            {
+              "point": "Maltase in the ileum converts maltose to glucose",
+              "marks": 4
+            },
+            {
+              "point": "Glucose absorbed through villi into the blood",
+              "marks": 5
+            }
+          ],
+          "explanation": "Model answer: salivary amylase (mouth) → pancreatic amylase (duodenum) → maltase (ileum) → glucose, absorbed at the villi; the stomach contributes no starch digestion. Marking points: 4 + 3 + 4 + 4 + 5."
+        },
+        {
+          "orderIndex": 2,
+          "questionText": "2. Describe the pathway taken by deoxygenated blood from the body tissues to the lungs, naming the vessels and heart chambers through which it passes. [20 marks]",
+          "marks": 20,
+          "options": [
+            "Body tissues → pulmonary vein → left atrium → left ventricle → aorta → lungs.",
+            "Body tissues → vena cava → right atrium → right ventricle → pulmonary artery → alveoli of the lungs.",
+            "Body tissues → vena cava → left atrium → left ventricle → pulmonary artery → lungs.",
+            "Body tissues → aorta → right ventricle → pulmonary vein → lungs."
+          ],
+          "correctAnswer": "Body tissues → vena cava → right atrium → right ventricle → pulmonary artery → alveoli of the lungs.",
+          "modelAnswer": "Deoxygenated blood from the body tissues drains into the venules and veins, which join to form the vena cavae. The vena cava empties into the right atrium, which contracts and drives the blood through the tricuspid valve into the right ventricle. The right ventricle pumps it into the pulmonary artery — the only artery carrying deoxygenated blood — which branches to the lungs, where carbon dioxide is released and oxygen taken up at the alveoli.",
+          "markingPoints": [
+            {
+              "point": "Vena cava carries deoxygenated blood from the body to the heart",
+              "marks": 4
+            },
+            {
+              "point": "Blood enters the right atrium",
+              "marks": 4
+            },
+            {
+              "point": "Blood passes into the right ventricle",
+              "marks": 4
+            },
+            {
+              "point": "Pumped through the pulmonary artery",
+              "marks": 4
+            },
+            {
+              "point": "Gas exchange at the alveoli of the lungs",
+              "marks": 4
+            }
+          ],
+          "explanation": "Model answer: vena cava → right atrium → right ventricle → pulmonary artery → lung alveoli. Marking points: 4 + 4 + 4 + 4 + 4."
+        },
+        {
+          "orderIndex": 3,
+          "questionText": "3. In maize, tallness (T) is dominant over dwarfness (t). A homozygous tall plant was crossed with a dwarf plant, and the F1 plants were then self-pollinated to produce 240 F2 plants. (a) State the genotypes of the parents and of the F1. (b) State the phenotypic ratio of the F2 generation. (c) State how many of the F2 plants would be expected to be tall. [20 marks]",
+          "marks": 20,
+          "options": [
+            "(a) Parents Tt × tt, F1 Tt; (b) 1 tall : 1 dwarf; (c) 120 tall plants.",
+            "(a) Parents TT × tt, F1 Tt; (b) 3 tall : 1 dwarf; (c) 120 tall plants.",
+            "(a) Parents TT × tt, F1 Tt; (b) 3 tall : 1 dwarf; (c) 180 tall plants.",
+            "(a) Parents tt × tt, F1 tt; (b) all dwarf; (c) 0 tall plants."
+          ],
+          "correctAnswer": "(a) Parents TT × tt, F1 Tt; (b) 3 tall : 1 dwarf; (c) 180 tall plants.",
+          "modelAnswer": "(a) The homozygous tall parent is TT and the dwarf parent is tt, so every F1 plant inherits T from one parent and t from the other — all F1 are Tt and tall. (b) Self-pollinating Tt × Tt gives the F2 genotypes TT, Tt, Tt, tt — three tall genotypes to one dwarf, a ratio of 3 : 1. (c) Of 240 plants, 3/4 are expected to be tall: 240 × 3/4 = 180.",
+          "markingPoints": [
+            {
+              "point": "(a) Correct genotypes: parents TT × tt and F1 Tt",
+              "marks": 6
+            },
+            {
+              "point": "(b) Correct phenotypic ratio 3 tall : 1 dwarf",
+              "marks": 7
+            },
+            {
+              "point": "(c) Correct number of tall plants (180 = 3/4 of 240)",
+              "marks": 7
+            }
+          ],
+          "explanation": "Model answer: TT × tt → F1 Tt; F2 ratio 3 : 1; 180 of the 240 plants tall. Marking points: 6 + 7 + 7."
+        },
+        {
+          "orderIndex": 4,
+          "questionText": "4. Explain the circulation of carbon in nature, naming the processes by which carbon dioxide is removed from the atmosphere and the processes by which it is returned. [20 marks]",
+          "marks": 20,
+          "options": [
+            "Transpiration removes CO2 from the air and respiration stores carbon permanently in the soil.",
+            "Only combustion removes CO2 from the atmosphere, and plants release it during photosynthesis.",
+            "Nitrogen fixation removes CO2 from the atmosphere and excretion returns it.",
+            "Photosynthesis by green plants removes CO2 to build glucose; respiration by plants and animals returns it; decomposers return it as they decay dead matter; combustion of wood and fuels returns it."
+          ],
+          "correctAnswer": "Photosynthesis by green plants removes CO2 to build glucose; respiration by plants and animals returns it; decomposers return it as they decay dead matter; combustion of wood and fuels returns it.",
+          "modelAnswer": "Green plants remove carbon dioxide from the atmosphere during photosynthesis, using the carbon to build glucose and other organic compounds. Carbon dioxide is returned by respiration of plants, animals and microorganisms; by decomposers breaking down dead remains and sewage; and by the combustion of wood, coal, oil and gas. The balance of these processes keeps the atmospheric carbon dioxide concentration within workable limits.",
+          "markingPoints": [
+            {
+              "point": "Photosynthesis removes CO2 (plants fix carbon into glucose)",
+              "marks": 5
+            },
+            {
+              "point": "Respiration returns CO2 to the atmosphere",
+              "marks": 5
+            },
+            {
+              "point": "Decomposers release CO2 from dead matter",
+              "marks": 5
+            },
+            {
+              "point": "Combustion of fuels/wood returns CO2",
+              "marks": 5
+            }
+          ],
+          "explanation": "Model answer: photosynthesis removes CO2; respiration, decomposition and combustion return it. Marking points: 5 + 5 + 5 + 5."
+        },
+        {
+          "orderIndex": 5,
+          "questionText": "5. Describe how the human body restores the blood glucose concentration to normal after a carbohydrate-rich meal raises it above the set point. [20 marks]",
+          "marks": 20,
+          "options": [
+            "The pancreas detects the rise; beta cells of the islets secrete insulin; insulin makes the liver and muscles convert glucose to glycogen and increases glucose uptake by cells; negative feedback returns the level to normal.",
+            "The liver detects the rise and secretes glucagon, which raises the blood glucose level still further.",
+            "The kidneys excrete the excess glucose in urine while the pituitary gland secretes adrenaline.",
+            "The pancreas secretes insulin, which converts glycogen to glucose and raises the level further."
+          ],
+          "correctAnswer": "The pancreas detects the rise; beta cells of the islets secrete insulin; insulin makes the liver and muscles convert glucose to glycogen and increases glucose uptake by cells; negative feedback returns the level to normal.",
+          "modelAnswer": "After a carbohydrate-rich meal, glucose enters the blood and its concentration rises above the set point (~90 mg per 100 cm³). The pancreas detects the rise and the beta cells of the islets of Langerhans secrete insulin. Insulin stimulates the liver and muscles to convert excess glucose to glycogen for storage and increases the uptake of glucose by body cells for respiration. As glucose is removed from the blood the level falls, insulin secretion falls, and the concentration returns to normal — an example of negative feedback.",
+          "markingPoints": [
+            {
+              "point": "Pancreas (islets) detects the rise in blood glucose",
+              "marks": 4
+            },
+            {
+              "point": "Insulin secreted by the beta cells",
+              "marks": 4
+            },
+            {
+              "point": "Liver and muscles convert glucose to glycogen",
+              "marks": 5
+            },
+            {
+              "point": "Increased uptake of glucose by body cells",
+              "marks": 4
+            },
+            {
+              "point": "Negative feedback returns the level to normal",
+              "marks": 3
+            }
+          ],
+          "explanation": "Model answer: pancreas detects the rise → insulin from beta cells → glycogen storage and cell uptake → level falls by negative feedback. Marking points: 4 + 4 + 5 + 4 + 3."
+        }
+      ]
+    }
+  ]
+}

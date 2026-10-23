@@ -1,0 +1,1021 @@
+{
+  "board": {
+    "slug": "waec",
+    "name": "WAEC (WASSCE)"
+  },
+  "provenance": "original",
+  "provenanceNote": "Authored by Gnostiri — an original, exam-style practice paper modelled on the WAEC (WASSCE) format. Not an official WAEC past paper.",
+  "disclaimer": true,
+  "reviewStatus": "needs-human-review",
+  "crossBoardNote": "Writing NECO? The WAEC and NECO syllabi cover the same material — these questions prepare you for both.",
+  "papers": [
+    {
+      "id": "waec-mathematics-2026-p1",
+      "subject": "Mathematics",
+      "year": 2026,
+      "paperNumber": "Paper 1 (Objective)",
+      "durationMinutes": 60,
+      "totalMarks": 50,
+      "onScreenForm": "single-select",
+      "instructions": "Answer ALL questions. Each question carries one mark.",
+      "questions": [
+        {
+          "orderIndex": 1,
+          "questionText": "Evaluate (0.75 × 0.84) ÷ 0.12.",
+          "options": [
+            "5.25",
+            "0.525",
+            "52.5",
+            "7.5"
+          ],
+          "correctAnswer": "5.25",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(0.75*0.84)/0.12",
+            "equals": 5.25
+          },
+          "explanation": "0.75 × 0.84 = 0.63, and 0.63 ÷ 0.12 = 5.25."
+        },
+        {
+          "orderIndex": 2,
+          "questionText": "Simplify 2½ + 1¾ − ⅓.",
+          "options": [
+            "4 1/12",
+            "3 11/12",
+            "3 1/12",
+            "4 5/12"
+          ],
+          "correctAnswer": "3 11/12",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "5/2 + 7/4 - 1/3",
+            "equals": 3.9167
+          },
+          "explanation": "Using the LCM of 12: 30/12 + 21/12 − 4/12 = 47/12 = 3 11/12."
+        },
+        {
+          "orderIndex": 3,
+          "questionText": "Express 0.004561 in standard form.",
+          "options": [
+            "4.561 × 10⁻²",
+            "4.561 × 10⁻⁵",
+            "4.561 × 10⁻³",
+            "5.461 × 10⁻³"
+          ],
+          "correctAnswer": "4.561 × 10⁻³",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Move the decimal point three places to the right, so the index is −3: 4.561 × 10⁻³."
+        },
+        {
+          "orderIndex": 4,
+          "questionText": "The nth term of the sequence 5, 11, 17, 23, … is",
+          "options": [
+            "6n + 1",
+            "5n + 6",
+            "6n − 5",
+            "6n − 1"
+          ],
+          "correctAnswer": "6n − 1",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The common difference is 6, so the nth term is 5 + (n − 1) × 6 = 6n − 1."
+        },
+        {
+          "orderIndex": 5,
+          "questionText": "If 2^(2x) = 64, find the value of x.",
+          "options": [
+            "3",
+            "2",
+            "4",
+            "6"
+          ],
+          "correctAnswer": "3",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "6/2",
+            "equals": 3
+          },
+          "explanation": "64 = 2⁶, so 2x = 6 and x = 3."
+        },
+        {
+          "orderIndex": 6,
+          "questionText": "Simplify log₁₀ 1000 + log₂ 8.",
+          "options": [
+            "5",
+            "6",
+            "9",
+            "8"
+          ],
+          "correctAnswer": "6",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "3+3",
+            "equals": 6
+          },
+          "explanation": "log₁₀ 1000 = 3 because 10³ = 1000, and log₂ 8 = 3 because 2³ = 8. Their sum is 6."
+        },
+        {
+          "orderIndex": 7,
+          "questionText": "Solve the equation 3x − 7 = 14.",
+          "options": [
+            "5",
+            "−7",
+            "7",
+            "21"
+          ],
+          "correctAnswer": "7",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "(14+7)/3",
+            "equals": 7
+          },
+          "explanation": "3x = 21, hence x = 7."
+        },
+        {
+          "orderIndex": 8,
+          "questionText": "Factorise x² − 2x − 24.",
+          "options": [
+            "(x − 4)(x + 6)",
+            "(x + 4)(x + 6)",
+            "(x − 12)(x + 2)",
+            "(x + 4)(x − 6)"
+          ],
+          "correctAnswer": "(x + 4)(x − 6)",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Two numbers with product −24 and sum −2 are +4 and −6, giving (x + 4)(x − 6)."
+        },
+        {
+          "orderIndex": 9,
+          "questionText": "Expand (2x − 3)(x + 4).",
+          "options": [
+            "2x² + 5x − 12",
+            "2x² − 5x − 12",
+            "2x² + 11x − 12",
+            "2x² + 5x + 12"
+          ],
+          "correctAnswer": "2x² + 5x − 12",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Multiplying out: 2x² + 8x − 3x − 12 = 2x² + 5x − 12."
+        },
+        {
+          "orderIndex": 10,
+          "questionText": "Simplify (6a²b³)/(2ab).",
+          "options": [
+            "3a²b²",
+            "3ab²",
+            "3ab",
+            "3a³b⁴"
+          ],
+          "correctAnswer": "3ab²",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Divide the coefficients (6/2 = 3) and subtract the indices: a^(2−1) = a, b^(3−1) = b²."
+        },
+        {
+          "orderIndex": 11,
+          "questionText": "Solve x/3 + (x + 1)/2 = 5.",
+          "options": [
+            "5",
+            "9/2",
+            "27/5",
+            "3"
+          ],
+          "correctAnswer": "27/5",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "27/5",
+            "equals": 5.4
+          },
+          "explanation": "Multiplying through by 6: 2x + 3(x + 1) = 30 → 5x = 27 → x = 27/5."
+        },
+        {
+          "orderIndex": 12,
+          "questionText": "Make y the subject of the relation x = 2y + 5.",
+          "options": [
+            "y = (x + 5)/2",
+            "y = 2x − 5",
+            "y = 2(x − 5)",
+            "y = (x − 5)/2"
+          ],
+          "correctAnswer": "y = (x − 5)/2",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Subtract 5 from both sides (x − 5 = 2y), then divide both sides by 2."
+        },
+        {
+          "orderIndex": 13,
+          "questionText": "Two angles of a triangle are 45° and 65°. The third angle is",
+          "options": [
+            "70°",
+            "80°",
+            "95°",
+            "110°"
+          ],
+          "correctAnswer": "70°",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "180 - 45 - 65",
+            "equals": 70
+          },
+          "explanation": "The angles of a triangle add up to 180°, so the third angle is 180° − 110° = 70°."
+        },
+        {
+          "orderIndex": 14,
+          "questionText": "Two angles on a straight line are (3x + 10)° and 50°. Find x.",
+          "options": [
+            "50°",
+            "40°",
+            "60°",
+            "30°"
+          ],
+          "correctAnswer": "40°",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(180-10-50)/3",
+            "equals": 40
+          },
+          "explanation": "Angles on a straight line add up to 180°: 3x + 10 + 50 = 180 → 3x = 120 → x = 40°."
+        },
+        {
+          "orderIndex": 15,
+          "questionText": "Each interior angle of a regular polygon is 156°. How many sides does the polygon have?",
+          "options": [
+            "12",
+            "18",
+            "15",
+            "20"
+          ],
+          "correctAnswer": "15",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "360/(180-156)",
+            "equals": 15
+          },
+          "explanation": "Each exterior angle is 180° − 156° = 24°, and the number of sides is 360° ÷ 24° = 15."
+        },
+        {
+          "orderIndex": 16,
+          "questionText": "Find the area of a circle of radius 7 cm. [Take π = 22/7]",
+          "options": [
+            "44 cm²",
+            "49 cm²",
+            "308 cm²",
+            "154 cm²"
+          ],
+          "correctAnswer": "154 cm²",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(22/7)*7*7",
+            "equals": 154
+          },
+          "explanation": "Area = πr² = (22/7) × 7 × 7 = 154 cm²."
+        },
+        {
+          "orderIndex": 17,
+          "questionText": "Find the circumference of a circle of diameter 21 cm. [Take π = 22/7]",
+          "options": [
+            "66 cm",
+            "33 cm",
+            "132 cm",
+            "42 cm"
+          ],
+          "correctAnswer": "66 cm",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(22/7)*21",
+            "equals": 66
+          },
+          "explanation": "Circumference = πd = (22/7) × 21 = 66 cm."
+        },
+        {
+          "orderIndex": 18,
+          "questionText": "Find the volume of a cylinder of radius 3.5 cm and height 10 cm. [Take π = 22/7]",
+          "options": [
+            "269.5 cm³",
+            "385 cm³",
+            "3850 cm³",
+            "110 cm³"
+          ],
+          "correctAnswer": "385 cm³",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(22/7)*3.5*3.5*10",
+            "equals": 385
+          },
+          "explanation": "Volume = πr²h = (22/7) × 3.5² × 10 = (22/7) × 12.25 × 10 = 385 cm³."
+        },
+        {
+          "orderIndex": 19,
+          "questionText": "A trapezium has parallel sides of 8 cm and 12 cm and a height of 5 cm. Find its area.",
+          "options": [
+            "40 cm²",
+            "100 cm²",
+            "50 cm²",
+            "30 cm²"
+          ],
+          "correctAnswer": "50 cm²",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "0.5*(8+12)*5",
+            "equals": 50
+          },
+          "explanation": "Area of a trapezium = ½(a + b)h = ½ × (8 + 12) × 5 = 50 cm²."
+        },
+        {
+          "orderIndex": 20,
+          "questionText": "An arc of a circle of radius 7 cm subtends an angle of 90° at the centre. Find the length of the arc. [Take π = 22/7]",
+          "options": [
+            "22 cm",
+            "44 cm",
+            "5.5 cm",
+            "11 cm"
+          ],
+          "correctAnswer": "11 cm",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "(90/360)*2*(22/7)*7",
+            "equals": 11
+          },
+          "explanation": "Length = (θ/360°) × 2πr = (90/360) × 2 × (22/7) × 7 = (1/4) × 44 = 11 cm."
+        },
+        {
+          "orderIndex": 21,
+          "questionText": "The two shorter sides of a right-angled triangle are 5 cm and 12 cm. Find the hypotenuse.",
+          "options": [
+            "13 cm",
+            "17 cm",
+            "7 cm",
+            "14 cm"
+          ],
+          "correctAnswer": "13 cm",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "sqrt(25+144)",
+            "equals": 13
+          },
+          "explanation": "By Pythagoras: c² = 5² + 12² = 169, so c = √169 = 13 cm."
+        },
+        {
+          "orderIndex": 22,
+          "questionText": "The bearing of B from A is 060°. Find the bearing of A from B.",
+          "options": [
+            "120°",
+            "240°",
+            "060°",
+            "300°"
+          ],
+          "correctAnswer": "240°",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "60+180",
+            "equals": 240
+          },
+          "explanation": "The back bearing differs by 180°: 060° + 180° = 240°."
+        },
+        {
+          "orderIndex": 23,
+          "questionText": "If sin θ = 3/5 and θ is acute, find cos θ.",
+          "options": [
+            "3/4",
+            "5/4",
+            "4/5",
+            "4/3"
+          ],
+          "correctAnswer": "4/5",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "sqrt(25-9)/5",
+            "equals": 0.8
+          },
+          "explanation": "The adjacent side is √(5² − 3²) = √16 = 4, so cos θ = 4/5."
+        },
+        {
+          "orderIndex": 24,
+          "questionText": "If tan θ = 1 and 0° ≤ θ ≤ 90°, then θ is",
+          "options": [
+            "30°",
+            "60°",
+            "90°",
+            "45°"
+          ],
+          "correctAnswer": "45°",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "tan 45° = 1 — a standard exact value."
+        },
+        {
+          "orderIndex": 25,
+          "questionText": "Evaluate sin 30° + cos 60°.",
+          "options": [
+            "1",
+            "1.5",
+            "0.5",
+            "0"
+          ],
+          "correctAnswer": "1",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "0.5+0.5",
+            "equals": 1
+          },
+          "explanation": "sin 30° = 0.5 and cos 60° = 0.5, so the sum is 1."
+        },
+        {
+          "orderIndex": 26,
+          "questionText": "On a map of scale 1 : 50,000, a distance of 4 cm on the map represents how many kilometres on the ground?",
+          "options": [
+            "20 km",
+            "2 km",
+            "0.2 km",
+            "4 km"
+          ],
+          "correctAnswer": "2 km",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "4*50000/100000",
+            "equals": 2
+          },
+          "explanation": "4 × 50,000 = 200,000 cm = 2,000 m = 2 km."
+        },
+        {
+          "orderIndex": 27,
+          "questionText": "Find the median of the numbers 3, 8, 5, 9, 7, 4.",
+          "options": [
+            "5",
+            "7",
+            "6",
+            "4.5"
+          ],
+          "correctAnswer": "6",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(5+7)/2",
+            "equals": 6
+          },
+          "explanation": "Arranged in order: 3, 4, 5, 7, 8, 9. The two middle numbers are 5 and 7, so the median is 6."
+        },
+        {
+          "orderIndex": 28,
+          "questionText": "Find the mode of the numbers 2, 3, 3, 5, 7, 3, 8.",
+          "options": [
+            "5",
+            "7",
+            "8",
+            "3"
+          ],
+          "correctAnswer": "3",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The mode is the most frequent value: 3 appears three times."
+        },
+        {
+          "orderIndex": 29,
+          "questionText": "A fair die is thrown once. Find the probability of obtaining a prime number.",
+          "options": [
+            "1/2",
+            "1/3",
+            "2/3",
+            "1/6"
+          ],
+          "correctAnswer": "1/2",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "3/6",
+            "equals": 0.5
+          },
+          "explanation": "The prime numbers on a die are 2, 3 and 5 — three favourable outcomes out of six, so 3/6 = 1/2."
+        },
+        {
+          "orderIndex": 30,
+          "questionText": "A bag contains 5 red and 3 blue identical balls. If a ball is picked at random, find the probability that it is red.",
+          "options": [
+            "3/8",
+            "5/8",
+            "5/3",
+            "8/3"
+          ],
+          "correctAnswer": "5/8",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "5/8",
+            "equals": 0.625
+          },
+          "explanation": "There are 8 balls in total and 5 of them are red, so the probability is 5/8."
+        },
+        {
+          "orderIndex": 31,
+          "questionText": "Two fair coins are tossed once. Find the probability of obtaining two heads.",
+          "options": [
+            "1/2",
+            "1/3",
+            "1/4",
+            "3/4"
+          ],
+          "correctAnswer": "1/4",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "1/4",
+            "equals": 0.25
+          },
+          "explanation": "The outcomes are HH, HT, TH, TT — four equally likely outcomes, one of which is two heads."
+        },
+        {
+          "orderIndex": 32,
+          "questionText": "Express 3/8 as a percentage.",
+          "options": [
+            "32.5%",
+            "38.5%",
+            "42.5%",
+            "37.5%"
+          ],
+          "correctAnswer": "37.5%",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "3/8*100",
+            "equals": 37.5
+          },
+          "explanation": "3/8 × 100 = 37.5%."
+        },
+        {
+          "orderIndex": 33,
+          "questionText": "A trader bought an article for ₦250 and sold it for ₦300. Find her percentage profit.",
+          "options": [
+            "20%",
+            "25%",
+            "16⅔%",
+            "50%"
+          ],
+          "correctAnswer": "20%",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "(300-250)/250*100",
+            "equals": 20
+          },
+          "explanation": "Profit = ₦50, so percentage profit = 50/250 × 100 = 20%."
+        },
+        {
+          "orderIndex": 34,
+          "questionText": "Find the simple interest on ₦5,000 at 8% per annum for 3 years.",
+          "options": [
+            "₦1,500",
+            "₦1,200",
+            "₦800",
+            "₦400"
+          ],
+          "correctAnswer": "₦1,200",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "5000*8*3/100",
+            "equals": 1200
+          },
+          "explanation": "Simple interest = PRT/100 = 5000 × 8 × 3 ÷ 100 = ₦1,200."
+        },
+        {
+          "orderIndex": 35,
+          "questionText": "₦60,000 is shared between two sisters in the ratio 2 : 3. Find the larger share.",
+          "options": [
+            "₦24,000",
+            "₦30,000",
+            "₦36,000",
+            "₦40,000"
+          ],
+          "correctAnswer": "₦36,000",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "60000*3/5",
+            "equals": 36000
+          },
+          "explanation": "The larger share is 3/5 of ₦60,000 = ₦36,000."
+        },
+        {
+          "orderIndex": 36,
+          "questionText": "Simplify the ratio 1.5 : 2.5.",
+          "options": [
+            "2 : 3",
+            "5 : 7",
+            "4 : 5",
+            "3 : 5"
+          ],
+          "correctAnswer": "3 : 5",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Multiply both parts by 10 to clear the decimals: 15 : 25, which simplifies to 3 : 5."
+        },
+        {
+          "orderIndex": 37,
+          "questionText": "Convert 1011 (base two) to a number in base ten.",
+          "options": [
+            "11",
+            "9",
+            "13",
+            "23"
+          ],
+          "correctAnswer": "11",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "1*8+0*4+1*2+1*1",
+            "equals": 11
+          },
+          "explanation": "1011₂ = 1×8 + 0×4 + 1×2 + 1×1 = 11."
+        },
+        {
+          "orderIndex": 38,
+          "questionText": "What is the value of the digit 7 in the number 4732.65?",
+          "options": [
+            "70",
+            "700",
+            "7",
+            "0.7"
+          ],
+          "correctAnswer": "700",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The 7 is in the hundreds place, so its value is 700."
+        },
+        {
+          "orderIndex": 39,
+          "questionText": "Round 4.736 to two decimal places.",
+          "options": [
+            "4.73",
+            "4.72",
+            "4.74",
+            "4.75"
+          ],
+          "correctAnswer": "4.74",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The third decimal digit is 6, so the 3 in the second decimal place rounds up to 4."
+        },
+        {
+          "orderIndex": 40,
+          "questionText": "Find the HCF of 24, 36 and 48.",
+          "options": [
+            "6",
+            "24",
+            "8",
+            "12"
+          ],
+          "correctAnswer": "12",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "24 = 2³ × 3, 36 = 2² × 3², 48 = 2⁴ × 3; the common prime factors give 2² × 3 = 12."
+        },
+        {
+          "orderIndex": 41,
+          "questionText": "Find the LCM of 8, 12 and 18.",
+          "options": [
+            "72",
+            "48",
+            "144",
+            "36"
+          ],
+          "correctAnswer": "72",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Taking the highest power of each prime: 2³ × 3² = 72."
+        },
+        {
+          "orderIndex": 42,
+          "questionText": "Simplify √72.",
+          "options": [
+            "8√2",
+            "6√2",
+            "3√6",
+            "12"
+          ],
+          "correctAnswer": "6√2",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "72 = 36 × 2, so √72 = √36 × √2 = 6√2."
+        },
+        {
+          "orderIndex": 43,
+          "questionText": "If x varies inversely as y, and x = 4 when y = 3, find x when y = 8.",
+          "options": [
+            "32",
+            "3",
+            "1.5",
+            "10.67"
+          ],
+          "correctAnswer": "1.5",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "12/8",
+            "equals": 1.5
+          },
+          "explanation": "x = k/y, so k = xy = 12. When y = 8, x = 12/8 = 1.5."
+        },
+        {
+          "orderIndex": 44,
+          "questionText": "Express 20 minutes as a fraction of 2 hours.",
+          "options": [
+            "1/3",
+            "1/2",
+            "1/12",
+            "1/6"
+          ],
+          "correctAnswer": "1/6",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "20/120",
+            "equals": 0.1667
+          },
+          "explanation": "2 hours = 120 minutes, so the fraction is 20/120 = 1/6."
+        },
+        {
+          "orderIndex": 45,
+          "questionText": "Find the common difference of the arithmetic progression 7, 4, 1, −2, … .",
+          "options": [
+            "−3",
+            "3",
+            "−4",
+            "1"
+          ],
+          "correctAnswer": "−3",
+          "marks": 1,
+          "difficulty": "easy",
+          "check": {
+            "expr": "4-7",
+            "equals": -3
+          },
+          "explanation": "d = T₂ − T₁ = 4 − 7 = −3."
+        },
+        {
+          "orderIndex": 46,
+          "questionText": "Find the 10th term of the sequence 2, 5, 8, … .",
+          "options": [
+            "26",
+            "29",
+            "32",
+            "27"
+          ],
+          "correctAnswer": "29",
+          "marks": 1,
+          "difficulty": "medium",
+          "check": {
+            "expr": "2+9*3",
+            "equals": 29
+          },
+          "explanation": "The common difference is 3, so T₁₀ = 2 + 9 × 3 = 29."
+        },
+        {
+          "orderIndex": 47,
+          "questionText": "How many diagonals does a hexagon have?",
+          "options": [
+            "6",
+            "12",
+            "9",
+            "3"
+          ],
+          "correctAnswer": "9",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "6*(6-3)/2",
+            "equals": 9
+          },
+          "explanation": "Number of diagonals = n(n − 3)/2 = 6 × 3 ÷ 2 = 9."
+        },
+        {
+          "orderIndex": 48,
+          "questionText": "Find the surface area of a sphere of radius 3.5 cm. [Take π = 22/7]",
+          "options": [
+            "77 cm²",
+            "38.5 cm²",
+            "308 cm²",
+            "154 cm²"
+          ],
+          "correctAnswer": "154 cm²",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "4*(22/7)*3.5*3.5",
+            "equals": 154
+          },
+          "explanation": "Surface area = 4πr² = 4 × (22/7) × 3.5² = 4 × 38.5 = 154 cm²."
+        },
+        {
+          "orderIndex": 49,
+          "questionText": "Find the total surface area of a closed cylinder of radius 7 cm and height 10 cm. [Take π = 22/7]",
+          "options": [
+            "748 cm²",
+            "440 cm²",
+            "308 cm²",
+            "880 cm²"
+          ],
+          "correctAnswer": "748 cm²",
+          "marks": 1,
+          "difficulty": "hard",
+          "check": {
+            "expr": "2*(22/7)*7*(7+10)",
+            "equals": 748
+          },
+          "explanation": "Total surface area = 2πr(r + h) = 2 × (22/7) × 7 × 17 = 748 cm²."
+        },
+        {
+          "orderIndex": 50,
+          "questionText": "Simplify (x⁻²y³)/(x⁴y⁻¹).",
+          "options": [
+            "x⁻⁶y²",
+            "x⁻⁶y⁴",
+            "x⁻⁶y⁻⁴",
+            "x²y⁴"
+          ],
+          "correctAnswer": "x⁻⁶y⁴",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "Subtract the indices: x^(−2−4) = x⁻⁶ and y^(3−(−1)) = y⁴."
+        }
+      ]
+    },
+    {
+      "id": "waec-mathematics-2026-p2",
+      "subject": "Mathematics",
+      "year": 2026,
+      "paperNumber": "Paper 2 (Theory)",
+      "durationMinutes": 140,
+      "totalMarks": 100,
+      "onScreenForm": "candidate-answer-set",
+      "instructions": "Answer ALL five questions. Each question carries 20 marks: method marks and accuracy marks are awarded as shown in the marking scheme.",
+      "questions": [
+        {
+          "orderIndex": 1,
+          "questionText": "1. Solve the simultaneous equations: 3x + 2y = 8 and 2x − y = 3. [20 marks]",
+          "marks": 20,
+          "options": [
+            "x = 2, y = 1",
+            "x = 1, y = 2",
+            "x = −2, y = −7",
+            "x = 2, y = −1"
+          ],
+          "correctAnswer": "x = 2, y = 1",
+          "modelAnswer": "From 2x − y = 3, y = 2x − 3. Substitute into 3x + 2y = 8: 3x + 2(2x − 3) = 8 → 3x + 4x − 6 = 8 → 7x = 14, so x = 2. Then y = 2(2) − 3 = 1. Check: 3(2) + 2(1) = 8 and 2(2) − 1 = 3. Both equations are satisfied.",
+          "markingPoints": [
+            {
+              "point": "Correct elimination or substitution method set up",
+              "marks": 6
+            },
+            {
+              "point": "Correct value of x (x = 2)",
+              "marks": 7
+            },
+            {
+              "point": "Correct value of y (y = 1), verified in either equation",
+              "marks": 7
+            }
+          ],
+          "explanation": "Model answer: from 2x − y = 3, y = 2x − 3; substituting into 3x + 2y = 8 gives 7x = 14, so x = 2 and then y = 1. On-screen form: select the solution set that matches the marking scheme — the written paper awards 6 marks for a correct method and 7 each for the two correct values."
+        },
+        {
+          "orderIndex": 2,
+          "questionText": "2. In a right-angled triangle, the hypotenuse is 10 cm and one of the acute angles is 30°. Find the lengths of the other two sides. [20 marks]",
+          "marks": 20,
+          "options": [
+            "5 cm and 5 cm",
+            "5 cm and 5√3 cm (≈ 8.66 cm)",
+            "10√3 cm and 10 cm",
+            "5√2 cm and 5√3 cm"
+          ],
+          "correctAnswer": "5 cm and 5√3 cm (≈ 8.66 cm)",
+          "modelAnswer": "The side opposite the 30° angle has length 10 sin 30° = 10 × 0.5 = 5 cm. The remaining side has length 10 cos 30° = 10 × (√3/2) = 5√3 ≈ 8.66 cm (2 d.p.).",
+          "markingPoints": [
+            {
+              "point": "Correct trigonometric ratio for the side opposite the 30° angle",
+              "marks": 6
+            },
+            {
+              "point": "Correct value 5 cm",
+              "marks": 7
+            },
+            {
+              "point": "Correct value 5√3 cm ≈ 8.66 cm",
+              "marks": 7
+            }
+          ],
+          "explanation": "Model answer: 10 sin 30° = 5 cm and 10 cos 30° = 5√3 ≈ 8.66 cm. Marking points: correct trig ratio (6), 5 cm (7), 5√3 cm ≈ 8.66 cm (7)."
+        },
+        {
+          "orderIndex": 3,
+          "questionText": "3. A cylindrical tank has base radius 3.5 m and height 10 m. It is filled with water. (a) Calculate the volume of water in the tank. (b) Express the volume in litres. [Take π = 22/7; 1 m³ = 1,000 litres] [20 marks]",
+          "marks": 20,
+          "options": [
+            "385 m³ = 3,850 litres",
+            "115.5 m³ = 115,500 litres",
+            "385 m³ = 385,000 litres",
+            "77 m³ = 7,700 litres"
+          ],
+          "correctAnswer": "385 m³ = 385,000 litres",
+          "modelAnswer": "Volume = πr²h = (22/7) × 3.5² × 10 = (22/7) × 12.25 × 10 = 385 m³. Since 1 m³ = 1,000 litres, the tank holds 385 × 1,000 = 385,000 litres.",
+          "markingPoints": [
+            {
+              "point": "Correct volume formula V = πr²h",
+              "marks": 4
+            },
+            {
+              "point": "Correct substitution of r = 3.5 and h = 10",
+              "marks": 5
+            },
+            {
+              "point": "Correct volume 385 m³",
+              "marks": 5
+            },
+            {
+              "point": "Correct conversion to 385,000 litres",
+              "marks": 6
+            }
+          ],
+          "explanation": "Model answer: V = πr²h = 385 m³, which equals 385,000 litres. Marking points: formula (4), substitution (5), volume (5), conversion (6)."
+        },
+        {
+          "orderIndex": 4,
+          "questionText": "4. The marks scored by eight students in a test are 5, 7, 8, 5, 6, 7, 9 and 7. (a) State the mode. (b) Find the median. (c) Calculate the mean. [20 marks]",
+          "marks": 20,
+          "options": [
+            "Mode 7; median 6.5; mean 6.5",
+            "Mode 8; median 7; mean 6.75",
+            "Mode 5; median 6.5; mean 7",
+            "Mode 7; median 7; mean 6.75"
+          ],
+          "correctAnswer": "Mode 7; median 7; mean 6.75",
+          "modelAnswer": "(a) 7 appears three times, more often than any other mark, so the mode is 7. (b) In order the marks are 5, 5, 6, 7, 7, 7, 8, 9; the two middle marks are both 7, so the median is 7. (c) Sum = 54, so the mean = 54 ÷ 8 = 6.75.",
+          "markingPoints": [
+            {
+              "point": "Correct mode (7)",
+              "marks": 6
+            },
+            {
+              "point": "Correct median (7)",
+              "marks": 7
+            },
+            {
+              "point": "Correct mean (6.75)",
+              "marks": 7
+            }
+          ],
+          "explanation": "Model answer: mode 7, median 7, mean 6.75 (54 ÷ 8). Marking points: mode (6), median (7), mean (7)."
+        },
+        {
+          "orderIndex": 5,
+          "questionText": "5. The sum of the interior angles of a regular polygon is 1080°. (a) Find the number of sides. (b) Find the size of each interior angle. (c) Name the polygon. [20 marks]",
+          "marks": 20,
+          "options": [
+            "8 sides; 135°; octagon",
+            "7 sides; 150°; heptagon",
+            "9 sides; 140°; nonagon",
+            "8 sides; 120°; hexagon"
+          ],
+          "correctAnswer": "8 sides; 135°; octagon",
+          "modelAnswer": "(a) Sum of interior angles = (n − 2) × 180°, so (n − 2) × 180 = 1080 → n − 2 = 6 → n = 8. (b) Each interior angle = 1080 ÷ 8 = 135°. (c) A regular polygon with eight sides is an octagon.",
+          "markingPoints": [
+            {
+              "point": "Correct use of (n − 2) × 180° = 1080°",
+              "marks": 6
+            },
+            {
+              "point": "Correct number of sides (8)",
+              "marks": 7
+            },
+            {
+              "point": "Correct interior angle and name (135°, octagon)",
+              "marks": 7
+            }
+          ],
+          "explanation": "Model answer: n = 8, each interior angle 135°, an octagon. Marking points: formula (6), sides (7), angle and name (7)."
+        }
+      ]
+    }
+  ]
+}

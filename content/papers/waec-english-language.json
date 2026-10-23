@@ -1,0 +1,873 @@
+{
+  "board": {
+    "slug": "waec",
+    "name": "WAEC (WASSCE)"
+  },
+  "provenance": "original",
+  "provenanceNote": "Authored by Gnostiri — an original, exam-style practice paper modelled on the WAEC (WASSCE) format. Not an official WAEC past paper.",
+  "disclaimer": true,
+  "reviewStatus": "needs-human-review",
+  "crossBoardNote": "Writing NECO? The WAEC and NECO syllabi cover the same material — these questions prepare you for both.",
+  "papers": [
+    {
+      "id": "waec-english-language-2026-p1",
+      "subject": "English Language",
+      "year": 2026,
+      "paperNumber": "Paper 1 (Objective)",
+      "durationMinutes": 60,
+      "totalMarks": 50,
+      "onScreenForm": "single-select",
+      "instructions": "Answer ALL questions. Each question carries one mark.",
+      "questions": [
+        {
+          "orderIndex": 1,
+          "questionText": "Read the following passage carefully and answer the question. 'The new bridge across the river was opened last Tuesday. For years, traders on the far bank had complained that the only crossing was a shaky canoe that capsized whenever it was overloaded. On the opening day the chief cut the ribbon while schoolchildren sang.' According to the passage, about what had the traders complained?",
+          "options": [
+            "The canoe crossing",
+            "The new bridge",
+            "The schoolchildren",
+            "The chief's speech"
+          ],
+          "correctAnswer": "The canoe crossing",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The passage states the traders complained that the only crossing was a shaky canoe; the bridge was the solution, not the complaint."
+        },
+        {
+          "orderIndex": 2,
+          "questionText": "Read the following passage carefully and answer the question. 'Aminu wakes at four every morning. He walks two kilometres to the farm, clears a strip of bush and plants maize before the sun becomes hot. He says the morning hours are the only ones that belong to him.' The passage suggests that Aminu is",
+          "options": [
+            "lazy",
+            "hard-working",
+            "wealthy",
+            "frightened"
+          ],
+          "correctAnswer": "hard-working",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Waking at four, walking two kilometres and working before the heat all point to a hard-working character, not laziness or wealth."
+        },
+        {
+          "orderIndex": 3,
+          "questionText": "Read the following passage carefully and answer the question. 'The library used to be the noisiest room in the school. Then the headmistress ordered the shelves locked except during the two lunch hours. Borrowing dropped at once, and reading followed.' The writer suggests that the decline in reading was caused by",
+          "options": [
+            "The students' dislike of books",
+            "The two lunch hours",
+            "The library being kept locked most of the time",
+            "The headmistress's visits"
+          ],
+          "correctAnswer": "The library being kept locked most of the time",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The cause is stated in order: shelves locked except at lunch, then borrowing and reading fell — the restriction on access, not a dislike of books."
+        },
+        {
+          "orderIndex": 4,
+          "questionText": "Choose the option NEAREST in meaning to the word FRUGAL.",
+          "options": [
+            "generous",
+            "wasteful",
+            "cheerful",
+            "thrifty"
+          ],
+          "correctAnswer": "thrifty",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Frugal means careful with money; thrifty is its nearest synonym. Generous and wasteful are opposites in spirit."
+        },
+        {
+          "orderIndex": 5,
+          "questionText": "Choose the option OPPOSITE in meaning to the word SCARCE.",
+          "options": [
+            "rare",
+            "abundant",
+            "little",
+            "few"
+          ],
+          "correctAnswer": "abundant",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Scarce means in short supply; its opposite is abundant (plentiful)."
+        },
+        {
+          "orderIndex": 6,
+          "questionText": "Choose the option OPPOSITE in meaning to the word GENEROUS.",
+          "options": [
+            "stingy",
+            "kind",
+            "cheerful",
+            "wealthy"
+          ],
+          "correctAnswer": "stingy",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Generous means giving freely; stingy — unwilling to give — is its opposite."
+        },
+        {
+          "orderIndex": 7,
+          "questionText": "Choose the option NEAREST in meaning to the word MOMENTOUS.",
+          "options": [
+            "insignificant",
+            "lengthy",
+            "significant",
+            "doubtful"
+          ],
+          "correctAnswer": "significant",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Momentous means very important — significant. Insignificant is its nearest opposite."
+        },
+        {
+          "orderIndex": 8,
+          "questionText": "Choose the option OPPOSITE in meaning to the word TRANSIENT.",
+          "options": [
+            "brief",
+            "temporary",
+            "unstable",
+            "permanent"
+          ],
+          "correctAnswer": "permanent",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Transient means lasting only a short time; permanent — lasting — is its opposite."
+        },
+        {
+          "orderIndex": 9,
+          "questionText": "Choose the option NEAREST in meaning to the word VULNERABLE.",
+          "options": [
+            "defenceless",
+            "invincible",
+            "powerful",
+            "protected"
+          ],
+          "correctAnswer": "defenceless",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Vulnerable means exposed to harm; defenceless is nearest. Invincible and protected are opposites."
+        },
+        {
+          "orderIndex": 10,
+          "questionText": "Choose the option NEAREST in meaning to the word SACKED as used in: 'The accountant was SACKED for dishonesty.'",
+          "options": [
+            "promoted",
+            "dismissed",
+            "robbed",
+            "punished"
+          ],
+          "correctAnswer": "dismissed",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "To sack a worker is to dismiss them from their job."
+        },
+        {
+          "orderIndex": 11,
+          "questionText": "If I ___ you, I would apologise at once.",
+          "options": [
+            "was",
+            "am",
+            "were",
+            "be"
+          ],
+          "correctAnswer": "were",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "In the unreal conditional with 'if I ... I would', the past subjunctive 'were' is required for all persons."
+        },
+        {
+          "orderIndex": 12,
+          "questionText": "She said she ___ come the following day.",
+          "options": [
+            "will",
+            "shall",
+            "can",
+            "would"
+          ],
+          "correctAnswer": "would",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Reported speech shifts the future 'will' to 'would' after a past reporting verb."
+        },
+        {
+          "orderIndex": 13,
+          "questionText": "One of the boys ___ absent from school today.",
+          "options": [
+            "are",
+            "is",
+            "were",
+            "have"
+          ],
+          "correctAnswer": "is",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "'One of + plural noun' takes a singular verb."
+        },
+        {
+          "orderIndex": 14,
+          "questionText": "Neither of the girls ___ ready for the race.",
+          "options": [
+            "is",
+            "are",
+            "were",
+            "has"
+          ],
+          "correctAnswer": "is",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "In formal usage 'neither of + plural noun' takes a singular verb."
+        },
+        {
+          "orderIndex": 15,
+          "questionText": "The news from the village ___ very disturbing.",
+          "options": [
+            "are",
+            "were",
+            "is",
+            "have"
+          ],
+          "correctAnswer": "is",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "'News' looks plural but is a singular noun and takes 'is'."
+        },
+        {
+          "orderIndex": 16,
+          "questionText": "You can swim, ___?",
+          "options": [
+            "can you",
+            "cannot you",
+            "could you",
+            "can't you"
+          ],
+          "correctAnswer": "can't you",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "A positive statement takes a negative question tag: can → can't you."
+        },
+        {
+          "orderIndex": 17,
+          "questionText": "I look forward to ___ you again soon.",
+          "options": [
+            "see",
+            "seeing",
+            "seen",
+            "be seeing"
+          ],
+          "correctAnswer": "seeing",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "'Look forward to' is followed by the -ing form (gerund), not the bare infinitive."
+        },
+        {
+          "orderIndex": 18,
+          "questionText": "The boy ___ bicycle was stolen has reported to the police.",
+          "options": [
+            "whose",
+            "who's",
+            "who",
+            "which"
+          ],
+          "correctAnswer": "whose",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "'Whose' shows possession — the bicycle belonging to the boy."
+        },
+        {
+          "orderIndex": 19,
+          "questionText": "Mathematics ___ my favourite subject.",
+          "options": [
+            "are",
+            "were",
+            "is",
+            "has"
+          ],
+          "correctAnswer": "is",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Subject names ending in -ics, such as mathematics and physics, take singular verbs."
+        },
+        {
+          "orderIndex": 20,
+          "questionText": "How ___ sugar do you need for the tea?",
+          "options": [
+            "many",
+            "few",
+            "lot",
+            "much"
+          ],
+          "correctAnswer": "much",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Sugar is an uncountable noun, so it takes 'much', not 'many'."
+        },
+        {
+          "orderIndex": 21,
+          "questionText": "Had he come earlier, I ___ gone home with him.",
+          "options": [
+            "will have",
+            "would have",
+            "had have",
+            "would had"
+          ],
+          "correctAnswer": "would have",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "A third conditional (had + past participle) pairs with 'would have' + past participle."
+        },
+        {
+          "orderIndex": 22,
+          "questionText": "It is high time we ___ for home.",
+          "options": [
+            "went",
+            "go",
+            "gone",
+            "going"
+          ],
+          "correctAnswer": "went",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "After 'it is high time' the past tense expresses urgency: 'went'."
+        },
+        {
+          "orderIndex": 23,
+          "questionText": "He prefers tea ___ coffee.",
+          "options": [
+            "than",
+            "over",
+            "to",
+            "for"
+          ],
+          "correctAnswer": "to",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "'Prefer' is followed by 'to', not 'than': prefer X to Y."
+        },
+        {
+          "orderIndex": 24,
+          "questionText": "By the time we arrived, the film ___ started.",
+          "options": [
+            "has",
+            "have",
+            "was",
+            "had"
+          ],
+          "correctAnswer": "had",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The earlier of two past events takes the past perfect: the film 'had started' before we arrived."
+        },
+        {
+          "orderIndex": 25,
+          "questionText": "Neither John nor his brothers ___ informed of the meeting.",
+          "options": [
+            "was",
+            "were",
+            "is",
+            "has"
+          ],
+          "correctAnswer": "were",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "With 'neither...nor' the verb agrees with the nearer subject; 'his brothers' is plural, so 'were'."
+        },
+        {
+          "orderIndex": 26,
+          "questionText": "The number of applicants for the course ___ increasing every year.",
+          "options": [
+            "is",
+            "are",
+            "were",
+            "have"
+          ],
+          "correctAnswer": "is",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "'The number of' (as opposed to 'a number of') takes a singular verb."
+        },
+        {
+          "orderIndex": 27,
+          "questionText": "Choose the correctly spelt word to complete the sentence: 'The ___ of floods every rainy season worries the farmers.'",
+          "options": [
+            "occurence",
+            "ocurrence",
+            "occurrence",
+            "ocurence"
+          ],
+          "correctAnswer": "occurrence",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "From 'occur': double the r and double the c — occurrence."
+        },
+        {
+          "orderIndex": 28,
+          "questionText": "Choose the correctly spelt word to complete the sentence: 'Please ___ the cards into two piles.'",
+          "options": [
+            "seperate",
+            "separete",
+            "ceperate",
+            "separate"
+          ],
+          "correctAnswer": "separate",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Remember: 'a rat' sits in separate — sep-A-RAT-e."
+        },
+        {
+          "orderIndex": 29,
+          "questionText": "Choose the correctly spelt word to complete the sentence: 'The ___ has approved a new road for the town.'",
+          "options": [
+            "government",
+            "goverment",
+            "govermant",
+            "governmant"
+          ],
+          "correctAnswer": "government",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The verb 'govern' keeps its n before the -ment suffix: government."
+        },
+        {
+          "orderIndex": 30,
+          "questionText": "Choose the correct plural form of 'goose'.",
+          "options": [
+            "gooses",
+            "geese",
+            "geeses",
+            "goosen"
+          ],
+          "correctAnswer": "geese",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Goose is an irregular noun; its plural is geese (compare tooth/teeth)."
+        },
+        {
+          "orderIndex": 31,
+          "questionText": "Choose the correct past tense form of the verb LAY.",
+          "options": [
+            "lied",
+            "layed",
+            "laid",
+            "lain"
+          ],
+          "correctAnswer": "laid",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Lay (to put something down) is regular in speech but written lay–laid–laid; lain belongs to LIE."
+        },
+        {
+          "orderIndex": 32,
+          "questionText": "Choose the correct past participle of the verb LIE (to recline).",
+          "options": [
+            "lied",
+            "laid",
+            "laying",
+            "lain"
+          ],
+          "correctAnswer": "lain",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "Lie (recline) is lie–lay–lain; laid is the past of LAY, and lied belongs to LIE (not tell the truth)."
+        },
+        {
+          "orderIndex": 33,
+          "questionText": "Which of the following words has its primary stress on the SECOND syllable?",
+          "options": [
+            "devote",
+            "water",
+            "table",
+            "garden"
+          ],
+          "correctAnswer": "devote",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "deVOTE is stressed on the second syllable; water, table and garden are stressed on the first."
+        },
+        {
+          "orderIndex": 34,
+          "questionText": "Which of the following words rhymes with 'cheap'?",
+          "options": [
+            "ship",
+            "keep",
+            "step",
+            "cap"
+          ],
+          "correctAnswer": "keep",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Cheap and keep share the /iːp/ sound; ship, step and cap have different vowels and endings."
+        },
+        {
+          "orderIndex": 35,
+          "questionText": "Which of the following words contains the same vowel sound as 'bird'?",
+          "options": [
+            "beard",
+            "blood",
+            "word",
+            "card"
+          ],
+          "correctAnswer": "word",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "In standard British English bird and word share the /ɜː/ sound; beard, blood and card do not."
+        },
+        {
+          "orderIndex": 36,
+          "questionText": "Which of the following words contains the /eɪ/ sound?",
+          "options": [
+            "cat",
+            "cut",
+            "cot",
+            "cake"
+          ],
+          "correctAnswer": "cake",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The silent e lengthens the a in cake to /eɪ/; the others have /æ/, /ʌ/ and /ɒ/."
+        },
+        {
+          "orderIndex": 37,
+          "questionText": "'The wind whispered through the trees' is an example of",
+          "options": [
+            "metaphor",
+            "personification",
+            "hyperbole",
+            "irony"
+          ],
+          "correctAnswer": "personification",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "A human action (whispering) is given to something non-human — personification."
+        },
+        {
+          "orderIndex": 38,
+          "questionText": "'She is as brave as a lion' is an example of a",
+          "options": [
+            "simile",
+            "metaphor",
+            "personification",
+            "hyperbole"
+          ],
+          "correctAnswer": "simile",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "A comparison using 'as ... as' or 'like' is a simile."
+        },
+        {
+          "orderIndex": 39,
+          "questionText": "'I have told you a thousand times' is an example of",
+          "options": [
+            "irony",
+            "litotes",
+            "hyperbole",
+            "euphemism"
+          ],
+          "correctAnswer": "hyperbole",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "A deliberate exaggeration ('a thousand times') for effect is hyperbole."
+        },
+        {
+          "orderIndex": 40,
+          "questionText": "To 'let the cat out of the bag' means to",
+          "options": [
+            "keep a secret",
+            "tell a deliberate lie",
+            "buy a pet",
+            "reveal a secret"
+          ],
+          "correctAnswer": "reveal a secret",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The idiom means to disclose something that was meant to be hidden."
+        },
+        {
+          "orderIndex": 41,
+          "questionText": "To 'burn the midnight oil' means to",
+          "options": [
+            "waste lamp oil",
+            "work or study late into the night",
+            "perform magic",
+            "save money"
+          ],
+          "correctAnswer": "work or study late into the night",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "The idiom refers to working by lamplight after midnight — studying or working very late."
+        },
+        {
+          "orderIndex": 42,
+          "questionText": "'Passed away' is a euphemism for",
+          "options": [
+            "died",
+            "slept",
+            "left home",
+            "fainted"
+          ],
+          "correctAnswer": "died",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "A euphemism softens a harsh reality; 'passed away' stands for died."
+        },
+        {
+          "orderIndex": 43,
+          "questionText": "Which of the following is a collective noun?",
+          "options": [
+            "doctor",
+            "river",
+            "fleet",
+            "beauty"
+          ],
+          "correctAnswer": "fleet",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "A fleet names a group (of ships); doctor and river are concrete nouns and beauty is abstract."
+        },
+        {
+          "orderIndex": 44,
+          "questionText": "It is rude to ___ when someone else is speaking.",
+          "options": [
+            "intercept",
+            "intersect",
+            "interpret",
+            "interrupt"
+          ],
+          "correctAnswer": "interrupt",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "To interrupt is to break into someone's speech; the other words mean to stop, cross and explain."
+        },
+        {
+          "orderIndex": 45,
+          "questionText": "She is married ___ a medical doctor.",
+          "options": [
+            "with",
+            "to",
+            "by",
+            "for"
+          ],
+          "correctAnswer": "to",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "The correct collocation is 'married to a person' (not married with)."
+        },
+        {
+          "orderIndex": 46,
+          "questionText": "Each of the students ___ given a textbook.",
+          "options": [
+            "was",
+            "were",
+            "are",
+            "have"
+          ],
+          "correctAnswer": "was",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "'Each of' takes a singular verb and pronoun: each of the students was."
+        },
+        {
+          "orderIndex": 47,
+          "questionText": "Choose the option OPPOSITE in meaning to the word ABUNDANT.",
+          "options": [
+            "plentiful",
+            "adequate",
+            "scarce",
+            "enough"
+          ],
+          "correctAnswer": "scarce",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Abundant means plentiful; scarce — in short supply — is its opposite."
+        },
+        {
+          "orderIndex": 48,
+          "questionText": "Which of the following words has its primary stress on the THIRD syllable?",
+          "options": [
+            "hospital",
+            "magnificent",
+            "economics",
+            "advertisement"
+          ],
+          "correctAnswer": "advertisement",
+          "marks": 1,
+          "difficulty": "hard",
+          "explanation": "adVERtiseMENT is stressed on the third syllable; hospital, magnificent and economics are stressed elsewhere."
+        },
+        {
+          "orderIndex": 49,
+          "questionText": "Which of the following is an abstract noun?",
+          "options": [
+            "beauty",
+            "table",
+            "Lagos",
+            "boy"
+          ],
+          "correctAnswer": "beauty",
+          "marks": 1,
+          "difficulty": "easy",
+          "explanation": "Abstract nouns name ideas or qualities; beauty qualifies. Table, Lagos and boy are concrete."
+        },
+        {
+          "orderIndex": 50,
+          "questionText": "Choose the option NEAREST in meaning to the word CANDID.",
+          "options": [
+            "doubtful",
+            "frank",
+            "careless",
+            "generous"
+          ],
+          "correctAnswer": "frank",
+          "marks": 1,
+          "difficulty": "medium",
+          "explanation": "Candid means honest and straightforward — frank."
+        }
+      ]
+    },
+    {
+      "id": "waec-english-language-2026-p2",
+      "subject": "English Language",
+      "year": 2026,
+      "paperNumber": "Paper 2 (Theory)",
+      "durationMinutes": 140,
+      "totalMarks": 100,
+      "onScreenForm": "candidate-answer-set",
+      "instructions": "Answer ALL five questions. Each question carries 20 marks; the marking scheme shows how the marks are allocated.",
+      "questions": [
+        {
+          "orderIndex": 1,
+          "questionText": "1. SUMMARY. Read the passage below carefully and answer the question. 'The market wakes before the sun. Traders arrange pyramids of tomatoes and yams along the gutters, and by seven o'clock the air is thick with the smell of fried plantain and the noise of bargaining. When the rains come, the gutters overflow, and the water carries waste and sand across the vegetables. By noon the same traders sweep the debris away and continue selling, because customers rarely ask where the produce was washed.' State, in ONE sentence of not more than twenty-five words, what the writer says makes selling in the market unhygienic. [20 marks]",
+          "marks": 20,
+          "options": [
+            "Overflowing gutters during the rains carry waste across the vegetables the traders sell.",
+            "The market traders are bad people who do not care about their customers.",
+            "In one sentence of not more than twenty-five words the writer complains about the market.",
+            "The market wakes before the sun and the air smells of fried plantain by seven."
+          ],
+          "correctAnswer": "Overflowing gutters during the rains carry waste across the vegetables the traders sell.",
+          "modelAnswer": "The unhygienic condition named by the writer is the flooding of the gutters when it rains, which carries waste across the vegetables that are then sold. A correct one-sentence summary: 'Overflowing gutters during the rains carry waste across the vegetables the traders sell.' The noise and the heat of the market are not the complaint, and nor is the honesty of the traders.",
+          "markingPoints": [
+            {
+              "point": "Identifies the flooding / overflowing gutters",
+              "marks": 6
+            },
+            {
+              "point": "Identifies the contamination of the produce (waste across vegetables)",
+              "marks": 6
+            },
+            {
+              "point": "Written as ONE sentence of not more than twenty-five words",
+              "marks": 8
+            }
+          ],
+          "explanation": "Model answer: 'Overflowing gutters during the rains carry waste across the vegetables the traders sell.' Marking points: flooding identified (6), contamination of produce (6), one sentence of not more than 25 words (8)."
+        },
+        {
+          "orderIndex": 2,
+          "questionText": "2. COMPREHENSION. Read the passage below carefully and answer the question. 'When the school first received its computers, they were locked in the headmaster's office and wheeled out only on inspection days. Teachers were told the machines would be damaged by dust. For two years the students watched films on them at assembly, and the laboratory where they were stored was itself too dusty to open the windows. In the third term the new headmistress moved the computers into an air-conditioned room, hired a technician, and put them to work in every class.' According to the passage, why did the students not use the computers at first? [20 marks]",
+          "marks": 20,
+          "options": [
+            "The machines had been damaged by dust and no longer worked.",
+            "They were locked away and brought out only on special occasions.",
+            "There were no teachers willing to work in the laboratory.",
+            "The headmistress preferred showing films to teaching computing."
+          ],
+          "correctAnswer": "They were locked away and brought out only on special occasions.",
+          "modelAnswer": "The reason is in the first sentence: the computers were locked in the headmaster's office and produced only on inspection days. The passage never says the machines were damaged; on the contrary, they worked (films were shown), and the fall in use ended only when access changed.",
+          "markingPoints": [
+            {
+              "point": "Correct reason given — restricted access / locked away",
+              "marks": 10
+            },
+            {
+              "point": "Evidence identified — produced only on inspection days",
+              "marks": 10
+            }
+          ],
+          "explanation": "Model answer: the computers were locked in the headmaster's office and only brought out on inspection days. Marking points: correct reason (10), evidence (10)."
+        },
+        {
+          "orderIndex": 3,
+          "questionText": "3. LETTER WRITING. A friend of yours in another school has written to ask whether your school's new boarding system should be adopted by his school. Write a reply to his letter, giving THREE reasons why the system should be adopted and TWO reasons why some parents object. [20 marks]",
+          "marks": 20,
+          "options": [
+            "A formal reply beginning 'Dear Sir' that gives one reason for and three reasons against the system, with no closing.",
+            "An informal reply that praises the boarding system at length for five paragraphs and never mentions the parents' objections.",
+            "An informal letter reply (correct salutation and closing) giving three reasons for adopting the system — short journeys avoided, supervised evening study, independence — and two parental objections: the extra fees and reduced family time.",
+            "A formal letter to the headmaster asking that boarding fees be reduced."
+          ],
+          "correctAnswer": "An informal letter reply (correct salutation and closing) giving three reasons for adopting the system — short journeys avoided, supervised evening study, independence — and two parental objections: the extra fees and reduced family time.",
+          "modelAnswer": "A full-marks reply opens with a friendly informal salutation ('Dear Musa,'), responds to the question directly, gives three reasons for adoption (pupils save long daily journeys, evening study is supervised, boarders learn independence and time-keeping) and two parental objections (boarding fees are an extra cost; families see less of their children), then closes informally ('Your friend, ...'). Letters to friends do not use 'Dear Sir' or formal blocks, and a reply that omits the objections answers only half the task.",
+          "markingPoints": [
+            {
+              "point": "Correct informal letter format (salutation, body, informal closing)",
+              "marks": 6
+            },
+            {
+              "point": "Three clear reasons for adopting the system",
+              "marks": 9
+            },
+            {
+              "point": "Two parental objections stated",
+              "marks": 5
+            }
+          ],
+          "explanation": "Model answer: an informal reply with correct format giving three reasons for adoption and two objections. Marking points: format (6), three reasons (9), two objections (5)."
+        },
+        {
+          "orderIndex": 4,
+          "questionText": "4. ARGUMENT. Read the extract below and answer the question. 'Mobile phones have no place in secondary schools,' the school prefect told the assembly. 'Lessons stop every time a phone rings, pupils copy answers by message, and parents telephone teachers at home. On the other hand, pupils who walk long distances say a phone lets them call for help, and research suggests phone reminders improve homework completion.' (a) List TWO arguments the prefect gives FOR banning phones in schools. (b) List TWO arguments he gives AGAINST the ban. (c) Which side does the passage lean towards? [20 marks]",
+          "marks": 20,
+          "options": [
+            "For: emergency calls and homework reminders; Against: lesson interruptions and cheating; the passage leans towards allowing phones.",
+            "For: interrupted lessons and parents phoning teachers; Against: none are given; the passage leans towards banning phones.",
+            "For: copying answers by message; Against: extra fees and dust; the passage leans towards neither side.",
+            "For: lessons interrupted by ringing and cheating by message; Against: emergency calls on long journeys and better homework completion; the passage leans towards banning phones."
+          ],
+          "correctAnswer": "For: lessons interrupted by ringing and cheating by message; Against: emergency calls on long journeys and better homework completion; the passage leans towards banning phones.",
+          "modelAnswer": "(a) The arguments for the ban are that lessons are interrupted when phones ring and that pupils copy answers by message. (b) The arguments against it are that pupils on long journeys can call for help and that phone reminders improve homework completion. (c) The passage leans towards banning phones: the prefect speaks first and at length for the ban, and the counter-arguments are reported second-hand ('pupils say', 'research suggests').",
+          "markingPoints": [
+            {
+              "point": "Two arguments for the ban correctly identified",
+              "marks": 8
+            },
+            {
+              "point": "Two arguments against the ban correctly identified",
+              "marks": 8
+            },
+            {
+              "point": "Correct stance — the passage leans towards the ban",
+              "marks": 4
+            }
+          ],
+          "explanation": "Model answer: for — interruptions and cheating; against — emergency calls and homework reminders; leaning — towards the ban. Marking points: 8 + 8 + 4."
+        },
+        {
+          "orderIndex": 5,
+          "questionText": "5. LEXIS AND STRUCTURE. In each of the following sentences, choose the option that correctly completes the gap: (i) Neither of the boys ___ present at the lecture. (ii) If I ___ rich, I would travel the world. (iii) It is high time we ___ for home. Give all three completions. [20 marks]",
+          "marks": 20,
+          "options": [
+            "(i) is; (ii) were; (iii) left",
+            "(i) are; (ii) was; (iii) leave",
+            "(i) is; (ii) was; (iii) leave",
+            "(i) were; (ii) were; (iii) left"
+          ],
+          "correctAnswer": "(i) is; (ii) were; (iii) left",
+          "modelAnswer": "(i) 'Neither of the boys' takes the singular verb 'is'. (ii) In unreal conditional sentences the past subjunctive 'were' is used for all persons after 'if'. (iii) After 'it is high time', the past tense expresses urgency: 'left'.",
+          "markingPoints": [
+            {
+              "point": "(i) 'neither of' takes the singular verb 'is'",
+              "marks": 7
+            },
+            {
+              "point": "(ii) unreal 'if' takes 'were' for all persons",
+              "marks": 7
+            },
+            {
+              "point": "(iii) 'it is high time' takes the past tense 'left'",
+              "marks": 6
+            }
+          ],
+          "explanation": "Model answer: (i) is, (ii) were, (iii) left. Marking points: 7 + 7 + 6."
+        }
+      ]
+    }
+  ]
+}
