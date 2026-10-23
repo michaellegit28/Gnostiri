@@ -83,7 +83,7 @@ const sq = (s) => {
   if (/[\0\n\r]/.test(v)) throw new Error(`unsafe SQL string literal: ${JSON.stringify(v)}`);
   return `'${v.replace(/'/g, "''")}'`;
 };
-const jsonLit = (arr) => `${JSON.stringify(arr)}::jsonb`;
+const jsonLit = (arr) => `'${JSON.stringify(arr)}'::jsonb`;
 
 if (!process.env.DATABASE_URL) {
   console.error(
@@ -395,8 +395,8 @@ async function tagJambTree(examId) {
   if (!tree.root) throw new Error("no jamb topic tree root");
   const inList = tree.ids.map(lit).join(", ");
   const sql =
-    `INSERT INTO "QuestionBoardTag" (id, "questionId", "examinationId", tier, "paperIds", "createdAt") ` +
-    `SELECT gen_random_uuid(), q.id, ${lit(examId)}, 'CORE', ${jsonLit(["P1"])}, now() ` +
+    `INSERT INTO "QuestionBoardTag" (id, "questionId", "examinationId", tier, "paperIds") ` +
+    `SELECT gen_random_uuid(), q.id, ${lit(examId)}, 'CORE', ${jsonLit(["P1"])} ` +
     `FROM "Question" q WHERE q."topicId" IN (${inList}) ` +
     `ON CONFLICT ("questionId", "examinationId") DO NOTHING`;
   await run(sql, `jamb: tag every tree question CORE → P1 (one statement, ${tree.ids.length} tree topics)`);
@@ -414,9 +414,10 @@ async function duplicateBoard(code, examId) {
   for (const [source, target] of map) {
     const sql =
       `INSERT INTO "Question" (id, domain, "topicId", type, "questionText", options, "correctAnswer", ` +
-      `explanation, difficulty, "sourceExam", hint, "markingPoints") ` +
+      `explanation, difficulty, "sourceExam", hint, "markingPoints", paper, "markingGuide", marks, "sourceYear") ` +
       `SELECT q.id || ${lit(suffix)}, q.domain, ${lit(target)}, q.type, q."questionText", q.options, q."correctAnswer", ` +
-      `q.explanation, q.difficulty, q."sourceExam", q.hint, q."markingPoints" ` +
+      `q.explanation, q.difficulty, q."sourceExam", q.hint, q."markingPoints", ` +
+      `q.paper, q."markingGuide", q.marks, q."sourceYear" ` +
       `FROM "Question" q ` +
       `WHERE q."topicId" = ${lit(source)} ` +
       `AND q.id IN (SELECT t."questionId" FROM "QuestionBoardTag" t ` +
@@ -424,10 +425,11 @@ async function duplicateBoard(code, examId) {
       `ON CONFLICT (id) DO NOTHING`;
     await run(sql, `${code}: duplicate ${source} → ${target}`);
   }
-  // the copies carry the same board tags (tier + paperIds verbatim)
+  // the copies carry the same board tags (tier + paperIds verbatim) — the
+  // board tag table has no createdAt column (production schema, verified)
   const sql =
-    `INSERT INTO "QuestionBoardTag" (id, "questionId", "examinationId", tier, "paperIds", "createdAt") ` +
-    `SELECT t.id || ${lit(suffix)}, t."questionId" || ${lit(suffix)}, t."examinationId", t.tier, t."paperIds", now() ` +
+    `INSERT INTO "QuestionBoardTag" (id, "questionId", "examinationId", tier, "paperIds") ` +
+    `SELECT t.id || ${lit(suffix)}, t."questionId" || ${lit(suffix)}, t."examinationId", t.tier, t."paperIds" ` +
     `FROM "QuestionBoardTag" t ` +
     `WHERE t."examinationId" = ${lit(examId)} ` +
     `AND EXISTS (SELECT 1 FROM "Question" c WHERE c.id = t."questionId" || ${lit(suffix)}) ` +
