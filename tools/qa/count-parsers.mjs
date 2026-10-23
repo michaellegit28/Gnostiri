@@ -185,11 +185,26 @@ export function parseQuizTotal(html) {
 /** Exams hub — per-board "N practice Qs" chips (tag scoped). */
 export function parseExamHub(html, boardNames) {
   const text = stripComments(html);
+  // Bound each parse to its OWN card: the BoardCard root className is unique to
+  // board cards. An unbounded forward scan used to leak the neighbouring card's
+  // number into the last card (edexcel read jamb's 6,000).
+  const CARD_ROOT = "bg-slate-900/80";
+  const cards = text
+    .split(CARD_ROOT)
+    .slice(1)
+    .map((seg) => seg.slice(0, 4000));
   const out = [];
   for (const name of boardNames) {
     const escaped = String(name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const m = first(new RegExp(`${escaped}[\\s\\S]{0,8000}?([\\d,]+) practice Qs`), text);
-    out.push({ name, practiceQs: m ? num(m[0]) : null });
+    let practiceQs = null;
+    for (const card of cards) {
+      if (!new RegExp(escaped).test(card)) continue;
+      // RSC flight emits the number as its own child: `",0," practice Qs`.
+      const m = first(new RegExp(`([\\d,]+)[^a-zA-Z0-9]{0,6}practice Qs`), card);
+      practiceQs = m ? num(m[0]) : null;
+      break;
+    }
+    out.push({ name, practiceQs });
   }
   return out;
 }

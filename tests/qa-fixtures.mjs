@@ -126,13 +126,16 @@ export function cbtPageHtml(boards) {
   );
 }
 
-/** Exams hub — per-board "N practice Qs" chips plus the class-grouped hub. */
+/** Exams hub — per-board "N practice Qs" chips plus the class-grouped hub.
+ *  Card markup mirrors the real BoardCard root (bg-slate-900/80) so the
+ *  card-bounded parser is tested against real structure. */
 export function hubPageHtml(boards) {
   const cards = boards
     .map(
       (b) =>
+        `<div class="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6">` +
         `<h3 class="text-xl font-serif font-bold">${b.name}</h3>` +
-        `<svg class="lucide lucide-book-open"></svg> ${num(b.hubTagTotal)} practice Qs</span>`,
+        `<svg class="lucide lucide-book-open"></svg> ${num(b.hubTagTotal)} practice Qs</span></div>`,
     )
     .join("");
   return page(
