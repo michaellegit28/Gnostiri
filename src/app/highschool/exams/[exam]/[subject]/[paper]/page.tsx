@@ -75,6 +75,12 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
           </div>
         </header>
 
+        {/* Honest provenance — the bank holds authored practice papers only */}
+        <p className="text-sm text-slate-400">
+          Authored by Gnostiri — an original, exam-style practice paper modelled on the {examination.name} format.
+          Not an official past paper.
+        </p>
+
         {/* Ways to sit the paper */}
         {questionCount === 0 ? (
           <section className="rounded-2xl border border-dashed border-white/15 bg-white/[0.02] p-8 text-center space-y-3">

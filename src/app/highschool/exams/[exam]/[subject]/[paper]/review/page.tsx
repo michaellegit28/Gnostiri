@@ -93,6 +93,12 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
           )}
         </header>
 
+        {/* Honest provenance — the bank holds authored practice papers only */}
+        <p className="text-sm text-slate-400">
+          Authored by Gnostiri — an original, exam-style practice paper modelled on the {examination.name} format.
+          Not an official past paper.
+        </p>
+
         {/* Latest attempt */}
         {latestAttempt && (
           <section className="rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">

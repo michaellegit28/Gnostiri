@@ -64,6 +64,10 @@ export default async function TakePaperPage({ params, searchParams }: TakePagePr
           <span className="text-slate-100 font-medium">{mode === "timed" ? "Timed attempt" : "Open practice"}</span>
         </nav>
 
+        <p className="text-xs text-slate-500">
+          Authored by Gnostiri — an original, exam-style practice paper. Not an official past paper.
+        </p>
+
         <AttemptClient
           paperId={paper.id}
           backUrl={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)}
