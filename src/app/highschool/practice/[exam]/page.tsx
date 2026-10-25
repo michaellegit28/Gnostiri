@@ -11,7 +11,7 @@ interface PickerPageProps {
   params: { exam: string };
 }
 
-const EXAM_CODE_PREFIXES = ["waec", "jamb", "neco", "kcse", "nsc-matric", "necta", "maneb", "cbse", "icse", "cambridge", "aqa", "edexcel", "sat", "ap"];
+const EXAM_CODE_PREFIXES = ["jamb"];
 
 interface SubjectRoot {
   /** subject slug inside the board tree (id minus the board-code prefix) */

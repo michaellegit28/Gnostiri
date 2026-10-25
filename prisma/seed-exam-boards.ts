@@ -1,8 +1,12 @@
 // Exam Blueprint Engine — board profile seed.
 // Verification source: the owner's Brief 2 "Verified Exam Board Profiles".
-// Boards whose full format data (durations/marks per paper) is NOT in the
-// verified profiles are deliberately NOT seeded here — see the flag note in
-// the handoff. Idempotent: safe to run repeatedly; upserts on stable keys.
+// Idempotent: safe to run repeatedly; upserts on stable keys.
+//
+// 2026-10-24 board clearance (owner directive): WAEC/NECO + all foreign
+// boards retired from production and content. The bank is JAMB-only until
+// the owner returns to board expansion. This seed therefore creates ONLY the
+// JAMB profile and actively retires every other board slug (with dependents
+// cascading) so a re-seed can never resurrect a cleared board.
 
 import { PrismaClient } from "@prisma/client";
 
@@ -21,12 +25,6 @@ interface SeedPaper {
   instructions?: string;
 }
 
-const WAEC_FORMAT: SeedPaper[] = [
-  { paperId: "P1", paperName: "Objective", sequence: 1, delivery: "CBT", questionTypes: ["MCQ"], durationMinutes: 60, marks: 50, applicability: ["all"], required: true, instructions: "Answer ALL questions. Each question carries equal marks." },
-  { paperId: "P2", paperName: "Theory/Essay", sequence: 2, delivery: "HYBRID", questionTypes: ["THEORY"], durationMinutes: 140, marks: 100, applicability: ["all"], required: true, instructions: "Answer any FOUR questions. Write clearly in the answer booklet." },
-  { paperId: "P3", paperName: "Practical / Alt to Practical", sequence: 3, delivery: "HYBRID", questionTypes: ["PRACTICAL"], durationMinutes: 120, marks: 50, applicability: ["sciences", "technical"], required: false, instructions: "For school candidates: practical. Private candidates: Alternative to Practical." },
-];
-
 const BOARD_PROFILES: {
   slug: string;
   name: string;
@@ -44,36 +42,21 @@ const BOARD_PROFILES: {
       { paperId: "P1", paperName: "UTME", sequence: 1, delivery: "CBT", questionTypes: ["MCQ"], durationMinutes: 120, marks: 400, applicability: ["all"], required: true, instructions: "Computer-based: answer ALL questions. No negative marking." },
     ],
   },
-  { slug: "waec", name: "WAEC (WASSCE)", code: "waec", country: "Nigeria", notes: "Transitioning to hybrid CBT: MCQs on-screen, theory answers in booklets.", formatConfig: WAEC_FORMAT },
-  { slug: "neco", name: "NECO (SSCE)", code: "neco", country: "Nigeria", formatConfig: WAEC_FORMAT },
-  {
-    slug: "kcse",
-    name: "KNEC (KCSE)",
-    code: "kcse",
-    country: "Kenya",
-    formatConfig: [
-      { paperId: "P1", paperName: "Paper 1 — Theory", sequence: 1, delivery: "PAPER", questionTypes: ["THEORY", "MCQ"], durationMinutes: 150, marks: 80, applicability: ["all"], required: true },
-      { paperId: "P2", paperName: "Paper 2 — Theory", sequence: 2, delivery: "PAPER", questionTypes: ["THEORY"], durationMinutes: 150, marks: 80, applicability: ["all"], required: true },
-      { paperId: "P3", paperName: "Paper 3 — Practical", sequence: 3, delivery: "PAPER", questionTypes: ["PRACTICAL"], durationMinutes: 120, marks: 40, applicability: ["sciences"], required: false },
-    ],
-  },
-  {
-    slug: "nsc-matric",
-    name: "DBE (NSC / Matric)",
-    code: "nsc",
-    country: "South Africa",
-    formatConfig: [
-      { paperId: "P1", paperName: "Paper 1", sequence: 1, delivery: "PAPER", questionTypes: ["MCQ", "THEORY"], durationMinutes: 180, marks: 150, applicability: ["all"], required: true },
-      { paperId: "P2", paperName: "Paper 2", sequence: 2, delivery: "PAPER", questionTypes: ["THEORY"], durationMinutes: 180, marks: 150, applicability: ["all"], required: true },
-    ],
-  },
+];
+
+// Boards retired in the 2026-10-24 clearance. deleteMany cascades to papers,
+// tags, sessions and alignments; running this seed after a partial restore
+// re-enforces the JAMB-only bank.
+const RETIRED_BOARDS = [
+  "demo", "wassce-ghana",
+  "waec", "neco", "kcse", "nsc-matric",
+  "sat", "ap", "maneb", "cbse", "icse", "necta", "cambridge", "aqa", "edexcel",
 ];
 
 async function main() {
   const verified = new Date();
-  console.log("Seeding exam board blueprint profiles…");
+  console.log("Seeding exam board blueprint profiles (JAMB-only bank)…");
 
-  // 1. Board profiles + blueprint papers
   const boardIds: { slug: string; id: string }[] = [];
   for (const profile of BOARD_PROFILES) {
     const board = await prisma.examination.upsert({
@@ -108,48 +91,25 @@ async function main() {
       });
     }
   }
-  console.log(`✓ ${boardIds.length} board profiles (JAMB, WAEC, NECO, KNEC-KCSE, DBE-NSC)`);
+  console.log(`✓ ${boardIds.length} board profile(s): ${boardIds.map((b) => b.slug).join(", ")}`);
 
-  // 1b. Registry boards without verified blueprint formats yet — Examination
-  // rows only (repo convention: no blueprint until the format data is
-  // verified). They appear on the hub as "In preparation" until content lands.
-  const REGISTRY_BOARDS = [
-    { slug: "sat", name: "College Board — Digital SAT", code: "sat", country: "United States" },
-    { slug: "ap", name: "College Board — AP Exams", code: "ap", country: "United States" },
-    { slug: "maneb", name: "MANEB (MSCE / JCE)", code: "maneb", country: "Malawi" },
-    { slug: "cbse", name: "CBSE", code: "cbse", country: "India" },
-    { slug: "icse", name: "ICSE", code: "icse", country: "India" },
-    { slug: "necta", name: "NECTA (CSEE / ACSEE)", code: "necta", country: "Tanzania" },
-    { slug: "cambridge", name: "Cambridge (CAIE)", code: "cambridge", country: "United Kingdom" },
-    { slug: "aqa", name: "AQA", code: "aqa", country: "United Kingdom" },
-    { slug: "edexcel", name: "Edexcel", code: "edexcel", country: "United Kingdom" },
-  ];
-  for (const board of REGISTRY_BOARDS) {
-    await prisma.examination.upsert({
-      where: { slug: board.slug },
-      update: { name: board.name, code: board.code, country: board.country, domain: "highschool" },
-      create: { slug: board.slug, name: board.name, code: board.code, country: board.country, domain: "highschool" },
-    });
-  }
-  console.log(`✓ ${REGISTRY_BOARDS.length} registry boards created (preparing, no blueprint yet)`);
-
-  // 1c. Retirement — boards outside the owner's registry are removed with all
+  // Retirement — boards outside the JAMB-only bank are removed with all
   // dependents (papers, blueprints, tags, practice sessions cascade).
-  for (const retired of ["demo", "wassce-ghana"]) {
+  for (const retired of RETIRED_BOARDS) {
     const gone = await prisma.examination.deleteMany({ where: { slug: retired } });
     if (gone.count > 0) console.log(`✓ retired board: ${retired}`);
   }
 
-  // 2. Cross-board CORE tagging: curriculum MCQ questions serve every board's
-  // first MCQ paper. Curriculum content is board-agnostic; boards package it.
+  // Cross-board CORE tagging: every curriculum MCQ question serves the JAMB
+  // first MCQ paper. Curriculum content is board-agnostic; JAMB packages it.
   // RESUME GUARD: serverless functions can hit execution limits mid-seed —
-  // if tags already exist, skip the bulk pass and continue with the samples.
+  // if tags already exist, skip the bulk pass.
   const existingTagCount = await prisma.questionBoardTag.count({
     where: { examinationId: { in: boardIds.map((b) => b.id) } },
   });
   let tagCount = 0;
   if (existingTagCount > 0) {
-    console.log(`↷ skip cross-board tag pass (${existingTagCount} tags already present)`);
+    console.log(`↷ skip CORE tag pass (${existingTagCount} tags already present)`);
   } else {
     const mcqQuestions = await prisma.question.findMany({
       where: { type: "mcq" },
@@ -170,120 +130,25 @@ async function main() {
       }
     }
   }
-  console.log(`✓ ${tagCount} CORE question tags across boards`);
+  console.log(`✓ ${tagCount} CORE question tags`);
 
-  // 3. Validation samples: theory + practical questions on the biology cell
-  // topic, tagged to WAEC P2/P3, so the multi-type manifest path is provable
-  // end-to-end. Clearly id-marked as blueprint samples.
-  const cellTopic = await prisma.topic.findFirst({ where: { id: "waec-biology-cell-structure" } });
-  const waec = boardIds.find((b) => b.slug === "waec");
-  if (cellTopic && waec) {
-    const sampleMcq = {
-      id: "blueprint-sample-bio-mcq-1",
-      domain: "highschool" as const,
-      topicId: cellTopic.id,
-      type: "mcq",
-      questionText: "Which structure is present in a plant cell but absent from an animal cell?",
-      options: ["Mitochondrion", "Chloroplast", "Nucleus", "Ribosome"],
-      correctAnswer: "Chloroplast",
-      explanation: "Chloroplasts carry out photosynthesis; mitochondria, nuclei and ribosomes are shared by both cell types.",
-      difficulty: "easy",
-      hint: "Think photosynthesis.",
-      sourceExam: "WAEC",
-    };
-    await prisma.question.upsert({
-      where: { id: sampleMcq.id },
-      update: { questionText: sampleMcq.questionText, options: sampleMcq.options, correctAnswer: sampleMcq.correctAnswer, hint: sampleMcq.hint },
-      create: sampleMcq,
-    });
+  // NOT_EXAMINED validation sample: one quadratic MCQ excluded from the JAMB
+  // manifest, so the manifest path (count minus exclusions) stays provable.
+  const firstQuadratic = await prisma.question.findFirst({
+    where: { topicId: { startsWith: "jamb-mathematics" }, type: "mcq" },
+    orderBy: { id: "asc" },
+  });
+  const jamb = boardIds.find((b) => b.slug === "jamb");
+  if (firstQuadratic && jamb) {
     await prisma.questionBoardTag.upsert({
-      where: { questionId_examinationId: { questionId: sampleMcq.id, examinationId: waec.id } },
-      update: { tier: "CORE", paperIds: ["P1"] },
-      create: { questionId: sampleMcq.id, examinationId: waec.id, tier: "CORE", paperIds: ["P1"] },
+      where: { questionId_examinationId: { questionId: firstQuadratic.id, examinationId: jamb.id } },
+      update: { tier: "NOT_EXAMINED", paperIds: ["P1"] },
+      create: { questionId: firstQuadratic.id, examinationId: jamb.id, tier: "NOT_EXAMINED", paperIds: ["P1"] },
     });
-
-    const theoryQ = {
-      id: "blueprint-sample-bio-theory-1",
-      domain: "highschool" as const,
-      topicId: cellTopic.id,
-      type: "theory",
-      questionText: "(a) Define the cell theory. [4 marks] (b) List THREE organelles found in a plant cell but absent from an animal cell and state one function of each. [6 marks]",
-      options: [],
-      correctAnswer:
-        "(a) Cell theory: (i) the cell is the basic unit of life; (ii) all living things are made of one or more cells; (iii) all cells arise from pre-existing cells. (b) Chloroplast — site of photosynthesis; large permanent vacuole — stores cell sap and keeps the cell turgid; cellulose cell wall — provides structural support and rigidity.",
-      markingPoints: [
-        { point: "Cell = basic unit of life", marks: 2 },
-        { point: "All living things made of cell(s)", marks: 1 },
-        { point: "Cells arise from pre-existing cells", marks: 1 },
-        { point: "Three plant-only organelles named", marks: 3 },
-        { point: "One function per organelle stated", marks: 3 },
-      ],
-      explanation: "Cell theory and plant-vs-animal cell differences are core WAEC P2 territory.",
-      difficulty: "medium",
-      hint: "Think: what does a plant do that an animal cannot — and which structures make that possible?",
-    };
-    await prisma.question.upsert({
-      where: { id: theoryQ.id },
-      update: { questionText: theoryQ.questionText, correctAnswer: theoryQ.correctAnswer, markingPoints: theoryQ.markingPoints, hint: theoryQ.hint },
-      create: theoryQ,
-    });
-    await prisma.questionBoardTag.upsert({
-      where: { questionId_examinationId: { questionId: theoryQ.id, examinationId: waec.id } },
-      update: { tier: "CORE", paperIds: ["P2"] },
-      create: { questionId: theoryQ.id, examinationId: waec.id, tier: "CORE", paperIds: ["P2"] },
-    });
-
-    const practicalQ = {
-      id: "blueprint-sample-bio-practical-1",
-      domain: "highschool" as const,
-      topicId: cellTopic.id,
-      type: "practical",
-      questionText: "You are provided with a piece of onion epidermis. Describe how you would prepare and observe a stained temporary mount of it under the light microscope. [8 marks]",
-      options: [],
-      correctAnswer:
-        "Peel a thin epidermal layer with forceps; place on a clean slide with a drop of water; add a drop of iodine stain; lower the coverslip at an angle to avoid air bubbles; observe first under low power, then high power; draw and label what you see.",
-      markingPoints: [
-        { point: "Thin epidermal peel obtained", marks: 1 },
-        { point: "Water drop on clean slide", marks: 1 },
-        { point: "Iodine stain applied", marks: 2 },
-        { point: "Coverslip lowered without bubbles", marks: 2 },
-        { point: "Low power then high power observation", marks: 1 },
-        { point: "Labeled drawing", marks: 1 },
-      ],
-      explanation: "Classic Alternative-to-Practical wording: method + apparatus + observation.",
-      difficulty: "hard",
-      hint: "Structure your answer as: peel → stain → mount → observe.",
-    };
-    await prisma.question.upsert({
-      where: { id: practicalQ.id },
-      update: { questionText: practicalQ.questionText, correctAnswer: practicalQ.correctAnswer, markingPoints: practicalQ.markingPoints, hint: practicalQ.hint },
-      create: practicalQ,
-    });
-    await prisma.questionBoardTag.upsert({
-      where: { questionId_examinationId: { questionId: practicalQ.id, examinationId: waec.id } },
-      update: { tier: "CORE", paperIds: ["P3"] },
-      create: { questionId: practicalQ.id, examinationId: waec.id, tier: "CORE", paperIds: ["P3"] },
-    });
-    console.log("✓ blueprint sample theory + practical questions (WAEC P2/P3)");
-
-    // RULE 4 validation: mark one quadratic MCQ NOT_EXAMINED for JAMB — the
-    // JAMB manifest for that topic must show one fewer question than WAEC's.
-    const firstQuadratic = await prisma.question.findFirst({
-      where: { topicId: "waec-mathematics-quadratic-equations", type: "mcq" },
-      orderBy: { id: "asc" },
-    });
-    const jamb = boardIds.find((b) => b.slug === "jamb");
-    if (firstQuadratic && jamb) {
-      await prisma.questionBoardTag.upsert({
-        where: { questionId_examinationId: { questionId: firstQuadratic.id, examinationId: jamb.id } },
-        update: { tier: "NOT_EXAMINED", paperIds: ["P1"] },
-        create: { questionId: firstQuadratic.id, examinationId: jamb.id, tier: "NOT_EXAMINED", paperIds: ["P1"] },
-      });
-      console.log(`✓ NOT_EXAMINED exclusion sample (${firstQuadratic.id} → JAMB)`);
-    }
+    console.log(`✓ NOT_EXAMINED exclusion sample (${firstQuadratic.id} → JAMB)`);
   }
 
-  console.log("Exam board seed complete.");
+  console.log("Exam board seed complete (JAMB-only bank).");
 }
 
 // Exported for the one-shot temp seeder route. Guarded so bundlers never

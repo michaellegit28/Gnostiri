@@ -27,7 +27,7 @@ export default async function HighSchoolHub() {
             Textbooks and exams, <span className="text-gold">one roof</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Master {subjects} subjects in the study textbooks, then prove it on real past papers — WAEC, JAMB, Bagrut and more.
+            Master {subjects} subjects in the study textbooks, then prove it on real JAMB past papers.
           </p>
         </div>
 

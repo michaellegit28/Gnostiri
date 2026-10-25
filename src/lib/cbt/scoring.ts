@@ -42,6 +42,6 @@ export function gradeSubject(correct: number, total: number, model: ScoringModel
   return { rawPercent, scaled: rawPercent, grade };
 }
 
-export function waecGrade(percent: number, model: ScoringModel): string | undefined {
+export function gradeForPercent(percent: number, model: ScoringModel): string | undefined {
   return model.kind === "percent" ? model.grades.find((g) => percent >= g.min)?.grade : undefined;
 }

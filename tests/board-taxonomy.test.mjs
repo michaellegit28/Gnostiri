@@ -27,7 +27,7 @@ const SUBJECTS = [
   { slug: "business-economics-accounting", name: "Business, Economics & Accounting" },
   { slug: "english-language", name: "English Language" },
 ];
-const EXAM_CODE_PREFIXES = ["waec", "jamb", "neco", "kcse", "nsc-matric"];
+const EXAM_CODE_PREFIXES = ["jamb"];
 /** Curriculum registry index — the master-* curriculum tree carries these slugs. */
 const topicBySlug = (slug) =>
   ({
@@ -110,8 +110,8 @@ test("longest subject root wins when root slugs nest", () => {
 
 test("curriculum topics still resolve through the registry slug", () => {
   const resolveSubject = loadResolver();
-  // WAEC/NECO tagged questions live on master-* topics carrying curriculum slugs
-  const subject = resolveSubject("master-cell-biology", "cell-biology", "waec", []);
+  // JAMB tagged questions live on master-* topics carrying curriculum slugs
+  const subject = resolveSubject("master-cell-biology", "cell-biology", "jamb", []);
   assert.deepEqual(subject, { slug: "biology", title: "Biology" });
 });
 
@@ -139,9 +139,17 @@ test("the tag pass is additive and idempotent — no destructive SQL", () => {
 
 test("the board API serves a board's own tree without a tag, and never NOT_EXAMINED", () => {
   const src = readFileSync(Q("src/app/api/questions/route.ts"), "utf8");
-  assert.ok(src.includes("inBoardTree"), "tree detection must gate the bank");
-  assert.ok(/NOT:\s*\{\s*boardTags:/.test(src), "NOT_EXAMINED must be excluded on both paths");
-  assert.ok(!/correctAnswer/.test(src), "the key must never be selected");
+  // Strip line comments so the assertions read the shipped CODE, not prose.
+  const code = src.split("\n").filter((l) => !l.trim().startsWith("//")).join("\n");
+  // Tree detection gates the bank: the topic must resolve inside the board's
+  // own {code}-* tree (round 4 moved the gate from a prefix check to the shared
+  // boardTreeTopicIds helper so /api/questions and the manifest agree).
+  assert.ok(code.includes("boardTreeTopicIds"), "board tree detection must gate the bank");
+  assert.ok(/NOT:\s*\{\s*boardTags:/.test(code), "NOT_EXAMINED must be excluded on both paths");
+  // No tag-admission branch may precede the NOT_EXAMINED exclusion: a tag can
+  // only ever SUBTRACT from the response, never add an out-of-tree question.
+  assert.ok(!code.split("NOT:")[0].includes("boardTags"), "no tag-admission branch before the exclusion");
+  assert.ok(!/correctAnswer/.test(code), "the key must never be selected");
 });
 
 test("topic links resolve for legacy ids that do not extend their parent", () => {

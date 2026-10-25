@@ -46,7 +46,7 @@ export default function HomeDashboard() {
       try {
         const [dashRes, battleRes] = await Promise.all([
           fetch("/api/progress/dashboard?domain=highschool"),
-          fetch("/api/battle-plan?exam=waec"),
+          fetch("/api/battle-plan?exam=jamb"),
         ]);
         if (cancelled) return;
         if (dashRes.ok) {
@@ -152,7 +152,7 @@ export default function HomeDashboard() {
             >
               <span className="flex items-center gap-2 text-sm text-slate-200">
                 <Swords className="w-4 h-4 text-gold shrink-0" />
-                No mission yet — generate your WAEC battle plan
+                No mission yet — generate your JAMB battle plan
               </span>
               <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </Link>

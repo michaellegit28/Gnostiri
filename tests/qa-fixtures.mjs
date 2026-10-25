@@ -167,25 +167,6 @@ const STATIC_PAGES = {
   "/cbt/session?board=jamb&mode=simulation": "Mark for review · JAMB (UTME)",
 };
 
-/** An empty, honestly-"preparing" board: no tree, no tags, no card. */
-const emptyBoard = (slug, code, name, country, boardClass, cbtReady = false) => ({
-  slug,
-  code,
-  name,
-  country,
-  class: boardClass,
-  status: "preparing",
-  cbtReady,
-  tagTotal: 0,
-  hubTagTotal: 0,
-  tree: { total: 0, subjects: 0, topics: [] },
-  subjects: [],
-  topics: [],
-  tagTopics: [],
-  cbtCard: cbtReady ? { questionCount: 0, subjectCount: 0, status: "preparing" } : null,
-  quizTotal: 0,
-});
-
 export const DEFAULT_BOARDS = [
   {
     slug: "jamb", code: "jamb", name: "JAMB (UTME)", country: "Nigeria", class: "CBT", status: "live",
@@ -205,49 +186,6 @@ export const DEFAULT_BOARDS = [
     cbtCard: { questionCount: 600, subjectCount: 1, status: "live" },
     quizTotal: 300,
   },
-  {
-    slug: "waec", code: "waec", name: "WAEC (WASSCE)", country: "Nigeria & Ghana", class: "MCQ", status: "live",
-    cbtReady: false, tagTotal: 40, hubTagTotal: 40,
-    tree: { total: 40, subjects: 1, topics: 2 },
-    subjects: [{ slug: "mathematics", title: "Mathematics" }],
-    topics: [
-      { id: "waec-mathematics-algebra", subjectSlug: "mathematics", topicSlug: "algebra", title: "Algebra", count: 25 },
-      { id: "waec-mathematics-geometry", subjectSlug: "mathematics", topicSlug: "geometry", title: "Geometry", count: 15 },
-    ],
-    tagTopics: [
-      { id: "waec-mathematics-algebra", subjectSlug: "mathematics", title: "Algebra", mcq: 25, theory: 0, practical: 0 },
-      { id: "waec-mathematics-geometry", subjectSlug: "mathematics", title: "Geometry", mcq: 15, theory: 0, practical: 0 },
-    ],
-    cbtCard: null,
-    quizTotal: 25,
-  },
-  {
-    slug: "neco", code: "neco", name: "NECO (SSCE)", country: "Nigeria", class: "MCQ", status: "live",
-    cbtReady: false, tagTotal: 40, hubTagTotal: 40,
-    tree: { total: 40, subjects: 1, topics: 2 },
-    subjects: [{ slug: "biology", title: "Biology" }],
-    topics: [
-      { id: "neco-biology-cell", subjectSlug: "biology", topicSlug: "cell", title: "The Cell", count: 25 },
-      { id: "neco-biology-ecology", subjectSlug: "biology", topicSlug: "ecology", title: "Ecology", count: 15 },
-    ],
-    tagTopics: [
-      { id: "neco-biology-cell", subjectSlug: "biology", title: "The Cell", mcq: 25, theory: 0, practical: 0 },
-      { id: "neco-biology-ecology", subjectSlug: "biology", title: "Ecology", mcq: 15, theory: 0, practical: 0 },
-    ],
-    cbtCard: null,
-    quizTotal: 25,
-  },
-  emptyBoard("nsc-matric", "nsc", "DBE (NSC / Matric)", "South Africa", "Written"),
-  emptyBoard("maneb", "maneb", "MANEB (MSCE / JCE)", "Malawi", "MCQ"),
-  emptyBoard("cbse", "cbse", "CBSE", "India", "MCQ"),
-  emptyBoard("icse", "icse", "ICSE", "India", "MCQ"),
-  emptyBoard("necta", "necta", "NECTA (CSEE / ACSEE)", "Tanzania", "Written"),
-  emptyBoard("kcse", "kcse", "KNEC (KCSE)", "Kenya", "Written"),
-  emptyBoard("cambridge", "cambridge", "Cambridge (CAIE)", "United Kingdom", "Written"),
-  emptyBoard("aqa", "aqa", "AQA", "United Kingdom", "Written"),
-  emptyBoard("edexcel", "edexcel", "Edexcel", "United Kingdom", "Written"),
-  emptyBoard("sat", "sat", "College Board — Digital SAT", "United States", "CBT", true),
-  emptyBoard("ap", "ap", "College Board — AP Exams", "United States", "CBT", true),
 ];
 
 /** Route map for a whole fixture site. */

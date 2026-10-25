@@ -9,8 +9,7 @@
 // The fix defines a board's bank in exactly ONE place — src/lib/board-bank.ts —
 // as "every question inside the board's own {code}-* topic tree, minus rows the
 // board marks NOT_EXAMINED", and every counting surface derives from it. These
-// tests assert that structurally, on the SHIPPED source (no DB needed), plus the
-// bulk-SQL safety rules for the unification pass.
+// tests assert that structurally, on the SHIPPED source (no DB needed).
 //
 // The live, database-backed half of the same guard is tools/pq/verify-unification.mjs.
 
@@ -26,7 +25,6 @@ const HUB = read("src/app/highschool/exams/page.tsx");
 const BOARD_PAGE = read("src/app/highschool/exams/[exam]/page.tsx");
 const PICKER = read("src/app/highschool/practice/[exam]/page.tsx");
 const QUIZ = read("src/app/highschool/[exam]/[subject]/[topic]/quiz/page.tsx");
-const UNIFY = read("tools/pq/unify-boards.mjs");
 
 // ─── 1. the ONE bank definition ──────────────────────────────────────────────
 
@@ -126,103 +124,7 @@ test("render formats stay machine-readable", () => {
   assert.match(HUB, /\{stats\.questions\} practice Qs/);
 });
 
-// ─── 4. the unification tool: bulk, additive, idempotent, dry-run first ──────
-
-test("the unification tool is dry-run first and bulk-only", () => {
-  assert.match(UNIFY, /DRY_RUN = !process\.argv\.includes\("--apply"\)/, "dry-run must be the default");
-  // the tool self-polices destructive SQL …
-  assert.match(UNIFY, /refusing to run destructive SQL/, "every statement must pass the safety guard");
-  // … and nothing it EMITS is destructive. Comments explain the rule and the
-  // guard array names the banned keywords; the emitted statements must be clean.
-  const emitted = UNIFY.replace(/\/\*[\s\S]*?\*\//g, "")
-    .replace(/^\s*\/\/.*$/gm, "")
-    .split("\n")
-    .filter((line) => !line.includes('"DELETE "') && !line.includes('"DROP "') && !line.includes('"TRUNCATE"') && !line.includes('"ALTER "'))
-    .join("\n");
-  assert.doesNotMatch(emitted, /\bDELETE\b/, "no destructive SQL may exist in the tool");
-  assert.doesNotMatch(emitted, /\bDROP\b/, "no destructive SQL may exist in the tool");
-  assert.doesNotMatch(emitted, /TRUNCATE/i, "no destructive SQL may exist in the tool");
-  // every INSERT is a single bulk statement guarded by ON CONFLICT
-  const inserts = UNIFY.match(/INSERT INTO "[^"]+"/g) ?? [];
-  assert.ok(inserts.length >= 4, "the topic, tag, question and tag-copy statements must all be bulk INSERTs");
-  const conflictCount = (UNIFY.match(/ON CONFLICT/g) ?? []).length;
-  assert.ok(
-    conflictCount >= inserts.length,
-    `every INSERT (${inserts.length}) must be guarded by ON CONFLICT (${conflictCount} found)`
-  );
-  // the jamb tag pass is ONE statement over the whole tree
-  assert.match(
-    UNIFY,
-    /INSERT INTO "QuestionBoardTag"[\s\S]*?ON CONFLICT \("questionId", "examinationId"\) DO NOTHING/,
-    "the jamb tree tag pass must be one bulk INSERT…SELECT…ON CONFLICT statement"
-  );
-  assert.match(UNIFY, /gen_random_uuid\(\)/, "ids are generated in SQL, never by a per-row loop");
-  // no per-row question loop anywhere
-  assert.doesNotMatch(
-    UNIFY,
-    /for \(const q of (treeQuestionIds|toCreate|questions)\)/,
-    "no per-row question loop may exist — a per-row script hung a whole environment"
-  );
-  // NOTHING is moved or rewritten: the ordered mechanism is DUPLICATION for
-  // both waec and neco (masters untouched), so no UPDATE may exist at all —
-  // that is what keeps the master curriculum's 330 questions in place.
-  assert.doesNotMatch(emitted, /\bUPDATE\b/, "duplication only — no question may be re-homed or rewritten");
-  assert.doesNotMatch(
-    emitted,
-    /SET "correctAnswer"|SET "questionText"|SET "options"/,
-    "correctness data must never be rewritten"
-  );
-  // waec and neco both duplicate through one generic bulk emitter
-  assert.match(UNIFY, /if \(code === "waec" \|\| code === "neco"\) await duplicateBoard\(/, "both boards duplicate");
-  assert.match(UNIFY, /const suffix = `-\$\{code\}`/, "duplicate ids are per-board suffixed");
-  assert.match(
-    UNIFY,
-    /q\.id \|\| \$\{lit\(suffix\)\}/,
-    "duplicate ids are deterministic, so re-runs converge"
-  );
-  assert.match(
-    UNIFY,
-    /INSERT INTO "Question" \(id, domain, "topicId", type, "questionText", options, "correctAnswer",/,
-    "the duplicate must copy the full question row"
-  );
-  // the copies carry the source board tags verbatim (tier + paperIds)
-  assert.match(
-    UNIFY,
-    /t\.id \|\| \$\{lit\(suffix\)\}, t\."questionId" \|\| \$\{lit\(suffix\)\}/,
-    "board tags travel with the copies so the manifest keeps working"
-  );
-  // new nodes' titles are verified against existing nodes — no invented text
-  assert.match(UNIFY, /verifyNewTitles\(/, "planned nodes must be title-verified before any write");
-  assert.match(UNIFY, /refusing to invent a title/, "an unverifiable title aborts the pass");
-});
-
-test("the waec and neco mappings are complete and board-local", () => {
-  const waecPairs = [...UNIFY.matchAll(/\["(master-[a-z0-9-]+|waec-mathematics-quadratic-equations)", "(waec-[a-z0-9-]+)"\]/g)];
-  assert.equal(waecPairs.length, 33, "all 33 waec-tagged master topics are duplicated");
-  const waecSources = new Set(waecPairs.map((m) => m[1]));
-  assert.equal(waecSources.size, 33, "no source topic is mapped twice");
-  for (const [, source, target] of waecPairs) {
-    assert.ok(target.startsWith("waec-"), `${target} must be a waec node`);
-    assert.notEqual(source, target, `${source} cannot map to itself`);
-    // every waec source is master-* or WAEC's own quadratic topic — the
-    // duplication never sources from inside another board's copy set
-    assert.ok(source.startsWith("master-") || source.startsWith("waec-"), `${source} must be waec-local content`);
-  }
-  const necoPairs = [...UNIFY.matchAll(/\["(master-[a-z0-9-]+|waec-mathematics-quadratic-equations)", "(neco-[a-z0-9-]+)"\]/g)];
-  assert.equal(necoPairs.length, 14, "neco's 14 tagged topic sources are covered");
-  const necoSources = new Set(necoPairs.map((m) => m[1]));
-  assert.equal(necoSources.size, 14, "no neco source is mapped twice");
-  for (const [, source, target] of necoPairs) {
-    assert.ok(target.startsWith("neco-"), `${target} must be a neco node`);
-    assert.notEqual(source, target, `${source} cannot map to itself`);
-  }
-  // neco's 113 are WAEC's shared rows — a question has ONE topicId, so the
-  // duplicates (not moves) are what make WAEC 343 AND NECO 113 possible.
-  assert.match(UNIFY, /duplicateBoard\(code, exam\.id\)/, "duplicates keep WAEC's rows in WAEC's tree");
-});
-
-
-// ─── 5. what must NOT come back ──────────────────────────────────────────────
+// ─── 4. what must NOT come back ──────────────────────────────────────────────
 
 test("no tag-scoped count remains on a student-facing surface", () => {
   for (const [name, src] of [
@@ -243,8 +145,8 @@ test("no tag-scoped count remains on a student-facing surface", () => {
 // tools/qa/rsc-guard.mjs flags "No topics are tagged … yet" / "Content lands
 // here as topics are rebuilt" / "still being loaded" / "In preparation" on
 // routes where content is mandatory. A board with an empty tree must render an
-// honest empty state that is NOT one of those flagged phrases (a real NECO
-// picker with zero tree questions renders exactly this, before its bank lands).
+// honest empty state that is NOT one of those flagged phrases (an empty-tree
+// picker renders exactly this, before its bank lands).
 
 test("the picker's empty state is honest but unflagged", () => {
   const guarded = [

@@ -13,7 +13,7 @@ export default async function Home() {
   const domainCards = [
     {
       title: "High School",
-      description: "WAEC, JAMB & NECO, more exams coming — master its subjects and ace its examinations.",
+      description: "JAMB (UTME) — master its subjects and ace the examination.",
       numeral: "I",
       rule: "via-teal-400/60",
       badge: "Free Forever",
