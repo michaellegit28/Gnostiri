@@ -8,6 +8,7 @@ import { seedMedicine } from "./medicine";
 import { seedSurgery } from "./surgery";
 import { seedObstetricsGynaecology } from "./obstetrics-gynecology";
 import { seedPaediatrics } from "./pediatrics";
+import { ALLIED_SUBJECTS, ALLIED_SEEDERS } from "./allied-specialities";
 import {
   ANATOMY,
   PHYSIOLOGY,
@@ -48,6 +49,7 @@ export const MBBS_SUBJECTS: SubjectSeed[] = [
   SURGERY,
   OBSTETRICS_GYNAECOLOGY,
   PAEDIATRICS,
+  ...ALLIED_SUBJECTS,
 ];
 
 /** Each subject's idempotent seed function, matched by index to MBBS_SUBJECTS. */
@@ -61,6 +63,7 @@ const MBBS_SEEDERS: (() => Promise<unknown>)[] = [
   seedSurgery,
   seedObstetricsGynaecology,
   seedPaediatrics,
+  ...ALLIED_SEEDERS,
 ];
 
 export async function seedMbbs(): Promise<number> {
