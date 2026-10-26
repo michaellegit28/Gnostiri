@@ -1242,6 +1242,1919 @@ function lesson6() {
 }
 
 // ---------------------------------------------------------------------------
+// LESSON 7 — Embolism: types & fates (fully authored)
+// ---------------------------------------------------------------------------
+function lesson7() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define an embolus and distinguish it from a thrombus in situ; name the main types of embolus and the clinical setting in which each occurs; predict the vessel in which a given embolus will lodge from where it entered the circulation; grade a pulmonary embolism by its size and predict its presentation; recognise fat embolism syndrome and decompression sickness; and explain why air and amniotic-fluid embolism present with collapse and coagulopathy rather than with simple vascular obstruction.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-6 of this course. You need Virchow's triad and the structure of a thrombus (lesson 5), the patterns of necrosis (lesson 1) and the vascular events of inflammation (lesson 2), because an embolus ends either in one of the patterns of necrosis or in the inflammatory response to it.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Embolus",
+        text: "An intravascular mass — solid, liquid or gas — detached from its point of formation and carried by the bloodstream until it lodges in a vessel too small to let it pass.",
+      },
+      {
+        type: "paragraph",
+        text: "Almost every embolus is a fragment of a thrombus, so the science of embolism begins exactly where the last lesson ended. The word tells you what the material is and that it is travelling; the pathology of any given embolus is the pathology of its source plus the anatomy of the vessel it ends up in. Ask two questions of every embolus case — where did it come from, and where did it lodge — and the two answers give you the whole clinical picture.",
+      },
+
+      { type: "heading", level: 2, text: "The types of embolus" },
+      {
+        type: "table",
+        headers: ["Type", "Source and mechanism", "Where it lodges"],
+        rows: [
+          ["Thromboembolus", "A fragment of a thrombus that has broken free — a leg-vein thrombosis, a thrombus in a fibrillating atrium, a mural thrombus over a myocardial infarct, or an aneurysmal clot", "Venous side: the pulmonary arteries. Arterial side: brain, lower limb, mesentery, kidney, spleen"],
+          ["Fat", "Free fat droplets released from the marrow or adipose tissue after fracture of a long bone, soft-tissue trauma or burn", "The pulmonary arteries; droplets can pass to the systemic circulation in severe cases"],
+          ["Gas", "Nitrogen bubbles on decompression (caisson disease); air introduced iatrogenically", "Pulmonary or systemic arteries depending on the portal of entry"],
+          ["Amniotic fluid", "Amniotic fluid and fetal squames forced into maternal uterine sinuses during prolonged or forceful labour", "The pulmonary circulation, with a systemic coagulopathy"],
+          ["Tumour", "A solid tumour invading a vein, e.g. renal cell carcinoma into the renal vein or hepatocellular carcinoma into the hepatic vein", "The next vascular bed along the route of flow — lung first, then beyond"],
+          ["Infective", "A fragment of infected thrombus, or vegetations of infective endocarditis", "Distal vessels, where it seeds a septic infarct or a mycotic aneurysm"],
+          ["Bone marrow", "Fragments of marrow released by fracture, cardiac massage or resuscitation", "The pulmonary arteries, usually asymptomatic"],
+          ["Foreign body", "Talc or filler particles injected by intravenous drug users", "The lungs and the retinal circulation"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Pulmonary embolism, by size" },
+      {
+        type: "paragraph",
+        text: "Because the pulmonary embolism is the commonest clinically important embolus, it has its own grading, and the grade predicts both the presentation and the urgency. Every venous embolus must pass through the right heart before it lodges — that single anatomical fact explains why leg-vein thrombosis causes breathlessness rather than a stroke.",
+      },
+      {
+        type: "table",
+        headers: ["Size", "What is obstructed", "Clinical picture"],
+        rows: [
+          ["Massive", "The pulmonary trunk and both main arteries (a saddle embolus), or more than half of the pulmonary vascular bed", "Sudden collapse with obstructive shock; the right ventricle cannot empty, so death follows within minutes if untreated"],
+          ["Large", "More than two lobar arterial branches", "Marked dyspnoea, pleuritic pain, hypoxaemia and right ventricular strain, often with a raised troponin"],
+          ["Medium", "Segmental or subsegmental arteries", "The classic pleuritic chest pain, cough and a slightly raised respiratory rate, with or without haemoptysis"],
+          ["Small", "Branches at the lung periphery", "Often silent; may cause a small haemorrhagic infarct, pleuritic pain, or a persisting effusion"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The pattern of recurrence also matters clinically. Repeated small emboli over months or years progressively obliterate the pulmonary vascular bed, so the patient eventually develops pulmonary hypertension and right heart failure — chronic thromboembolic pulmonary hypertension — in which the embolism itself is far easier to miss because each individual event was small.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: fat embolism syndrome" },
+      {
+        type: "example",
+        text: "A 24-year-old man has a fractured femur fixed surgically on the day of the injury. Thirty-six hours later he is breathless, develops a reddish petechial rash over the chest and shoulders, and becomes drowsy and restless. His platelet count is low, haemoglobin falling, and CT shows diffuse ground-glass shadowing in both lungs.",
+      },
+      {
+        type: "paragraph",
+        text: "The mechanism is partly mechanical and partly biochemical: fat droplets released from the marrow occlude pulmonary capillaries, and the free fatty acids they liberate injure the pulmonary endothelium directly and activate platelets. The combination produces respiratory failure, the petechial rash (which is characteristic on the upper body) and cerebral symptoms from hypoxia and microvascular obstruction. The clues are the timing — usually 24 to 72 hours after the injury, a lucid interval after the initial trauma — and the triad of respiratory failure, petechiae and neurological change. Treatment is essentially supportive: oxygen, mechanical ventilation if needed, and no proven benefit for heparin, alcohol or any specific antidote.",
+      },
+
+      { type: "heading", level: 2, text: "Gas and air embolism" },
+      {
+        type: "definition",
+        term: "Decompression sickness",
+        text: "Bubbles of inert gas (mostly nitrogen) released from solution in blood and tissues when the ambient pressure falls too quickly — the disease of divers and caisson workers.",
+      },
+      {
+        type: "paragraph",
+        text: "A diver who ascends without eliminating the nitrogen dissolved at depth forms gas bubbles in the tissues. Type I is milder — joint and muscle pain (the bends) and skin itch. Type II is the pulmonary form (the chokes) and the neurological form with paraesthesiae, confusion and, at worst, spinal and cerebral infarction; it is treated by hyperbaric recompression, which shrinks the bubbles and re-dissolves the gas. The same inert-gas problem explains why oxygen — which the body consumes and can therefore eliminate — is preferred to nitrogen in inspired gas at depth.",
+      },
+      {
+        type: "paragraph",
+        text: "Air embolism is a different iatrogenic hazard: air introduced into a vein when a central line is disconnected, during surgery on the head and neck (where the dural sinuses are held open by gravity), during lung biopsy, or during haemodialysis. The risk depends on the rate and volume, and on a position in which the venous pressure is below atmospheric. Patients present with sudden dyspnoea, an audible mill-wheel murmur, hypotension and, if enough air reaches the carotid arteries, neurological deficits. The emergency treatment is to make venous pressure positive again — lay the patient in the left lateral head-down position ( Durant manoeuvre ), aspirate air from the right ventricle if a catheter is present, and give a high inspired oxygen concentration to wash nitrogen out and shrink the bubbles by diffusion.",
+      },
+
+      { type: "heading", level: 2, text: "Amniotic fluid and tumour emboli" },
+      {
+        type: "paragraph",
+        text: "Amniotic fluid embolism is the rarest and most lethal of the common emboli. During prolonged labour, amniotic fluid and fetal squames enter the maternal uterine sinuses; the patient develops abrupt hypoxia, circulatory collapse, and disseminated intravascular coagulation. The mechanism appears less a pure obstruction than an anaphylactoid reaction to fetal material, which is why it behaves more like an acute immunological catastrophe than like a blocked pipe, and why it is poorly predicted by the volume of fluid involved.",
+      },
+      {
+        type: "paragraph",
+        text: "Tumour emboli are the microscopic correlate of metastasis, which you will study in the neoplasia lessons. A tumour that invades a vein sheds fragments that follow the route of flow — so renal cell carcinoma embolises to the lungs and, from there, through the pulmonary capillaries into the arterial side. Finding tumour cells in the vasculature of a resection specimen is thus not a technical artefact; it is a measurable predictor of subsequent metastasis.",
+      },
+
+      { type: "heading", level: 2, text: "Fates of an embolus" },
+      {
+        type: "paragraph",
+        text: "An embolus is usually a one-time event with three possible endings. Small or fresh fragments are lysed by the fibrinolytic system and disappear — a small pulmonary embolus may leave no trace at all. If the vessel dies, the tissue beyond it infarcts, and the infarct then follows the usual inflammatory and repair sequence you learned in lessons 1 to 4. Larger fragments organise and recanalise, sometimes leaving a web or a saddle of scar tissue across the vessel, which is the appearance pathologists see long afterwards in unexplained pulmonary hypertension.",
+      },
+      {
+        type: "table",
+        headers: ["Fate", "When it happens", "Long-term consequence"],
+        rows: [
+          ["Lysis", "The embolus is small or fresh and fibrinolysis succeeds", "None — a small pulmonary embolus often heals completely"],
+          ["Organisation and recanalisation", "The embolus is incorporated by fibroblasts and new channels open through it", "A scarred vessel with persistent webs and local stenosis"],
+          ["Infarction of the tissue beyond", "The occluded artery supplies tissue without a collateral supply", "A scar, with the functional loss of the dead territory"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "All embolisms are thromboembolisms. They are not — fat, gas, amniotic fluid, tumour and foreign-body emboli have their own sources and their own clinical syndromes, and none of them is a fragment of a thrombus.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "A pulmonary embolism must be large to be lethal. Size does not have to be enormous; and the group most likely to die is the one in which the embolus mechanically obstructs the right ventricular outflow — the saddle embolus — a fraction of the clots lodged at the lung periphery.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Any acute hypoxaemic respiratory collapse with a clotting disorder two days after childbirth is pulmonary oedema. Amniotic fluid embolism should be on the list: the triad of hypoxia, shock and DIC during or shortly after labour is its signature.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A young woman has breathlessness two weeks after starting the combined contraceptive pill, and a CT scan shows a pulmonary embolus. What has happened?",
+        answer: "Oestrogen-induced hypercoagulability has promoted a deep-vein thrombosis in the pelvis or leg, and a fragment has embolised through the right heart into the pulmonary arteries — a pulmonary embolism.",
+        explanation: "Oestrogen therapy is a listed cause of hypercoagulability in Virchow's triad; the venous embolus then reaches the lung circulation, which is why the presentation is respiratory rather than cerebral.",
+      },
+      {
+        type: "question",
+        prompt: "A scuba diver surfaces too quickly and develops joint pain, itching skin and tingling in the feet. What is the pathology, and how is it treated?",
+        answer: "Decompression sickness — bubbles of inert nitrogen released from solution in blood and tissues when the ambient pressure falls too quickly, obstructing vessels and distending tissues. It is treated with hyperbaric recompression, which shrinks the bubbles and re-dissolves the gas, and with oxygen, which accelerates the washout of nitrogen.",
+        explanation: "The spinal and cerebral forms (Type II) are the emergencies: they can cause paraplegia and cognitive change. Prevention is proper decompression tables and slow ascent.",
+      },
+      {
+        type: "question",
+        prompt: "Why does an embolus from a leg-vein thrombosis cause breathlessness, while an embolus from a left-atrial thrombus causes a stroke?",
+        answer: "Because the chamber of the heart the embolus passes through determines the circulation it reaches: venous blood is carried through the right heart into the pulmonary arteries, so the leg-vein embolus obstructs the lung circulation; a left-atrial thrombus enters the systemic circulation through the left ventricle and aorta, and most systemic emboli arrest in the cerebral circulation.",
+        explanation: "The destination — and therefore the whole clinical picture — is set by the route, not by the embolus itself. A venous embolus can only reach the lungs unless there is a right-to-left shunt.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with a deep-vein thrombosis feels sudden breathlessness while straining at stool. Which vessel will the embolus reach FIRST as it leaves the deep veins?",
+        options: [
+          "The left ventricle and then the aorta",
+          "The right atrium, right ventricle and pulmonary arteries",
+          "The portal vein and the liver",
+          "The pulmonary vein and the left atrium",
+        ],
+        correctIndex: 1,
+        explanation: "Venous return carries the embolus through the right atrium into the right ventricle and then into the pulmonary arterial tree — which is why a venous embolus causes respiratory symptoms and never a stroke in a patient without a septal defect.",
+      },
+      {
+        type: "mcq",
+        stem: "Which pair of findings characterises fat embolism syndrome most strongly?",
+        options: [
+          "Pleuritic chest pain at 48 hours with a normal respiratory rate",
+          "Respiratory failure, petechial rash and cognitive change, 24-72 hours after a long-bone fracture",
+          "Haemoptysis from a PE with a clear chest at 48 hours",
+          "A raised D-dimer alone after a chest injury",
+        ],
+        correctIndex: 1,
+        explanation: "Fat embolism classically appears 24-72 hours after a long-bone fracture — the lucid interval — with the respiratory, skin and cerebral triad described; a plain pulmonary embolism presents earlier and without the petechial rash and mental change.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the commonest vein-level embolus source of systemic arterial embolism?",
+        options: [
+          "A mural thrombus in the left ventricle after myocardial infarction",
+          "A deep-vein thrombosis in the leg",
+          "A thrombus in a jugular vein",
+          "A portal vein thrombus",
+        ],
+        correctIndex: 0,
+        explanation: "Systemic (arterial) emboli must come from the left side of the heart, the aorta or the proximal systemic arteries — classically a mural thrombus over an infarct, or thrombus in a fibrillating atrium. Leg-vein thrombi travel to the lungs.",
+      },
+      {
+        type: "mcq",
+        stem: "A woman collapses during prolonged labour with hypoxia, shock and bruising, followed by oozing from venepuncture sites. Which embolus explains this picture?",
+        options: ["Air embolism", "Tumour embolism", "Amniotic fluid embolism", "Fat embolism"],
+        correctIndex: 2,
+        explanation: "Amniotic fluid embolism occurs during labour and presents with anaphylactoid respiratory collapse plus a consumptive coagulopathy (DIC), not with simple vascular obstruction — the oozing venepuncture sites are the coagulopathy, not a platelet problem of the embolus itself.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of the following is the immediate best response to air embolism from a disconnected central line?",
+        options: [
+          "Raise the head of the bed and give aspirin",
+          "Lay the patient left-lateral head-down, aspirate right ventricular air, give 100% oxygen",
+          "Give heparin thrombolysis and observe",
+          "Insert a chest drain bilaterally",
+        ],
+        correctIndex: 2,
+        explanation: "The Durant manoeuvre makes venous pressure positive again, keeping air out and keeping the right ventricular air pocket away from the pulmonary outflow; aspiration where possible and a high inspired oxygen (which washes out nitrogen and speeds bubble absorption) complete the emergency management.",
+      },
+      {
+        type: "mcq",
+        stem: "What proportion of systemic arterial emboli occlude the cerebral circulation?",
+        options: ["About 10%", "About 20%", "About 80%", "About 50% of them lodge in the splenic artery"],
+        correctIndex: 2,
+        explanation: "Approximately four out of five systemic emboli enter the internal carotid arteries and the cerebral circulation; the rest go to the lower limb, the mesentery, the kidneys, the spleen and the viscera — which is why stroke is the dominant complication of embolism from the left heart.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "An embolus is intravascular material in transit; almost all of them are thromboemboli, and their destination is set by the chamber of the heart they pass through — venous clots go to the lungs, arterial clots go to brain, limb and gut. Fat, gas, amniotic fluid, tumour and infective emboli are each a distinct clinical syndrome with its own source. An embolus may be lysed silently, organise and recanalise, or kill the tissue it lodges in front of — and infarction is that last ending.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: what happens when that tissue dies — ischaemia and infarction, including why some infarcts are pale and others red, and why collateral supply changes everything.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 8 — Infarction & ischaemia (fully authored)
+// ---------------------------------------------------------------------------
+function lesson8() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define ischaemia, infarction and death by time; rank the tissues by their vulnerability to hypoxia; predict the shape, colour and outcome of an infarct in a named organ; distinguish pale from red infarcts and state which organs produce each; list the factors that decide infarct size; and relate the clinical complications of an infarct to its location.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-7, in particular lesson 1 (cell injury and the patterns of necrosis), lesson 5 (thrombosis) and lesson 7 (embolism): an infarct is what happens when a thrombus or embolus stops flow, and the necrosis you see in it is the pattern you have already learned to classify.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Infarction",
+        text: "Ischaemic necrosis of tissue caused by obstruction of its arterial supply — infarcts occur in organs whose blood supply is sufficient to keep the tissue alive until the moment it is cut off, and then fails.",
+      },
+      {
+        type: "paragraph",
+        text: "Ischaemia and infarction are two different words. Ischaemia is the loss of arterial blood flow; the tissue is in danger. Infarction is the irreversible outcome of prolonged, severe ischaemia — the tissue has actually died. Everything between is a race: the slower the occlusion, the longer the tissue can survive; the richer the collateral supply, the longer still. All the geography of infarction — where it strikes, how big it is, what colour it is — follows from that race.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: the sequence in time" },
+      {
+        type: "table",
+        headers: ["Time after occlusion", "What the tissue is doing", "What can be done"],
+        rows: [
+          ["Seconds to minutes", "Aerobic metabolism fails and ATP starts to fall", "Restore flow quickly — reperfusion of myocardium and brain is a matter of minutes"],
+          ["Minutes to an hour", "Reversible injury: cell swelling, blebs, nuclear chromatin clumping", "Reversible with oxygen and substrate, though some cells (neurons) are already lost"],
+          ["Hours", "Irreversible injury: mitochondrial failure and massive calcium entry", "Too late to save this tissue; the aim now is to limit its size and treat complications"],
+          ["Days", "Coordinated necrosis and the inflammatory response: swelling, neutrophil infiltration, fever, leucocytosis", "Nothing enzymatic can reverse it — the neutrophil influx is a reaction to death, not its cause"],
+          ["Weeks", "Repair: granulation tissue replaces the infarct, then a scar", "Scarring is fixed; the aim is rehabilitation and preventing a second event"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Time is the critical variable in the commonest emergencies, because death accelerates. Neurons lose function after 3 to 5 minutes; myocardium after about 20 to 30 minutes of complete ischaemia — the origin of 'time is brain' in thrombolysis and 'time is muscle' in primary coronary intervention.",
+      },
+
+      { type: "heading", level: 2, text: "Why some tissues infarct and others do not" },
+      {
+        type: "paragraph",
+        text: "The answer is anatomical before it is cellular: what collateral circulation does the organ have, and how fast did the occlusion develop? The kidney, spleen and heart have mostly end-arteries, so they infarct when their supply stops abruptly. The lung has a double supply, from pulmonary and bronchial arteries, and the forearm has a rich collateral network, so both tolerate obstruction far better. The brain is the opposite — no functional anastomoses beyond the circle of Willis, so a small occluded artery kills the territory it feeds.",
+      },
+      {
+        type: "table",
+        headers: ["Organ", "Collateral protection", "Effect of abrupt arterial occlusion"],
+        rows: [
+          ["Brain", "Circle of Willis and small leptomeningeal anastomoses, but no functional overlap between adjacent cortical territories", "Infarct (liquefactive necrosis) of the territory supplied"],
+          ["Heart", "Coronary anastomoses exist but are not functional at a haemodynamic level", "Myocardial infarct (coagulative necrosis), unless collaterals were developed over months"],
+          ["Kidney", "None — end-artery", "Pale infarct, wedge-shaped"],
+          ["Spleen", "None — end-artery", "Pale infarct, wedge-shaped"],
+          ["Lung", "Dual circulation — pulmonary and bronchial arteries", "Infarcts only if there is also cardiac failure or another predisposing factor"],
+          ["Small intestine", "Arches between the jejunal and ileal branches", "Infarcts only in segmental ('marginal artery') occlusion, and then it is haemorrhagic"],
+          ["Liver", "Dual circulation — portal vein and hepatic artery", "Infarcts only with combined compromise, unless the circulation is chronically sluggish"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "There are two further determinants. The speed of the occlusion matters because a slowly developed stenosis gives collaterals time to open, so a gradual but severe coronary narrowing may never cause an infarct at all. And the oxygen content of the delivered blood matters: an anaemic, cyanosed or hypotensive patient infarcts tissue more easily, so the same arterial occlusion does more damage in a shocked patient.",
+      },
+
+      { type: "heading", level: 2, text: "Pale versus red infarcts" },
+      {
+        type: "paragraph",
+        text: "Two colours of infarct exist, and the difference is not microscopic but anatomical: whether blood can still reach the region after the artery is blocked. A pale (anaemic, white) infarct occurs in an organ with an end-artery supply, where the dead region is dense with no blood entering it — heart, kidney, spleen. A red (haemorrhagic) infarct occurs in a loose tissue where blood still flows in from another source or oozes back through loose tissues — lung, ovary after torsion, testis after torsion, small intestine — and where the dead area is filled with extravasated red cells.",
+      },
+      {
+        type: "table",
+        headers: ["", "Pale (anaemic) infarct", "Red (haemorrhagic) infarct"],
+        rows: [
+          ["Typical organs", "Heart, kidney, spleen, brain (softens and liquefies)", "Lung, ovary, testis, small intestine"],
+          ["Why the colour", "The tissue is dense and no blood enters after occlusion", "Blood still reaches or re-enters the area and fills a loose, spongy tissue"],
+          ["Gross appearance", "White or grey wedge with its base at the organ surface, apex pointing to the blocked vessel", "Deeply congested, dark and swollen, sharply defined"],
+          ["Dual circulation or not", "End-artery supply", "Double supply or venous occlusion"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Note two grey zones. Red infarcts occur where arterial thrombosis occurs on a background of venous congestion: the notorious splenic infarct is pale in a healthy spleen but haemorrhagic in congestive heart failure. And pulmonary infarcts are red too because of the bronchial arterial supply to lung tissue, which continues to deliver blood into the dead area.",
+      },
+
+      { type: "heading", level: 2, text: "The age of an infarct" },
+      {
+        type: "paragraph",
+        text: "Because infarcts pass through the standard necrosis-inflammation-repair sequence, the pathologist can date them, and so can the histologist. It is an everyday question at post-mortem and is asked in examinations because it is the whole of the pathology in miniature.",
+      },
+      {
+        type: "table",
+        headers: ["Time", "Gross appearance", "Microscopic appearance"],
+        rows: [
+          ["Under 24 hours", "Pale and ill-defined, or hard to see at all in the brain; there may be nothing to the naked eye", "Coagulative necrosis at the margins only; on electron microscopy the characteristic isometric contraction bands"],
+          ["1-3 days", "The infarct is clearly defined and depressed, with a congested rim; the lung embolus infarct becomes haemorrhagic", "Coagulative necrosis throughout, with a neutrophilic infiltrate at the edge"],
+          ["1-2 weeks", "The necrotic centre is yellowish and softened, and the congested margin is wide", "Macrophages and granulation tissue invade the edge; capillaries grow in"],
+          ["Weeks to months", "The infarct is replaced by a scar: white, firm, contracted", "A collagenous scar, gradually thinned and contracted"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example: clinical consequences" },
+      {
+        type: "paragraph",
+        text: "An elderly man with atrial fibrillation develops cramping abdominal pain and later passes dark red blood mixed with stool. The clinical picture is the result of an embolus from the left atrium that has occluded a branch of his superior mesenteric artery. The dead segment of bowel is a transmural, haemorrhagic infarction; without surgery and reperfusion within hours it perforates, and the peritoneal cavity is flooded with faecal material — peritonitis, shock and death. Contrast the splenic infarct from the same fibrillation (left hypochondrial pain, sometimes a friction rub, and no other consequence), or the femoral embolus from the same source (a cold, pale, pulseless leg requiring urgent embolectomy). Location decides everything.",
+      },
+      {
+        type: "paragraph",
+        text: "The complications of the two commonest infarcts — myocardial and cerebral — follow the same rules. The myocardial infarct leaves a scar that does not contract and does not conduct, so heart failure and arrhythmia follow; the cerebral infarct liquefies, so the area softens into a CSF-filled cavity surrounded by gliosis. Both are irreversible, and both are the reason the words 'time is muscle' and 'time is brain' are the standard slogans of acute care.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying every organ with a pale infarct has no collateral supply at all. The heart has coronary anastomoses; they are simply not functional at flow-demand levels. Saying the lung cannot infarct because it has a dual supply — it can, provided the bronchial circulation is also compromised, as in heart failure, so the pulmonary and bronchial vessels cannot compensate between them.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Giving red infarcts an arterial-type explanation. Red infarcts classically occur in loose tissues with a dual or continuing circulation, or following venous occlusion; they are not due to 'bleeding through' the necrotic area alone.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Defining infarction by a time limit alone. The same hour that saves a myocardium will do nothing for a neuron — the threshold for irreversible injury is a property of the tissue, not of the clock.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Why does a cerebral infarction injure the brain more severely than the equivalent ischaemia injures skeletal muscle?",
+        answer: "Because neurons depend almost entirely on oxidative metabolism: the brain stores essentially no glycogen and has no meaningful anaerobic reserve, and its neurons are among the most hypoxia-sensitive cells in the body, so complete ischaemia causes irreversible injury within about 3 to 5 minutes — whereas skeletal muscle tolerates the injury for far longer.",
+        explanation: "Neurons have almost no glycogen stores and cannot carry out meaningful anaerobic glycolysis; cardiac muscle can survive through the first 20-30 minutes, and skeletal muscle is even more resistant.",
+      },
+      {
+        type: "question",
+        prompt: "A patient with congestive heart failure develops a splenic infarct, and the infarct is dark red. Why, when the splenic infarct in a healthy person is white?",
+        answer: "Because heart failure raises venous pressure throughout the system, so blood continues to enter the spleen through the arterial supply and oozes back into the dead, congested tissue, producing a haemorrhagic (red) infarct rather than a pale one.",
+        explanation: "The colour of an infarct mirrors how much blood actually reaches its parenchyma after the occlusion — the congested heart failure bolsters the circulation and turns an anaemic infarct into a haemorrhagic one.",
+      },
+      {
+        type: "question",
+        prompt: "A patient has a fresh, clear-cut pale wedge-shaped infarct in the kidney. When, roughly, did the obstruction occur, and what is on the microscope?",
+        answer: "Approximately 1 to 3 days ago, from coagulative necrosis with a neutrophilic margin — the outline is sharpest at this age, and earlier than this it would be visible as a pale indistinct area.",
+        explanation: "The pathologist dates infarcts from the transition from oedema and neutrophils (day 1-3) to macrophages and granulation tissue (week 2), and finally to a scar (months).",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which pattern of necrosis is expected in a pulmonary infarct caused by an embolus?",
+        options: ["Coagulative", "Liquefactive", "Caseous", "Haemorrhagic (red) with coagulative features"],
+        correctIndex: 3,
+        explanation: "Pulmonary infarcts are classically red (haemorrhagic) — the loose sponge of lung and the continuing bronchial arterial supply fill the dead area with blood, which is why the characteristic features are haemorrhagic necrosis, not the coagulative pattern of most solid organs.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of the following tissues is most vulnerable to irreversible ischaemic injury?",
+        options: ["Skeletal muscle", "Neurons in the brain", "Renal tubular epithelium", "Myocardium"],
+        correctIndex: 1,
+        explanation: "Neurons are the most vulnerable — irreversible injury after about 3 to 5 minutes of complete ischaemia, followed by myocardium at 20-30 minutes and skeletal muscle at far longer times. The order explains why stroke cannot be treated after the first hours, whereas a limb may survive much longer.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient has a pale, well-defined, wedge-shaped infarct in the spleen. What is the most likely appearance at 2 weeks?",
+        options: [
+          "It has completely disappeared by normal regeneration",
+          "A yellowish softened centre with a wide congested border, with macrophages and new granulation tissue at the edge",
+          "It is becoming a caseating granuloma",
+          "It has liquefied into a fluid-filled cavity",
+        ],
+        correctIndex: 1,
+        explanation: "At one to two weeks necrosis has been removed by macrophages and the infarct is being replaced by granulation tissue from its margins — the stage that precedes a contracted, permanent scar. Complete disappearance by regeneration does not occur because the spleen has no regenerative reserve.",
+      },
+      {
+        type: "mcq",
+        stem: "Which determinant most strongly reduces the size of a myocardial infarct when an artery suddenly occludes?",
+        options: [
+          "The oxygen content of the patient's blood alone",
+          "A rich collateral circulation developed through a gradual previous narrowing",
+          "An enlarged heart",
+          "A shorter time between ECG and liver enzymes",
+        ],
+        correctIndex: 1,
+        explanation: "Collateral vessels take time to develop; a slowly progressive stenosis recruits them, so the abrupt occlusion of a chronically narrowed artery may infarct far less. Oxygenation and the patient's general state also matter, but collateral supply is the strongest determinant of the size of the dead territory.",
+      },
+      {
+        type: "mcq",
+        stem: "Which best explains the pattern of necrosis in a cerebral infarct?",
+        options: [
+          "Caseous necrosis from a granulomatous reaction",
+          "Liquefactive necrosis, because the brain has no supporting stroma and is rich in hydrolytic enzymes",
+          "Coagulative necrosis, because brain tissue is vascular",
+          "Fat necrosis, because the brain is lipid-rich",
+        ],
+        correctIndex: 1,
+        explanation: "Brain ischaemia liquefies the tissue; the brain has no collagenous framework to retain form, and its cells are rich in lipid and hydrolytic enzymes, so the dead area softens into a fluid-filled cavity rather than a coagulative wedge.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Infarction is the endpoint of prolonged ischaemia. The shape, colour and outcome of the infarct follow anatomy alone: pale wedges from end-arteries, red haemorrhagic infarcts in loose double-circulation organs, and liquefaction in the brain. Timing decides everything — neurons within minutes, myocardium within half an hour — and after death the infarct passes through the familiar cycle of necrosis, inflammation, and scar. The one thing that changes the size of that dead territory is collateral blood supply.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: the coagulopathy that converts every one of these events into a bleeding catastrophe — disseminated intravascular coagulation, in which clotting and bleeding are the same process.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 9 — Disseminated intravascular coagulation (fully authored)
+// ---------------------------------------------------------------------------
+function lesson9() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define disseminated intravascular coagulation and explain how a single process produces both thrombosis and bleeding; list its major acute and chronic causes; interpret the laboratory profile of DIC and explain each abnormality; distinguish DIC from other thrombocytopenia-and-bleeding states; and describe the principles of its management and their rationale.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 5 (thrombosis) and lesson 6 (oedema and shock) from this course, plus the coagulation cascade from physiology. DIC is a derangement of the haemostatic system itself, so Virchow's triad is not the framework here — it is what happens when the whole clotting system is switched on at once.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Disseminated intravascular coagulation",
+        text: "A pathological, widespread activation of the coagulation system in which thrombin is generated uncontrollably inside the living circulation, fibrin thrombi plug the microvasculature, and the consumption of platelets and clotting factors then produces a hemorrhagic diathesis.",
+      },
+      {
+        type: "paragraph",
+        text: "DIC is never a disease in its own right; it is a complication of something else — usually a catastrophe of obstetric, malignant or septic origin. The apparent paradox is the whole lesson: because the coagulation system is switched on everywhere, fibrin is deposited in every small vessel, which uses up the platelets and clotting factors; the body's fibrinolytic system then breaks the fibrin down, generating fragments that themselves prevent normal clotting. The patient bleeds because the system is exhausted by the clotting it has already done, and the organs fail because the microcirculation of every organ is plugged with fibrin.",
+      },
+
+      { type: "heading", level: 2, text: "Consequences on two fronts" },
+      {
+        type: "table",
+        headers: ["Consequence", "Mechanism", "Clinical manifestation"],
+        rows: [
+          ["Thrombotic", "Microvascular occlusion by fibrin thrombi, platelet aggregates and red cells forced through the narrowed vessels", "Ischaemic injury to skin (petechiae, purpura fulminans and acral necrosis), kidney (acute cortical necrosis), brain, adrenal glands and digits"],
+          ["Haemorrhagic", "Consumption of platelets and factors II, V and VIII, plus fibrin degradation products that inhibit fibrin polymerisation", "Oozing from venepuncture sites and lines, epistaxis, haematuria, gastrointestinal haemorrhage, purpura"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The classic description of the acute form is the bleeding one: the patient who bleeds from every recent puncture, whose surgical sites weep and whose urine and stool contain fresh blood. In the chronic form the balance is different — the bleeding is mild or absent, and the dominant picture is thrombosis: red clots forming in a digital cyanosis, or recurrent venous thromboembolism in a patient with disseminated malignancy.",
+      },
+
+      { type: "heading", level: 2, text: "Causes" },
+      {
+        type: "table",
+        headers: ["Category", "Examples", "Mechanism of activation"],
+        rows: [
+          ["Obstetric", "Abruptio placentae, amniotic fluid embolism, retained dead foetus, septic abortion", "Tissue factor released from the placenta and decidua enters the maternal circulation"],
+          ["Infections", "Sepsis from Neisseria meningitidis and other Gram-negative rods; severe sepsis from any organism; viral haemorrhagic fevers", "Endotoxin and cytokines trigger tissue factor expression on monocytes and endothelium"],
+          ["Malignancy", "Acute promyelocytic leukaemia (the classic leukaemic form), metastatic adenocarcinoma", "Tumour tissue factor and procoagulant-rich malignant cells (the granules of promyelocytes)"],
+          ["Trauma and burns", "Massive soft-tissue trauma, crush injury, burns, extensive surgery", "Tissue factor released from injured tissue and haemorrhagic shock"],
+          ["Vascular and haemolytic", "Giant haemangioma (Kasabach-Merritt), aortic aneurysm, haemolytic transfusion reaction, snake bite", "Procoagulant exposure or endothelial injury within an abnormal vessel"],
+          ["Other", "Acute pancreatitis, fulminant liver failure, heat stroke, transplantation", "Circulating enzymes, activated cytokines or direct endothelial damage"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Acute promyelocytic leukaemia deserves its own memory: the malignant promyelocyte granules are intensely procoagulant, and its patients are classically found to be bleeding with a DIC profile at presentation. Treating the leukaemia with all-trans retinoic acid corrects the DIC along with the disease.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: the laboratory profile" },
+      {
+        type: "paragraph",
+        text: "A woman in labour with abruptio placentae begins to bleed from her uterine incision and her venepuncture sites. The samples taken before any transfusion show a platelet count of 35 × 10⁹/L, a prothrombin time twice the control, the activated partial thromboplastin time prolonged, a low fibrinogen, and a very high D-dimer. The blood film shows fragmented red cells.",
+      },
+      {
+        type: "table",
+        headers: ["Investigation", "Expected in DIC", "Why"],
+        rows: [
+          ["Platelet count", "Low (thrombocytopenia)", "Consumed in the widespread platelet aggregation"],
+          ["Prothrombin time", "Prolonged", "Consumption of factors I, II, V and VIII"],
+          ["Activated partial thromboplastin time", "Prolonged", "The same consumption of intrinsic-pathway factors"],
+          ["Fibrinogen", "Low", "Consumed by the fibrin generation; a normal fibrinogen does not exclude DIC because it is an acute-phase reactant and often starts high"],
+          ["D-dimer and fibrin degradation products", "High", "Fibrinolysis of the microvascular fibrin deposits — the most sensitive clue"],
+          ["The blood film", "Schistocytes and helmet cells", "Red cells sheared by fibrin strands in the microcirculation — microangiopathic haemolysis"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Read the pattern as a story: the D-dimer was generated by clot, so something has clotted; the platelet count, PT and fibrinogen have fallen, so the clotting has consumed the machinery; the schistocytes are the signature of the fibrin mesh inside the microcirculation. The consumption of a factor profile is the picture of a haemostatic system running out of its own parts.",
+      },
+
+      { type: "heading", level: 2, text: "Distinguishing DIC from its mimics" },
+      {
+        type: "table",
+        headers: ["Condition", "Platelets", "Coagulation times", "Fibrinogen", "Distinguishing feature"],
+        rows: [
+          ["DIC", "Low", "Both prolonged", "Low", "Consumption with high D-dimer; fibrinolytic debris present"],
+          ["Thrombotic thrombocytopaenic purpura", "Low", "Normal (PT/APTT)", "Normal", "Microangiopathic haemolysis with neurological change, fever and renal failure, but clotting times are normal"],
+          ["Heparin-induced thrombocytopenia", "Low", "PT normal; APTT may be prolonged by heparin", "Normal", "Exposure to heparin 5-10 days before, and thrombosis rather than bleeding"],
+          ["Severe liver failure", "Low", "Prolonged", "Low", "A clinical history of liver disease, and D-dimer is not raised unless DIC is superimposed"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The distinction matters for acute medicine, because heparin is the wrong treatment for TTP but is central to the thrombotic forms of DIC. The commonest error in examinations is the platelet count alone; read the coagulation times and the D-dimer together.",
+      },
+
+      { type: "heading", level: 2, text: "Management" },
+      {
+        type: "paragraph",
+        text: "There is no single drug for DIC; it is managed by treating the cause and replacing what is missing while giving the system a chance to correct itself. Platelets, fresh frozen plasma and cryoprecipitate are given to a bleeding patient based on the laboratory results and blood loss. In the rare thrombosis-dominated forms — chronic DIC of malignancy, purpura fulminans, or acral ischaemia — low-dose heparin is given deliberately, because the treatment is to halt the consumption. Supportive care of the organ failure follows the shock and acute kidney injury lessons of the course, and the outcome depends almost entirely on the underlying cause.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying a low fibrinogen excludes DIC, or that a normal platelet count rules it out. Early DIC can exist with a normal fibrinogen (fibrinogen is an acute-phase protein and often rises before it falls) and the platelet count falls before the coagulation times change.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Treating a bleeding DIC patient with heparin as a first reflex. In the common haemorrhagic forms, replacement and treating the cause are the answer; heparin is reserved for the thrombotic forms of the disease.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Explaining the purpura as a platelet problem from thrombocytopenia alone. The purpura fulminans of DIC is a thrombotic lesion: fibrin thrombi occlude the skin vessels, and the skin necrosis is a microvascular infarction — bleeding into the skin comes from consumption of factors, not from an immune platelet disorder.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient has DIC. Why does the patient bleed, and why does the patient clot at the same time?",
+        answer: "The patient clots because thrombin is generated everywhere and fibrin plugs the microcirculation; the patient bleeds because this process consumes platelets and clotting factors and because the fibrin degradation products produced by the body's own lysis of the fibrin further impair normal clotting.",
+        explanation: "The single name describes two faces of one process; the treatment reverses the process but the same process causes both sides.",
+      },
+      {
+        type: "question",
+        prompt: "Which single laboratory test best points to ongoing microvascular fibrin generation in a suspected DIC?",
+        answer: "The D-dimer — because it is generated by degradation of fibrin, so a high level indicates that fibrin has actually been formed and lysed. Platelet count and coagulation times show the consumption, but the D-dimer is the most sensitive signal of the process itself.",
+        explanation: "D-dimer is the direct product of fibrin breakdown, which is why it is raised in DIC (fibrinolysis of the microvascular fibre) but can be raised in other clotting states as well.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which best describes the primary defect in disseminated intravascular coagulation?",
+        options: [
+          "A reduced production of clotting factors in the liver",
+          "Widespread intravascular thrombin generation with consumption of clotting factors and platelets",
+          "An isolated platelet antibody-mediated thrombocytopenia",
+          "An abnormality of the vessel wall alone",
+        ],
+        correctIndex: 1,
+        explanation: "DIC is activation of the coagulation system, not a failure of synthesis: the liver in fact continues to produce factors as best it can; the problem is that the clotting system is consuming its components faster than they can be replaced.",
+      },
+      {
+        type: "mcq",
+        stem: "Which set of results is characteristic of acute DIC?",
+        options: [
+          "Low platelets, prolonged PT and APTT, low fibrinogen, high D-dimer",
+          "Low platelets with normal coagulation times",
+          "High platelets with prolonged PT",
+          "Normal platelets, prolonged APTT, normal D-dimer",
+        ],
+        correctIndex: 0,
+        explanation: "Consumption lowers platelets, factors and fibrinogen; the prolonged times come from the missing factors; the D-dimer is high because fibrin has been formed and broken down. Normal coagulation times with thrombocytopenia are the pattern of TTP instead.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with acute promyelocytic leukaemia is bleeding from venepuncture sites with a low fibrinogen and schistocytes. Which process explains this?",
+        options: [
+          "A primary liver failure",
+          "Procoagulant granules released from malignant promyelocytes triggering DIC",
+          "An immune thrombocytopenia",
+          "A vitamin K deficiency",
+        ],
+        correctIndex: 1,
+        explanation: "Acute promyelocytic leukaemia is the classic leukaemic cause of DIC: the granules of the malignant promyelocytes are intensely procoagulant, and all-trans retinoic acid therapy rapidly corrects the coagulopathy.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the correct first-line approach in the bleeding patient with acute DIC?",
+        options: [
+          "Immediate full-dose heparin anticoagulation",
+          "Treat the underlying cause and replace platelets, plasma and cryoprecipitate as indicated",
+          "Aspirin and steroids only",
+          "Kidney-dialysis alone to remove the fibrin fragments",
+        ],
+        correctIndex: 1,
+        explanation: "In the haemorrhagic form, management is replacement of what is consumed plus the urgent treatment of the obstetric, malignant or septic cause. Heparin has a place only in the thrombosis-dominated forms, where the aim is to stop consumption.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient has thrombocytopenia, neurological changes, fever, normal coagulation times and a normal fibrinogen. Which is the most likely diagnosis?",
+        options: ["DIC", "Thrombotic thrombocytopenic purpura", "Haemolytic transfusion reaction", "Acute liver failure"],
+        correctIndex: 1,
+        explanation: "The pentad of TTP is thrombocytopenia, microangiopathic haemolysis, neurological signs, renal impairment and fever — with normal coagulation times, because the platelet consumption is driven by microvascular platelet aggregation rather than by activation of the coagulation cascade.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Disseminated intravascular coagulation is one process with two faces: thrombin generated in the microcirculation plugs the smallest vessels and consumes the clotting system, so the patient bleeds from the very factors the clotting has exhausted. It is diagnosed in the laboratory as low platelets, prolonged coagulation times, low fibrinogen and a high D-dimer, and treated by treating its cause and replacing what is missing. The specialty that follows will take the same haemostatic system and show it behaving in a far more controlled way: the haemodynamic disorders you have just finished are now behind you, and the neoplasia module begins.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: neoplasia — the disease of the cell's own control of its division, from the benign adenoma to the metastasising carcinoma.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 10 — Neoplasia: definitions & nomenclature (fully authored)
+// ---------------------------------------------------------------------------
+function lesson10() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define a neoplasm and explain what autonomy of growth means; apply the benign/malignant classification to a named example; derive the correct name of a benign and a malignant tumour from its tissue of origin; apply the exception rules to melanoma, lymphoma and the other names that break the pattern; and explain why a benign tumour can still be clinically dangerous.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 1 (cell injury, cell division and adaptation) from this course. Neoplasia is a disorder of the cell's own growth regulation, so hypertrophy, hyperplasia and the molecular control of the cell cycle are its foundation. The pathways of angiogenesis and haemostasis from modules 1 and 2 are what malignant tumours exploit.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Neoplasm",
+        text: "An abnormal mass of tissue whose growth exceeds and is uncoordinated with that of the normal tissues, and which persists after the stimulus that initiated it has been withdrawn.",
+      },
+      {
+        type: "paragraph",
+        text: "Three words in that definition separate neoplasia from every other swelling. Growth exceeds the normal tissue — the question is one of relative pace, not of size. Growth is autonomous — remove the stimulus and the tumour keeps growing, unlike the hypertrophy of an exercised muscle or the hyperplasia of a wound. And the tumour is clonal — it descends from one ancestral cell whose gene expression has become abnormal and passed that abnormality on to all its descendants. Inflammation and repair swell and then settle; neoplasia does not settle.",
+      },
+
+      { type: "heading", level: 2, text: "Benign versus malignant" },
+      {
+        type: "table",
+        headers: ["Feature", "Benign tumour", "Malignant tumour"],
+        rows: [
+          ["Differentiation", "Resembles its tissue of origin closely", "Ranges from well differentiated to undifferentiated"],
+          ["Rate of growth", "Usually slow and progressive", "Usually rapid, but variable — some malignant tumours exist for years"],
+          ["Mode of growth", "Expansile: grows to a cohesive mass, often encapsulated", "Infiltrative: invades through the basement membrane into the surrounding tissue"],
+          ["Metastasis", "Does not metastasise", "Metastasises to regional lymph nodes and distant organs"],
+          ["Clinical outcome", "Usually curable by excision; may still be dangerous from position, hormones or haemorrhage", "Progressive, drug-resistant and ultimately fatal if untreated"],
+          ["Recurrence after removal", "Unusual", "Common, unless the excision is wide"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Benign is not the same as harmless. A benign pituitary adenoma compresses the optic chiasm and blinds, a benign meningioma kills by pressure inside the skull, a leiomyoma of the uterus causes menorrhagia, and a benign phaeochromocytoma secretes adrenaline that kills. Malignancy is defined by invasion and metastasis, not by danger alone.",
+      },
+
+      { type: "heading", level: 2, text: "Nomenclature: derive the name from the tissue" },
+      {
+        type: "paragraph",
+        text: "Naming is a two-step rule, not a list to memorise. First identify the basic tissue class — epithelial or mesenchymal — then add the suffix that tells you the behaviour. Benign mesenchymal tumours take the tissue name plus -oma (lipoma, fibroma, chondroma, osteoma). Benign epithelial tumours are named by their surface pattern: papilloma when the surface is raised, adenoma when it forms glands, and cystadenoma when it forms cysts. The malignant counterparts replace -oma with -carcinoma for epithelial tumours and with -sarcoma for mesenchymal tumours.",
+      },
+      {
+        type: "table",
+        headers: ["Tissue of origin", "Benign", "Malignant"],
+        rows: [
+          ["Stratified squamous epithelium", "Squamous papilloma", "Squamous cell carcinoma"],
+          ["Glandular epithelium", "Adenoma", "Adenocarcinoma"],
+          ["Transitional epithelium", "Transitional cell papilloma", "Transitional cell carcinoma"],
+          ["Fat", "Lipoma", "Liposarcoma"],
+          ["Fibrous tissue", "Fibroma", "Fibrosarcoma"],
+          ["Cartilage", "Chondroma", "Chondrosarcoma"],
+          ["Bone", "Osteoma", "Osteosarcoma"],
+          ["Blood vessels", "Haemangioma", "Angiosarcoma"],
+          ["Lymphoid tissue", "(benign reactivity only)", "Lymphoma"],
+          ["Haemopoietic marrow", "(does not occur)", "Leukaemia"],
+          ["Melanocyte", "Naevus", "Melanoma"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "The exceptions you must memorise" },
+      {
+        type: "paragraph",
+        text: "A handful of tumours break the suffix rule, and these are exactly the ones the examination asks. In every case, the exception has a historical reason and a clinical consequence: a tumour with an innocent -oma suffix that behaves malignantly.",
+      },
+      {
+        type: "definition",
+        term: "The malignant -omas",
+        text: "Melanoma, lymphoma, seminoma, hepatoma (hepatocellular carcinoma), glioma and mesothelioma are all malignant, despite their benign-looking suffixes.",
+      },
+      {
+        type: "paragraph",
+        text: "The corollary is that some -oma tumours are malignant only in some settings: a teratoma is a benign germ cell tumour unless it is immature, and hepatoma is malignant. Mixed tumours obey the rule of their worst component: a cystosarcoma phyllodes with malignant stroma is malignant. And the two lesions that look like tumours but are not are worth separating from the concept entirely — a hamartoma is an excessive but organised growth of tissues normally present in the organ, such as the cartilage of a pulmonary hamartoma; a choristoma is a normal tissue growing at a foreign site, such as gastric mucosa in a Meckel diverticulum.",
+      },
+      {
+        type: "table",
+        headers: ["Name", "What it actually is", "Why it is high-yield"],
+        rows: [
+          ["Melanoma", "Malignant tumour of melanocytes", "The -oma is benign by rule but the tumour kills — an entirely metastatic disease by name"],
+          ["Lymphoma", "Malignant tumour of lymphoid cells", "No benign equivalent exists: lymphoid hyperplasia is not a tumour"],
+          ["Seminoma", "Malignant germ cell tumour of the testis", "Radiosensitive, and curability is high — name and behaviour go together"],
+          ["Hepatoma", "Malignant tumour of hepatocytes", "Derived from cirrhosis and hepatitis virus carriage"],
+          ["Glioma", "Malignant tumour of glial cells", "Grades I to IV; the most common primary brain tumour"],
+          ["Pleomorphic adenoma", "Benign mixed tumour of salivary gland", "Histologically mixed (epithelial and stromal) but the recurrence rate makes it a surgical problem"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Borderline and intermediate tumours" },
+      {
+        type: "paragraph",
+        text: "Not every tumour is a benign-or-malignant binary. Some are locally aggressive without metastasising — a desmoid-type fibromatosis invades muscle and recurs after excision but never metastasises; a cystosarcoma phyllodes is benign or malignant depending on its stromal component; a carcinoid tumour is neuroendocrine, metastasises only rarely, and may secrete hormones. Establishing that a tumour is borderline or intermediate is a real histology decision, and it is why a report on a fibromatosis or an atypical carcinoid changes management from reassurance to surveillance.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying a lymphoma is a benign lymphoid hyperplasia. Lymphoma is a malignant tumour; the word has no benign counterpart, and its behaviour — clonal growth, infiltration, systemic spread — is the behaviour of a cancer.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Calling a melanoma benign because of the -oma ending. Melanoma is malignant; it is the reason the 'all -omas are benign' rule is taught as a rule with exceptions, not as a law of nature.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying a benign tumour cannot be dangerous. Position (pituitary, meninges, spinal canal), function (insulinoma, phaeochromocytoma, VIPoma) and haemorrhage (oesophageal leiomyoma) make the benign tumours clinically dangerous without any malignant behaviour.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A 2 cm encapsulated mass of the thyroid is removed and called a follicular adenoma. Why is this tumour not called a carcinoma?",
+        answer: "Because it is encapsulated, does not invade the capsule or the surrounding thyroid, and does not metastasise — an adenoma of the thyroid is a benign epithelial tumour. It would only be a carcinoma if it showed capsular or vascular invasion.",
+        explanation: "The benign/malignant decision rests on invasion and metastasis; in endocrine organs a capsular breach or vascular invasion is the decisive histological criterion.",
+      },
+      {
+        type: "question",
+        prompt: "What does the word autonomy mean when it is said that neoplasms are autonomous?",
+        answer: "It means the tumour's growth does not stop when the growth stimulus that started it is removed — a neoplasm persists after the initiating stimulus is withdrawn, unlike physiological hyperplasia, which is stimulus-driven and reverses when the stimulus ends.",
+        explanation: "Autonomy of growth is how neoplasia is separated from hypertrophy and hyperplasia: those responses are adaptive; neoplasia is a heritable change in the cell's own regulation.",
+      },
+      {
+        type: "question",
+        prompt: "Why is a hamartoma not considered a neoplasm?",
+        answer: "Because a hamartoma is a disorganised but non-clonal overgrowth of tissues that are normally present at that site — it is a developmental abnormality whose growth stops with the rest of the body, and it does not persist or progress after the stimulus ends.",
+        explanation: "Hamartomas and choristomas are malformations; they are outside the neoplastic process because they are not derived from an abnormal clonal cell population.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A 4 cm mass in the breast is well circumscribed and has never recurred after excision. Histology shows a fibroadenoma. What is it?",
+        options: [
+          "A malignant tumour because it is large and in the breast",
+          "A benign epithelial-mesenchymal (biphasic) tumour of the breast",
+          "A carcinoma because the breast is a glandular organ",
+          "A hamartoma, because the tissue is mixed",
+        ],
+        correctIndex: 1,
+        explanation: "A fibroadenoma is the benign biphasic tumour of the breast — it mixes epithelial ducts with a stromal stroma in a biphasic pattern — and size in a benign tumour is not a criterion of malignancy.",
+      },
+      {
+        type: "mcq",
+        stem: "Which statement about a malignant tumour is correct?",
+        options: [
+          "It must be fast-growing, because slow growth implies benign",
+          "It can be well differentiated, slow-growing and lethal — these features describe grade, not behaviour",
+          "It must metastasise by the time of diagnosis",
+          "It is always the largest version of the corresponding benign tumour",
+        ],
+        correctIndex: 1,
+        explanation: "Grading (differentiation) and staging (spread) are separate axes: a very well-differentiated follicular thyroid carcinoma is malignant but grows slowly, and metastasis may appear years after the resection — which is why grade is never a synonym for stage.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of the following tumours is malignant despite its -oma suffix?",
+        options: ["Lipoma", "Chondroma", "Melanoma", "Adenoma"],
+        correctIndex: 2,
+        explanation: "Melanoma — a malignant tumour of melanocytes — is the high-yield example of the malignant -omas. Lipoma, chondroma and adenoma are all benign.",
+      },
+      {
+        type: "mcq",
+        stem: "A benign phaeochromocytoma of the adrenal medulla causes fatal hypertension. Which statement best explains this?",
+        options: [
+          "Benign tumours are always dangerous, because they are not cancers",
+          "A tumour can be benign (non-invasive, non-metastasising) and still dangerous through its position or the hormones it secretes",
+          "The phaeochromocytoma must have metastasised, otherwise it would be harmless",
+          "Hormonal secretion converts a benign tumour into a malignant one",
+        ],
+        correctIndex: 1,
+        explanation: "Danger is not the definition of malignancy: a phaeochromocytoma secretes catecholamines, which cause the hypertensive crises, while the tumour itself remains benign in the pathological sense — no invasion, no metastasis.",
+      },
+      {
+        type: "mcq",
+        stem: "Which feature is the most reliable criterion separating a malignant tumour from a benign one?",
+        options: ["Its size", "Its rate of growth", "Local invasion and metastasis", "The same organs it is found in"],
+        correctIndex: 2,
+        explanation: "Malignancy is defined by behaviour — invasive growth and metastasis. A benign tumour may be very large or occasionally grow fast, but it does not invade and does not metastasise.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "A neoplasm is an autonomous, stimulus-independent, clonal growth. It is benign when it is circumscribed and differentiated, and malignant when it invades and metastasises. Names are derived from the tissue of origin by suffix rules that every student must know and every melan memorise-exception: -oma for benign mesenchymal, adenoma/papilloma for benign epithelial, carcinoma for malignant epithelial, sarcoma for malignant mesenchymal — and melanoma, lymphoma, seminoma, hepatoma and glioma are all malignant despite the -oma.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: how cancers actually acquire those behaviours — the hallmarks of cancer and the gene families whose mutation makes a normal cell into a malignant one.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 11 — Hallmarks of cancer & molecular changes (fully authored)
+// ---------------------------------------------------------------------------
+function lesson11() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: list the hallmarks of cancer and give one molecular example of each; distinguish an oncogene from a tumour suppressor gene by the logic of its mutation; explain how loss of DNA repair accelerates tumour formation; describe the Warburg effect and why it matters clinically; and set out the classic genetic sequence of colorectal cancer as a model of multistep carcinogenesis.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 10 (definitions and nomenclature) and lesson 1 (cell injury). You need the cell cycle, apoptosis and the signalling cascades from physiology and biochemistry (BCHM 101, modules on signal transduction and DNA replication) to follow the molecular detail.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "paragraph",
+        text: "A cancer is not a cell that divides faster. A cancer is a cell that has acquired a set of capabilities, one mutation at a time, which together convert a law-abiding cell of a tissue into an autonomous, immortal, invasive, mobile and invisible-to-the-immune-system organism in its own right. Hanahan and Weinberg expressed this as the hallmarks of cancer, and the framework is worth more than any list of genes, because every gene name in the pathology textbooks maps onto one of these capabilities.",
+      },
+      {
+        type: "table",
+        headers: ["Hallmark", "What the cell gains", "Example gene or mechanism"],
+        rows: [
+          ["Sustained proliferative signalling", "It no longer waits for an external growth signal — it makes its own", "KRAS and BRAF mutations, HER2 amplification, autocrine growth factor loops"],
+          ["Evading growth suppressors", "It ignores the tissue's stop signals from homeostatic mechanisms", "Loss of RB (retinoblastoma) and TP53"],
+          ["Resisting cell death", "Apoptosis is one mechanism by which the body removes an abnormal cell — this fault in its function is lost", "BCL2 overexpression, loss of TP53"],
+          ["Enabling replicative immortality", "Normal cells run out of telomeres and senesce; the cancer cell reactivates telomerase", "TERT promoter mutation, telomerase reactivation"],
+          ["Inducing angiogenesis", "It recruits and builds its own blood supply", "VEGF secretion and its receptor switching off the anti-angiogenic side"],
+          ["Activating invasion and metastasis", "It detaches, crosses the basement membrane, and travels and colonises", "Loss of E-cadherin, matrix metalloproteinase induction, epithelial-to-mesenchymal transition"],
+          ["Reprogramming energy metabolism", "It reroutes metabolism to fuel rapid growth", "The Warburg effect — aerobic glycolysis even when oxygen is present"],
+          ["Evading immune destruction", "It hides from, suppresses, or exhausts the T cells and natural killer cells that would remove it", "PD-L1 expression, loss of antigen presentation, an immunosuppressive tumour microenvironment"],
+          ["Genome instability", "It accumulates mutations at a higher rate than a normal cell, which accelerates all of the above", "BRCA1/2 mismatch repair defects — hereditary non-polyposis colorectal cancer (HNPCC/Lynch)"],
+          ["Tumour-promoting inflammation", "It hijacks the inflammatory infiltrate, turning macrophages and neutrophils into suppliers of growth and invasion factors", "IL-6, TNF, chemokines from tumour-associated macrophages"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Three of these hallmarks are drug targets in cancer therapy today: VEGF is the target of bevacizumab, the HER2 receptor is the target of trastuzumab, and the PD-1/PD-L1 interaction is the target of checkpoint inhibitors (pembrolizumab, nivolumab). Knowing the hallmark is how you know what the drug does.",
+      },
+
+      { type: "heading", level: 2, text: "The gene families" },
+      {
+        type: "paragraph",
+        text: "The hallmarks are acquired by mutations in four broad classes of gene, and the logic of each class is different. Learn the logic and the examples follow.",
+      },
+      {
+        type: "table",
+        headers: ["Class", "Mutation logic", "Representative genes", "Associated tumours"],
+        rows: [
+          ["Oncogenes", "Gain of function: one mutated allele is enough, and the mutation activates the protein", "KRAS, MYC, HER2, BRAF, TERT", "Pancreatic and colorectal carcinoma (KRAS), breast carcinoma (HER2), Burkitt lymphoma (MYC)"],
+          ["Tumour suppressors", "Loss of function: both alleles must be hit, because the normal gene product restrains growth", "TP53, RB, APC, BRCA1, BRCA2", "Li-Fraumeni and most cancers (TP53), retinoblastoma (RB), familial adenomatous polyposis (APC), breast and ovarian carcinoma (BRCA1/2)"],
+          ["DNA repair genes", "Loss of function: errors in replication accumulate, so mutation rate rises (a mutator phenotype)", "BRCA1/2, mismatch repair genes (MLH1, MSH2), XP protein genes", "Hereditary breast and ovarian cancer, Lynch syndrome, xeroderma pigmentosum"],
+          ["Apoptosis regulators", "Balance between the pro- and anti-apoptotic members is shifted", "BCL2 (anti-apoptotic, amplified in follicular lymphoma), TP53 (pro-apoptotic)", "Follicular lymphoma, many carcinomas"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "This explains why cancer is clonal and why cancer increases with age: each division carries a chance of mutation, and mutations accumulate in the descendants that carry them. It also explains inheritance: inheriting one defective tumour suppressor allele means only a single somatic event in the other allele is needed in any cell — so hereditary cancers appear earlier, and in more than one site, than their sporadic counterparts.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Most cancers are not inherited. Monogenic inherited cancer syndromes account for a small minority; the common cancers are the result of somatic mutations accumulated over decades, modulated by environment. Familial clustering of common cancers, like breast and colorectal, is a mix of shared environment, low-penetrance variants and the rare strong syndromes.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: the Vogelstein sequence" },
+      {
+        type: "paragraph",
+        text: "The colorectal cancer sequence is the textbook model of multistep carcinogenesis, because it shows that each step is a loss of a specific control rather than a single leap to malignancy. It begins in a normal mucosa, and it progresses through a morphologically visible sequence of increasingly abnormal epithelium.",
+      },
+      {
+        type: "table",
+        headers: ["Stage", "Morphology", "Genetic event"],
+        rows: [
+          ["1", "Normal mucosa", "None"],
+          ["2", "Hyperplastic epithelium", "Loss of APC (the gatekeeper of the Wnt pathway)"],
+          ["3", "Early adenoma", "KRAS activation (gain of function of a growth signalling gene)"],
+          ["4", "Intermediate adenoma", "Loss of 18q (the DCC region, a tumour suppressor)"],
+          ["5", "Late adenoma", "Loss of TP53 (the guardian of the genome)"],
+          ["6", "Invasive carcinoma", "The accumulated hallmarks let it invade and metastasise"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Read the model as the answer to the question of why cancer takes years. A mutation in a growth suppressor is not enough; a growth-signalling oncogene is not enough; the cell has to lose the machinery of checkpoints and repair before the balance can tip. This is also the biological basis of polyp surveillance in familial adenomatous polyposis: removing the adenomas removes the substrate of the sequence.",
+      },
+
+      { type: "heading", level: 2, text: "Invasion and metastasis" },
+      {
+        type: "paragraph",
+        text: "Invasion and metastasis are a sequence, not a property, and each step can fail. The tumour cells lose the adhesion molecules that hold them to their neighbours — classically E-cadherin — and acquire the ability to cross the basement membrane by secreting matrix metalloproteinases that digest the surrounding stroma. They enter lymphatics and blood vessels, survive a circulation that would normally kill them (anchorage-independent survival, evasion of shear forces and of immune cells), arrest in a distant vascular bed, extravasate, and finally grow — in a microenvironment that may or may not support them. The molecular machinery behind this transformation is called epithelial-to-mesenchymal transition, and the cell that executes it gains motility at the cost of its differentiated function.",
+      },
+      {
+        type: "question",
+        prompt: "Why are most metastases in the first capillary bed downstream of the tumour — lung for most solid tumours, and liver for gut tumours?",
+        answer: "Because the first vascular bed that a shed tumour cell reaches traps it by size: tumour emboli mechanically lodge in the first capillary network they meet, and only there do they extravasate and grow if the soil is right.",
+        explanation: "The old 'seed and soil' principle is a real pattern for systemic circulation, but tumours draining directly into the portal venous system reach the liver first, which is why gastrointestinal cancers seed the liver.",
+      },
+
+      { type: "heading", level: 2, text: "Tumour heterogeneity" },
+      {
+        type: "paragraph",
+        text: "A tumour is not a uniform population of identical cells. Genomic instability and clonal evolution mean that subclones with different mutations, growth rates, antigen profiles and drug sensitivities coexist within the same mass, and selection under chemotherapy or radiation favours the resistant subclones. This is the molecular explanation of tumour progression (the acquisition of greater malignancy over time), and of the hard problem of drug resistance — a single-agent therapy selecting for a resistant subclone rather than curing the whole. The cancer stem cell hypothesis proposes that only a small subpopulation maintains tumour growth, which is one reason a residual tumour can regrow after an apparently complete microscopic resection.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying an oncogene needs two hits. It needs one — oncogenes act by gain of function, and a single activating mutation in one allele is sufficient. Tumour suppressors need two — the loss is recessive at the level of the gene product.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying the Warburg effect is why cancers cannot make ATP. Cancer cells do respire; they simply run glycolysis alongside respiration. It is a metabolic reprogramming, not a respiratory failure, and it is the basis of PET imaging with fluorodeoxyglucose.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying angiogenesis means the tumour simply grows more blood vessels. It means the tumour secretes its own angiogenic factors (VEGF above all) and tilts the balance of the angiogenic regulators, so the vessel supply follows the tumour's own demand rather than the tissue's.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "How is a mutated TP53 different from a mutated KRAS in its contribution to cancer?",
+        answer: "KRAS is an oncogene — an activating mutation in one allele turns a growth signal on permanently. TP53 is a tumour suppressor — both alleles must be lost, and the loss removes the checkpoint that would halt division, repair DNA, or trigger apoptosis after damage.",
+        explanation: "The logic of gain versus loss determines the inheritance pattern: inherited cancer is usually the dominant inheritance of a defective tumour suppressor allele, because one functional allele still restrains growth, whereas incidentally activated oncogenes are almost always somatic.",
+      },
+      {
+        type: "question",
+        prompt: "A patient has a breast cancer that secretes VEGF, which drives its own blood supply. Which hallmark is demonstrated, and what drug targets it?",
+        answer: "Angiogenesis — sustained angiogenesis is one of the hallmarks of cancer. The VEGF pathway is targeted by bevacizumab, a monoclonal antibody that blocks VEGF, so the tumour's abnormal vessel supply is deprived.",
+        explanation: "The hallmarks map onto modern drug targets: anti-VEGF therapy, anti-HER2 therapy, and checkpoint inhibitors against the immune-evasion hallmark.",
+      },
+      {
+        type: "question",
+        prompt: "Why does loss of a DNA repair gene produce many types of tumour over a lifetime, rather than one?",
+        answer: "Because the mutator phenotype is not tissue-specific: every dividing cell in the body accumulates replication errors faster, so the probability of hitting the hallmarks somewhere — the breast, ovary, colon — rises in proportion to the number of cells and their divisions.",
+        explanation: "Inherited defects in repair (Fanconi anaemia, xeroderma pigmentosum, Lynch syndrome) therefore produce cancers of multiple organ systems, unlike the single-tissue syndromes of a mutation like RET.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which mutation is most likely to require loss of both alleles in the same cell before a tumour develops?",
+        options: ["An activating KRAS mutation", "An increased HER2 gene copy number", "A loss of the RB tumour suppressor gene", "A TERT promoter reactivation"],
+        correctIndex: 2,
+        explanation: "Tumour suppressor genes lose function recessively — two hits are required, as in the sporadic retinoblastoma case of two somatic hits, versus the hereditary case of one inherited and one somatic. KRAS, HER2 and TERT act by gain of function, where one altered allele suffices.",
+      },
+      {
+        type: "mcq",
+        stem: "Which hallmark explains how cancer cells obtain ATP despite hypoxia in the tumour mass?",
+        options: [
+          "Replicative immortality", "Reprogramming of energy metabolism (the Warburg effect)", "Genome instability", "Immunoevasion",
+        ],
+        correctIndex: 1,
+        explanation: "The Warburg effect describes aerobic glycolysis that runs alongside respiration, producing ATP with less oxygen uptake so the tumour cell survives in an acidic, hypoxic mass — the reason PET imaging uses labelled glucose uptake as a signal of tumour tissue.",
+      },
+      {
+        type: "mcq",
+        stem: "Which pairing between the hallmark and its representative molecular mechanism is correct?",
+        options: [
+          "Resisting apoptosis — loss of E-cadherin",
+          "Sustained angiogenesis — HER2 amplification",
+          "Evading immune destruction — PD-L1 expression by the tumour cells",
+          "Genome instability — overexpression of VEGF",
+        ],
+        correctIndex: 2,
+        explanation: "PD-L1 is what stops an anti-tumour T cell, so immune destruction is evaded — it is the target of checkpoint inhibitors. Loss of E-cadherin is invasion, HER2 is proliferative signalling, VEGF is angiogenesis.",
+      },
+      {
+        type: "mcq",
+        stem: "Which sequence best describes the progression of colorectal carcinoma according to the Vogelstein model?",
+        options: [
+          "TP53 loss, then KRAS activation, then APC loss, then metastasis",
+          "APC loss, then KRAS activation, then 18q loss, then TP53 loss",
+          "KRAS loss, then APC activation, then TP53 loss",
+          "BRCA1 loss, then HER2 amplification, then TP53 loss",
+        ],
+        correctIndex: 1,
+        explanation: "The classic sequence begins with APC loss (hyperplastic epithelium), then KRAS activation (early adenoma), then loss of 18q (intermediate), and finally TP53 loss (late adenoma progressing to carcinoma) — each step maps onto a new hallmark.",
+      },
+      {
+        type: "mcq",
+        stem: "A chemotherapy regimen selects for a resistant subclone of a tumour. Which property of tumours best explains this?",
+        options: [
+          "Tumours are monoclonal and chemically stable",
+          "Tumours are heterogeneous populations of subclones, and drug selection favours the resistant ones",
+          "Chemotherapy enlarges the tumour's blood supply",
+          "Tumours suppress immune responses, so resistance is acquired by immune selection",
+        ],
+        correctIndex: 1,
+        explanation: "Genomic instability creates subclones with different mutation profiles; therapy kills the sensitive ones and the resistant subclone expands. This is the basis of resistance to single-agent therapy in a heterogeneous tumour population.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The hallmarks of cancer describe how a cell becomes a tumour: sustained growth signalling, evasion of suppression, escape from apoptosis, immortalisation, angiogenesis, invasion and metastasis, metabolic rewiring, immune evasion, genomic instability and inflammatory hijacking. Under the hallmarks sit the gene families — oncogenes (one activating hit), tumour suppressors (two hits), DNA repair genes and apoptosis regulators. The Vogelstein sequence shows these capabilities accumulating one mutation at a time, and the heterogeneity within any one tumour explains why single-agent therapies fail.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: where the mutations come from — chemical, physical and viral carcinogens, the initiator-promoter rules, and the inherited syndromes that predispose.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 12 — Carcinogenesis: mutation & environment (fully authored)
+// ---------------------------------------------------------------------------
+function lesson12() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: explain multistep carcinogenesis as initiation, promotion and progression; name the main chemical carcinogens with their source and their target tumour; distinguish direct-acting from indirect-acting carcinogens; list the oncogenic viruses and the tumour each causes; describe how radiation causes cancer; and list the principal inherited cancer syndromes and their genes.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 10 and 11. Carcinogenesis is the process by which the gene classes of the previous lesson acquire their mutations — the hallmarks from lesson 11 come to exist because of what happens here.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Carcinogenesis",
+        text: "The origin and evolution of a neoplasm by the sequential acquisition of mutations in genes that govern cell growth, survival, differentiation and repair, under the influence of inherited susceptibilities and environmental exposures.",
+      },
+      {
+        type: "paragraph",
+        text: "Cancer is a genetic disease of somatic cells. The mutations are acquired during life, they accumulate in a clone, and they are not random in their consequences — each mutation removes a brake or adds an accelerator. The environment supplies most of the mutational pressure, so the geographic epidemiology of cancer is largely a map of exposures: tobacco in the lung, aflatoxin in the liver, sunlight on the skin, hepatitis virus in the liver, schistosoma in the bladder.",
+      },
+
+      { type: "heading", level: 2, text: "Initiation, promotion, progression" },
+      {
+        type: "table",
+        headers: ["Phase", "Event", "Reversibility", "Property of the agent"],
+        rows: [
+          ["Initiation", "A mutation is fixed in the DNA of a cell — not enough for cancer, but enough to confer its permanent potential", "Irreversible at the single-cell level; may never produce a tumour", "Mutagenic; brief exposure is enough"],
+          ["Promotion", "The initiated cell divides and its clone expands, under the selective pressure of a stimulus that drives proliferation", "Reversible — withdraw the promoter and the clone regresses", "Usually not mutagenic; needs prolonged exposure"],
+          ["Progression", "Subclones accumulate further mutations and the tumour becomes more malignant — invasive, then metastatic", "Irreversible", "Mutagenic, or promoting at a higher level"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The practical message of the initiator-promoter model is that most interventions that reduce cancer risk act by reducing promotion: quitting smoking does not undo a mutation, but it removes the chronic injury and regenerative proliferation that would have expanded the clone of cells already harbouring mutations.",
+      },
+
+      { type: "heading", level: 2, text: "Chemical carcinogens" },
+      {
+        type: "paragraph",
+        text: "Most chemical carcinogens are electrophilic — they react with DNA through active metabolites. Direct-acting carcinogens do this in their native form; indirect-acting ones require metabolic activation, typically by the cytochrome P450 system, which is why the liver and the organs it detoxifies are common cancer sites. The pattern of targets is worth memorising because each agent is a one-line cause-of-death entry.",
+      },
+      {
+        type: "table",
+        headers: ["Agent", "Source", "Signature tumour"],
+        rows: [
+          ["Polycyclic aromatic hydrocarbons", "Tobacco smoke, grilled and smoked meat, fossil fuel combustion", "Bronchogenic carcinoma, cancer of the lip and oral cavity"],
+          ["Aromatic amines (beta-naphthylamine, benzidine)", "Aniline dye and rubber industry", "Urothelial carcinoma of the bladder"],
+          ["Aflatoxin B1", "Aspergillus growing on stored grain and groundnuts", "Hepatocellular carcinoma — a characteristic mutation in codon 249 of TP53"],
+          ["Asbestos", "Building, lagging and brake materials", "Malignant mesothelioma, bronchogenic carcinoma, laryngeal carcinoma"],
+          ["Arsenic", "Contaminated water, smelting, old pesticides", "Skin, lung and hepatic angiosarcoma and carcinoma"],
+          ["Vinyl chloride", "Plastics manufacture", "Angiosarcoma of the liver"],
+          ["Benzene", "Petroleum and solvents", "Acute myeloid leukaemia"],
+          ["Alkylating drugs", "Cyclophosphamide and other chemotherapy", "Retinoblastoma survivors and others treated with alkylating agents develop AML and myelodysplasia"],
+          ["Metals — nickel and chromium", "Smelting and plating", "Lung and sinonasal carcinomas"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Radiation" },
+      {
+        type: "paragraph",
+        text: "Ultraviolet radiation — especially the UVB spectrum — damages keratinocyte DNA by creating pyrimidine dimers, and its pattern tells you the mechanism: sun-exposed skin, the epithelium repair of severe burns (squamous carcinoma in old scars, Marjolin ulcer), and a long latency. DNA repair defects such as xeroderma pigmentosum show the extreme case, where the patient cannot repair the damage. Ionising radiation, by contrast, breaks DNA directly; its carcinogenic dose-response explains the leukaemias and solid tumours among atomic bomb survivors, the thyroid cancers after childhood exposure, the second tumours after radiotherapy, and skin cancers in early radiologists. The latent period after radiation can be decades — radiation protection is a lifetime concern, not an acute one.",
+      },
+
+      { type: "heading", level: 2, text: "Oncogenic viruses" },
+      {
+        type: "table",
+        headers: ["Virus", "Mechanism", "Tumour"],
+        rows: [
+          ["Human papillomavirus types 16 and 18", "E6 protein degrades TP53; E7 inactivates RB", "Cervical carcinoma, anal carcinoma, oropharyngeal squamous carcinoma"],
+          ["Hepatitis B and C viruses", "Chronic inflammation and regeneration; HBV integrates into the genome, HCVC acts through repeated injury and cirrhosis", "Hepatocellular carcinoma"],
+          ["Epstein-Barr virus", "Immortalises B cells through latent membrane proteins; the tumour emerges where immune control is weak or defective", "Burkitt lymphoma, nasopharyngeal carcinoma, post-transplant lymphoproliferative disease, Hodgkin lymphoma"],
+          ["Human herpesvirus 8 (Kaposi sarcoma herpesvirus)", "Latency proteins drive proliferation of the infected endothelial and lymphatic cell", "Kaposi sarcoma, primary effusion lymphoma"],
+          ["Human T-cell lymphotropic virus type 1", "The Tax protein drives T-cell proliferation", "Adult T-cell leukaemia/lymphoma"],
+          ["Merkel cell polyomavirus", "Integrated into the genome of tumour cells", "Merkel cell carcinoma"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Helicobacter pylori is worth adding to the list even though it is a bacterium: chronic gastritis with repeated regeneration progresses to gastric intestinal metaplasia and adenocarcinoma, and the organism also drives an MALT lymphoma. Vaccination against HPV, and the eradication of H. pylori in colonised patients, are therefore true cancer prevention — a direct application of this table.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: a smoker's tumours" },
+      {
+        type: "paragraph",
+        text: "A 65-year-old who has smoked 40 cigarettes a day for 50 years now has a mass in the upper lobe of his right lung, a hoarse voice, and one nodule in the liver. The mechanism is a chain: the polycyclic aromatic hydrocarbons and other mutagens in the smoke are activated by the cytochrome P450 system of the bronchial mucosa, and each replication of an initiated bronchial epithelial cell is a chance for a promoter effect from the chronic inflammation. The accumulated hits give the hallmarks from the previous lesson. He also has a raised risk of urothelial carcinoma from the aromatic amines excreted in the urine, of oesophageal carcinoma, of laryngeal carcinoma, and of myocardial infarction (from the non-neoplastic morbidity of smoke) — one exposure, multiple endpoints, because the same DNA-damaging mechanisms act on every epithelium exposed.",
+      },
+
+      { type: "heading", level: 2, text: "Inherited susceptibility" },
+      {
+        type: "table",
+        headers: ["Syndrome", "Gene", "What it gives"],
+        rows: [
+          ["Familial adenomatous polyposis", "APC", "Hundreds to thousands of colonic adenomas and near-certain colorectal carcinoma"],
+          ["Retinoblastoma", "RB", "Retinoblastoma and, later, osteosarcoma in survivors"],
+          ["Li-Fraumeni syndrome", "TP53", "Breast carcinoma, sarcoma, leukaemia, adrenal cortical carcinoma, brain tumours"],
+          ["Hereditary breast and ovarian cancer syndrome", "BRCA1 and BRCA2", "Breast, ovarian, pancreatic and prostate carcinoma"],
+          ["Lynch syndrome (HNPCC)", "Mismatch repair genes (MLH1, MSH2, MSH6)", "Colorectal, endometrial, gastric, ovarian carcinomas with microsatellite instability"],
+          ["Familial medullary thyroid carcinoma and MEN2", "RET", "Medullary thyroid carcinoma and phaeochromocytoma"],
+          ["Neurofibromatosis types 1 and 2", "NF1 and NF2", "Neurofibromas and malignant peripheral nerve sheath tumours, acoustic neuromas, meningiomas"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Two features run across the list: the cancers appear decades earlier than their sporadic equivalents, and they tend to be multiple or bilateral, because every cell of the patient already carries the first hit. That is why a family history of early breast and ovarian cancer, or of colorectal and endometrial carcinoma, triggers genetic counselling and surveillance — the genes from the last two lessons are not abstractions, they are the reason a patient's mother's cancer changes how she is screened.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying asbestos exposure always gives a short latency. The latency of mesothelioma is 30-40 years, so the disease presents in an elderly patient decades after the exposure ended — which is why the occupational history goes back decades, not weeks.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying all cervical cancers are caused by HPV. HPV 16 and 18 cause a large majority, but not all — a small proportion of cervical carcinomas are unrelated, and vaccination does not remove every case. Saying aflatoxin, not HBV, is the cause of hepatocellular carcinoma worldwide: chronic hepatitis B carriage is the leading global risk factor; aflatoxin adds to it.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying the initiator-promoter model is a pathology of viral carcinogenesis only. It is the general logic of solid tumour carcinogenesis, and it explains the reversibility of promotion — which is why smoking cessation reduces cancer risk even after decades.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Which phase of carcinogenesis can be reversed, and why does this make prevention possible?",
+        answer: "Promotion is reversible because the clone of initiated cells depends on a continuing proliferative stimulus. Remove the promoter — stop smoking, eradicate H. pylori, control inflammation — and the expanded clone may regress or at least stop growing, so the tumour never arises.",
+        explanation: "Initiation is a fixed mutation at the single-cell level, but a cancer requires promotion; intervention is always aimed at promotion, and this is the basis of secondary prevention after an exposure.",
+      },
+      {
+        type: "question",
+        prompt: "Why do the aromatic amines of the dye industry cause bladder cancer rather than lung cancer?",
+        answer: "Because aromatic amines are absorbed and excreted in the urine, so the urothelium that lines the bladder is exposed to the activated metabolites concentrated in the urine; the lung is not the site of contact for this exposure route.",
+        explanation: "Carcinogenesis requires a site of exposure — the same chemical has different target organs through absorption and excretion, which is why the occupational and exposure history is part of every cancer diagnosis.",
+      },
+      {
+        type: "question",
+        prompt: "A 3-year-old has bilateral retinoblastoma. Why is the retinoblastoma tumour bilateral, and why is her risk of a second tumour higher than a sporadic case?",
+        answer: "Because she inherited one mutated RB allele in every cell of her body, so one somatic second hit in one retinal cell is enough; the same inherited first hit also raises the risk of osteosarcoma and other second tumours after radiation.",
+        explanation: "Heredity supplies the first hit — a sporadic retinoblastoma requires two somatic hits and is therefore rare and unilateral, whereas the inherited pattern shows autosomal dominant transmission, earlier onset and bilateral tumours.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A dyestuff worker exposed to aromatic amines for 20 years develops haematuria and a bladder mass. What is the mechanism of chemical carcinogenesis here?",
+        options: [
+          "Direct alkylation without metabolic activation",
+          "The aromatic amines are metabolically activated in the liver and excreted in the urine, where they react with DNA in the urothelium",
+          "A direct viral effect on the urothelial cells",
+          "An irritant effect that is purely non-genotoxic",
+        ],
+        correctIndex: 1,
+        explanation: "Aromatic amines are indirect-acting carcinogens activated by the hepatic cytochrome system and concentrated in the urine, where they cause mutagenic adducts in bladder epithelium, typically with a long latency of two decades.",
+      },
+      {
+        type: "mcq",
+        stem: "Which virus–tumour pairing is correct?",
+        options: [
+          "HTLV-1 — Burkitt lymphoma",
+          "HPV 16 and 18 — hepatocellular carcinoma",
+          "Hepatitis B virus — hepatocellular carcinoma",
+          "EBV — adult T-cell leukaemia",
+        ],
+        correctIndex: 2,
+        explanation: "Hepatitis B is a cause of hepatocellular carcinoma through a combination of chronic necroinflammation and genomic integration. HTLV-1 causes adult T-cell leukaemia; HPV 16/18 causes cervical and oropharyngeal carcinoma; EBV causes Burkitt lymphoma.",
+      },
+      {
+        type: "mcq",
+        stem: "A farmer has stored grain contaminated with a fungus that produces aflatoxin B1. Which tumour is most associated, and through which gene?",
+        options: [
+          "Urothelial carcinoma — RB mutation",
+          "Hepatocellular carcinoma — a characteristic TP53 codon 249 mutation",
+          "Mesothelioma — BAP1 mutation",
+          "Bronchogenic carcinoma — KRAS mutation",
+        ],
+        correctIndex: 1,
+        explanation: "Aflatoxin B1 is metabolically activated in the liver and produces a signature mutation at codon 249 of TP53, which drives hepatocellular carcinoma — an exposure that acts in synergy with chronic hepatitis B.",
+      },
+      {
+        type: "mcq",
+        stem: "Which feature of solid-tumour carcinogenesis explains the typical decades-long latency between an exposure and the appearance of a classic cancer?",
+        options: [
+          "That the initiator mutation is one of a sequence of required steps, and each step is rare — years to decades are needed for promotion and progression of the clone",
+          "That radiation causes tumours only when the patient is elderly",
+          "That radiation damage to DNA heals immediately after the exposure ends",
+          "That most exposed persons have inherited the causative mutations",
+        ],
+        correctIndex: 0,
+        explanation: "Initiation is a single mutation and promotion takes years of clonal expansion, and progression requires further mutation; each step is a low-probability event and their series in time is the latency — the same is true of solid tumours after chemical and viral exposures.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of the following patients best illustrates a promoter effect acting on an initiated cell population?",
+        options: [
+          "A patient with an inherited RB mutation who receives radiotherapy for the original tumour and later develops a radiation-induced sarcoma",
+          "A patient who receives a single mutagenic dose of an alkylating agent and, years later, develops a colorectal carcinoma with a KRAS mutation",
+          "A patient whose chronic H. pylori gastritis drives intestinal metaplasia and adenocarcinoma in a mucosa that has acquired mutations",
+          "A patient with xeroderma pigmentosum who develops basal cell carcinoma after sun exposure",
+        ],
+        correctIndex: 2,
+        explanation: "Chronic inflammation is the classic promoter: it expands the initiated population by providing a proliferative stimulus, and removing it (eradicating the organism) reduces the cancer risk. The others illustrate inherited susceptibility, direct initiation and repair failure respectively.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Carcinogenesis is a multistep process: irreversible initiation (a fixed mutation), the reversible promotion of a clone of initiated cells, and the progression of that clone into an invasive and eventually metastasising tumour. The mutagenic pressure comes from chemicals (tobacco, aromatic amines, aflatoxin, asbestos, aromatic hydrocarbons), radiation (ultraviolet and ionising), oncogenic viruses (HPV, HBV, HCV, EBV, HHV-8, HTLV-1) and chronic infection and inflammation; the inherited cancer syndromes contribute the first hit. The environment therefore changes the probability, and the mutations in the genes from the previous lesson supply the mechanisms.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: how cancers are measured, so that a treatment plan can be made and an outcome predicted — grading, staging, biopsy diagnosis and the honest limits of tumour markers.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 13 — Grading, staging & tumour markers (fully authored)
+// ---------------------------------------------------------------------------
+function lesson13() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: distinguish grading from staging and state what each predicts; interpret a TNM classification and derive a stage group; describe the major biopsy and cytology techniques with the questions each answers; name the common tumour markers, the tumours they follow, and their limitations; and explain how immunohistochemistry confirms a diagnosis and selects a therapy.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 10-12. Grading and staging describe how far a neoplasm's biology has gone, so the benign/malignant classification and the hallmarks of the previous lessons underpin it. Histological interpretation is applied lesson 1's cell-injury morphology.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Grade versus stage",
+        text: "Grading is the assessment of how closely a tumour resembles the tissue it arises from, and stage is the assessment of how far it has anatomically spread. The grade tells you how fast it is likely to behave; the stage tells you how far it has actually got.",
+      },
+      {
+        type: "paragraph",
+        text: "The two axes are independent and both matter. A well-differentiated follicular thyroid carcinoma is a low-grade cancer that nevertheless metastasises and is a stage IV disease at diagnosis; a poorly differentiated carcinoma may still be stage I if caught early. The stage, not the grade, decides how far surgery should reach; the grade, not the stage, predicts the aggressiveness that determines the strength of adjuvant treatment. Above all, a grade or stage is only meaningful attached to the tumour's site — a T2 bladder tumour and a T2 lung tumour are different worlds.",
+      },
+
+      { type: "heading", level: 2, text: "Grading" },
+      {
+        type: "table",
+        headers: ["Axis", "What is used"],
+        rows: [
+          ["Differentiation", "How closely the tumour cells and architecture resemble the parent tissue — graded well (G1), moderate (G2), poor (G3) and undifferentiated (G4)"],
+          ["Mitotic rate", "Counted mitoses per high-power field; a faster rate is worse"],
+          ["Nuclear pleomorphism", "Variation in nuclear size, shape and chromatin"],
+          ["Organ-specific scores", "Gleason grade (prostate architecture: patterns 1-5 summed to a score); Nottingham grade (tubule formation + nuclear pleomorphism + mitoses for breast); FIGO grading for some gynaecological tumours"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Three practical caveats belong here. Grade is sampled from a representative area, because a tumour is heterogeneous — its highest grade may lie in a region the needle missed, or in the deepest part of the mass, so a biopsy grade is often a floor and undergrades more often than it overgrades. Grade is a pathology report, not a blood test, and it is sometimes not assessable after preoperative treatment. And uniformity may be misleading: neuroendocrine tumours look uniform under the microscope but behave aggressively, so architecture is not the whole truth.",
+      },
+
+      { type: "heading", level: 2, text: "The TNM staging system" },
+      {
+        type: "table",
+        headers: ["Component", "Classification", "Meaning"],
+        rows: [
+          ["T — the primary tumour", "T0 to T4 (sometimes Tis for carcinoma in situ)", "Size and/or depth of local invasion, defined per organ"],
+          ["N — the regional lymph nodes", "N0 to N3", "Number and site of involved nodes (often the strongest single prognostic factor)"],
+          ["M — distant metastasis", "M0 or M1", "Distant metastasis present or absent; M1 is almost always incurable"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The TNM letters are then combined into stage groups I to IV, which is the shorthand you will see in tumour registries and trials: roughly, stage I is a localised small tumour, stage II a larger local tumour without nodes, stage III node-positive disease, and stage IV metastatic disease. The system is maintained by the AJCC/UICC and updated by organ; the prefix c is added for clinical staging (before resection) and p for pathologists' staging after resection. Pathological stage is more accurate than clinical because it counts actual nodes and the true depth.",
+      },
+      {
+        type: "example",
+        text: "A colonoscopy shows a 3 cm tumour in the sigmoid colon. Histology and a CT show it invading the muscularis propria, two of twelve nodes are positive, and CT shows no liver metastases. The classification is T2 N1 M0 — a node-positive disease, stage III. It changes the plan from endoscopic follow-up alone to colectomy with node clearance and consideration of adjuvant chemotherapy; the presence of stage III disease is the reason adjuvant chemotherapy is even discussed.",
+      },
+      {
+        type: "table",
+        headers: ["Stage group", "TNM pattern", "General meaning", "Typical treatment implication"],
+        rows: [
+          ["Stage I", "T1-2 N0 M0, no high-risk features", "Local tumour, no nodes", "Local therapy (surgery alone) is often sufficient"],
+          ["Stage II", "Larger local tumour, still N0 M0", "Local disease, higher recurrence risk", "Local therapy plus consideration of adjuvant therapy for high-risk features"],
+          ["Stage III", "Any T, N1-3 M0", "Node involvement", "Combination of surgery with node clearance and adjuvant systemic therapy"],
+          ["Stage IV", "Any T, any N, M1", "Metastatic disease", "Systemic therapy; local treatment only for symptoms or for control"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Diagnosis: biopsy, cytology, molecular" },
+      {
+        type: "table",
+        headers: ["Method", "What is taken", "What it is used for"],
+        rows: [
+          ["Fine-needle aspiration", "Cells only, no tissue architecture", "Rapid triage — distinguishing a cyst from a solid lesion; convenient for node, thyroid and breast"],
+          ["Core needle biopsy", "A small cylinder preserving architecture", "The technique of choice for breast and prostate diagnosis, and for grading"],
+          ["Incisional biopsy", "A piece of a larger tumour", "Diagnosis when the diagnosis requires architecture but complete excision would be disfiguring"],
+          ["Excisional biopsy", "The whole lesion", "Melanoma and most small lesions — both diagnosis and treatment"],
+          ["Frozen section", "A frozen slice inside theatre", "Decides during surgery whether a margin is clear or a sentinel node is positive"],
+          ["Cytology", "Shed or scraped cells", "Cervical screening (Pap smear), urine, effusions"],
+          ["Immunohistochemistry", "Stains applied to the histology slide", "Cell of origin, grade markers, and therapeutic targets — ER, PR and HER2 in breast carcinoma; CK and CD45; TTF-1 for lung"],
+          ["Molecular testing", "DNA or RNA extracted from the tumour", "Driver mutations that determine targeted therapy — EGFR and ALK in lung adenocarcinoma, BRAF in melanoma, KRAS in colorectal, HER2 in gastric"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Tumour markers" },
+      {
+        type: "table",
+        headers: ["Marker", "Main association", "Real clinical use"],
+        rows: [
+          ["PSA (prostate-specific antigen)", "Prostate epithelium", "Early detection and follow-up at best; elevated in benign hyperplasia, prostatitis and after instrumentation, so a positive biopsy, not the level, makes the diagnosis"],
+          ["CA-125", "Ovarian carcinoma", "Follow-up of a treated ovarian carcinoma; not adequate for population screening"],
+          ["Carcinoembryonic antigen (CEA)", "Colorectal carcinoma (and smoking)", "Follow-up after resection of colorectal carcinoma; not for diagnosis"],
+          ["Alpha-fetoprotein", "Hepatocellular carcinoma, germ cell tumours", "A level of 500 ng/ml or more with a liver nodule is near-diagnostic of HCC; also used for germ cell follow-up"],
+          ["Beta-hCG", "Trophoblastic tumours, germ cell tumours", "Diagnosis and follow-up of hydatidiform mole and choriocarcinoma; elevated AFP in germ cell tumours indicates yolk sac"],
+          ["CA 19-9", "Pancreatic adenocarcinoma", "Follow-up; not specific enough for screening and not always elevated in advanced disease"],
+          ["Calcitonin", "Medullary thyroid carcinoma", "Baseline measurement and family screening in MEN2, where it is a true genetic screening test"],
+          ["HER2", "Breast carcinoma", "Not a blood marker: detected on the tumour; it is essential for prescribing trastuzumab"],
+          ["Lactate dehydrogenase", "Lymphoma, germ cell tumours", "Bulk of disease and a prognostic variable in treatment protocols"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "The correct use of tumour markers is almost always monitoring a known tumour — after treatment and then for relapse — not detecting a cancer that has not been found. Using CA-125 or PSA to screen an asymptomatic population causes overdiagnosis, false positives and harm, which is why screening protocols use the marker in combination with imaging or not at all.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying grade and stage mean the same thing. Grade = microscopic differentiation; stage = anatomic spread. A low-grade advanced tumour kills; a high-grade early tumour is cured.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Treating a raised CEA or CA-125 as proof of advanced cancer. Both rise in benign disease, both can be normal in cancer, and neither replaces a scan or a biopsy. The correct statement is that a rising marker after a completed treatment is more informative than a single elevated one.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying immunohistochemistry is a blood test. It is a stain applied to the tissue, and its real power is cell-of-origin classification and the detection of therapeutic targets — HER2, hormone receptors, mismatch repair status — not simply identifying the tumour's name.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A 2 cm breast carcinoma is found in one of three axillary nodes; there are no liver metastases. What is the TNM, and why does it matter surgically?",
+        answer: "T2 (a 2-5 cm mass), N1 (one of three nodes involved) and M0 — stage IIB. The node positivity is the decisive point: it converts the plan from breast surgery alone to surgery with axillary clearance and adjuvant systemic therapy, because nodal disease carries a materially worse prognosis.",
+        explanation: "Stage answers two things for a surgeon: how far to remove (nodes) and what to plan after (adjuvant). Both are driven by the anatomic spread, not the grade.",
+      },
+      {
+        type: "question",
+        prompt: "Why does the biopsy see a more moderate grade of the tumour than the resection specimen in some patients?",
+        answer: "Because a tumour is heterogeneous — its highest grade may be in the region the needle missed, or in the deepest part of the mass; the needle grades a sample, the resection grades the worst part.",
+        explanation: "Sampling error is the reason a biopsy grade is often a floor, not an exact number; it undergrades more often than it overgrades.",
+      },
+      {
+        type: "question",
+        prompt: "Why is a rising AFP a much more useful test than a raised one?",
+        answer: "A single raised AFP also occurs in hepatitis, cirrhosis and pregnancy; but after a treated hepatocellular carcinoma the trend is informative, because an increasing concentration means residual or recurrent tumour and a fall after therapy means response.",
+        explanation: "Tumour markers are kinetic tests: direction and slope, not an absolute threshold, carries the diagnostic content in follow-up.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which best describes the relationship between grading and staging?",
+        options: [
+          "They are two names for the same assessment",
+          "Grade measures differentiation microscopically; stage measures anatomic spread",
+          "Grade is only used for haematological tumours",
+          "Stage is decided by the number of mitoses on the biopsy",
+        ],
+        correctIndex: 1,
+        explanation: "Grade and stage are independent axes: the first is histologic differentiation, the second is anatomic extent. Both are needed — grade predicts behaviour, stage decides the treatment.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient's colon cancer is 4 cm, invades the pericolic fat, has one node involved, and CT shows a single 1 cm liver metastasis. What is the stage?",
+        options: ["Stage I", "Stage II", "Stage III", "Stage IV"],
+        correctIndex: 3,
+        explanation: "Any metastasis (M1) is stage IV, whatever the T and N — the single metastatic deposit defines the stage, and the presence of stage IV disease moves the plan from curative to palliative, with systemic therapy at its centre.",
+      },
+      {
+        type: "mcq",
+        stem: "Which technique would a surgeon most appropriately use to decide the width of breast excision in theatre?",
+        options: ["Fine-needle aspiration cytology", "Frozen section of the re-excision margin", "A serum CA-125", "A CT of the chest"],
+        correctIndex: 1,
+        explanation: "Frozen section gives a same-day microscopic answer on a margin while the patient is still open, enabling immediate wider excision; cytology is too coarse, a serum marker is not useful for margin status, and a CT cannot assess a margin microscopically.",
+      },
+      {
+        type: "mcq",
+        stem: "Which tumour marker is best used as a true screening test, because of its mode of inheritance?",
+        options: ["PSA for prostate cancer in a 60-year-old man", "Calcitonin for MEN2 carriers who carry a RET mutation", "CEA for colorectal carcinoma screening", "CA-125 for ovarian carcinoma screening"],
+        correctIndex: 1,
+        explanation: "A raised calcitonin is a specific marker for medullary thyroid carcinoma, and screening MEN2 carriers is driven by the genotype, so an elevated calcitonin in a RET mutation carrier is a direct prompt for prophylactic thyroidectomy. PSA, CEA and CA-125 have false-positive problems that disqualify them as population screens.",
+      },
+      {
+        type: "mcq",
+        stem: "Which statement about the interpretation of a raised CA-125 is correct?",
+        options: [
+          "It confirms ovarian carcinoma and requires no further test",
+          "It may be elevated in benign conditions and in other malignancies, so it is most useful as a follow-up in a patient after a known ovarian carcinoma",
+          "It is only elevated in men with ovarian cancer",
+          "It measures response to treatment but never falls after treatment",
+        ],
+        correctIndex: 1,
+        explanation: "CA-125 is raised in menstruation, pregnancy, cirrhosis, peritonitis and other malignancies, so it lacks diagnostic specificity; its real use is monitoring treatment response and recurrence in an already diagnosed cancer.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Grade and stage answer different questions: grade measures how closely the tumour resembles its tissue of origin, via differentiation, mitoses and organ-specific scores, and predicts behaviour; stage measures anatomical spread, via TNM and the stage groups, and decides the treatment. Biopsy and cytology give the tissue; immunohistochemistry and molecular testing give the cell of origin and the target; and tumour markers are most honest when they are used to monitor treatment and detect recurrence, not to diagnose cancer. A rising marker after therapy is a question asked of the tumour, not a verdict delivered by a number.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: the endocrine and haematological aspects are left to the systemic lessons; this module ends with the paraneoplastic syndromes and tumour immunology that connect the neoplasm to the rest of the body.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 14 — Amyloidosis (fully authored)
+// ---------------------------------------------------------------------------
+function lesson14() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define amyloid and state its universal physical property; link the chemical classification of amyloid to the clinical syndromes; predict the organ consequences of systemic deposition from the physics of a stiff protein gel; list the sites used for diagnosis and explain the role of tissue biopsy with Congo red staining; and outline the treatment targets for the major systemic forms.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-13 of this course, especially lesson 4 (chronic inflammation, because reactive amyloidosis follows chronic inflammatory disease) and lesson 10 (the plasma cell dyscrasias that produce the light-chain form). The chemistry of protein misfolding in BCHM 101 underpins the definition.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Amyloidosis",
+        text: "A group of deposition diseases in which abnormally folded proteins form insoluble extracellular fibrils that impair tissue function, with a characteristic cross-beta quaternary structure that binds Congo red and splits polarised light into apple-green birefringence.",
+      },
+      {
+        type: "paragraph",
+        text: "Every amyloid deposit is made of three components: the main fibril protein, a serum amyloid P component, and glycosaminoglycans. The pool of fibril protein differs by cause, but the shared beta-pleated structure is what makes all amyloid behave alike — this is why amyloid in heart, kidney or tongue looks identical under the microscope and stains Congo red in the same way, whatever protein went into it. Fifteen or so fibril proteins are recognised, and the clinical course is decided by which one it is, not merely by where it is deposited. The tissue never dies of the deposit mechanically; it dies of the space the deposit takes up and the function it displaces.",
+      },
+
+      { type: "heading", level: 2, text: "The chemical classification" },
+      {
+        type: "table",
+        headers: ["Type", "Fibril protein", "Source and setting"],
+        rows: [
+          ["AL (primary systemic)", "Immunoglobulin light chains", "Plasma cell dyscrasia — multiple myeloma and the light-chain–secreting lymphomas; the commonest form in clinical practice"],
+          ["AA (secondary/reactive)", "Serum amyloid A", "Chronic inflammatory disease — tuberculosis, bronchiectasis, rheumatoid arthritis, inflammatory bowel disease, chronic osteomyelitis, familial Mediterranean fever"],
+          ["Hereditary ATTR (familial amyloid neuropathy)", "Mutant transthyretin", "Inherited mutations of transthyretin (the transport protein for thyroxine and retinol) producing mixed neuropathy and cardiomyopathy"],
+          ["Wild-type ATTR (senile systemic)", "Normal transthyretin", "The elderly patient with restrictive cardiomyopathy — increasingly diagnosed in heart failure with preserved ejection fraction"],
+          ["Abeta2M (dialysis-associated)", "Beta-2 microglobulin", "Long-term haemodialysis, the patient on dialysis for a decade or more"],
+          ["Localised endocrine", "Calcitonin, islet amyloid polypeptide", "Medullary thyroid carcinoma (calcitonin); type 2 diabetes (islet amyloid polypeptide in the beta cells)"],
+          ["Localised neurological", "Beta amyloid", "Alzheimer disease — cortical plaques; the cerebral amyloid angiopathy of the elderly bleed"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "AL is not an old person's disease. It is a neoplasm-related plasma cell dyscrasia, and the cardiac form is the most lethal of all. ATTR in an elderly patient with an infiltrating history of peripheral neuropathy and cardiomyopathy is a different disease needing a different drug (tafamidis), and mistaking it for AL — with its own chemotherapy — does direct harm.",
+      },
+
+      { type: "heading", level: 2, text: "Distribution and organ consequences" },
+      {
+        type: "paragraph",
+        text: "The heart failure, nephrotic syndrome, macroglossia and the purpura around the eyes are the clinical patterns, and all four are explained by the same physics: the stiff beta-sheeted fibril occupies tissue space, replaces functional cells, thickens and immobilises basement membranes, and makes the capillary walls brittle so they bleed at minor trauma.",
+      },
+      {
+        type: "table",
+        headers: ["Organ", "Consequence", "Mechanism"],
+        rows: [
+          ["Kidney", "Nephrotic syndrome — proteinuria, hypoalbuminaemia, oedema (the commonest systemic presentation)", "Deposition in the glomerular mesangium and capillary walls"],
+          ["Heart", "Restrictive cardiomyopathy with diastolic dysfunction; conduction block; the presentation of heart failure with preserved ejection fraction", "Amyloid infiltrates the myocardium and stiffens the walls without dilatation"],
+          ["Liver and spleen", "Hepatomegaly; a hard splenomegaly, sometimes with a 'sago' appearance", "Deposition in the sinusoidal and sinusoidal-lining spaces"],
+          ["Gut and tongue", "Macroglossia, dysphagia, malabsorption and weight loss", "Deposition in mucosa, muscularis and tongue"],
+          ["Peripheral nerves", "Carpal tunnel, a painful sensory neuropathy, autonomic failure (postural hypotension, impotence, bowel dysmotility)", "Deposition compresses the nerve trunks (carpal tunnel) or destroys the endoneurium"],
+          ["Skin", "The pinch purpura of the eyelids, papules, plaques and bullae", "Amyloid in the dermal vessel walls causes fragility"],
+          ["Blood", "A bleeding tendency in AL disease", "Amyloid fibrils adsorb clotting factor X and impair platelet function"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Diagnosis" },
+      {
+        type: "paragraph",
+        text: "The diagnosis follows a rule: biopsy a tissue and stain it, then type the fibril by identifying its precursor protein. Lesions are best biopsied where they are easiest to reach: a rectal biopsy or an aspiration of abdominal fat gives an adequate sample in most systemic amyloidosis, and the histology is confirmed by Congo red with apple-green birefringence under polarised light. Once amyloid is found, the type is narrowed by serum and urine protein electrophoresis with immunofixation and free light chain assay (which identifies AL), echocardiography with strain imaging and a technetium pyrophosphate scan (which identifies ATTR without a biopsy), and sometimes laser microdissection with mass spectrometry of the deposited fibril in formalin-fixed tissue.",
+      },
+      {
+        type: "example",
+        text: "A 70-year-old with a raised NT-proBNP has a stiff heart on echocardiography, plus a numb and painful foot, carpal tunnel, easy bruising and a large tongue. His free light chains are normal. A technetium pyrophosphate scan shows avid myocardial uptake, and fat-pad biopsy stains negative for light chains. The diagnosis is wild-type transthyretin cardiac amyloidosis — the normal transthyretin protein slowly misfolds and deposits, and the normal free light chains steer the diagnosis away from AL.",
+      },
+
+      { type: "heading", level: 2, text: "Treatment" },
+      {
+        type: "paragraph",
+        text: "Therapy is aimed at the fibril precursor rather than at the deposit. In AA amyloidosis, control of the chronic inflammatory disease removes the stimulus — colchicine in familial Mediterranean fever is so effective at prevention that it is a lifelong prescription for affected patients. In AL, the treatment is directed at the plasma cell clone with chemotherapy approaches that include high-dose melphalan and autologous stem cell transplantation, and bortezomib-based regimens; support of the transplanted heart or kidney may follow. In ATTR, tafamidis stabilises the transthyretin tetramer and slows the decline in the cardiac form, and gene-silencing approaches reduce the production of the mutant protein.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying amyloidosis is a single disease. It is a family of deposition diseases unified only by a microscopic appearance, and the treatment of each is different — suppress inflammation, suppress the clone, or stabilise the transthyretin.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying amyloid only deposits in the kidney. The heart is the most lethal target (and a heart that cannot relax can be as fatal as one that cannot pump), and localised deposits need no systemic disease — Alzheimer plaques and medullary thyroid carcinoma deposits are local.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying an elderly stiff heart is 'just hypertensive'. In the elderly patient with heart failure with preserved ejection fraction, wild-type ATTR is an important diagnosis to consider, and the Congo red or the technetium scan, not an assumption, settles it.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What do all amyloid fibrils have in common, whatever protein they are made of, and how is this detected?",
+        answer: "A cross-beta pleated sheet structure, seen by electron microscopy as straight non-branching 10-nanometre fibrils, and detected histologically by Congo red staining with apple-green birefringence under polarised light.",
+        explanation: "The shared quaternary structure is why all amyloids look and stain alike; the primary structure of the fibril protein is what is typed to determine the treatment.",
+      },
+      {
+        type: "question",
+        prompt: "Why does cardiac amyloidosis cause heart failure with a heart of normal size and preserved ejection fraction?",
+        answer: "Because the amyloid infiltrates the stiff ventricular wall so that poor diastole — impaired filling during relaxation — dominates, while contraction is preserved; the ventricle is not dilated and its ejection fraction appears normal.",
+        explanation: "Restrictive physiology is a filling problem, not a pumping problem — hence the raised filling pressures, the raised NT-proBNP and the normal chamber size in contrast to a dilated cardiomyopathy.",
+      },
+      {
+        type: "question",
+        prompt: "Which chronic inflammatory disease is most classically associated with AA amyloidosis, and how is the amyloid prevented?",
+        answer: "Familial Mediterranean fever is the cleanest modern association: recurrent bouts of inflammation with a persistently high serum amyloid A precursor lead to renal deposition, and colchicine, which prevents the attacks, prevents the amyloid as well.",
+        explanation: "Treating the inflammation removes the supply of the precursor, and treatment must be prophylactic — the AA form is the easiest of the amyloids to prevent and the easiest to be missed.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A 70-year-old presents with a nephrotic syndrome, macroglossia and periorbital purpura. What is the most likely amyloid type?",
+        options: ["AA (secondary)", "AL (a light-chain dyscrasia)", "Abeta2M (dialysis-associated)", "ATTR (wild-type transthyretin)"],
+        correctIndex: 1,
+        explanation: "The triad of nephrotic syndrome, macroglossia and purpura is the classic systemic AL — light-chain–driven deposition from a plasma cell dyscrasia. ATTR gives neuropathy and cardiomyopathy, and dialysis amyloid gives joint and carpal tunnel disease.",
+      },
+      {
+        type: "mcq",
+        stem: "Which finding on tissue examination confirms amyloid?",
+        options: [
+          "Granular immunoglobulin on immunofluorescence",
+          "Congo red binding with apple-green birefringence under polarised light",
+          "Birefringent urate crystals",
+          "Cholesterol clefts in a granuloma",
+        ],
+        correctIndex: 1,
+        explanation: "Congo red binding and the apple-green birefringence is the diagnostic physical property of amyloid fibrils. Immunofluorescence 'granular immunoglobulin' is immune complex disease, needle-shaped crystals are gout, cholesterol clefts suggest a cholesterol granuloma.",
+      },
+      {
+        type: "mcq",
+        stem: "Which patient most likely has wild-type transthyretin amyloidosis?",
+        options: [
+          "A 30-year-old with tuberculosis and a nephrotic syndrome",
+          "An 80-year-old man with new carpal tunnel, a peripheral neuropathy, and heart failure with preserved ejection fraction",
+          "A 50-year-old on haemodialysis for 12 years with wrist pain",
+          "A 70-year-old with multiple myeloma and liver failure",
+        ],
+        correctIndex: 1,
+        explanation: "Wild-type ATTR is a disease of the very elderly, presenting with the carpal tunnel, neuropathy and a restrictive/stiff cardiac picture; it is diagnosed by technetium pyrophosphate scanning and its own drug. The tuberculosis case is AA; dialysis is beta-2 microglobulin; myeloma is AL.",
+      },
+      {
+        type: "mcq",
+        stem: "Which treatment mechanism most directly reduces the supply of the fibril protein in AA amyloidosis?",
+        options: [
+          "High-dose melphalan and autologous stem cell transplantation",
+          "Controlling chronic inflammation — colchicine for familial Mediterranean fever",
+          "Tafamidis stabilising the transthyretin tetramer",
+          "Intravenous heparin",
+        ],
+        correctIndex: 1,
+        explanation: "The fibril protein in AA is serum amyloid A, synthesised as part of the acute phase of inflammation; interrupting the inflammation removes the precursor. Tafamidis works for ATTR, and autologous transplantation for the AL clone.",
+      },
+      {
+        type: "mcq",
+        stem: "Which organ manifestation makes amyloidosis fatal fastest in AL disease?",
+        options: [
+          "Macroglossia",
+          "Cardiac deposition causing restrictive cardiomyopathy",
+          "Carpal tunnel syndrome",
+          "Periorbital purpura",
+        ],
+        correctIndex: 1,
+        explanation: "In AL the cardiac involvement is the main determinant of a poor outcome — stiff diastolic failure — while the macroglossia and purpura are markers of diagnosis, and carpal tunnel is inconvenient rather than lethal.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Amyloidosis is a deposition family, not a single disease: misfolded proteins share one microscopic identity but originate from light chains, acute-phase precursors, transthyretin or beta-2 microglobulin. The consequences follow from the location — nephrotic kidney, stiff heart, bulky tongue, brittle capillaries. Diagnosis is a tissue stained with Congo red plus typing of the fibril precursor, and each type has a distinct treatment: treat the inflammation, the plasma cell clone or the transthyretin.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: the cardiovascular system — the most common systemic target for the processes you have studied in this course, from atherosclerosis through infarction to the vasculitides and aneurysms.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 15 — Cardiovascular pathology (fully authored)
+// ---------------------------------------------------------------------------
+function lesson15() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the development of an atheromatous plaque and its complications; state the major risk factors and distribution of atherosclerosis; distinguish stable angina from the acute coronary syndromes and list their complications; explain the vascular lesions of benign and malignant hypertension; contrast a true aneurysm and a dissection and name their complications; and recognise the category, target vessel and clinical clue of the main vasculitides.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "The whole course: thrombosis and embolism (lesson 5), infarction (lesson 8) and the cell-injury sequence (lesson 1) all combine here. Atherosclerosis is inflammatory, thrombotic and degenerative at once — every mechanism you have studied is visible in a coronary plaque.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "paragraph",
+        text: "Cardiovascular pathology is dominated by one process: atherosclerosis, a chronic inflammatory disease of the arterial wall that narrows vessels and then kills catastrophically when a plaque ruptures and thrombosis supervenes. Hypertension accelerates it, diabetes amplifies it, and smoking drives its inflammation. Around that centre stand the secondary diseases of the wall itself — aneurysms, dissection and vasculitis — each of which can rupture or block an artery without any plaque at all.",
+      },
+
+      { type: "heading", level: 2, text: "Risk factors and distribution" },
+      {
+        type: "table",
+        headers: ["Category", "Factor", "Mechanism of harm"],
+        rows: [
+          ["Major, modifiable", "Hypertension", "Shear injury to endothelium and accelerated plaque growth"],
+          ["Major, modifiable", "Cigarette smoking", "Endothelial injury, inflammation, and a prothrombotic state"],
+          ["Major, modifiable", "Hypercholesterolaemia", "Low-density lipoprotein retention and oxidation in the intima"],
+          ["Major, modifiable", "Diabetes mellitus", "Advanced glycation, endothelial dysfunction and smaller-vessel disease"],
+          ["Other, modifiable", "Obesity and physical inactivity", "Insulin resistance, dyslipidaemia and inflammation"],
+          ["Non-modifiable", "Age and male sex", "The contribution of cumulative injury and hormonal protection"],
+          ["Non-modifiable", "Family history and genetic determinants", "Inherited lipid metabolism and inflammatory variants"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The distribution is worth memorising as a list because a question about stroke, limb or gut ischaemia is asking it in disguise: abdominal aorta, then the coronary arteries, the popliteals, the internal carotids, and the circle of Willis. Each of these is a high-shear, branch-heavy vessel, and it is the narrowing of these vessels that produces the three commonest manifestations of the disease — myocardial infarction, stroke and peripheral arterial disease.",
+      },
+
+      { type: "heading", level: 2, text: "From injury to plaque" },
+      {
+        type: "paragraph",
+        text: "The lesion begins with endothelial injury and dysfunction. Low-density lipoprotein enters the intima and becomes oxidised; the oxidised lipid activates the endothelium so it expresses adhesion molecules, and monocytes enter and become macrophages that eat the lipid and turn into foam cells. T lymphocytes arrive, cytokines and growth factors are secreted, and smooth muscle cells migrate from the media to the intima and lay down collagen — which makes the fibrous cap and creates the necrotic lipid core at the plaque's centre. A fibrous plaque, white to yellow and raised into the lumen, is the result.",
+      },
+      {
+        type: "table",
+        headers: ["Stage", "Lesion", "Clinical importance"],
+        rows: [
+          ["Fatty streak", "A yellow streak of lipid-filled foam cells — present in teenagers, fully reversible", "No clinical significance"],
+          ["Fibrous plaque", "A raised white plaque with a fibrous cap over a lipid-rich necrotic core, narrowing the lumen", "Causes stable angina if it limits flow"],
+          ["Complicated plaque", "Rupture or erosion of the cap with superimposed thrombus, calcification and haemorrhage into the core, sometimes aneurysm formation", "The cause of the acute coronary syndromes, stroke and acute limb ischaemia"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The deadliest plaques are not necessarily the tightest. Expansile remodelling and a large soft lipid core with a thin cap make a stenosis invisible on a coronary angiogram while it is perfectly capable of rupturing — which is why treatment decisions are not made from the degree of narrowing alone, and why statins and antiplatelets are preventive rather than simply 'unclogging' drugs.",
+      },
+
+      { type: "heading", level: 2, text: "Ischaemic heart disease" },
+      {
+        type: "table",
+        headers: ["Syndrome", "Mechanism", "Pathology"],
+        rows: [
+          ["Stable angina", "Exertional demand exceeds fixed supply — a stenosis narrows the coronary lumen", "Ischaemia without necrosis; chest pain on exertion, relieved by rest and nitrates"],
+          ["Unstable angina and non-ST elevation myocardial infarction", "A plaque has changed (rupture, erosion, haemorrhage) and a non-occlusive thrombus forms intermittently; injury is subendocardial", "Myocardial necrosis in some (raised troponin) but not through the full wall; may progress"],
+          ["ST elevation myocardial infarction", "An occlusive thrombus on a ruptured plaque stops transmural flow", "Transmural coagulative necrosis; Q-wave infarction"],
+          ["Sudden cardiac death", "Arrhythmia, most commonly ventricular fibrillation, in a heart with ischaemia", "A normal-looking heart, often a plaque with a fresh thrombus"],
+          ["Chronic ischaemic heart disease", "Progressive failure from previous infarcts, often with ventricular dilatation and scar", "Left ventricular failure, from scars that do not contract"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Location decides the consequence: a right coronary occlusion gives inferoposterior infarction with sinus-node and atrioventricular block; a left anterior descending occlusion gives anterior infarction, the commonest and most lethal; a circumflex gives a lateral infarction. Infarction of the left main produces catastrophic anterolateral necrosis; thrombi in small distal branches produce the miniature infarcts that add up to a cardiomyopathy over years.",
+      },
+      {
+        type: "table",
+        headers: ["Complication of infarction", "Mechanism", "Timing"],
+        rows: [
+          ["Arrhythmia", "Ischaemic cells conduct badly and reperfusion of the injured myocardium triggers irritable foci", "First hours — the commonest cause of pre-hospital death"],
+          ["Left ventricular failure and cardiogenic shock", "More than about 40% of the left ventricular muscle is lost", "Any time over the first days"],
+          ["Rupture of the free wall", "Coagulative necrosis softens the wall, and the intact pericardium fills — tamponade", "3-7 days, when the wall is weakest"],
+          ["Rupture of the interventricular septum or a papillary muscle", "Septal rupture gives an acute shunt; papillary rupture gives severe mitral regurgitation", "3-7 days, same interval"],
+          ["Mural thrombus", "The infarcted wall (and an aneurysmal bulge) creates stasis, so a thrombus forms in the ventricle — a source of emboli", "Days to months"],
+          ["Pericarditis", "The epicardium over a transmural infarct becomes inflamed", "2-4 days"],
+          ["Dressler syndrome", "An autoimmune pericarditis weeks after the event", "Weeks"],
+          ["Ventricular aneurysm", "Scar stretched by intraventricular pressure; arrhythmia, failure and persistent bulge", "Months, as a late complication"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Hypertension, aneurysm and vasculitis" },
+      {
+        type: "paragraph",
+        text: "Long-standing hypertension remodells the heart concentrically (hypertrophy of cardiomyocytes) and thickens the arterioles: hyaline arteriolosclerosis in the benign form, a plasma-protein leak into arteriolar walls, and hyperplastic (onion-skin) arteriolosclerosis in the accelerated and malignant form, where massively raised pressures damage kidney and brain as well. The treatment principle is that lowering the pressure reverses the mechanism before it reaches its endpoints: stroke, renal failure and heart failure.",
+      },
+      {
+        type: "table",
+        headers: ["Condition", "Mechanism", "Typical patient and consequence"],
+        rows: [
+          ["Abdominal aortic aneurysm", "Atherosclerosis and inflammation weaken the wall, classically below the origin of the renal arteries", "Older smoker; pulsatile epigastric mass with back pain, and rupture producing fatal retroperitoneal or intraperitoneal haemorrhage"],
+          ["Aortic dissection", "Blood splits the media through a tear in the intima; cystic medial degeneration in Marfan and Ehlers-Danlos and in long-standing hypertension", "Sudden tearing chest pain to the back; the type A dissection involves the ascending aorta (tamponade, acute aortic regurgitation, coronary occlusion) and is a surgical emergency; type B is often managed medically"],
+          ["Giant cell arteritis", "Granulomatous inflammation of medium-to-large arteries (temporal)", "Older patient with headache, scalp tenderness, jaw claudication, a raised ESR — blindness risk if not treated urgently with steroids"],
+          ["Takayasu arteritis", "Granulomatous inflammation of the aortic arch and branches", "Young women, pulseless, with visual and cerebrovascular symptoms"],
+          ["Polyarteritis nodosa", "Necrotising inflammation of medium-sized arteries (kidney, gut, nerves; spares the lung)", "Young and middle-aged, with microaneurysms on arteriography, haematuria, abdominal pain and neuropathy — hepatitis-B association"],
+          ["Kawasaki disease", "Arteritis of medium and coronary vessels in a child with mucocutaneous lymph node syndrome", "Coronary aneurysm and myocardial infarction in a febrile child — treated with immunoglobulin and aspirin"],
+          ["Small-vessel ANCA vasculitides", "Microscopic polyangiitis and granulomatosis with polyangiitis — pauci-immune destruction of small vessels", "Kidney involvement with haematuria; the PR3-ANCA (or MPO-ANCA) pattern; lung and upper-airway disease in granulomatosis"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Calling every myocardial infarction transthoracic-on-a-plaque. Non-atherosclerotic infarction exists — coronary embolism (from atrial fibrillation or endocarditis), artery spasm, vasculitis and dissection can all cause it, particularly in younger patients.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying a tight plaque is the dangerous one. A thin-capped, lipid-rich, remodelled plaque can rupture at any degree of stenosis; the conventional 50% and 70% cut-offs describe flow limitation, not rupture risk.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying a dissection is an aneurysm. In a dissection there is no dilated segment — blood tracks within the wall, which compromises the true lumen; in an aneurysm the wall itself is dilated but intact. The treatments differ, and confusing them is a clinical error.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What turns a stable plaque into the lesion of an acute coronary syndrome?",
+        answer: "Rupture or erosion of its fibrous cap with exposure of the thrombogenic core and collagen, and a superimposed platelet-rich thrombus that occludes (STEMI) or nearly occludes (NSTEMI/unstable angina) the vessel.",
+        explanation: "The acute coronary syndromes are plaque-activation events, not plaque-growth events, which is why they can strike with little advance warning from angiographic narrowing.",
+      },
+      {
+        type: "question",
+        prompt: "Why did a patient's myocardial infarction give a pericardial rub and, three weeks later, pleuritic pain and fever?",
+        answer: "The early rub is pericarditis over the transmural infarct; the later syndrome — fever, pleuritic chest pain and a pericardial rub weeks after the infarct — is Dressler syndrome, an autoimmune post-myocardial-pericarditis, not a new infarction.",
+        explanation: "The clinical distinction is the timing: early pericarditis is local injury; Dressler is an autoimmune remote complication, typically at two weeks to several months.",
+      },
+      {
+        type: "question",
+        prompt: "A patient with jaw claudication, a new headache, tenderness over the temple and an ESR of 90 is suspected of which condition, and what must be done urgently?",
+        answer: "Giant cell arteritis — the site of the temporal artery, the jaw claudication and the high ESR. High-dose corticosteroids must be started immediately, before a biopsy, because of the risk of irreversible blindness from ischaemic optic neuropathy.",
+        explanation: "The urgent steroid is the treatment; the temporal artery biopsy then confirms, and steroids are not delayed for the test.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which sequence correctly describes the development of an atheromatous plaque?",
+        options: [
+          "Endothelial injury, LDL entry and oxidation, monocyte and macrophage foam cells, smooth muscle migration and cap formation, lipid core and finally rupture",
+          "Thrombotic occlusion of the lumen first, then lipid deposition after recanalisation",
+          "Smooth muscle necrosis first, then lipid accumulation at the wall",
+          "A fatty streak that forms first and then progresses directly to aneurysm",
+        ],
+        correctIndex: 0,
+        explanation: "Plaque formation follows one inflammatory sequence — endothelial injury, lipid retention and oxidation, monocyte recruitment and foam cells, smooth muscle migration and collagen cap, a necrotic lipid core — with the stable or complicated plaque as the end result.",
+      },
+      {
+        type: "mcq",
+        stem: "Which complication is the most common cause of death in the first hours after myocardial infarction?",
+        options: ["Dressler syndrome", "Ventricular arrhythmia (ventricular fibrillation)", "Ventricular aneurysm", "Mural thrombus"],
+        correctIndex: 1,
+        explanation: "Ventricular fibrillation is the leading cause of sudden death after infarction, arising from the electrically irritable ischaemic and reperfused tissue; Dressler syndrome, aneurysms and mural thrombus are later events.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with Marfan syndrome has sudden tearing chest pain radiating to the back. Which combination of history and investigation is most specific?",
+        options: [
+          "A widened mediastinum on chest radiograph with an intimal flap on CT angiography",
+          "A systolic bruit at the apex with a raised troponin — papillary muscle rupture",
+          "A pulsatile epigastric mass with a raised serum urate — an abdominal aortic aneurysm",
+          "A raised ESR with jaw claudication — giant cell arteritis",
+        ],
+        correctIndex: 0,
+        explanation: "A young man with Marfan (a connective tissue disorder making dissection likely) presents with tearing chest pain, and CT confirms aortic dissection by the intimal flap. The other options describe mitral rupture, an AAA and temporal arteritis.",
+      },
+      {
+        type: "mcq",
+        stem: "Which artery is least likely to be affected by atherosclerosis?",
+        options: ["Abdominal aorta", "Coronary artery", "Circle of Willis", "Pulmonary artery"],
+        correctIndex: 3,
+        explanation: "Atherosclerosis is a systemic arterial disease, and the pulmonary circulation (a low-pressure system) does not develop the same lesions. The distribution follows the high-shear systemic vessels: abdominal aorta, coronaries, carotids, circle of Willis.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of the following is NOT a complication of myocardial infarction?",
+        options: [
+          "Free-wall rupture with tamponade", "Dressler syndrome weeks later", "Pulmonary thromboembolism from a leg-vein thrombus", "Ventricular aneurysm months later",
+        ],
+        correctIndex: 2,
+        explanation: "The complications of myocardial infarction are arrhythmia, failure and shock, rupture, mural thrombus, pericarditis, Dressler syndrome, and aneurysm. Pulmonary embolism arises from deep-vein thrombosis, an independently dangerous clot rather than a direct complication of the infarct.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Cardiovascular pathology is atherosclerosis at the centre — a chronic inflammatory plaque disease of the shear-stressed arteries, accelerated by hypertension, smoking, diabetes and lipidaemia, that narrows and then ruptures. Ischaemic heart disease runs from stable angina through the acute coronary syndromes (thrombus on a ruptured plaque) to the late complications of myocardial infarction — arrhythmia, rupture, pericarditis, Dressler, aneurysm, failure. Around that centre stand hypertension with its arteriolosclerosis and cardiac hypertrophy, aneurysms and dissection, and the vasculitides from giant cell to ANCA — each a different mechanism, each capable of occluding or rupturing the vessel.",
+      },
+      {
+        type: "paragraph",
+        text: "This lesson concludes the cardiovascular synthesis: every process of the course — injury, inflammation, repair, clot, embolism, infarct and the immune response — is visible in the wall of one artery.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Module 1 SBA items — one per concept, authored and machine-checked.
 // ---------------------------------------------------------------------------
 const MODULE_ONE_SBAS: SbaSeed[] = [
@@ -1345,21 +3258,21 @@ const DEEPER_LESSONS: LessonSeed[] = [
   // --- M2 Haemodynamic disorders & thrombosis ---
   { title: "Hyperaemia, congestion & haemorrhage", module: 2, estimatedMinutes: 30, authored: false, concept: { title: "Hyperaemia, congestion and haemorrhage", slug: "hyperaemia-congestion", summary: "Active and passive hyperaemia, the effects of chronic venous congestion on liver, lung and spleen, and the consequences of haemorrhage.", blooms: "understand", minutes: 30, prereq: ["acute-inflammation"] }, content: { blocks: [] } },
   { title: "Thrombosis: mechanism & outcomes", module: 2, estimatedMinutes: 40, authored: false, concept: { title: "Mechanism and outcomes of thrombosis", slug: "thrombosis-mechanism", summary: "Endothelial injury, stasis and hypercoagulability; the platelet and coagulation phases; and the four possible fates of a thrombus.", blooms: "analyze", minutes: 40, prereq: ["cell-injury"] }, content: { blocks: [] } },
-  { title: "Embolism: types & fates", module: 2, estimatedMinutes: 35, authored: false, concept: { title: "Types and fates of embolism", slug: "embolism-types", summary: "Venous, arterial, gas, fat, air, amniotic fluid and tumour emboli, and where each lodges.", blooms: "apply", minutes: 35, prereq: ["thrombosis-mechanism"] }, content: { blocks: [] } },
-  { title: "Infarction & ischaemia", module: 2, estimatedMinutes: 35, authored: false, concept: { title: "Infarction", slug: "infarction", summary: "The distinction between ischaemia and infarction, the red and pale infarcts, and the influence of collateral supply.", blooms: "apply", minutes: 35, prereq: ["embolism-types"] }, content: { blocks: [] } },
-  { title: "Disseminated intravascular coagulation", module: 2, estimatedMinutes: 30, authored: false, concept: { title: "Disseminated intravascular coagulation", slug: "dic", summary: "Widespread microvascular coagulation with consumption of platelets and factors, and the bleeding that follows.", blooms: "apply", minutes: 30, prereq: ["thrombosis-mechanism"] }, content: { blocks: [] } },
+  { title: "Embolism: types & fates", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Types and fates of embolism", slug: "embolism-types", summary: "Venous, arterial, gas, fat, air, amniotic fluid and tumour emboli, and where each lodges.", blooms: "apply", minutes: 35, prereq: ["thrombosis-mechanism"] }, content: lesson7() as never },
+  { title: "Infarction & ischaemia", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Infarction", slug: "infarction", summary: "The distinction between ischaemia and infarction, the red and pale infarcts, and the influence of collateral supply.", blooms: "apply", minutes: 35, prereq: ["embolism-types"] }, content: lesson8() as never },
+  { title: "Disseminated intravascular coagulation", module: 2, estimatedMinutes: 30, authored: true, concept: { title: "Disseminated intravascular coagulation", slug: "dic", summary: "Widespread microvascular coagulation with consumption of platelets and factors, and the bleeding that follows.", blooms: "apply", minutes: 30, prereq: ["thrombosis-mechanism"] }, content: lesson9() as never },
 
   // --- M3 Neoplasia ---
-  { title: "Definitions & nomenclature", module: 3, estimatedMinutes: 30, authored: false, concept: { title: "Neoplasm: definitions and nomenclature", slug: "neoplasia-definitions", summary: "Benign and malignant, the naming rules, the exceptions to those rules, and grading versus staging.", blooms: "remember", minutes: 30, prereq: ["cell-injury"] }, content: { blocks: [] } },
-  { title: "Hallmarks of cancer & molecular changes", module: 3, estimatedMinutes: 45, authored: false, concept: { title: "Hallmarks of cancer and molecular changes", slug: "cancer-hallmarks", summary: "Self-sufficiency in growth signals, evasion of suppression, immortality, angiogenesis, invasion and metastasis, and the genes that enable them.", blooms: "analyze", minutes: 45, prereq: ["neoplasia-definitions"] }, content: { blocks: [] } },
-  { title: "Carcinogenesis: mutation & environment", module: 3, estimatedMinutes: 40, authored: false, concept: { title: "Carcinogenesis", slug: "carcinogenesis", summary: "Initiators and promoters, the multistep sequence, oncogenic viruses, chemical carcinogens and the biology of metastasis.", blooms: "analyze", minutes: 45, prereq: ["cancer-hallmarks"] }, content: { blocks: [] } },
-  { title: "Grading, staging & tumour markers", module: 3, estimatedMinutes: 35, authored: false, concept: { title: "Grading, staging and tumour markers", slug: "grading-staging", summary: "The TNM staging system, grading, biopsy diagnosis, and the use and limitations of tumour markers.", blooms: "apply", minutes: 35, prereq: ["neoplasia-definitions"] }, content: { blocks: [] } },
+  { title: "Definitions & nomenclature", module: 3, estimatedMinutes: 30, authored: true, concept: { title: "Neoplasm: definitions and nomenclature", slug: "neoplasia-definitions", summary: "Benign and malignant, the naming rules, the exceptions to those rules, and grading versus staging.", blooms: "remember", minutes: 30, prereq: ["cell-injury"] }, content: lesson10() as never },
+  { title: "Hallmarks of cancer & molecular changes", module: 3, estimatedMinutes: 45, authored: true, concept: { title: "Hallmarks of cancer and molecular changes", slug: "cancer-hallmarks", summary: "Self-sufficiency in growth signals, evasion of suppression, immortality, angiogenesis, invasion and metastasis, and the genes that enable them.", blooms: "analyze", minutes: 45, prereq: ["neoplasia-definitions"] }, content: lesson11() as never },
+  { title: "Carcinogenesis: mutation & environment", module: 3, estimatedMinutes: 40, authored: true, concept: { title: "Carcinogenesis", slug: "carcinogenesis", summary: "Initiators and promoters, the multistep sequence, oncogenic viruses, chemical carcinogens and the biology of metastasis.", blooms: "analyze", minutes: 45, prereq: ["cancer-hallmarks"] }, content: lesson12() as never },
+  { title: "Grading, staging & tumour markers", module: 3, estimatedMinutes: 35, authored: true, concept: { title: "Grading, staging and tumour markers", slug: "grading-staging", summary: "The TNM staging system, grading, biopsy diagnosis, and the use and limitations of tumour markers.", blooms: "apply", minutes: 35, prereq: ["neoplasia-definitions"] }, content: lesson13() as never },
   { title: "Paraneoplastic syndromes & tumour immunology", module: 3, estimatedMinutes: 35, authored: false, concept: { title: "Paraneoplastic syndromes and tumour immunology", slug: "paraneoplastic-tumour-immunity", summary: "The systemic effects of remote hormone-like products, immune surveillance, and current immunotherapy.", blooms: "apply", minutes: 35, prereq: ["grading-staging"] }, content: { blocks: [] } },
 
   // --- M4 Genetic & immune-mediated disease ---
   { title: "Mendelian, chromosomal & multifactorial disease", module: 4, estimatedMinutes: 40, authored: false, concept: { title: "Patterns of genetic disease", slug: "genetic-disease-patterns", summary: "Autosomal and sex-linked inheritance, triplet repeats, imprinting, chromosomal disorders and multifactorial inheritance.", blooms: "understand", minutes: 40,     prereq: ["chronic-inflammation"] }, content: { blocks: [] } },
   { title: "Autoimmune mechanisms", module: 4, estimatedMinutes: 40, authored: false, concept: { title: "Mechanisms of autoimmune disease", slug: "autoimmune-mechanisms", summary: "Loss of tolerance, molecular mimicry, and the systemic versus organ-specific autoimmune diseases.", blooms: "analyze", minutes: 40, prereq: ["chronic-inflammation"] }, content: { blocks: [] } },
-  { title: "Amyloidosis", module: 4, estimatedMinutes: 30, authored: false, concept: { title: "Amyloidosis", slug: "amyloidosis", summary: "Extracellular deposition of misfolded protein fibrils, its classification, and the organ consequences — an application of the protein-structure chemistry taught in BCHM 101.", blooms: "apply", minutes: 30, prereq: ["chronic-inflammation"] }, content: { blocks: [] } },
+  { title: "Amyloidosis", module: 4, estimatedMinutes: 30, authored: true, concept: { title: "Amyloidosis", slug: "amyloidosis", summary: "Extracellular deposition of misfolded protein fibrils, its classification, and the organ consequences — an application of the protein-structure chemistry taught in BCHM 101.", blooms: "apply", minutes: 30, prereq: ["chronic-inflammation"] }, content: lesson14() as never },
 
   // --- M5 Environmental & nutritional pathology ---
   { title: "Environmental & occupational pathology", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Environmental and occupational injury", slug: "environmental-pathology", summary: "Air pollution, tobacco, ionising and non-ionising radiation, occupational dusts and heavy metal toxicity.", blooms: "understand", minutes: 35, prereq: [] }, content: { blocks: [] } },
@@ -1369,7 +3282,7 @@ const DEEPER_LESSONS: LessonSeed[] = [
   { title: "Ageing & death", module: 5, estimatedMinutes: 25, authored: false, concept: { title: "Ageing and the pathology of dying", slug: "ageing-death", summary: "The cellular and molecular biology of ageing, and the definition and certification of death.", blooms: "remember", minutes: 25, prereq: [] }, content: { blocks: [] } },
 
   // --- M6 Systemic pathology ---
-  { title: "Cardiovascular pathology", module: 6, estimatedMinutes: 45, authored: false, concept: { title: "Cardiovascular pathology", slug: "cardiovascular-pathology", summary: "Atherosclerosis, ischaemic heart disease and its consequences, valvular disease, cardiomyopathies, aneurysms and vasculitides.", blooms: "apply", minutes: 45, prereq: ["thrombosis-mechanism", "infarction"] }, content: { blocks: [] } },
+  { title: "Cardiovascular pathology", module: 6, estimatedMinutes: 45, authored: true, concept: { title: "Cardiovascular pathology", slug: "cardiovascular-pathology", summary: "Atherosclerosis, ischaemic heart disease and its consequences, valvular disease, cardiomyopathies, aneurysms and vasculitides.", blooms: "apply", minutes: 45, prereq: ["thrombosis-mechanism", "infarction"] }, content: lesson15() as never },
   { title: "Respiratory pathology", module: 6, estimatedMinutes: 40, authored: false, concept: { title: "Respiratory pathology", slug: "respiratory-pathology", summary: "Pulmonary infections, obstructive lung disease, interstitial lung disease, vascular disease and lung tumours.", blooms: "apply", minutes: 40, prereq: ["infectious-disease-principles"] }, content: { blocks: [] } },
   { title: "Renal & urinary pathology", module: 6, estimatedMinutes: 40, authored: false, concept: { title: "Renal and urinary pathology", slug: "renal-pathology", summary: "Glomerular disease, tubulointerstitial disease, obstructive uropathy, tumours, and the acute and chronic kidney disease syndromes.", blooms: "apply", minutes: 40, prereq: ["thrombosis-mechanism"] }, content: { blocks: [] } },
   { title: "Gastrointestinal & hepatobiliary pathology", module: 6, estimatedMinutes: 40, authored: false, concept: { title: "Gastrointestinal and hepatobiliary pathology", slug: "gi-hepatobiliary-pathology", summary: "Inflammatory, obstructive, vascular and neoplastic diseases of the gut, liver and pancreas.", blooms: "apply", minutes: 40, prereq: ["infectious-disease-principles"] }, content: { blocks: [] } },

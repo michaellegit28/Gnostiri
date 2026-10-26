@@ -34,6 +34,8 @@ const SEEDS = [
   "prisma/seed-assessment-anaesthesiology.ts",
   "prisma/seed-assessment-otorhinolaryngology.ts",
   "prisma/seed-assessment-ophthalmology.ts",
+  "prisma/seed-assessment-introduction-to-programming.ts",
+  "prisma/seed-assessment-applied-statistics.ts",
 ];
 
 /** Extract the ITEMS array from a seed file as evaluable source. */

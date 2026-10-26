@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { LessonContent } from "@/types/lesson";
 import { topicSlugOf } from "@/app/highschool/exams/[exam]/topic-slug";
 import StudyReaderClient from "./StudyReaderClient";
+import { masterTopicFor } from "@/lib/study-crosswalk";
 
 interface StudyPageProps {
   params: {
@@ -72,13 +73,41 @@ export default async function StudyPage({ params, searchParams }: StudyPageProps
     notFound();
   }
 
-  // Fetch lesson content server-side via prisma
+  // Fetch lesson content server-side via prisma. Study notes are authored on
+  // the master curriculum topics; a JAMB-tree topic falls back to its mapped
+  // master topic (study-crosswalk) so exam pages show the authored note
+  // instead of an empty state.
   const lesson = await prisma.lesson.findFirst({
     where: {
       domain: "highschool",
       topicId: currentTopic.id,
     },
   });
+  if (!lesson) {
+    const masterTopicId = masterTopicFor(currentTopic.id);
+    if (masterTopicId) {
+      const fallback = await prisma.lesson.findFirst({
+        where: { domain: "highschool", topicId: masterTopicId },
+      });
+      if (fallback) {
+        return (
+          <StudyReaderClient
+            examCode={examination.code.toLowerCase()}
+            examName={examination.name.toUpperCase()}
+            subjectSlug={subjectSlug}
+            subjectTitle={subjectTopic.title}
+            topicSlug={topicSlug}
+            topicTitle={currentTopic.title}
+            topics={topics}
+            lessonContent={fallback.content as unknown as LessonContent}
+            alignmentSlug={topicSlug}
+            lite={searchParams?.lite === "1"}
+            lastAudited={currentTopic.lastAuditedDate ? new Date(currentTopic.lastAuditedDate).toISOString().slice(0, 10) : null}
+          />
+        );
+      }
+    }
+  }
 
   const lessonContent = lesson && lesson.content ? (lesson.content as unknown as LessonContent) : null;
 
