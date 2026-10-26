@@ -7,6 +7,7 @@ import { LessonContent, LessonBlock } from "@/types/lesson";
 import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
+import ContentReportTab from "@/components/ContentReportTab";
 import {
   ChevronRight,
   ChevronLeft,
@@ -352,14 +353,23 @@ export default function StudyReaderClient({
             <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/50 p-8">
               <BookOpen className="w-12 h-12 text-slate-600 mb-4" />
               <h3 className="text-xl font-semibold font-serif text-slate-200 mb-2">
-                Content coming soon
+                Study notes on the way
               </h3>
               <p className="text-slate-400 max-w-md text-sm">
-                Study notes and structured lesson content for &quot;{topicTitle}&quot; are currently being prepared for {examName}.
+                Study notes and structured lesson content for &quot;{topicTitle}&quot; are on the way.
               </p>
             </div>
           )}
           <AlignmentDisclaimer lastAudited={lastAudited} />
+
+          <ContentReportTab
+            domain="highschool"
+            targetType="topic"
+            targetId={fullTopicId}
+            targetUrl={`/highschool/${examCode}/${subjectSlug}/${topicSlug}/study`}
+            targetTitle={topicTitle}
+            authenticated={Boolean(user)}
+          />
         </main>
       </div>
 

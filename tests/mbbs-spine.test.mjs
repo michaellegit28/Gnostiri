@@ -279,10 +279,12 @@ test("spine engine never marks a row verified or draft", () => {
   );
   assert.ok(src.includes("update: itemData,"), "the item write path must be one governed object");
   assert.ok(src.includes("create: { slug: s.slug, ...itemData }"), "the item create path must reuse the same governed object");
-  // needsCheck is derived from authorship, never hard-coded true.
-  assert.match(src, /needsCheck:\s*!l\.authored/, "needsCheck must follow authorship");
-  // Placeholder lessons must say so in their content.
-  assert.match(src, /text: "In preparation"/, "placeholder lessons must announce themselves");
+  // Owner directive 2026-10-24 ("show what's real"): only AUTHORED lessons are
+  // written — a placeholder is never a student-facing row, and the seeder
+  // self-heals by deleting placeholder rows left by an earlier seed.
+  assert.match(src, /subject\.lessons\[i\]\.authored/, "the lesson write path iterates authored lessons only");
+  assert.match(src, /notIn: Array\.from\(authoredIds\)/, "placeholder lesson rows are deleted on re-seed");
+  assert.doesNotMatch(src, /needsCheck:\s*!l\.authored/, "needsCheck is no longer derived — unauthored lessons are not written");
 });
 
 test("spine engine enforces its own invariants before writing", () => {

@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { boardTreeTopicIds } from "@/lib/board-bank";
 
 // Exam Blueprint Engine — the manifest is the single source of truth.
 // The frontend renders what the manifest says: nothing more, nothing less.
@@ -169,8 +170,20 @@ export async function buildRenderManifest(
   });
   if (!examination) return null;
 
+  // The board's bank is its OWN {code}-* topic tree (src/lib/board-bank.ts:6-12).
+  // The tag engine is layered on top for blueprint paper structure — it can only
+  // ever subtract (RULE 4 NOT_EXAMINED), never add. A topic outside that tree is
+  // therefore not part of this board's exam, even if tags point at it: the
+  // manifest returns null and the practice page 404s, instead of building a
+  // paper from master-* content a hand-typed URL smuggled in. boardTreeTopicIds
+  // returns null for a board with no tree — that board keeps serving every topic.
+  const treeTopicIds = await boardTreeTopicIds(examination.code.toLowerCase());
+
   const topic = await prisma.topic.findFirst({
-    where: { OR: [{ id: topicSlug }, { slug: topicSlug }] },
+    where: {
+      OR: [{ id: topicSlug }, { slug: topicSlug }],
+      ...(treeTopicIds ? { id: { in: treeTopicIds } } : {}),
+    },
   });
   if (!topic) return null;
 

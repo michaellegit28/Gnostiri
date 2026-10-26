@@ -14,7 +14,7 @@ export default function CsvImporter() {
       }}
       className="space-y-2"
     >
-      <textarea aria-label="CSV input" rows={5} placeholder="topic_slug,board_name,track_name,tier,weight_notes&#10;thermodynamics,AQA A-Level,,core,Cambridge 9702 Sec III" className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs font-mono" />
+      <textarea aria-label="CSV input" rows={5} placeholder="topic_slug,board_name,track_name,tier,weight_notes&#10;algebra-foundations,JAMB (UTME),Nigeria,core,UTME Mathematics syllabus" className="w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs font-mono" />
       <button className="px-3 py-1 rounded bg-gold text-slate-950 font-semibold text-sm" type="submit">Import CSV</button>
     </form>
   );

@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { boardTreeTopicIds } from "@/lib/board-bank";
 
 export const dynamic = "force-dynamic";
 
 // GET /api/questions?boardId=&topicId=&paperId=&type=
-// Content endpoint for the practice UI: a board's own topic tree is its bank;
-// topics outside that tree stay tag- and blueprint-paper-scoped. NOT_EXAMINED
-// questions are never returned. Correct answers and marking schemes are never
-// sent — grading happens server-side via the session APIs.
+// Content endpoint for the practice UI. A question is part of a board's bank
+// ONLY because it sits inside that board's own {code}-* topic tree — board tags
+// can never ADD one (they may only subtract, via the RULE 4 NOT_EXAMINED
+// exclusion). boardTags is therefore consulted for the NOT_EXAMINED tier alone.
+// The topic itself must also resolve INSIDE the board's tree (boardTreeTopicIds):
+// a hand-typed master-* topicId that the board never adopted is 404, not served.
+// NOT_EXAMINED questions are never returned. Correct answers and marking schemes
+// are never sent — grading happens server-side via the session APIs.
 export async function GET(req: NextRequest) {
   const boardId = req.nextUrl.searchParams.get("boardId");
   const topicId = req.nextUrl.searchParams.get("topicId");
@@ -22,32 +27,24 @@ export async function GET(req: NextRequest) {
   });
   if (!examination) return NextResponse.json({ error: "Board not found" }, { status: 404 });
 
+  // ONE taxonomy: the board's own tree is the bank. boardTreeTopicIds returns
+  // null only for a tree-less board (that case skips the gate); otherwise a
+  // topic outside the {code}-* tree — e.g. a master-* topic the board never
+  // adopted — is not this board's syllabus content and answers 404. There is no
+  // tag-admission path in either direction; a tag may only REMOVE a question.
+  // RULE 4 applies here: NOT_EXAMINED never reaches the client.
+  const treeTopicIds = await boardTreeTopicIds(examination.code.toLowerCase());
   const topic = await prisma.topic.findFirst({ where: { OR: [{ id: topicId }, { slug: topicId }] } });
   if (!topic) return NextResponse.json({ error: "Topic not found" }, { status: 404 });
-
-  // ONE taxonomy: a question inside the board's OWN topic tree ({code}-*) is
-  // part of that board's bank by construction — that is the tree /cbt serves,
-  // so this endpoint can never again under-report it because a tag is missing.
-  // Topics outside the tree keep the tag contract (blueprint papers + tiers).
-  // RULE 4 applies to both paths: NOT_EXAMINED never reaches the client.
-  const boardCode = examination.code.toLowerCase();
-  const inBoardTree = topic.id === boardCode || topic.id.startsWith(`${boardCode}-`);
+  if (treeTopicIds && !treeTopicIds.includes(topic.id)) {
+    return NextResponse.json({ error: "Topic is not part of this board's syllabus tree" }, { status: 404 });
+  }
 
   const questions = await prisma.question.findMany({
     where: {
       topicId: topic.id,
       ...(type ? { type: type.toLowerCase() } : {}),
       NOT: { boardTags: { some: { examinationId: examination.id, tier: "NOT_EXAMINED" } } },
-      ...(inBoardTree
-        ? {}
-        : {
-            boardTags: {
-              some: {
-                examinationId: examination.id,
-                ...(paperId ? { paperIds: { array_contains: [paperId] } } : {}),
-              },
-            },
-          }),
     },
     orderBy: { id: "asc" },
     select: { id: true, type: true, questionText: true, options: true, hint: true, difficulty: true },

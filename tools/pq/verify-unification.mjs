@@ -6,11 +6,14 @@
  * unification is not complete: for every live board, every question inside its
  * own {code}-* topic tree must carry an active board tag (so the blueprint
  * manifest can actually serve it), and the per-topic numbers must agree with
- *  the tree the board page renders. Tags that still point at master-* topics
- *  are reported as information — the master curriculum's rows are the SOURCE
- *  copies the board trees were duplicated from, students still study them, and
- *  deleting them would be destructive work, which belongs to the orchestrator
- *  alone.
+ *  the tree the board page renders. Active tags that still point at questions
+ *  OUTSIDE that tree are UNIQUE CONTENT (329 of the 330 jamb rows have no
+ *  in-tree twin — the trees were not duplicated; 60 of them, IB / history /
+ *  business-studies, have no JAMB syllabus destination at all). They were
+ *  reachable only by hand-typed URL, and the api/questions + manifest fix makes
+ *  them inert, so they are reported as a LOUD WARNING only: deleting the rows
+ *  is destructive work that needs an explicit owner ruling first, which has NOT
+ *  been given. It is therefore not a failure condition for this tool.
  *
  * The APPLICATION surfaces are guarded structurally by tests/one-count.test.mjs;
  * the HTTP surfaces are guarded by tools/audit-counts.mjs (agent 7's lane).
@@ -25,16 +28,15 @@
 import { PrismaClient } from "../../node_modules/@prisma/client/index.js";
 
 const JSON_OUT = process.argv.includes("--json");
-const LIVE_BOARDS = ["jamb", "waec", "neco"];
+const LIVE_BOARDS = ["jamb"];
 
 /**
  * The unified end-state, machine-verified against production on 2026-10-21:
- * jamb 6,000 (12 subjects x 500) · waec 343 (330 duplicated into the waec tree
- * + 13 in-tree) · neco 113 (duplicated into the empty neco tree). If a future
- * content pass changes a board's bank deliberately, bump this table in the
- * same commit.
+ * jamb 6,000 (12 subjects x 500). WAEC/NECO were retired with the 2026-10-24
+ * board clearance, so their end-state tables are gone. If a future content
+ * pass changes JAMB's bank deliberately, bump this table in the same commit.
  */
-const EXPECTED = { jamb: 6000, waec: 343, neco: 113 };
+const EXPECTED = { jamb: 6000 };
 
 if (!process.env.DATABASE_URL) {
   console.error(
@@ -130,6 +132,16 @@ async function checkBoard(slug) {
   const stale = Number(t.stale_tags_outside_tree ?? 0);
 
   const problems = [];
+  const warnings = [];
+  if (stale > 0) {
+    // LOUD WARNING, deliberately NOT fatal. After the api/questions + manifest
+    // tree gates these rows are inert (no surface admits a tag-only question),
+    // but deleting them is destructive work that needs an explicit owner ruling,
+    // which has not been given — so this must never fail the guard.
+    warnings.push(
+      `${stale} active tag(s) point at questions outside the ${code} tree — inert after the api/manifest fix (surfaces no longer admit them); tag deletion needs owner sign-off`
+    );
+  }
   if (treeTotal !== taggedInTree) {
     problems.push(`${treeTotal - taggedInTree} question(s) in the ${code} tree carry no active tag — the blueprint manifest cannot serve them`);
   }
@@ -149,6 +161,7 @@ async function checkBoard(slug) {
     taggedInTree,
     activeTags,
     staleTagsOutsideTree: stale,
+    warnings,
     problems,
   };
 }
@@ -159,7 +172,17 @@ async function main() {
   await prisma.$disconnect();
 
   if (JSON_OUT) {
-    console.log(JSON.stringify({ ok: results.every((r) => r.ok), boards: results }, null, 2));
+    console.log(
+      JSON.stringify(
+        {
+          ok: results.every((r) => r.ok),
+          warnings: results.flatMap((r) => (r.warnings ?? []).map((w) => `${r.slug}: ${w}`)),
+          boards: results,
+        },
+        null,
+        2
+      )
+    );
     process.exit(results.every((r) => r.ok) ? 0 : 1);
   }
 
@@ -170,14 +193,21 @@ async function main() {
       `taggedInTree=${String(r.taggedInTree ?? "-").padStart(5)} · activeTags=${String(r.activeTags ?? "-").padStart(5)} · ` +
       `staleTagsOutsideTree=${String(r.staleTagsOutsideTree ?? "-").padStart(4)}`;
     console.log(`${r.ok ? "PASS" : "FAIL"}  ${line}`);
-    for (const p of r.problems ?? []) console.log(`      · ${p}`);
+    for (const w of r.warnings ?? []) console.log(`      WARNING  ${w}`);
+    for (const p of r.problems ?? []) console.log(`      FAIL     ${p}`);
   }
   const failed = results.filter((r) => !r.ok).length;
+  const warned = results.filter((r) => (r.warnings ?? []).length > 0).length;
   console.log(
     failed === 0
       ? "\nEvery tree question is tagged and servable; per-topic numbers agree; totals match the verified end-state."
       : `\n${failed} board(s) FAIL — the unification is incomplete (re-run tools/pq/unify-boards.mjs --apply).`
   );
+  if (warned > 0) {
+    console.log(
+      `\n${warned} board(s) carry a WARNING — out-of-tree tags only. Inert after the api/manifest fix; needs owner sign-off before deletion.`
+    );
+  }
   process.exit(failed === 0 ? 0 : 1);
 }
 

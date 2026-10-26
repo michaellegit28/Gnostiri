@@ -39,3 +39,6 @@ next-env.d.ts
 
 # local agent messaging matrix (sandbox protocol) — never commit
 /inbox
+
+# local clearance backups — never commit
+/.backups

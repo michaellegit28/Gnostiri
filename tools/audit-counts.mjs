@@ -79,26 +79,25 @@ const nf = (n) => {
  * Mirrors src/lib/exam-bank.ts. tests/qa-tools.test.mjs extracts the real
  * registry and fails if this list drifts, so the tool stays honest without
  * needing node_modules or the repo at the operator's machine.
+ *
+ * 2026-10-24 board clearance: WAEC/NECO and the 11 foreign boards are retired
+ * (production DB + content) — the mirror is JAMB-only, exactly like the source.
  */
 const BOARD_REGISTRY = [
-  { slug: "jamb", code: "jamb", name: "JAMB (UTME)", status: "live", cbtReady: true },
-  { slug: "sat", code: "sat", name: "College Board — Digital SAT", status: "preparing", cbtReady: false },
-  { slug: "ap", code: "ap", name: "College Board — AP Exams", status: "preparing", cbtReady: false },
-  { slug: "waec", code: "waec", name: "WAEC (WASSCE)", status: "live", cbtReady: false },
-  { slug: "neco", code: "neco", name: "NECO (SSCE)", status: "live", cbtReady: false },
-  { slug: "maneb", code: "maneb", name: "MANEB (MSCE / JCE)", status: "preparing", cbtReady: false },
-  { slug: "cbse", code: "cbse", name: "CBSE", status: "preparing", cbtReady: false },
-  { slug: "icse", code: "icse", name: "ICSE", status: "preparing", cbtReady: false },
-  { slug: "nsc-matric", code: "nsc", name: "DBE (NSC / Matric)", status: "preparing", cbtReady: false },
-  { slug: "necta", code: "necta", name: "NECTA (CSEE / ACSEE)", status: "preparing", cbtReady: false },
-  { slug: "kcse", code: "kcse", name: "KNEC (KCSE)", status: "preparing", cbtReady: false },
-  { slug: "cambridge", code: "cambridge", name: "Cambridge (CAIE)", status: "preparing", cbtReady: false },
-  { slug: "aqa", code: "aqa", name: "AQA", status: "preparing", cbtReady: false },
-  { slug: "edexcel", code: "edexcel", name: "Edexcel", status: "preparing", cbtReady: false },
+  {
+    slug: "jamb",
+    code: "jamb",
+    name: "JAMB (UTME)",
+    country: "Nigeria",
+    class: "cbt",
+    formats: ["Pure CBT", "100% multiple choice", "4 subjects · one sitting"],
+    status: "live",
+    cbtReady: true,
+  },
 ];
 
 /** Boards with a CBT preset (src/lib/cbt/config.ts) — the /api/cbt/session check. */
-const CBT_PRESETS = new Set(["jamb", "waec", "neco", "sat", "ap"]);
+const CBT_PRESETS = new Set(["jamb"]);
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 async function fetchWithTimeout(url, init = {}) {

@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import LessonRenderer from "@/components/university/LessonRenderer";
 import AddToRevision from "@/components/university/AddToRevision";
+import ContentReportTab from "@/components/ContentReportTab";
 import CourseCompletionButton from "@/components/CourseCompletionButton";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, ChevronRight, Clock, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
@@ -32,7 +33,7 @@ export default async function LessonPage({ params }: PageProps) {
       code: true,
       lessons: {
         orderBy: { orderIndex: "asc" },
-        select: { id: true, title: true, orderIndex: true, needsCheck: true },
+        select: { id: true, title: true, orderIndex: true },
       },
       modules: { orderBy: { orderIndex: "asc" }, select: { id: true, title: true, slug: true } },
       concepts: { orderBy: { orderIndex: "asc" }, select: { id: true, title: true, slug: true, moduleId: true, orderIndex: true, bloomsLevel: true, estMinutes: true } },
@@ -155,12 +156,6 @@ export default async function LessonPage({ params }: PageProps) {
               {concept.bloomsLevel} · {concept.estMinutes} min concept
             </p>
           )}
-          {lesson.needsCheck && (
-            <p className="rounded-xl border border-amber-500/30 bg-amber-500/[0.07] px-4 py-3 text-sm text-amber-200">
-              This lesson is a tracked placeholder: its place in the course and its concept spine are
-              real, but the teaching content is still being written and is awaiting human review.
-            </p>
-          )}
         </header>
 
         {/* Body — the renderer covers every block type, so nothing is dropped */}
@@ -179,14 +174,7 @@ export default async function LessonPage({ params }: PageProps) {
             </p>
           )}
           <div className="mt-6 border-t border-white/5 pt-5">
-            {lesson.needsCheck ? (
-              // A tracked placeholder is not completable — progress is never
-              // faked on content that has not been written yet.
-              <p className="text-sm text-slate-400">
-                This lesson is still being written. Marking a lesson complete opens once its teaching
-                content is published — the course spine below always shows what is ready now.
-              </p>
-            ) : user ? (
+            {user ? (
               <CourseCompletionButton courseId={course.id} lessonId={lesson.id} locked={false} />
             ) : (
               <p className="text-sm text-slate-400">
@@ -201,6 +189,15 @@ export default async function LessonPage({ params }: PageProps) {
             )}
           </div>
         </div>
+
+        <ContentReportTab
+          domain="university"
+          targetType="lesson"
+          targetId={lesson.id}
+          targetUrl={`/university/${course.slug}/lessons/${lesson.id}`}
+          targetTitle={lesson.title}
+          authenticated={Boolean(user)}
+        />
 
         {/* Prev / Next — the plain keyboard path: Tab, then Enter. Within the
             module first; across a module boundary the destination is named. */}

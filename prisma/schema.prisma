@@ -36,6 +36,7 @@ model User {
   practiceSessions PracticeSession[]
   assessmentSessions AssessmentSession[]
   launchTokens LaunchToken[]
+  contentReports ContentReport[]
 }
 
 model Profile {
@@ -166,6 +167,31 @@ model AlignmentAudit {
   createdAt     DateTime @default(now())
 
   @@index([alignmentId])
+}
+
+// Learner content reports — the discreet "flag a problem" channel. Deliberately
+// NOT coupled to CourseLesson.reviewStatus: a report is learner feedback about
+// what is on screen, not a governance flag. Written only by trusted server code.
+model ContentReport {
+  id            String    @id @default(cuid())
+  domain        AppDomain
+  targetType    String    // 'lesson' | 'question' | 'topic' | 'assessmentItem'
+  targetId      String
+  targetUrl     String
+  targetTitle   String?
+  category      String    // 'incorrect' | 'unclear' | 'typo' | 'missing' | 'inappropriate' | 'other'
+  detail        String
+  reporterId    String?
+  reporter      User?     @relation(fields: [reporterId], references: [id], onDelete: SetNull)
+  reporterEmail String?
+  status        String    @default("open") // 'open' | 'triaged' | 'fixed' | 'rejected'
+  createdAt     DateTime  @default(now())
+  resolvedAt    DateTime?
+  resolvedBy    String?
+
+  @@index([status, createdAt])
+  @@index([targetType, targetId])
+  @@index([reporterId])
 }
 
 model Topic {

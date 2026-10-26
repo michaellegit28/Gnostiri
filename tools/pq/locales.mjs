@@ -48,15 +48,6 @@ export const LOCALES = {
     names: ["Priya", "Omar", "Ellie", "Callum", "Zainab", "Marcus"],
     places: ["Leeds", "Bristol", "Coventry", "Cardiff"],
   },
-  // WAEC (WASSCE) papers are written across several Anglophone West African
-  // jurisdictions; the Ghana (cedi) skin is the default rendering for WAEC-track
-  // Version B clones.
-  WAEC: {
-    currency: "\u20b5",
-    currencyWord: "cedis",
-    names: ["Kwame", "Akosua", "Yaw", "Ama", "Kofi", "Adjoa"],
-    places: ["Accra", "Takoradi", "Cape Coast", "Tamale"],
-  },
 };
 
 /** Neutral (no jurisdiction) skin for pools that shuffle across many tracks. */

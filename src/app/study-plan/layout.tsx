@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Study Plan — Gnostiri",
   description:
-    "Organize learning with a manual study plan — or generate an automatic WAEC battle plan.",
+    "Organize learning with a manual study plan — or generate an automatic JAMB battle plan.",
 };
 
 export default function StudyPlanLayout({

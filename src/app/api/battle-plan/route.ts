@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 
-const SUPPORTED_EXAMS = ["waec", "jamb", "neco"];
+const SUPPORTED_EXAMS = ["jamb"];
 const MAX_ITEMS = 100;
 const SESSIONS_PER_DAY = 2;
 
@@ -30,7 +30,7 @@ function addDays(base: Date, n: number): string {
 }
 
 /**
- * GET /api/battle-plan?exam=waec
+ * GET /api/battle-plan?exam=jamb
  * Returns the active battle plan plus today's mission, countdown and progress.
  * Free for highschool — no premium gate.
  */
@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
   const user = await getCurrentUser();
   if (!user) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
 
-  const exam = (req.nextUrl.searchParams.get("exam") || "waec").toLowerCase();
+  const exam = (req.nextUrl.searchParams.get("exam") || "jamb").toLowerCase();
   if (!SUPPORTED_EXAMS.includes(exam)) {
     return NextResponse.json({ error: "Unsupported exam" }, { status: 404 });
   }
@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
 
   const body = await req.json().catch(() => ({}));
-  const examCode = String(body.examCode || "waec").toLowerCase();
+  const examCode = String(body.examCode || "jamb").toLowerCase();
   if (!SUPPORTED_EXAMS.includes(examCode)) {
     return NextResponse.json({ error: "Unsupported exam" }, { status: 400 });
   }

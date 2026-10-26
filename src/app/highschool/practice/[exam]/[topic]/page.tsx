@@ -13,7 +13,7 @@ interface PracticePageProps {
   searchParams?: { subject?: string };
 }
 
-const EXAM_CODE_PREFIXES = ["waec", "jamb", "neco", "wassce-ghana", "kcse", "nsc-matric"];
+const EXAM_CODE_PREFIXES = ["jamb"];
 
 function fallbackSubject(topicId: string): string | null {
   for (const subject of SUBJECTS) {

@@ -35,11 +35,7 @@ interface UpcomingDay {
   items: MissionItem[];
 }
 
-const EXAMS = [
-  { code: "waec", name: "WAEC" },
-  { code: "jamb", name: "JAMB" },
-  { code: "neco", name: "NECO" },
-];
+const EXAMS = [{ code: "jamb", name: "JAMB" }];
 
 const priorityStyle: Record<string, string> = {
   high: "bg-rose-500/10 text-rose-300 border-rose-500/30",
@@ -49,7 +45,7 @@ const priorityStyle: Record<string, string> = {
 
 export default function BattlePlanPage() {
   const { user, loading } = useAuth();
-  const [exam, setExam] = useState("waec");
+  const [exam, setExam] = useState("jamb");
   const [examDate, setExamDate] = useState("");
   const [hasPlan, setHasPlan] = useState<boolean | null>(null);
   const [daysLeft, setDaysLeft] = useState<number | null>(null);

@@ -19,6 +19,21 @@ const SEEDS = [
   "prisma/seed-assessment-anatomy.ts",
   "prisma/seed-assessment-physiology.ts",
   "prisma/seed-assessment-biochemistry.ts",
+  "prisma/seed-assessment-internal-medicine.ts",
+  "prisma/seed-assessment-pathology.ts",
+  "prisma/seed-assessment-pharmacology.ts",
+  "prisma/seed-assessment-obstetrics-gynaecology.ts",
+  "prisma/seed-assessment-paediatrics.ts",
+  "prisma/seed-assessment-surgery.ts",
+  "prisma/seed-assessment-microbiology.ts",
+  "prisma/seed-assessment-community-medicine.ts",
+  "prisma/seed-assessment-psychiatry.ts",
+  "prisma/seed-assessment-dermatology.ts",
+  "prisma/seed-assessment-forensic-medicine.ts",
+  "prisma/seed-assessment-orthopaedics.ts",
+  "prisma/seed-assessment-anaesthesiology.ts",
+  "prisma/seed-assessment-otorhinolaryngology.ts",
+  "prisma/seed-assessment-ophthalmology.ts",
 ];
 
 /** Extract the ITEMS array from a seed file as evaluable source. */

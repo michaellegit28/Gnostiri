@@ -99,49 +99,9 @@ const CATALOGUE = [
     expectContent: true,
   },
   {
-    path: "/highschool/exams/waec",
-    name: "board-waec",
-    markers: [/past papers/i, /Class:\s*MCQ/i],
-    expectCount: { pattern: /([\d,]+) practice questions/, min: 1 },
-    forbid: [/In preparation/i],
-    expectContent: true,
-  },
-  {
-    path: "/highschool/exams/neco",
-    name: "board-neco",
-    markers: [/past papers/i, /Class:\s*MCQ/i],
-    // NECO's tree is legitimately empty today; the page must still render the
-    // board, its class chip and the honest zero — never the digitizing copy.
-    expectCount: { pattern: /([\d,]+) practice questions/, min: 0 },
-  },
-  {
-    path: "/highschool/exams/nsc-matric",
-    name: "board-nsc-matric",
-    markers: [/Class:\s*Written/i],
-  },
-  {
-    path: "/highschool/exams/maneb",
-    name: "board-maneb",
-    markers: [/Class:\s*MCQ/i],
-  },
-
-  // ── Practice pickers ────────────────────────────────────────────────────
-  {
     path: "/highschool/practice/jamb",
     name: "practice-jamb",
     markers: [/Board-format practice/i, /Practice JAMB/i],
-    expectContent: true,
-  },
-  {
-    path: "/highschool/practice/waec",
-    name: "practice-waec",
-    markers: [/Board-format practice/i, /Practice WAEC/i],
-    expectContent: true,
-  },
-  {
-    path: "/highschool/practice/neco",
-    name: "practice-neco",
-    markers: [/Board-format practice/i, /Practice NECO/i],
     expectContent: true,
   },
 
@@ -236,7 +196,7 @@ const CATALOGUE = [
       field: "regions",
       min: 1,
       max: 100,
-      textMatches: [/"code"\s*:\s*"jamb"/, /"code"\s*:\s*"waec"/, /"code"\s*:\s*"neco"/],
+      textMatches: [/"code"\s*:\s*"jamb"/],
     },
   },
   {

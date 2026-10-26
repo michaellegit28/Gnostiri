@@ -42,8 +42,8 @@ test("rsc: detects an RSC error digest in the escaped flight payload", () => {
 });
 
 test("rsc: does NOT flag topic ids that merely contain 'digestion'", () => {
-  // `"li","neco-biology-nutrition-and-digestion"` — a real topic id.
-  const html = `<script>self.__next_f.push([1,"[\\"$\\",\\"li\\",\\"neco-biology-nutrition-and-digestion\\",{}]"])</script>`;
+  // `"li","jamb-biology-nutrition-and-digestion"` — a real topic id.
+  const html = `<script>self.__next_f.push([1,"[\\"$\\",\\"li\\",\\"jamb-biology-nutrition-and-digestion\\",{}]"])</script>`;
   assert.deepEqual(rscErrorsIn(html), []);
 });
 
@@ -66,13 +66,13 @@ test("soft-404: catches the retired 'Papers are being digitized' copy", () => {
 });
 
 test("soft-404: an honest empty board produces no soft-404", () => {
-  const routes = buildSite();
-  assert.deepEqual(soft404In(routes["/highschool/exams/sat"]), []);
+  const routes = buildSite([EMPTY_BOARD]);
+  assert.deepEqual(soft404In(routes["/highschool/exams/empty"]), []);
 });
 
 test("empty-state copy: honest on an empty board, fatal where content exists", () => {
   assert.match(emptyCopyIn("<h2>In preparation</h2>")[0], /In preparation/);
-  assert.match(emptyCopyIn("<p>No topics are tagged for NECO practice yet.</p>")[0], /No topics are tagged/);
+  assert.match(emptyCopyIn("<p>No topics are tagged for JAMB practice yet.</p>")[0], /No topics are tagged/);
   // the same copy is what made the JAMB board page a soft-404; the caller gates
   // on "the tree has content", which is what audit-counts does.
   const populated = buildSite()["/highschool/exams/jamb"];
@@ -129,8 +129,7 @@ test("board page: a legacy id that does not extend its parent still resolves", (
 });
 
 test("board page: an empty board renders no hero claim but reports the empty state", () => {
-  const board = DEFAULT_BOARDS.find((b) => b.slug === "sat");
-  const parsed = parseBoardPage(boardPageOf(board), board.code);
+  const parsed = parseBoardPage(boardPageOf(EMPTY_BOARD), EMPTY_BOARD.code);
   assert.equal(parsed.heroTotal, null);
   assert.equal(parsed.subjects.length, 0);
   assert.equal(parsed.topics.length, 0);
@@ -159,10 +158,10 @@ test("cbt payload: the boards array is lifted intact", () => {
 
 test("hub: a board name is paired with its own 'practice Qs' chip", () => {
   const routes = buildSite();
-  const hub = parseExamHub(routes["/highschool/exams"], ["JAMB (UTME)", "WAEC (WASSCE)", "NECO (SSCE)"]);
+  const hub = parseExamHub(routes["/highschool/exams"], ["JAMB (UTME)"]);
   assert.deepEqual(
     hub.map((h) => [h.name, h.practiceQs]),
-    [["JAMB (UTME)", 600], ["WAEC (WASSCE)", 40], ["NECO (SSCE)", 40]],
+    [["JAMB (UTME)", 600]],
   );
 });
 
@@ -173,6 +172,25 @@ test("quiz: 'Question 1 of N' is read as the count the student sits", () => {
 });
 
 // ─── fixtures helpers (keep the fixture honest about its own shape) ─────────
+
+/** A board with no tree, no tags and no card — the parser's empty state. */
+const EMPTY_BOARD = {
+  slug: "empty",
+  code: "empty",
+  name: "EMPTY",
+  country: "Nowhere",
+  class: "MCQ",
+  status: "preparing",
+  cbtReady: false,
+  tagTotal: 0,
+  hubTagTotal: 0,
+  tree: { total: 0, subjects: 0, topics: [] },
+  subjects: [],
+  topics: [],
+  tagTopics: [],
+  cbtCard: null,
+  quizTotal: 0,
+};
 
 function boardPageOf(board) {
   return buildSite([board])[`/highschool/exams/${board.slug}`];
@@ -216,13 +234,7 @@ test("catalogue: the full priority surface is covered", () => {
     "/highschool",
     "/highschool/exams",
     "/highschool/exams/jamb",
-    "/highschool/exams/waec",
-    "/highschool/exams/neco",
-    "/highschool/exams/nsc-matric",
-    "/highschool/exams/maneb",
     "/highschool/practice/jamb",
-    "/highschool/practice/waec",
-    "/highschool/practice/neco",
     "/highschool/jamb/physics/motion-and-kinematics/study",
     "/highschool/jamb/physics/motion-and-kinematics/quiz",
     "/cbt",
@@ -250,7 +262,7 @@ test("catalogue: the JAMB kinematics API probe demands more than 100 questions",
 });
 
 test("catalogue: every board with content must advertise a count and forbid the empty card", () => {
-  for (const path of ["/highschool/exams/jamb", "/highschool/exams/waec"]) {
+  for (const path of ["/highschool/exams/jamb"]) {
     const entry = CATALOGUE.find((e) => e.path === path);
     assert.ok(entry.expectContent, `${path} must declare expectContent`);
     assert.ok(entry.expectCount?.min >= 1, `${path} must require a real advertised count`);

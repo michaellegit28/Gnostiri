@@ -7,6 +7,7 @@ import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignme
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 import ManualCompleteButton from "@/components/study/ManualCompleteButton";
+import ContentReportTab from "@/components/ContentReportTab";
 import { BioDiagram } from "@/components/diagrams/BioDiagrams";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -181,7 +182,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
           <h2 className="font-bold">Study {chapterBlocks.length > 0 && <span className="text-[11px] font-normal text-teal-300">· chapter ready (~{chapterMinutes} min)</span>}</h2>
           {chapterBlocks.length > 0 ? (
             <article className="mt-3 space-y-3">{chapterBlocks.map((b, i) => renderBlock(b, i, tocMap))}</article>
-          ) : <p className="mt-1 text-xs text-slate-400">Chapter being written — linked notes below in the meantime.</p>}
+          ) : <p className="mt-1 text-xs text-slate-400">Linked notes below.</p>}
           {chapters.slice(1).map((ch) => (
             <details key={ch.title} className="mt-4 rounded-xl border border-gold/30 bg-gold/5 p-4">
               <summary className="font-bold text-sm cursor-pointer text-amber-200">{ch.title} — advanced (~{ch.minutes} min)</summary>
@@ -223,7 +224,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
               ) : <p className="mt-1 text-xs text-slate-400">Hands-on guides surface here from linked study examples; educators can propose more via the tutor.</p>}
             </section>
             <section aria-label="Country alignment matrix" className="space-y-3">
-              <h3 className="font-bold text-sm">Country tags ({byRegion.size || "none yet — pending human verification"})</h3>
+              <h3 className="font-bold text-sm">Country tags ({byRegion.size || "none yet"})</h3>
               {Array.from(byRegion.values()).map(({ region, rows }) => (
                 <div key={region} className="rounded-xl border border-slate-800 bg-slate-950/40 p-3">
                   <p className="text-xs font-semibold text-slate-400">{region}</p>
@@ -241,6 +242,15 @@ export default async function TopicPage({ params, searchParams }: { params: { su
         </details>
 
         <AlignmentDisclaimer lastAudited={topic.lastAuditedDate ? new Date(topic.lastAuditedDate).toISOString().slice(0, 10) : null} />
+
+        <ContentReportTab
+          domain="highschool"
+          targetType="topic"
+          targetId={topic.id}
+          targetUrl={`/highschool/study/${subjectParam}/${topicParam}`}
+          targetTitle={topic.title}
+          authenticated={Boolean(user)}
+        />
 
         <nav aria-label="Topic navigation" className="flex items-center justify-between gap-3 border-t border-slate-800 pt-4">
           {prev ? (

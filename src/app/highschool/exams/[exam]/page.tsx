@@ -82,6 +82,9 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
   }
 
   const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) {
+    notFound();
+  }
   const cbtPreset = presetFor(examination.code);
   const sectionBase = `/highschool/${examination.code.toLowerCase()}`;
 

@@ -1,3 +1,4 @@
+export { ALLIED_SUBJECTS, ALLIED_SEEDERS } from "./allied-specialities";
 export { ANATOMY } from "./anatomy";
 export { PHYSIOLOGY } from "./physiology";
 export { BIOCHEMISTRY } from "./biochemistry";

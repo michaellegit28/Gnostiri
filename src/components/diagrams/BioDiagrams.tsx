@@ -461,7 +461,7 @@ function RegionalHistoryTimelines() {
         </g>
       ))}
       <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="11">each syllabus makes its national story compulsory</text>
-      <text x="200" y="225" textAnchor="middle" fill={faint} fontSize="9">WAEC · Bagrut · Thanaweya require these by name</text>
+      <text x="200" y="225" textAnchor="middle" fill={faint} fontSize="9">Required by name in several curricula</text>
     </Fig>
   );
 }

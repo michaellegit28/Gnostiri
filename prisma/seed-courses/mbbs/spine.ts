@@ -21,11 +21,11 @@ const prisma = new PrismaClient();
  *   - SBA AssessmentItems carrying the invariants the exam scorer relies on
  *
  * Governance: every row ships reviewStatus "needs-human-review" — this seeder
- * never marks anything "verified". needsCheck is false ONLY for fully authored
- * content; tracked-placeholder lessons carry needsCheck true so they surface in
- * the human-review queue instead of masquerading as finished work. No
- * placeholder assessment item is ever created — an item exists only when it has
- * been authored.
+ * never marks anything "verified". Since 2026-10-24 ("show what's real") ONLY
+ * authored lessons are written to the database — a placeholder lesson is never
+ * a student-facing row: the seeder writes the concept spine, skips unauthored
+ * lessons, and deletes any placeholder row left by an earlier seed. No
+ * placeholder assessment item is ever created either.
  */
 
 export interface ConceptSeed {
@@ -301,20 +301,32 @@ export async function seedMbbsCourse(subject: SubjectSeed): Promise<SubjectCount
     await prisma.conceptNode.update({ where: { id: slugToId.get(l.concept.slug)! }, data: { moduleId: moduleRow.id } });
   }
 
-  // --- lessons, 1:1 with concepts by orderIndex ---
-  let lessonCount = 0;
+  // --- lessons: AUTHORED ONLY. Owner directive 2026-10-24 ("show what's
+  // real"): tracked-placeholder lessons never ship to students, so this seeder
+  // writes no placeholder row and self-heals by deleting any placeholder row
+  // left over from an earlier seed. The authoring queue lives in the seed
+  // source (authored:false lessons keep their concept spine and prerequisites),
+  // never in the student-facing database.
+  const authoredIndexes: number[] = [];
   for (let i = 0; i < subject.lessons.length; i++) {
+    if (subject.lessons[i].authored) authoredIndexes.push(i);
+  }
+  const authoredIds = new Set(authoredIndexes.map((i) => `${courseId}-lesson-${i + 1}`));
+  await prisma.courseLesson.deleteMany({
+    where: { courseId, id: { notIn: Array.from(authoredIds) } },
+  });
+  let lessonCount = 0;
+  for (const i of authoredIndexes) {
     const l = subject.lessons[i];
-    const content = l.authored ? l.content : pendingLesson(l);
     const lessonData = {
       courseId,
       domain: "university" as const,
       title: l.title,
       orderIndex: i,
       estimatedMinutes: l.estimatedMinutes,
-      content: content as never,
+      content: l.content as never,
       reviewStatus: "needs-human-review",
-      needsCheck: !l.authored,
+      needsCheck: false,
     };
     await prisma.courseLesson.upsert({
       where: { id: `${courseId}-lesson-${i + 1}` },

@@ -3,7 +3,7 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { hasPremiumAccess } from "@/lib/entitlements";
 import { UNIVERSITY_OPEN } from "@/lib/access";
-import { ArrowRight, BookOpen, CheckCircle2, Clock, GraduationCap, Notebook } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, GraduationCap, Notebook } from "lucide-react";
 import WaitlistForm from "@/components/university/WaitlistForm";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +30,7 @@ export default async function UniversityIndexPage() {
   const courses = await prisma.course.findMany({
     where: { domain: "university", isPublished: true },
     include: {
-      lessons: { select: { id: true, estimatedMinutes: true, needsCheck: true } },
+      lessons: { select: { id: true, estimatedMinutes: true } },
       programme: { select: { name: true, degreeAwarded: true, slug: true } },
       faculty: { select: { name: true, accent: true } },
     },
@@ -56,14 +56,7 @@ export default async function UniversityIndexPage() {
   }
 
   const totalLessons = courses.reduce((sum, c) => sum + c.lessons.length, 0);
-  const authoredLessons = courses.reduce(
-    (sum, c) => sum + c.lessons.filter((l) => !l.needsCheck).length,
-    0,
-  );
   const degreeProgramme = mbbs[0]?.programme;
-  // Any lesson still in preparation keeps the notify anchor relevant — a course
-  // page "Get notified" link resolves here, for signed-in and anonymous alike.
-  const inPreparation = totalLessons > authoredLessons;
 
   return (
     <main className="min-h-screen bg-transparent text-slate-50">
@@ -81,15 +74,12 @@ export default async function UniversityIndexPage() {
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
               The full MBBS degree is the spine of this catalogue — nine subjects, taught
-              pre-clinical to clinical, each lesson built on the one before it. Where a lesson is
-              still being written, it is labelled as such. Nothing is padded to look finished.
+              pre-clinical to clinical, each lesson built on the one before it. Every lesson listed
+              here is open to study. Nothing is padded to look finished.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <BookOpen className="h-3.5 w-3.5" aria-hidden /> {totalLessons} lessons
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5" aria-hidden /> {authoredLessons} fully authored
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5" aria-hidden /> taught in concept order
@@ -121,7 +111,6 @@ export default async function UniversityIndexPage() {
             <ol className="space-y-3">
               {mbbs.map((course, index) => {
                 const done = doneMap.get(course.id) ?? 0;
-                const authored = course.lessons.filter((l) => !l.needsCheck).length;
                 const minutes = course.lessons.reduce((s, l) => s + l.estimatedMinutes, 0);
                 return (
                   <li key={course.id}>
@@ -141,8 +130,6 @@ export default async function UniversityIndexPage() {
                         </span>
                         <span className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-500">
                           <span>{course.lessons.length} lessons</span>
-                          <span aria-hidden>·</span>
-                          <span>{authored} authored</span>
                           <span aria-hidden>·</span>
                           <span>~{Math.max(1, Math.round(minutes / 60))}h</span>
                           {course.credits != null && (
@@ -244,7 +231,7 @@ export default async function UniversityIndexPage() {
           </section>
         )}
 
-        {(!premium || inPreparation) && (
+        {!premium && (
           <aside
             id="waitlist"
             className="space-y-5 rounded-2xl border border-gold/30 bg-gold/[0.07] p-6 scroll-mt-24 md:p-8"
@@ -255,7 +242,7 @@ export default async function UniversityIndexPage() {
               </strong>
               <p className="mt-2 max-w-2xl text-sm text-slate-300">
                 {premium
-                  ? `${authoredLessons} of ${totalLessons} catalogue lessons are published so far — each one reviewed before it ships. Leave an address and hear about each release.`
+                  ? `${totalLessons} catalogue lessons are open to study. Leave an address and hear about each release.`
                   : "Every lesson of the MBBS degree, the concept map behind it, and the competency transcript. Payments are not live yet — reserve your place instead."}
               </p>
             </div>

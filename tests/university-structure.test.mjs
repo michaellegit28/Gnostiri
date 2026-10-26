@@ -1,15 +1,14 @@
-// Structural validation for the round-3 university "never lost" pass.
+// Structural validation for the university surface.
 //
 // What is asserted (all static — no database, no network):
 //
-//   1. placeholder lessons cannot be completed: the API route rejects a
-//      needsCheck lesson, and the lesson page locks the completion action on
-//      placeholders with an honest explanation instead
+//   1. review scaffolding never reaches a student: no student-facing
+//      university surface renders needsCheck / placeholder language, and the
+//      lesson page mounts the content report affordance instead
 //   2. the lesson page walks the module spine (prev/next within a module, the
 //      destination named across a boundary) rather than course-wide order
-//   3. the course page shows per-module authored progress, marks the next
-//      uncompleted lesson, offers a plain being-written state when nothing is
-//      published, and links every assessment route (no orphaned exam hall)
+//   3. the course page marks the next uncompleted lesson and links every
+//      assessment route (no orphaned exam hall)
 //   4. no dead ends: every university shell offers a way back and a next step
 //   5. the RSC rule that crashed this page before: no onClick is passed to a
 //      Link in a server component
@@ -24,6 +23,8 @@ import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
+const ROOT = new URL("../", import.meta.url).pathname;
+const Q = (p) => `${ROOT}${p}`;
 const read = (p) => readFileSync(p, "utf8");
 
 const COMPLETE_ROUTE = "src/app/api/courses/[courseId]/complete/route.ts";
@@ -40,32 +41,17 @@ for (const f of [COMPLETE_ROUTE, LESSON_PAGE, COURSE_PAGE, INDEX_PAGE, NAV, TRAN
 }
 
 // ---------------------------------------------------------------------------
-// 1. A placeholder is never completable.
+// 1. Review scaffolding never reaches a student.
 // ---------------------------------------------------------------------------
-test("completion API refuses placeholder lessons", () => {
-  const src = read(COMPLETE_ROUTE);
-  assert.match(src, /target\.needsCheck/, "the route must look at the lesson's needsCheck flag");
-  assert.match(src, /status:\s*409/, "the refusal must be an honest 409, not a silent success");
-  assert.match(src, /still being written/, "the refusal message must say the lesson is unwritten");
-  // The guard must sit before the progress upsert — nothing is written first.
-  const guardAt = src.indexOf("target.needsCheck");
-  const writeAt = src.indexOf("prisma.progress.upsert");
-  assert.ok(guardAt !== -1 && writeAt !== -1 && guardAt < writeAt, "the guard must run before any progress write");
+test("no student-facing university surface renders review scaffolding", () => {
+  for (const f of [COMPLETE_ROUTE, LESSON_PAGE, COURSE_PAGE, INDEX_PAGE, NAV]) {
+    const src = readFileSync(Q(f), "utf8");
+    assert.doesNotMatch(src, /needsCheck|In preparation|awaiting human review|being written/);
+  }
 });
 
-test("lesson page locks completion on placeholders and explains why", () => {
-  const src = read(LESSON_PAGE);
-  assert.match(src, /lesson\.needsCheck \?/, "the completion action must branch on needsCheck");
-  // The placeholder branch must explain when completion opens and must not
-  // render the completion button at all.
-  const start = src.indexOf("lesson.needsCheck ?");
-  const branchEnd = src.indexOf(") : user ?", start);
-  assert.ok(start !== -1 && branchEnd !== -1, "the placeholder branch must be a distinct render branch");
-  const branch = src.slice(start, branchEnd);
-  assert.match(branch, /Marking a lesson complete opens once its teaching\s*\n?\s*content is published/, "the locked state must explain when completion opens");
-  assert.doesNotMatch(branch, /CourseCompletionButton/, "a placeholder must never render the completion button");
-  // Anonymous visitors are sent to sign in, not into a 401.
-  assert.match(src, /Sign in/, "anonymous visitors get a sign-in CTA");
+test("the university lesson page mounts the content report affordance", () => {
+  assert.match(readFileSync(Q(LESSON_PAGE), "utf8"), /ContentReportTab/);
 });
 
 // ---------------------------------------------------------------------------
@@ -83,16 +69,8 @@ test("lesson navigation is module-scoped with named boundaries", () => {
 });
 
 // ---------------------------------------------------------------------------
-// 3. Course page: honest progress, obvious next action, no orphaned routes.
+// 3. Course page: obvious next action, no orphaned routes.
 // ---------------------------------------------------------------------------
-test("course page reports per-module authored progress", () => {
-  const src = read(COURSE_PAGE);
-  assert.match(src, /authoredCount: lessons\.filter\(\(l\) => !l\.needsCheck\)\.length/, "each module carries its authored count");
-  const nav = read(NAV);
-  assert.match(nav, /authoredCount\?: number/, "the nav type carries the count");
-  assert.match(nav, /of \$\{group\.lessons\.length\} authored/, "the module header prints X of Y authored");
-});
-
 test("course page marks the next uncompleted lesson", () => {
   const src = read(COURSE_PAGE);
   assert.match(src, /nextLessonId=\{nextLesson\?\.id \?\? null\}/, "the next lesson id reaches the nav");
@@ -101,15 +79,9 @@ test("course page marks the next uncompleted lesson", () => {
   assert.match(nav, /Next up/, "the first uncompleted lesson is labelled Next up");
 });
 
-test("course page states plainly when nothing is published", () => {
-  const src = read(COURSE_PAGE);
-  assert.match(src, /authoredCount === 0/, "a course with no published content must be detected");
-  assert.match(src, /This course is being written/, "it must say so in plain words");
-  assert.match(src, /Get notified when lessons open/, "and offer the notify action, not a broken spine");
-  // The start action must not dangle into an unwritten course.
-  assert.match(src, /nextLesson && authoredCount > 0/, "the start CTA is gated on published content");
-});
-
+// ---------------------------------------------------------------------------
+// 4. No dead ends: every university shell offers a way back and a next step.
+// ---------------------------------------------------------------------------
 test("no university route is orphaned", () => {
   const src = read(COURSE_PAGE);
   assert.match(src, /href=\{`\/university\/\$\{course\.slug\}\/exams`\}/, "the exam hall must be linked from the course page");
@@ -118,15 +90,6 @@ test("no university route is orphaned", () => {
   assert.match(read(TRANSCRIPT), /href="\/login"/, "the transcript sign-in dead end links out");
   assert.match(read(REVISION), /href="\/university"/, "the revision queue links back to university");
   assert.match(read(REVISION), /Browse the courses/, "the revision empty state offers a next step");
-});
-
-// ---------------------------------------------------------------------------
-// 4. The index keeps the notify anchor reachable while lessons are pending.
-// ---------------------------------------------------------------------------
-test("index keeps the waitlist anchor while lessons are in preparation", () => {
-  const src = read(INDEX_PAGE);
-  assert.match(src, /inPreparation = totalLessons > authoredLessons/, "in-preparation state is computed");
-  assert.match(src, /!premium \|\| inPreparation/, "the aside shows for non-premium or pending content");
 });
 
 // ---------------------------------------------------------------------------
@@ -173,8 +136,15 @@ test("no university seed row is pre-verified or left as draft", () => {
   }
 });
 
-test("placeholder lessons are honest in seed content", () => {
+test("placeholder lessons are never written to the student database", () => {
+  // Owner directive 2026-10-24 ("show what's real"): the authoring queue lives
+  // in the seed source, never in student-facing rows. The engine writes
+  // authored lessons only and deletes placeholder rows left by earlier seeds.
   const spine = read("prisma/seed-courses/mbbs/spine.ts");
-  assert.match(spine, /text: "In preparation"/, "placeholder lessons announce themselves in their body");
-  assert.match(spine, /needsCheck:\s*!l\.authored/, "needsCheck follows authorship, never a hard-coded true");
+  assert.match(spine, /subject\.lessons\[i\]\.authored/, "only authored lessons are written");
+  assert.match(spine, /notIn: Array\.from\(authoredIds\)/, "leftover placeholder rows are deleted on re-seed");
+  assert.doesNotMatch(spine, /needsCheck:\s*!l\.authored/, "needsCheck is not derived from authorship any more");
+  // And the shipped UI must not render review scaffolding either.
+  const lessonPage = read("src/app/university/[course]/lessons/[lesson]/page.tsx");
+  assert.doesNotMatch(lessonPage, /needsCheck|In preparation|awaiting human review|being written/);
 });

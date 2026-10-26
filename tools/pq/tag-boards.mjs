@@ -13,7 +13,8 @@
  * which is exactly how the cross-board CORE pass in prisma/seed-exam-boards.ts
  * (and its resume guard) tagged the legacy curriculum questions.
  *
- * Boards covered: jamb, waec, neco (the three LIVE boards in src/lib/exam-bank.ts).
+ * Boards covered: jamb (the only LIVE board in src/lib/exam-bank.ts — WAEC/NECO
+ * and the 11 foreign boards were retired on 2026-10-24).
  * Preparing boards are never touched — they have no verified blueprint papers.
  *
  * SAFETY (repo rules: additive + idempotent only, never destructive):
@@ -43,7 +44,7 @@ const onlyBoards = (() => {
 })();
 
 /** The live boards, in registry order (src/lib/exam-bank.ts). */
-const LIVE_BOARDS = ["jamb", "waec", "neco"];
+const LIVE_BOARDS = ["jamb"];
 
 const lit = (s) => {
   const v = String(s);
