@@ -379,3 +379,20 @@ any assessment weight); rebuild in parallel with the board clearance.
   (DELETE FROM QuestionBoardTag ... topic LIKE 'master-%') or keep for tag-hygiene history?
 - **Next queue**: lesson authoring for the 9 allied subjects (409 placeholder lessons, one agent
   per subject file), then programming/statistics depth, then stubs.
+
+## Production deployment (2026-10-26, orchestrator)
+
+- PR #9 (`release/board-clearance-university-rebuild`, 5 commits, 98 files, ~9.9k insertions)
+  merged to main (849bce2) with CI green (tsc + lint + 226/226 tests + build) and a passing
+  Vercel preview. Production deploy dpl_ByNhMnZKj1MtBZjyZiNHLKMszegU READY.
+- DB-side changes were applied directly earlier (board clearance, 414 items, placeholder-lesson
+  deletion, ContentReport migration with FK+RLS); this merge shipped the matching code.
+- Live verification on gnostiri.vercel.app: /highschool/exams/jamb shows 5,997 as the single
+  count on every surface; battle-plan and the exams hub are JAMB-only; /university renders no
+  review scaffolding ("open to study" copy live); the ContentReport tab ("Spotted a problem with
+  this content?") renders on university lesson pages, highschool study pages and quiz pages;
+  POST /api/content-reports returns 401 unauthenticated.
+- Known nuance: retired-board URLs (e.g. /highschool/exams/waec) render the not-found PAGE but
+  answer HTTP 200 (force-dynamic streaming) — content is correct, status code is cosmetic.
+- Next queue: lesson authoring for the 9 allied subjects (concept spines only, no lesson rows),
+  then programming/statistics depth (12 items each), then the two stubs.
