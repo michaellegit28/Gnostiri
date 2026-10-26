@@ -245,7 +245,7 @@ export async function seedAssessmentPhysiology(): Promise<void> {
     }
     await prisma.assessmentItem.upsert({
       where: { slug: it.slug },
-      update: { conceptId, stem: it.stem, options: opts, correctAnswer: it.correctAnswer, explanation: it.explanation, marks: it.marks, negativeMarks: 1.25, orderIndex: i, difficulty: it.difficulty, reviewStatus: "draft", needsCheck: it.needsCheck ?? false },
+      update: { conceptId, stem: it.stem, options: opts, correctAnswer: it.correctAnswer, explanation: it.explanation, marks: it.marks, negativeMarks: 0.25, orderIndex: i, difficulty: it.difficulty, reviewStatus: "draft", needsCheck: it.needsCheck ?? false },
       create: {
         slug: it.slug,
         courseId: course.id,
@@ -256,7 +256,7 @@ export async function seedAssessmentPhysiology(): Promise<void> {
         correctAnswer: it.correctAnswer,
         explanation: it.explanation,
         marks: it.marks,
-        negativeMarks: 1.25,
+        negativeMarks: 0.25,
         orderIndex: i,
         isPublished: true,
         difficulty: it.difficulty,
