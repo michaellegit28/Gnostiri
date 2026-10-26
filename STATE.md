@@ -210,3 +210,172 @@ Root causes found and fixed:
   All 12 subjects x 500 = 6,000 now reachable; JAMB CBT card reports 12.
 - Killed a day-long hung tag-boards dry-run (per-row upserts over the pooler are
   unusable at this scale; single-statement approach documented for agent 5).
+
+## opencode integration (2026-10-24, orchestrator)
+
+- Repo cloned to /root/Gnostiri; project config `/root/Gnostiri/opencode.json` (schema-tagged,
+  pure JSON). Conventions in `AGENTS.md` (loaded via `instructions`).
+- MCP servers (verified working): github (remote, bearer via {env:GITHUB_TOKEN}; initialize probe
+  OK), context7 (remote docs, no auth), postgres (local `@modelcontextprotocol/server-postgres` —
+  npm-deprecated but functional; reads `$DATABASE_URL` from shell env; initialize + tools/list OK,
+  exposes read-only `query`), playwright, sequential-thinking, memory.
+- Vercel MCP is OAuth-only (PAT rejected: www-authenticate → authorization_servers vercel.com).
+  Config carries no header; run `opencode mcp auth vercel` once after restart. `VERCEL_TOKEN`
+  retained in .env for CLI/API use only.
+- markitdown MCP disabled (`enabled: false`): PyPI unreachable from this box; venv exists at
+  /root/mcp-venvs/markitdown. Re-enable after `/root/mcp-venvs/markitdown/bin/pip install markitdown-mcp`.
+- Secrets: `.env` (chmod 600, gitignored) + exports in `~/.zshrc` and `~/.profile`. No secret values
+  in repo or opencode.json. Chat-exposed creds (GitHub PAT, Vercel token, Supabase DB password)
+  remain on the rotation list (blocker #5).
+- Agent roster (.opencode/agent/, all subagents): questions-lane, curriculum-lane, db-lane,
+  app-lane, tutor-lane, payments-lane, e2e-lane, audit-lane (read-only), reviewer-lane (read-only),
+  scribe-lane. Mailbox: /tmp/opencode/mailbox/agent-agents/AGENT-MESSAGES.md.
+- Skills (.opencode/skills/): dual-version-question-banks, sm2-spaced-repetition, assessment-items,
+  prisma-supabase-pooler, nextjs-repo-conventions, qa-gates, study-content-accessibility,
+  seo-public-pages, secrets-and-env-hygiene, vercel-github-ops.
+- Commands: /qa, /ship-check.
+- Ops notes: run opencode from /root/Gnostiri (restart required after config changes). Playwright
+  browsers need `npx playwright install chromium` before e2e-lane can run.
+
+## Board clearance (2026-10-24, orchestrator — owner directive)
+
+Owner directive: clone/variant questions stay as original Gnostiri content; leave JAMB for now;
+clear all other Nigeria exams (WAEC, NECO) and all other-country boards; return to JAMB later;
+build university (MBBS) in parallel.
+
+- Provenance audit first: the shipped 6,000 JAMB questions are original-text variants
+  (provenance "original", variant B, no board names/years in text, zero duplicate stems in the 12
+  banks) — ZERO verbatim board questions live in production. The only official-text artifacts were
+  JSON-side (nsc-official.batch1.json ×6, nsc-necta.dual-version.json ×3) and are quarantined.
+- Production cleared (transactional, backups at .backups/pre-clear-2026-10-24/): Examination 13→1
+  (jamb only) · Questions 7,096→6,640 (jamb 6,000 + master 640 original) · Topics 92 waec/neco
+  deleted · QuestionBoardTag 909 deleted · TopicBoardAlignment 663 deleted (all pointed to cleared
+  boards) · CurriculumBoard 27→0 · ExaminationPaper 11 deleted · StudyTrack 3 + PracticeSession 5 +
+  Lesson 1 user-data rows removed with cleared content.
+- Repo: exam-bank.ts + seed-exam-boards.ts now JAMB-only (retirement list re-enforces on re-seed);
+  content/exams/exam-papers.json filtered to JAMB (21→10 papers); NSC/NECTA official files +
+  a4-generated batches (unlocalized multi-country variants) quarantined to .backups/.
+- Content defects found for the JAMB rework queue (later round): a4-batch2 had 41 duplicate stems
+  (quarantined); 9 english passage-comprehension items are self-contained (inline passage) — OK;
+  physics bank has 1 needsCheck item.
+- Master 640 questions KEPT (owner call): original exam-style content incl. non-board topics
+  (e.g. master-ai-emerging-tech) — not board past-questions.
+- MBBS status at clearance: 13 courses · 57 modules · 321 lessons · 317 concepts · 139 assessment
+  items — all needs-human-review. Item depth is the gap: medicine/pathology/obgyn/pharmacology/
+  paediatrics/surgery at 6 items vs biochem 25 / physio 26 / anatomy 28. Deepening underway.
+
+## MBBS deepening round 1 (2026-10-24, orchestrator)
+
+- New seed `prisma/seed-assessment-internal-medicine.ts` (20 original SBA items, MED 201):
+  internal-medicine-foundations 6 → 26 items, orderIndex offset 6 to preserve pre-existing
+  items, marks 1 / negativeMarks 1.25 / isPublished / reviewStatus needs-human-review (post-repair
+  convention — no draft rows). Concepts covered: fluid/acid-base, sepsis, ischaemic heart disease,
+  heart failure, arrhythmia, valvular disease, asthma/COPD, pneumonia/pleural, PE, GI approach,
+  peptic ulcer, IBD, liver, pancreatic, thyroid, diabetes, endocrine emergencies, AKI, anaemia,
+  infectious disease. Registered in tests/assessment-seed.test.mjs (structural invariants).
+- Platform totals: 139 → 159 assessment items, all needs-human-review (0 draft).
+- Gates green: assessment-seed 4/4 · tsc clean · mbbs-spine + mbbs-module-two + alignment-engine +
+  assessment 43/43.
+- Next deepening targets (same pattern, ~20 items each): pathology-cell-injury-repair (6),
+  obstetrics-gynaecology (6), pharmacology-foundations (6), paediatrics-child-health (6),
+  surgery-principles (6), then introduction-to-programming (12) + applied-statistics (12), then
+  stubs data-foundations + academic-writing (0 modules).
+
+## AIIMS MBBS reconstruction (2026-10-24, orchestrator + parallel agent lanes)
+
+Owner directive: rebuild the university on the real AIIMS MBBS syllabus (owner-supplied condensed
+transcription of "syllabus - MBBS.pdf" — marks still OCR-unverified, validate before hard-coding
+any assessment weight); rebuild in parallel with the board clearance.
+
+- **Spec**: `prisma/seed-courses/mbbs/AIIMS-SYLLABUS-SPEC.md` — 3 phases, 9 semesters, 3
+  professional exams, subject×semester map, postings, internship block table, skills layer.
+- **9 missing subjects seeded** (`prisma/seed-courses/mbbs/allied-specialities.ts`, spines only —
+  modules + concept DAG + tracked-placeholder lessons, no placeholder items; SUBJECTS env filter
+  for resumable runs): MIC 201 microbiology · CMED 301 community medicine · FOR 202 forensic
+  medicine · PSYT 306 psychiatry · DERM 307 dermatology · ANAES 307 anaesthesiology · OPHT 307
+  ophthalmology · ORTH 307 orthopaedics · OTOR 308 ENT. University totals: 13 → 22 courses ·
+  57 → 94 modules · 321 → 409 lessons · 317 → 424 concepts.
+- **Assessment depth (parallel agent lanes, all verified)**: pathology 6→26, pharmacology 6→26,
+  obstetrics-gynaecology 6→26 (new seeds `prisma/seed-assessment-{pathology,pharmacology,
+  obstetrics-gynaecology}.ts`, registered in tests/assessment-seed.test.mjs). Platform items:
+  139 → 219, ALL needs-human-review, 0 draft, 0 verified.
+- **negativeMarks normalised**: the seed template had drifted to 1.25 while every live row shipped
+  0.25 — all 219 rows normalised to 0.25 and all 7 seed-assessment-*.ts files corrected, so
+  re-runs cannot reintroduce the split.
+- **Post-clearance code repair (audit → parallel fix lanes, all green)**: 20+ retired-board
+  references removed across prisma/seed.ts (WAEC/NECO resurrection risk — examsData now JAMB-only,
+  WAEC quadratic block deleted), src/lib/cbt/config.ts (presets trimmed, WAEC_GRADES deleted),
+  cbt/scoring.ts (waecGrade → gradeForPercent), battle-plan chain (API guard + page + homepage now
+  jamb-only), homepage/highschool/study-plan SEO copy, BioDiagrams label, CsvImporter example,
+  highschool exam route guard (`if (!registryBoard) notFound()` — a stray DB row can never render a
+  board page again), practice-page EXAM_CODE_PREFIXES → ["jamb"], tools/audit-counts.mjs +
+  tools/smoke.mjs + tools/pq/{tag-boards,verify-unification,audit-surfaces,locales}.mjs, tests
+  fixtures (qa-fixtures/qa-tools/board-taxonomy/one-count), and
+  `tools/pq/unify-boards.mjs` DELETED (destructive re-duplication script).
+- **Gates**: tsc clean · next lint clean · full suite 218/218 pass.
+- **Known follow-ups**: (1) content/questions/{biology,chemistry}.json still carry styleBoard
+  "WAEC" on 173 rows and relabel-sourceExam.json is unapplied; (2) tools/pq/audit-surfaces.mjs
+  flags 6,000 jamb-tree vs 6,330 tag-served questions (330 master-* rows tagged jamb CORE by
+  design — contradiction matrix needs an owner ruling); (3) verify-unification.mjs:178 prose still
+  references the deleted unify-boards.mjs; (4) curriculum-alignment seed still carries foreign
+  CurriculumBoard rows (country-alignment feature — owner to confirm scope); (5) MBBS authoring
+  queue: 409 placeholder lessons + 0 items on the 9 new subjects, plus paediatrics/surgery/
+  programming/statistics depth pass.
+
+## Authoring wave 1 (2026-10-24, 6 parallel agent lanes — all verified)
+
+- **Depth passes**: paediatrics 6→26, surgery 6→26. **New subjects**: medical-microbiology 0→22,
+  community-medicine 0→23, psychiatry 0→18, dermatology 0→16. New seeds:
+  prisma/seed-assessment-{paediatrics,surgery,microbiology,community-medicine,psychiatry,
+  dermatology}.ts — all registered in tests/assessment-seed.test.mjs, all negativeMarks 0.25,
+  all needs-human-review.
+- **Repair caught by the psychiatry lane**: production had zero ConceptNodes for `mbbs-psychiatry`
+  (its spine seed had silently failed in the first allied run). The lane re-ran the idempotent
+  spine seeder scoped to `SUBJECTS=psychiatry` — 5 modules, 16 concepts, 13 prereq edges, 16
+  placeholder lessons restored from repo source. Lesson for the orchestrator: after any allied
+  spine run, verify concepts-per-course, not just course rows.
+- **allied-specialities.ts split** into 9 per-subject files (microbiology.ts … otorhinolaryngology.ts)
+  + a barrel, so lesson-authoring agents can own one file each without collisions. Barrel verified
+  end-to-end (SUBJECTS=dermatology re-run clean), SUBJECTS env filter retained for resumable runs.
+- **Gates**: tsc clean · lint clean · full suite 224/224 (was 218).
+- **Platform totals**: 22 courses · 338 assessment items — ALL needs-human-review, 0 draft, 0
+  verified. Core nine subjects now uniform at 25–28 items each (ANAT 28, PHYS 26, BCHM 25, PATH
+  26, PHRM 26, MED 26, SURG 26, OBGY 26, PEDS 26).
+- **Next queue**: item batches for forensic-medicine, ophthalmology, orthopaedics, anaesthesiology,
+  otorhinolaryngology (0 items each — 5 lanes), then lesson authoring (one subject-file per agent,
+  house format: outcomes/prereqs/big idea/worked examples/common mistakes/check questions/MCQs),
+  then programming/statistics depth, then stubs data-foundations + academic-writing (retire or build).
+
+## Authoring wave 2 + highschool exam fixes (2026-10-24)
+
+- **Power-cut recovery**: lanes for forensic/ortho/anaes/ENT completed before the outage
+  (16/16/14/14 items); ophthalmology was mid-write and was re-run clean (16 items). Verified no
+  partial writes, no duplicate slugs, all rows needs-human-review. Stray hung ts-node killed.
+- **Bank hygiene** (tools/pq/dedupe-banks.mjs, idempotent, backups in .backups/pre-dedupe-2026-10-24/):
+  the 4 expansion files were fully absorbed into their base banks → content/questions 6,140 → 6,000
+  rows (12 banks × 500, zero duplicate stems); 173 items relabelled styleBoard WAEC → JAMB (bank is
+  now uniformly 6,000 JAMB-styled, zero WAEC labels); 5 diagram/figure refs all verified
+  answerable inline (kept, reasons logged); one needsCheck item remains (physics/exp1-waves-q2).
+- **Count contradiction — resolved as a STALE MIRROR + one real leak.** Live audit of
+  gnostiri.vercel.app proved every surface already prints 6,000 (tree basis); the "3 DIFFERENT
+  COUNTS" came from tools/pq/audit-surfaces.mjs modelling tag counts the shipped code no longer
+  runs. Real leak: 330 master-* questions tagged jamb CORE were servable by hand-typed URL
+  (/api/questions and /api/practice/manifest both answered a master topic). Fix (a) src/app/api/
+  questions/route.ts — topic lookup now gated by boardTreeTopicIds (out-of-tree topic → 404) and
+  no tag-admission branch remains; (b) src/lib/exam-manifest.ts — topic resolution tree-gated;
+  (c) tools/pq/audit-surfaces.mjs — mirror corrected to the shipped tree basis + manifest summed
+  per topic + new "out-of-tree tags (hygiene)" row; (d) tools/pq/verify-unification.mjs — stale-tag
+  warning is loud but non-fatal (deletion needs owner sign-off) + false "SOURCE copies" comment
+  replaced with measured facts (329/330 have no in-tree twin; 60 have no JAMB destination).
+  Matrix now prints JAMB ONE COUNT.
+- **Platform totals**: 22 courses · 414 assessment items — ALL needs-human-review, 0 draft, 0
+  verified. Item depth uniform: the nine core subjects 25-28 each, allied subjects 14-23 each,
+  programming/statistics 12 each.
+- **Gates**: tsc clean · lint clean · full suite 229/229.
+- **OWNER RULINGS PENDING**: (1) the 3 in-tree theory questions (theory-bio-q1/2/3) are excluded
+  from board-format practice because JAMB P1 is MCQ-only — manifest serves 5,997 vs tree 6,000.
+  Tag them NOT_EXAMINED (single count 5,997) or keep CORE (6,000 + documented 3-question
+  divergence)? (2) the 330 stale out-of-tree jamb tags are now inert — approve deletion
+  (DELETE FROM QuestionBoardTag ... topic LIKE 'master-%') or keep for tag-hygiene history?
+- **Next queue**: lesson authoring for the 9 allied subjects (409 placeholder lessons, one agent
+  per subject file), then programming/statistics depth, then stubs.

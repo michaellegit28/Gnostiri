@@ -2,15 +2,15 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { BookOpen, CheckCircle2, ChevronDown, Clock, CircleDashed, ArrowRight } from "lucide-react";
+import { BookOpen, CheckCircle2, ChevronDown, Clock, ArrowRight } from "lucide-react";
 
 /**
  * ModuleLessonNav — the course → module → lesson spine of a course page.
  *
  * One disclosure section per module, each lesson a real link (so it is
- * keyboard-navigable by default), with progress and placeholders visible
- * before a lesson is opened. Module headers use a roving tabindex, so Arrow
- * Up/Down/Home/End move between them and Enter or Space toggles the section.
+ * keyboard-navigable by default), with progress visible before a lesson is
+ * opened. Module headers use a roving tabindex, so Arrow Up/Down/Home/End
+ * move between them and Enter or Space toggles the section.
  */
 
 export interface NavLesson {
@@ -18,8 +18,6 @@ export interface NavLesson {
   title: string;
   orderIndex: number;
   estimatedMinutes: number;
-  /** true for a tracked placeholder lesson that has not been authored yet. */
-  needsCheck: boolean;
 }
 
 export interface NavModule {
@@ -27,8 +25,6 @@ export interface NavModule {
   title: string;
   orderIndex: number;
   lessons: NavLesson[];
-  /** How many of this module's lessons carry authored (non-placeholder) content. */
-  authoredCount?: number;
 }
 
 interface ModuleLessonNavProps {
@@ -107,13 +103,6 @@ export default function ModuleLessonNav({
       {groups.map((group, gi) => {
         const isOpen = open === group.id;
         const done = group.lessons.filter((l) => completed.has(l.id)).length;
-        const authored = group.lessons.filter((l) => !l.needsCheck).length;
-        const authoredLabel =
-          group.authoredCount == null
-            ? null
-            : group.authoredCount === group.lessons.length
-              ? "all authored"
-              : `${group.authoredCount} of ${group.lessons.length} authored`;
         return (
           <section
             key={group.id}
@@ -135,7 +124,6 @@ export default function ModuleLessonNav({
                 <span className="block font-semibold text-sm text-slate-100">{group.title}</span>
                 <span className="mt-0.5 block text-xs text-slate-400">
                   {group.lessons.length} lesson{group.lessons.length === 1 ? "" : "s"}
-                  {authoredLabel ? ` · ${authoredLabel}` : ""}
                   {done > 0 ? ` · ${done} done` : ""}
                 </span>
               </span>
@@ -182,11 +170,6 @@ export default function ModuleLessonNav({
                             {isNext && (
                               <span className="inline-flex items-center gap-1 font-semibold text-gold">
                                 <ArrowRight className="h-3 w-3" aria-hidden /> Next up
-                              </span>
-                            )}
-                            {lesson.needsCheck && (
-                              <span className="inline-flex items-center gap-1 text-amber-400/80">
-                                <CircleDashed className="h-3 w-3" aria-hidden /> In preparation
                               </span>
                             )}
                           </span>

@@ -35,7 +35,7 @@ export default async function CoursePage({
     include: {
       lessons: {
         orderBy: { orderIndex: "asc" },
-        select: { id: true, title: true, orderIndex: true, estimatedMinutes: true, needsCheck: true },
+        select: { id: true, title: true, orderIndex: true, estimatedMinutes: true },
       },
       modules: {
         orderBy: { orderIndex: "asc" },
@@ -61,7 +61,6 @@ export default async function CoursePage({
   const premium = user ? await hasPremiumAccess(user.id) : UNIVERSITY_OPEN;
 
   const totalMinutes = course.lessons.reduce((s, l) => s + l.estimatedMinutes, 0);
-  const authoredCount = course.lessons.filter((l) => !l.needsCheck).length;
   const flatConcepts =
     course.concepts.length > 0
       ? course.concepts
@@ -82,7 +81,6 @@ export default async function CoursePage({
     title: l.title,
     orderIndex: l.orderIndex,
     estimatedMinutes: l.estimatedMinutes,
-    needsCheck: l.needsCheck,
   }));
 
   const navModules: NavModule[] = course.modules.map((m) => {
@@ -92,7 +90,6 @@ export default async function CoursePage({
       title: m.title,
       orderIndex: m.orderIndex,
       lessons,
-      authoredCount: lessons.filter((l) => !l.needsCheck).length,
     };
   });
   const orphanLessons: NavLesson[] = navLessons.filter((l) => moduleIdOfLesson(l) == null);
@@ -188,16 +185,6 @@ export default async function CoursePage({
                   {Math.max(1, Math.round(totalMinutes / 60))}h
                 </dd>
               </div>
-              <div className="flex items-center gap-1.5">
-                <dt className="sr-only">Authored lessons</dt>
-                <Sparkles className="h-3.5 w-3.5" aria-hidden />
-                <dd>
-                  {authoredCount} fully authored
-                  {authoredCount < course.lessons.length && (
-                    <span className="text-amber-400/80"> · {course.lessons.length - authoredCount} in preparation</span>
-                  )}
-                </dd>
-              </div>
               {flatConcepts.length > 0 && (
                 <div className="flex items-center gap-1.5">
                   <dt className="sr-only">Concepts</dt>
@@ -218,7 +205,7 @@ export default async function CoursePage({
               )}
             </dl>
 
-            {nextLesson && authoredCount > 0 && (
+            {nextLesson && (
               <div className="pt-2">
                 <Link
                   href={`/university/${course.slug}/lessons/${nextLesson.id}`}
@@ -232,25 +219,6 @@ export default async function CoursePage({
                 <p className="mt-2 text-xs text-slate-500">
                   {nextModule ? `${nextModule.title} · ` : ""}{nextLesson.title} · ~{nextLesson.estimatedMinutes} min
                 </p>
-              </div>
-            )}
-
-            {/* Nothing authored yet: say so plainly — never lead a student into
-                a spine where every lesson is a placeholder. */}
-            {authoredCount === 0 && (
-              <div className="max-w-2xl rounded-xl border border-amber-500/30 bg-amber-500/[0.06] p-5">
-                <p className="font-serif text-lg font-bold text-amber-200">This course is being written</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                  The full structure is in place — every module, concept and lesson slot is real — but no
-                  teaching content has been published yet. We are authoring it now, one reviewed lesson at
-                  a time.
-                </p>
-                <Link
-                  href="/university#waitlist"
-                  className="mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-5 py-2.5 text-sm font-semibold text-amber-200 transition-colors hover:bg-gold/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                >
-                  Get notified when lessons open <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
               </div>
             )}
           </div>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import ContentReportTab from "@/components/ContentReportTab";
 import {
   ChevronRight,
   CheckCircle2,
@@ -92,7 +93,7 @@ export default function QuizClient({
           <div className="space-y-2">
             <h2 className="text-2xl font-serif font-bold text-slate-100">No questions available yet</h2>
             <p className="text-slate-400 text-sm">
-              Practice questions for &quot;{topicTitle}&quot; in {examName} {subjectTitle} are currently being added. Check back soon!
+              Practice questions for &quot;{topicTitle}&quot; are on the way.
             </p>
           </div>
           <div>
@@ -355,6 +356,15 @@ export default function QuizClient({
               <span>Back to {subjectTitle}</span>
             </Link>
           </div>
+
+          <ContentReportTab
+            domain={domain === "extras" ? "extras" : "highschool"}
+            targetType="question"
+            targetId={topicId}
+            targetUrl={domain === "extras" ? `/discovery/${topicSlug}/quiz` : `/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz`}
+            targetTitle={topicTitle}
+            authenticated={Boolean(user)}
+          />
         </div>
       </div>
     );
@@ -484,6 +494,17 @@ export default function QuizClient({
               </div>
             </div>
           )}
+
+          <div className="flex justify-end pt-2">
+            <ContentReportTab
+              domain={domain === "extras" ? "extras" : "highschool"}
+              targetType="question"
+              targetId={currentQuestion.id}
+              targetUrl={domain === "extras" ? `/discovery/${topicSlug}/quiz` : `/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz`}
+              targetTitle={topicTitle}
+              authenticated={Boolean(user)}
+            />
+          </div>
         </div>
       </main>
 
