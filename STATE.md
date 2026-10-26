@@ -396,3 +396,22 @@ any assessment weight); rebuild in parallel with the board clearance.
   answer HTTP 200 (force-dynamic streaming) — content is correct, status code is cosmetic.
 - Next queue: lesson authoring for the 9 allied subjects (concept spines only, no lesson rows),
   then programming/statistics depth (12 items each), then the two stubs.
+
+## University wave 1 + study crosswalk (2026-10-26)
+
+- **Lesson authoring** (house format, all gates green): microbiology 0→15 lessons, forensic
+  medicine 0→12, community medicine 0→10, pathology 6→15. Second-Professional-bound subjects
+  now carry real teaching content; M4-M5 remain tracked spines for the next wave.
+- **Item depth**: introduction-to-programming 12→26, applied-statistics 1→26 (both now at the
+  house standard; platform items 414→442).
+- **Study crosswalk** (src/lib/study-crosswalk.ts): the 67 highschool study notes live on
+  master-* curriculum topics while JAMB study pages resolve the {code}-* tree, so exam study
+  pages showed an empty state. The crosswalk maps 32 JAMB topics to their master counterparts
+  (incl. the two semantic fixes the naive suffix matcher got wrong: english-punctuation →
+  master-punctuation-mechanics, physics-fields → master-further-mechanics-fields); the JAMB
+  study page falls back to the mapped note. Topics unique to JAMB keep the honest empty state.
+- Fixed the CLI guards in the split allied seed files to the sibling `mbbs/<name>` pattern.
+- Gates: tsc clean · lint clean · full suite 226/226.
+- **Remaining queue (December launch)**: wave 2 — dermatology, psychiatry, ophthalmology,
+  orthopaedics, anaesthesiology, ENT lessons (0 each); wave 3 — paediatrics/medicine/surgery/
+  obgyn lessons 6→~14 each; then the AI-era interface pass (owner flagged the current UI).
