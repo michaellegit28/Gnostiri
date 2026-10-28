@@ -1108,6 +1108,1547 @@ function lesson6() {
 }
 
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// LESSON 7 — Small bowel surgery & abdominal emergencies
+// ---------------------------------------------------------------------------
+function lesson7() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the causes and the recognition of small bowel obstruction; distinguish a simple from a strangulating obstruction and state what each demands; classify abdominal and inguinal hernias and state their complications; describe the principles of stoma formation, care and the complications of a high-output stoma; and outline the immediate management of a patient with a suspected obstructed bowel.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-6 and ANAT 101 (the abdominal wall and the inguinal canal). A hernia is a defect in the abdominal wall, and an obstruction is a failure of transit, and both are defined by the anatomy they interrupt.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Small bowel obstruction",
+        text: "A failure of the transit of small bowel content past a point of obstruction, producing distension, vomiting, colicky pain and, in a strangulating obstruction, the compromise of the blood supply of the bowel wall itself.",
+      },
+      {
+        type: "paragraph",
+        text: "The whole assessment of an obstruction is directed at one question: is the bowel strangulated? A simple obstruction is a mechanical problem managed by decompression, resuscitation and, in many cases, an operation; a strangulation is a vascular problem that kills within hours regardless of the fluid and the analgesia. The distinction is made clinically — a constant rather than a colicky pain, fever, tachycardia, peritonitis and a rising lactate — and it is the only question that changes the urgency from hours to minutes.",
+      },
+
+      { type: "heading", level: 2, text: "Causes and recognition" },
+      {
+        type: "table",
+        headers: ["Cause", "Frequency and mechanism", "Note"],
+        rows: [
+          ["Adhesions", "The commonest cause, from previous abdominal surgery, with bands that kink or compress the bowel", "A patient with a scar and colic is obstructed until proven otherwise"],
+          ["Incarcerated hernia", "The commonest cause in a patient without a scar", "The hernial orifices are examined in every obstruction"],
+          ["Malignancy", "A stricture from a colon or small bowel carcinoma", "A change in bowel habit precedes the obstruction"],
+          ["Volvulus", "A twist of a mobile segment — a sigmoid volvulus, or a midgut volvulus in a child", "A closed-loop obstruction with a rapid strangulation"],
+          ["Intussusception", "The telescoping of bowel into bowel, commonest in children aged 6 to 18 months", "A sausage-shaped mass and redcurrant stool"],
+          ["Gallstone ileus", "An eroding stone that obstructs the terminal ileum", "Air in the biliary tree in an older patient"],
+          ["Crohn stricture", "A fibrotic narrowing of diseased small bowel", "Presents after years of known disease"],
+        ],
+      },
+      {
+        type: "table",
+        headers: ["Feature", "Simple obstruction", "Strangulating obstruction"],
+        rows: [
+          ["Pain", "Colicky, with pain-free intervals", "Constant, without relief, and worsening"],
+          ["Fever and tachycardia", "Late or absent", "Early and progressive"],
+          ["Abdomen", "Distended, tender but soft, with bowel sounds", "Peritonitic, with a silent abdomen and rigidity"],
+          ["Lactate", "Normal or mildly raised", "Raised, and rising with the ischaemia"],
+          ["Management", "Nil by mouth, nasogastric tube, intravenous fluid, and an operation for a proven or a high risk of strangulation", "Immediate resuscitation and laparotomy"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Hernias" },
+      {
+        type: "table",
+        headers: ["Type", "Site and course", "Risk and note"],
+        rows: [
+          ["Inguinal (indirect)", "Enters the deep ring and travels through the inguinal canal; commonest overall", "The commonest hernia in children and young men; a congenital process"],
+          ["Inguinal (direct)", "Bulges through the posterior wall of the canal", "Commonest in older men with a weak abdominal wall"],
+          ["Femoral", "Below and lateral to the pubic tubercle, through the femoral canal", "Commonest in women, and the most likely to strangulate because the neck is narrow"],
+          ["Umbilical and epigastric", "At the umbilicus or in the linea alba", "Often asymptomatic and small, and they can incarcerate"],
+          ["Incisional", "Through a previous operative scar", "Risk factors are the wound risk factors: infection, obesity, tension"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The complications of a hernia are the reason every hernia is either repaired or explicitly observed: an irreducible (incarcerated) hernia that becomes obstructed, a strangulation with ischaemia and perforation, and rarely, the content of a Richter hernia with only part of the circumference trapped and no bowel obstruction at all. A femoral hernia in a woman is the classic trap: it is small, it lies below the crease, and it strangulates early with little to find.",
+      },
+      {
+        type: "question",
+        prompt: "Why is a femoral hernia more likely to strangulate than an indirect inguinal one?",
+        answer: "Because the femoral canal is a narrow, rigid opening bounded by the pubic ramus, the femoral vein and the inguinal ligament, and a hernia through it is compressed early and completely rather than distending. The neck is anatomically unforgiving.",
+        explanation: "This is why a small lump below the inguinal ligament in a woman is operated on urgently rather than watched.",
+      },
+
+      { type: "heading", level: 2, text: "Stomas" },
+      {
+        type: "table",
+        headers: ["Type", "What it is", "Use and consideration"],
+        rows: [
+          ["End ileostomy", "The divided ileum brought out to the skin", "The commonest temporary stoma; the effluent is liquid and corrosive"],
+          ["Loop ileostomy", "A loop of ileum brought out and supported", "Defunctioning an anastomosis, and usually closed within a year"],
+          ["End colostomy", "The divided colon brought out", "The end of a resection, or an unresectable obstruction"],
+          ["Loop colostomy", "A loop of colon brought out", "Defunctioning a low rectal lesion"],
+          ["Urostomy", "An ileal conduit", "A urinary diversion after a cystectomy"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "A high-output stoma (more than 1500 ml per day) produces dehydration, a hyponatraemia, a metabolic acidosis and a magnesium deficiency, and it is managed with fluid and salt replacement, an antimotility agent and a diet that thickens the effluent. The site is marked before the operation, and the appliance is fitted and taught before the discharge, because the appliance management is what the patient lives with.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The nasogastric tube relieves the vomiting and the distension of an obstruction, but it does not treat it: it is an adjunct to the resuscitation, and the place for a tube is debated in the modern literature. The value of the 'drip and suck' regimen is decompression for the drainage, not the treatment.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Not examining the hernial orifices in a patient with abdominal pain or obstruction. A strangulated femoral hernia is a small lump missed by an incomplete examination, and its consequences are fatal.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming the absence of fever excludes a strangulation early. The fever and the tachycardia are later signs than the constant pain, and the lactate rises before the temperature in the first hours.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Operating on every adhesion without a plan. Many adhesive obstructions settle with decompression, and the decision for an operation is based on a strangulation, a failure to settle or a closed loop.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with a previous appendicectomy has 12 hours of vomiting, colicky central abdominal pain, distension and no flatus. What is the immediate management?",
+        answer: "Nil by mouth, a nasogastric tube for the decompression, intravenous fluid and electrolytes, analgesia, a plain abdominal radiograph and the blood tests including a lactate, and an assessment for the strangulation, because the likely diagnosis is an adhesive small bowel obstruction.",
+        explanation: "The resuscitation is immediate while the decision for surgery is made on the strangulation and the course.",
+      },
+      {
+        type: "question",
+        prompt: "What are the features of a strangulating obstruction, and why does it change the urgency?",
+        answer: "A constant unrelenting pain, fever, tachycardia, peritonitis, a silent abdomen and a rising lactate. The urgency changes because the ischaemic bowel progresses to perforation and to sepsis within hours, and the operation is not for the obstruction but for the survival of the bowel.",
+        explanation: "The management of a simple obstruction is measured in hours because it is mechanical; the management of a strangulation is measured in minutes.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with a previous laparotomy has colicky pain, vomiting and distension. Which is the most likely cause?",
+        options: ["Adhesions", "A carcinoma of the colon", "A gallstone ileus", "Intussusception"],
+        correctIndex: 0,
+        explanation: "Adhesive obstruction is the commonest cause in a patient with an abdominal scar, and it usually presents within the first years after the operation.",
+      },
+      {
+        type: "mcq",
+        stem: "Which finding most strongly suggests a strangulating obstruction?",
+        options: ["Colicky central pain", "A constant pain with fever, tachycardia and a raised lactate", "Vomiting with a large volume of bile", "Visible peristalsis"],
+        correctIndex: 1,
+        explanation: "The transition from a colicky to a constant pain, with a systemic response and a rising lactate, indicates the ischaemia of the bowel wall and demands immediate surgery.",
+      },
+      {
+        type: "mcq",
+        stem: "Which hernia is most likely to strangulate?",
+        options: ["An indirect inguinal hernia", "A femoral hernia", "An umbilical hernia", "An epigastric hernia"],
+        correctIndex: 1,
+        explanation: "The femoral canal is narrow and rigid, and the hernia is occluded early; a small lump below the inguinal ligament is a femoral hernia until proven otherwise.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with an ileostomy has an output of 2 litres per day, is lethargic and has sodium of 128. What is the management?",
+        options: ["Restrict the fluids", "Fluid and salt replacement, an antimotility agent, and check magnesium", "Taper down the stoma", "Close the stoma urgently"],
+        correctIndex: 1,
+        explanation: "A high-output ileostomy produces dehydration, hyponatraemia and a metabolic acidosis, and the treatment is replacement, with the magnesium checked too.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the role of the nasogastric tube in an obstruction?",
+        options: ["It cures the obstruction", "It decompresses the stomach and relieves the vomiting while the cause is treated", "It prevents the operation", "It replaces the fluid"],
+        correctIndex: 1,
+        explanation: "The tube drains the stomach and relieves the vomiting of the obstruction; it does not relieve the obstruction itself, and it is an adjunct to the resuscitation and the definitive treatment.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Small bowel obstruction is a mechanical problem until it becomes a vascular one, and the entire assessment is directed at the strangulation: a constant pain, fever, tachycardia, peritonitis and a rising lactate. The adhesions from previous surgery and the incarcerated hernias are the commonest causes, and the hernial orifices are examined in every obstruction. A stoma is a planned and marked part of the operation, and a high-output stoma needs the salt and the magnesium replaced. The definitive treatment of a simple obstruction is often an operation, and the definitive treatment of a strangulation is immediate surgery.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: colorectal surgery, where the resection of the colon and the rectum is planned for a cancer and for its complications.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 8 — Appendicitis & appendicectomy
+// ---------------------------------------------------------------------------
+function lesson8() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the presentation of acute appendicitis and its variants; apply a scoring system to a possible diagnosis and state the place of imaging; describe the operative approaches and their differences; recognise and manage a complicated appendicitis; and list the differentials of an acute lower abdominal pain in a young adult.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-7. Appendicitis is the commonest acute abdominal surgical emergency, and it is the model for how a clinical diagnosis is made without a single definitive test.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Acute appendicitis",
+        text: "Inflammation of the appendix, producing a characteristically migrating central abdominal pain that becomes a right iliac fossa pain with fever, tenderness and anorexia, and progressing to perforation and peritonitis if untreated.",
+      },
+      {
+        type: "paragraph",
+        text: "The appendix is a diverticulum of the caecum with a narrow lumen, and its obstruction — by a faecolith or lymphoid hyperplasia — produces a closed loop of mucosa that became inflamed, ischaemic and finally necrotic. The clinical signature follows that physiology: the visceral peritoneum produces the mid-abdominal, poorly localised pain; the parietal peritoneum produces the sharp, localised right iliac fossa pain of established appendicitis; and once the inflammation is contained by the omentum the presentation is a mass rather than peritonitis.",
+      },
+
+      { type: "heading", level: 2, text: "The presentation" },
+      {
+        type: "table",
+        headers: ["Feature", "What is found", "Basis"],
+        rows: [
+          ["Pain", "Central abdominal pain that migrates to the right iliac fossa within hours", "The visceral referral to the mid-abdomen, and the parietal pain once the appendix inflames"],
+          ["Anorexia", "An early and universal feature", "The vagal and inflammatory response"],
+          ["Tenderness", "Right iliac fossa, maximal at McBurney's point", "Over the site of the inflamed parietal peritoneum"],
+          ["Guarding and rebound", "The sign of parietal peritoneum involvement", "The severity of the localised peritonitis"],
+          ["Fever", "Low grade, below 38.5 degrees C", "A higher fever suggests perforation"],
+          ["Pelvic signs", "Rectal or pelvic tenderness, and urinary frequency", "A pelvic appendix inflames the bladder and the rectum"],
+          ["Rovsing sign", "Left iliac fossa pressure producing right-sided pain", "The indirect pressure of the inflated contents"],
+          ["Psoas sign", "Pain on extension of the right hip", "A retrocaecal appendix lies on the muscle"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "A high fever, a tachycardia and a generalised peritonitis indicate perforation, and a perforated appendix is a different disease from the classic presentation. The elderly patient, the very young, the pregnant woman and the immunosuppressed all have an atypical presentation and a delayed diagnosis, and the consequences are more severe.",
+      },
+
+      { type: "heading", level: 2, text: "Atypical presentations and the diagnosis" },
+      {
+        type: "table",
+        headers: ["Situation", "Why the presentation is altered", "How to manage"],
+        rows: [
+          ["The elderly", "A reduced inflammatory response and a less specific pain", "A lower threshold for imaging and an operation"],
+          ["The child under 5", "A poor ability to localise the pain, a rapid perforation, and a rising peritoneal irritation", "A careful examination and a low threshold for laparoscopy"],
+          ["The pregnant woman", "The appendix is displaced upward by the uterus, and the pain is right upper quadrant", "A low threshold for imaging, especially an MRI without the radiation of CT"],
+          ["The immunosuppressed", "A blunted immune response and an unclear fever pattern", "An early CT and an early operation"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The diagnosis is clinical, and the scoring systems (the Alvarado score) combine the features above into a probability. The place of the score is not to make the diagnosis but to decide who needs imaging and admission: a low score with no pain can be discharged, a moderate score needs an ultrasound, and a high score goes to theatre. An ultrasound is the first imaging test in a child and in a pregnant woman, and a CT is used in the adult when the diagnosis is unclear, with the acknowledged radiation risk.",
+      },
+      {
+        type: "question",
+        prompt: "When should a scoring system be used in the diagnosis of appendicitis, and what is it not for?",
+        answer: "It is used to stratify the need for admission and imaging in a patient with abdominal pain, and not to make the diagnosis or to replace the examination. A high score is an indication for an operation, a low score permits the discharge, and a moderate score is the group for observation or imaging.",
+        explanation: "A score that overrides the clinical judgement is used badly, and the negative appendicectomy rate is a quality measure of the whole team rather than of the score.",
+      },
+
+      { type: "heading", level: 2, text: "Complicated appendicitis" },
+      {
+        type: "table",
+        headers: ["Stage", "Features", "Management"],
+        rows: [
+          ["Uncomplicated", "A right iliac fossa pain with a localised tenderness and no mass", "Appendicectomy, laparoscopic or open"],
+          ["Phlegmon", "An inflammatory mass without a drainable abscess", "Antibiotics first and an interval appendicectomy later"],
+          ["Appendicular abscess", "A walled collection, with fever and a palpable mass", "Percutaneous drainage and antibiotics, then an interval appendicectomy"],
+          ["Free perforation", "Generalised peritonitis with a systemic response", "Laparotomy or laparoscopy and peritoneal washout"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The interval appendicectomy for a phlegmon or an abscess is a debated operation: it removes the risk of a recurrent appendicitis and it treats the incidental pathological concern of a neoplasm in the older patient. The modern practice is to offer it selectively — in a young patient with a resolved phlegmon it is often not needed, and in a patient over forty, in whom a carcinoma or a Crohn appendix may be found, it is usually performed.",
+      },
+
+      { type: "heading", level: 2, text: "The operation and its complications" },
+      {
+        type: "table",
+        headers: ["Aspect", "Laparoscopic", "Open"],
+        rows: [
+          ["Incision", "Three small ports and a camera", "A gridiron or a Lanz incision over McBurney's point"],
+          ["Advantage", "A better diagnostic and therapeutic view, less pain, a faster recovery, and a lower wound infection", "No equipment dependency, and it is quicker in the very unstable patient"],
+          ["Wound infection", "Less common", "More common"],
+          ["Specific risks", "The trocar injury, the carbon dioxide insufflation", "The wound infection and the incisional hernia"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The complications after an appendicectomy are the specific ones and the general ones: the wound infection, the intra-abdominal abscess (especially after a perforation), the pelvic abscess, the ileus, the stump leak, and the small bowel obstruction from the adhesions. A patient who does not settle by the third day, with fever and pain, has an intra-abdominal collection until a CT says otherwise.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Forgetting the gynaecological differential in a young woman. A ruptured ovarian cyst, an ectopic pregnancy, a pelvic inflammatory disease and a torted ovary all present with a lower abdominal pain, and a pregnancy test and an ultrasound are parts of the assessment of any woman with this presentation.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Calling the pelvic pain of a torted ovary gastroenteritis. A torted ovary presents with a sudden severe pain, a mild fever and a normal bowel habit, and the ultrasound shows an enlarged ovary; the delay in diagnosis costs the ovary.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Discharging a young man with a right testicular pain without examining the testes. A testicular torsion presents with a lower abdominal pain and a retracted, exquisitely tender testis, and it is a surgical emergency in which time is testis.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Why did the classic presentation of appendicitis produce the 'migrating' pain?",
+        answer: "Because the early inflammation produces a visceral pain referred to the mid-abdomen (the same segment as the small bowel), and only when the appendix inflames the adjacent parietal peritoneum does the pain shift to the right iliac fossa. The sequence is the physiology of the two peritoneal layers.",
+        explanation: "The migration is the clinical clue to the diagnosis, and it is why the history is the most useful test.",
+      },
+      {
+        type: "question",
+        prompt: "What is the place of the interval appendicectomy after a phlegmon?",
+        answer: "To treat the recurrence risk and the possibility of a malignancy in an older patient, and it is offered selectively: it is the standard in a patient over 40, in whom a carcinoma of the caecum may be the cause, and it may be omitted in a young adult with a resolved collection.",
+        explanation: "The operative decision is based on the risk of a recurrence and on the pathological concern.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which is the characteristic sequence of pain in appendicitis?",
+        options: [
+          "A right iliac fossa pain from the onset",
+          "Central abdominal pain migrating to the right iliac fossa within hours",
+          "Left iliac fossa pain radiating to the right groin",
+          "Epigastric pain after meals",
+        ],
+        correctIndex: 1,
+        explanation: "The visceral pain is referred to the mid-abdomen, and the parietal pain localises at the right iliac fossa as the appendix inflames; the anorexia follows.",
+      },
+      {
+        type: "mcq",
+        stem: "An 8-year-old boy has a right lower abdominal pain, a mild fever and a swollen tender testis. What is the diagnosis?",
+        options: ["Appendicitis", "Testicular torsion", "Intussusception", "Mesenteric adenitis"],
+        correctIndex: 1,
+        explanation: "A torted testis presents as a lower abdominal pain with a retracted, exquisitely tender testis, and it is a surgical emergency in which the time is testis.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the imaging of choice in a pregnant woman with a suspected appendicitis?",
+        options: ["CT of the abdomen", "Ultrasound first and then magnetic resonance imaging", "Plain radiograph", "No imaging is ever performed"],
+        correctIndex: 1,
+        explanation: "Ultrasound avoids ionising radiation, and magnetic resonance imaging is used when the ultrasound is inconclusive; CT is reserved for a situation where the diagnosis is unclear and the pregnancy is at risk.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the standard management of an appendicular abscess in a stable patient?",
+        options: [
+          "Immediate appendicectomy in all cases",
+          "Percutaneous drainage with antibiotics and an interval appendicectomy later",
+          "Observation only with no follow-up",
+          "Prolonged intravenous antibiotics with no drainage",
+        ],
+        correctIndex: 1,
+        explanation: "A walled abscess is drained percutaneously and the patient is treated with antibiotics; an interval appendicectomy is then considered, especially in an older patient.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is the wound infection rate lower after a laparoscopic appendicectomy?",
+        options: [
+          "Because the wound is never touched",
+          "Because the appendix is removed through a port and the incision is smaller and less contaminated",
+          "Because the laparoscopic approach sterilises the wound",
+          "Because no antibiotic is needed",
+        ],
+        correctIndex: 1,
+        explanation: "The laparoscopic approach uses small ports and no large exposed incision, which reduces the wound infection rate; the intra-abdominal abscess rate is similar.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Appendicitis is a clinical diagnosis with a migrating central to right iliac fossa pain, anorexia and fever, and the complications of perforation are recognised by a high fever, tachycardia and a generalised peritonitis. Imaging — ultrasound in a child or a pregnant woman, CT in an adult — is for the equivocal case, and the operation is a laparoscopy or an open appendicectomy. A phlegmon and an abscess are treated with antibiotics and drainage and then considered for an interval appendicectomy, and the patient who does not settle by the third day has an intra-abdominal collection.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: colorectal surgery, where the principles of an elective resection are applied to the colonic and rectal disease.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 9 — The acute abdomen & gastrointestinal bleeding
+// ---------------------------------------------------------------------------
+function lesson9() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: characterise an acute abdominal pain by its onset, site, radiation, character, severity, progression and associated features; name the commonest causes of an acute abdomen by anatomical region and by the surgical pattern; recognise peritonitis, intestinal obstruction, gastrointestinal bleeding and the signs of an ischaemic bowel; state the initial resuscitation and investigations of an acute abdomen; and identify the patients who need immediate surgery from those who are managed conservatively.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-8 and ANAT 101 (abdominal anatomy and referred pain). The acute abdomen is a regional differential, and the pattern of referral follows the embryonic segments.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Acute abdomen",
+        text: "An abrupt, or rapidly worsening, abdominal pain of less than about a week's duration, which usually requires an urgent surgical decision and is distinguished by the pattern of the pain rather than by the pain itself.",
+      },
+      {
+        type: "paragraph",
+        text: "The acute abdomen is not one disease but a differential made narrow by the pattern of the pain. Visceral pain is dull, midline and poorly localised; parietal (peritoneal) pain is sharp, localised and worsened by movement; referred pain is felt where the nerve supplies the same embryonic segment, so the diaphragmatic irritation of a perforated ulcer is felt at the shoulder. The first task in any acute abdomen is to decide which of the three patterns is present, because the visceral pattern is treated while the parietal pattern is an emergency.",
+      },
+
+      { type: "heading", level: 2, text: "The pattern of the pain" },
+      {
+        type: "table",
+        headers: ["Pattern", "Mechanism", "What it means", "Typical example"],
+        rows: [
+          ["Visceral", "Stretching of the wall of a hollow viscus", "Colicky, poorly localised, midline, with sweating, nausea and restlessness", "Biliary or ureteric colic; small bowel obstruction"],
+          ["Parietal (peritoneal)", "Inflammation of the parietal peritoneum", "Sharp, localised, constant, with guarding and rebound; the patient lies still and refuses to move", "Appendicitis, perforated ulcer, diverticulitis"],
+          ["Referred", "Shared spinal segment", "Pain felt remote from the source", "Shoulder tip pain from diaphragmatic irritation; loin-to-groin from ureteric colic"],
+          ["Other", "Non-abdominal and referred systemic causes", "A pattern that does not localise to one region", "Basal pneumonia, inferior myocardial infarction, diabetic ketoacidosis, porphyria"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The examination that identifies peritonitis has three components, and they are the earliest signs to go. Tenderness with guarding, rigidity of the abdominal wall, and the absence of bowel sounds; the rebound tenderness is the same peritoneal irritation and is cruel to elicit, so it can be inferred from coughing and moving. Early peritonitis is a quiet abdomen with tenderness, not a dramatic one.",
+      },
+
+      { type: "heading", level: 2, text: "Causes by the surgical pattern" },
+      {
+        type: "table",
+        headers: ["Pattern", "Diagnoses", "Management"],
+        rows: [
+          ["Perforation", "Perforated peptic ulcer, perforated diverticulitis, perforated appendix or colon, ruptured ectopic pregnancy", "Resuscitate and urgent laparotomy or percutaneous drainage"],
+          ["Obstruction", "Adhesions, strangulated hernia, volvulus, obstructing carcinoma", "Tube decompression, resuscitation, and surgery for strangulation or obstruction"],
+          ["Inflammation", "Appendicitis, cholecystitis, pancreatitis, salpingitis, diverticulitis", "Observation, antibiotics, and timed surgery or drainage"],
+          ["Ischaemia or rupture", "Ruptured abdominal aneurysm, ischaemic bowel, torsioned ovary", "Immediate surgery; the mortality is high and rises every hour"],
+          ["Bleeding", "Peptic ulcer, variceal haemorrhage, diverticular bleeding, angiodysplasia", "Resuscitate, endoscopy, then radiological or surgical control"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The order of the exceptions matters more than the list. Ruptured aneurysm presents as a sudden onset abdominal and back pain with a pulsatile mass and shock; a mesenteric ischaemia presents with pain that is out of proportion to the examination; an ectopic pregnancy in a woman of childbearing age; and the third-trimester pregnant patient, in whom the physical signs are unreliable and the differential is widened by pregnancy itself.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: the initial assessment" },
+      {
+        type: "table",
+        headers: ["Action", "What it looks for", "Note"],
+        rows: [
+          ["History", "Onset, character, migration, timing, the factors that worsen and relieve it, associated vomiting and its timing, the last bowel movement and flatus, urinary and gynaecological history, drug history (especially steroids, anticoagulants and non-steroidal anti-inflammatory drugs)", "The history is the most discriminating part of the assessment"],
+          ["Examination", "Pulse, blood pressure, temperature, capillary refill; then the abdomen with inspection, palpation, percussion, auscultation; and the hernial orifices, the scars and the renal angles", "The hernial orifices are a part of every abdominal examination, especially in obstruction"],
+          ["Observations", "Fever, tachycardia and hypotension indicate sepsis or bleeding", "The early warning chart is the first evidence of deterioration"],
+          ["Fluids and analgesia", "Wide-bore intravenous access, resuscitation, venous thromboembolism prophylaxis, and opioids for the pain", "Analgesia does not obscure the examination and is given early; withholding it is an outdated practice"],
+          ["Baseline tests", "Full blood count, urea and electrolytes, liver tests, clotting, group and save or cross-match, amylase or lipase, arterial or capillary lactate, pregnancy test in a woman of childbearing age, and an electrocardiogram in an older patient", "Ordered on the basis of the differential, not as a routine"],
+          ["Imaging", "Erect chest radiograph for free gas under the diaphragm; ultrasound for biliary and gynaecological causes; CT for the definitive diagnosis in the stable patient", "An unstable patient goes to theatre, not to the scanner"],
+        ],
+      },
+      {
+        type: "question",
+        prompt: "Why does an erect chest radiograph detect gas free in the abdomen, and when does it fail?",
+        answer: "Because the gas rises to the highest point beneath the diaphragm and appears as a dark crescent under the right or left dome. It fails in small perforations and in a patient too ill to sit up, which is why a CT is used if the suspicion remains and the patient is stable enough.",
+        explanation: "The sensitivity of the erect film is about 70 per cent, and a negative film does not exclude a perforation in the right patient.",
+      },
+      {
+        type: "question",
+        prompt: "Why is it wrong to withhold analgesia from a patient with an acute abdomen?",
+        answer: "Because pain relief is a clinical right and because a careful examination is not obscured by analgesia; the studies show that opioids do not mask the findings but relieve distress and allow a more accurate examination.",
+        explanation: "A patient who is rolling in pain cannot localise the tenderness, and analgesia improves the examination while relieving genuine suffering.",
+      },
+
+      { type: "heading", level: 2, text: "Gastrointestinal bleeding" },
+      {
+        type: "table",
+        headers: ["Presentation", "Source", "Approach"],
+        rows: [
+          ["Haematemesis or melaena", "Upper gastrointestinal bleeding — peptic ulcer, varices, Mallory-Weiss tear, malignancy", "Resuscitate, risk-score (such as Rockall), early endoscopy within 24 hours, and band or inject the bleeding point"],
+          ["Fresh rectal bleeding with clot", "Lower gastrointestinal bleeding — diverticulosis, angiodysplasia, colorectal cancer, ischaemic colitis", "Resuscitate, and use CT angiography or colonoscopy; embolise if the bleeding localises"],
+          ["Occult bleeding", "Chronic loss from a colonic or gastric cancer; iron deficiency anaemia", "Upper and lower endoscopy; the cancer is found or the small bowel is investigated"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The management of a bleed is resuscitation, the restoration of the perfusion and the correction of the coagulopathy, followed by control. The endoscopic treatment of an upper gastrointestinal bleed is injection with adrenaline, thermal coagulation or a mechanical clip, and the proton pump inhibitor is given before and after; in a variceal bleed the first drug is a vasoactive agent such as terlipressin with an antibiotic, and the endoscopy band the varices. Surgery is needed for a bleeding ulcer that endoscopy cannot control, or a recurrent bleed in a fit patient.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "A melaena stool is not always an upper tract bleed, and a patient with anaemia and a positive faecal occult blood test needs the colon examined rather than treated with iron. Iron deficiency anaemia in a man or a postmenopausal woman is a gastrointestinal cancer until excluded by endoscopy.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Calling pain without a diagnosis gastroenteritis. The diagnosis of gastroenteritis requires a prodrome of vomiting and diarrhoea and an absence of peritoneal signs, and dismissing an acute abdomen as a bug is one of the classic ways a perforation is missed.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Not examining the hernial orifices in an obstructed patient. A strangulated inguinal or femoral hernia is an obstruction that is fixed by a simple examination and a small operation, and it is missed when the groin is not looked at.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Sending an unstable patient with a suspected bleeding ulcer to CT. Resuscitate, transfuse and endoscope; a CT is for the stable patient in whom the source is uncertain.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Missing an ectopic pregnancy in a woman of lower abdominal pain. The pregnancy test is part of the assessment of every woman of childbearing age with abdominal pain, and a ruptured ectopic is a lethal haemorrhage.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What are the features that distinguish a strangulated from a simple intestinal obstruction?",
+        answer: "A constant pain rather than colic, fever, tachycardia, peritonitis, a raised lactate and a leukocytosis; the bowel becomes ischaemic and, untreated, perforates. A simple obstruction has colic, distension and vomiting with a soft, non-tender abdomen.",
+        explanation: "Strangulation changes the urgency from hours to minutes, and the lactate is the biochemical clue to the ischaemia.",
+      },
+      {
+        type: "question",
+        prompt: "Why is pancreatitis rarely a surgical problem while a perforated ulcer is?",
+        answer: "Because pancreatitis is managed with fluids, analgesia and the treatment of the cause, and the surgery is for the complications (such as a walled-off collection or a necrosis); a perforated ulcer needs the hole closed and the contamination washed out, and the mortality rises with every hour of delay.",
+        explanation: "The division is decided by whether the disease can be stopped by conservative means, and if not, how quickly control must be achieved.",
+      },
+      {
+        type: "question",
+        prompt: "What is the initial treatment of a patient who has vomited blood and has a pulse of 120 and a blood pressure of 90 systolic?",
+        answer: "Resuscitation with oxygen, wide-bore intravenous access, a fluid bolus and blood, correction of the coagulopathy, and urgent endoscopy after the airway is protected; in a variceal patient, a vasoactive drug and antibiotics. The young fit patient compensates until they decompensate.",
+        explanation: "The sequence is airway (a patient vomiting blood needs to be able to protect theirs), access, blood, and then the diagnosis and control.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with a sudden severe abdominal pain lies completely still, has a rigid abdomen and absent bowel sounds. What is the diagnosis?",
+        options: ["Biliary colic", "Peritonitis, most likely a perforated viscus", "Small bowel obstruction", "Gastroenteritis"],
+        correctIndex: 1,
+        explanation: "The rigidity and the absolute stillness are parietal peritoneal irritation from a perforation, and it is an emergency laparotomy in a resuscitated patient.",
+      },
+      {
+        type: "mcq",
+        stem: "Which finding in an obstructed patient demands immediate surgery?",
+        options: ["Distension and vomiting", "A constant pain with fever, tachycardia and a raised lactate", "Colicky pain with visible peristalsis", "A hemoglobin of 9 grams per decilitre"],
+        correctIndex: 1,
+        explanation: "Constant pain, fever, tachycardia and a raised lactate are the signs of strangulation and ischaemia, which is the surgical emergency of obstruction.",
+      },
+      {
+        type: "mcq",
+        stem: "A man of 45 presents with melaena and anaemia. What is the first investigation after resuscitation?",
+        options: ["Barium enema", "Upper gastrointestinal endoscopy", "Plain abdominal radiograph", "Laparotomy"],
+        correctIndex: 1,
+        explanation: "Melaena is an upper tract bleed until proven otherwise, and endoscopy both diagnoses and treats, so it is performed within 24 hours in an admitted patient.",
+      },
+      {
+        type: "mcq",
+        stem: "Which investigation is the most useful initial test in a suspected perforated peptic ulcer?",
+        options: ["Erect chest radiograph", "Ultrasound of the abdomen", "Serum amylase", "Barium meal"],
+        correctIndex: 0,
+        explanation: "An erect chest radiograph detects free gas under the diaphragm in most perforations, and it is the quickest test to perform in a patient who may be going to theatre.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is a pregnancy test performed in a woman with acute lower abdominal pain?",
+        options: [
+          "To estimate the gestational age",
+          "To exclude an ectopic pregnancy, which is a lethal cause of a haemoperitoneum",
+          "To decide the analgesic prescription",
+          "To comply with local policy",
+        ],
+        correctIndex: 1,
+        explanation: "A ruptured ectopic pregnancy is a common cause of an acute abdomen in a woman of childbearing age, and the test is quick and free.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The acute abdomen is a pattern, not a name: visceral colic, parietal peritonitis, referred pain and the non-abdominal mimics. Perforation, obstruction, inflammation, ischaemia and bleeding are the surgical patterns, and each has its urgency and its management. The initial assessment is a history, an examination including the hernial orifices, a resuscitation with analgesia, and investigations tailored to the differential. Gastrointestinal bleeding is resuscitation, then control, with the endoscope used for both diagnosis and treatment.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: colorectal surgery, where the commonest elective operation in surgery — the resection of a colon cancer — is planned and its risks are managed.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 10 — Colorectal surgery
+// ---------------------------------------------------------------------------
+function lesson10() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the anatomy and function of the colon relevant to a resection; state the presentation, investigation and staging of colorectal cancer; describe diverticular disease and its complications; describe the surgical management of inflammatory bowel disease; state the principles of bowel preparation, anastomosis and the defunctioning stoma; and recognise the specific complications of colorectal surgery.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-9, ANAT 101 (abdominal and pelvic anatomy) and PATH 201. Colorectal disease is the commonest general surgical practice and its pathology is dominated by two processes: neoplasia and inflammation.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Colorectal cancer",
+        text: "A carcinoma, usually of the ascending, descending, sigmoid or rectal colon, arising through the adenoma-carcinoma sequence over ten or more years, presenting with a change in bowel habit, bleeding, anaemia or obstruction, and treated by resection with lymphadenectomy.",
+      },
+      {
+        type: "paragraph",
+        text: "Colorectal surgery is the study of one operation: the removal of a segment of bowel with its mesenteric lymphovascular supply, and the restoration of continuity. Every case — a cancer, an inflamed diverticulum, a stricture, a polyp that cannot be removed endoscopically — uses the same set of decisions: how much bowel to take, where to tie the artery, how to join the ends, and whether the join can be protected by a stoma or must be deferred.",
+      },
+
+      { type: "heading", level: 2, text: "Colorectal cancer" },
+      {
+        type: "table",
+        headers: ["Aspect", "Content"],
+        rows: [
+          ["Pathogenesis", "The adenoma-carcinoma sequence: an adenomatous polyp acquires successive mutations — the APC, KRAS, p53 pathway — and becomes invasive over years"],
+          ["Presentation", "A change in bowel habit, bleeding per rectum, iron-deficiency anaemia (right-sided lesion), tenesmus and a narrow stool (rectal lesion), weight loss, and obstruction or perforation in a late case"],
+          ["Investigation", "Colonoscopy with biopsy, which is the diagnostic test and also maps synchronous lesions; and CT of the chest, abdomen and pelvis for staging"],
+          ["Staging", "A CT for the metastasis and the local extent; an MRI for the rectal tumour and the mesorectal fascia; endoanal ultrasound for an early rectal tumour"],
+          ["Treatment", "Surgical resection with a lymphadenectomy, and pre-operative chemoradiotherapy for the locally advanced rectal cancer before surgery"],
+          ["Adjuvant", "Chemotherapy for a node-positive or a metastatic colon cancer; and the palliative approach for a late or unfit patient"],
+          ["Surveillance", "Colonoscopy, tumour markers and CT at intervals, because a metachronous tumour and a recurrence are both looked for"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The sigmoid colon cancers usually bleed or obstruct, and the ascending colon cancers present late with anaemia and weight loss because the lumen is wide and the content is liquid. This difference is the reason for a different presentation and for a different urgency, and it is the reason that an iron-deficiency anaemia is a colonoscopy and not a prescription for iron.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example: a right hemicolectomy for an ascending colon cancer" },
+      {
+        type: "table",
+        headers: ["Step", "What is done and why"],
+        rows: [
+          ["Preparation", "Mechanical bowel preparation is now selective; the laparoscopic approach allows a smaller incision and a faster recovery"],
+          ["Vessels", "The ileocolic artery is ligated at its origin, so the mesentery and the lymph nodes of the ascending colon are removed with the specimen"],
+          ["Resection", "The terminal ileum and the right colon to the mid transverse colon are resected with a clear margin"],
+          ["Anastomosis", "A side-to-side or end-to-side anastomosis of the ileum to the transverse colon, using the fact that the ileum is adaptable"],
+          ["Principles", "No tension, a good blood supply, no distal obstruction, and a well-perfused proximal end — these are the conditions that prevent an anastomotic leak"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The three principles of anastomotic integrity are the same one: good blood supply, no tension, and no distal obstruction. Where the risk is high — a low rectal anastomosis, a septic or an immunosuppressed patient, a frail patient with a low reserve — a defunctioning stoma is created above the join so that a leak does not become a faecal peritonitis.",
+      },
+
+      { type: "heading", level: 2, text: "Diverticular disease" },
+      {
+        type: "table",
+        headers: ["Stage", "Features", "Management"],
+        rows: [
+          ["Diverticulosis", "Sigmoid pouches, asymptomatic, present in most older adults", "A high-fibre diet and the reduction of the risk factors"],
+          ["Acute diverticulitis", "Left iliac fossa pain, fever, constipation; CT shows the pericolic fat stranding", "Antibiotics in the uncomplicated case, a liquid diet, and follow-up"],
+          ["Complicated (abscess)", "A pericolic or pelvic abscess with a spiking fever and a raised white cell count", "Percutaneous drainage and antibiotics; surgery if it fails"],
+          ["Complicated (perforation)", "Faecal peritonitis, peritonism, shock", "A Hartmann or a resection with a stoma; the immediate priority is control"],
+          ["Stricture or fistula", "Obstruction, or a colovesical fistula with faecal urinary infection", "Elective resection in a fit patient"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The distinction between a simple and a complicated diverticulitis is made by CT, and it is the distinction that decides whether an operation is urgent or elective. The Hinchey classification describes the degree of the perforation, from a pericolic abscess (I) to generalised faecal peritonitis (IV), and the Hartmann resection — the sigmoid colectomy with an end colostomy and a closed rectal stump — is the operation for the unstable or the heavily contaminated patient.",
+      },
+
+      { type: "heading", level: 2, text: "Inflammatory bowel disease" },
+      {
+        type: "table",
+        headers: ["Condition", "Pattern", "Surgical role"],
+        rows: [
+          ["Crohn disease", "Transmural, discontinuous, anywhere from mouth to anus, with strictures, abscesses and fistulae", "Resection of a complicated segment; conservative management of uncomplicated disease; a strictureplasty to preserve the small bowel"],
+          ["Ulcerative colitis", "Mucosal, continuous from the rectum backwards, confined to the colon", "A colectomy for a fulminating colitis, a perforation, a toxic megacolon, a dysplasia or a cancer, or for the patient with a chronic course"],
+          ["Post-operative", "The pouch is a common later problem", "Proctocolectomy with an ileal pouch-anal anastomosis, or a terminal ileostomy if the sphincter is poor"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The surgical management of inflammatory bowel disease is the management of the complications rather than of the disease: a fulminating colitis that fails medical therapy is treated by a colectomy; a toxic megacolon is a surgical emergency; a Crohn stricture is bypassed rather than resected where it is possible; and a dysplasia or cancer in ulcerative colitis mandates surgery. The difference between ulcerative colitis and Crohn decides the operation: ulcerative colitis is cured by removing the colon and rectum, Crohn cannot be cured by an operation.",
+      },
+
+      { type: "heading", level: 2, text: "Stomas" },
+      {
+        type: "table",
+        headers: ["Stoma", "What it is", "Indication"],
+        rows: [
+          ["Endicolostomy", "The divided colon brought out to the skin", "A Hartmann, or an end of a resection where the distal part is closed"],
+          ["Loop colostomy", "A loop of colon supported on a rod, with a bridge that can be closed later", "To defunction a distal anastomosis or a low rectal tumour"],
+          ["End ileostomy", "The divided ileum brought to the skin", "A proctocolectomy, or a functional end of an ileal pouch"],
+          ["Loop ileostomy", "A temporary loop, often closed after 6 to 12 weeks", "To defunction a low rectal anastomosis"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The stoma is planned before the operation — its site is marked by the stoma nurse through the rectus sheath, away from a crease, and within the patient's reach — and the high-output stoma is a cause of dehydration and electrolyte disturbance that must be recognised and treated with fluid and salt replacement. The complications are ischaemia, retraction, prolapse, parastomal hernia and skin breakdown.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Treating iron deficiency anaemia in an older patient with iron and no colonoscopy. A right-sided colon cancer presents with anaemia, and the test that finds it is a colonoscopy.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Treating every episode of diverticulitis as an emergency. The uncomplicated episode is treated with antibiotics and a liquid diet in a stable patient, and the CT is done to distinguish it from a complicated episode that needs drainage or an operation.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying the rectum is part of the colon. The rectum has a different blood supply and a different lymphatic drainage, and its operation (the total mesorectal excision) removes the whole mesorectum with the tumour, because the local recurrence is a lymphatic failure.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Closing a defunctioning stoma without checking the distal anastomosis. The distal anastomosis must be shown to be intact by contrast study or endoscopy before the stoma is reversed.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What is the difference between a right and a left colon cancer in its presentation, and why?",
+        answer: "The right-sided cancer presents with anaemia, weight loss and a mass, because the lumen is wide and the content is liquid so it obstructs late; the left-sided cancer presents with a change in bowel habit, bleeding and obstruction, because the lumen is narrower and the content is solid.",
+        explanation: "This is the reason an iron deficiency anaemia is the indication for a colonoscopy, and the reason obstruction is commoner on the left side.",
+      },
+      {
+        type: "question",
+        prompt: "When is a defunctioning stoma created above a colorectal anastomosis?",
+        answer: "When the risk of an anastomotic leak is high — a low rectal join, a patient on steroids or immunosuppression, pelvic sepsis, malnutrition, or a fit patient with a low reserve — because a leak with a stoma is a contained surgical event rather than a fatal faecal peritonitis.",
+        explanation: "The stoma does not prevent a leak; it changes the consequence of one, and it is closed later.",
+      },
+      {
+        type: "question",
+        prompt: "Why is a colectomy curative in ulcerative colitis but not in Crohn disease?",
+        answer: "Because ulcerative colitis is confined to the colon and the rectum and is mucosal, so removing the colon and rectum removes the disease; Crohn disease is transmural and may affect any part of the bowel, and operation does not remove a disease that recurs anywhere.",
+        explanation: "The distinction is also why the operation in Crohn is reserved for the complications (obstruction, abscess, fistula) rather than for the diagnosis.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which feature is the most suggestive of a right-sided colon cancer?",
+        options: ["Fresh rectal bleeding", "Iron deficiency anaemia and a mass", "Tenesmus", "A narrow ribbon stool"],
+        correctIndex: 1,
+        explanation: "A right-sided lesion bleeds slowly and obstructs late, so it presents with anaemia and weight loss; tenesmus and a ribbon stool are the signs of a rectal lesion.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient has a left iliac fossa pain with fever and constipation, and a CT shows pericolic fat stranding with no abscess. What is the management?",
+        options: ["Immediate laparotomy", "Antibiotics and a liquid diet, with a follow-up", "Percutaneous drainage", "No treatment"],
+        correctIndex: 1,
+        explanation: "Uncomplicated acute diverticulitis is treated with antibiotics and a liquid diet; abscesses are drained, and surgery is for the complicated or the recurrent case.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the standard operation for a mid-rectal cancer?",
+        options: ["A right hemicolectomy", "An anterior resection with a total mesorectal excision", "A colostomy", "A local excision"],
+        correctIndex: 1,
+        explanation: "A mid-rectal cancer is treated by an anterior resection of the upper rectum, and the total mesorectal excision removes the mesorectum as the lymphatic unit to reduce the local recurrence.",
+      },
+      {
+        type: "mcq",
+        stem: "Why is the total mesorectal excision performed for a rectal cancer?",
+        options: [
+          "It removes the tumour margin only",
+          "It removes the lymphatic tissue of the mesorectum, where the local recurrence occurs",
+          "It reduces the blood loss",
+          "It preserves the anal sphincter",
+        ],
+        correctIndex: 1,
+        explanation: "The mesorectum contains the lymphatics of the rectal drainage, and the local recurrence is a lymphatic failure, so the whole mesorectum is excised with the rectum.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the role of a defunctioning stoma above a low rectal anastomosis?",
+        options: [
+          "It prevents the need for a second operation",
+          "It converts the consequence of a leak into a contained surgical event rather than a faecal peritonitis",
+          "It improves the chance of a leak-free healing",
+          "It replaces the need for a good blood supply",
+        ],
+        correctIndex: 1,
+        explanation: "The stoma diverts the faecal stream while the anastomosis heals; a leak behind a stoma is contained, and the stoma is closed after 6 to 12 weeks once a contrast study confirms healing.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Colorectal surgery is the management of the colon and the rectum as one continuous lumen with two pathological processes — neoplasia and inflammation. Colorectal cancer is resected with its lymphovascular supply and staged radiologically; the rectal cancer needs a total mesorectal excision and often pre-operative chemoradiotherapy. Diverticulitis is uncomplicated or complicated, and CT is the test that makes the distinction. Inflammatory bowel disease is treated medically, and surgery is for the complications: a colectomy for a fulminating ulcerative colitis, and a segmental resection or a strictureplasty for Crohn. The stoma is planned before the operation, and the anastomosis is protected where the risk of a leak is high.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: hepatobiliary and pancreatic surgery, where the same principles are applied to the liver, the gallbladder and the biliary tree.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 11 — Hepatobiliary & pancreatic surgery
+// ---------------------------------------------------------------------------
+function lesson11() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the features of obstructive, hepatocellular and haemolytic jaundice and name the investigations that distinguish them; state the causes, presentation and complications of gallstone disease; apply the Tokyo guidelines to acute cholangitis and to acute cholecystitis; describe the presentation and management of acute and chronic pancreatitis and of pancreatic cancer; and name the principles of liver resection and of the management of the complications of biliary surgery.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-10, PATH 201 and PHRM 202. Hepatobiliary disease is a study of obstruction and infection, and its consequences are a model of how a duct changes the function of an organ.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Jaundice",
+        text: "A yellow discolouration of the sclerae, the skin and the mucosa produced by a serum bilirubin above about 35 micromoles per litre, divided into pre-hepatic (haemolytic), hepatocellular and obstructive (cholestatic) by the pattern of the liver tests.",
+      },
+      {
+        type: "paragraph",
+        text: "The surgical question in a jaundiced patient is whether the bile duct is obstructed, because obstruction is the one cause that can be relieved by an intervention. The pattern of the liver tests separates the groups: an isolated raised unconjugated bilirubin is haemolysis, a predominantly raised transaminase is hepatocellular, and a raised alkaline phosphatase with a conjugated bilirubin is cholestasis. The next step in a cholestatic patient is to see the duct, with an ultrasound first and then magnetic resonance or an endoscopic retrograde cholangiopancreatography.",
+      },
+
+      { type: "heading", level: 2, text: "Distinguishing the groups" },
+      {
+        type: "table",
+        headers: ["Group", "Mechanism", "Pattern", "Causes", "Treatment"],
+        rows: [
+          ["Pre-hepatic (haemolytic)", "Increased bilirubin production", "Unconjugated rise, reticulocytosis and a raised lactate dehydrogenase", "Sickle cell, thalassaemia, auto-immune haemolysis, transfusion reaction", "Treat the haemolysis; the jaundice is mild"],
+          ["Hepatocellular", "Failure of the hepatocyte to conjugate and excrete", "A raised transaminase, with a mixed conjugated and unconjugated picture", "Viral hepatitis, alcohol, drugs, cirrhosis", "Supportive care; treat the cause; assess for a transplant"],
+          ["Obstructive (cholestatic)", "A block to the flow of bile", "A raised conjugated bilirubin and alkaline phosphatase, with dark urine and pale stool", "Choledocholithiasis, a pancreatic or a biliary cancer, a stricture, cholangiocarcinoma", "Relieve the blockage: endoscopy, stone removal, biliary drainage or resection"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The two specific features of obstructive jaundice are dark urine (the renal excretion of the conjugated bilirubin, which is water soluble) and pale stools (the absence of the bilirubin reaching the duodenum), and a palpable gallbladder in a jaundiced patient suggests a malignant rather than a stone obstruction, because the gallbladder is not diseased and can distend (Courvoisier's law).",
+      },
+
+      { type: "heading", level: 2, text: "Gallstone disease" },
+      {
+        type: "table",
+        headers: ["Condition", "Presentation", "Treatment"],
+        rows: [
+          ["Biliary colic", "Right upper quadrant pain, constant for four to six hours after a fatty meal, with nausea and vomiting, no fever and a negative Murphy", "Analgesia, then an elective laparoscopic cholecystectomy, the definitive treatment"],
+          ["Acute cholecystitis", "Right upper quadrant pain with fever, leukocytosis, and a positive Murphy; the ultrasound shows wall thickening and pericholecystic fluid", "Nil by mouth, intravenous antibiotics, analgesia, and a laparoscopic cholecystectomy — early (within a week) rather than delayed"],
+          ["Chronic cholecystitis", "Recurrent attacks, a contracted gallbladder on ultrasound", "Elective laparoscopic cholecystectomy"],
+          ["Choledocholithiasis", "Jaundice, abnormal liver tests, dilated ducts, a raised bilirubin with a sometimes raised amylase", "Endoscopic retrograde cholangiopancreatography with sphincterotomy and stone extraction, then cholecystectomy"],
+          ["Gallstone ileus", "Small bowel obstruction in an older patient with air in the biliary tree", "Removal of the stone (enterolithotomy), usually without the gallbladder surgery"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The distinction between biliary colic and cholecystitis is the duration and the temperature: colic is a pain that passes, cholecystitis is a pain that persists with fever and a raised white cell count. The timing of the surgery matters: an early laparoscopic cholecystectomy in the same admission, at about 72 hours, is safer than a delayed operation after 6 weeks, because the latter leaves a group of patients waiting to have another attack or a complication.",
+      },
+      {
+        type: "question",
+        prompt: "Why is the laparoscopic cholecystectomy usually performed early rather than delayed after a bout of acute cholecystitis?",
+        answer: "Because the early operation is technically easier before the inflammation has become dense adhesions, and because about one in five patients waiting for a delayed operation returns with a further attack or a complication. The early operation has a lower conversion rate and a shorter overall stay.",
+        explanation: "This is the lesson of a trial that changed the practice, and it is the commonest elective biliary operation.",
+      },
+
+      { type: "heading", level: 2, text: "Cholangitis and pancreatitis" },
+      {
+        type: "table",
+        headers: ["Condition", "Diagnosis", "Immediate treatment"],
+        rows: [
+          ["Acute cholangitis", "Charcot: fever, jaundice and right upper quadrant pain; Reynolds (with confusion and hypotension) means a severe attack", "Resuscitation, intravenous antibiotics, and endoscopic biliary drainage within 24 to 48 hours — the definitive treatment"],
+          ["Acute pancreatitis", "A severe epigastric pain radiating to the back, a raised lipase or amylase above three times normal, and the imaging features", "Fluids, analgesia, oxygen, no early feeding in the severe case; intervention for the necrosis or the pseudocyst later"],
+          ["Chronic pancreatitis", "Chronic epigastric pain, steatorrhoea, diabetes, calcification", "Pain control, pancreatic enzyme replacement, and drainage for the obstruction or the pseudocyst"],
+          ["Pancreatic cancer", "Painless jaundice with weight loss and a dilated duct, or an epigastric mass with a late diagnosis", "CT staging, then a Whipple resection for a resectable head tumour, or biliary drainage and palliation"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "The severity of acute pancreatitis is judged by the organ failure, and the persistent organ failure that does not settle within 48 hours defines severe pancreatitis with a mortality of 20 to 30 per cent. The patient needs early fluids, careful monitoring and a multidisciplinary review, and the intervention is delayed until the necrosis has walled off.",
+      },
+      {
+        type: "question",
+        prompt: "Why does the treatment of a gallstone that has obstructed the bile duct precede the treatment of the gallbladder?",
+        answer: "Because the infection of the obstructed duct is the life-threatening problem (cholangitis), and it is relieved endoscopically by sphincterotomy and stone extraction; the gallbladder is then removed to prevent the stone recurring. Doing the gallbladder first leaves the obstruction untreated.",
+        explanation: "The principle is to relieve the emergency first, then prevent the recurrence — the sequence also allows the inflammation to settle before an operation.",
+      },
+
+      { type: "heading", level: 2, text: "Liver and biliary tumours" },
+      {
+        type: "table",
+        headers: ["Tumour", "Features", "Management"],
+        rows: [
+          ["Hepatocellular carcinoma", "In a cirrhotic liver, a raised alpha-fetoprotein, a vascular lesion on imaging", "Resection if the liver reserve allows, ablation, a transplant within the criteria, or palliative treatment"],
+          ["Colorectal liver metastasis", "A synchronous liver lesion in a colorectal cancer", "Resection of both if the future liver remnant is enough, often after chemotherapy"],
+          ["Cholangiocarcinoma", "A hilar or an intrahepatic tumour presenting with obstructive jaundice", "Resection where possible; otherwise biliary drainage"],
+          ["Gallbladder cancer", "Found incidentally at cholecystectomy, or a late presentation", "Re-resection for an early tumour; the prognosis of a late tumour is poor"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The essential limitation of liver surgery is the future liver remnant: the resection must leave enough functioning liver, and the volume and the function of the remnant are calculated before the operation. A resection that removes more than about 70 per cent is unsafe, which is why the liver is prepared by embolisation or hypertrophy in some patients. The postoperative bleed and the bile leak are the specific complications.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Operating on a jaundiced patient without first defining the obstruction. The first step is to look at the duct, not to cut: an ultrasound defines the dilation and the cause, and the obstruction can then be relieved endoscopically or percutaneously.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Waiting for a transaminase to rise before suspecting a bile duct injury after a cholecystectomy. A bile leak presents in the first days with a bile in a drain, a rising bilirubin and a painful, distended abdomen; and an injured duct presents with early jaundice. Both are investigated by magnetic resonance cholangiopancreatography, and the repair is by a hepatobiliary specialist.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming a palpable gallbladder in a jaundiced patient means a stone. The gallbladder that is distended in a jaundiced patient is usually the consequence of a malignant obstruction, because a gallbladder that is chronically diseased with stones cannot distend (Courvoisier's law).",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Which investigation is the first in a jaundiced patient, and what is it looking for?",
+        answer: "An ultrasound, to look for a dilated duct and a gallstone, and for a pancreatic or a biliary mass. If the duct is dilated, the next step is a magnetic resonance cholangiopancreatography or an endoscopic retrograde cholangiopancreatography.",
+        explanation: "The ultrasound is safe, portable and immediate, and it answers the surgical question of whether the duct is blocked.",
+      },
+      {
+        type: "question",
+        prompt: "Why is the early fluid resuscitation central to the management of severe pancreatitis?",
+        answer: "Because the capillary leak produces a large third-space loss and haemoconcentration, which reduces the pancreatic perfusion and worsens the necrosis. The early and adequate fluid replacement is the intervention with the clearest evidence of benefit, at about 5 to 10 ml per kilogram per hour initially.",
+        explanation: "The late intervention of the necrotic collection is separate from the early management of the physiology.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with painless jaundice, weight loss and a palpable gallbladder. Which is the most likely diagnosis?",
+        options: ["Choledocholithiasis", "A carcinoma of the head of the pancreas", "Acute cholecystitis", "Haemolysis"],
+        correctIndex: 1,
+        explanation: "A painless progressive jaundice with a palpable gallbladder suggests a malignant obstruction, because a chronically diseased gallbladder cannot distend.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient has fever, jaundice, right upper quadrant pain and confusion. What is the definitive treatment?",
+        options: ["Antibiotics and observation", "Endoscopic biliary drainage, after antibiotics and resuscitation", "Immediate cholecystectomy", "Percutaneous cholecystostomy"],
+        correctIndex: 1,
+        explanation: "This is acute cholangitis (Charcot with the added Reynolds signs of confusion and hypotension), and the obstruction must be relieved by endoscopic drainage within 24 to 48 hours.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the timing of the surgery in a laparoscopic cholecystectomy for acute cholecystitis?",
+        options: ["Within a week of the onset, at about 72 hours", "After 6 to 8 weeks of antibiotics", "Only if the pain recurs", "Immediately on arrival to the emergency department"],
+        correctIndex: 0,
+        explanation: "Early cholecystectomy in the same admission is favoured, because the inflammation is easier and the waiting patients return with complications.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the main determinant of whether a liver resection is safe?",
+        options: ["The size of the tumour", "The volume and function of the future liver remnant", "The type of incision", "The speed of the surgery"],
+        correctIndex: 1,
+        explanation: "The patient must be left with enough functioning liver, so the future remnant is measured and, where necessary, hypertrophied before the resection.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the earliest sign of a bile leak after a cholecystectomy?",
+        options: ["Fever on day three", "Bile in a drain with a rising bilirubin and a tender abdomen", "Jaundice at a week", "A palpable mass"],
+        correctIndex: 1,
+        explanation: "A bile in the drain, a rising bilirubin and a painful distended abdomen in the first few days are the signs of a bile leak, which is investigated by magnetic resonance cholangiopancreatography.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The jaundiced patient is first asked whether the duct is obstructed, and the obstruction is defined by ultrasound and relieved endoscopically or radiologically. Gallstone disease is a spectrum from colic to cholecystitis to cholangitis, and the operation is timed by the severity and the complications. Cholangitis is relieved by drainage; pancreatitis is resuscitated with early fluid and intervened late. Liver resection is limited by the function of the remnant, and the biliary injury or the bile leak is the specific complication of a cholecystectomy that must be recognised early.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: trauma, where the principles of the module are applied at speed and in a fixed order.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 12 — Vascular assessment & acute limb ischaemia
+// ---------------------------------------------------------------------------
+function lesson12() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: take a vascular history and perform a vascular examination; interpret an ankle-brachial index and a duplex result; distinguish acute from chronic limb ischaemia; recognise the six Ps of acute limb ischaemia; state the management of an acutely ischaemic limb; and recognise the immediately life-threatening vascular emergencies.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-11 and PHYS 101 (cardiovascular physiology). Vascular disease is a disorder of flow and of the wall, and the measurements are of both.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Acute limb ischaemia",
+        text: "The sudden interruption of the arterial blood supply of a limb, producing the six Ps of pain, pallor, pulselessness, paraesthesia, paralysis and perishing cold, and threatening the limb within hours unless the flow is restored.",
+      },
+      {
+        type: "paragraph",
+        text: "The limb threatened by ischaemia is the commonest vascular emergency, and the determinant of survival is the time: a limb that is viable can be salvaged by an embolectomy or a thrombolysis, a limb that is threatened has hours of sensory and then motor loss, and an irreversible limb needs an amputation. The vascular examination is the first act, and its findings — the pulses, the temperature, the sensation, the motor function and the capillary refill — decide which of these situations is present.",
+      },
+
+      { type: "heading", level: 2, text: "The vascular examination" },
+      {
+        type: "table",
+        headers: ["Step", "What is done", "What it answers"],
+        rows: [
+          ["History", "The claudication distance, the rest pain, the tissue loss, the risk factors, the previous operations and the exercise", "Whether the disease is chronic or acute, and what the limb is used for"],
+          ["Inspection", "The colour, the temperature, the hair, the trophic changes and the ulceration", "The severity of the perfusion deficit"],
+          ["Palpation", "The femoral, popliteal, dorsal pedis and posterior tibial pulses, compared with the other limb", "The level of obstruction, and whether the pulses are absent"],
+          ["Auscultation", "The bruits over the carotid, the aorta, the femoral and the renal vessels", "The turbulence that suggests a stenosis"],
+          ["Buerger test", "The elevation pallor and the dependency rubor", "Whether a chronically ischaemic limb is present"],
+          ["The pulses of all four limbs", "The subclavian, the axillary and the brachial pulses and the blood pressures", "The subclavian steal and the aortic disease"],
+        ],
+      },
+      {
+        type: "question",
+        prompt: "What is an ankle-brachial index, and what does a value of 0.5 mean?",
+        answer: "It is the ratio of the systolic pressure at the ankle (the dorsalis pedis or the posterior tibial) to the systolic pressure at the brachial artery. A value of 0.5 means the ankle pressure is half the brachial, which indicates a moderate to severe arterial obstruction in the leg, and a value below 0.5 corresponds to rest pain and tissue loss.",
+        explanation: "The index is a screening and monitoring tool; it is falsely elevated in a diabetic or a calcified vessel, and a value above 1.3 is a reason to measure the toe pressures.",
+      },
+
+      { type: "heading", level: 2, text: "The six Ps and their grading" },
+      {
+        type: "table",
+        headers: ["Finding", "Meaning", "Urgency"],
+        rows: [
+          ["Pain", "The first and the commonest symptom of an occluded limb", "Immediate assessment"],
+          ["Pallor", "The empty artery and the emptied capillary bed", "Immediate assessment"],
+          ["Pulselessness", "The absence of the distal pulses compared with the other side", "Immediate assessment"],
+          ["Paraesthesia", "The sensory nerves are affected before the motor", "The limb is threatened, and the hours have begun"],
+          ["Paralysis", "The motor nerves and the muscles are ischaemic", "The limb is severely threatened or irreversible"],
+          ["Perishing cold", "The temperature falls below that of the environment", "Confirms the interruption of the flow"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The distinction between an embolic and a thrombotic occlusion is made by the history and by the examination, and it changes the treatment. An embolic occlusion has a sudden onset, no previous symptoms, a normal contralateral limb and a source (commonly the atrial fibrillation), and it is treated by an embolectomy. A thrombotic occlusion has a preceding claudication, an abnormal contralateral limb and often a known peripheral arterial disease, and it is treated by a bypass or a thrombolysis.",
+      },
+      {
+        type: "table",
+        headers: ["Feature", "Embolic", "Thrombotic"],
+        rows: [
+          ["Onset", "Sudden, in seconds, with a recallable moment", "Gradual, over hours to days"],
+          ["Previous symptoms", "None, or unrelated", "Claudication or rest pain"],
+          ["Contralateral limb", "Normal pulses", "Reduced pulses and bruits"],
+          ["Source", "Atrial fibrillation, a recent myocardial infarction, an aneurysm, a paradoxical embolus", "A stenosis in the atheromatous disease"],
+          ["Treatment", "Embolectomy, or a thrombolysis in a viable limb", "Bypass, angioplasty or a thrombolysis"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The two immediate exceptions in the vascular patient are a ruptured abdominal aortic aneurysm and a dissecting thoracic aneurysm, both of which present with a sudden severe pain and shock, and both of which are lethal within hours. A patient with a sudden abdominal and back pain and a pulsatile mass is a ruptured aneurysm, and the treatment is an immediate operation, not a scan.",
+      },
+
+      { type: "heading", level: 2, text: "The immediately life-threatening vascular emergencies" },
+      {
+        type: "table",
+        headers: ["Emergency", "Presentation", "Initial management"],
+        rows: [
+          ["Ruptured abdominal aneurysm", "A sudden abdominal and back pain with a pulsatile mass and shock", "Resuscitation and an immediate operation or an endovascular repair"],
+          ["Aortic dissection", "A tearing interscapular or chest pain, with a blood pressure difference between the arms", "Control the heart rate and the blood pressure, and an urgent scan and repair"],
+          ["Acute limb ischaemia", "The six Ps with a source", "Heparin, and an embolectomy or a thrombolysis depending on the limb"],
+          ["Ruptured thoracic aneurysm", "A chest or back pain with shock", "Emergency repair"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Sending a patient with a threatened limb to thrombolysis when the limb has no motor function. Thrombolysis takes hours to work, and a limb with paralysis needs the surgical restoration of the flow now, or an amputation.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Missing an aneurysm because the abdomen is not palpated. An abdominal aortic aneurysm is a pulsatile mass above the umbilicus, and it is discovered by the hand that palpates, not by the scan.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Interpreting a normal ankle-brachial index as an absence of disease in a diabetic patient. The calcified vessels give a falsely elevated index, and the toe pressures and the waveforms are used instead.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Which features of an acutely ischaemic limb mean it is no longer salvageable?",
+        answer: "The paralysis and the fixed mottling of the limb with a complete sensory loss, because these indicate the death of the muscle and the nerves, and the reperfusion of such a limb produces a systemic release of potassium, myoglobin and acid that is lethal.",
+        explanation: "The distinction determines whether the treatment is an embolectomy or an amputation, and the irreversible limb is not perfused.",
+      },
+      {
+        type: "question",
+        prompt: "What is the initial medical treatment of an acutely ischaemic limb, and why?",
+        answer: "Intravenous heparin, to prevent the propagation of the thrombus and the distal microvascular thrombosis while the definitive restoration of the flow is arranged. It buys time and protects the distal bed.",
+        explanation: "The anticoagulation is the bridge to the embolectomy, the bypass or the thrombolysis.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with atrial fibrillation has a sudden cold, pale, pulseless leg with paraesthesia but motor power. What is the diagnosis?",
+        options: ["Chronic limb ischaemia", "An embolic acute limb ischaemia", "Deep vein thrombosis", "Cellulitis"],
+        correctIndex: 1,
+        explanation: "The sudden onset in a fibrillating patient is an embolus, and the limb is threatened but viable, and the treatment is heparin and an embolectomy.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the most reliable sign that an acutely ischaemic limb has passed the point of salvage?",
+        options: ["Pain", "Pallor", "Paralysis with fixed mottling and a complete sensory loss", "Pulselessness"],
+        correctIndex: 2,
+        explanation: "Paralysis, fixed mottling and anaesthesia indicate the death of the muscle and the nerve, and the limb is not salvageable; reperfusion would be lethal.",
+      },
+      {
+        type: "mcq",
+        stem: "What does an ankle-brachial index below 0.5 indicate?",
+        options: ["Normal arteries", "Rest pain and tissue loss from a severe arterial disease", "A venous disease", "A diabetic foot"],
+        correctIndex: 1,
+        explanation: "An index below 0.5 corresponds to rest pain and tissue loss; an index of 0.5 to 0.8 indicates a claudication, and above 1.3 is falsely elevated by a calcified vessel.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the initial management of a ruptured abdominal aortic aneurysm?",
+        options: ["CT scan", "Resuscitation and an immediate operation or an endovascular repair", "Angiography", "Thrombolysis"],
+        correctIndex: 1,
+        explanation: "A ruptured aneurysm is lethal within hours, and the treatment is an immediate operation or an endovascular repair after a minimal resuscitation; the scan is for a stable patient.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the usual difference in the presentation between an embolic and a thrombotic limb ischaemia?",
+        options: [
+          "The embolic has a sudden onset with no previous symptoms and a normal contralateral limb",
+          "The thrombotic has a sudden onset with a claudication history",
+          "Both are identical",
+          "The thrombotic is always painless",
+        ],
+        correctIndex: 0,
+        explanation: "An embolus is sudden with a normal limb and a cardiac source, and a thrombosis is gradual on a background of atheromatous disease with an abnormal contralateral limb.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The vascular assessment is a history, a four-limb examination of the pulses, an auscultation for the bruits, and the measurement of the ankle-brachial index. Acute limb ischaemia is the six Ps, and the urgency is decided by the sensory and motor loss; heparin is given while the flow is restored by an embolectomy or a thrombolysis. An embolic occlusion is sudden with a cardiac source, and a thrombotic occlusion is gradual on a background of arterial disease. The immediately life-threatening emergencies are the ruptured and the dissected aorta, and they are a hand on the abdomen away.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: wound care, fluid management, shock and haemostasis, whose mechanics underpin the success of any vascular or bowel restoration.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 13 — Approach to the urological patient & haematuria
+// ---------------------------------------------------------------------------
+function lesson13() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the storage and the voiding symptoms and what each suggests; perform a urological examination and urine analysis; investigate haematuria and state the risk factors and the cancers it may indicate; describe the approach to urinary stone disease; and outline the principles of benign prostatic disease and its management.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-12 and ANAT 101 (renal and pelvic anatomy). Urological disease presents through the urinary stream, and its differential is defined by the pattern of the symptoms.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Haematuria",
+        text: "The passage of blood in the urine, which must be classified as visible (macroscopic) or non-visible (microscopic) and, in either case, requires investigation to the renal tract, because it is the commonest presentation of a bladder or a kidney cancer.",
+      },
+      {
+        type: "paragraph",
+        text: "The urinary symptoms are grouped into storage — frequency, urgency, nocturia and urge incontinence, which indicate an irritative or a bladder cause — and voiding — hesitancy, a poor stream, intermittency, straining, dribbling and retention, which indicate an obstruction. The distinction narrows the differential before any test, because the storage symptoms point to the bladder and the voiding symptoms point to the outlet and the prostate.",
+      },
+
+      { type: "heading", level: 2, text: "Storage and voiding symptoms" },
+      {
+        type: "table",
+        headers: ["Group", "Symptom", "What it suggests"],
+        rows: [
+          ["Storage", "Frequency with small volumes", "A bladder irritability from an infection, a stone or a carcinoma in situ"],
+          ["Storage", "Urgency and urge incontinence", "Detrusor overactivity or a bladder outlet problem"],
+          ["Storage", "Nocturia", "A bladder outlet problem, a diabetes, a diuretic or a poor concentrating ability"],
+          ["Voiding", "Hesitancy and a poor stream", "Bladder outlet obstruction, most often from the prostate"],
+          ["Voiding", "Intermittency and straining", "A detrusor that is failing to overcome the outlet"],
+          ["Voiding", "Terminal dribbling", "A pooling of urine in the bulbar urethra"],
+          ["Voiding", "Acute retention", "A sudden complete obstruction, often precipitated by an anticholinergic or a constipation"],
+          ["Either", "Incontinence", "Stress (the sphincter), urge (the detrusor), overflow (a retention) or a continuous (a fistula)"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The vital distinction in the older man with retention is between the acute and the chronic: an acute retention is a painful distended bladder with a constant urge and inability to void, and a chronic retention is a painless distension with overflow, a residual volume and a risk of a renal impairment. The chronic retention is the one that damages the kidney, and it is the one that is missed because it does not hurt.",
+      },
+
+      { type: "heading", level: 2, text: "The examination and the first investigations" },
+      {
+        type: "table",
+        headers: ["Investigation", "What is assessed"],
+        rows: [
+          ["Urine dipstick", "Blood, protein, glucose, nitrites and leucocytes"],
+          ["Urine microscopy and culture", "Infection, the red-cell morphology (a dysmorphic red cell indicates a glomerular source), and the casts"],
+          ["Cytology", "The exfoliated malignant cells of the urothelium, used in a carcinoma in situ"],
+          ["Renal function and calcium", "The kidney function and the metabolic cause of a stone"],
+          ["Prostate-specific antigen", "A screening and staging measure, discussed in the context of the patient's age and the life expectancy"],
+          ["Ultrasound of the urinary tract", "The size, the hydronephrosis, the residual volume and the stones"],
+          ["Cystoscopy", "The direct view of the bladder, done for a macroscopic haematuria or a risk of a cancer"],
+          ["CT urography", "The renal tract from the kidney to the bladder, and the standard for the investigation of haematuria"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Haematuria and the cancers" },
+      {
+        type: "table",
+        headers: ["Presentation", "Cancer", "Notes"],
+        rows: [
+          ["Painless visible haematuria in an older man", "Transitional cell carcinoma of the bladder, and the commonest cause", "The commonest urological cancer, and smoking is the dominant risk factor"],
+          ["Painless visible haematuria with a flank mass", "Renal cell carcinoma", "The classic triad with a flank pain and fever"],
+          ["Painless visible haematuria with a clot colic", "Transitional cell carcinoma of the ureter", "A clot that obstructs the ureter causes a colic"],
+          ["Microscopic haematuria in a young adult", "Usually a benign cause, but a disease of the glomeruli is excluded", "The dysmorphic red cells and the protein indicate a glomerular source"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The investigation of a macroscopic haematuria is a CT urography and a cystoscopy, because both must be done: the CT defines the upper tract and the cystoscopy the bladder. A non-visible haematuria is investigated on the basis of the risk factors (age, smoking, previous pelvic radiation, cyclophosphamide exposure, and a family history), and the repeated dipstick is done after an infection has been excluded. The dipstick haematuria is not the same as a haematuria on microscopy, and the false positives from myoglobinuria or from a concentrated urine are excluded first.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "A painless visible haematuria in an older patient is a bladder cancer until the cystoscopy says otherwise, and the diagnosis must not be deferred because the patient is on anticoagulation. The anticoagulation is managed, but the haematuria is investigated.",
+      },
+
+      { type: "heading", level: 2, text: "Stone disease and prostatic disease" },
+      {
+        type: "table",
+        headers: ["Condition", "Presentation", "Management"],
+        rows: [
+          ["Renal colic", "A severe loin to groin pain with vomiting and a microscopic or a visible haematuria", "Non-contrast CT, analgesia, an alpha-blocker for the ureteric stone, and an intervention for a large or an infected stone"],
+          ["Ureteric obstruction", "A loin pain, hydronephrosis and a risk of sepsis", "Decompression by a stent or a nephrostomy in an infected obstruction"],
+          ["Vesical calculus", "Frequency, a stoppage of the stream and discomfort", "Cystolitholapaxy or a removal"],
+          ["Benign prostatic hyperplasia", "Storage and voiding symptoms in an older man, and a palpable smooth prostate", "Alpha-blockers and 5-alpha-reductase inhibitors, a transurethral resection for the refractory case, and the treatment of the acute retention"],
+          ["Carcinoma of the prostate", "Asymptomatic in the early stage, with the voiding symptoms, the bone pain and an irregular prostate", "Staging, and the treatment tailored to the tumour, the life expectancy and the patient"],
+        ],
+      },
+      {
+        type: "question",
+        prompt: "Why is an obstructed and infected urinary tract an emergency?",
+        answer: "Because the obstruction prevents the drainage of the infected urine, so the antibiotics cannot reach the source and the infection becomes bacteraemic. The tract must be decompressed with a stent or a nephrostomy, and the stone treated later.",
+        explanation: "An obstructed infected system is a urological emergency that is relieved by drainage and not by antibiotics alone.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Attributing a visible haematuria to a urinary infection without a culture and, in an older patient, without a cystoscopy. An infection is treated and the urine is re-tested after it, and no patient with a risk of a cancer is left unexamined.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Telling a patient with a chronic retention that they have no problem because they are not in pain. The chronic retention damages the kidney, and it is discovered by the residual volume.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Not palpating a distended bladder in an acute abdomen. A palpably distended bladder is a cause of suprapubic tenderness and an obstruction that must be relieved before a laparotomy.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "How do you distinguish a glomerular from a urological haematuria on the dipstick and the microscopy?",
+        answer: "A glomerular haematuria has dysmorphic red cells (the cells have been distorted by the passage through the nephron), a proteinuria and often a cast, and it is investigated by a renal physician; a urological haematuria has uniform red cells and is investigated by a CT urography and a cystoscopy.",
+        explanation: "The distinction separates the medical from the surgical cause of the same sign.",
+      },
+      {
+        type: "question",
+        prompt: "What is the standard investigation of a painless visible haematuria in a 65-year-old smoker?",
+        answer: "A CT urography of the upper tract and a cystoscopy of the bladder, both done within the same episode, because the presentation is a bladder cancer until the cystoscopy says otherwise.",
+        explanation: "Both tests are mandatory: the CT for the kidney and the ureter, and the cystoscopy for the bladder.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which is the commonest urological cancer, and its commonest risk factor?",
+        options: ["Renal cell carcinoma and smoking", "Transitional cell carcinoma of the bladder and smoking", "Prostatic cancer and obesity", "Testicular cancer and diet"],
+        correctIndex: 1,
+        explanation: "Transitional cell carcinoma of the bladder is the commonest urological cancer, and smoking is the dominant risk factor, with the aromatic amines of the industry also.",
+      },
+      {
+        type: "mcq",
+        stem: "A man of 70 has a sudden suprapubic pain with an inability to void, and a palpable mass. What is the immediate management?",
+        options: ["An alpha-blocker and a discharge", "Immediate catheterisation to relieve the acute retention", "A CT scan of the abdomen", "An intravenous antibiotic alone"],
+        correctIndex: 1,
+        explanation: "An acute retention is painful and must be relieved by a catheter, and the prostate and the cause are then assessed; the trial of a catheter removal is a later decision.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the treatment of the obstructed and infected urinary tract?",
+        options: ["Antibiotics alone", "Decompression by a stent or a nephrostomy, with antibiotics", "A cystoscopy and a stone removal", "A nephrectomy"],
+        correctIndex: 1,
+        explanation: "The antibiotics cannot reach the source through an obstructed tract, so the drainage relieves the sepsis and the stone is treated later.",
+      },
+      {
+        type: "mcq",
+        stem: "Which feature of a microhaematuria suggests a glomerular source?",
+        options: ["Uniform red cells with a clot", "Dysmorphic red cells with a proteinuria and a cast", "A visible clot", "An alkaline urine"],
+        correctIndex: 1,
+        explanation: "The dysmorphic red cells, the protein and a cast indicate a glomerular source, and they are found by the microscopy of the urine.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the investigation of a painless visible haematuria in an older patient?",
+        options: ["A urine culture alone", "A CT urography and a cystoscopy", "A prostate-specific antigen", "An intravenous urogram only"],
+        correctIndex: 1,
+        explanation: "A CT urography images the kidney and the ureter and a cystoscopy the bladder, and both are required for a macroscopic haematuria.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The urological symptoms divide into storage (irritative) and voiding (obstructive), and the distinction narrows the differential before a test is ordered. A painless visible haematuria in an older patient is a bladder cancer until the CT urography and the cystoscopy say otherwise, and the glomerular causes are separated by the microscopy of the urine. A renal colic is diagnosed by the CT and managed with an analgesia and the passage of the stone, and an obstructed and infected system is an emergency relieved by drainage.",
+      },
+      {
+        type: "paragraph",
+        text: "Next: fluid management and shock, whose recognition is a daily part of the management of any surgical or urological patient.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 14 — Oesophagus, stomach & duodenum surgery
+// ---------------------------------------------------------------------------
+function lesson14() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the presentation and management of gastro-oesophageal reflux; recognise Barrett oesophagus and the risk of adenocarcinoma; state the causes and management of oesophageal cancer; describe peptic ulceration, its complications and their treatment; and outline the presentation and surgery of gastric cancer.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 1-13 and ANAT 101 (foregut anatomy and the diaphragmatic hiatus). The gastro-oesophageal junction is a physiological sphincter whose failure is the entry to the whole of foregut surgery.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Gastro-oesophageal reflux disease",
+        text: "The reflux of gastric content into the oesophagus producing heartburn and regurgitation, caused by a failure of the anti-reflux barrier — the lower oesophageal sphincter, the diaphragmatic hiatus and the angle of His — and treated by lifestyle measures, acid suppression and, for the resistant case, anti-reflux surgery.",
+      },
+      {
+        type: "paragraph",
+        text: "The whole of foregut surgery turns on one junction. The lower oesophageal sphincter is not a true anatomical sphincter but a physiological one, and it fails by a transient relaxation, a hiatal hernia, a raised intra-abdominal pressure or a weak muscle. Reflux is the symptom, but the consequences that matter are the complications: the erosive oesophagitis, the stricture, the Barrett metaplasia and the adenocarcinoma that can follow.",
+      },
+
+      { type: "heading", level: 2, text: "Gastro-oesophageal reflux and its surgery" },
+      {
+        type: "table",
+        headers: ["Aspect", "Content"],
+        rows: [
+          ["Symptoms", "Heartburn (a retrosternal burning, worse lying flat and after meals), regurgitation, water brash, a cough and hoarseness, and a non-cardiac chest pain"],
+          ["Diagnosis", "Clinical, then an upper gastrointestinal endoscopy if the presentation is atypical, or if the alarm features are present, or if the treatment fails"],
+          ["Medical treatment", "A proton pump inhibitor, weight loss, the elevation of the bed-head, the avoidance of the late meals and the reduction of the alcohol and the smoking"],
+          ["Surgery", "A laparoscopic Nissen fundoplication — the wrapping of the fundus around the lower oesophagus — for the patient who is young, who refuses the lifelong medication, or who has a volume reflux that the acid suppression does not control"],
+          ["Alarm features", "Dysphagia, odynophagia, weight loss, anaemia, vomiting or an age over 55, each of which is an indication for an endoscopy"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The dysphagia of a reflux stricture is progressive and solid, whereas the dysphagia of a cancer is rapidly progressive and liquid follows. Any new dysphagia is an indication for an upper gastrointestinal endoscopy, and this is the single rule that catches oesophageal cancer early.",
+      },
+
+      { type: "heading", level: 2, text: "Barrett oesophagus and oesophageal cancer" },
+      {
+        type: "table",
+        headers: ["Condition", "Features", "Management"],
+        rows: [
+          ["Barrett oesophagus", "The replacement of the squamous epithelium by a columnar metaplasia in response to the chronic acid exposure", "Acid suppression and a surveillance endoscopy; the risk of a cancer is about 0.5 per cent per year"],
+          ["Low-grade dysplasia", "A change confined to the lower epithelium", "Intensified surveillance or an ablation"],
+          ["High-grade dysplasia", "The full thickness involvement", "Endoscopic resection or ablation"],
+          ["Adenocarcinoma", "The distal oesophageal and the cardia tumour, arising in Barrett", "Staging, then an oesophagectomy or a chemoradiotherapy for the locally advanced disease"],
+          ["Squamous cell carcinoma", "The mid and the upper oesophageal tumour, related to the alcohol, the smoking and the dietary deficiency", "Staging, then a chemoradiotherapy or an oesophagectomy"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Oesophageal cancer is the disease that presents late, because the oesophagus is distensible and the lumen is not narrowed until the tumour is circumferentially advanced. The presenting symptom is a progressive dysphagia, first for the solids and then for the liquids, with the weight loss that follows the inability to swallow. The staging is by a CT, an endoscopic ultrasound and a PET, and the treatment is a chemoradiotherapy for a squamous cell tumour and an oesophagectomy for a resectable adenocarcinoma.",
+      },
+      {
+        type: "question",
+        prompt: "Why is the dysphagia of an oesophageal cancer progressive in the way a benign stricture is not?",
+        answer: "Because the cancer grows circumferentially and continuously, so the lumen narrows without remission, whereas a benign reflux stricture is fixed and the patient can sometimes swallow soft food for long periods. The history of the progressive solids-to-liquids dysphagia is the diagnostic clue.",
+        explanation: "The dysphagia is the symptom that brings the patient to an endoscopy, and the delay is the reason for the late presentation.",
+      },
+
+      { type: "heading", level: 2, text: "Peptic ulceration" },
+      {
+        type: "table",
+        headers: ["Aspect", "Content"],
+        rows: [
+          ["Aetiology", "Helicobacter pylori infection, the non-steroidal anti-inflammatory drugs, the aspirin, the smoking, and (rarely) the Zollinger-Ellison syndrome"],
+          ["Symptoms", "Epigastric pain that is related to the meals — a gastric ulcer is worse on eating and a duodenal ulcer is relieved by food and recurs 2 to 3 hours later"],
+          ["Diagnosis", "An upper gastrointestinal endoscopy with the biopsy and the testing for the Helicobacter pylori, and the urea breath test or the stool antigen for the non-invasive confirmation"],
+          ["Treatment", "Eradication of the Helicobacter pylori with a triple or a quadruple therapy, a proton pump inhibitor, and the cessation of the non-steroidal drug"],
+          ["Complications", "Perforation, haemorrhage, penetration into the pancreas and the gastric outlet obstruction"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "A perforated peptic ulcer is a surgical emergency: a sudden severe epigastric pain that spreads across the abdomen, with a rigid board-like abdomen, free gas on the erect chest radiograph, and a mortality that rises with every hour of delay. The treatment is a resuscitation, an antibiotic, and the closure of the perforation — an omental patch for a duodenal ulcer, and a resection for a gastric ulcer that may be malignant.",
+      },
+      {
+        type: "question",
+        prompt: "Why is a perforated gastric ulcer treated differently from a perforated duodenal one?",
+        answer: "Because a gastric ulcer may be a carcinoma, so the biopsy and a resection are needed, whereas a duodenal ulcer is almost never malignant and is closed with an omental patch. The distinction is made by the biopsy and the site.",
+        explanation: "The venereal biopsy of a gastric ulcer is a rule that protects against the missed cancer.",
+      },
+
+      { type: "heading", level: 2, text: "Gastric cancer" },
+      {
+        type: "table",
+        headers: ["Aspect", "Content"],
+        rows: [
+          ["Epidemiology", "The incidence is falling; Helicobacter pylori, the dietary salted and smoked food, and the smoking are the risk factors"],
+          ["Presentation", "An early satiety, a weight loss, an epigastric pain, anaemia, and — a Virchow node in the left supraclavicular fossa or a Blumer shelf on the rectal examination — the signs of the advanced disease"],
+          ["Spread", "The lymphatic spread to the coeliac and the supraclavicular nodes, a transcoelomic spread to the ovaries (Krukenberg) and the pouch of Douglas, and a haematogenous spread to the liver"],
+          ["Treatment", "Staging by a CT and a staging laparoscopy, then a subtotal or a total gastrectomy with a lymphadenectomy for a resectable tumour, and a chemotherapy for the advanced or the node-positive disease"],
+          ["Reconstruction", "A Roux-en-Y oesophagojejunostomy after a total gastrectomy, or a Billroth I or a Billroth II anastomosis after a partial gastrectomy"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Attributing a new dysphagia to reflux without an endoscopy. The progressive solids-to-liquids dysphagia is the presentation of oesophageal cancer, and the alarm features are the indication for the investigation rather than the reassurance.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Continuing the non-steroidal anti-inflammatory drug and treating the ulcer with a proton pump inhibitor alone. The Helicobacter pylori and the non-steroidal drug must be addressed, or the ulcer recurs within weeks of the acid suppression being stopped.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Missing the bleeding presentation of a peptic ulcer. A patient with a melaena and a tachycardia is bleeding, and the treatment is a resuscitation, a transfusion and an urgent endoscopy, not a prescription for an iron supplement.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "What is the alarm feature that changes the management of a patient with reflux?",
+        answer: "Dysphagia, odynophagia, weight loss, anaemia, vomiting or an age over 55, because each of these is an indication for an upper gastrointestinal endoscopy, which is the test that finds the Barrett and the cancer.",
+        explanation: "The alarm features are the reason the endoscopy is done, and they are the pathway by which the cancer is found in time to treat it.",
+      },
+      {
+        type: "question",
+        prompt: "Which patient with gastro-oesophageal reflux is referred for a fundoplication?",
+        answer: "The patient who is young, in whom the reflux is a volume reflux with a large hiatal hernia, who refuses the lifelong proton pump inhibitor, who has the respiratory symptoms of an aspiration, or in whom the acid suppression does not control the symptoms. The Nissen wrap is the standard operation.",
+        explanation: "The surgery is a decision for the refractory or the volume reflux, and it is weighed against a well-tolerated lifelong medication.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A man of 70 has a progressive dysphagia, first for solids and now for liquids, with a weight loss. What is the first investigation?",
+        options: ["Barium swallow", "Upper gastrointestinal endoscopy with a biopsy", "Plain chest radiograph", "CT scan of the chest"],
+        correctIndex: 1,
+        explanation: "A progressive solids-to-liquids dysphagia is the presentation of an oesophageal carcinoma, and the endoscopy both sees and biopsies it.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the most common cause of a benign peptic ulcer?",
+        options: ["Helicobacter pylori infection", "Alcohol", "Smoking alone", "Dietary salt"],
+        correctIndex: 0,
+        explanation: "Helicobacter pylori is the commonest cause, with the non-steroidal anti-inflammatory drugs the second, and the eradication is a part of the treatment.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient has a sudden severe epigastric pain and a board-like rigid abdomen. What is the diagnosis?",
+        options: ["Acute pancreatitis", "A perforated peptic ulcer", "Biliary colic", "Myocardial infarction"],
+        correctIndex: 1,
+        explanation: "A sudden pain with a generalised rigidity is a perforation, and the erect chest radiograph shows the free gas under the diaphragm; the treatment is a resuscitation and a closure.",
+      },
+      {
+        type: "mcq",
+        stem: "Which of the following is a feature of a gastric rather than a duodenal ulcer?",
+        options: ["The pain is relieved by food", "The pain is worse on eating", "The pain wakes the patient at 2 am", "The pain is relieved by an antacid at the end of the day"],
+        correctIndex: 1,
+        explanation: "A gastric ulcer is worse on eating because the food stimulates the acid secretion in the stomach, whereas a duodenal ulcer is relieved by the food and recurs a few hours later.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the risk of a cancer in a Barrett oesophagus?",
+        options: ["About 0.1 per cent per year", "About 0.5 per cent per year", "About 5 per cent per year", "About 50 per cent per year"],
+        correctIndex: 1,
+        explanation: "The risk of an adenocarcinoma in a Barrett oesophagus is about 0.5 per cent per year, which is the basis of the surveillance programme and of the treatment of the dysplasia.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Foregut surgery is the surgery of one junction. Reflux is a failure of the physiological sphincter and is treated by the acid suppression and the lifestyle, and by a Nissen fundoplication for the refractory or the volume reflux. The dysphagia is the alarm symptom that must be endoscoped, because the oesophageal cancer presents late with a progressive solids-to-liquids dysphagia. A peptic ulcer is caused by the Helicobacter pylori or the non-steroidal drug, and it is treated by the eradication and the cessation; its perforation and haemorrhage are the emergencies. A gastric cancer presents late and is staged and resected with a lymphadenectomy.",
+      },
+    ],
+  };
+}
 // Module 1 SBA items — one per concept, authored and machine-checked.
 // ---------------------------------------------------------------------------
 const MODULE_ONE_SBAS: SbaSeed[] = [
@@ -1201,22 +2742,22 @@ const MODULE_ONE_SBAS: SbaSeed[] = [
 // ---------------------------------------------------------------------------
 const DEEPER_LESSONS: LessonSeed[] = [
   // --- M2 GI & hepatobiliary surgery ---
-  { title: "The acute abdomen & gastrointestinal bleeding", module: 2, estimatedMinutes: 40, authored: false, concept: { title: "The acute abdomen and gastrointestinal bleeding", slug: "acute-abdomen-gi-bleeding", summary: "The causes and the pattern of abdominal pain, the approach to perforation, obstruction and bleeding, and the initial resuscitation.", blooms: "apply", minutes: 40, prereq: ["haemostasis-shock-fluids"] }, content: { blocks: [] } },
-  { title: "Oesophagus, stomach & duodenum surgery", module: 2, estimatedMinutes: 35, authored: false, concept: { title: "Oesophageal, gastric and duodenal surgery", slug: "oesophagogastric-surgery", summary: "Gastro-oesophageal reflux and its surgical repair, peptic ulceration and its complications, and the gastric cancer operations.", blooms: "apply", minutes: 35, prereq: ["acute-abdomen-gi-bleeding"] }, content: { blocks: [] } },
-  { title: "Small bowel & emergency surgery", module: 2, estimatedMinutes: 35, authored: false, concept: { title: "Small bowel and emergency surgery", slug: "small-bowel-surgery", summary: "Small bowel obstruction, ischaemia and herniation, the principle of stoma formation, and the complications of bowel surgery.", blooms: "apply", minutes: 35, prereq: ["acute-abdomen-gi-bleeding"] }, content: { blocks: [] } },
-  { title: "Colorectal surgery", module: 2, estimatedMinutes: 40, authored: false, concept: { title: "Colorectal surgery", slug: "colorectal-surgery", summary: "Diverticular disease, inflammatory bowel disease, colorectal cancer, the laparoscopic approach and the principles of the low anterior resection.", blooms: "apply", minutes: 40, prereq: ["small-bowel-surgery"] }, content: { blocks: [] } },
-  { title: "Appendicectomy & the appendix", module: 2, estimatedMinutes: 30, authored: false, concept: { title: "Appendicitis and appendicectomy", slug: "appendix", summary: "The spectrum from uncomplicated to complicated appendicitis, the scoring tools, open versus laparoscopic, and the post-operative complications.", blooms: "apply", minutes: 30, prereq: ["small-bowel-surgery"] }, content: { blocks: [] } },
-  { title: "Hepatobiliary & pancreatic surgery", module: 2, estimatedMinutes: 40, authored: false, concept: { title: "Hepatobiliary and pancreatic surgery", slug: "hepatobiliary-surgery", summary: "Gallstone disease, the intervention for cholangitis and pancreatitis, the resection of liver and pancreatic tumours, and the principles of jaundice surgery.", blooms: "apply", minutes: 40, prereq: ["colorectal-surgery"] }, content: { blocks: [] } },
+  { title: "The acute abdomen & gastrointestinal bleeding", module: 2, estimatedMinutes: 40, authored: true, concept: { title: "The acute abdomen and gastrointestinal bleeding", slug: "acute-abdomen-gi-bleeding", summary: "The causes and the pattern of abdominal pain, the approach to perforation, obstruction and bleeding, and the initial resuscitation.", blooms: "apply", minutes: 40, prereq: ["haemostasis-shock-fluids"] }, content: lesson9() as never },
+  { title: "Oesophagus, stomach & duodenum surgery", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Oesophageal, gastric and duodenal surgery", slug: "oesophagogastric-surgery", summary: "Gastro-oesophageal reflux and its surgical repair, peptic ulceration and its complications, and the gastric cancer operations.", blooms: "apply", minutes: 35, prereq: ["acute-abdomen-gi-bleeding"] }, content: lesson14() as never },
+  { title: "Small bowel & emergency surgery", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Small bowel and emergency surgery", slug: "small-bowel-surgery", summary: "Small bowel obstruction, ischaemia and herniation, the principle of stoma formation, and the complications of bowel surgery.", blooms: "apply", minutes: 35, prereq: ["acute-abdomen-gi-bleeding"] }, content: lesson7() as never },
+  { title: "Colorectal surgery", module: 2, estimatedMinutes: 40, authored: true, concept: { title: "Colorectal surgery", slug: "colorectal-surgery", summary: "Diverticular disease, inflammatory bowel disease, colorectal cancer, the laparoscopic approach and the principles of the low anterior resection.", blooms: "apply", minutes: 40, prereq: ["small-bowel-surgery"] }, content: lesson10() as never },
+  { title: "Appendicectomy & the appendix", module: 2, estimatedMinutes: 30, authored: true, concept: { title: "Appendicitis and appendicectomy", slug: "appendix", summary: "The spectrum from uncomplicated to complicated appendicitis, the scoring tools, open versus laparoscopic, and the post-operative complications.", blooms: "apply", minutes: 30, prereq: ["small-bowel-surgery"] }, content: lesson8() as never },
+  { title: "Hepatobiliary & pancreatic surgery", module: 2, estimatedMinutes: 40, authored: true, concept: { title: "Hepatobiliary and pancreatic surgery", slug: "hepatobiliary-surgery", summary: "Gallstone disease, the intervention for cholangitis and pancreatitis, the resection of liver and pancreatic tumours, and the principles of jaundice surgery.", blooms: "apply", minutes: 40, prereq: ["colorectal-surgery"] }, content: lesson11() as never },
 
   // --- M3 Vascular & cardiovascular surgery ---
   { title: "Approach to the vascular patient", module: 3, estimatedMinutes: 35, authored: false, concept: { title: "Approach to the vascular patient", slug: "vascular-approach", summary: "The history and examination of the arterial and venous systems, the interpretation of the investigation results, and the grading of limb ischaemia.", blooms: "apply", minutes: 35, prereq: ["trauma-principles"] }, content: { blocks: [] } },
   { title: "Aneurysmal & occlusive arterial disease", module: 3, estimatedMinutes: 40, authored: false, concept: { title: "Aneurysmal and occlusive arterial disease", slug: "aneurysmal-occlusive-disease", summary: "Abdominal and thoracic aneurysm, carotid disease, peripheral arterial disease, and the surgical and endovascular interventions.", blooms: "apply", minutes: 40, prereq: ["vascular-approach"] }, content: { blocks: [] } },
-  { title: "Acute limb ischaemia", module: 3, estimatedMinutes: 30, authored: false, concept: { title: "Acute limb ischaemia", slug: "acute-limb-ischaemia", summary: "The 6 Ps of acute limb ischaemia, the discriminating embolic from thrombotic occlusion, and the treatment including thrombolysis.", blooms: "analyze", minutes: 30, prereq: ["vascular-approach"] }, content: { blocks: [] } },
+  { title: "Acute limb ischaemia", module: 3, estimatedMinutes: 30, authored: true, concept: { title: "Acute limb ischaemia", slug: "acute-limb-ischaemia", summary: "The 6 Ps of acute limb ischaemia, the discriminating embolic from thrombotic occlusion, and the treatment including thrombolysis.", blooms: "analyze", minutes: 30, prereq: ["vascular-approach"] }, content: lesson12() as never },
   { title: "Venous disease & lymphatics", module: 3, estimatedMinutes: 30, authored: false, concept: { title: "Venous disease and lymphatics", slug: "venous-disease", summary: "Varicose veins and chronic venous disease, the complications of venous stasis, and the treatment of lymphoedema.", blooms: "apply", minutes: 30, prereq: [] }, content: { blocks: [] } },
   { title: "Cardiac surgery", module: 3, estimatedMinutes: 35, authored: false, concept: { title: "Cardiac surgery", slug: "cardiac-surgery", summary: "Coronary artery bypass grafting, valve replacement and repair, the cardiopulmonary bypass, and post-operative complications.", blooms: "apply", minutes: 35, prereq: ["wound-care-healing"] }, content: { blocks: [] } },
 
   // --- M4 Urology & renal surgery ---
-  { title: "Approach to the urological patient", module: 4, estimatedMinutes: 30, authored: false, concept: { title: "Approach to the urological patient", slug: "urological-approach", summary: "The causes of urinary symptoms, the examination and the investigation of a renal transplant, and the approach to haematuria.", blooms: "apply", minutes: 30, prereq: ["assessment-consent"] }, content: { blocks: [] } },
+  { title: "Approach to the urological patient", module: 4, estimatedMinutes: 30, authored: true, concept: { title: "Approach to the urological patient", slug: "urological-approach", summary: "The causes of urinary symptoms, the examination and the investigation of a renal transplant, and the approach to haematuria.", blooms: "apply", minutes: 30, prereq: ["assessment-consent"] }, content: lesson13() as never },
   { title: "Stones & obstruction of the urinary tract", module: 4, estimatedMinutes: 35, authored: false, concept: { title: "Urinary stones and obstruction", slug: "urinary-stones", summary: "The composition and causes of urinary stones, the pattern of renal colic, and the incidence of hydronephrosis.", blooms: "apply", minutes: 35, prereq: ["urological-approach"] }, content: { blocks: [] } },
   { title: "Prostate & bladder disease", module: 4, estimatedMinutes: 35, authored: false, concept: { title: "Prostatic and bladder disease", slug: "prostate-bladder", summary: "Benign prostatic enlargement, carcinoma of the prostate with its staging, bladder cancer, and the investigation and management.", blooms: "apply", minutes: 35, prereq: ["urological-approach"] }, content: { blocks: [] } },
   { title: "External genitalia & the scrotum", module: 4, estimatedMinutes: 30, authored: false, concept: { title: "External genitalia and the scrotum", slug: "genital-scrotal-surgery", summary: "Testicular torsion and swellings, hydrocele, varicocele, hypospadias, and the principles of the acute scrotum.", blooms: "apply", minutes: 30, prereq: ["urological-approach"] }, content: { blocks: [] } },

@@ -426,3 +426,14 @@ any assessment weight); rebuild in parallel with the board clearance.
   applied-statistics (1 lesson vs 26 items).
 - CLI guards fixed in all six split seed files (sibling mbbs/<name> pattern).
 - Gates: tsc clean · lint clean · 228/228 tests.
+
+## University wave 3 (2026-10-27) — content complete
+
+- Wave 3 delivered: medicine 6→14, surgery 6→14, paediatrics 6→14, obstetrics-gynaecology 6→14,
+  pharmacology 6→14, applied-statistics 1→10 authored lessons (all house format, seeded, verified).
+- **Every course now carries real teaching content**: 263 authored lessons across 20 courses
+  (lowest: otorhinolaryngology 9; only the two stubs data-foundations/academic-writing remain at 2).
+- Gates: tsc clean · lint clean · 228/228 tests · both waves merged to main and deployed.
+- Remaining content queue (optional depth): M4-M5 placeholders in microbiology (8), community
+  medicine (8), forensic medicine (2), pathology (~15), psychiatry (4) and the two stubs' module
+  structure. Then the AI-era interface pass (owner's next priority).
