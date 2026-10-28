@@ -415,3 +415,14 @@ any assessment weight); rebuild in parallel with the board clearance.
 - **Remaining queue (December launch)**: wave 2 — dermatology, psychiatry, ophthalmology,
   orthopaedics, anaesthesiology, ENT lessons (0 each); wave 3 — paediatrics/medicine/surgery/
   obgyn lessons 6→~14 each; then the AI-era interface pass (owner flagged the current UI).
+
+## University wave 2 (2026-10-27)
+
+- Lesson authoring wave 2 complete (connection dropped mid-wave; all six files had completed
+  their writes, re-seeded and verified): psychiatry 12, dermatology 11, ophthalmology 11,
+  orthopaedics 11, anaesthesiology 10, otorhinolaryngology 9 — 64 lessons.
+- University lessons 102 → 166 across 15 courses; only pharmacology, medicine, surgery,
+  obstetrics-gynaecology and paediatrics remain thin (6 lessons each) for wave 3, plus
+  applied-statistics (1 lesson vs 26 items).
+- CLI guards fixed in all six split seed files (sibling mbbs/<name> pattern).
+- Gates: tsc clean · lint clean · 228/228 tests.
