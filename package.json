@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test:alignment": "node --test tests/alignment-engine.test.mjs",
     "test:spaced-repetition": "node --test tests/spaced-repetition.test.mjs",
+    "test:desk": "node --test tests/desk-pipeline.test.mjs",
     "test:assessment": "node --test tests/assessment.test.mjs",
     "test:lesson-python": "node --test tests/lesson-python.test.mjs",
     "test:assessment-seed": "node --test tests/assessment-seed.test.mjs",
@@ -33,6 +34,7 @@
     "react-dom": "^18",
     "stripe": "^16.8.0",
     "tailwind-merge": "^2.5.2",
+    "unpdf": "^1.9.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -42,6 +44,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
+    "pdfkit": "^0.20.2",
     "postcss": "^8",
     "prisma": "^5.22.0",
     "tailwindcss": "^3.4.1",

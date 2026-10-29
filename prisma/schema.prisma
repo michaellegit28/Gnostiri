@@ -45,6 +45,11 @@ model User {
   competitionMembers   CompetitionMember[]
   leagueBadges         LeagueBadge[]
   leagueCredits        LeagueCredit[]
+
+  // Desk — processed study documents and scheduled tasks
+  studyDocuments        StudyDocument[]
+  documentQuizItems     DocumentQuizItem[]
+  studyTasks            StudyTask[]
 }
 
 model Profile {
@@ -933,4 +938,67 @@ model LeagueCredit {
   createdAt    DateTime @default(now())
 
   @@index([userId, createdAt])
+}
+
+
+// ── Desk: the PDF pipeline ───────────────────────────────────────────────────
+// The source PDF is NEVER stored — it is processed in memory and discarded.
+// What persists is the processed artifact (extracted text + AI notes + quiz
+// items), so storage stays small and the Library's "artifacts, never files"
+// rule holds by construction.
+model StudyDocument {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String
+  contentHash  String   @unique   // dedupe: same text processed once per user cohort
+  domain       AppDomain @default(highschool)
+  subjectSlug  String?
+  status       String   @default("processing") // processing | ready | needs-ai | failed
+  pageCount    Int      @default(0)
+  errorNote    String?
+  // The processed notes artifact (sections of LessonBlocks): extractive or
+  // AI, shared across the dedupe cohort — content is document-derived only,
+  // never user-identifying. Null while status is "processing", for scanned
+  // documents (no extractable text) and on failures.
+  notes        Json?
+  createdAt    DateTime @default(now())
+
+  quizItems DocumentQuizItem[]
+  tasks     StudyTask[]
+
+  @@index([userId, createdAt])
+}
+
+model DocumentQuizItem {
+  id           String   @id @default(cuid())
+  documentId   String
+  document     StudyDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stem         String
+  options      Json
+  correctAnswer String
+  explanation  String
+  difficulty   String   @default("medium")
+  createdAt    DateTime @default(now())
+
+  @@index([documentId])
+  @@index([userId])
+}
+
+model StudyTask {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documentId   String?
+  document     StudyDocument? @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  kind         String   // reading | quiz
+  title        String
+  minutes      Int      @default(30)
+  scheduledFor DateTime
+  status       String   @default("pending") // pending | done | skipped
+  createdAt    DateTime @default(now())
+
+  @@index([userId, scheduledFor, status])
 }
