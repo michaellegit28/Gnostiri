@@ -437,3 +437,23 @@ any assessment weight); rebuild in parallel with the board clearance.
 - Remaining content queue (optional depth): M4-M5 placeholders in microbiology (8), community
   medicine (8), forensic medicine (2), pathology (~15), psychiatry (4) and the two stubs' module
   structure. Then the AI-era interface pass (owner's next priority).
+
+## Phase 1 build (2026-10-27): shell, notifications, Merit League
+
+- Schema: Notification, NotificationPreference, Competition, CompetitionMember, LeagueBadge,
+  LeagueCredit (migration 20261027130000 applied to production with FKs + RLS; client generated).
+- App shell: SiteMenu restructured into six zones (Study / Your workspace / Compete & share /
+  Membership) with NotificationBell + PrimeBadge in the menu header; /arena permanently redirects
+  to /league; Desk and Library land as honest "opening soon" pages (no dead links).
+- Notification centre: single writer src/lib/notify.ts (muted types, quiet-hours email deferral,
+  Resend env-gated no-throw email), bell with unread badge, /notifications feed + preferences
+  (emailOptIn, quietHours, per-type mutes), /api/notifications + /api/notifications/preferences,
+  plus a contract test (tests/notify.test.mjs, 6/6).
+- Merit League: lobby (season banner, format explainers, eligibility panel), create flow,
+  invite/join flows, public + private cups; Speed Cup live play with the derived question set
+  (seeded FNV-1a → mulberry32 → Fisher-Yates, byte-identical per competition, NO answer key in
+  the payload — verified: 20 questions, deterministic, no correctAnswer leak), server-side scoring
+  with best-of + rank reconciliation + overtaken notifications, results page and leaderboard.
+- Gnostiri Prime badge: /api/entitlements/prime (tier + consecutive months) + PrimeBadge chrome.
+- Demo cup seeded ("Launch Cup — Speed", live, public, free) so the lobby is not empty on deploy.
+- Gates: tsc clean · lint clean · 234/234 tests.

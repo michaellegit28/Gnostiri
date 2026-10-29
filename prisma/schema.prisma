@@ -37,6 +37,14 @@ model User {
   assessmentSessions AssessmentSession[]
   launchTokens LaunchToken[]
   contentReports ContentReport[]
+
+  // App shell: notifications, Merit League, rewards
+  notifications        Notification[]
+  notificationPref     NotificationPreference?
+  hostedCompetitions   Competition[]    @relation("CompetitionHost")
+  competitionMembers   CompetitionMember[]
+  leagueBadges         LeagueBadge[]
+  leagueCredits        LeagueCredit[]
 }
 
 model Profile {
@@ -837,4 +845,92 @@ model LaunchToken {
 
   @@index([country, tier])
   @@index([usedById])
+}
+
+
+// ── App shell: notification centre (in-app primary, email backup) ─────────────
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // cup_starting | streak_risk | overtaken | bracket_invite | milestone | artifact_reward | season_result | report_resolved
+  title     String
+  body      String
+  href      String?
+  read      Boolean  @default(false)
+  emailed   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read, createdAt])
+}
+
+model NotificationPreference {
+  userId     String   @id
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailOptIn Boolean  @default(false)
+  quietHours String?  // "22:00-07:00"
+  mutedTypes String[] // notification types muted in-app
+}
+
+// ── Merit League (replaces Global Arena) ──────────────────────────────────────
+model Competition {
+  id          String    @id @default(cuid())
+  hostId      String
+  host        User      @relation("CompetitionHost", fields: [hostId], references: [id], onDelete: Cascade)
+  format      String    // speed | endurance | mastery | bracket
+  title       String
+  subjectSlug String?
+  domain      AppDomain  @default(highschool)
+  visibility  String    @default("private") // private | public
+  inviteCode  String?   @unique
+  entryRule   String    @default("free") // free | prime
+  maxMembers  Int       @default(16)
+  startsAt    DateTime
+  endsAt      DateTime
+  status      String    @default("scheduled") // scheduled | live | finished | cancelled
+  seasonSlug  String?   // e.g. "s3-2026" (Season 3, Sep–Dec)
+  createdAt   DateTime  @default(now())
+
+  members CompetitionMember[]
+
+  @@index([status, startsAt])
+  @@index([visibility, status])
+}
+
+model CompetitionMember {
+  id            String   @id @default(cuid())
+  competitionId String
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  anonymous     Boolean  @default(true)
+  score         Int      @default(0)
+  rank          Int?
+  joinedAt      DateTime @default(now())
+
+  @@unique([competitionId, userId])
+}
+
+// ── Public Library rewards: badges + Prime-day credits ────────────────────────
+model LeagueBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  key       String   // "first-artifact" | "speed-cup-top3" | ...
+  label     String
+  awardedAt DateTime @default(now())
+
+  @@unique([userId, key])
+}
+
+model LeagueCredit {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  delta        Int      // +earned / -redeemed
+  reason       String
+  balanceAfter Int
+  createdAt    DateTime @default(now())
+
+  @@index([userId, createdAt])
 }
