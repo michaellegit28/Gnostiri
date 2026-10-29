@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import NotificationBell from "@/components/notifications/NotificationBell";
+import PrimeBadge from "@/components/chrome/PrimeBadge";
 import { usePathname } from "next/navigation";
 
 /**
@@ -10,22 +12,34 @@ import { usePathname } from "next/navigation";
  */
 const GROUPS: { label: string; links: { href: string; title: string; note: string; badge?: string }[] }[] = [
   {
-    label: "Three ways of learning",
+    label: "Study",
     links: [
       { href: "/highschool", title: "High School", note: "Textbooks and exam banks" },
       { href: "/university", title: "University", note: "Degree-depth courses and faculties" },
       { href: "/discovery", title: "Discovery", note: "Follow curiosity past the syllabus" },
-      { href: "/arena", title: "Global Arena", note: "Inter-school contests", badge: "Soon" },
     ],
   },
   {
-    label: "Your journey",
+    label: "Your workspace",
     links: [
+      { href: "/desk", title: "Desk", note: "Your uploads, notes and plans", badge: "Soon" },
+      { href: "/tutor", title: "AI Tutor", note: "A guide, not an oracle" },
       { href: "/battle-plan", title: "Battle Plan", note: "Your day-by-day mission" },
       { href: "/progress", title: "My Progress", note: "Streaks, accuracy, history" },
+    ],
+  },
+  {
+    label: "Compete & share",
+    links: [
+      { href: "/league", title: "Merit League", note: "Cups, brackets and seasons" },
+      { href: "/library", title: "Public Library", note: "Shared notes and quizzes", badge: "Soon" },
+    ],
+  },
+  {
+    label: "Membership",
+    links: [
+      { href: "/pricing", title: "Gnostiri Prime", note: "Unlock everything" },
       { href: "/university/revision", title: "Revision Queue", note: "Concepts due for review" },
-      { href: "/tutor", title: "AI Tutor", note: "A guide, not an oracle" },
-      { href: "/pricing", title: "Premium", note: "Unlock everything" },
     ],
   },
 ];
@@ -93,7 +107,11 @@ export default function SiteMenu() {
 
       {open && (
         <div className="fixed inset-0 z-[60] overflow-y-auto bg-[#070b16]/97 backdrop-blur-lg">
-          <nav className="mx-auto max-w-2xl px-6 pt-24 pb-16 space-y-10" aria-label="Site">
+          <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-6 pt-20 pb-2">
+            <NotificationBell />
+            <PrimeBadge />
+          </div>
+          <nav className="mx-auto max-w-2xl px-6 pt-4 pb-16 space-y-10" aria-label="Site">
             {GROUPS.map((group, gi) => (
               <div
                 key={group.label}
