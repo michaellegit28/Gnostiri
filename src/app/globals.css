@@ -67,3 +67,37 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Appearance & accessibility prefs (Settings) ─────────────────────────── */
+/* Solid background: replaces the blurred aurora with a flat high-contrast
+   surface — easier on astigmatism and low-end devices. */
+html.solid-bg body,
+html.solid-bg .bg-\[#070b16\]\/97,
+html.solid-bg .bg-\[#070b16\]\/90,
+html.solid-bg .bg-\[#070b16\]\/95 {
+  background-color: #0a0f1a !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+}
+html.solid-bg [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+}
+
+/* Reduce motion: no card, menu, countdown or celebration animation anywhere. */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
