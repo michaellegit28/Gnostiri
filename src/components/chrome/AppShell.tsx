@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Command, Crown, Menu, X } from "lucide-react";
 import NotificationBell from "@/components/notifications/NotificationBell";
 import PrimeBadge from "@/components/chrome/PrimeBadge";
-import { BOTTOM_TABS, NAV_ZONES, isActive, type NavItem } from "./nav-model";
+import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
 
 /**
  * AppShell — one chrome for every device.
@@ -25,12 +25,31 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebar, setSidebar] = useState(false);
   const [palette, setPalette] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const paletteRef = useRef<HTMLDivElement>(null);
+  const paletteReturnTo = useRef<HTMLElement | null>(null);
 
   // Close overlays on navigation.
   useEffect(() => {
     setDrawer(false);
     setPalette(false);
   }, [pathname]);
+
+  // Command-palette focus management (WCAG 2.4.3): on open, remember the
+  // element that had focus and move focus to the first destination inside the
+  // dialog; on close — Escape, navigation or the unmount that follows — hand
+  // focus back so a keyboard user never loses their place in the chrome.
+  // No focus trap is attempted (the palette is a short list of links and Esc
+  // always leaves), only enter + restore.
+  useEffect(() => {
+    if (!palette) return;
+    paletteReturnTo.current = document.activeElement as HTMLElement | null;
+    const firstLink = paletteRef.current?.querySelector<HTMLElement>("a[href]");
+    firstLink?.focus();
+    return () => {
+      paletteReturnTo.current?.focus();
+      paletteReturnTo.current = null;
+    };
+  }, [palette]);
 
   // Escape closes; Cmd/Ctrl+K opens the palette (desktop power-user nav).
   useEffect(() => {
@@ -128,7 +147,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Desktop sidebar ─────────────────────────────────────────────── */}
       <nav
-        aria-label="Primary"
+        aria-label={NAV_LABEL}
         className={`fixed inset-y-0 left-0 z-40 hidden w-64 transform border-r border-white/10 bg-[#070b16]/97 pt-14 backdrop-blur-lg transition-transform duration-300 lg:block ${
           sidebar ? "-translate-x-full" : "translate-x-0"
         }`}
@@ -163,7 +182,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               <X className="h-5 w-5" aria-hidden />
             </button>
           </div>
-          <nav aria-label="Primary" className="px-5 pb-16 pt-4">
+          <nav aria-label={NAV_LABEL} className="px-5 pb-16 pt-4">
             {NAV_ZONES.map((zone) => (
               <div key={zone.id} className="mb-7">
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">{zone.label}</p>
@@ -175,14 +194,17 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                       <li key={item.href}>
                         <Link
                           href={item.href}
-                          className="group flex min-h-[52px] items-center gap-3 py-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                          aria-current={active ? "page" : undefined}
+                          className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                            active ? "border-gold" : "border-transparent hover:border-gold/40"
+                          }`}
                         >
-                          <Icon className={`h-5 w-5 ${active ? "text-gold" : "text-slate-500 group-hover:text-gold"}`} aria-hidden />
+                          <Icon className={`h-5 w-5 ${active ? "text-gold" : "text-slate-400 group-hover:text-gold"}`} aria-hidden />
                           <span>
                             <span className={`block font-serif text-lg font-bold ${active ? "text-gold" : "text-slate-100 group-hover:text-gold"}`}>
                               {item.label}
                             </span>
-                            <span className="block text-xs text-slate-400">{item.note}</span>
+                            <span className="block text-xs text-muted">{item.note}</span>
                           </span>
                         </Link>
                       </li>
@@ -203,7 +225,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Command palette ─────────────────────────────────────────────── */}
       {palette && (
-        <div className="fixed inset-0 z-[80] bg-[#070b16]/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Jump to">
+        <div
+          ref={paletteRef}
+          className="fixed inset-0 z-[80] bg-[#070b16]/80 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Jump to"
+        >
           <div className="mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-white/10 bg-slate-950/95 shadow-2xl">
             <p className="border-b border-white/10 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-gold">Jump to</p>
             <ul className="max-h-[60vh] overflow-y-auto py-2">
@@ -215,9 +243,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                       href={item.href}
                       className="flex min-h-[44px] items-center gap-3 px-4 py-2.5 text-sm text-slate-200 hover:bg-white/5 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                     >
-                      <Icon className="h-4 w-4 text-slate-500" aria-hidden />
+                      <Icon className="h-4 w-4 text-slate-400" aria-hidden />
                       {item.label}
-                      <span className="ml-auto text-xs text-slate-500">{item.note}</span>
+                      <span className="ml-auto text-xs text-muted">{item.note}</span>
                     </Link>
                   </li>
                 );
@@ -233,8 +261,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
         <footer className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pb-28 pt-4 lg:pb-6">
-          <p className="text-xs text-slate-500">Gnostiri — built for the December launch.</p>
-          <Link href="/settings" className="rounded text-xs text-slate-500 underline-offset-2 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+          <p className="text-xs text-muted">Gnostiri — built for the December launch.</p>
+          <Link href="/settings" className="rounded text-xs text-slate-400 underline-offset-2 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
             Appearance & accessibility
           </Link>
         </footer>
@@ -242,7 +270,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Mobile bottom tabs ──────────────────────────────────────────── */}
       <nav
-        aria-label="Primary tabs"
+        aria-label={TAB_BAR_LABEL}
         className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#070b16]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
       >
         <ul className="flex">
@@ -260,6 +288,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 >
                   <Icon className="h-5 w-5" aria-hidden />
                   {tab.label}
+                  {/* Active state is never colour-only: aria-current="page" for
+                      assistive tech plus a gold dot every sighted user can see. */}
+                  {active && <span className="h-1 w-1 rounded-full bg-gold" aria-hidden="true" />}
                 </Link>
               </li>
             );
@@ -277,8 +308,8 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <Link
       href={item.href}
       aria-current={active ? "page" : undefined}
-      className={`flex min-h-[44px] items-center gap-3 rounded-lg px-2 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-        active ? "bg-gold/10 text-gold" : "text-slate-300 hover:bg-white/5 hover:text-gold"
+      className={`flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 px-2 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+        active ? "border-gold bg-gold/10 text-gold" : "border-transparent text-slate-300 hover:bg-white/5 hover:text-gold"
       }`}
     >
       <Icon className="h-4 w-4 shrink-0" aria-hidden />

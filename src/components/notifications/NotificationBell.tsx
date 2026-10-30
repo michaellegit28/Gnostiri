@@ -168,8 +168,8 @@ export default function NotificationBell() {
                       {!n.read && <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />}
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-sm font-semibold text-slate-100">{n.title}</span>
-                        <span className="mt-0.5 block line-clamp-2 text-xs text-slate-400">{n.body}</span>
-                        <span className="mt-1 block text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                        <span className="mt-0.5 block line-clamp-2 text-xs text-muted">{n.body}</span>
+                        <span className="mt-1 block text-[11px] uppercase tracking-[0.2em] text-muted">
                           {relativeTime(n.createdAt)}
                         </span>
                       </span>

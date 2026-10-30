@@ -50,6 +50,49 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
 /* Premium reading font polish — Literata for long-form study text */
 .font-reading { text-rendering: optimizeLegibility; font-feature-settings: "kern" 1, "liga" 1; }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Phase 6d — accessibility & contrast pass (shell surfaces)
+   -----------------------------------------------------------------------------
+   Measured WCAG 2.1 contrast ratios, computed from these hex values against
+   the app background #070b16 (recomputed from source by tests/a11y.test.mjs in
+   pure JS — no browser, no Yak shaving):
+
+     foreground token                    surface            ratio    verdict
+     gold #D4AF37                        #070b16            9.35:1   AA body text
+     slate-300 #cbd5e1  (.text-muted)    #070b16           13.24:1   AA body text
+     slate-400 #94a3b8                    #070b16            7.67:1   AA body text
+     slate-500 #64748b                    #070b16            4.13:1   FAILS 4.5:1 body
+     slate-950 #020617  on gold CTA       #D4AF37            9.59:1   AA body text
+     amber-200 #fde68a  on gold/15        over #070b16      12.49:1   AA body text
+     gold as border / focus ring          #070b16            9.35:1   UI >= 3:1
+
+   Note: earlier review notes quoted ~5.4:1 for slate-400 and ~3.4:1 for
+   slate-500 — those were measured against slate-900 (#0f172a). On the real
+   #070b16 surface the numbers are the table above; slate-500 STILL fails the
+   4.5:1 body-copy floor, so the finding stands either way.
+
+   FLOOR ADOPTED HERE: body copy is never darker than slate-400 (7.67:1), 12px
+   sub-copy moves up one more step to slate-300 via .text-muted (13.24:1), and
+   any text darker than slate-500 in BODY copy must move up one step. slate-500
+   survives only as decorative non-text chrome, which needs 3:1 (it has 4.13:1
+   and is allowed); the arrow glyphs are hidden from assistive tech with
+   aria-hidden so they never carry meaning alone.
+   -----------------------------------------------------------------──────────── */
+
+/* Body-secondary copy: the slate-300 (#cbd5e1) floor. Deliberately unlayered so
+   it outranks any text-slate-* utility it travels with in the same class list. */
+.text-muted { color: #cbd5e1; }
+
+/* Global focus fallback (WCAG 2.4.7). Every shell component ALSO carries its
+   own focus-visible:ring-2 — this rule is the floor for anything that does
+   not, so no element can ever become a keyboard dead zone. theme(colors.gold)
+   cannot resolve: `gold` is an object in tailwind.config.ts, so the DEFAULT
+   segment must be named explicitly or the build fails. */
+:focus-visible {
+  outline: 2px solid theme(colors.gold.DEFAULT);
+  outline-offset: 2px;
+}
+
 /* Mini-TOC horizontal pill bar */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

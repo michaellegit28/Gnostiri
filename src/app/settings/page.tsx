@@ -26,8 +26,8 @@ export default function SettingsPage() {
           <li><kbd className="rounded border border-white/15 px-1.5 py-0.5 text-xs text-slate-300">Esc</kbd> — close menus and overlays</li>
         </ul>
       </div>
-      <Link href="/profile" className="mt-8 inline-block text-sm text-slate-400 hover:text-gold">
-        ← Back to profile
+      <Link href="/profile" className="mt-8 inline-block py-2 text-sm text-slate-400 hover:text-gold">
+        <span aria-hidden="true">← </span>Back to profile
       </Link>
     </main>
   );
