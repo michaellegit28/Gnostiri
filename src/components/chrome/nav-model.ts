@@ -19,7 +19,26 @@ import {
  * drawer, the bottom tab bar and the command palette all render from this.
  * Adding a destination here adds it everywhere — there is no second list to
  * drift (the old SiteMenu GROUPS array is gone).
+ *
+ * Accessibility contract (Phase 6d):
+ *  - The accessible names below are SHARED constants, so the sidebar, the
+ *    drawer and the tab bar announce themselves identically to a screen reader
+ *    no matter which surface rendered them. Never re-type these strings.
+ *  - An item's active state is NEVER colour-only. Every surface pairs
+ *    aria-current="page" (see isActive) with a visible indicator that is not
+ *    a colour: a gold dot on the bottom tabs, a left border in the drawer and
+ *    sidebar. Gold text alone is not an answer.
+ *  - Every NavItem carries a `note` — the sub-copy the drawer and palette
+ *    render at 12px, which must stay on the .text-muted floor.
  */
+
+/** Accessible name of the desktop sidebar and the mobile drawer (both are the
+ *  same "Primary" landmark to a screen reader — only one is ever displayed). */
+export const NAV_LABEL = "Primary";
+
+/** Accessible name of the mobile bottom tab bar. Deliberately distinct from
+ *  NAV_LABEL so the two landmarks are not collapsed into one. */
+export const TAB_BAR_LABEL = "Primary tabs";
 export interface NavItem {
   href: string;
   label: string;

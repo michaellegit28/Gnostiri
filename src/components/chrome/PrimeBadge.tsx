@@ -41,7 +41,7 @@ export default function PrimeBadge() {
     return (
       <Link
         href="/pricing"
-        className="inline-flex min-h-[36px] items-center gap-1.5 rounded-full border border-gold/50 bg-gold/15 px-3 py-1.5 text-xs font-semibold text-amber-200 transition-colors hover:bg-gold/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-gold/50 bg-gold/15 px-3 py-1.5 text-xs font-semibold text-amber-200 transition-colors hover:bg-gold/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
       >
         <Crown className="h-3.5 w-3.5" aria-hidden />
         Prime · {state.months} {state.months === 1 ? "month" : "months"}

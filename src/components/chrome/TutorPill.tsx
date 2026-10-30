@@ -37,7 +37,7 @@ export default function TutorPill() {
           <span className="block text-sm font-bold text-slate-100">
             AI Tutor
           </span>
-          <span className="block text-sm text-slate-400">
+          <span className="block text-sm text-muted">
             {open ? "Close" : "Ask anything"}
           </span>
         </span>

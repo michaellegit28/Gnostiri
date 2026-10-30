@@ -55,18 +55,18 @@ export default async function ProfilePage() {
         <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
           <div className="flex items-center gap-2">
             <Coins className="h-4 w-4 text-gold" aria-hidden />
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">Credits</h2>
+            <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">Credits</h2>
           </div>
           <p className="mt-3 font-serif text-3xl font-bold tabular-nums text-slate-100">{balance}</p>
-          <p className="mt-1 text-xs text-slate-500">Redeemable for Prime days — the team handles redemption during the founder period.</p>
+          <p className="mt-1 text-xs text-muted">Redeemable for Prime days — the team handles redemption during the founder period.</p>
         </div>
         <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
           <div className="flex items-center gap-2">
             <Trophy className="h-4 w-4 text-gold" aria-hidden />
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">Badges</h2>
+            <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">Badges</h2>
           </div>
           <p className="mt-3 font-serif text-3xl font-bold tabular-nums text-slate-100">{badges.length}</p>
-          <p className="mt-1 text-xs text-slate-500">Earned in the Public Library and the Merit League.</p>
+          <p className="mt-1 text-xs text-muted">Earned in the Public Library and the Merit League.</p>
         </div>
       </div>
 
@@ -95,12 +95,12 @@ export default async function ProfilePage() {
             href={href}
             className="group flex min-h-[52px] items-center gap-3 py-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
-            <Icon className="h-5 w-5 text-slate-500 group-hover:text-gold" aria-hidden />
+            <Icon className="h-5 w-5 text-slate-400 group-hover:text-gold" aria-hidden />
             <span>
               <span className="block font-semibold text-slate-100 group-hover:text-gold">{label}</span>
-              <span className="block text-xs text-slate-400">{note}</span>
+              <span className="block text-xs text-muted">{note}</span>
             </span>
-            <span className="ml-auto text-slate-600 group-hover:text-gold" aria-hidden>
+            <span className="ml-auto text-slate-400 group-hover:text-gold" aria-hidden>
               →
             </span>
           </Link>
