@@ -4,9 +4,39 @@ import { createHash } from "crypto";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { FORMAT_META, type CompetitionFormat } from "@/lib/competition";
+import { MASTERY_TARGET_LABEL } from "@/lib/competition-additions";
 import Countdown from "@/components/league/Countdown";
 
 export const dynamic = "force-dynamic";
+
+/** Where each format's play surface lives, and how its CTA reads. */
+const PLAY_PATH: Record<CompetitionFormat, string> = {
+  speed: "play",
+  endurance: "endurance",
+  mastery: "mastery",
+  bracket: "bracket",
+};
+
+const PLAY_LABEL: Record<CompetitionFormat, string> = {
+  speed: "Play",
+  endurance: "Check in",
+  mastery: "View progress",
+  bracket: "Open bracket",
+};
+
+const PLAY_OPEN_COPY: Record<CompetitionFormat, string> = {
+  speed: "The clock is live — your paper is drawn fresh, and your best score is the one that counts.",
+  endurance: "The window is live — one check-in per day, every day you show up counts.",
+  mastery: "The window is live — mastery is measured from your assessed sessions, not claimed.",
+  bracket: "The bracket is live — win your quickfire to advance.",
+};
+
+const PLAY_CLOSED_COPY: Record<CompetitionFormat, string> = {
+  speed: "Your paper is available once the cup window opens.",
+  endurance: "Your first check-in unlocks when the window opens.",
+  mastery: "Progress counts once the cup window opens.",
+  bracket: "Your seeding and match appear once the window opens.",
+};
 
 /**
  * /league/[id] — the Merit League cup page.
@@ -170,12 +200,28 @@ export default async function CompetitionPage({ params }: { params: { id: string
                 <dd className="font-semibold text-slate-200">{meta.duration}</dd>
               </div>
               <div className="flex justify-between gap-4">
-                <dt className="text-slate-400">Questions</dt>
-                <dd className="font-semibold text-slate-200">20 · multiple choice</dd>
+                <dt className="text-slate-400">{format === "speed" || format === "bracket" ? "Questions" : format === "mastery" ? "Target" : "Check-ins"}</dt>
+                <dd className="font-semibold text-slate-200">
+                  {format === "speed"
+                    ? "20 · multiple choice"
+                    : format === "bracket"
+                      ? "5 per quickfire round"
+                      : format === "mastery"
+                        ? `${MASTERY_TARGET_LABEL} mean mastery`
+                        : "Once per day, server-stamped"}
+                </dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-slate-400">Marking</dt>
-                <dd className="font-semibold text-slate-200">+1 correct, no negatives</dd>
+                <dd className="font-semibold text-slate-200">
+                  {format === "speed"
+                    ? "+1 correct, no negatives"
+                    : format === "bracket"
+                      ? "Best accuracy advances"
+                      : format === "mastery"
+                        ? `${MASTERY_TARGET_LABEL} mean mastery`
+                        : "Demonstrated mastery, server-measured"}
+                </dd>
               </div>
             </dl>
           </div>
@@ -199,15 +245,15 @@ export default async function CompetitionPage({ params }: { params: { id: string
                 <h2 className="font-serif text-xl font-bold text-slate-100">You&apos;re on the grid</h2>
                 <p className="mt-2 text-sm text-slate-400">
                   {windowOpen
-                    ? "The clock is live — your paper is drawn fresh, and your best score is the one that counts."
-                    : "Your paper is available once the cup window opens."}
+                    ? PLAY_OPEN_COPY[format]
+                    : PLAY_CLOSED_COPY[format]}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
-                    href={`/league/${competition.id}/play`}
+                    href={`/league/${competition.id}/${PLAY_PATH[format]}`}
                     className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   >
-                    Play
+                    {PLAY_LABEL[format]}
                   </Link>
                   <Link
                     href={`/league/${competition.id}/results`}
