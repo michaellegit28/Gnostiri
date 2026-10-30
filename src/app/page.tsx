@@ -3,13 +3,24 @@ import { BookOpen, GraduationCap, Sparkles, CheckCircle2 } from "lucide-react";
 import prisma from "@/lib/db";
 import { allTopicSlugs } from "@/lib/curriculum";
 import CountrySelector from "@/components/CountrySelector";
-import HomeDashboard from "@/components/HomeDashboard";
+import { getCurrentUser } from "@/lib/server-auth";
+import Greeting from "@/components/dashboard/Greeting";
+import BattlePlanHero from "@/components/dashboard/BattlePlanHero";
+import StatsRow from "@/components/dashboard/StatsRow";
+import StudyGrid from "@/components/dashboard/StudyGrid";
+import LeagueBanner from "@/components/dashboard/LeagueBanner";
+import LibraryStrip from "@/components/dashboard/LibraryStrip";
+import DashboardTeaser from "@/components/dashboard/DashboardTeaser";
 import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
 import DarkVeil from "@/components/effects/DarkVeil";
 import TechText from "@/components/effects/TechText";
 import GhostFibers from "@/components/effects/GhostFibers";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
+  const user = await getCurrentUser();
+
   const domainCards = [
     {
       title: "High School",
@@ -146,7 +157,20 @@ export default async function Home() {
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-16 flex flex-col items-center justify-center space-y-20">
-        <HomeDashboard />
+        {user ? (
+          <section aria-label="Dashboard" className="w-full">
+            <div className="space-y-10">
+              <Greeting name={user.name} email={user.email} />
+              <BattlePlanHero userId={user.id} />
+              <StatsRow userId={user.id} />
+              <StudyGrid userId={user.id} />
+              <LeagueBanner />
+              <LibraryStrip />
+            </div>
+          </section>
+        ) : (
+          <DashboardTeaser />
+        )}
         {/* Hero Section — GhostFibers atmosphere + TechText particle brand */}
         <section className="relative w-full overflow-hidden rounded-2xl border border-slate-800/60">
           <div className="relative h-[600px] md:h-[640px]">
