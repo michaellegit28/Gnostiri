@@ -457,3 +457,24 @@ any assessment weight); rebuild in parallel with the board clearance.
 - Gnostiri Prime badge: /api/entitlements/prime (tier + consecutive months) + PrimeBadge chrome.
 - Demo cup seeded ("Launch Cup — Speed", live, public, free) so the lobby is not empty on deploy.
 - Gates: tsc clean · lint clean · 234/234 tests.
+
+## Phase 3 + League formats (2026-10-29/30)
+
+- **Phase 3 Desk pipeline — MERGED (PR #16, CI green):** source PDFs are never stored (parsed in
+  memory, discarded); extraction via unpdf, sha256 content-hash dedupe (one textbook processed once
+  per cohort), notes + 10 house-invariant quiz items per document, StudyTasks scheduled by the
+  user's minutes/day × days preference, honest "needs-ai" status when no OPENAI_API_KEY is
+  configured (extractive notes, no fabricated AI content). Pure pipeline logic unit-tested.
+  Models: StudyDocument, DocumentQuizItem, StudyTask (RLS on; migration 20261029160000 applied).
+- **Merit League formats — MERGED (PR #17, CI green):** Endurance Cup (daily server-stamped
+  check-in, freeze-not-reset streaks, 7/14/30 milestones), Mastery Cup (race to 80% mean mastery
+  measured from assessed sessions — never client-claimed), Cohort Bracket (deterministic seeding,
+  single-elimination quickfire; documented limitation: derived tree, persistent BracketMatch table
+  is the next iteration). All four cups now live on /league with format-aware CTAs.
+- Efficiency upgrades adopted: git worktree per lane (no cross-agent contamination), direct
+  (non-pooled) connection for scripted writes, agents ship their own PRs, gates green on every
+  merge (tsc + lint + 234/234 tests).
+- Workflow note: the Desk lane and this lane were each recovered after connection drops by
+  verifying file state before re-dispatching — the worktree setup made that clean.
+- Remaining roadmap: Public Library (Phase 4) on Desk artifacts · seasons + certificates
+  (Phase 5) · AI-era visual pass (Phase 6) · payments wiring (blocker before any paid tier).
