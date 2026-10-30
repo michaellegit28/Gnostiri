@@ -964,6 +964,11 @@ model StudyDocument {
   notes        Json?
   createdAt    DateTime @default(now())
 
+  // Public Library sharing (artifacts only — source files are never stored).
+  visibility   String   @default("private") // private | public
+  sharedAt     DateTime?
+  reuseCount   Int      @default(0)         // denormalised adoptions, bumped server-side
+
   quizItems DocumentQuizItem[]
   tasks     StudyTask[]
 
