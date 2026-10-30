@@ -478,3 +478,18 @@ any assessment weight); rebuild in parallel with the board clearance.
   verifying file state before re-dispatching — the worktree setup made that clean.
 - Remaining roadmap: Public Library (Phase 4) on Desk artifacts · seasons + certificates
   (Phase 5) · AI-era visual pass (Phase 6) · payments wiring (blocker before any paid tier).
+
+## Phase 4 Public Library (2026-10-30) — MERGED (PR #19, CI green, 251/251 tests)
+
+- /library live: browse + search public processed artifacts (metadata-only list: heading previews,
+  quiz counts, reuse counts, uploader handle — no stems/answers ever in a list payload).
+- /library/[id]: full notes via the shared LessonRenderer + Adopt CTA. /library/credits: balance,
+  badges, earn ledger (founder-period honesty: redemption is team-handled, no fake button).
+- Rewards (owner decision 3): publishing +25 credits + first-artifact badge; each adoption +10 to
+  the uploader with milestone badges (first adoption, reused-N at multiples of 10) + an
+  artifact_reward notification. Adoption reuses the Desk dedupe path (contentHash is globally
+  unique — one artifact per textbook, quiz rows copy to the adopter with no user data).
+- Unpublish removes future visibility but never reverses the ledger (documented: prevents
+  credit farming). Only status="ready" documents can be shared; source PDFs never stored.
+- Remaining roadmap: Phase 5 seasons + certificates · Phase 6 AI-era visual pass · payments
+  wiring (blocker before paid tiers).
