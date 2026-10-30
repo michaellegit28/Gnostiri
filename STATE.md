@@ -493,3 +493,29 @@ any assessment weight); rebuild in parallel with the board clearance.
   credit farming). Only status="ready" documents can be shared; source PDFs never stored.
 - Remaining roadmap: Phase 5 seasons + certificates · Phase 6 AI-era visual pass · payments
   wiring (blocker before paid tiers).
+
+## Phase 6 UI reconstruction (2026-10-30) — MERGED (PRs #21, #22, #23; CI green, 279/279 tests)
+
+Owner directive after a UX audit: rebuild the navigation — mobile bottom tabs, tablet collapsible
+sidebar, desktop persistent sidebar + command palette, cards over lists, tutor FAB, and full a11y.
+
+- **AppShell (PR #21):** one nav model (src/components/chrome/nav-model.ts) renders the mobile
+  drawer, bottom tabs, desktop sidebar and Ctrl/Cmd+K palette — the surfaces can never drift.
+  Bell + Prime crown moved to the top bar; the tutor FAB lifts above the bottom nav; new /profile
+  (membership, credits, badges, settings) and /settings (device-local appearance prefs: solid
+  background, reduce motion, Lite Mode — hydrated on mount); skip-to-content link; 44px targets;
+  dead SiteMenu removed. All 10 core routes verified 200 under the new shell.
+- **Dashboard (PR #23):** home is now the dashboard — greeting, Battle Plan hero (reuses the
+  existing plan query), three honest stats widgets (streak/accuracy/minutes with "—" + "appears
+  after your first session" instead of fabricated numbers), study grid with prisma-derived counts,
+  Merit League season banner, Public Library strip (metadata-only). Signed-out visitors keep the
+  SEO hero plus a static teaser band. Query timings documented; only the hero chain exceeds 500ms.
+- **A11y (PR #22):** measured WCAG ratios on the real #070b16 base (gold 9.35:1, slate-300 13.24:1,
+  slate-400 7.67:1, slate-500 4.13:1 FAILS the body floor → body text floor is slate-400, 12px
+  sub-copy uses .text-muted slate-300, slate-500 decorative-only); global :focus-visible gold
+  outline fallback; palette focus management (open focuses, close restores); active-state signals
+  beyond colour (left borders, gold dot); decorative chevrons aria-hidden; Prime badge to 44px.
+  Manual NVDA/VoiceOver items listed in the PR for the next session.
+- Phase 6b (dashboard) and 6d (a11y) shipped in parallel lanes against the landed shell.
+- **Remaining roadmap:** Phase 5 (seasons + verified certificates + win cards) · payments wiring
+  (Stripe + Paystack — the blocker before paid tiers) · optional content depth.
