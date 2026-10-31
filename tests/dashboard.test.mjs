@@ -6,7 +6,7 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const q = (p) => readFileSync(ROOT + p, "utf8");
 
 const HOME = "src/app/page.tsx";
-const TEASER = "src/components/dashboard/LandingBand.tsx";
+const TEASER = "src/components/landing/Landing.tsx";
 
 test("the signed-in dashboard shows no study categories", () => {
   const home = q(HOME);
@@ -41,11 +41,29 @@ test("the study hub is a dedicated route with four cards", () => {
   assert.match(grid, /min-h-\[132px\]/, "cards keep generous touch targets");
 });
 
-test("the logo mark is an SVG that carries gold and stays simple", () => {
+test("the logo mark is an SVG that carries the refined gold and stays simple", () => {
   const logo = q("src/components/brand/Logo.tsx");
   assert.match(logo, /<svg/, "inline SVG, crisp at any size");
-  assert.match(logo, /#D4AF37/, "rich solid gold");
+  assert.match(logo, /#C69A2E/, "the refined brass gold");
+  assert.match(logo, /linearGradient/, "the mark carries the brand gradient");
   assert.ok((logo.match(/<path/g) ?? []).length <= 5, "no fine detail that dies at 16px");
+});
+
+test("the brand art is a lightweight animated SVG, not a video or bitmap", () => {
+  const hero = q("src/components/brand/HeroVisual.tsx");
+  assert.match(hero, /<svg/, "inline SVG art");
+  assert.match(hero, /prefers-reduced-motion/, "the animation is silenced for reduced motion");
+  assert.match(hero, /html\.reduce-motion/, "and by the in-app motion preference");
+  assert.ok(!/\.(mp4|webm|png|jpg)/.test(hero), "no video or bitmap payload");
+});
+
+test("the signed-out landing is category-free with one CTA and a real hero", () => {
+  const landing = q("src/components/landing/Landing.tsx");
+  for (const banned of [/High School<\/a>/, /University<\/a>/, /Discovery<\/a>/]) {
+    assert.ok(!banned.test(landing), "no category navigation on Home");
+  }
+  assert.match(landing, /HeroVisual/, "the brand art is on the landing");
+  assert.match(landing, /bg-gradient-to-r from-gold-from to-gold-to/, "the primary CTA uses the brand gradient");
 });
 
 test("design tokens exist for both themes with a measured floor", () => {

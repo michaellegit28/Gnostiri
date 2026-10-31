@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, Manrope, Source_Sans_3 } from "next/font/google";
+import { Inter, Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { DomainProvider } from "@/context/DomainContext";
@@ -7,21 +7,27 @@ import ServiceWorker from "@/components/ServiceWorker";
 import AppShell from "@/components/chrome/AppShell";
 import TutorPill from "@/components/chrome/TutorPill";
 
-const display = Sora({
+const display = Inter_Tight({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Manrope({
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const reading = Source_Sans_3({
+const reading = Inter({
   subsets: ["latin"],
   variable: "--font-reading",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -36,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" className={`${display.variable} ${body.variable} ${reading.variable}`}>
+    <html lang="en" data-theme="dark" className={`${display.variable} ${body.variable} ${reading.variable} ${mono.variable}`}>
       <body className="font-sans antialiased">
         <script
           dangerouslySetInnerHTML={{
