@@ -36,8 +36,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${reading.variable}`}>
+    <html lang="en" data-theme="dark" className={`${display.variable} ${body.variable} ${reading.variable}`}>
       <body className="font-sans antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("gnostiri.theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}`,
+          }}
+        />
         <ServiceWorker />
         <AuthProvider>
           <DomainProvider>
