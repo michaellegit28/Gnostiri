@@ -57,9 +57,10 @@ export const NAV_ZONES: NavZone[] = [
     id: "study",
     label: "Study",
     items: [
-      { href: "/highschool", label: "High School", icon: BookOpen, note: "Textbooks and exam banks" },
-      { href: "/university", label: "University", icon: GraduationCap, note: "Degree-depth courses" },
-      { href: "/discovery", label: "Discovery", icon: Compass, note: "Follow curiosity" },
+      { href: "/study", label: "Study", icon: BookOpen, note: "High school, university, discovery, desk" },
+      { href: "/highschool", label: "High School", icon: BookOpen, note: "Exam questions, verified" },
+      { href: "/university", label: "University", icon: GraduationCap, note: "Courses, full depth" },
+      { href: "/discovery", label: "Discovery", icon: Compass, note: "Explore past the syllabus" },
     ],
   },
   {
@@ -67,8 +68,8 @@ export const NAV_ZONES: NavZone[] = [
     label: "Your workspace",
     items: [
       { href: "/battle-plan", label: "Battle Plan", icon: Swords, note: "Your day-by-day mission" },
-      { href: "/desk", label: "Desk", icon: FolderOpen, note: "Uploads, notes and plans" },
-      { href: "/tutor", label: "AI Tutor", icon: Sparkles, note: "A guide, not an oracle" },
+      { href: "/desk", label: "Desk", icon: FolderOpen, note: "Your uploads, notes and plans" },
+      { href: "/tutor", label: "AI Tutor", icon: Sparkles, note: "Your AI study assistant" },
       { href: "/progress", label: "My Progress", icon: Trophy, note: "Streaks, accuracy, history" },
     ],
   },
@@ -94,8 +95,8 @@ export const NAV_ZONES: NavZone[] = [
 /** The four mobile bottom tabs — the four places a student actually lives. */
 export const BOTTOM_TABS: NavItem[] = [
   { href: "/", label: "Home", icon: Home, note: "Dashboard" },
-  { href: "/highschool", label: "Study", icon: BookOpen, note: "High school and university" },
-  { href: "/league", label: "Compete", icon: Trophy, note: "Merit League" },
+  { href: "/study", label: "Study", icon: BookOpen, note: "High school, university, discovery, desk" },
+  { href: "/league", label: "Compete", icon: Trophy, note: "Merit League and rankings" },
   { href: "/profile", label: "Profile", icon: GraduationCap, note: "Membership and settings" },
 ];
 

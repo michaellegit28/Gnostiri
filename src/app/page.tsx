@@ -7,10 +7,9 @@ import { getCurrentUser } from "@/lib/server-auth";
 import Greeting from "@/components/dashboard/Greeting";
 import BattlePlanHero from "@/components/dashboard/BattlePlanHero";
 import StatsRow from "@/components/dashboard/StatsRow";
-import StudyGrid from "@/components/dashboard/StudyGrid";
-import LeagueBanner from "@/components/dashboard/LeagueBanner";
-import LibraryStrip from "@/components/dashboard/LibraryStrip";
-import DashboardTeaser from "@/components/dashboard/DashboardTeaser";
+import LeagueStatusWidget from "@/components/dashboard/LeagueStatusWidget";
+import TutorShortcut from "@/components/dashboard/TutorShortcut";
+import LandingBand from "@/components/dashboard/LandingBand";
 import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
 import DarkVeil from "@/components/effects/DarkVeil";
 import TechText from "@/components/effects/TechText";
@@ -162,14 +161,15 @@ export default async function Home() {
             <div className="space-y-10">
               <Greeting name={user.name} email={user.email} />
               <BattlePlanHero userId={user.id} />
-              <StatsRow userId={user.id} />
-              <StudyGrid userId={user.id} />
-              <LeagueBanner />
-              <LibraryStrip />
+              <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+                <StatsRow userId={user.id} />
+                <LeagueStatusWidget />
+              </div>
+              <TutorShortcut />
             </div>
           </section>
         ) : (
-          <DashboardTeaser />
+          <LandingBand />
         )}
         {/* Hero Section — GhostFibers atmosphere + TechText particle brand */}
         <section className="relative w-full overflow-hidden rounded-2xl border border-slate-800/60">
