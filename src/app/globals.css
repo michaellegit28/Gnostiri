@@ -122,7 +122,7 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --bg: 9 9 11;            --surface: 19 19 22;        --surface-2: 28 28 32;
   --border: 39 39 42;      --border-strong: 63 63 70;
   --text: 250 250 250;     --text-muted: 161 161 170;  --text-subtle: 113 113 122;
-  --gold: 212 175 55;      --gold-hover: 226 194 94;   --gold-text: 212 175 55;
+  --gold: 198 154 46;      --gold-hover: 226 190 105;  --gold-text: 212 175 55;
   --gold-soft: 212 175 55; --on-gold: 9 9 11;
   --success: 52 211 153;   --danger: 251 113 133;      --warning: 251 191 36;
   --focus: 212 175 55;     --radius: 14px;
@@ -132,7 +132,7 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --bg: 250 250 250;       --surface: 255 255 255;     --surface-2: 244 244 245;
   --border: 228 228 231;   --border-strong: 212 212 216;
   --text: 24 24 27;        --text-muted: 82 82 91;     --text-subtle: 113 113 122;
-  --gold: 212 175 55;      --gold-hover: 184 150 44;   --gold-text: 122 94 20;
+  --gold: 176 138 40;      --gold-hover: 152 118 32;   --gold-text: 122 94 20;
   --gold-soft: 212 175 55; --on-gold: 24 24 27;
   --success: 5 150 105;    --danger: 225 29 72;        --warning: 180 83 9;
   --focus: 212 175 55;     --radius: 14px;
@@ -143,6 +143,16 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
    dark  #09090B: text #FAFAFA 19.1:1 · muted #A1A1AA 7.6:1 · subtle #71717A 4.6:1 · on-gold 9.6:1
    light #FAFAFA: text #18181B 16.1:1 · muted #52525B 7.4:1 · subtle #71717A 4.6:1 · gold-text #7A5E14 5.9:1
    raw gold on white is 2.0:1 — fills only, never text (that is what --gold-text is for). */
+/* ── 60/30/10 ──────────────────────────────────────────────────────────────
+   60%  zinc surfaces (--bg/--surface/--surface-2) — the calm base
+   30%  neutrals for structure and text (--border/--text/--text-muted)
+   10%  ONE accent: refined brass gold. It is allowed on: primary CTAs,
+        active states, key figures, the mark, and the hero gradient.
+        Nothing else. If a screen looks "gold", the 10% was exceeded.      */
+/* Warm gradient pair — the mark, the hero art and the primary CTA only. */
+:root, [data-theme="dark"] { --gold-from: 214 170 60; --gold-to: 240 190 95; }
+[data-theme="light"] { --gold-from: 176 138 40; --gold-to: 214 170 60; }
+
 /* Engineered, not glowy: no aurora, no backdrop blur, anywhere. */
 [class*="backdrop-blur"] { backdrop-filter: none !important; }
 .bg-aurora, .aurora { background-image: none !important; }
