@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Medal } from "lucide-react";
+import { FileBadge, Medal } from "lucide-react";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
-import { TIERS, tierInfo } from "@/lib/ranking";
+import { TIERS, displayHandle, tierInfo } from "@/lib/ranking";
 
 export const dynamic = "force-dynamic";
 
@@ -11,11 +11,22 @@ export const dynamic = "force-dynamic";
 // rosterJson holds DISPLAY NAMES ONLY — never an email, never a user id — so
 // this page can be public without exposing who was beaten by whom. An empty
 // hall is not a failure state: the first season close is what fills it.
+//
+// Phase 5 adds the reward itself: a member engraved here downloads their
+// VERIFIED certificate (the button is rendered only when the signed-in
+// member's own display name sits on that roster — the API re-checks), and
+// anyone can check a certificate's code on /verify.
 
 const RANK_LABEL = ["Champion", "Runner-up", "Third"];
 
 export default async function HallOfFamePage() {
   const user = await getCurrentUser();
+  // Server-checked entitlement: the download button only appears when the
+  // signed-in member's DISPLAY NAME is engraved on that roster. The route
+  // re-checks this against the row — this is the UI half of that gate.
+  const myHandle = user ? displayHandle(user.name) : null;
+  const canDownload = (roster: string[]) => Boolean(myHandle && roster.includes(myHandle));
+
   const entries = await prisma.hallOfFameEntry.findMany({
     orderBy: [{ seasonSlug: "desc" }, { tier: "asc" }, { rank: "asc" }],
     take: 400,
@@ -58,7 +69,7 @@ export default async function HallOfFamePage() {
       <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100 md:text-4xl">Engraved by season</h1>
       <p className="mt-3 max-w-2xl text-sm text-slate-400">
         Every season close engraves the top three groups of each tier. Rosters carry display names only — never an
-        email, never an id.
+        email, never an id. If your name is engraved here, your verified certificate is one click away.
       </p>
 
       {seasons.map((slug) => {
@@ -97,6 +108,15 @@ export default async function HallOfFamePage() {
                           <p className="mt-1 text-xs text-slate-500">
                             {Math.round(entry.avgStars).toLocaleString()} average stars
                           </p>
+                          {canDownload(entry.rosterJson) && (
+                            <a
+                              href={`/api/ranking/certificate?season=${encodeURIComponent(entry.seasonSlug)}&member=${encodeURIComponent(user!.id)}`}
+                              className="mt-3 inline-flex min-h-[36px] items-center gap-2 rounded-lg border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                            >
+                              <FileBadge className="h-3.5 w-3.5" aria-hidden />
+                              Download certificate
+                            </a>
+                          )}
                         </li>
                       ))}
                     </ol>
@@ -108,12 +128,18 @@ export default async function HallOfFamePage() {
         );
       })}
 
-      <div className="mt-12">
+      <div className="mt-12 flex flex-wrap gap-3">
         <Link
           href="/league/ladder"
           className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-6 font-semibold text-gold transition-colors hover:bg-gold/10"
         >
           Back to the ladder
+        </Link>
+        <Link
+          href="/verify"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500"
+        >
+          Verify a certificate
         </Link>
       </div>
     </main>

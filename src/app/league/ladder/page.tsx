@@ -6,6 +6,7 @@ import { MAX_TIER, TIERS, displayHandle, starsForTier, starsToNextTier, tierFor,
 import { activeSeason, groupLeaderboard } from "@/lib/ranking-pool";
 import Countdown from "@/components/league/Countdown";
 import JoinQueueButton from "@/components/ranking/JoinQueueButton";
+import WinCardButton from "@/components/ranking/WinCardButton";
 
 export const dynamic = "force-dynamic";
 
@@ -156,6 +157,15 @@ export default async function LadderPage() {
     include: { group: true },
   });
 
+  // The member's most recent star award — the ONLY delta the win-card route
+  // will render for a rank-up (it re-checks it against their last ledger row,
+  // so a spoofed number is a 400 rather than a card).
+  const lastAward = await prisma.starLedger.findFirst({
+    where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
+    select: { delta: true },
+  });
+
   const leaderRows = membership ? await groupLeaderboard(membership.group.id) : [];
   const handles = await prisma.user.findMany({
     where: { id: { in: leaderRows.map((r) => r.userId) } },
@@ -188,6 +198,16 @@ export default async function LadderPage() {
           detail={nextTier ? `${starsToNextTier(stars).toLocaleString()} ★ to ${nextTier.threshold.toLocaleString()}` : "Paragon reached"}
           ratio={progress}
         />
+        {lastAward && (
+          <div className="mt-5">
+            <WinCardButton
+              tier={tier}
+              delta={lastAward.delta}
+              context={`Rank up · ${info.label}`}
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
+            />
+          </div>
+        )}
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
             <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-500">
@@ -279,13 +299,22 @@ export default async function LadderPage() {
                       Tier {seat.match.tier} · round {seat.match.round}
                       {seat.submittedAt ? " · submitted" : " · in play"}
                     </p>
-                    <Link
-                      href={`/league/ladder/play?match=${seat.match.id}`}
-                      className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-                    >
-                      <Clock className="h-4 w-4" aria-hidden />
-                      {seat.submittedAt ? "Review window" : "Play this pod"}
-                    </Link>
+                    <div className="mt-3 flex flex-wrap items-start gap-4">
+                      <Link
+                        href={`/league/ladder/play?match=${seat.match.id}`}
+                        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                      >
+                        <Clock className="h-4 w-4" aria-hidden />
+                        {seat.submittedAt ? "Review window" : "Play this pod"}
+                      </Link>
+                      {seat.submittedAt && (
+                        <WinCardButton
+                          matchId={seat.match.id}
+                          label="Share win card"
+                          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
+                        />
+                      )}
+                    </div>
                   </li>
                 ))}
               </ul>
