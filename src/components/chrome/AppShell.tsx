@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Command, Crown, Menu, X } from "lucide-react";
 import NotificationBell from "@/components/notifications/NotificationBell";
+import ThemeToggle from "@/components/chrome/ThemeToggle";
 import PrimeBadge from "@/components/chrome/PrimeBadge";
 import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
 
@@ -138,7 +139,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <Command className="h-3.5 w-3.5" aria-hidden />
             Jump to…
           </button>
-          <div className="[&_button]:min-h-[44px]">
+          <div className="flex items-center [&_button]:min-h-[44px]">
+            <ThemeToggle />
             <NotificationBell />
           </div>
           <PrimeBadge />

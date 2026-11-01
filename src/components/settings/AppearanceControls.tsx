@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import LiteModeToggle from "@/components/chrome/LiteModeToggle";
+import ThemeToggle from "@/components/chrome/ThemeToggle";
 
 /**
  * Appearance prefs — the accessibility escape hatches, persisted locally:
@@ -35,6 +36,15 @@ export default function AppearanceControls() {
 
   return (
     <div className="space-y-5">
+      <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+        <div>
+          <h2 className="font-semibold text-slate-100">Colour theme</h2>
+          <p className="mt-1 max-w-md text-sm text-slate-400">
+            Dark by default. Light mode uses the same refined palette — every surface passes contrast in both.
+          </p>
+        </div>
+        <ThemeToggle />
+      </div>
       <Toggle
         label="Solid background"
         note="Replaces the blurred aurora backdrop with a flat dark surface — higher contrast, less eye strain."
