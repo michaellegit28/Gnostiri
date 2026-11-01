@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 const KEY = "gnostiri-lite";
 
 /** Footer lite-mode toggle — flips `html.lite` (see globals.css) for
- * text-only reading. Persists to localStorage; honours ?lite=1 on load. */
+ * text-only reading. Persists to localStorage; honours ?lite=1 on load.
+ * `html.lite-mode` carries the motion-free half of the same choice. */
 export default function LiteModeToggle() {
   const [lite, setLite] = useState(false);
 
@@ -17,6 +18,7 @@ export default function LiteModeToggle() {
       const on = viaQuery || viaStore;
       setLite(on);
       document.documentElement.classList.toggle("lite", on);
+      document.documentElement.classList.toggle("lite-mode", on);
     } catch {
       /* ignore */
     }
@@ -26,6 +28,7 @@ export default function LiteModeToggle() {
     const next = !lite;
     setLite(next);
     document.documentElement.classList.toggle("lite", next);
+    document.documentElement.classList.toggle("lite-mode", next);
     try {
       localStorage.setItem(KEY, next ? "1" : "0");
     } catch {

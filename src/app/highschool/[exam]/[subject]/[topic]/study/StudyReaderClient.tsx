@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { enqueue } from "@/lib/offline-queue";
 import { LessonContent, LessonBlock } from "@/types/lesson";
 import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
@@ -21,6 +22,7 @@ import {
   Sparkles,
   List,
   Check,
+  CloudOff,
 } from "lucide-react";
 
 interface TopicItem {
@@ -62,8 +64,21 @@ export default function StudyReaderClient({
 
   const [isCompleted, setIsCompleted] = useState(false);
   const [isMarking, setIsMarking] = useState(false);
+  const [savedOffline, setSavedOffline] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
 
   const fullTopicId = `${examCode}-${subjectSlug}-${topicSlug}`;
+
+  useEffect(() => {
+    const sync = () => setIsOffline(typeof navigator !== "undefined" && navigator.onLine === false);
+    sync();
+    window.addEventListener("online", sync);
+    window.addEventListener("offline", sync);
+    return () => {
+      window.removeEventListener("online", sync);
+      window.removeEventListener("offline", sync);
+    };
+  }, []);
 
   const handleMarkComplete = async () => {
     if (isCompleted || isMarking) return;
@@ -71,13 +86,19 @@ export default function StudyReaderClient({
 
     try {
       if (user) {
+        const body = { domain: "highschool", topicId: fullTopicId };
+        if (isOffline) {
+          const queued = await enqueue({ endpoint: "/api/progress/mark-complete", body });
+          if (queued) {
+            setIsCompleted(true);
+            setSavedOffline(true);
+          }
+          return;
+        }
         const res = await fetch("/api/progress/mark-complete", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            domain: "highschool",
-            topicId: fullTopicId,
-          }),
+          body: JSON.stringify(body),
         });
         if (res.ok) {
           setIsCompleted(true);
@@ -87,6 +108,15 @@ export default function StudyReaderClient({
         setIsCompleted(true);
       }
     } catch (err) {
+      const queued = await enqueue({
+        endpoint: "/api/progress/mark-complete",
+        body: { domain: "highschool", topicId: fullTopicId },
+      });
+      if (queued) {
+        setIsCompleted(true);
+        setSavedOffline(true);
+        return;
+      }
       console.error("Failed to mark complete:", err);
     } finally {
       setIsMarking(false);
@@ -372,6 +402,13 @@ export default function StudyReaderClient({
           />
         </main>
       </div>
+
+      {savedOffline && (
+        <p className="mx-4 mb-2 flex items-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-200 md:mx-8">
+          <CloudOff className="h-4 w-4 shrink-0" aria-hidden />
+          Offline — answers saved, will sync
+        </p>
+      )}
 
       {/* Floating Bottom Action Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-md border-t border-slate-800 p-3 md:p-4 z-40">

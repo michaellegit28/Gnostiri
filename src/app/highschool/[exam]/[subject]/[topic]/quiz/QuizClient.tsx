@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import ContentReportTab from "@/components/ContentReportTab";
+import { enqueue } from "@/lib/offline-queue";
 import {
   ChevronRight,
   CheckCircle2,
@@ -16,6 +17,7 @@ import {
   AlertCircle,
   LogIn,
   Check,
+  CloudOff,
 } from "lucide-react";
 
 export interface QuestionItem {
@@ -72,6 +74,21 @@ export default function QuizClient({
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [submittingAnswer, setSubmittingAnswer] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
+
+  const [savedOffline, setSavedOffline] = useState<number>(0);
+  const [queuedToSync, setQueuedToSync] = useState<boolean>(false);
+  const [isOffline, setIsOffline] = useState<boolean>(false);
+
+  useEffect(() => {
+    const sync = () => setIsOffline(typeof navigator !== "undefined" && navigator.onLine === false);
+    sync();
+    window.addEventListener("online", sync);
+    window.addEventListener("offline", sync);
+    return () => {
+      window.removeEventListener("online", sync);
+      window.removeEventListener("offline", sync);
+    };
+  }, []);
 
   const isSavingAttemptRef = useRef(false);
   const examHubHref = domain === "extras" ? "/discovery" : `/highschool/${examCode}`;
@@ -137,7 +154,15 @@ export default function QuizClient({
 
     setUserAnswers((prev) => [...prev, record]);
     setIsSubmitted(true);
-    } catch (error) { console.error(error); }
+    } catch (error) {
+      if (isOffline) {
+        setUserAnswers((prev) => [...prev, { questionId: currentQuestion.id, selectedAnswer: selectedOption, isCorrect: false, correctAnswer: "" }]);
+        setSavedOffline((count) => count + 1);
+        setIsSubmitted(true);
+      } else {
+        console.error(error);
+      }
+    }
     finally { setSubmittingAnswer(false); }
   };
 
@@ -148,18 +173,35 @@ export default function QuizClient({
 
     try {
       const correctCount = finalAnswers.filter((a) => a.isCorrect).length;
-      const res = await fetch("/api/quiz/attempt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          domain,
-          topicId,
-          score: correctCount,
-          maxScore: finalAnswers.length,
-          answers: finalAnswers,
-          durationSeconds: durationSec,
-        }),
-      });
+      const payload = {
+        domain,
+        topicId,
+        score: correctCount,
+        maxScore: finalAnswers.length,
+        answers: finalAnswers,
+        durationSeconds: durationSec,
+        startedAt: new Date(startTime).toISOString(),
+        elapsedSeconds: durationSec,
+      };
+
+      if (isOffline) {
+        const queued = await enqueue({ endpoint: "/api/quiz/attempt", body: payload });
+        if (queued) setQueuedToSync(true);
+        return;
+      }
+
+      let res: Response | null = null;
+      try {
+        res = await fetch("/api/quiz/attempt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      } catch {
+        const queued = await enqueue({ endpoint: "/api/quiz/attempt", body: payload });
+        if (queued) setQueuedToSync(true);
+        return;
+      }
 
       if (res.ok) {
         setSaveSuccess(true);
@@ -211,6 +253,8 @@ export default function QuizClient({
       setIsFinished(false);
       setIsSaving(false);
       setSaveSuccess(false);
+      setSavedOffline(0);
+      setQueuedToSync(false);
       isSavingAttemptRef.current = false;
     }
   };
@@ -230,7 +274,8 @@ export default function QuizClient({
     const score = userAnswers.filter((a) => a.isCorrect).length;
     const durationSeconds = endTime ? Math.max(1, Math.round((endTime - startTime) / 1000)) : 0;
     const accuracy = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
-    const isWeakTopic = accuracy < 60;
+    const awaitingSync = queuedToSync || savedOffline > 0;
+    const isWeakTopic = !awaitingSync && accuracy < 60;
 
     return (
       <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12 flex flex-col items-center justify-center">
@@ -254,9 +299,9 @@ export default function QuizClient({
                 Score
               </div>
               <div className="text-3xl font-bold text-gold">
-                {score} / {totalQuestions}
+                {awaitingSync ? "—" : `${score} / ${totalQuestions}`}
               </div>
-              <div className="text-xs text-slate-400 mt-1">{accuracy}% Accuracy</div>
+              <div className="text-xs text-slate-400 mt-1">{awaitingSync ? "Graded on sync" : `${accuracy}% Accuracy`}</div>
             </div>
 
             <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center">
@@ -273,8 +318,8 @@ export default function QuizClient({
               <div className="text-slate-400 text-xs uppercase font-semibold tracking-wider mb-1">
                 Status
               </div>
-              <div className={`text-xl font-bold mt-1 ${accuracy >= 70 ? "text-emerald-400" : "text-rose-400"}`}>
-                {accuracy >= 70 ? "Passed" : "Needs Review"}
+              <div className={`text-xl font-bold mt-1 ${awaitingSync ? "text-gold" : accuracy >= 70 ? "text-emerald-400" : "text-rose-400"}`}>
+                {awaitingSync ? "Saved offline" : accuracy >= 70 ? "Passed" : "Needs Review"}
               </div>
             </div>
           </div>
@@ -284,6 +329,17 @@ export default function QuizClient({
             <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
               Topic Analysis
             </h2>
+            {awaitingSync && (
+              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex items-start gap-3 text-amber-200">
+                <CloudOff className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-semibold text-gold text-sm">Offline — answers saved, will sync</div>
+                  <p className="text-xs text-amber-200/80 mt-1">
+                    This paper was finished with no connection. Every answer is kept and graded by the server as soon as the submission syncs — nothing is scored from the device.
+                  </p>
+                </div>
+              </div>
+            )}
             {isWeakTopic ? (
               <div className="bg-rose-950/20 border border-rose-500/30 rounded-xl p-4 flex items-start gap-3 text-rose-200">
                 <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
@@ -328,6 +384,10 @@ export default function QuizClient({
             <div className="text-xs text-center text-slate-400 flex items-center justify-center gap-2">
               {isSaving ? (
                 <span>Saving quiz results...</span>
+              ) : awaitingSync ? (
+                <span className="text-gold flex items-center gap-1">
+                  <CloudOff className="w-4 h-4" /> Offline — answers saved, will sync
+                </span>
               ) : saveSuccess ? (
                 <span className="text-emerald-400 flex items-center gap-1">
                   <Check className="w-4 h-4" /> Progress saved to profile
@@ -410,6 +470,13 @@ export default function QuizClient({
           </div>
         </div>
       </div>
+
+      {savedOffline > 0 && (
+        <div className="flex items-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-200">
+          <CloudOff className="w-4 h-4 shrink-0" aria-hidden />
+          <span>Offline — answers saved, will sync</span>
+        </div>
+      )}
 
       {/* Main Question Card */}
       <main className="my-6 space-y-6">

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import JoinQueueButton from "@/components/ranking/JoinQueueButton";
+import { enqueue } from "@/lib/offline-queue";
 
 /**
  * PodPlayClient — the async-simultaneous pod surface.
@@ -66,7 +67,7 @@ interface RankStatePayload {
   openPods: { matchId: string; remainingSeconds: number; submitted: boolean; score: number }[];
 }
 
-type Phase = "joining" | "waiting" | "loading" | "playing" | "submitting" | "done" | "error";
+type Phase = "joining" | "waiting" | "loading" | "playing" | "submitting" | "queued" | "done" | "error";
 
 /** mm:ss (h:mm:ss past an hour) — the member's own clock. */
 function clock(ms: number): string {
@@ -104,8 +105,20 @@ export default function PodPlayClient({
   const [standings, setStandings] = useState<RankStatePayload | null>(null);
 
   const submittedRef = useRef(false);
+  const [offline, setOffline] = useState(false);
 
   const windowMs = session ? session.windowSeconds * 1000 : 0;
+
+  useEffect(() => {
+    const sync = () => setOffline(typeof navigator !== "undefined" && navigator.onLine === false);
+    sync();
+    window.addEventListener("online", sync);
+    window.addEventListener("offline", sync);
+    return () => {
+      window.removeEventListener("online", sync);
+      window.removeEventListener("offline", sync);
+    };
+  }, []);
 
   const submitPaper = useCallback(async () => {
     if (submittedRef.current || !session || !matchId) return;
@@ -127,11 +140,26 @@ export default function PodPlayClient({
       setResult(data);
       setPhase("done");
     } catch (e) {
+      if (offline || e instanceof TypeError) {
+        const elapsedSeconds = Math.max(0, Math.round((windowMs - remaining) / 1000));
+        const queued = await enqueue({
+          endpoint: `/api/ranking/pods/${matchId}/submit`,
+          body: {
+            answers: Object.entries(answers).map(([questionId, selected]) => ({ questionId, selected })),
+            startedAt: session.startedAt,
+            elapsedSeconds,
+          },
+        });
+        if (queued) {
+          setPhase("queued");
+          return;
+        }
+      }
       submittedRef.current = false;
       setPhase("playing");
       setError(e instanceof Error ? e.message : "Submit failed");
     }
-  }, [answers, matchId, session]);
+  }, [answers, matchId, offline, remaining, session, windowMs]);
 
   // Join (or resume), then serve the paper for the resulting pod.
   useEffect(() => {
@@ -264,6 +292,35 @@ export default function PodPlayClient({
     );
   }
 
+  if (phase === "queued") {
+    return (
+      <main className="mx-auto max-w-2xl px-4 py-16 text-center">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Pod play · saved</p>
+        <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Offline — answers saved, will sync</h1>
+        <p className="mt-3 text-sm text-slate-400">
+          This paper is queued on the device. It is submitted the moment the connection returns and
+          graded against the pod window the server opened — if that window closed before the sync,
+          the submit endpoint&apos;s rejection stands and the submission stays queued for a manual
+          retry.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/league/ladder"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover"
+          >
+            Back to the ladder
+          </Link>
+          <Link
+            href="/offline"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 hover:border-slate-500"
+          >
+            See what is saved
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
   if (phase === "done" && result) {
     const medal = result.placement === 1 ? "1st" : result.placement === 2 ? "2nd" : result.placement === 3 ? "3rd" : `${result.placement}th`;
     return (
@@ -343,6 +400,12 @@ export default function PodPlayClient({
           <p className="font-serif text-3xl font-bold tabular-nums text-gold">{clock(remaining)}</p>
         </div>
       </div>
+
+      {offline && (
+        <p className="mt-4 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+          Offline — answers saved, will sync
+        </p>
+      )}
 
       <div
         className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-slate-800"
