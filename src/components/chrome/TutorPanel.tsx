@@ -114,7 +114,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
             Tutor
           </p>
           <p className="mt-1 font-serif text-xl italic text-slate-100">
-            A guide, not an oracle.
+            Your AI study assistant — grounded in your courses, notes and exam banks.
           </p>
         </div>
         <button

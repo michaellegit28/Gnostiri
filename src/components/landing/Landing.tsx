@@ -81,7 +81,7 @@ export default function Landing() {
       {/* ── What you get ─────────────────────────────────────────────────── */}
       <section className="mt-16">
         <h2 className="font-serif text-3xl font-bold tracking-tight text-ink md:text-4xl">
-          Three ways in. One account.
+          What you can do here.
         </h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {PREVIEW.map(({ Icon, title, line }) => (
