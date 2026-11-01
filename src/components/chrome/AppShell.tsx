@@ -7,6 +7,7 @@ import { Command, Crown, Menu, X } from "lucide-react";
 import NotificationBell from "@/components/notifications/NotificationBell";
 import ThemeToggle from "@/components/chrome/ThemeToggle";
 import PrimeBadge from "@/components/chrome/PrimeBadge";
+import SyncIndicator from "@/components/offline/SyncIndicator";
 import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
 
 /**
@@ -140,6 +141,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             Jump to…
           </button>
           <div className="flex items-center [&_button]:min-h-[44px]">
+            <SyncIndicator />
             <ThemeToggle />
             <NotificationBell />
           </div>

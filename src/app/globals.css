@@ -185,3 +185,14 @@ html.reduce-motion *::after {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Lite Mode is text-only / data-saving: motion is the remaining heavy part,
+   so the same reduction the OS setting gets applies to the opt-in class. */
+html.lite-mode *,
+html.lite-mode *::before,
+html.lite-mode *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

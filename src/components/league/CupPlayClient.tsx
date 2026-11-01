@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { enqueue } from "@/lib/offline-queue";
 
 interface CupQuestion {
   id: string;
@@ -31,7 +32,11 @@ interface SubmitResult {
   breakdown: BreakdownRow[];
 }
 
-type Phase = "loading" | "playing" | "submitting" | "done" | "error";
+type Phase = "loading" | "playing" | "submitting" | "queued" | "done" | "error";
+
+function isNetworkError(error: unknown): boolean {
+  return error instanceof TypeError;
+}
 
 /** mm:ss (h:mm:ss past an hour) — the racer's clock. */
 function clock(ms: number): string {
@@ -73,9 +78,21 @@ export default function CupPlayClient({
   const [remaining, setRemaining] = useState(0);
   const [confirming, setConfirming] = useState(false);
   const [result, setResult] = useState<SubmitResult | null>(null);
+  const [offline, setOffline] = useState(false);
 
   // Guards against a double submit (timer expiry + a click in the same tick).
   const submittedRef = useRef(false);
+
+  useEffect(() => {
+    const sync = () => setOffline(typeof navigator !== "undefined" && navigator.onLine === false);
+    sync();
+    window.addEventListener("online", sync);
+    window.addEventListener("offline", sync);
+    return () => {
+      window.removeEventListener("online", sync);
+      window.removeEventListener("offline", sync);
+    };
+  }, []);
 
   const submit = useCallback(
     async (skipConfirm: boolean) => {
@@ -100,12 +117,27 @@ export default function CupPlayClient({
         setResult(data);
         setPhase("done");
       } catch (e) {
+        if (offline || isNetworkError(e)) {
+          const elapsedSeconds = Math.max(0, Math.round((session.durationMinutes * 60_000 - remaining) / 1000));
+          const queued = await enqueue({
+            endpoint: `/api/competitions/${competitionId}/submit`,
+            body: {
+              answers: Object.entries(answers).map(([questionId, selected]) => ({ questionId, selected })),
+              startedAt: session.startedAt,
+              elapsedSeconds,
+            },
+          });
+          if (queued) {
+            setPhase("queued");
+            return;
+          }
+        }
         submittedRef.current = false;
         setPhase("playing");
         setError(e instanceof Error ? e.message : "Submit failed");
       }
     },
-    [answers, competitionId, session],
+    [answers, competitionId, offline, remaining, session],
   );
 
   // Session fetch: the paper, and the server's own start time for the clock.
@@ -189,6 +221,35 @@ export default function CupPlayClient({
             className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Back to the cup
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
+  if (phase === "queued") {
+    return (
+      <main className="mx-auto max-w-3xl px-6 py-20 text-center">
+        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Speed Cup · saved</p>
+        <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Offline — answers saved, will sync</h1>
+        <p className="mt-3 text-sm text-slate-400">
+          This paper is queued on the device with the time it took. It is submitted the moment the
+          connection returns, and graded against the server&apos;s own window — if that window has
+          already closed by then, the submit endpoint&apos;s rejection stands and the submission
+          stays queued for a manual retry.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href={hrefBack}
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 text-sm font-semibold text-slate-950 hover:bg-gold-hover"
+          >
+            Back to the cup
+          </Link>
+          <Link
+            href="/offline"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 hover:border-gold/60 hover:text-white"
+          >
+            See what is saved
           </Link>
         </div>
       </main>
@@ -304,6 +365,12 @@ export default function CupPlayClient({
           style={{ width: `${(1 - timeElapsed) * 100}%` }}
         />
       </div>
+
+      {offline && (
+        <p className="mt-4 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+          Offline — answers saved, will sync
+        </p>
+      )}
 
       <div className="mt-6 flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-slate-500">
         <span>
