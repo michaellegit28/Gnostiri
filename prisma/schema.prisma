@@ -1007,3 +1007,152 @@ model StudyTask {
 
   @@index([userId, scheduledFor, status])
 }
+
+// ── Global Ranking engine (Phase 7): one currency, six tiers, async pods ──────
+//
+// The Merit League cup models above (Competition / CompetitionMember — Speed,
+// Endurance, Mastery, Bracket) are UNTOUCHED by this block. This is the global
+// LADDER: Stars as the single currency, six tiers, season-scoped groups of 20
+// that auto-assign by tier, async-simultaneous pods of 2–4 racing a 20-minute
+// window at their own pace, and the Hall of Fame at season close.
+//
+// New tables only — no field on an existing model is added, changed or
+// dropped, so the cup formats and their scoring path keep working exactly as
+// they are.
+//
+// Scoring invariant (the same one the cups hold): the answer key NEVER leaves
+// the server. A pod paper is DERIVED, never stored — buildChampionshipPaper
+// (src/lib/ranking.ts) re-computes an identical paper from (tier, member
+// seed) on every request, so the paper a member plays and the grade the
+// marker derives on submit cannot drift apart.
+
+model Season {
+  slug     String   @id
+  name     String
+  startsAt DateTime
+  endsAt   DateTime
+  status   String   @default("active") // active | closed
+
+  groups  LeagueGroup[]      @relation("SeasonGroups")
+  matches PodMatch[]         @relation("SeasonMatches")
+  hall    HallOfFameEntry[]  @relation("SeasonHall")
+}
+
+// The single ledger. Every star a member earns or burns is one row, with the
+// running balance after it — the ledger is the audit trail behind
+// RankState.stars, never a duplicate of it. `reason` carries the idempotency
+// key for pod awards ("pod:<matchId>:<userId>"), so a re-computed placement
+// can be reconciled without double-paying.
+model StarLedger {
+  id           String   @id @default(cuid())
+  userId       String
+  delta        Int
+  reason       String
+  balanceAfter Int
+  seasonSlug   String?
+  createdAt    DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([userId, reason])
+}
+
+// One row per member: their star total, derived tier, season group, and the
+// instant they signalled ready for pod matchmaking.
+model RankState {
+  userId     String    @id
+  stars      Int       @default(0)
+  tier       Int       @default(1)
+  groupId    String?
+  podReadyAt DateTime?
+  updatedAt  DateTime  @updatedAt
+}
+
+// A season+tier cohort of at most `capacity` (20) members. Pods form inside a
+// group as members become ready, so a group is the unit of promotion and
+// relegation at season close.
+model LeagueGroup {
+  id         String   @id @default(cuid())
+  seasonSlug String
+  tier       Int
+  name       String   // "Vanguard III" — tier label + roman group index
+  capacity   Int      @default(20)
+  createdAt  DateTime @default(now())
+
+  season  Season             @relation("SeasonGroups", fields: [seasonSlug], references: [slug], onDelete: Cascade)
+  members LeagueGroupMember[]
+  matches PodMatch[]
+
+  @@unique([seasonSlug, tier, name])
+  @@index([seasonSlug, tier])
+}
+
+model LeagueGroupMember {
+  id       String   @id @default(cuid())
+  groupId  String
+  userId   String
+  joinedAt DateTime @default(now())
+
+  group LeagueGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([userId])
+}
+
+// One async-simultaneous pod: a shared 20-minute window in which 2–4 members
+// of the same group each play the same paper at their own pace. The
+// scoreboard fills as they submit — no websockets, no live session.
+model PodMatch {
+  id             String   @id @default(cuid())
+  groupId        String
+  seasonSlug     String
+  tier           Int
+  round          Int      @default(1)
+  windowOpensAt  DateTime
+  windowClosesAt DateTime
+  state          String   @default("open") // open | closed
+  seed           Int
+  createdAt      DateTime @default(now())
+
+  season  Season      @relation("SeasonMatches", fields: [seasonSlug], references: [slug], onDelete: Cascade)
+  group   LeagueGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  members PodMember[]
+
+  @@index([groupId, createdAt])
+  @@index([seasonSlug, tier])
+  @@index([state, windowClosesAt])
+}
+
+// One seat in a pod. `seed` is hash(matchId + userId) — the per-user draw that
+// randomises question AND option order, so two members in the same window see
+// the same questions in a different order with shuffled options.
+model PodMember {
+  id          String    @id @default(cuid())
+  matchId     String
+  userId      String
+  seed        Int
+  score       Int       @default(0)
+  submittedAt DateTime?
+
+  match PodMatch @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  @@unique([matchId, userId])
+  @@index([userId])
+}
+
+// Season close: the top three groups per tier, forever. `rosterJson` holds
+// DISPLAY NAMES ONLY — never an email, never a user id.
+model HallOfFameEntry {
+  id         String   @id @default(cuid())
+  seasonSlug String
+  tier       Int
+  rank       Int
+  groupName  String
+  rosterJson String[]
+  avgStars   Float
+  createdAt  DateTime @default(now())
+
+  season Season @relation("SeasonHall", fields: [seasonSlug], references: [slug], onDelete: Cascade)
+
+  @@unique([seasonSlug, tier, rank])
+  @@index([seasonSlug, tier])
+}
