@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Gnostiri Premium — Plans",
   description:
-    "Unlock university courses, adaptive plans, certificates, and unlimited Tutor access.",
+    "All university courses and quizzes, the AI Tutor, adaptive study plans and completion certificates.",
 };
 
 export default function PricingLayout({

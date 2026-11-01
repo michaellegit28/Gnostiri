@@ -16,14 +16,13 @@ export default function RootError({ error, reset }: RootErrorProps) {
     <div className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 py-24 text-center">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
-          Something interrupted learning
+          Something went wrong
         </p>
         <h1 className="mt-4 font-serif text-3xl font-bold md:text-4xl">
-          This page stumbled — your progress is safe.
+          This page didn&apos;t load.
         </h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base">
-          A hiccup on our side kept this view from loading. Try again, or head
-          somewhere calm while we recover.
+          Something broke on our side. Try again, or head back home.
         </p>
         {error?.digest && (
           <p className="mt-4 font-mono text-xs text-slate-600">

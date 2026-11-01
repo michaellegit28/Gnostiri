@@ -33,7 +33,7 @@ const PLAY_OPEN_COPY: Record<CompetitionFormat, string> = {
 
 const PLAY_CLOSED_COPY: Record<CompetitionFormat, string> = {
   speed: "Your paper is available once the cup window opens.",
-  endurance: "Your first check-in unlocks when the window opens.",
+  endurance: "Your first check-in opens when the window starts.",
   mastery: "Progress counts once the cup window opens.",
   bracket: "Your seeding and match appear once the window opens.",
 };

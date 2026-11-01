@@ -155,7 +155,7 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
         <header className="space-y-3">
           <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">Board-format practice</p>
           <h1 className="text-3xl md:text-4xl font-serif font-bold">
-            Practice {examination.name.toUpperCase()} the way the exam is <span className="text-gold">actually set</span>
+            Practice {examination.name.toUpperCase()} in the <span className="text-gold">real format</span>
           </h1>
           <p className="text-slate-400 text-sm max-w-2xl">
             Sessions follow the board&apos;s real paper structure — objectives, theory, practicals — with

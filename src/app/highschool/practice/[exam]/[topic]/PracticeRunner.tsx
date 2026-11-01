@@ -435,7 +435,7 @@ export default function PracticeRunner({
                   {reveals[question.id] && (
                     <p className={`text-sm font-semibold ${reveals[question.id].isCorrect ? "text-emerald-300" : "text-rose-300"}`}>
                       {reveals[question.id].isCorrect
-                        ? "You are right!"
+                        ? "Correct"
                         : `The correct answer is ${reveals[question.id].correctAnswer}`}
                     </p>
                   )}

@@ -24,10 +24,10 @@ export default async function HighSchoolHub() {
             <span>High School</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            Textbooks and exams, <span className="text-gold">one roof</span>
+            Read the textbook, then sit the <span className="text-gold">past papers</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
-            Master {subjects} subjects in the study textbooks, then prove it on real JAMB past papers.
+            Study {subjects} subjects in the textbooks, then test yourself on real past papers.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default async function HighSchoolHub() {
 
         <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center">
           <Trophy className="w-6 h-6 text-gold mx-auto mb-2" />
-          <p className="text-sm text-slate-400">Want to compete? <Link href="/arena" className="rounded text-gold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Global Arena</Link> hosts inter-school and inter-country contests.</p>
+          <p className="text-sm text-slate-400">Ready to compete? <Link href="/arena" className="rounded text-gold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Global Arena</Link> adds inter-school and inter-country cups — it&apos;s in build.</p>
         </section>
       </div>
     </div>

@@ -434,18 +434,18 @@ export default function DiscoveryReader({
           <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-8 text-center">
             <Compass className="w-10 h-10 text-slate-600 mx-auto mb-3" />
             <h2 className="font-serif text-xl font-bold text-slate-200">
-              This depth is still being charted
+              No lessons at this depth yet
             </h2>
             <p className="mt-2 text-sm text-slate-400 max-w-md mx-auto">
-              Our guides haven&apos;t mapped {DEPTHS[Math.min(depth, 3)]} for {title} yet.
-              Ask the tutor to take you there right now.
+              Nothing is written for {DEPTHS[Math.min(depth, 3)]} on {title} yet.
+              Ask the tutor to cover it.
             </p>
             <Link
               href={`/tutor?domain=extras&topicId=${encodeURIComponent(topicId)}`}
               className="mt-5 inline-flex items-center gap-2 min-h-[48px] px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
             >
               <MessageSquare className="w-4 h-4" />
-              Take me deeper
+              Ask the tutor
             </Link>
           </div>
         )}

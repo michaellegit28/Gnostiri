@@ -38,8 +38,8 @@ export default async function RevisionPage() {
             Your revision queue
           </h1>
           <p className="text-slate-400 text-sm md:text-base max-w-2xl leading-relaxed">
-            Every concept you touch has a forgetting curve. This queue surfaces each one at the
-            moment you are about to lose it — so an hour here protects weeks of work.
+            Each concept sits on a forgetting curve. This queue shows the ones due, right
+            before you would forget them.
           </p>
         </header>
 

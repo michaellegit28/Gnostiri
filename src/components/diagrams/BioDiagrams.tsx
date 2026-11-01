@@ -986,7 +986,7 @@ function MemoryStages() {
       <path d="M250 111 L285 111" fill="none" stroke={ink} strokeWidth="1.5" />
       <text x="267" y="103" textAnchor="middle" fill={ink} fontSize="8">encoding</text>
       <path d="M290 85 C240 45 215 45 202 85" fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="4 3" />
-      <text x="255" y="38" textAnchor="middle" fill={faint} fontSize="8">retrieval — the cue unlocks it</text>
+      <text x="255" y="38" textAnchor="middle" fill={faint} fontSize="8">retrieval — the cue brings it back</text>
       <text x="200" y="165" textAnchor="middle" fill={faint} fontSize="8">rehearsal holds the short-term store; interference and decay lose the rest</text>
       <text x="200" y="205" textAnchor="middle" fill={faint} fontSize="9">retroactive: new disrupts old · proactive: old disrupts new — name the direction</text>
     </Fig>

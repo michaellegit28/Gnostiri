@@ -144,8 +144,8 @@ export default async function HighSchoolHubPage() {
           <BellPlus className="w-8 h-8 text-slate-500 mx-auto" />
           <h2 className="font-serif text-2xl font-bold">Your board isn&#39;t classified yet?</h2>
           <p className="text-slate-400 text-sm max-w-xl mx-auto">
-            New examination systems open every term. Create a free account and yours
-            will be among the first we unlock — members shape what comes next.
+            New examination systems are added every term. Create a free account and we&apos;ll
+            notify you the moment yours is available.
           </p>
           <Link
             href="/login"

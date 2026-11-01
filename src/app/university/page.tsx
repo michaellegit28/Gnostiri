@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Gnostiri University — the MBBS degree and foundation courses",
   description:
-    "A quiet, structured university: the full MBBS degree first, then the foundation courses that feed it. Course, module, lesson — one concept at a time.",
+    "The full MBBS degree taught in order, then the foundation courses that feed it — one concept and lesson at a time.",
 };
 
 /**
