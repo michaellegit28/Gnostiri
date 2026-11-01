@@ -155,7 +155,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
   return (
     <main className="flex min-h-screen flex-col bg-transparent text-slate-50">
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0d0a24]/95 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-white/10 bg-bg/95 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between gap-2">
             <div className="flex min-w-0 gap-1 overflow-x-auto" role="tablist" aria-label="Subjects">
@@ -331,7 +331,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
       {/* Submit confirmation */}
       {confirmOpen && (
         <div className="fixed inset-0 z-40 flex items-end justify-center bg-black/70 p-4 sm:items-center" role="dialog" aria-modal="true" aria-labelledby="confirm-h">
-          <div className={`${CBT.panel} w-full max-w-md bg-[#0d0a24] p-6`}>
+          <div className={`${CBT.panel} w-full max-w-md bg-bg p-6`}>
             <div className="flex items-start justify-between gap-3">
               <h2 id="confirm-h" className="flex items-center gap-2 font-serif text-lg font-bold">
                 <AlertTriangle className="h-5 w-5 text-gold" aria-hidden /> Submit your paper?

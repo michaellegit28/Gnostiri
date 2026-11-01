@@ -51,9 +51,9 @@ export default async function LaunchPage() {
   return (
     <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
       <div className="max-w-2xl mx-auto space-y-8 py-10">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,#14213d_0%,#0a0f22_55%,#060814_100%)] px-6 py-12 md:px-12 md:py-16 text-center space-y-4">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg))_55%,rgb(var(--bg-deep))_100%)] px-6 py-12 md:px-12 md:py-16 text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 text-xs font-semibold border border-teal-500/30">
-            <SectionMark variant="school" className="w-4 h-4" accent="#14B8A6" />
+            <SectionMark variant="school" className="w-4 h-4" accent="rgb(var(--teal))" />
             <span>1st Launch · Limited Access</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">

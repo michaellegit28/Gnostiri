@@ -2,16 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { BRAND_CREAM, BRAND_NAVY } from "@/components/brand/Logo";
 
 /**
  * ThemeToggle — dark (default) ⇄ light. The choice is device-local
  * (localStorage "gnostiri.theme") and applied pre-paint by the layout script,
  * so there is no flash. <meta name="theme-color"> follows the theme so the
  * PWA chrome matches. First visit follows the operating system.
+ *
+ * The meta tag needs a literal colour, so it comes from the documented brand
+ * constants (the same source the mark and the win card draw from).
  */
 
-const DARK = "#09090B";
-const LIGHT = "#FAFAFA";
+const DARK = BRAND_NAVY;
+const LIGHT = BRAND_CREAM;
 
 function currentTheme(): "dark" | "light" {
   const attr = document.documentElement.getAttribute("data-theme");

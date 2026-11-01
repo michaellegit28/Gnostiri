@@ -15,12 +15,13 @@
 }
 
 body {
-  color: #ededed;
-  background-color: #060a14;
+  color: rgb(var(--text));
+  background-color: rgb(var(--bg));
+  /* Hero spotlight: faint teal (left) and gold (right), ~10% max. No purple. */
   background-image:
-    radial-gradient(90% 55% at 50% -5%, rgba(64, 48, 140, 0.5), transparent 70%),
-    radial-gradient(60% 45% at 88% 28%, rgba(20, 90, 100, 0.28), transparent 70%),
-    radial-gradient(55% 40% at 8% 72%, rgba(150, 110, 25, 0.16), transparent 70%),
+    radial-gradient(90% 55% at 50% -5%, rgb(var(--teal) / 0.10), transparent 70%),
+    radial-gradient(60% 45% at 88% 28%, rgb(var(--gold) / 0.10), transparent 70%),
+    radial-gradient(55% 40% at 8% 72%, rgb(var(--teal) / 0.05), transparent 70%),
     radial-gradient(1px 1px at 18% 22%, rgba(255, 255, 255, 0.55), transparent),
     radial-gradient(1px 1px at 73% 12%, rgba(255, 255, 255, 0.4), transparent),
     radial-gradient(1.5px 1.5px at 41% 38%, rgba(212, 175, 55, 0.5), transparent),
@@ -119,23 +120,66 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
    --gold-text in light mode (raw gold on white is 2.0:1).                  */
 :root,
 [data-theme="dark"] {
-  --bg: 9 9 11;            --surface: 19 19 22;        --surface-2: 28 28 32;
-  --border: 39 39 42;      --border-strong: 63 63 70;
-  --text: 250 250 250;     --text-muted: 161 161 170;  --text-subtle: 113 113 122;
-  --gold: 198 154 46;      --gold-hover: 226 190 105;  --gold-text: 212 175 55;
-  --gold-soft: 212 175 55; --on-gold: 9 9 11;
-  --success: 52 211 153;   --danger: 251 113 133;      --warning: 251 191 36;
-  --focus: 212 175 55;     --radius: 14px;
+  --bg-deep: 11 17 32;        /* #0B1120 */
+  --bg: 15 23 42;             /* #0F172A */
+  --surface: 30 41 59;        /* #1E293B */
+  --surface-2: 39 52 73;      /* #273449 (surface-hover) */
+  --border: 51 65 85;         /* #334155 */
+  --border-strong: 71 85 105; /* #475569 */
+  --text: 248 250 252;        /* #F8FAFC */
+  --text-muted: 148 163 184;  /* #94A3B8 */
+  --text-subtle: 100 116 139; /* #64748B — decorative only */
+  --gold: 212 175 55;         /* #D4AF37 */
+  --gold-hover: 232 211 122;
+  --gold-text: 212 175 55;
+  --gold-soft: 212 175 55;
+  --gold-from: 243 217 122;   /* #F3D97A */
+  --gold-to: 168 132 31;      /* #A8841F */
+  --on-gold: 15 23 42;
+  --teal: 20 184 166;         /* #14B8A6 */
+  --teal-text: 20 184 166;
+  --teal-soft: 20 184 166;
+  --success: 34 197 94;   --success-text: 34 197 94;   --success-soft: 34 197 94;
+  --error: 239 68 68;     --error-text: 239 68 68;     --error-soft: 239 68 68;
+  --warning: 245 158 11;  --warning-text: 245 158 11;  --warning-soft: 245 158 11;
+  --muted-fill: 148 163 184;  /* #94A3B8 */
+  --focus: 212 175 55;
+  --radius: 14px;
+  /* card depth: inset highlight on dark surfaces */
+  --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 1px 2px rgba(2, 6, 23, 0.4);
+  --header-bg: rgb(var(--bg) / 0.82);
   color-scheme: dark;
 }
 [data-theme="light"] {
-  --bg: 250 250 250;       --surface: 255 255 255;     --surface-2: 244 244 245;
-  --border: 228 228 231;   --border-strong: 212 212 216;
-  --text: 24 24 27;        --text-muted: 82 82 91;     --text-subtle: 113 113 122;
-  --gold: 176 138 40;      --gold-hover: 152 118 32;   --gold-text: 122 94 20;
-  --gold-soft: 212 175 55; --on-gold: 24 24 27;
-  --success: 5 150 105;    --danger: 225 29 72;        --warning: 180 83 9;
-  --focus: 212 175 55;     --radius: 14px;
+  --bg-deep: 253 251 247;
+  --bg: 253 251 247;          /* #FDFBF7 */
+  --surface: 255 255 255;     /* #FFFFFF */
+  --surface-2: 248 250 252;
+  --border: 226 232 240;      /* #E2E8F0 */
+  --border-strong: 203 213 225;
+  --text: 15 23 42;           /* #0F172A */
+  --text-muted: 100 116 139;  /* #64748B */
+  --text-subtle: 120 133 156; /* #78859C — the lightest that still clears 3:1 on cream; #94A3B8 (2.5:1) is a chart fill, never text */
+  --gold: 212 175 55;
+  --gold-hover: 168 132 31;
+  --gold-text: 138 109 11;    /* #8A6D0B — gold that may carry text */
+  --gold-soft: 212 175 55;
+  --gold-from: 243 217 122;
+  --gold-to: 212 175 55;
+  --on-gold: 15 23 42;
+  --teal: 13 148 136;         /* #0D9488 — fills read on cream */
+  --teal-text: 15 118 110;    /* #0F766E */
+  --teal-soft: 20 184 166;
+  --success: 22 163 74;   --success-text: 21 128 61;   --success-soft: 34 197 94;
+  --error: 220 38 38;     --error-text: 185 28 28;     --error-soft: 239 68 68;
+  --warning: 217 119 6;   --warning-text: 180 83 9;    --warning-soft: 245 158 11;
+  --muted-fill: 100 116 139;
+  --focus: 138 109 11;
+  --radius: 14px;
+  --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --header-bg: rgb(255 255 255 / 0.82);
   color-scheme: light;
 }
 
@@ -143,6 +187,46 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
    dark  #09090B: text #FAFAFA 19.1:1 · muted #A1A1AA 7.6:1 · subtle #71717A 4.6:1 · on-gold 9.6:1
    light #FAFAFA: text #18181B 16.1:1 · muted #52525B 7.4:1 · subtle #71717A 4.6:1 · gold-text #7A5E14 5.9:1
    raw gold on white is 2.0:1 — fills only, never text (that is what --gold-text is for). */
+/* ── The paper medium ───────────────────────────────────────────────────────
+   Lesson readers and certificates are a PRINTED PAGE, not app chrome: the
+   same paper reads correctly on a desk, on a phone in dark mode, and on
+   paper. These values are the medium and are intentionally theme-locked. */
+:root, [data-theme="dark"] {
+  --paper: 253 251 247;        /* #FDFBF7 — the sheet */
+  --paper-ink: 31 30 38;       /* #1F1E26 — printed text */
+  --paper-ink-soft: 58 56 68;  /* #3A3844 — secondary print */
+  --paper-gold: 138 109 28;    /* #8A6D1C — printed gold text */
+  --paper-line: 216 203 164;   /* #D8CBA4 — printed rule */
+  --paper-wash: 243 233 207;   /* #F3E9CF — tinted definition block */
+  --paper-green: 47 107 79;    /* #2F6B4F */
+  --paper-navy: 30 74 107;     /* #1E4A6B */
+  --paper-navy-wash: 228 237 243;
+  --paper-amber: 138 90 0;     /* #8A5A00 */
+  --paper-amber-wash: 247 236 208;
+}
+[data-theme="light"] { --paper: 253 251 247; }
+
+/* ── Biological illustration paint ──────────────────────────────────────────
+   BioDiagrams draws textbook figures — membranes, cristae, flows and the
+   retinal cone map. These are ILLUSTRATION CONTENT, not app chrome, so they
+   are not remapped onto the theme scale: they are the diagram's own paint,
+   theme-locked like the paper medium. Values are HARVESTED from the shipped
+   figures so dark mode stays pixel-identical, one token per distinct colour
+   the diagrams actually use. */
+:root, [data-theme="dark"] {
+  --bio-ink: 203 213 225;        /* #CBD5E1 — labels, structure strokes */
+  --bio-faint: 100 116 139;      /* #64748B — axes, captions, faint detail */
+  --bio-membrane: 45 212 191;    /* #2DD4BF — membranes, curves, connectors */
+  --bio-gold: 212 175 55;        /* #D4AF37 — energy: cristae, ATP, optima */
+  --bio-flow: 248 113 113;       /* #F87171 — flow / active-signal red */
+  --bio-cone-red: 231 76 60;     /* #E74C3C — the retinal cone map */
+  --bio-cone-orange: 230 126 34; /* #E67E22 */
+  --bio-cone-yellow: 241 196 15; /* #F1C40F */
+  --bio-cone-green: 39 174 96;   /* #27AE60 */
+  --bio-cone-blue: 41 128 185;   /* #2980B9 */
+  --bio-cone-violet: 142 68 173; /* #8E44AD */
+}
+
 /* ── 60/30/10 ──────────────────────────────────────────────────────────────
    60%  zinc surfaces (--bg/--surface/--surface-2) — the calm base
    30%  neutrals for structure and text (--border/--text/--text-muted)
@@ -196,3 +280,43 @@ html.lite-mode *::after {
   transition-duration: 0.001ms !important;
   scroll-behavior: auto !important;
 }
+
+/* ── Premium surface system ─────────────────────────────────────────────────
+   One card recipe everywhere: 1px border + inset highlight + layered shadow.
+   Motion is 150-200ms ease-out, transform/opacity only, and every animation
+   sits inside prefers-reduced-motion.                                         */
+.gn-card {
+  border: 1px solid rgb(var(--border));
+  background: rgb(var(--surface));
+  box-shadow: var(--card-inset), var(--card-shadow);
+}
+.gn-press { transition: transform 180ms ease-out, opacity 180ms ease-out, border-color 180ms ease-out; }
+.gn-press:active { transform: scale(0.98); }
+@media (prefers-reduced-motion: no-preference) {
+  .gn-press:hover { border-color: rgb(var(--gold) / 0.5); }
+}
+/* Glass ONLY on the top bar and bottom nav, with a solid fallback. */
+.gn-glass { background: var(--header-bg); }
+@supports (backdrop-filter: blur(14px)) {
+  .gn-glass { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+}
+/* Gold hero button: gradient + glow; the text is dark in BOTH themes. */
+.gn-btn-gold {
+  background: linear-gradient(135deg, rgb(var(--gold-from)), rgb(var(--gold)) 55%, rgb(var(--gold-to)));
+  color: rgb(var(--on-gold));
+  box-shadow: 0 8px 30px rgb(var(--gold) / 0.18);
+}
+.gn-btn-gold:active { transform: scale(0.98); }
+/* One-time shimmer on completion. */
+@keyframes gn-shimmer { 0% { background-position: -120% 0; } 100% { background-position: 220% 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .gn-shimmer {
+    background-image: linear-gradient(100deg, transparent 30%, rgb(var(--gold) / 0.28) 50%, transparent 70%);
+    background-size: 220% 100%;
+    animation: gn-shimmer 900ms ease-out 1;
+  }
+}
+/* 360px safety: the Prime badge drops its label rather than crowding. */
+@media (max-width: 400px) { .prime-label { display: none; } }
+html.reduce-motion .gn-press:active, html.reduce-motion .gn-press:hover { transform: none; }
+html.lite-mode .gn-shimmer { animation: none; }

@@ -52,7 +52,7 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
         </nav>
 
         {/* Header */}
-        <header className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,#14213d_0%,#0a0f22_55%,#060814_100%)] p-8 md:p-12 space-y-4">
+        <header className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg))_55%,rgb(var(--bg-deep))_100%)] p-8 md:p-12 space-y-4">
           <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">
             {examination.name.toUpperCase()} · {paper.subject}
           </p>

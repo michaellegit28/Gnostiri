@@ -133,7 +133,7 @@ export default async function CoursePage({
 
         {/* Course header */}
         <header className="relative overflow-hidden rounded-3xl border border-white/10">
-          <div className="absolute inset-0 bg-[radial-gradient(110%_100%_at_90%_0%,rgba(212,175,55,0.12)_0%,rgba(20,27,44,0.9)_45%,#060814_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(110%_100%_at_90%_0%,rgb(var(--gold)/0.12)_0%,rgb(var(--bg)/0.9)_45%,rgb(var(--bg-deep))_100%)]" />
           <div className="relative space-y-5 px-6 py-9 md:px-10 md:py-11">
             <div className="flex flex-wrap items-center gap-2">
               {course.code && (

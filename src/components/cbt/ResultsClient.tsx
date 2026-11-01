@@ -19,7 +19,7 @@ function ScoreRing({ percent, label, sub }: { percent: number; label: string; su
       <svg viewBox="0 0 160 160" className="h-full w-full -rotate-90">
         <circle cx="80" cy="80" r={R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="10" />
         <circle
-          cx="80" cy="80" r={R} fill="none" stroke="#d4af37" strokeWidth="10" strokeLinecap="round"
+          cx="80" cy="80" r={R} fill="none" stroke="rgb(var(--gold))" strokeWidth="10" strokeLinecap="round"
           strokeDasharray={C} strokeDashoffset={C - (C * Math.min(percent, 100)) / 100}
           style={{ transition: "stroke-dashoffset 900ms ease" }}
         />

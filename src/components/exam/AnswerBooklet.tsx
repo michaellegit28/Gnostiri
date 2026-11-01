@@ -73,7 +73,7 @@ export default function AnswerBooklet({
         }
         style={
           mode === "simulation"
-            ? { backgroundImage: "repeating-linear-gradient(#ffffff 0 31px, #dbe3ec 31px 32px)" }
+            ? { backgroundImage: "repeating-linear-gradient(rgb(var(--paper)) 0 31px, rgb(var(--border)) 31px 32px)" }
             : undefined
         }
       />

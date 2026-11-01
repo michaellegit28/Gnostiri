@@ -104,7 +104,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
     <div
       role="dialog"
       aria-label="AI Tutor"
-      className="fixed z-[80] inset-x-3 bottom-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-[400px] flex flex-col overflow-hidden rounded-2xl border border-gold/30 bg-[#0B0F22]/98 shadow-2xl shadow-black/60 backdrop-blur-xl animate-[panel-up_0.3s_ease-out]"
+      className="fixed z-[80] inset-x-3 bottom-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-[400px] flex flex-col overflow-hidden rounded-2xl border border-gold/30 bg-bg/98 shadow-2xl shadow-black/60 backdrop-blur-xl animate-[panel-up_0.3s_ease-out]"
       style={{ maxHeight: "min(78vh, 620px)", height: "560px", maxWidth: "100%" }}
     >
       {/* Header */}

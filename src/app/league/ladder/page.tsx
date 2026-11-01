@@ -37,7 +37,7 @@ function TierLadder({ currentTier, stars }: { currentTier: number | null; stars:
               aria-current={isCurrent ? "step" : undefined}
               className={`flex flex-wrap items-center justify-between gap-3 rounded-xl border px-4 py-3 ${
                 isCurrent
-                  ? "border-gold/50 bg-gradient-to-r from-[#2a230f] to-slate-900"
+                  ? "border-gold/50 bg-gradient-to-r from-gold/15 to-slate-900"
                   : "border-slate-800 bg-slate-950/60"
               }`}
             >
@@ -325,7 +325,7 @@ export default async function LadderPage() {
         <div className="space-y-8">
           <TierLadder currentTier={tier} stars={stars} />
 
-          <section className="rounded-2xl border border-gold/30 bg-gradient-to-r from-[#2a230f] via-slate-900 to-slate-950 p-6">
+          <section className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/15 via-slate-900 to-slate-950 p-6">
             <h2 className="flex items-center gap-2 font-serif text-xl font-bold text-slate-100">
               <Swords className="h-5 w-5 text-gold" aria-hidden /> Play a pod
             </h2>

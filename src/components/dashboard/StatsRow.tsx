@@ -70,7 +70,7 @@ export default async function StatsRow({ userId }: { userId: string }) {
       value: `${streak}`,
       hint: "days in a row",
       icon: Flame,
-      accent: "text-orange-400",
+      accent: "text-warning",
     },
     {
       key: "accuracy",

@@ -63,7 +63,7 @@ export default async function UniversityIndexPage() {
       <div className="mx-auto max-w-6xl px-6 py-12 md:py-16 space-y-14">
         {/* Hero — one screen, one message */}
         <header className="relative overflow-hidden rounded-3xl border border-white/10">
-          <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_85%_0%,rgba(212,175,55,0.14)_0%,rgba(20,27,44,0.9)_45%,#060814_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_85%_0%,rgb(var(--gold)/0.14)_0%,rgb(var(--bg)/0.9)_45%,rgb(var(--bg-deep))_100%)]" />
           <div className="relative space-y-6 px-7 py-12 md:px-12 md:py-16">
             <p className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-amber-300">
               <GraduationCap className="h-4 w-4" aria-hidden />

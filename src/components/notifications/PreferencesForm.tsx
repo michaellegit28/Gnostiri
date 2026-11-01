@@ -107,7 +107,7 @@ export default function PreferencesForm() {
             setPrefs((prev) => ({ ...prev, emailOptIn: e.target.checked }));
             setState("idle");
           }}
-          className="mt-0.5 h-4 w-4 rounded border-white/20 bg-slate-900 accent-[#D4AF37] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-0.5 h-4 w-4 rounded border-white/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         />
         <span>
           Email backup
@@ -126,7 +126,7 @@ export default function PreferencesForm() {
               setQuietEnabled(e.target.checked);
               setState("idle");
             }}
-            className="h-4 w-4 rounded border-white/20 bg-slate-900 accent-[#D4AF37] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="h-4 w-4 rounded border-white/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           />
           Quiet hours
         </label>
@@ -169,7 +169,7 @@ export default function PreferencesForm() {
                 type="checkbox"
                 checked={prefs.mutedTypes.includes(type)}
                 onChange={() => toggleMuted(type)}
-                className="h-4 w-4 rounded border-white/20 bg-slate-900 accent-[#D4AF37] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="h-4 w-4 rounded border-white/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               />
               {TYPE_LABELS[type] ?? type}
             </label>
