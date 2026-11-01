@@ -519,3 +519,26 @@ sidebar, desktop persistent sidebar + command palette, cards over lists, tutor F
 - Phase 6b (dashboard) and 6d (a11y) shipped in parallel lanes against the landed shell.
 - **Remaining roadmap:** Phase 5 (seasons + verified certificates + win cards) · payments wiring
   (Stripe + Paystack — the blocker before paid tiers) · optional content depth.
+
+## Night build (2026-10-31): ranking live, rewards, offline, light mode, copy
+
+Merged and deployed tonight (CI green on every merge; full suite now 339/339):
+- **Global Ranking engine (Phase 7)** — Stars ledger, six tiers (Initiate→Paragon),
+  auto-assignment into groups of 20 by tier, async-simultaneous pods (2–4 members, 20-minute
+  window, same paper per pod, per-user question+option shuffling, server-side scoring with
+  idempotent star awards), championship pools per tier drawn from the verified banks, group
+  promotion/relegation, season close, Hall of Fame. No-leak + determinism proven in the smoke
+  (poisoned-pool test asserts the served shape carries no answers).
+- **Season rewards** — verified certificates (real PDF via pdf-lib, HMAC verification code over
+  the engraving, public /verify recompute page) and 1080×1920 PNG win cards via sharp, sized for
+  WhatsApp Status. Certificate only ever served to its owner or an allowlisted admin.
+- **Offline-first** — IndexedDB submission queue with 3-retry backoff (payload preserved on
+  permanent failure, visible at /offline with manual sync), SWR caching for study/lesson/desk
+  reads, /offline fallback, top-bar SyncIndicator, and lite-mode now strips animation. When a
+  window closes before sync the answer is never faked: the endpoint's rejection applies and the
+  learner sees "Graded on sync", never an invented score.
+- **Light/dark mode** — toggle in the top bar + Settings, system-preference default applied
+  pre-paint, both palettes contrast-verified.
+- **Copy pass** — every AI-sounding string removed student-facing (ban-list enforced by a test);
+  metadata specific; prices corrected to $3.99/$39.90.
+- Payments deliberately NOT integrated (owner instruction — the blocker stays open).
