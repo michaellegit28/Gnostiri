@@ -60,7 +60,7 @@ function palette(block) {
     goldText: token(block, "gold-text"),
     onGold: token(block, "on-gold"),
     success: token(block, "success"),
-    danger: token(block, "danger"),
+    error: token(block, "error"),
   };
 }
 
@@ -91,7 +91,7 @@ const UI_FLOOR = 3.0;
 
 test("both themes ship the full token set", () => {
   for (const [name, block] of [["dark", DARK], ["light", LIGHT]]) {
-    for (const tokenName of ["bg", "surface", "surface-2", "border", "border-strong", "text", "text-muted", "text-subtle", "gold", "gold-hover", "gold-text", "gold-soft", "on-gold", "success", "danger", "warning", "focus"]) {
+    for (const tokenName of ["bg", "surface", "surface-2", "border", "border-strong", "text", "text-muted", "text-subtle", "gold", "gold-hover", "gold-text", "gold-soft", "on-gold", "success", "error", "warning", "focus"]) {
       assert.ok(new RegExp(`--${tokenName}:`).test(block), `${name} theme defines --${tokenName}`);
     }
   }
@@ -164,7 +164,7 @@ test(`light CTA ${LIGHT_P.onGold} on ${LIGHT_P.gold} = ${contrast(LIGHT_P.onGold
 
 test(`state colours clear their floors in both themes (danger, success)`, () => {
   for (const [name, p] of [["dark", DARK_P], ["light", LIGHT_P]]) {
-    assert.ok(contrast(p.danger, p.bg) >= UI_FLOOR, `${name} danger ≥ ${UI_FLOOR}:1 as a UI signal`);
+    assert.ok(contrast(p.error, p.bg) >= UI_FLOOR, `${name} error ≥ ${UI_FLOOR}:1 as a UI signal`);
     assert.ok(contrast(p.success, p.bg) >= UI_FLOOR, `${name} success ≥ ${UI_FLOOR}:1 as a UI signal`);
   }
 });

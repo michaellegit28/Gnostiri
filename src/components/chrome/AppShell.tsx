@@ -112,7 +112,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Top bar ─────────────────────────────────────────────────────── */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 flex h-14 items-center gap-2 border-b border-white/10 bg-[#070b16]/90 px-3 backdrop-blur-md transition-transform duration-300 md:h-15 ${
+        className={`fixed inset-x-0 top-0 z-50 flex h-14 items-center gap-2 border-b border-line bg-bg/85 px-3 backdrop-blur-md transition-transform duration-300 md:h-15 ${
           hidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
@@ -152,7 +152,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {/* ── Desktop sidebar ─────────────────────────────────────────────── */}
       <nav
         aria-label={NAV_LABEL}
-        className={`fixed inset-y-0 left-0 z-40 hidden w-64 transform border-r border-white/10 bg-[#070b16]/97 pt-14 backdrop-blur-lg transition-transform duration-300 lg:block ${
+        className={`fixed inset-y-0 left-0 z-40 hidden w-64 transform border-r border-line bg-bg/97 pt-14 backdrop-blur-lg transition-transform duration-300 lg:block ${
           sidebar ? "-translate-x-full" : "translate-x-0"
         }`}
       >
@@ -174,7 +174,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Mobile drawer ───────────────────────────────────────────────── */}
       {drawer && (
-        <div className="fixed inset-0 z-[60] overflow-y-auto bg-[#070b16]/97 backdrop-blur-lg lg:hidden">
+        <div className="fixed inset-0 z-[60] overflow-y-auto bg-bg/97 backdrop-blur-lg lg:hidden">
           <div className="flex h-14 items-center justify-between px-3">
             <span className="font-serif text-lg font-bold text-slate-100">Gnostiri</span>
             <button
@@ -231,12 +231,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {palette && (
         <div
           ref={paletteRef}
-          className="fixed inset-0 z-[80] bg-[#070b16]/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[80] bg-bg/80 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-label="Jump to"
         >
-          <div className="mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-white/10 bg-slate-950/95 shadow-2xl">
+          <div className="mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-line bg-surface/95 shadow-2xl">
             <p className="border-b border-white/10 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-gold">Jump to</p>
             <ul className="max-h-[60vh] overflow-y-auto py-2">
               {allItems.map((item) => {
@@ -261,7 +261,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
       <div className="pt-14 lg:pl-64">
-        <main id="main" className="min-h-[calc(100vh-3.5rem)] pb-24 lg:pb-10">
+        <main id="main" className="min-h-[calc(100vh-3.5rem)] pb-28 lg:pb-10">
           {children}
         </main>
         <footer className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pb-28 pt-4 lg:pb-6">
@@ -275,7 +275,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {/* ── Mobile bottom tabs ──────────────────────────────────────────── */}
       <nav
         aria-label={TAB_BAR_LABEL}
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#070b16]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-bg/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
       >
         <ul className="flex">
           {BOTTOM_TABS.map((tab) => {

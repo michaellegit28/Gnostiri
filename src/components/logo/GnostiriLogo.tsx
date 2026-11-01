@@ -23,7 +23,7 @@ interface MarkProps {
 
 /** Master Gnostiri monogram — a dotted orbit ring around a gold nucleus.
  *  Minimal, premium, legible from favicon to hero. */
-export function GnostiriMark({ className = "w-8 h-8", accent = "#D4AF37" }: MarkProps) {
+export function GnostiriMark({ className = "w-8 h-8", accent = "rgb(var(--gold))" }: MarkProps) {
   const dots = Array.from({ length: 12 }, (_, i) => {
     const a = (i / 12) * Math.PI * 2 - Math.PI / 2;
     return { x: 12 + 8.4 * Math.cos(a), y: 12 + 8.4 * Math.sin(a) };
@@ -142,7 +142,7 @@ function glyph(variant: MarkVariant, accent: string) {
 export function SectionMark({
   variant,
   className = "w-6 h-6",
-  accent = "#D4AF37",
+  accent = "rgb(var(--gold))",
 }: MarkProps & { variant: MarkVariant }) {
   return (
     <svg

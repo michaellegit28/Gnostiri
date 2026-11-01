@@ -74,8 +74,8 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "example":
       return (
-        <div className="border-l-4 border-violet-400 bg-violet-950/20 rounded-r-xl p-5 my-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-violet-300 mb-2">
+        <div className="border-l-4 border-teal bg-teal/10 rounded-r-xl p-5 my-6">
+          <div className="text-xs font-semibold uppercase tracking-wider text-teal mb-2">
             See it in action
           </div>
           <div className="text-slate-200 font-reading leading-relaxed">{block.text}</div>
@@ -198,7 +198,7 @@ function CodeCard({
   caption?: string;
 }) {
   return (
-    <figure className="my-6 overflow-hidden rounded-xl border border-white/10 bg-[#0a0a1a]">
+    <figure className="my-6 overflow-hidden rounded-xl border border-white/10 bg-surface-2">
       <figcaption className="flex flex-wrap items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-2">
         <span className="flex items-center gap-1.5 rounded-md border border-gold/30 bg-gold/10 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-gold">
           <FileCode2 className="h-3 w-3" />
@@ -236,8 +236,8 @@ function QuestionCard({
   const [revealed, setRevealed] = useState(false);
   const answerId = useId();
   return (
-    <div className="my-6 rounded-xl border border-violet-400/30 bg-violet-950/20 p-5">
-      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-violet-300">
+    <div className="my-6 rounded-xl border border-teal/30 bg-teal/10 p-5">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-teal">
         <CheckCircle2 className="h-3.5 w-3.5" /> Check yourself
       </div>
       <p className="text-slate-200 font-reading leading-relaxed">{prompt}</p>
@@ -258,7 +258,7 @@ function QuestionCard({
             onClick={() => setRevealed(false)}
             aria-expanded={true}
             aria-controls={answerId}
-            className="min-h-[44px] text-xs font-semibold text-violet-300 underline hover:text-violet-200"
+            className="min-h-[44px] text-xs font-semibold text-teal underline hover:text-violet-200"
           >
             Hide answer
           </button>
@@ -371,7 +371,7 @@ export default function DiscoveryReader({
   return (
     <div className="min-h-screen bg-transparent text-slate-50">
       {/* Cosmic header */}
-      <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,#1b1440_0%,#0d0a24_50%,#060814_100%)]">
+      <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_50%,rgb(var(--bg))_100%)]">
         <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">
           <nav className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm text-slate-400">
             <Link href="/discovery" className="hover:text-gold transition-colors">
@@ -386,7 +386,7 @@ export default function DiscoveryReader({
               </span>
             ))}
           </nav>
-          <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-semibold border border-violet-500/30">
+          <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-teal text-xs font-semibold border border-violet-500/30">
             <Telescope className="w-4 h-4" />
             <span>
               Depth {Math.min(depth + 1, 4)} of 4 — {DEPTHS[Math.min(depth, 3)]}
@@ -479,7 +479,7 @@ export default function DiscoveryReader({
         {siblings.length > 0 && (
           <section className="mt-8 space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
-              <Compass className="w-5 h-5 text-violet-300" />
+              <Compass className="w-5 h-5 text-teal" />
               Side paths
             </h2>
             <div className="flex flex-wrap gap-2">

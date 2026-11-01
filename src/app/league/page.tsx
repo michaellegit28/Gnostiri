@@ -125,7 +125,7 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
 function SeasonBanner() {
   const season = SEASONS.find((s) => s.slug === CURRENT_SEASON) ?? SEASONS[SEASONS.length - 1];
   return (
-    <section className="rounded-2xl border border-gold/30 bg-gradient-to-r from-[#2a230f] via-slate-900 to-slate-950 p-6 md:p-8">
+    <section className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/15 via-slate-900 to-slate-950 p-6 md:p-8">
       <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Merit League season</p>
       <h2 className="mt-2 font-serif text-3xl font-bold text-slate-100">
         {season.label} <span className="text-gold">is live</span>

@@ -5,11 +5,16 @@ import React from "react";
 // Hand-drawn SVG study diagrams — offline-safe, no external images.
 // Each diagram is labelled like a textbook figure. Add new ones here and
 // reference by diagramId from lesson blocks: { type: "diagram", diagramId, caption }.
+//
+// The paint is the illustration's own (globals.css, "biological illustration
+// paint"): theme-locked and centralised there, one --bio-* token per distinct
+// colour these figures actually use. The figure frame and caption stay on the
+// theme tokens (slate/white aliases) so the card itself is theme-aware.
 
-const ink = "#cbd5e1";
-const accent = "#2dd4bf";
-const gold = "#D4AF37";
-const faint = "#64748b";
+const ink = "rgb(var(--bio-ink))";
+const accent = "rgb(var(--bio-membrane))";
+const gold = "rgb(var(--bio-gold))";
+const faint = "rgb(var(--bio-faint))";
 
 function Fig({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -182,8 +187,8 @@ function FluidMosaic() {
       ))}
       <rect x="185" y="70" width="30" height="80" rx="6" fill="none" stroke={gold} strokeWidth="2" />
       <text x="200" y="165" textAnchor="middle" fill={gold} fontSize="10">channel</text>
-      <rect x="330" y="70" width="34" height="80" rx="6" fill="none" stroke="#f87171" strokeWidth="2" />
-      <text x="347" y="165" textAnchor="middle" fill="#f87171" fontSize="10">Na⁺/K⁺ pump</text>
+      <rect x="330" y="70" width="34" height="80" rx="6" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
+      <text x="347" y="165" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="10">Na⁺/K⁺ pump</text>
       <text x="60" y="70" fill={faint} fontSize="10">outside</text>
       <text x="60" y="185" fill={faint} fontSize="10">inside</text>
       <line x1="40" y1="80" x2="365" y2="60" stroke={faint} strokeWidth="1" strokeDasharray="4 3" />
@@ -236,8 +241,8 @@ function CellCycleClock() {
       <path d="M200 120 A70 70 0 0 1 130 190" fill="none" stroke={gold} strokeWidth="8" />
       <path d="M130 190 A70 70 0 0 1 60 120" fill="none" stroke={accent} strokeWidth="8" opacity="0.6" />
       <text x="130" y="124" textAnchor="middle" fill={ink} fontSize="11">G1•S•G2•M</text>
-      <circle cx="200" cy="120" r="5" fill="#f87171" />
-      <text x="272" y="80" fill="#f87171" fontSize="10">● G1/S, G2/M, M</text>
+      <circle cx="200" cy="120" r="5" fill="rgb(var(--bio-flow))" />
+      <text x="272" y="80" fill="rgb(var(--bio-flow))" fontSize="10">● G1/S, G2/M, M</text>
       <text x="272" y="95" fill={faint} fontSize="10">p53 guards them</text>
       {["P", "M", "A", "T"].map((s, i) => (
         <g key={s}>
@@ -262,9 +267,9 @@ function CrossingOver() {
       <line x1="260" y1="60" x2="260" y2="160" stroke={accent} strokeWidth="3" />
       <line x1="300" y1="60" x2="300" y2="160" stroke={accent} strokeWidth="3" />
       <text x="280" y="185" textAnchor="middle" fill={accent} fontSize="10">normal 1:1 ✓</text>
-      <line x1="340" y1="60" x2="340" y2="160" stroke="#f87171" strokeWidth="3" />
-      <line x1="360" y1="60" x2="360" y2="160" stroke="#f87171" strokeWidth="1" strokeDasharray="3 3" />
-      <text x="350" y="185" textAnchor="middle" fill="#f87171" fontSize="10">2:0 ✗ Down/Turner</text>
+      <line x1="340" y1="60" x2="340" y2="160" stroke="rgb(var(--bio-flow))" strokeWidth="3" />
+      <line x1="360" y1="60" x2="360" y2="160" stroke="rgb(var(--bio-flow))" strokeWidth="1" strokeDasharray="3 3" />
+      <text x="350" y="185" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="10">2:0 ✗ Down/Turner</text>
     </Fig>
   );
 }
@@ -278,7 +283,7 @@ function SelectionModes() {
           <path d={bell(cx as number, 45)} fill="none" stroke={faint} strokeWidth="1.5" strokeDasharray="4 3" />
           <path
             d={label === "directional" ? bell((cx as number) + 22, 45) : label === "stabilising" ? bell(cx as number, 24) : bell(cx as number, 45)}
-            fill="none" stroke={label === "disruptive" ? "#f87171" : accent} strokeWidth="2"
+            fill="none" stroke={label === "disruptive" ? "rgb(var(--bio-flow))" : accent} strokeWidth="2"
           />
           {label === "disruptive" && <path d={bell((cx as number) - 26, 22) + " " + bell((cx as number) + 26, 22)} fill="none" stroke={accent} strokeWidth="2" />}
           <text x={cx as number} y="205" textAnchor="middle" fill={ink} fontSize="10">{label}</text>
@@ -300,8 +305,8 @@ function PhylogenySpeciation() {
       <text x="115" y="93" fill={ink} fontSize="10">sister taxa</text>
       <rect x="105" y="120" width="80" height="45" rx="6" fill="none" stroke={accent} strokeWidth="1.5" strokeDasharray="4 3" />
       <text x="145" y="183" textAnchor="middle" fill={accent} fontSize="10">monophyletic clade</text>
-      <line x1="230" y1="60" x2="230" y2="170" stroke="#f87171" strokeWidth="6" />
-      <text x="230" y="185" textAnchor="middle" fill="#f87171" fontSize="10">barrier (river)</text>
+      <line x1="230" y1="60" x2="230" y2="170" stroke="rgb(var(--bio-flow))" strokeWidth="6" />
+      <text x="230" y="185" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="10">barrier (river)</text>
       <line x1="250" y1="100" x2="310" y2="100" stroke={accent} strokeWidth="2" />
       <line x1="250" y1="140" x2="310" y2="140" stroke={accent} strokeWidth="2" />
       <text x="330" y="105" fill={ink} fontSize="10">sp. A</text>
@@ -375,7 +380,7 @@ function Biomagnification() {
     <Fig title="Fig. — Biomagnification up the chain + eutrophication cascade">
       {levels.map(([label, r], i) => (
         <g key={label}>
-          <circle cx={50 + i * 70} cy="80" r={r} fill="none" stroke={i === 3 ? "#f87171" : accent} strokeWidth="2" />
+          <circle cx={50 + i * 70} cy="80" r={r} fill="none" stroke={i === 3 ? "rgb(var(--bio-flow))" : accent} strokeWidth="2" />
           <text x={50 + i * 70} y="130" textAnchor="middle" fill={ink} fontSize="8">{label}</text>
         </g>
       ))}
@@ -411,7 +416,7 @@ function ColdWarBlocs() {
       <rect x="25" y="70" width="120" height="80" rx="8" fill="none" stroke={accent} strokeWidth="2" />
       <text x="85" y="100" textAnchor="middle" fill={ink} fontSize="10">NATO / USA</text>
       <text x="85" y="115" textAnchor="middle" fill={faint} fontSize="9">capitalism · containment</text>
-      <rect x="255" y="70" width="120" height="80" rx="8" fill="none" stroke="#f87171" strokeWidth="2" />
+      <rect x="255" y="70" width="120" height="80" rx="8" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
       <text x="315" y="100" textAnchor="middle" fill={ink} fontSize="10">Warsaw Pact / USSR</text>
       <text x="315" y="115" textAnchor="middle" fill={faint} fontSize="9">communism · expansion</text>
       <line x1="145" y1="110" x2="255" y2="110" stroke={ink} strokeWidth="2" strokeDasharray="6 4" />
@@ -474,12 +479,12 @@ function DoubleCirculation() {
       <text x="200" y="122" textAnchor="middle" fill={faint} fontSize="8">4 chambers</text>
       <rect x="30" y="55" width="70" height="40" rx="8" fill="none" stroke={accent} strokeWidth="1.5" />
       <text x="65" y="80" textAnchor="middle" fill={accent} fontSize="9">lungs</text>
-      <rect x="30" y="150" width="70" height="40" rx="8" fill="none" stroke="#f87171" strokeWidth="1.5" />
-      <text x="65" y="175" textAnchor="middle" fill="#f87171" fontSize="9">body</text>
+      <rect x="30" y="150" width="70" height="40" rx="8" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="1.5" />
+      <text x="65" y="175" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="9">body</text>
       <path d="M240 90 C 280 90, 280 75, 100 75" fill="none" stroke={accent} strokeWidth="2" />
-      <path d="M100 170 C 280 170, 280 155, 240 155" fill="none" stroke="#f87171" strokeWidth="2" />
+      <path d="M100 170 C 280 170, 280 155, 240 155" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
       <text x="270" y="112" fill={accent} fontSize="8">pulmonary</text>
-      <text x="270" y="145" fill="#f87171" fontSize="8">systemic</text>
+      <text x="270" y="145" fill="rgb(var(--bio-flow))" fontSize="8">systemic</text>
       <text x="200" y="40" textAnchor="middle" fill={ink} fontSize="10">blood is re-pressurised between loops</text>
       <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">right side → lungs · left side → body</text>
     </Fig>
@@ -494,8 +499,8 @@ function Nephron() {
       <text x="90" y="99" textAnchor="middle" fill={faint} fontSize="7">filter under pressure</text>
       <path d="M112 95 C 160 95, 170 60, 210 60 C 250 60, 250 130, 300 130" fill="none" stroke={accent} strokeWidth="2" />
       <text x="180" y="50" fill={accent} fontSize="8">reabsorb: glucose, water, salts</text>
-      <path d="M300 130 L 350 130" fill="none" stroke="#f87171" strokeWidth="2" />
-      <text x="325" y="150" textAnchor="middle" fill="#f87171" fontSize="8">collecting duct</text>
+      <path d="M300 130 L 350 130" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
+      <text x="325" y="150" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="8">collecting duct</text>
       <text x="325" y="162" textAnchor="middle" fill={faint} fontSize="7">ADH → more water kept</text>
       <text x="200" y="30" textAnchor="middle" fill={ink} fontSize="10">one million per kidney, filtering all blood every ~5 min</text>
       <text x="200" y="200" textAnchor="middle" fill={faint} fontSize="9">out: urea + excess water and salts = urine</text>
@@ -516,8 +521,8 @@ function TranspirationStream() {
       {[0, 1, 2].map((i) => (
         <circle key={i} cx={130 + i * 35} cy={133 - i * 22} r="2.5" fill="none" stroke={accent} strokeWidth="1.5" />
       ))}
-      <path d="M310 40 C 340 30, 350 25, 360 18" fill="none" stroke="#f87171" strokeWidth="1.5" />
-      <text x="355" y="40" fill="#f87171" fontSize="8">water vapour out</text>
+      <path d="M310 40 C 340 30, 350 25, 360 18" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="1.5" />
+      <text x="355" y="40" fill="rgb(var(--bio-flow))" fontSize="8">water vapour out</text>
       <text x="200" y="215" textAnchor="middle" fill={faint} fontSize="9">cohesion holds the column; tension does the lifting</text>
     </Fig>
   );
@@ -533,9 +538,9 @@ function FlowerParts() {
       <text x="200" y="28" textAnchor="middle" fill={faint} fontSize="9">petals — insect advert</text>
       <circle cx="180" cy="75" r="8" fill="none" stroke={accent} strokeWidth="2" />
       <text x="180" y="60" textAnchor="middle" fill={accent} fontSize="8">anther (pollen)</text>
-      <circle cx="220" cy="75" r="8" fill="none" stroke="#f87171" strokeWidth="2" />
-      <text x="222" y="60" textAnchor="middle" fill="#f87171" fontSize="8">stigma</text>
-      <line x1="220" y1="83" x2="215" y2="105" stroke="#f87171" strokeWidth="1.5" />
+      <circle cx="220" cy="75" r="8" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
+      <text x="222" y="60" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="8">stigma</text>
+      <line x1="220" y1="83" x2="215" y2="105" stroke="rgb(var(--bio-flow))" strokeWidth="1.5" />
       <ellipse cx="212" cy="115" rx="14" ry="11" fill="none" stroke={gold} strokeWidth="2" />
       <text x="212" y="118" textAnchor="middle" fill={ink} fontSize="8">ovary</text>
       <text x="200" y="185" textAnchor="middle" fill={faint} fontSize="9">ovule → seed · ovary wall → fruit</text>
@@ -552,8 +557,8 @@ function PeriodicTrends() {
       <text x="70" y="30" fill={ink} fontSize="9">radius ↓ across (protons pull harder)</text>
       <path d="M295 120 C 320 110, 320 70, 290 60" fill="none" stroke={gold} strokeWidth="2" markerEnd="url(#ah)" />
       <text x="345" y="90" fill={gold} fontSize="9">ionisation ↑</text>
-      <path d="M70 150 C 50 140, 50 120, 68 108" fill="none" stroke="#f87171" strokeWidth="2" />
-      <text x="20" y="140" fill="#f87171" fontSize="9">radius ↑ down</text>
+      <path d="M70 150 C 50 140, 50 120, 68 108" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
+      <text x="20" y="140" fill="rgb(var(--bio-flow))" fontSize="9">radius ↑ down</text>
       <text x="200" y="185" textAnchor="middle" fill={faint} fontSize="9">each new period opens a new shell — the saw-tooth restarts</text>
     </Fig>
   );
@@ -615,8 +620,8 @@ function ElectrolysisCell() {
       <line x1="110" y1="100" x2="150" y2="100" stroke={ink} strokeWidth="2" />
       <rect x="150" y="55" width="22" height="110" rx="4" fill="none" stroke={accent} strokeWidth="2" />
       <text x="161" y="50" textAnchor="middle" fill={accent} fontSize="9">cathode −</text>
-      <rect x="280" y="55" width="22" height="110" rx="4" fill="none" stroke="#f87171" strokeWidth="2" />
-      <text x="291" y="50" textAnchor="middle" fill="#f87171" fontSize="9">anode +</text>
+      <rect x="280" y="55" width="22" height="110" rx="4" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
+      <text x="291" y="50" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="9">anode +</text>
       <rect x="150" y="140" width="152" height="40" rx="8" fill="none" stroke={ink} strokeWidth="1.5" />
       <text x="226" y="165" textAnchor="middle" fill={faint} fontSize="8">electrolyte (molten or aqueous)</text>
       <line x1="110" y1="95" x2="112" y2="95" stroke={ink} strokeWidth="2" />
@@ -739,8 +744,8 @@ function FieldLines() {
       <text x="215" y="22" textAnchor="middle" fill={accent} fontSize="10">ELECTRIC — charge decides</text>
       <circle cx="185" cy="80" r="11" fill="none" stroke={gold} strokeWidth="2" />
       <text x="185" y="84" textAnchor="middle" fill={gold} fontSize="9">+</text>
-      <circle cx="185" cy="150" r="11" fill="none" stroke="#f87171" strokeWidth="2" />
-      <text x="185" y="154" textAnchor="middle" fill="#f87171" fontSize="9">−</text>
+      <circle cx="185" cy="150" r="11" fill="none" stroke="rgb(var(--bio-flow))" strokeWidth="2" />
+      <text x="185" y="154" textAnchor="middle" fill="rgb(var(--bio-flow))" fontSize="9">−</text>
       <line x1="185" y1="91" x2="185" y2="139" stroke={accent} strokeWidth="1.5" />
       <line x1="185" y1="69" x2="185" y2="58" stroke={accent} strokeWidth="1.2" />
       <line x1="185" y1="161" x2="185" y2="172" stroke={accent} strokeWidth="1.2" />
@@ -751,7 +756,7 @@ function FieldLines() {
       <text x="278" y="118" textAnchor="middle" fill={faint} fontSize="8">out of +, into −</text>
       <text x="330" y="22" textAnchor="middle" fill={accent} fontSize="10">UNIFORM — plates</text>
       <rect x="285" y="55" width="70" height="5" fill={gold} />
-      <rect x="285" y="165" width="70" height="5" fill="#f87171" />
+      <rect x="285" y="165" width="70" height="5" fill="rgb(var(--bio-flow))" />
       {[300, 305, 310, 315, 320, 325, 330, 335, 340].map((x, idx) => (
         <line key={idx} x1={x} y1="63" x2={x} y2="162" stroke={accent} strokeWidth="1" />
       ))}
@@ -1104,18 +1109,18 @@ function MLPipeline() {
 function ColorWheel() {
   return (
     <Fig title="Fig. — The colour wheel: primaries, secondaries, and the harmony schemes">
-      <circle cx="120" cy="105" r="24" fill="#e74c3c" stroke={ink} strokeWidth="1" />
-      <text x="70" y="80" textAnchor="middle" fill="#e74c3c" fontSize="8">R — primary</text>
-      <circle cx="186" cy="66" r="24" fill="#e67e22" stroke={ink} strokeWidth="1" />
-      <text x="196" y="36" textAnchor="middle" fill="#e67e22" fontSize="8">O — secondary</text>
-      <circle cx="252" cy="105" r="24" fill="#f1c40f" stroke={ink} strokeWidth="1" />
-      <text x="300" y="80" textAnchor="middle" fill="#f1c40f" fontSize="8">Y — primary</text>
-      <circle cx="252" cy="173" r="24" fill="#27ae60" stroke={ink} strokeWidth="1" />
-      <text x="304" y="200" textAnchor="middle" fill="#27ae60" fontSize="8">G — secondary</text>
-      <circle cx="186" cy="212" r="24" fill="#2980b9" stroke={ink} strokeWidth="1" />
-      <text x="186" y="224" textAnchor="middle" fill="#2980b9" fontSize="8" opacity="0">.</text>
-      <circle cx="120" cy="173" r="24" fill="#8e44ad" stroke={ink} strokeWidth="1" />
-      <text x="76" y="206" textAnchor="middle" fill="#8e44ad" fontSize="8">V — secondary</text>
+      <circle cx="120" cy="105" r="24" fill="rgb(var(--bio-cone-red))" stroke={ink} strokeWidth="1" />
+      <text x="70" y="80" textAnchor="middle" fill="rgb(var(--bio-cone-red))" fontSize="8">R — primary</text>
+      <circle cx="186" cy="66" r="24" fill="rgb(var(--bio-cone-orange))" stroke={ink} strokeWidth="1" />
+      <text x="196" y="36" textAnchor="middle" fill="rgb(var(--bio-cone-orange))" fontSize="8">O — secondary</text>
+      <circle cx="252" cy="105" r="24" fill="rgb(var(--bio-cone-yellow))" stroke={ink} strokeWidth="1" />
+      <text x="300" y="80" textAnchor="middle" fill="rgb(var(--bio-cone-yellow))" fontSize="8">Y — primary</text>
+      <circle cx="252" cy="173" r="24" fill="rgb(var(--bio-cone-green))" stroke={ink} strokeWidth="1" />
+      <text x="304" y="200" textAnchor="middle" fill="rgb(var(--bio-cone-green))" fontSize="8">G — secondary</text>
+      <circle cx="186" cy="212" r="24" fill="rgb(var(--bio-cone-blue))" stroke={ink} strokeWidth="1" />
+      <text x="186" y="224" textAnchor="middle" fill="rgb(var(--bio-cone-blue))" fontSize="8" opacity="0">.</text>
+      <circle cx="120" cy="173" r="24" fill="rgb(var(--bio-cone-violet))" stroke={ink} strokeWidth="1" />
+      <text x="76" y="206" textAnchor="middle" fill="rgb(var(--bio-cone-violet))" fontSize="8">V — secondary</text>
       <line x1="120" y1="105" x2="252" y2="173" stroke={ink} strokeWidth="1.5" strokeDasharray="5 4" />
       <text x="215" y="150" textAnchor="middle" fill={ink} fontSize="8">complementary — opposites</text>
       <path d="M120 105 A 85 85 0 0 1 186 66" fill="none" stroke={gold} strokeWidth="1.5" strokeDasharray="3 3" />

@@ -4,25 +4,30 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { signInWithEmail, signInWithGoogle, signUpWithEmail } from "@/lib/firebase/auth-helpers";
 import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
+import { GOOGLE_G_BLUE, GOOGLE_G_GREEN, GOOGLE_G_RED, GOOGLE_G_YELLOW } from "@/components/brand/Logo";
 
-/** Brand-accurate Google "G" — mark only, no text (Google Sign-In rules). */
+/**
+ * Brand-accurate Google "G" — mark only, no text (Google Sign-In rules).
+ * Google's own palette is trademark-locked, so it is never themed: the four
+ * values are the documented brand constants, alongside the Gnostiri mark's.
+ */
 function GoogleIcon() {
   return (
     <svg className="h-[18px] w-[18px]" viewBox="0 0 18 18" aria-hidden="true">
       <path
-        fill="#4285F4"
+        fill={GOOGLE_G_BLUE}
         d="M17.64 9.205c0-.639-.057-1.252-.164-1.841H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z"
       />
       <path
-        fill="#34A853"
+        fill={GOOGLE_G_GREEN}
         d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.032-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z"
       />
       <path
-        fill="#FBBC05"
+        fill={GOOGLE_G_YELLOW}
         d="M3.988 10.71a5.386 5.386 0 0 1 0-3.42V4.957H.957a8.997 8.997 0 0 0 0 8.084l3.031-2.33Z"
       />
       <path
-        fill="#EA4335"
+        fill={GOOGLE_G_RED}
         d="M9 3.58c1.321 0 2.508.454 3.44 1.321l2.582-2.582C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.957L3.988 7.29C4.692 5.163 6.656 3.58 9 3.58Z"
       />
     </svg>

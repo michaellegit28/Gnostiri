@@ -26,6 +26,6 @@ export const CBT = {
     "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 text-xs font-bold",
   gridCell:
     "flex h-10 w-full items-center justify-center rounded-lg border text-xs font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",
-  stickyBar: "sticky bottom-0 z-20 border-t border-white/10 bg-[#0d0a24]/95 backdrop-blur px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]",
+  stickyBar: "sticky bottom-0 z-20 border-t border-white/10 bg-bg/95 backdrop-blur px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]",
   timerLow: "border-rose-500/40 bg-rose-950/40 text-rose-200",
 } as const;

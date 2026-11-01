@@ -49,7 +49,7 @@ export default function TransitionModal({
       aria-modal="true"
       aria-labelledby="bridge-heading"
       tabIndex={-1}
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-[#070b16]/95 p-4 backdrop-blur focus:outline-none"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-bg/95 p-4 backdrop-blur focus:outline-none"
     >
       <div className="w-full max-w-xl rounded-2xl border border-gold/40 bg-slate-950 px-6 py-10 text-center md:px-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">

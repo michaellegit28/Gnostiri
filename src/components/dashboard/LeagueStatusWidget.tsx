@@ -19,7 +19,7 @@ export default function LeagueStatusWidget() {
       <div>
         <div className="flex items-center gap-2">
           <Trophy className="h-4 w-4 text-gold" aria-hidden />
-          <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-subtle">Global Ranking</h2>
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">Global Ranking</h2>
         </div>
         <p className="mt-4 font-serif text-2xl font-bold text-ink">Season 3 — live now</p>
         <p className="mt-2 text-sm text-muted">

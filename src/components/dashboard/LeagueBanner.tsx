@@ -28,7 +28,7 @@ export default async function LeagueBanner() {
     <section aria-label="Merit League" className="space-y-5">
       <Link
         href="/league"
-        className="group flex flex-col gap-5 rounded-2xl border border-gold/30 bg-gradient-to-r from-[#2a230f] via-slate-900 to-slate-950 p-6 transition-colors hover:border-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:flex-row md:items-center md:justify-between md:p-8"
+        className="group flex flex-col gap-5 rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/15 via-slate-900 to-slate-950 p-6 transition-colors hover:border-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:flex-row md:items-center md:justify-between md:p-8"
       >
         <div className="flex items-start gap-4">
           <div className="rounded-xl border border-gold/30 bg-gold/10 p-3">

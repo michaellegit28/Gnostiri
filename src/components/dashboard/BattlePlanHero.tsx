@@ -86,7 +86,7 @@ export default async function BattlePlanHero({ userId }: { userId: string }) {
   return (
     <section
       aria-label="Today's battle plan"
-      className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 p-6 shadow-lg shadow-black/20 md:p-8"
+      className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-br from-gold/10 to-transparent p-6 shadow-[var(--card-shadow)] md:p-8"
     >
       <div
         aria-hidden

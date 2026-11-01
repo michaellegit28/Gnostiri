@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { BRAND_GOLD, BRAND_LINE, BRAND_NAVY } from "../components/brand/brand-constants.ts";
 
 /**
  * notify.ts — the single writer every feature uses for notifications.
@@ -53,6 +54,9 @@ export function isWithinQuietHours(quietHours: string | null | undefined, now: D
   return from <= to ? at >= from && at < to : at >= from || at < to;
 }
 
+// The email is rendered by mail clients, which cannot read the globals.css
+// token block — so the outbound page is painted from the documented brand
+// constants, the one source shared with the mark and the win card.
 function renderEmailHtml(title: string, body: string, href: string | null | undefined): string {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
   const link =
@@ -63,9 +67,9 @@ function renderEmailHtml(title: string, body: string, href: string | null | unde
         : "";
   return [
     '<div style="font-family:Georgia,serif;max-width:32rem;margin:0 auto;padding:1.5rem">',
-    '<p style="font:600 11px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.3em;color:#D4AF37;text-transform:uppercase">Gnostiri</p>',
-    `<h1 style="font-size:1.5rem;color:#0f172a">${title}</h1>`,
-    `<p style="color:#334155">${body}</p>`,
+    `<p style="font:600 11px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.3em;color:${BRAND_GOLD};text-transform:uppercase">Gnostiri</p>`,
+    `<h1 style="font-size:1.5rem;color:${BRAND_NAVY}">${title}</h1>`,
+    `<p style="color:${BRAND_LINE}">${body}</p>`,
     link,
     "</div>",
   ].join("");

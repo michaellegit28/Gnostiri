@@ -35,6 +35,7 @@ const config: Config = {
           to: "rgb(var(--gold-to) / <alpha-value>)",
         },
         "on-gold": "rgb(var(--on-gold) / <alpha-value>)",
+        bg: "rgb(var(--bg) / <alpha-value>)",
         line: "rgb(var(--border) / <alpha-value>)",
         "line-strong": "rgb(var(--border-strong) / <alpha-value>)",
         surface: "rgb(var(--surface) / <alpha-value>)",

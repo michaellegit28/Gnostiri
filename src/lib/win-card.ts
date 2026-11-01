@@ -8,7 +8,29 @@
  * an email, a user id or a roster, so a caller physically cannot put PII on a
  * card that is about to be posted publicly — the route, the tests and the
  * reviewer can all read that off the single template literal below.
+ *
+ * The card is a BRAND ARTIFACT, not app chrome: it rasterises to a PNG through
+ * sharp, so it cannot read the globals.css token block. Every colour comes
+ * from the documented brand constants in components/brand/brand-constants.ts
+ * (re-exported by the mark's Logo.tsx) — and the dark navy ground is
+ * BRAND_NAVY, the app --bg.
+ *
+ * The relative, explicitly-extensioned specifier is deliberate: this module is
+ * loaded by the test harness under plain Node (tests/rewards.test.mjs), which
+ * cannot resolve the "@/..." alias or execute a .tsx component file.
  */
+
+import {
+  BRAND_GOLD,
+  BRAND_GOLD_DEEP,
+  BRAND_GOLD_LIGHT,
+  BRAND_NAVY,
+  BRAND_TEXT,
+  BRAND_TEXT_DIM,
+  BRAND_TEXT_MUTED,
+  BRAND_TEXT_SOFT,
+  BRAND_TEXT_SUBTLE,
+} from "../components/brand/brand-constants.ts";
 
 export const WIN_CARD_WIDTH = 1080;
 export const WIN_CARD_HEIGHT = 1920;
@@ -77,29 +99,29 @@ export function winCardSvg(input: WinCardInput): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIN_CARD_WIDTH}" height="${WIN_CARD_HEIGHT}" viewBox="0 0 ${WIN_CARD_WIDTH} ${WIN_CARD_HEIGHT}">
   <defs>
     <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F0BE5F" />
-      <stop offset="55%" stop-color="#D4AF37" />
-      <stop offset="100%" stop-color="#9C7A1E" />
+      <stop offset="0%" stop-color="${BRAND_GOLD_LIGHT}" />
+      <stop offset="55%" stop-color="${BRAND_GOLD}" />
+      <stop offset="100%" stop-color="${BRAND_GOLD_DEEP}" />
     </linearGradient>
     <radialGradient id="warmGlow" cx="50%" cy="26%" r="62%">
-      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.22" />
-      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
+      <stop offset="0%" stop-color="${BRAND_GOLD}" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="${BRAND_GOLD}" stop-opacity="0" />
     </radialGradient>
   </defs>
-  <rect width="${WIN_CARD_WIDTH}" height="${WIN_CARD_HEIGHT}" fill="#070B16" />
+  <rect width="${WIN_CARD_WIDTH}" height="${WIN_CARD_HEIGHT}" fill="${BRAND_NAVY}" />
   <rect width="${WIN_CARD_WIDTH}" height="${WIN_CARD_HEIGHT}" fill="url(#warmGlow)" />
-  <rect x="24" y="24" width="${WIN_CARD_WIDTH - 48}" height="${WIN_CARD_HEIGHT - 48}" fill="none" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="2" />
+  <rect x="24" y="24" width="${WIN_CARD_WIDTH - 48}" height="${WIN_CARD_HEIGHT - 48}" fill="none" stroke="${BRAND_GOLD}" stroke-opacity="0.35" stroke-width="2" />
   ${mark()}
-  <circle cx="540" cy="300" r="30" fill="#D4AF37" />
-  <circle cx="540" cy="300" r="52" fill="none" stroke="#D4AF37" stroke-opacity="0.45" stroke-width="2" />
+  <circle cx="540" cy="300" r="30" fill="${BRAND_GOLD}" />
+  <circle cx="540" cy="300" r="52" fill="none" stroke="${BRAND_GOLD}" stroke-opacity="0.45" stroke-width="2" />
   <text x="540" y="470" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="16" fill="url(#goldFill)">GNOSTIRI</text>
-  <text x="540" y="560" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" letter-spacing="10" fill="#94A3B8">${esc(input.title.toUpperCase())}</text>
+  <text x="540" y="560" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" letter-spacing="10" fill="${BRAND_TEXT_SUBTLE}">${esc(input.title.toUpperCase())}</text>
   <text x="540" y="800" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700" fill="url(#goldFill)">${esc(input.tierLabel)}</text>
-  <text x="540" y="930" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="#F1F5F9">${esc(deltaLabel(input.delta))}</text>
-  <text x="540" y="1020" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" fill="#CBD5E1">${esc(input.context)}</text>
-  <text x="540" y="1080" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="#64748B">${esc(input.dateLabel)}</text>
-  <rect x="360" y="1430" width="360" height="3" fill="#D4AF37" fill-opacity="0.5" />
-  <text x="540" y="1510" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="54" fill="#E2E8F0">${esc(handle)}</text>
-  <text x="540" y="1720" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" letter-spacing="6" fill="#64748B">GNOSTIRI GLOBAL RANKING</text>
+  <text x="540" y="930" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="76" font-weight="700" fill="${BRAND_TEXT}">${esc(deltaLabel(input.delta))}</text>
+  <text x="540" y="1020" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" fill="${BRAND_TEXT_MUTED}">${esc(input.context)}</text>
+  <text x="540" y="1080" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="30" fill="${BRAND_TEXT_DIM}">${esc(input.dateLabel)}</text>
+  <rect x="360" y="1430" width="360" height="3" fill="${BRAND_GOLD}" fill-opacity="0.5" />
+  <text x="540" y="1510" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="54" fill="${BRAND_TEXT_SOFT}">${esc(handle)}</text>
+  <text x="540" y="1720" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" letter-spacing="6" fill="${BRAND_TEXT_DIM}">GNOSTIRI GLOBAL RANKING</text>
 </svg>`;
 }
