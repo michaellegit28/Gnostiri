@@ -482,7 +482,7 @@ export default function QuizClient({
                 <div>
                   <div className="font-semibold text-sm">
                     {selectedOption?.trim().toLowerCase() === (currentQuestion.correctAnswer || "").trim().toLowerCase()
-                      ? "Correct!"
+                      ? "Correct"
                       : "Incorrect"}
                   </div>
                   {currentQuestion.explanation && (

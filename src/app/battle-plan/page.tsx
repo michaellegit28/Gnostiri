@@ -223,7 +223,7 @@ export default function BattlePlanPage() {
                   <CalendarDays className="w-8 h-8 text-gold" />
                   <div>
                     <div className="text-3xl font-serif font-bold">
-                      {daysLeft === null ? "—" : daysLeft === 0 ? "Today!" : `${daysLeft} days`}
+                      {daysLeft === null ? "—" : daysLeft === 0 ? "Today" : `${daysLeft} days`}
                     </div>
                     <div className="text-sm text-slate-400">
                       to {examName}

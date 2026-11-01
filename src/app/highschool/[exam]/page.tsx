@@ -74,13 +74,13 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
         <div className="border-b border-slate-800 pb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold mb-3">
             <GraduationCap className="w-4 h-4" />
-            <span>High School Domain</span>
+            <span>High School</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-100 tracking-tight">
-            {examination.name.toUpperCase()} Exam Hub
+            {examination.name.toUpperCase()} exam hub
           </h1>
           <p className="mt-3 text-slate-400 text-base md:text-lg max-w-2xl">
-            Select a subject to explore syllabus topics, structured study guides, and past examination practice questions.
+            Pick a subject to see its syllabus topics, study guides and past-paper questions.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
         >
           <div>
             <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-gold transition-colors">
-              Get your automatic battle plan
+              Get your JAMB battle plan
             </div>
             <p className="text-sm text-slate-400 mt-1">
               Pick your exam date — we turn the syllabus into a day-by-day mission, weak topics first.
@@ -126,11 +126,11 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
                   <div className="mt-4 flex items-center gap-4 text-sm text-slate-400">
                     <div className="flex items-center gap-1.5">
                       <BookOpen className="w-4 h-4 text-gold" />
-                      <span>{topicCount} Topics</span>
+                      <span>{topicCount} topics</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <HelpCircle className="w-4 h-4 text-teal-400" />
-                      <span>{totalQuestions} Questions</span>
+                      <span>{totalQuestions} questions</span>
                     </div>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
                     href={`/highschool/${examination.code.toLowerCase()}/${subjectSlug}`}
                     className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
                   >
-                    <span>Start Studying</span>
+                    <span>Start studying</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>

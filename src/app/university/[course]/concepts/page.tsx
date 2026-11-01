@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Concept map — Gnostiri University",
-  description: "The connected concept spine of this course — how knowledge actually links together.",
+  description: "The concept spine of this course and the prerequisites that link each concept.",
 };
 
 export default async function ConceptMapPage({ params }: { params: { course: string } }) {
@@ -55,8 +55,8 @@ export default async function ConceptMapPage({ params }: { params: { course: str
             Concept map — {course.title}
           </h1>
           <p className="text-slate-400 text-sm md:text-base max-w-2xl">
-            Every concept is a node; every prerequisite is an edge. Mastery flows along the
-            spine — you cannot reach a node before its foundations stand.
+            Each concept links to the ones it needs. Study in spine order — a concept opens
+            only once its prerequisites are met.
           </p>
           <div className="flex items-center gap-5 text-xs text-slate-400 pt-1">
             <span>{flat.length} concepts</span>
@@ -72,7 +72,7 @@ export default async function ConceptMapPage({ params }: { params: { course: str
         <p className="text-xs text-slate-600 leading-relaxed border-t border-slate-800/80 pt-6">
           The concept map is the planning backbone behind the spaced-repetition scheduler and the
           competency transcript: lessons are taught in spine order, and a concept can be scheduled
-          only once its foundations stand.
+          only once its prerequisites are met.
         </p>
       </div>
     </main>

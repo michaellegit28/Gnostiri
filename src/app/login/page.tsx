@@ -112,7 +112,7 @@ export default function LoginPage() {
             {mode === "signup" ? "Create your account" : "Welcome back"}
           </h1>
           <p className="mt-2 text-sm text-slate-400">
-            Your learning progress syncs across devices.
+            Your progress syncs across every device you sign in on.
           </p>
         </div>
 

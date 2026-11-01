@@ -30,14 +30,14 @@ export default async function ExtrasPage() {
         <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-semibold border border-violet-500/30">
             <SectionMark variant="discovery" className="w-4 h-4 text-violet-300" accent="#a78bfa" />
-            <span>Discovery — beyond the curriculum</span>
+            <span>Discovery — beyond the syllabus</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            Keep going <span className="text-gold">deeper</span>
+            Read past <span className="text-gold">your syllabus</span>
           </h1>
           <p className="text-slate-300/90 text-base md:text-lg max-w-2xl mx-auto font-light">
-            Enter a subject and wander — every idea opens into the next,
-            far past anything school ever taught you.
+            Pick a field and read from the basics up to research level — topics your
+            school syllabus leaves out.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
             {DEPTHS.map((d, i) => (
@@ -63,7 +63,7 @@ export default async function ExtrasPage() {
         <dl className="grid gap-4 sm:grid-cols-3">
           <StatCard label="Fields open" value={fields.length} accent="gold" />
           <StatCard
-            label="Trails to wander"
+            label="Trails"
             value={fields.reduce((s, f) => s + f.children.length, 0)}
             accent="violet"
           />
@@ -71,7 +71,7 @@ export default async function ExtrasPage() {
         </dl>
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <Sparkles className="w-4 h-4 text-gold" />
-          <span>Fields of knowledge — choose where to begin wandering</span>
+          <span>Fields of knowledge — pick where to start</span>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {fields.map((field) => (
@@ -83,17 +83,17 @@ export default async function ExtrasPage() {
               tag={field.children.length > 0 ? `${field.children.length} paths` : undefined}
               blurb={
                 field.children.length > 0
-                  ? "Wander from one idea into the next"
+                  ? "Read from overview to research level"
                   : field.lessons.length > 0
                     ? "A guided trail with practice"
-                    : "New territory being charted"
+                    : "New field, no lessons yet"
               }
               cta="Enter field"
             />
           ))}
         </div>
         {fields.length === 0 && (
-          <p className="text-slate-400">New fields of knowledge are being charted. Check back soon.</p>
+          <p className="text-slate-400">No fields published yet. Check back soon.</p>
         )}
       </div>
     </main>

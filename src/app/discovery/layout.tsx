@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Discovery — Keep Going Deeper | Gnostiri",
+  title: "Discovery — read past your syllabus | Gnostiri",
   description:
-    "Beyond the curriculum: professional certifications, practical skills, and elective topics.",
+    "Topics past the school syllabus — certifications, practical skills and electives.",
 };
 
 export default function DiscoveryLayout({

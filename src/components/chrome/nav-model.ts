@@ -85,7 +85,7 @@ export const NAV_ZONES: NavZone[] = [
     id: "membership",
     label: "Membership",
     items: [
-      { href: "/pricing", label: "Gnostiri Prime", icon: Crown, note: "Unlock everything" },
+      { href: "/pricing", label: "Gnostiri Prime", icon: Crown, note: "Every feature, one subscription" },
       { href: "/university/revision", label: "Revision Queue", icon: RotateCcw, note: "Concepts due for review" },
       { href: "/library/credits", label: "Credits & Badges", icon: Coins, note: "Rewards earned in the Library" },
     ],

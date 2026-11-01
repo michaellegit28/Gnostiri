@@ -136,7 +136,7 @@ export default function ProgressPage() {
             <p className="text-slate-400 text-sm">
               {authTimedOut
                 ? "Sign-in is taking too long. Check your connection, then retry — or continue to sign in."
-                : "Please sign in to view your personalized learning progress, weak topics analysis, and quiz attempt history."}
+                : "Sign in to see your accuracy by topic, your weak topics, and your recent quiz attempts."}
             </p>
           </div>
           <div>
@@ -169,13 +169,13 @@ export default function ProgressPage() {
         <div className="border-b border-slate-800 pb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold mb-3">
             <BarChart3 className="w-4 h-4" />
-            <span>Progress Analytics</span>
+            <span>Progress</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold text-slate-100 tracking-tight">
-            Learning Progress
+            Your progress
           </h1>
           <p className="mt-2 text-slate-400 text-base max-w-2xl">
-            Track your accuracy across topics, target weak areas for review, and inspect recent quiz attempts.
+            Your accuracy by topic, the weak ones to revisit, and every recent quiz attempt.
           </p>
         </div>
 
@@ -285,7 +285,7 @@ export default function ProgressPage() {
 
                     {!dashboardData?.weakTopics || dashboardData.weakTopics.length === 0 ? (
                       <p className="text-slate-400 text-sm italic py-4">
-                        No weak topics identified yet. Keep taking quizzes to track areas for improvement!
+                        No weak topics yet. Take more quizzes and they will show up here.
                       </p>
                     ) : (
                       <div className="space-y-3">
@@ -324,7 +324,7 @@ export default function ProgressPage() {
 
                     {!dashboardData?.strongTopics || dashboardData.strongTopics.length === 0 ? (
                       <p className="text-slate-400 text-sm italic py-4">
-                        No strong topics identified yet. Complete quizzes with 85%+ accuracy to see your strengths here!
+                        No strong topics yet. Score 85% or higher in a quiz and it lands here.
                       </p>
                     ) : (
                       <div className="space-y-3">
@@ -376,7 +376,7 @@ export default function ProgressPage() {
 
                   {!dashboardData?.recentAttempts || dashboardData.recentAttempts.length === 0 ? (
                     <p className="text-slate-400 text-sm italic py-4">
-                      No quiz attempts recorded yet. Start practicing from any topic page to build your history!
+                      No quiz attempts yet. Practice from any topic page to build your history.
                     </p>
                   ) : (
                     <div className="overflow-x-auto">

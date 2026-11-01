@@ -6,7 +6,7 @@
 export const OPEN_PREVIEW = false;
 
 // While true, university content is NOT premium-gated: hasPremiumAccess()
-// returns true for everyone, unlocking all lessons, quizzes, tutor access,
+// returns true for everyone, opening all lessons, quizzes, tutor access,
 // and adaptive plans without a subscription.
 export const UNIVERSITY_OPEN = false;
 

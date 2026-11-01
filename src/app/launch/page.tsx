@@ -103,7 +103,7 @@ export default async function LaunchPage() {
         </div>
 
         <p className="text-xs text-slate-400 text-center">
-          Benefactor tokens also unlock university premium for the launch. Standard tokens unlock the full
+          Benefactor tokens also open university premium for the launch. Standard tokens open the full
           launch experience; premium university stays subscription-gated.
         </p>
       </div>

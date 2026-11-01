@@ -41,7 +41,7 @@ export default async function ProfilePage() {
         <p className="mt-2 text-sm text-slate-400">
           {premium
             ? "Prime is active — paid cups, the full Desk pipeline and premium tutor access are open."
-            : "Prime unlocks the full Desk pipeline, premium cups and the complete library."}
+            : "Prime opens the full Desk pipeline, premium cups and the whole library."}
         </p>
         <Link
           href="/pricing"

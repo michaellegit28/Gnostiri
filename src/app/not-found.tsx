@@ -2,27 +2,26 @@ import Link from "next/link";
 
 /**
  * Root not-found boundary — branded 404 with real doorways (no dead ends).
- * Links mirror SiteMenu's three ways of learning.
+ * Links mirror the three study domains.
  */
 export default function NotFound() {
   const doorways = [
-    { href: "/highschool", title: "High School", note: "Textbooks and exam banks" },
-    { href: "/university", title: "University", note: "Degree-depth courses" },
-    { href: "/discovery", title: "Discovery", note: "Follow curiosity" },
+    { href: "/highschool", title: "High School", note: "Read, then past papers" },
+    { href: "/university", title: "University", note: "One degree, studied in order" },
+    { href: "/discovery", title: "Discovery", note: "Past the syllabus" },
   ];
 
   return (
     <div className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 py-24 text-center">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
-          Off the map — 404
+          404 — page not found
         </p>
         <h1 className="mt-4 font-serif text-3xl font-bold md:text-5xl">
-          Curiosity brought you somewhere quiet.
+          That page isn&apos;t here.
         </h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base">
-          This page doesn&apos;t exist or moved. Pick a doorway below — your
-          progress follows you everywhere.
+          This page doesn&apos;t exist, or it moved. Pick a doorway below.
         </p>
         <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
           {doorways.map((door) => (

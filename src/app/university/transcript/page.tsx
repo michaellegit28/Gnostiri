@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Competency Transcript — Gnostiri University",
+  title: "Competency transcript — Gnostiri University",
   description: "Live competency record across every concept you have demonstrated.",
 };
 
@@ -30,7 +30,7 @@ export default async function TranscriptPage() {
           <span className="mx-2 text-slate-600" aria-hidden>/</span>
           <span className="text-slate-300">Transcript</span>
         </nav>
-        <h1 className="text-2xl font-bold">Competency Transcript</h1>
+        <h1 className="text-2xl font-bold">Competency transcript</h1>
         <p className="mt-4 text-muted-foreground">Sign in to view your competency record.</p>
         <Link
           href="/login"
@@ -59,7 +59,7 @@ export default async function TranscriptPage() {
     <main className="mx-auto max-w-4xl px-4 py-12">
       <header className="border-b pb-8">
         <p className="text-sm font-medium uppercase tracking-widest text-primary">Gnostiri University</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Competency Transcript</h1>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Competency transcript</h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
           A live record of every concept you have demonstrated, drawn from your mastery data. Levels update the moment an exam or review is scored.
         </p>
