@@ -542,3 +542,33 @@ Merged and deployed tonight (CI green on every merge; full suite now 339/339):
 - **Copy pass** — every AI-sounding string removed student-facing (ban-list enforced by a test);
   metadata specific; prices corrected to $3.99/$39.90.
 - Payments deliberately NOT integrated (owner instruction — the blocker stays open).
+
+## Brand palette overhaul (2026-11-01) — owner spec, merged (#35)
+
+- **Token block rewritten to the owner's palette** (single source of truth, channel triples): dark
+  #0B1120/#0F172A/#1E293B/#273449/#334155 + #F8FAFC/#94A3B8; light #FDFBF7/#FFFFFF/#E2E8F0 +
+  #0F172A/#64748B; shared accents gold #D4AF37, teal #14B8A6, success/error/warning; light-mode
+  TEXT variants (#8A6D0B gold, #0F766E teal, #15803D success, #B45309 warning, #B91C1C error) —
+  bright accents are fills/icons/rings only. Measured: both themes pass AA on every text pair
+  (dark muted 7.0:1, light muted 4.6:1 on cream, light gold-text 5.3:1). Light --text-subtle raised
+  from #94A3B8 (2.5:1 — a chart fill, never text) to #78859C (3.6:1) — the one deviation from the
+  spec, documented in the CSS.
+- **Bugs fixed**: header/bottom-nav chrome now follows tokens (the light-mode dark-header bug);
+  theme-color meta matches the header per theme (the gold strip is gone); the AI FAB sits above the
+  the bottom nav with safe-area insets and cards get mobile bottom clearance; the streak flame moved
+  off-palette orange to --warning; the Battle Plan card's muddy brown gradient replaced with a clean
+  surface + faint gold wash + gold hairline; the page background's purple glow replaced with a faint
+  teal/gold hero spotlight (10% max); discovery's violet accents moved to teal.
+- **Effects system**: gn-card (1px border + inset highlight + layered shadow, per mode), gn-press
+  (180ms ease-out, scale .98), gn-glass (top bar + bottom nav only, with a solid fallback),
+  gn-btn-gold (gradient + glow, dark text in both themes), gn-shimmer (one-time on completion).
+  All motion inside prefers-reduced-motion; lite-mode strips it too.
+- **Zero hardcoded hex outside the token block** (136 → 0): the dead duplicate
+  src/lib/design-tokens.ts deleted; the lesson reader + certificate are a documented PAPER medium
+  (--paper* tokens, identical in both themes); BioDiagrams' biological fills centralised as --bio-*
+  tokens (dark mode pixel-identical); the win card reads brand constants from the mark module.
+  The sweep also fixed a latent bug: bg-bg/* classes generated no CSS because the tailwind palette
+  had no `bg` mapping — chrome was transparent until fixed.
+- Acceptance: AA on every text pair in both themes (exceptions: --text-subtle is decorative/UI-only
+  at 3.6:1, by design; --muted-fill #94A3B8 is a chart fill only). Screenshots were not capturable in
+  this environment — verified via DOM/curl + the contrast test instead.
