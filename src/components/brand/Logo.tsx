@@ -6,7 +6,7 @@
  * brass-gold scale (see globals.css: 60/30/10).
  */
 
-import { BRAND_GOLD_LIGHT } from "./brand-constants";
+import { BRAND_GOLD, BRAND_GOLD_LIGHT } from "./brand-constants";
 
 /* ── Brand constants ────────────────────────────────────────────────────────
    The mark's constants — the ONE documented exception to the zero-hex bar,
@@ -41,7 +41,7 @@ const RING = "M34.5 17A14 14 0 1 0 34.5 33";
 const BAR = "M34.5 33L26.5 33";
 const SHAFT = "M34.5 17L40 11.5";
 const HEAD = "M40 9.2L34.6 14.6L41.6 15.4Z";
-const GOLD = "#C69A2E"; // refined brass gold — the 10% accent
+const GOLD = BRAND_GOLD;
 
 export function LogoMark({ size = 32, className }: { size?: number; className?: string }) {
   return (

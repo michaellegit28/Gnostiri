@@ -37,45 +37,46 @@ export default function Landing() {
   return (
     <main className="mx-auto w-full max-w-5xl px-5">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="pt-10 md:pt-16">
-        <div className="flex items-center gap-3">
-          <LogoMark size={36} />
-          <span className="font-serif text-xl font-bold tracking-tight text-ink">Gnostiri</span>
+      <section className="grid items-center gap-12 pb-2 pt-10 md:grid-cols-[1.08fr_0.92fr] md:gap-16 md:pt-16">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-gold-text">The learning system for serious students</p>
+          <h1 className="mt-5 max-w-3xl font-serif text-5xl font-bold leading-[1.02] tracking-tight text-ink md:text-7xl">
+            Study for the exam you&apos;re actually sitting.
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-muted">
+            Verified questions, full courses, an assistant that reads your notes, and a league that
+            ranks you against students across the country. Free to start.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <Link
+              href="/login"
+              className="inline-flex min-h-[52px] items-center rounded-xl bg-gradient-to-r from-gold-from to-gold-to px-8 text-base font-semibold text-on-gold transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            >
+              Create your free account
+            </Link>
+            <Link
+              href="/league"
+              className="inline-flex min-h-[52px] items-center rounded-xl border border-line-strong px-6 text-sm font-semibold text-ink transition-colors hover:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            >
+              See the League
+            </Link>
+          </div>
+          <dl className="mt-12 grid gap-5 border-t border-line pt-5 sm:grid-cols-3">
+            {NUMBERS.map((item) => (
+              <div key={item.label}>
+                <dd className="font-serif text-4xl font-bold tabular-nums text-gold">{item.figure}</dd>
+                <dt className="mt-1 text-sm text-muted">{item.label}</dt>
+              </div>
+            ))}
+          </dl>
         </div>
-        <h1 className="mt-8 max-w-3xl font-serif text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-7xl">
-          Study for the exam you&apos;re actually sitting.
-        </h1>
-        <p className="mt-6 max-w-xl text-lg text-muted">
-          Verified questions, full courses, an assistant that reads your notes, and a league that
-          ranks you against students across the country. Free to start.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center gap-4">
-          <Link
-            href="/login"
-            className="inline-flex min-h-[52px] items-center rounded-xl bg-gradient-to-r from-gold-from to-gold-to px-8 text-base font-semibold text-on-gold transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            Create your free account
-          </Link>
-          <Link
-            href="/league"
-            className="inline-flex min-h-[52px] items-center rounded-xl border border-line-strong px-6 text-sm font-semibold text-ink transition-colors hover:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            See the League
-          </Link>
+        <div className="rounded-[2rem] border border-line bg-surface p-5 shadow-sm md:p-8">
+          <div className="mb-5 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+            <span>Progress is built</span>
+            <span className="text-gold-text">One level at a time</span>
+          </div>
+          <HeroVisual />
         </div>
-        <dl className="mt-12 grid gap-6 sm:grid-cols-3">
-          {NUMBERS.map((item) => (
-            <div key={item.label}>
-              <dd className="font-serif text-4xl font-bold tabular-nums text-gold">{item.figure}</dd>
-              <dt className="mt-1 text-sm text-muted">{item.label}</dt>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      {/* ── Brand art band ───────────────────────────────────────────────── */}
-      <section className="mt-14 overflow-hidden rounded-2xl border border-line bg-surface px-4 py-8 md:px-10">
-        <HeroVisual />
       </section>
 
       {/* ── What you get ─────────────────────────────────────────────────── */}
@@ -97,11 +98,11 @@ export default function Landing() {
       </section>
 
       {/* ── Closing CTA ──────────────────────────────────────────────────── */}
-      <section className="mt-16 rounded-2xl border border-line bg-surface p-8 text-center md:p-12">
-        <h2 className="font-serif text-3xl font-bold tracking-tight text-ink md:text-4xl">
+      <section className="mt-16 rounded-[2rem] bg-ink p-8 text-center text-slate-100 md:p-14">
+        <h2 className="font-serif text-3xl font-bold tracking-tight md:text-4xl">
           Your first quiz is one tap away.
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-muted">
+        <p className="mx-auto mt-4 max-w-md text-slate-300">
           Free account, no card. Start with 500 questions in your subject.
         </p>
         <Link

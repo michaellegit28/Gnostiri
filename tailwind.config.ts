@@ -46,6 +46,42 @@ const config: Config = {
         success: "rgb(var(--success) / <alpha-value>)",
         danger: "rgb(var(--danger) / <alpha-value>)",
         warning: "rgb(var(--warning) / <alpha-value>)",
+        // Semantic families are theme-aware so exam, tutor, and league states
+        // keep the same meaning in both light and dark modes.
+        teal: {
+          200: "rgb(var(--teal-text) / <alpha-value>)",
+          300: "rgb(var(--teal-text) / <alpha-value>)",
+          400: "rgb(var(--teal-text) / <alpha-value>)",
+          500: "rgb(var(--teal) / <alpha-value>)",
+          600: "rgb(var(--teal) / <alpha-value>)",
+        },
+        emerald: {
+          200: "rgb(var(--success-text) / <alpha-value>)",
+          300: "rgb(var(--success-text) / <alpha-value>)",
+          400: "rgb(var(--success-text) / <alpha-value>)",
+          500: "rgb(var(--success) / <alpha-value>)",
+          600: "rgb(var(--success) / <alpha-value>)",
+        },
+        rose: {
+          200: "rgb(var(--error-text) / <alpha-value>)",
+          300: "rgb(var(--error-text) / <alpha-value>)",
+          400: "rgb(var(--error-text) / <alpha-value>)",
+          500: "rgb(var(--error) / <alpha-value>)",
+          600: "rgb(var(--error) / <alpha-value>)",
+        },
+        red: {
+          300: "rgb(var(--error-text) / <alpha-value>)",
+          400: "rgb(var(--error-text) / <alpha-value>)",
+          500: "rgb(var(--error) / <alpha-value>)",
+          600: "rgb(var(--error) / <alpha-value>)",
+        },
+        amber: {
+          200: "rgb(var(--warning-text) / <alpha-value>)",
+          300: "rgb(var(--warning-text) / <alpha-value>)",
+          400: "rgb(var(--warning) / <alpha-value>)",
+          500: "rgb(var(--warning) / <alpha-value>)",
+          600: "rgb(var(--warning) / <alpha-value>)",
+        },
       },
       letterSpacing: {
         label: "0.2em",
