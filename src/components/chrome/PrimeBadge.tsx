@@ -52,7 +52,7 @@ export default function PrimeBadge() {
   return (
     <Link
       href="/pricing"
-      className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-line px-3 text-xs font-semibold text-muted transition-colors hover:border-gold/50 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-line px-3 text-xs font-semibold text-gold-text transition-colors hover:border-gold/50 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
     >
       <Crown className="h-3.5 w-3.5" aria-hidden />
       Go Prime

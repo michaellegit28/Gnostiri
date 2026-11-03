@@ -44,7 +44,7 @@ test("the study hub is a dedicated route with four cards", () => {
 test("the logo mark is an SVG that carries the refined gold and stays simple", () => {
   const logo = q("src/components/brand/Logo.tsx");
   assert.match(logo, /<svg/, "inline SVG, crisp at any size");
-  assert.match(logo, /#C69A2E/, "the refined brass gold");
+  assert.match(logo, /BRAND_GOLD/, "the refined brass gold comes from the shared token");
   assert.match(logo, /linearGradient/, "the mark carries the brand gradient");
   assert.ok((logo.match(/<path/g) ?? []).length <= 5, "no fine detail that dies at 16px");
 });
