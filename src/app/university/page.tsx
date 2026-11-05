@@ -59,7 +59,7 @@ export default async function UniversityIndexPage() {
   const degreeProgramme = mbbs[0]?.programme;
 
   return (
-    <main className="min-h-screen bg-transparent text-slate-50">
+    <main className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto max-w-6xl px-6 py-12 md:py-16 space-y-14">
         {/* Hero — one screen, one message */}
         <header className="relative overflow-hidden rounded-3xl border border-white/10">
@@ -122,13 +122,13 @@ export default async function UniversityIndexPage() {
                         {course.code?.replace(/\s+\d+$/, "") ?? index + 1}
                       </span>
                       <span className="min-w-0">
-                        <span className="block font-serif text-lg font-bold text-slate-100 group-hover:text-amber-100">
+                          <span className="block font-serif text-lg font-bold text-slate-100 group-hover:text-gold">
                           {course.title}
                         </span>
                         <span className="mt-1 block text-sm leading-relaxed text-slate-400">
                           {course.department}
                         </span>
-                        <span className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-500">
+                        <span className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-400">
                           <span>{course.lessons.length} lessons</span>
                           <span aria-hidden>·</span>
                           <span>~{Math.max(1, Math.round(minutes / 60))}h</span>
@@ -143,7 +143,7 @@ export default async function UniversityIndexPage() {
                       <span className="flex items-center gap-4">
                         {user && (
                           <span className="hidden w-28 sm:block">
-                            <span className="mb-1 block text-right text-[11px] text-slate-500">
+                            <span className="mb-1 block text-right text-[11px] text-slate-400">
                               {done === 0 ? "Not started" : `${done} of ${course.lessons.length} done`}
                             </span>
                             <span
@@ -216,7 +216,7 @@ export default async function UniversityIndexPage() {
                           </span>
                         )}
                       </span>
-                      <span className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span className="flex items-center justify-between text-[11px] text-slate-400">
                         <span>
                           {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
                           {user && done > 0 ? ` · ${done} done` : ""}

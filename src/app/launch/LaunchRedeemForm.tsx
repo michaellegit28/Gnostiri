@@ -60,14 +60,14 @@ export default function LaunchRedeemForm() {
           type="button"
           onClick={() => void redeem()}
           disabled={busy || code.trim().length < 8}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover disabled:opacity-50"
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-gold px-6 font-semibold text-on-gold hover:bg-gold-hover disabled:opacity-50"
         >
           {busy ? "Redeeming…" : "Redeem"}
         </button>
       </div>
-      {error && <p role="alert" className="text-sm text-rose-300">{error}</p>}
+      {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
       {success && (
-        <p className="text-sm text-emerald-300 flex items-center gap-2">
+        <p className="text-sm text-slate-100 flex items-center gap-2">
           <Sparkles className="w-4 h-4" /> {success}
         </p>
       )}

@@ -23,7 +23,7 @@ export default async function CbtSessionPage({ searchParams }: SessionPageProps)
 
   if (!result.ok) {
     return (
-      <main className="min-h-screen bg-transparent text-slate-50">
+      <main className="min-h-screen bg-transparent text-slate-100">
         <div className="mx-auto max-w-2xl px-4 py-16 text-center md:px-6">
           <h1 className={`${CBT.heading} text-2xl md:text-4xl`}>This sitting can&#39;t be built yet</h1>
           <p className={`mx-auto mt-3 max-w-md text-sm ${CBT.muted}`}>{result.error}.</p>

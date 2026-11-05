@@ -22,7 +22,7 @@ export default async function MasterQuizPage({ params }: { params: { subject: st
       <div className="min-h-screen p-6 md:p-12 text-slate-100">
         <div className="max-w-2xl mx-auto space-y-4 text-center">
           <p className="text-slate-400 text-sm">No quiz bank yet for {topic.title}.</p>
-          <Link href={backHref} className="text-teal-300 hover:underline text-sm">Back to chapter →</Link>
+          <Link href={backHref} className="text-slate-400 hover:underline text-sm">Back to chapter →</Link>
         </div>
       </div>
     );

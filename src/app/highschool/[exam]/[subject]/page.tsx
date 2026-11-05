@@ -97,7 +97,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   const totalQuestions = topics.reduce((sum, t) => sum + (questionCountsByTopic.get(t.id) ?? 0), 0);
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Breadcrumbs: Exam > Subject */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">
@@ -107,7 +107,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
           >
             {examination.name.toUpperCase()}
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <span className="text-slate-100 font-medium">{subjectTopic.title}</span>
         </nav>
 
@@ -150,7 +150,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                     <h2 className="text-lg font-semibold text-slate-100">{topic.title}</h2>
                     <div className="mt-2 flex items-center gap-4 text-xs text-slate-400">
                       <div className="flex items-center gap-1">
-                        <HelpCircle className="w-3.5 h-3.5 text-teal-400" />
+                        <HelpCircle className="w-3.5 h-3.5 text-slate-400" />
                         <span>
                           {questionCountsByTopic.get(topic.id) ?? 0} question
                           {questionCountsByTopic.get(topic.id) === 1 ? "" : "s"}
@@ -159,7 +159,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
                       <div className="flex items-center gap-1">
                         <CheckCircle2
                           className={`w-3.5 h-3.5 ${
-                            completionPercent > 0 ? "text-emerald-400" : "text-slate-500"
+                            completionPercent > 0 ? "text-emerald-400" : "text-slate-400"
                           }`}
                         />
                         <span className={completionPercent > 0 ? "text-emerald-300 font-medium" : ""}>

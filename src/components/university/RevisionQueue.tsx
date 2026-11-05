@@ -94,13 +94,13 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
         />
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-slate-900/80 to-slate-950 overflow-hidden">
+      <div className="rounded-3xl border border-border/10 bg-gradient-to-b from-surface-2 to-bg overflow-hidden">
         <div className="px-7 py-8 md:px-10 md:py-10 space-y-5">
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <span className="font-mono text-[11px] tracking-[0.15em] text-violet-300 px-2.5 py-1 rounded-md border border-violet-500/25 bg-violet-500/10 uppercase">
+            <span className="font-mono text-[11px] tracking-[0.15em] text-slate-400 px-2.5 py-1 rounded-md border border-slate-600/40 bg-surface/20 uppercase">
               {current.bloomsLevel}
             </span>
-            <span className="flex items-center gap-1.5 text-[11px] text-amber-300/80">
+            <span className="flex items-center gap-1.5 text-[11px] text-slate-400/80">
               <Clock className="w-3.5 h-3.5" /> {overdueLabel}
             </span>
           </div>
@@ -130,7 +130,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   ) : (
                     <XCircle className="w-5 h-5 text-rose-400" />
                   )}
-                  <strong className={result.correct ? "text-emerald-300" : "text-rose-300"}>
+                  <strong className={result.correct ? "text-emerald-400" : "text-rose-400"}>
                     {result.correct ? "Correct" : "Not yet"}
                   </strong>
                 </div>
@@ -145,13 +145,13 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={next}
                   disabled={index >= due.length - 1}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-gold px-6 py-3 font-semibold text-slate-950 text-sm disabled:opacity-40"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-gold px-6 py-3 font-semibold text-on-gold text-sm disabled:opacity-40"
                 >
                   Next concept <ChevronRight className="w-4 h-4 ml-1" />
                 </button>
                 <Link
                   href={`/university/${current.courseSlug}/concepts`}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-200 text-sm hover:border-gold/60 transition-colors"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-border px-6 py-3 font-semibold text-slate-400 text-sm hover:border-gold/60 transition-colors"
                 >
                   Revisit the concept map
                 </Link>
@@ -168,7 +168,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={() => record(true, "high")}
                   disabled={recording}
-                  className="inline-flex items-center justify-center min-h-[48px] gap-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 px-4 py-3 font-semibold text-emerald-300 text-sm hover:bg-emerald-500/25 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center min-h-[48px] gap-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 px-4 py-3 font-semibold text-emerald-400 text-sm hover:bg-emerald-500/25 transition-colors disabled:opacity-50"
                 >
                   <CheckCircle2 className="w-4 h-4" /> Knew it well
                 </button>
@@ -176,7 +176,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={() => record(false, "low")}
                   disabled={recording}
-                  className="inline-flex items-center justify-center min-h-[48px] gap-2 rounded-xl bg-rose-500/15 border border-rose-500/40 px-4 py-3 font-semibold text-rose-300 text-sm hover:bg-rose-500/25 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center min-h-[48px] gap-2 rounded-xl bg-rose-500/15 border border-rose-500/40 px-4 py-3 font-semibold text-rose-400 text-sm hover:bg-rose-500/25 transition-colors disabled:opacity-50"
                 >
                   <RotateCcw className="w-4 h-4" /> Need a refresher
                 </button>

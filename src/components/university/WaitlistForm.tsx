@@ -45,7 +45,7 @@ export default function WaitlistForm() {
 
   return (
     <form onSubmit={submit} className="w-full max-w-md space-y-3" noValidate={false}>
-      <label htmlFor="premium-waitlist-email" className="block text-sm font-medium text-slate-200">
+      <label htmlFor="premium-waitlist-email" className="block text-sm font-medium text-slate-400">
         Email address
       </label>
       <div className="flex flex-col sm:flex-row gap-3">
@@ -61,13 +61,13 @@ export default function WaitlistForm() {
         />
         <button
           type="submit"
-          className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gold px-6 py-3 font-semibold text-slate-950 text-sm whitespace-nowrap transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-gold px-6 py-3 font-semibold text-on-gold text-sm whitespace-nowrap transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           Join the waitlist
         </button>
       </div>
       {error && (
-        <p role="alert" className="text-sm text-rose-300">
+        <p role="alert" className="text-sm text-rose-400">
           {error}
         </p>
       )}

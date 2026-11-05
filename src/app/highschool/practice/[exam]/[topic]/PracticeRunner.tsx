@@ -365,7 +365,7 @@ export default function PracticeRunner({
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/80 p-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.2em] text-teal-300">
+              <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
                 {section.sectionName} · {section.questionType}
               </p>
               <p className="mt-1 text-sm text-slate-400">Question {questionProgress}</p>
@@ -398,7 +398,7 @@ export default function PracticeRunner({
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${hintsOpen[question.id] ? "rotate-180" : ""}`} />
                 </button>
                 {hintsOpen[question.id] && (
-                  <p className="mt-2 rounded-lg border border-gold/20 bg-gold/5 p-3 text-sm text-amber-200">
+                  <p className="mt-2 rounded-lg border border-gold/20 bg-gold/5 p-3 text-sm text-gold">
                     {question.hint}
                   </p>
                 )}
@@ -540,7 +540,7 @@ export default function PracticeRunner({
       {/* ---------- RESULTS ---------- */}
       {phase === "results" && breakdown && (
         <div className="space-y-5">
-          <div className="rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">
+          <div className="rounded-xl border border-gold/30 bg-gradient-to-r from-gold/30 via-slate-900 to-slate-900 p-6 space-y-2">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Session complete — {topicTitle}</p>
             <p className="text-3xl font-serif font-bold text-gold">
               {breakdown.totalScore}/{breakdown.maxTotalScore} marks
@@ -559,7 +559,7 @@ export default function PracticeRunner({
                       {s.score}/{s.maxScore} correct
                     </span>
                   ) : (
-                    <span className="text-xs text-amber-300 border border-gold/30 bg-gold/10 rounded-full px-2.5 py-1">
+                    <span className="text-xs text-gold border border-gold/30 bg-gold/10 rounded-full px-2.5 py-1">
                       Self-assessment
                     </span>
                   )}
@@ -583,7 +583,7 @@ export default function PracticeRunner({
                             </div>
                             <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-3">
                               <p className="text-xs uppercase tracking-wide text-emerald-400 mb-1">Model answer</p>
-                              <p className="text-emerald-100/90 whitespace-pre-wrap">{ma.modelAnswer}</p>
+                              <p className="text-slate-100 whitespace-pre-wrap">{ma.modelAnswer}</p>
                             </div>
                           </div>
                           {ma.markingPoints && ma.markingPoints.length > 0 ? (
@@ -606,12 +606,12 @@ export default function PracticeRunner({
 
                           {/* AI marking — grades your typed answer against the scheme */}
                           {aiMark === "loading" ? (
-                            <p className="flex items-center gap-2 text-sm text-teal-300">
+                            <p className="flex items-center gap-2 text-sm text-slate-400">
                               <Sparkles className="w-4 h-4 animate-pulse" /> Marking your answer with AI…
                             </p>
                           ) : aiMark ? (
-                            <div className="space-y-2 rounded-lg border border-teal-500/30 bg-teal-500/5 p-3">
-                              <p className="text-xs font-semibold uppercase tracking-wide text-teal-300">AI marking</p>
+                          <div className="space-y-2 rounded-lg border border-gold/30 bg-gold/5 p-3">
+                            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">AI marking</p>
                               {aiMark.points.map((p) => (
                                 <div key={p.index} className="flex items-start gap-2 text-sm">
                                   {p.awarded > 0 ? (
@@ -630,7 +630,7 @@ export default function PracticeRunner({
                                 AI-awarded: {aiMark.totalAwarded} of {aiMark.maxTotal} marks
                               </p>
                               {aiMark.feedback && (
-                                <p className="text-xs text-slate-300 border-t border-teal-500/20 pt-2">{aiMark.feedback}</p>
+                                <p className="text-xs text-slate-300 border-t border-slate-700 pt-2">{aiMark.feedback}</p>
                               )}
                             </div>
                           ) : (
@@ -638,7 +638,7 @@ export default function PracticeRunner({
                               <button
                                 type="button"
                                 onClick={() => void markWithAi(s.sectionId, ma.questionId)}
-                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-300 border border-teal-500/40 bg-teal-500/10 rounded-full px-3 py-1.5 hover:bg-teal-500/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold border border-gold/40 bg-gold/10 rounded-full px-3 py-1.5 hover:bg-gold/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                               >
                                 <Sparkles className="w-3.5 h-3.5" /> Mark with AI
                               </button>

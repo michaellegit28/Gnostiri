@@ -38,11 +38,11 @@ const BLOOMS_LABEL: Record<string, string> = {
 
 const BLOOMS_COLOR: Record<string, string> = {
   remember: "text-slate-400 border-slate-600",
-  understand: "text-teal-300 border-teal-600/60",
-  apply: "text-sky-300 border-sky-600/60",
-  analyze: "text-violet-300 border-violet-600/60",
-  evaluate: "text-amber-300 border-amber-600/60",
-  create: "text-rose-300 border-rose-600/60",
+  understand: "text-slate-400 border-slate-600/60",
+  apply: "text-slate-400 border-slate-600/60",
+  analyze: "text-slate-400 border-slate-600/60",
+  evaluate: "text-slate-400 border-slate-600/60",
+  create: "text-slate-400 border-slate-600/60",
 };
 
 /**
@@ -87,13 +87,13 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
           return (
             <div
               key={group.id}
-              className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden"
+              className="rounded-2xl border border-border/10 bg-surface/10 overflow-hidden"
             >
               {hasModules && (
                 <button
                   type="button"
                   onClick={() => setExpanded(open ? null : group.id)}
-                  className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left hover:bg-white/[0.03] transition-colors"
+                  className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left hover:bg-surface/20 transition-colors"
                   aria-expanded={open}
                 >
                   <span className="font-semibold text-sm md:text-base">{group.title}</span>
@@ -108,10 +108,10 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
               {open && (
                 <ol className="relative px-5 pb-5 pt-2 space-y-1">
                   {/* the spine line */}
-                  <span
-                    className="absolute left-[34px] top-2 bottom-6 w-px bg-gradient-to-b from-gold/50 via-teal-500/30 to-transparent"
-                    aria-hidden
-                  />
+                    <span
+                      className="absolute left-[34px] top-2 bottom-6 w-px bg-gradient-to-b from-gold/40 via-slate-500/30 to-transparent"
+                      aria-hidden
+                    />
                   {group.items.map((concept, i) => {
                     const bloom = concept.bloomsLevel || "understand";
                     const isLast = i === group.items.length - 1;
@@ -119,11 +119,11 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
                       <li key={concept.id} className="relative flex items-start gap-3 py-2">
                         <span className="relative z-10 mt-0.5 shrink-0">
                           {i === 0 ? (
-                            <Circle className="w-5 h-5 text-teal-400 fill-teal-400/20" />
+                            <Circle className="w-5 h-5 text-slate-400 fill-slate-400/20" />
                           ) : isLast ? (
                             <CheckCircle2 className="w-5 h-5 text-gold" />
                           ) : (
-                            <Circle className="w-5 h-5 text-slate-600" />
+                            <Circle className="w-5 h-5 text-slate-400" />
                           )}
                         </span>
                         <div className="min-w-0 flex-1">

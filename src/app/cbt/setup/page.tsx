@@ -19,8 +19,8 @@ export default async function CbtSetupPage({ searchParams }: SetupPageProps) {
 
   if (subjects.length === 0) {
     return (
-      <main className="min-h-screen bg-transparent text-slate-50">
-        <div className="mx-auto max-w-2xl px-4 py-16 text-center md:px-6">
+    <main className="min-h-screen bg-transparent text-slate-100">
+      <div className="mx-auto max-w-2xl px-4 py-16 text-center md:px-6">
           <p className={CBT.eyebrow}>{preset.name}</p>
           <h1 className={`${CBT.heading} mt-2 text-2xl md:text-4xl`}>Content in preparation</h1>
           <p className={`mx-auto mt-3 max-w-md text-sm ${CBT.muted}`}>
@@ -34,12 +34,12 @@ export default async function CbtSetupPage({ searchParams }: SetupPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-transparent pb-44 text-slate-50">
+    <main className="min-h-screen bg-transparent pb-44 text-slate-100">
       <div className="mx-auto max-w-2xl px-4 pt-8 md:px-6">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/cbt" className="hover:text-gold">CBT</Link>
-          <span className="text-slate-600">/</span>
-          <span className="text-slate-300">{preset.name}</span>
+          <span className="text-slate-400">/</span>
+          <span className="text-slate-100">{preset.name}</span>
         </nav>
 
         <header className="mt-5">

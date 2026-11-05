@@ -123,19 +123,19 @@ export default function NotificationBell() {
           setOpen((v) => !v);
           if (!open) load();
         }}
-        className="relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/15 bg-slate-950/80 text-slate-200 backdrop-blur-md transition-all hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border/10 bg-slate-950/80 text-slate-200 backdrop-blur-md transition-all hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
       >
         <Bell className="h-4 w-4" aria-hidden="true" />
         {unread > 0 && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-slate-950">
+          <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-on-gold">
             {unread > 9 ? "9+" : unread}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-[3.25rem] w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-white/10 bg-slate-950/95 shadow-2xl shadow-black/50 backdrop-blur-lg">
-          <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+        <div className="absolute right-0 top-[3.25rem] w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-border/10 bg-slate-950/95 shadow-2xl shadow-black/50 backdrop-blur-lg">
+          <div className="flex items-center justify-between gap-3 border-b border-border/10 px-4 py-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Notifications</p>
             {unread > 0 && (
               <button
@@ -160,7 +160,7 @@ export default function NotificationBell() {
                   <Link
                     href={n.href ?? "/notifications"}
                     onClick={() => !n.read && markRead(n.id)}
-                    className={`block px-4 py-3 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                    className={`block px-4 py-3 transition-colors hover:bg-surface/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
                       n.read ? "" : "bg-gold/5"
                     }`}
                   >
@@ -182,7 +182,7 @@ export default function NotificationBell() {
 
           <Link
             href="/notifications"
-            className="flex min-h-[44px] items-center justify-center border-t border-white/10 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition-colors hover:bg-white/5 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="flex min-h-[44px] items-center justify-center border-t border-border/10 px-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition-colors hover:bg-surface/10 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             All notifications
           </Link>

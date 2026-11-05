@@ -52,7 +52,7 @@ function Block({ block }: { block: LessonBlock }) {
           {block.text}
         </h2>
       ) : (
-        <h3 className="font-serif text-xl font-semibold text-gold mt-6 mb-3">
+        <h3 className="font-serif text-xl font-semibold text-slate-400 mt-6 mb-3">
           {block.text}
         </h3>
       );
@@ -64,8 +64,8 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "definition":
       return (
-        <div className="border border-gold/30 bg-gold/5 rounded-xl p-5 my-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-gold mb-1">
+        <div className="border border-slate-800/30 bg-slate-900/10 rounded-xl p-5 my-6">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
             Key idea
           </div>
           <div className="font-bold text-slate-100 text-lg mb-2">{block.term}</div>
@@ -74,8 +74,8 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "example":
       return (
-        <div className="border-l-4 border-teal bg-teal/10 rounded-r-xl p-5 my-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-teal mb-2">
+        <div className="border-l-4 border-slate-800 bg-slate-900/10 rounded-r-xl p-5 my-6">
+          <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
             See it in action
           </div>
           <div className="text-slate-200 font-reading leading-relaxed">{block.text}</div>
@@ -83,20 +83,20 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "callout":
       return block.variant === "info" ? (
-        <div className="my-6 flex items-start gap-3 border border-sky-500/30 bg-sky-950/20 text-sky-200 rounded-xl p-5 leading-relaxed">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" />
+        <div className="my-6 flex items-start gap-3 border border-slate-800/40 bg-slate-900/20 text-slate-200 rounded-xl p-5 leading-relaxed">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-sky-400 mb-1">
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
               Note
             </div>
             {block.text}
           </div>
         </div>
       ) : (
-        <div className="my-6 flex items-start gap-3 border border-rose-500/30 bg-rose-950/20 text-rose-200 rounded-xl p-5 leading-relaxed">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-rose-400" />
+        <div className="my-6 flex items-start gap-3 border border-slate-600 bg-slate-900/30 text-slate-200 rounded-xl p-5 leading-relaxed">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-rose-400 mb-1">
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
               Watch out
             </div>
             {block.text}
@@ -166,9 +166,9 @@ function Block({ block }: { block: LessonBlock }) {
       );
     case "diagram":
       return (
-        <div className="my-6 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center text-sm text-slate-500">
+        <div className="my-6 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center text-sm text-slate-400">
           Diagram unavailable — {block.diagramId}
-          <span className="mt-1 block text-slate-600">{block.caption}</span>
+          <span className="mt-1 block text-slate-400">{block.caption}</span>
         </div>
       );
     default: {
@@ -200,7 +200,7 @@ function CodeCard({
   return (
     <figure className="my-6 overflow-hidden rounded-xl border border-white/10 bg-surface-2">
       <figcaption className="flex flex-wrap items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-2">
-        <span className="flex items-center gap-1.5 rounded-md border border-gold/30 bg-gold/10 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-gold">
+        <span className="flex items-center gap-1.5 rounded-md border border-slate-800/40 bg-slate-900/20 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-slate-400">
           <FileCode2 className="h-3 w-3" />
           {language}
         </span>
@@ -211,10 +211,10 @@ function CodeCard({
       </pre>
       {output && (
         <div className="border-t border-white/10 bg-white/[0.02] px-4 py-3">
-          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-emerald-400">
+          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
             <CheckCircle2 className="h-3 w-3" /> Output
           </div>
-          <pre className="overflow-x-auto font-mono text-sm leading-relaxed text-emerald-300/90">
+          <pre className="overflow-x-auto font-mono text-sm leading-relaxed text-slate-300">
             <code>{output}</code>
           </pre>
         </div>
@@ -236,18 +236,18 @@ function QuestionCard({
   const [revealed, setRevealed] = useState(false);
   const answerId = useId();
   return (
-    <div className="my-6 rounded-xl border border-teal/30 bg-teal/10 p-5">
-      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-teal">
+    <div className="my-6 rounded-xl border border-slate-800/30 bg-slate-900/10 p-5">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
         <CheckCircle2 className="h-3.5 w-3.5" /> Check yourself
       </div>
       <p className="text-slate-200 font-reading leading-relaxed">{prompt}</p>
       {revealed ? (
         <div
           id={answerId}
-          className="mt-3 space-y-2 border-t border-violet-400/20 pt-3"
+          className="mt-3 space-y-2 border-t border-slate-800/20 pt-3"
         >
           <p className="text-slate-300 font-reading leading-relaxed">
-            <span className="font-semibold text-gold">Answer: </span>
+            <span className="font-semibold text-slate-400">Answer: </span>
             {answer}
           </p>
           {explanation && (
@@ -258,7 +258,7 @@ function QuestionCard({
             onClick={() => setRevealed(false)}
             aria-expanded={true}
             aria-controls={answerId}
-            className="min-h-[44px] text-xs font-semibold text-teal underline hover:text-violet-200"
+            className="min-h-[44px] text-xs font-semibold text-slate-400 underline hover:text-slate-200"
           >
             Hide answer
           </button>
@@ -269,7 +269,7 @@ function QuestionCard({
           onClick={() => setRevealed(true)}
           aria-expanded={false}
           aria-controls={answerId}
-          className="mt-3 min-h-[44px] rounded-lg border border-violet-400/40 px-4 py-2 text-sm font-semibold text-violet-200 hover:border-gold/60 hover:text-gold transition-colors"
+          className="mt-3 min-h-[44px] rounded-lg border border-slate-800/40 bg-slate-900/20 px-4 py-2 text-sm font-semibold text-slate-200 hover:border-slate-400 hover:text-slate-100 transition-colors"
         >
           Reveal the answer
         </button>
@@ -295,8 +295,8 @@ function McqCard({
   // Defensive clamp: legacy rows may carry a key outside the option range.
   const keyIndex = Math.min(Math.max(correctIndex, 0), Math.max(options.length - 1, 0));
   return (
-    <div className="my-6 rounded-xl border border-gold/30 bg-gold/5 p-5">
-      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+    <div className="my-6 rounded-xl border border-slate-800/30 bg-slate-900/10 p-5">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400">
         <HelpCircle className="h-3.5 w-3.5" /> Quick check
       </div>
       <p className="text-slate-100 font-reading font-medium leading-relaxed">{stem}</p>
@@ -305,19 +305,19 @@ function McqCard({
           const isCorrect = index === keyIndex;
           const isPicked = picked === index;
           const tone = !revealed
-            ? "border-white/10 bg-white/5 text-slate-300 hover:border-gold/40"
-            : isCorrect
-              ? "border-gold/60 bg-gold/10 text-gold"
-              : isPicked
-                ? "border-rose-500/40 bg-rose-950/20 text-rose-200"
-                : "border-white/10 bg-white/[0.02] text-slate-500";
+            ? "border-white/10 bg-white/5 text-slate-300 hover:border-slate-400"
+              : isCorrect
+                ? "border-slate-800 bg-slate-900/20 text-slate-100"
+                : isPicked
+                  ? "border-slate-800/50 bg-slate-900/10 text-slate-400"
+                  : "border-white/10 bg-white/[0.02] text-slate-400";
           const chip = !revealed
             ? "bg-white/10 text-slate-400"
             : isCorrect
-              ? "bg-gold text-slate-950"
+              ? "bg-slate-950 text-slate-100"
               : isPicked
-                ? "bg-rose-500/80 text-white"
-                : "bg-white/5 text-slate-600";
+                ? "bg-slate-950 text-slate-400"
+                : "bg-white/5 text-slate-400";
           return (
             <button
               key={index}
@@ -342,7 +342,7 @@ function McqCard({
           aria-live="polite"
           className="mt-3 text-sm text-slate-400 leading-relaxed"
         >
-          <span className="font-semibold text-gold">
+          <span className="font-semibold text-slate-400">
             {picked === keyIndex ? "Correct — " : "Not quite — "}
             the answer is {letterFor(keyIndex)}.{" "}
           </span>
@@ -369,24 +369,24 @@ export default function DiscoveryReader({
     : 0;
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50">
+    <div className="min-h-screen bg-transparent text-slate-100">
       {/* Cosmic header */}
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_50%,rgb(var(--bg))_100%)]">
         <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">
           <nav className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm text-slate-400">
-            <Link href="/discovery" className="hover:text-gold transition-colors">
+            <Link href="/discovery" className="hover:text-slate-100 transition-colors">
               Discovery
             </Link>
             {trail.map((t) => (
               <span key={t.id} className="flex items-center gap-1.5">
-                <span className="text-slate-600">/</span>
-                <Link href={`/discovery/${t.id}`} className="hover:text-gold transition-colors">
+                <span className="text-slate-400">/</span>
+                <Link href={`/discovery/${t.id}`} className="hover:text-slate-100 transition-colors">
                   {t.title}
                 </Link>
               </span>
             ))}
           </nav>
-          <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-teal text-xs font-semibold border border-violet-500/30">
+          <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/40 border border-slate-600/40 text-xs font-semibold text-slate-400">
             <Telescope className="w-4 h-4" />
             <span>
               Depth {Math.min(depth + 1, 4)} of 4 — {DEPTHS[Math.min(depth, 3)]}
@@ -432,7 +432,7 @@ export default function DiscoveryReader({
           </article>
         ) : (
           <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-8 text-center">
-            <Compass className="w-10 h-10 text-slate-600 mx-auto mb-3" />
+            <Compass className="w-10 h-10 text-slate-400 mx-auto mb-3" />
             <h2 className="font-serif text-xl font-bold text-slate-200">
               No lessons at this depth yet
             </h2>
@@ -455,7 +455,7 @@ export default function DiscoveryReader({
         {subtopics.length > 0 && (
           <section className="mt-12 space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
-              <ArrowDown className="w-5 h-5 text-gold" />
+              <ArrowDown className="w-5 h-5 text-slate-400" />
               Go deeper
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -463,11 +463,11 @@ export default function DiscoveryReader({
                 <Link
                   key={c.id}
                   href={`/discovery/${c.id}`}
-                  className="group rounded-xl border border-white/10 bg-gradient-to-b from-violet-950/30 to-slate-900 p-5 hover:border-gold/40 transition-colors"
+                  className="group rounded-xl border border-white/10 bg-slate-900/40 p-5 hover:border-slate-400 transition-colors"
                 >
-                  <div className="font-semibold text-slate-100 group-hover:text-gold transition-colors flex items-center justify-between gap-2">
+                  <div className="font-semibold text-slate-100 transition-colors flex items-center justify-between gap-2">
                     {c.title}
-                    <ArrowRight className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight className="w-4 h-4 shrink-0 text-slate-400 group-hover:text-slate-200 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 </Link>
               ))}
@@ -479,7 +479,7 @@ export default function DiscoveryReader({
         {siblings.length > 0 && (
           <section className="mt-8 space-y-4">
             <h2 className="text-lg font-bold flex items-center gap-2">
-              <Compass className="w-5 h-5 text-teal" />
+              <Compass className="w-5 h-5 text-slate-400" />
               Side paths
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -487,7 +487,7 @@ export default function DiscoveryReader({
                 <Link
                   key={s.id}
                   href={`/discovery/${s.id}`}
-                  className="min-h-[44px] inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 hover:border-violet-400/50 hover:text-white transition-colors"
+                  className="min-h-[44px] inline-flex items-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-400 hover:border-slate-400/50 hover:text-slate-200 transition-colors"
                 >
                   {s.title}
                 </Link>
@@ -509,9 +509,9 @@ export default function DiscoveryReader({
           )}
           <Link
             href={`/tutor?domain=extras&topicId=${encodeURIComponent(topicId)}`}
-            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg border border-white/15 text-slate-200 font-semibold text-sm hover:border-gold/60 transition-colors"
+            className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg border border-white/15 text-slate-200 font-semibold text-sm hover:border-slate-400 transition-colors"
           >
-            <MessageSquare className="w-4 h-4 text-gold" />
+            <MessageSquare className="w-4 h-4 text-slate-400" />
             Ask the tutor
           </Link>
           {trail.length > 0 && (
@@ -527,7 +527,7 @@ export default function DiscoveryReader({
 
         {/* Depth progress hint */}
         {maxDepth < 3 && (
-          <p className="pb-10 text-center text-xs text-slate-600">
+          <p className="pb-10 text-center text-xs text-slate-400">
             You are at depth {maxDepth + 1} of 4 — the trail continues as new depths are charted.
           </p>
         )}

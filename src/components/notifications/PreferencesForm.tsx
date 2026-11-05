@@ -99,7 +99,7 @@ export default function PreferencesForm() {
 
   return (
     <div className="space-y-6">
-      <label className="flex items-start gap-3 text-sm text-slate-200">
+      <label className="flex items-start gap-3 text-sm text-slate-400">
         <input
           type="checkbox"
           checked={prefs.emailOptIn}
@@ -107,7 +107,7 @@ export default function PreferencesForm() {
             setPrefs((prev) => ({ ...prev, emailOptIn: e.target.checked }));
             setState("idle");
           }}
-          className="mt-0.5 h-4 w-4 rounded border-white/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-0.5 h-4 w-4 rounded border-border/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         />
         <span>
           Email backup
@@ -118,7 +118,7 @@ export default function PreferencesForm() {
       </label>
 
       <div className="space-y-3">
-        <label className="flex items-center gap-3 text-sm text-slate-200">
+        <label className="flex items-center gap-3 text-sm text-slate-400">
           <input
             type="checkbox"
             checked={quietEnabled}
@@ -126,7 +126,7 @@ export default function PreferencesForm() {
               setQuietEnabled(e.target.checked);
               setState("idle");
             }}
-            className="h-4 w-4 rounded border-white/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="h-4 w-4 rounded border-border/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           />
           Quiet hours
         </label>
@@ -141,7 +141,7 @@ export default function PreferencesForm() {
                 setState("idle");
               }}
               aria-label="Quiet hours start"
-              className="rounded-lg border border-white/15 bg-slate-900 px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="rounded-lg border border-border/10 bg-slate-900 px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             />
             <span>and</span>
             <input
@@ -152,15 +152,15 @@ export default function PreferencesForm() {
                 setState("idle");
               }}
               aria-label="Quiet hours end"
-              className="rounded-lg border border-white/15 bg-slate-900 px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="rounded-lg border border-border/10 bg-slate-900 px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             />
-            <span className="text-xs text-slate-500">The in-app row is still written; only the email waits.</span>
+            <span className="text-xs text-slate-400">The in-app row is still written; only the email waits.</span>
           </div>
         )}
       </div>
 
       <fieldset className="space-y-3">
-        <legend className="text-sm text-slate-200">Mute a type</legend>
+        <legend className="text-sm text-slate-400">Mute a type</legend>
         <p className="text-xs text-slate-400">A muted type writes nothing — no bell entry, no email.</p>
         <div className="grid gap-2 sm:grid-cols-2">
           {NOTIFICATION_TYPES.map((type) => (
@@ -169,7 +169,7 @@ export default function PreferencesForm() {
                 type="checkbox"
                 checked={prefs.mutedTypes.includes(type)}
                 onChange={() => toggleMuted(type)}
-                className="h-4 w-4 rounded border-white/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="h-4 w-4 rounded border-border/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               />
               {TYPE_LABELS[type] ?? type}
             </label>
@@ -182,12 +182,12 @@ export default function PreferencesForm() {
           type="button"
           onClick={save}
           disabled={state === "saving"}
-          className="flex min-h-[44px] items-center rounded-xl bg-gold px-5 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
+          className="flex min-h-[44px] items-center rounded-xl bg-gold px-5 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
         >
           {state === "saving" ? "Saving…" : "Save preferences"}
         </button>
-        {state === "saved" && <span className="text-sm text-emerald-300">Saved.</span>}
-        {state === "error" && <span className="text-sm text-red-300">{error}</span>}
+        {state === "saved" && <span className="text-sm text-emerald-400">Saved.</span>}
+        {state === "error" && <span className="text-sm text-rose-400">{error}</span>}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export const revalidate = 60;
 
 function pill(tier: string) {
   if (tier === "core") return "bg-emerald-100 text-emerald-800 border border-emerald-300";
-  if (tier === "elective") return "bg-amber-50 text-amber-800 border border-amber-300";
+  if (tier === "elective") return "bg-gold/10 text-gold border border-gold/30";
   return "bg-red-50 text-red-700 border border-red-200 opacity-75";
 }
 
@@ -139,9 +139,9 @@ export default async function TopicPage({ params, searchParams }: { params: { su
       const id = tocMap.get(i);
       return <h3 key={i} id={id} className={`scroll-mt-40 font-serif text-lg font-bold text-slate-100 ${id ? "" : ""}`}>{b.text}</h3>;
     }
-    if (b.type === "definition") return <p key={i} className="text-sm font-reading text-slate-200 rounded-lg border border-teal-800 p-3"><strong>{b.term}: </strong>{b.text}</p>;
-    if (b.type === "example") return <p key={i} className="text-sm font-reading text-slate-300 border-l-2 border-teal-500 pl-3">{b.text}</p>;
-    if (b.type === "callout") return <p key={i} className="text-sm font-reading text-amber-200/90 rounded-lg border border-gold/30 bg-gold/5 p-3">{b.text}</p>;
+    if (b.type === "definition") return <p key={i} className="text-sm font-reading text-slate-200 rounded-lg border border-slate-700 p-3"><strong>{b.term}: </strong>{b.text}</p>;
+    if (b.type === "example") return <p key={i} className="text-sm font-reading text-slate-300 border-l-2 border-gold pl-3">{b.text}</p>;
+    if (b.type === "callout") return <p key={i} className="text-sm font-reading text-slate-100 rounded-lg border border-gold/30 bg-gold/5 p-3">{b.text}</p>;
     if (b.type === "diagram" && b.diagramId) return <BioDiagram key={i} diagramId={b.diagramId} caption={b.caption || ""} />;
     if (b.type === "table" && b.headers) return <div key={i} className="overflow-x-auto rounded-lg border border-slate-700"><table className="w-full text-xs"><thead><tr>{b.headers.map((h) => <th key={h} className="p-2 text-left font-sans bg-slate-800">{h}</th>)}</tr></thead><tbody>{(b.rows || []).map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci} className="p-2 border-t border-slate-800">{c}</td>)}</tr>)}</tbody></table></div>;
     return <p key={i} className="text-sm font-reading text-slate-300 leading-relaxed">{b.text}</p>;
@@ -159,7 +159,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
 
         <header className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-teal-400 text-sm">{subject.name}</p>
+            <p className="text-slate-400 text-sm">{subject.name}</p>
             <h1 className="mt-1 font-serif text-3xl md:text-4xl font-bold">{topic.title}</h1>
             {topic.description && <p className="mt-3 text-slate-400">{topic.description}</p>}
           </div>
@@ -170,7 +170,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
           <nav aria-label="Chapter contents" className="sticky top-16 z-20 -mx-4 px-4 py-2 bg-slate-950/90 backdrop-blur border-y border-slate-800">
             <div role="region" aria-label="Chapter contents" tabIndex={0} className="flex gap-2 overflow-x-auto no-scrollbar focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg">
               {toc.map((t) => (
-                <a key={t.id} href={`#${t.id}`} className="shrink-0 rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-xs text-slate-300 hover:border-gold/60 hover:text-amber-300">
+                <a key={t.id} href={`#${t.id}`} className="shrink-0 rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-xs text-slate-300 hover:border-gold/60 hover:text-gold">
                   {t.label}
                 </a>
               ))}
@@ -179,18 +179,18 @@ export default async function TopicPage({ params, searchParams }: { params: { su
         )}
 
         <section aria-label="Study" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-          <h2 className="font-bold">Study {chapterBlocks.length > 0 && <span className="text-[11px] font-normal text-teal-300">· chapter ready (~{chapterMinutes} min)</span>}</h2>
+          <h2 className="font-bold">Study {chapterBlocks.length > 0 && <span className="text-[11px] font-normal text-slate-400">· chapter ready (~{chapterMinutes} min)</span>}</h2>
           {chapterBlocks.length > 0 ? (
             <article className="mt-3 space-y-3">{chapterBlocks.map((b, i) => renderBlock(b, i, tocMap))}</article>
           ) : <p className="mt-1 text-xs text-slate-400">Linked notes below.</p>}
           {chapters.slice(1).map((ch) => (
             <details key={ch.title} className="mt-4 rounded-xl border border-gold/30 bg-gold/5 p-4">
-              <summary className="font-bold text-sm cursor-pointer text-amber-200">{ch.title} — advanced (~{ch.minutes} min)</summary>
+              <summary className="font-bold text-sm cursor-pointer text-slate-100">{ch.title} — advanced (~{ch.minutes} min)</summary>
               <article className="mt-3 space-y-3">{ch.blocks.map((b, i) => renderBlock(b, i, new Map()))}</article>
             </details>
           ))}
           {studyLinks.length > 0 && (
-            <ul className="mt-3 space-y-1 text-sm">{studyLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-teal-300 hover:underline">{l.title} →</Link></li>)}</ul>
+            <ul className="mt-3 space-y-1 text-sm">{studyLinks.map((l) => <li key={l.href}><Link href={l.href} className="text-slate-400 hover:underline">{l.title} →</Link></li>)}</ul>
           )}
         </section>
 
@@ -205,7 +205,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
           {quizLinks.length ? (
             <ul className="mt-2 space-y-2 text-sm">{quizLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-amber-300 hover:underline">{l.title} →</Link>
+                <Link href={l.href} className="text-slate-400 hover:underline">{l.title} →</Link>
                 <span className="mt-1 flex flex-wrap gap-1">
                   {l.kinds.length ? l.kinds.map((k) => <span key={k} className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 border border-slate-600 text-slate-200">{k}</span>) : <span className="text-[11px] text-slate-400">Practice set</span>}
                 </span>
@@ -220,7 +220,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
             <section aria-label="Practicals" className="pt-2">
               <h3 className="font-bold text-sm">Practicals</h3>
               {practicals.length ? (
-                <div className="mt-2 space-y-2">{practicals.map((p, i) => <div key={i} className="text-sm text-slate-300 border-l-2 border-teal-500 pl-3">{p.text} <Link href={p.href} className="text-teal-300 hover:underline">Try it →</Link></div>)}</div>
+                <div className="mt-2 space-y-2">              {practicals.map((p, i) => <div key={i} className="text-sm text-slate-300 border-l-2 border-gold pl-3">{p.text} <Link href={p.href} className="text-slate-400 hover:underline">Try it →</Link></div>)}</div>
               ) : <p className="mt-1 text-xs text-slate-400">Hands-on guides surface here from linked study examples; educators can propose more via the tutor.</p>}
             </section>
             <section aria-label="Country alignment matrix" className="space-y-3">
@@ -254,11 +254,11 @@ export default async function TopicPage({ params, searchParams }: { params: { su
 
         <nav aria-label="Topic navigation" className="flex items-center justify-between gap-3 border-t border-slate-800 pt-4">
           {prev ? (
-            <Link href={`/highschool/study/${subjectParam}/${prev.slug}`} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-amber-300">
+              <Link href={`/highschool/study/${subjectParam}/${prev.slug}`} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-gold">
               <ArrowLeft className="w-4 h-4" /> {prev.title}
             </Link>
           ) : (
-            <Link href={`/highschool/study/${subjectParam}`} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-amber-300">
+            <Link href={`/highschool/study/${subjectParam}`} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-gold">
               <ArrowLeft className="w-4 h-4" /> All {subject.name} topics
             </Link>
           )}
@@ -267,7 +267,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
               Next topic: {next.title} <ArrowRight className="w-4 h-4" />
             </Link>
           ) : (
-            <Link href={`/highschool/study/${subjectParam}`} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-amber-300">
+            <Link href={`/highschool/study/${subjectParam}`} className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-gold">
               Back to {subject.name} <ArrowRight className="w-4 h-4" />
             </Link>
           )}

@@ -4,10 +4,10 @@ export type StatAccent = "gold" | "teal" | "violet" | "emerald" | "rose";
 
 const ACCENT_TEXT: Record<StatAccent, string> = {
   gold: "text-gold",
-  teal: "text-teal-300",
-  violet: "text-violet-300",
-  emerald: "text-emerald-300",
-  rose: "text-rose-300",
+  teal: "text-slate-400",
+  violet: "text-slate-400",
+  emerald: "text-emerald-400",
+  rose: "text-rose-400",
 };
 
 /**
@@ -32,7 +32,7 @@ export default function StatCard({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-5">
+    <div className="relative overflow-hidden rounded-2xl border border-line bg-surface p-5">
       {Icon && (
         <span
           aria-hidden="true"
@@ -44,7 +44,7 @@ export default function StatCard({
       <dt className="relative text-xs font-semibold uppercase tracking-label text-slate-400">
         {label}
       </dt>
-      <dd className="relative mt-1 font-serif text-3xl font-bold text-slate-50">
+      <dd className="relative mt-1 font-serif text-3xl font-bold text-slate-100">
         {value != null && value !== "" && <span className="block">{value}</span>}
         {note && <span className="mt-1 block text-xs font-normal text-slate-400">{note}</span>}
         {children}

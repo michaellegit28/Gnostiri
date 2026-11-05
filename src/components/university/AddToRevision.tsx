@@ -47,7 +47,7 @@ export default function AddToRevision({ conceptId, conceptTitle, authenticated }
 
       {state === "done" ? (
         <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.07] p-4 space-y-3">
-          <div className="flex items-center gap-2 text-emerald-300">
+          <div className="flex items-center gap-2 text-emerald-400">
             <CheckCircle2 className="h-4 w-4" />
             <span className="text-sm font-medium">In your revision queue</span>
           </div>
@@ -70,7 +70,7 @@ export default function AddToRevision({ conceptId, conceptTitle, authenticated }
             type="button"
             onClick={() => void subscribe()}
             disabled={state === "busy"}
-            className="shrink-0 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-gold/60 px-5 py-2 font-semibold text-gold text-sm hover:bg-gold/10 transition-colors disabled:opacity-50"
+            className="shrink-0 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-gold/60 px-5 py-2 font-semibold text-slate-400 text-sm hover:bg-gold/10 transition-colors disabled:opacity-50"
           >
             {state === "busy" ? "Adding…" : "Add to revision queue"}
           </button>

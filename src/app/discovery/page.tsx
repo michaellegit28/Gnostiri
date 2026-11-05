@@ -20,7 +20,7 @@ export default async function ExtrasPage() {
   });
 
   return (
-    <main className="min-h-screen bg-transparent text-slate-50">
+    <main className="min-h-screen bg-transparent text-slate-100">
       {/* Immersive hero — distinct from the structured exam pages */}
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_45%,rgb(var(--bg))_100%)]">
         <div
@@ -28,14 +28,14 @@ export default async function ExtrasPage() {
           className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(1px_1px_at_20%_30%,rgba(255,255,255,0.7),transparent),radial-gradient(1px_1px_at_70%_20%,rgba(255,255,255,0.5),transparent),radial-gradient(1.5px_1.5px_at_40%_70%,rgba(212,175,55,0.6),transparent),radial-gradient(1px_1px_at_85%_65%,rgba(255,255,255,0.5),transparent),radial-gradient(1px_1px_at_55%_45%,rgba(255,255,255,0.4),transparent)]"
         />
         <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-teal text-xs font-semibold border border-violet-500/30">
-            <SectionMark variant="discovery" className="w-4 h-4 text-teal" accent="rgb(var(--teal))" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/40 border border-slate-600/40 text-xs font-semibold text-slate-400">
+            <SectionMark variant="discovery" className="w-4 h-4 text-slate-400" accent="rgb(var(--surface-2))" />
             <span>Discovery — beyond the syllabus</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
             Read past <span className="text-gold">your syllabus</span>
           </h1>
-          <p className="text-slate-300/90 text-base md:text-lg max-w-2xl mx-auto font-light">
+          <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto font-light">
             Pick a field and read from the basics up to research level — topics your
             school syllabus leaves out.
           </p>
@@ -51,7 +51,7 @@ export default async function ExtrasPage() {
                 >
                   {d}
                 </span>
-                {i < DEPTHS.length - 1 && <span className="text-slate-600">→</span>}
+                {i < DEPTHS.length - 1 && <span className="text-slate-400">→</span>}
               </span>
             ))}
           </div>

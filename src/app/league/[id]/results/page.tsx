@@ -32,10 +32,17 @@ function displayName(member: {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  scheduled: "border-gold/40 bg-gold/10 text-gold",
-  live: "border-teal-500/40 bg-teal-500/10 text-teal-300",
+  scheduled: "border-slate-600 bg-slate-800/40 text-slate-400",
+  live: "border-teal-500/60 bg-teal-500/20 text-slate-100",
   finished: "border-white/15 bg-white/5 text-slate-400",
-  cancelled: "border-rose-500/40 bg-rose-500/10 text-rose-300",
+  cancelled: "border-rose-500/60 bg-rose-500/20 text-slate-100",
+};
+
+const FORMAT_TEXT: Record<CompetitionFormat, string> = {
+  speed: "text-cup-speed",
+  endurance: "text-gold",
+  mastery: "text-cup-mastery",
+  bracket: "text-teal-500",
 };
 
 export default async function ResultsPage({ params }: { params: { id: string } }) {
@@ -72,7 +79,7 @@ export default async function ResultsPage({ params }: { params: { id: string } }
           </span>
         </div>
         <p className="mt-3 max-w-2xl text-sm text-slate-400">
-          <span className="font-semibold text-slate-300">{meta.label}</span> — {meta.blurb}
+          <span className={`font-semibold ${FORMAT_TEXT[format]}`}>{meta.label}</span> — {meta.blurb}
         </p>
         {competition.status === "scheduled" && (
           <div className="mt-4 rounded-2xl border border-white/10 bg-slate-950/60 px-5 py-4 backdrop-blur-md">
@@ -159,7 +166,7 @@ export default async function ResultsPage({ params }: { params: { id: string } }
           <>
             <Link
               href={`/league/${competition.id}/play`}
-              className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               Play again — best score kept
             </Link>
@@ -173,7 +180,7 @@ export default async function ResultsPage({ params }: { params: { id: string } }
         ) : (
           <Link
             href="/league/join"
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Join cup
           </Link>

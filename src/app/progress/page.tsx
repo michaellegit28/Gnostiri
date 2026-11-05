@@ -114,7 +114,7 @@ export default function ProgressPage() {
   // sign-in card (with retry) instead of an endless spinner.
   if (loading && !authTimedOut) {
     return (
-      <div className="min-h-screen bg-transparent text-slate-50 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-transparent text-slate-100 flex items-center justify-center p-6">
         <div className="flex items-center gap-3 text-slate-400">
           <Loader2 className="w-6 h-6 animate-spin text-gold" />
           <span>Loading dashboard...</span>
@@ -126,7 +126,7 @@ export default function ProgressPage() {
   // 2. Unauthenticated (or auth-timed-out) state — always a way forward.
   if (!user || authTimedOut) {
     return (
-      <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12 flex items-center justify-center">
+      <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12 flex items-center justify-center">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6 shadow-xl">
           <div className="w-16 h-16 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto">
             <LogIn className="w-8 h-8" />
@@ -142,7 +142,7 @@ export default function ProgressPage() {
           <div>
             <Link
               href="/login"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover text-on-gold font-semibold text-sm transition-colors w-full"
             >
               <span>Sign in or create an account</span>
               <ArrowRight className="w-4 h-4" />
@@ -163,7 +163,7 @@ export default function ProgressPage() {
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-800 pb-6">
@@ -238,11 +238,11 @@ export default function ProgressPage() {
               </div>
             ) : error ? (
               <div className="p-4 rounded-xl bg-rose-950/30 border border-rose-500/30 text-sm flex flex-col sm:flex-row sm:items-center gap-3 justify-between">
-                <p role="alert" className="text-rose-300">{error}</p>
+                <p role="alert" className="text-red-300">{error}</p>
                 <button
                   type="button"
                   onClick={() => setRetryKey((k) => k + 1)}
-                  className="inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-lg border border-rose-500/40 px-5 py-2.5 font-semibold text-rose-200 transition-colors hover:bg-rose-500/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+                  className="inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-lg border border-slate-600 bg-slate-800/30 px-5 py-2.5 font-semibold text-slate-300 transition-colors hover:border-slate-400 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
                 >
                   Retry
                 </button>
@@ -261,13 +261,13 @@ export default function ProgressPage() {
                         <span className="block font-sans text-sm font-semibold text-slate-100">
                           {dashboardData.studyPlan.items.length} study items
                         </span>
-                        <Link href="/study-plan" className="text-sm text-teal-300 underline">
+                        <Link href="/study-plan" className="text-sm text-slate-400 underline">
                           Edit plan
                         </Link>
                       </span>
                     ) : (
-                      <Link href="/study-plan" className="mt-1 inline-block text-sm text-teal-300 underline">
-                        Create a study plan
+<Link href="/study-plan" className="mt-1 inline-block text-sm text-slate-400 underline">
+                          Create a study plan
                       </Link>
                     )}
                   </StatCard>
@@ -276,7 +276,7 @@ export default function ProgressPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Weak Topics Card */}
                   <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                    <div className="flex items-center gap-2.5 text-rose-400">
+                    <div className="flex items-center gap-2.5 text-slate-400">
                       <AlertTriangle className="w-5 h-5 shrink-0" />
                       <h2 className="text-lg font-serif font-semibold text-slate-100">
                         Weak Topics (&lt; 60% Accuracy)
@@ -303,7 +303,7 @@ export default function ProgressPage() {
                               </p>
                             </div>
                             <div className="text-right shrink-0">
-                              <span className="text-sm font-bold text-rose-400">
+                              <span className="text-sm font-bold text-slate-400">
                                 {Math.round(item.accuracy * 100)}%
                               </span>
                             </div>
@@ -315,7 +315,7 @@ export default function ProgressPage() {
 
                   {/* Strong Topics Card */}
                   <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                    <div className="flex items-center gap-2.5 text-emerald-400">
+                    <div className="flex items-center gap-2.5 text-slate-400">
                       <CheckCircle2 className="w-5 h-5 shrink-0" />
                       <h2 className="text-lg font-serif font-semibold text-slate-100">
                         Strong Topics (&ge; 85% Accuracy)
@@ -342,7 +342,7 @@ export default function ProgressPage() {
                               </p>
                             </div>
                             <div className="text-right shrink-0">
-                              <span className="text-sm font-bold text-emerald-400">
+                              <span className="text-sm font-bold text-slate-400">
                                 {Math.round(item.accuracy * 100)}%
                               </span>
                             </div>
@@ -402,7 +402,7 @@ export default function ProgressPage() {
                               <td className="py-3.5 px-4">
                                 <span
                                   className={`font-semibold ${
-                                    attempt.accuracy >= 70 ? "text-emerald-400" : "text-rose-400"
+                                    attempt.accuracy >= 70 ? "text-slate-100" : "text-slate-400"
                                   }`}
                                 >
                                   {attempt.accuracy}%

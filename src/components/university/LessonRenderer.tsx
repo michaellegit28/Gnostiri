@@ -25,7 +25,7 @@ function CodeBlock({ language, code, output, caption }: { language: string; code
       <figcaption className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/70 px-4 py-2 text-xs text-slate-400">
         <FileCode2 className="h-3.5 w-3.5 shrink-0" />
         <span className="font-mono uppercase tracking-wide">{language}</span>
-        {caption && <span className="ml-2 truncate text-slate-500">{caption}</span>}
+        {caption && <span className="ml-2 truncate text-slate-400">{caption}</span>}
       </figcaption>
       <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-slate-200">
         <code>{code}</code>
@@ -35,7 +35,7 @@ function CodeBlock({ language, code, output, caption }: { language: string; code
           <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-emerald-400">
             <CheckCircle2 className="h-3 w-3" /> Output
           </div>
-          <pre className="overflow-x-auto font-mono text-sm leading-relaxed text-emerald-300/90">
+          <pre className="overflow-x-auto font-mono text-sm leading-relaxed text-emerald-400/[0.9]">
             <code>{output}</code>
           </pre>
         </div>
@@ -80,7 +80,7 @@ function QuestionBlock({ prompt, answer, explanation }: { prompt: string; answer
   const answerId = useId();
   return (
     <div className="my-4 rounded-xl border border-slate-700 bg-slate-900/50 p-4">
-      <div className="mb-2 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-violet-400">
+      <div className="mb-2 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-slate-400">
         <CheckCircle2 className="h-3.5 w-3.5" /> Check
       </div>
       <p className="font-medium text-slate-200">{prompt}</p>
@@ -89,7 +89,7 @@ function QuestionBlock({ prompt, answer, explanation }: { prompt: string; answer
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={answerId}
-        className="mt-3 inline-flex min-h-[36px] items-center rounded-lg border border-violet-600/40 px-3 py-1.5 text-sm font-medium text-violet-300 transition-colors hover:border-violet-400/70 hover:text-violet-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70"
+        className="mt-3 inline-flex min-h-[36px] items-center rounded-lg border border-slate-600/40 px-3 py-1.5 text-sm font-medium text-slate-400 transition-colors hover:border-slate-400/70 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70"
       >
         {open ? "Hide answer" : "Show answer"}
       </button>
@@ -135,28 +135,28 @@ function McqBlock({ stem, options, correctIndex, explanation }: { stem: string; 
               disabled={answered}
               aria-pressed={chosen}
               className={`flex w-full items-start gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 ${
-                reveal
-                  ? "border-emerald-700/50 bg-emerald-950/20"
-                  : chosen
-                    ? "border-gold/60 bg-gold/10"
-                    : "border-slate-800 bg-slate-950/40 hover:border-slate-600"
+                  reveal
+                    ? "border-emerald-500/30 bg-emerald-500/[0.07]"
+                    : chosen
+                      ? "border-gold/60 bg-gold/10"
+                      : "border-slate-800 bg-slate-950/40 hover:border-slate-600"
               } ${answered && !chosen && !reveal ? "opacity-60" : ""}`}
             >
               <span
                 className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                  reveal ? "bg-emerald-600 text-white" : chosen ? "bg-gold text-slate-950" : "bg-slate-800 text-slate-400"
+                  reveal ? "bg-emerald-500 text-slate-950" : chosen ? "bg-gold text-on-gold" : "bg-slate-800 text-slate-400"
                 }`}
               >
                 {letters[oi]}
               </span>
-              <span className={reveal ? "text-emerald-200" : chosen ? "text-amber-100" : "text-slate-300"}>{opt}</span>
+              <span className={reveal ? "text-emerald-200" : chosen ? "text-slate-200" : "text-slate-300"}>{opt}</span>
             </button>
           );
         })}
       </div>
       <div role="status" aria-live="polite">
         {answered && (
-          <p className={`mt-3 flex items-start gap-1.5 text-sm ${isCorrect ? "text-emerald-300" : "text-amber-300"}`}>
+          <p className={`mt-3 flex items-start gap-1.5 text-sm ${isCorrect ? "text-emerald-400" : "text-slate-400"}`}>
             {isCorrect ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /> : <XCircle className="mt-0.5 h-4 w-4 shrink-0" />}
             <span>
               {isCorrect ? "Correct. " : `Not quite — the answer is ${letters[safeCorrect]}. `}
@@ -191,11 +191,11 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "definition":
       return (
-        <div key={key} className="my-4 rounded-xl border border-teal-700/50 bg-teal-950/20 p-4">
+        <div key={key} className="my-4 rounded-xl border border-slate-600/40 bg-surface/20 p-4">
           <div className="flex items-start gap-2">
-            <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" />
+            <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
             <div>
-              <div className="font-semibold text-teal-300">{block.term}</div>
+              <div className="font-semibold text-slate-400">{block.term}</div>
               <div className="mt-1 text-slate-300">{block.text}</div>
             </div>
           </div>
@@ -205,7 +205,7 @@ function renderBlock(block: LessonBlock, key: number) {
     case "example":
       return (
         <div key={key} className="my-4 rounded-xl border border-slate-700 bg-slate-900/50 p-4">
-          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-amber-400">
+          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-slate-400">
             <Lightbulb className="h-3.5 w-3.5" /> Example
           </div>
           <p className="text-slate-300">{block.text}</p>
@@ -214,18 +214,18 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "callout":
       return block.variant === "info" ? (
-        <div key={key} className="my-4 flex items-start gap-3 rounded-xl border border-sky-700/40 bg-sky-950/20 p-4">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-sky-400" />
+        <div key={key} className="my-4 flex items-start gap-3 rounded-xl border border-slate-600/40 bg-surface/20 p-4">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
           <p className="text-slate-300">
-            <span className="mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-sky-400">Note</span>
+            <span className="mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-slate-400">Note</span>
             {block.text}
           </p>
         </div>
       ) : (
-        <div key={key} className="my-4 flex items-start gap-3 rounded-xl border border-amber-600/40 bg-amber-950/20 p-4">
+        <div key={key} className="my-4 flex items-start gap-3 rounded-xl border border-amber-500/40 bg-amber-500/[0.07] p-4">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
           <p className="text-slate-300">
-            <span className="mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-amber-400">Watch out</span>
+            <span className="mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-slate-400">Watch out</span>
             {block.text}
           </p>
         </div>
@@ -253,7 +253,7 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "diagram":
       return (
-        <div key={key} className="my-4 rounded-xl border border-dashed border-slate-700 p-4 text-sm text-slate-500">
+        <div key={key} className="my-4 rounded-xl border border-dashed border-slate-700 p-4 text-sm text-slate-400">
           Diagram unavailable — {block.diagramId}. {block.caption}
         </div>
       );

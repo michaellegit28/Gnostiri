@@ -44,7 +44,7 @@ function TierLadder({ currentTier, stars }: { currentTier: number | null; stars:
               <div className="flex items-center gap-3">
                 <span
                   className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
-                    isCurrent ? "bg-gold text-slate-950" : "bg-slate-800 text-slate-300"
+                    isCurrent ? "bg-gold text-on-gold" : "bg-slate-800 text-slate-300"
                   }`}
                 >
                   {tier.tier}
@@ -64,7 +64,7 @@ function TierLadder({ currentTier, stars }: { currentTier: number | null; stars:
                 </span>
               )}
               {!isCurrent && reached && (
-                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-300">Reached</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Reached</span>
               )}
             </li>
           );
@@ -132,7 +132,7 @@ export default async function LadderPage() {
             <>
               <Link
                 href="/login"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 Sign in to join the queue
               </Link>
@@ -334,7 +334,7 @@ export default async function LadderPage() {
             </p>
             <Link
               href="/league/ladder/play"
-              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               Open a pod
             </Link>

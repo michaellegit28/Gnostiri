@@ -120,22 +120,25 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
    --gold-text in light mode (raw gold on white is 2.0:1).                  */
 :root,
 [data-theme="dark"] {
-  --bg-deep: 11 17 32;        /* #0B1120 */
-  --bg: 15 23 42;             /* #0F172A */
-  --surface: 30 41 59;        /* #1E293B */
-  --surface-2: 39 52 73;      /* #273449 (surface-hover) */
-  --border: 51 65 85;         /* #334155 */
+  --bg-deep: 11 17 32;        /* #0B1120 — deepest navy */
+  --bg: 16 29 56;             /* #101D38 Royal Navy */
+  --surface: 23 42 73;        /* #172A49 Secondary Navy */
+  --surface-2: 36 70 117;     /* #244675 Sapphire (elevated hover) */
+  --cup-speed: 36 70 117;     /* #244675 Sapphire — Speed Cup accent */
+  --cup-mastery: 99 102 241;  /* #6366F1 Indigo — Mastery Cup accent */
+  --cup-bracket: 20 184 166;  /* #14B8A6 Teal — Cohort Bracket accent */
+  --border: 220 227 236;      /* #DCE3EC Border */
   --border-strong: 71 85 105; /* #475569 */
-  --text: 248 250 252;        /* #F8FAFC */
+  --text: 248 250 252;        /* #F8FAFC — light typography */
   --text-muted: 148 163 184;  /* #94A3B8 */
   --text-subtle: 100 116 139; /* #64748B — decorative only */
-  --gold: 212 175 55;         /* #D4AF37 */
-  --gold-hover: 232 211 122;
-  --gold-text: 212 175 55;
-  --gold-soft: 212 175 55;
-  --gold-from: 243 217 122;   /* #F3D97A */
-  --gold-to: 168 132 31;      /* #A8841F */
-  --on-gold: 15 23 42;
+  --gold: 213 173 99;         /* #D5AD63 Champagne Gold */
+  --gold-hover: 232 200 140;
+  --gold-text: 213 173 99;
+  --gold-soft: 213 173 99;
+  --gold-from: 213 173 99;
+  --gold-to: 168 132 31;
+  --on-gold: 16 29 56;
   --teal: 20 184 166;         /* #14B8A6 */
   --teal-text: 20 184 166;
   --teal-soft: 20 184 166;
@@ -154,29 +157,32 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
 }
 [data-theme="light"] {
   --bg-deep: 253 251 247;
-  --bg: 253 251 247;          /* #FDFBF7 */
+  --bg: 245 242 234;          /* #F5F2EA Warm Ivory */
   --surface: 255 255 255;     /* #FFFFFF */
-  --surface-2: 248 250 252;
-  --border: 226 232 240;      /* #E2E8F0 */
-  --border-strong: 203 213 225;
-  --text: 15 23 42;           /* #0F172A */
-  --text-muted: 100 116 139;  /* #64748B */
-  --text-subtle: 120 133 156; /* #78859C — the lightest that still clears 3:1 on cream; #94A3B8 (2.5:1) is a chart fill, never text */
-  --gold: 212 175 55;
+  --surface-2: 255 255 255;
+  --cup-speed: 36 70 117;     /* #244675 Sapphire — Speed Cup accent */
+  --cup-mastery: 99 102 241;  /* #6366F1 Indigo — Mastery Cup accent */
+  --cup-bracket: 15 118 110;  /* #0F766E Teal — Cohort Bracket accent */
+  --border: 100 116 139;      /* #64748B — visible on ivory (AA UI) */
+  --border-strong: 71 85 105; /* #475569 */
+  --text: 23 36 58;           /* #17243A Navy typography */
+  --text-muted: 71 85 105;    /* #475569 — AA on ivory */
+  --text-subtle: 100 116 139; /* #64748B — decorative only */
+  --gold: 213 173 99;         /* #D5AD63 Champagne Gold (light text on it passes AA) */
   --gold-hover: 168 132 31;
-  --gold-text: 138 109 11;    /* #8A6D0B — gold that may carry text */
-  --gold-soft: 212 175 55;
-  --gold-from: 243 217 122;
-  --gold-to: 212 175 55;
-  --on-gold: 15 23 42;
-  --teal: 13 148 136;         /* #0D9488 — fills read on cream */
-  --teal-text: 15 118 110;    /* #0F766E */
+  --gold-text: 106 79 15;     /* #6A4F0F — gold body text on ivory (AA body) */
+  --gold-soft: 213 173 99;
+  --gold-from: 176 138 40;
+  --gold-to: 138 109 16;
+  --on-gold: 16 29 56;
+  --teal: 15 118 110;         /* #0F766E — fills read on ivory */
+  --teal-text: 15 118 110;
   --teal-soft: 20 184 166;
-  --success: 22 163 74;   --success-text: 21 128 61;   --success-soft: 34 197 94;
-  --error: 220 38 38;     --error-text: 185 28 28;     --error-soft: 239 68 68;
-  --warning: 217 119 6;   --warning-text: 180 83 9;    --warning-soft: 245 158 11;
-  --danger: 185 28 28;
-  --muted-fill: 100 116 139;
+  --success: 35 134 106;   --success-text: 21 128 61;   --success-soft: 34 197 94;
+  --error: 185 28 28;     --error-text: 155 48 48;     --error-soft: 239 68 68;
+  --warning: 180 83 9;    --warning-text: 146 64 14;   --warning-soft: 245 158 11;
+  --danger: 155 48 48;
+  --muted-fill: 71 85 105;
   --focus: 138 109 11;
   --radius: 14px;
   --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);

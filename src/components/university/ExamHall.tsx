@@ -96,9 +96,9 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   }, [remaining]);
 
-  if (loading) {
+    if (loading) {
     return (
-      <div className="rounded-2xl border bg-card p-10 text-center text-muted-foreground" role="status">
+      <div className="rounded-2xl border bg-surface p-10 text-center text-muted" role="status">
         Building blueprint-balanced exam…
       </div>
     );
@@ -106,10 +106,10 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
   if (error && !session) {
     return (
-      <div className="rounded-2xl border border-amber-300 bg-amber-50 p-8 dark:border-gold/30 dark:bg-gold/10">
-        <h3 className="font-semibold text-amber-800 dark:text-amber-300">Exam unavailable</h3>
-        <p className="mt-2 text-sm text-amber-700 dark:text-amber-200/80">{error}</p>
-        <button onClick={() => void start()} className="mt-4 rounded-lg border border-gold px-4 py-2 text-sm font-medium text-amber-800 hover:bg-amber-100 dark:text-amber-200 dark:hover:bg-gold/20">
+      <div className="rounded-2xl border border-rose-400/30 bg-rose-500/[0.07] p-8">
+        <h3 className="font-semibold text-rose-400">Exam unavailable</h3>
+        <p className="mt-2 text-sm text-slate-400">{error}</p>
+        <button onClick={() => void start()} className="mt-4 rounded-lg border border-gold px-4 py-2 text-sm font-medium text-on-gold hover:bg-gold/20">
           Try again
         </button>
       </div>
@@ -121,21 +121,21 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
     const pass = pct >= 50;
     return (
       <div className="space-y-6">
-        <div className={`rounded-2xl border p-8 text-center ${pass ? "border-emerald-300 bg-emerald-50 dark:border-emerald-500/30 dark:bg-emerald-500/10" : "border-rose-300 bg-rose-50 dark:border-rose-500/30 dark:bg-rose-500/10"}`}>
-          <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Result</p>
-          <p className={`mt-2 text-5xl font-bold ${pass ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>{pct}%</p>
-          <p className="mt-3 text-muted-foreground">
+        <div className={`rounded-2xl border p-8 text-center ${pass ? "border-emerald-400/30 bg-emerald-500/[0.07]" : "border-rose-400/30 bg-rose-500/[0.07]"}`}>
+          <p className="text-sm font-medium uppercase tracking-widest text-muted">Result</p>
+          <p className={`mt-2 text-5xl font-bold ${pass ? "text-emerald-400" : "text-rose-400"}`}>{pct}%</p>
+          <p className="mt-3 text-muted">
             {result.score.toFixed(1)} / {result.maxScore.toFixed(1)} marks{result.negativeApplied > 0 ? ` · −${result.negativeApplied.toFixed(1)} penalty` : ""}
           </p>
-          <p className="mt-1 font-semibold" style={undefined}>{pass ? "Pass" : "Below pass mark"}</p>
+          <p className="mt-1 font-semibold">{pass ? "Pass" : "Below pass mark"}</p>
         </div>
 
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Item review</h3>
           {result.answers.map((a) => (
-            <div key={a.id} className="rounded-xl border bg-card p-5">
+            <div key={a.id} className="rounded-xl border bg-surface p-5">
               <div className="flex items-start gap-3">
-                <span className={`mt-0.5 shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${a.marked ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300" : "bg-rose-100 text-rose-800 dark:bg-rose-500/15 dark:text-rose-300"}`}>
+                <span className={`mt-0.5 shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${a.marked ? "bg-emerald-500/[0.07] text-emerald-400" : "bg-rose-500/[0.07] text-rose-400"}`}>
                   {a.marked ? "Correct" : "Incorrect"}
                 </span>
                 <div className="min-w-0">
@@ -145,8 +145,8 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                       {a.options.map((opt) => {
                         const isCorrect = opt === a.correctAnswer;
                         const isChosen = opt === a.selected;
-                        return (
-                          <li key={opt} className={`rounded-lg px-3 py-2 ${isCorrect ? "bg-emerald-50 font-medium text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-200" : isChosen ? "bg-rose-50 text-rose-800 dark:bg-rose-500/10 dark:text-rose-200" : "bg-muted/40"}`}>
+                          return (
+                            <li key={opt} className={`rounded-lg px-3 py-2 ${isCorrect ? "bg-emerald-500/[0.07] text-emerald-400" : isChosen ? "bg-rose-500/[0.07] text-rose-400" : "bg-surface/20"}`}>
                             {opt}
                             {isCorrect ? " — correct answer" : isChosen ? " — your answer" : ""}
                           </li>
@@ -154,7 +154,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                       })}
                     </ul>
                   )}
-                  {a.explanation && <p className="mt-3 text-sm text-muted-foreground">{a.explanation}</p>}
+                  {a.explanation && <p className="mt-3 text-sm text-muted">{a.explanation}</p>}
                 </div>
               </div>
             </div>
@@ -162,10 +162,10 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => void start()} className="rounded-lg bg-primary px-5 py-2.5 font-medium text-primary-foreground hover:bg-primary/90">
+          <button onClick={() => void start()} className="rounded-lg bg-gold px-5 py-2.5 font-medium text-on-gold hover:bg-gold-hover">
             Sit another exam
           </button>
-          <a href="/university/transcript" className="rounded-lg border px-5 py-2.5 font-medium hover:bg-muted/50">
+          <a href="/university/transcript" className="rounded-lg border border-border px-5 py-2.5 font-medium hover:bg-surface/20">
             View transcript
           </a>
         </div>
@@ -177,23 +177,23 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-4 z-10 flex items-center justify-between rounded-2xl border bg-card/95 px-5 py-3 shadow-sm backdrop-blur">
-        <span className="text-sm font-medium">
+      <div className="sticky top-4 z-10 flex items-center justify-between rounded-2xl border bg-surface/95 px-5 py-3 shadow-sm">
+        <span className="text-sm font-medium text-muted">
           {answered} / {session.items.length} answered
         </span>
         {mode === "timed" && (
-          <span className={`font-mono text-lg font-semibold tabular-nums ${remaining < 300 ? "text-rose-600 dark:text-rose-400" : ""}`}>{clock}</span>
+          <span className={`font-mono text-lg font-semibold tabular-nums ${remaining < 300 ? "text-rose-400" : ""}`}>{clock}</span>
         )}
       </div>
 
       <ol className="space-y-5">
         {session.items.map((item, idx) => (
-          <li key={item.id} className="rounded-2xl border bg-card p-6">
+          <li key={item.id} className="rounded-2xl border bg-surface p-6">
             <div className="flex items-baseline gap-3">
-              <span className="font-mono text-sm text-muted-foreground">Q{idx + 1}</span>
-              <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">{FORMAT_LABEL[item.format]}</span>
+              <span className="font-mono text-sm text-muted">Q{idx + 1}</span>
+              <span className="rounded-full bg-surface/20 px-2.5 py-0.5 text-xs font-medium text-slate-400">{FORMAT_LABEL[item.format]}</span>
               {session.negativeMarking && item.negativeMarks != null && item.negativeMarks > 0 && (
-                <span className="rounded-full bg-rose-100 px-2.5 py-0.5 text-xs font-medium text-rose-700 dark:bg-rose-500/15 dark:text-rose-300">
+                <span className="rounded-full bg-rose-500/[0.07] px-2.5 py-0.5 text-xs font-medium text-rose-400">
                   −{item.negativeMarks} for wrong
                 </span>
               )}
@@ -209,11 +209,11 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                       type="button"
                       onClick={() => setAnswers((prev) => ({ ...prev, [item.id]: opt }))}
                       className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors ${
-                        chosen ? "border-primary bg-primary/5 ring-1 ring-primary" : "hover:bg-muted/50"
+                        chosen ? "border-gold bg-gold/10 ring-1 ring-gold" : "hover:bg-surface/20"
                       }`}
                       aria-pressed={chosen}
                     >
-                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${chosen ? "border-primary bg-primary text-primary-foreground" : ""}`}>
+                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${chosen ? "border-gold bg-gold text-on-gold" : ""}`}>
                         {chosen && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
                       </span>
                       <span>{opt}</span>
@@ -227,7 +227,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                 onChange={(e) => setAnswers((prev) => ({ ...prev, [item.id]: e.target.value }))}
                 rows={4}
                 placeholder="Write your answer…"
-                className="mt-4 w-full rounded-xl border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                className="mt-4 w-full rounded-xl border bg-bg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
               />
             )}
           </li>
@@ -235,18 +235,18 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
       </ol>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted">
           {mode === "timed" ? "Submission is final. The exam auto-submits when the clock runs out." : "Open book — take your time."}
         </p>
         <button
           onClick={() => void submit()}
           disabled={submitting || answered === 0}
-          className="rounded-lg bg-primary px-6 py-2.5 font-semibold text-primary-foreground transition-opacity hover:bg-primary/90 disabled:opacity-50"
+          className="rounded-lg bg-gold px-6 py-2.5 font-semibold text-on-gold transition-opacity hover:bg-gold-hover disabled:opacity-50"
         >
           {submitting ? "Scoring…" : "Submit exam"}
         </button>
       </div>
-      {error && <p className="text-sm text-rose-600 dark:text-rose-400" role="alert">{error}</p>}
+      {error && <p className="text-sm text-rose-400" role="alert">{error}</p>}
     </div>
   );
 }

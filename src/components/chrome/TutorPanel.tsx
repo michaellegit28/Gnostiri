@@ -108,7 +108,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
       style={{ maxHeight: "min(78vh, 620px)", height: "560px", maxWidth: "100%" }}
     >
       {/* Header */}
-      <div className="flex items-start justify-between border-b border-white/10 px-5 py-4">
+      <div className="flex items-start justify-between border-b border-border/10 px-5 py-4">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
             Tutor
@@ -121,7 +121,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
           type="button"
           onClick={onClose}
           aria-label="Close tutor"
-          className="flex min-h-[40px] min-w-[40px] items-center justify-center rounded-full text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+          className="flex min-h-[40px] min-w-[40px] items-center justify-center rounded-full text-slate-400 hover:text-slate-100 hover:bg-surface/10 transition-colors"
         >
           <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M6 6l12 12M18 6L6 18" />
@@ -132,18 +132,18 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3" aria-live="polite">
         {messages.length === 0 && (
-          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-relaxed text-slate-200 border-l-2 !border-l-gold">
+          <div className="rounded-xl border border-border/10 bg-surface/10 p-4 text-sm leading-relaxed text-slate-400 border-l-2 !border-l-gold">
             I&apos;m your Tutor. Right now we&apos;re here to help you learn anything.
             Ask me anything, or pick a starter below.
           </div>
         )}
         {messages.map((m, i) =>
           m.role === "user" ? (
-            <div key={i} className="ml-auto max-w-[90%] rounded-xl bg-teal-900/50 px-4 py-3 text-sm text-slate-100">
+            <div key={i} className="ml-auto max-w-[90%] rounded-xl bg-surface/50 px-4 py-3 text-sm text-slate-100">
               {m.content}
             </div>
           ) : (
-            <div key={i} className="max-w-[95%] rounded-xl bg-white/[0.05] border border-white/10 px-4 py-3 text-sm leading-relaxed text-slate-200 border-l-2 !border-l-gold">
+            <div key={i} className="max-w-[95%] rounded-xl bg-surface/10 border border-border/10 px-4 py-3 text-sm leading-relaxed text-slate-400 border-l-2 !border-l-gold">
               {m.content || (busy ? "Thinking…" : "")}
             </div>
           )
@@ -155,7 +155,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
                 key={s}
                 type="button"
                 onClick={(e) => void send(e as unknown as FormEvent, s)}
-                className="rounded-full border border-white/15 px-3.5 py-2 text-xs text-slate-300 hover:border-gold/60 hover:text-white transition-colors"
+                className="rounded-full border border-border/10 px-3.5 py-2 text-xs text-slate-400 hover:border-gold/60 hover:text-slate-100 transition-colors"
               >
                 {s}
               </button>
@@ -163,14 +163,14 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
           </div>
         )}
         {error && (
-          <p role="alert" className="text-xs text-rose-300">
+          <p role="alert" className="text-xs text-rose-400">
             {error}
           </p>
         )}
         {upgrade && (
-          <p className="text-xs text-amber-200">
+          <p className="text-xs text-slate-400">
             Daily limit reached.{" "}
-            <Link href="/pricing" className="underline hover:text-amber-100">
+            <Link href="/pricing" className="underline hover:text-gold">
               Go unlimited
             </Link>
           </p>
@@ -178,19 +178,19 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
       </div>
 
       {/* Input */}
-      <form onSubmit={(e) => void send(e)} className="border-t border-white/10 p-3 flex items-center gap-2">
+      <form onSubmit={(e) => void send(e)} className="border-t border-border/10 p-3 flex items-center gap-2">
         <input
           ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about anything…"
           aria-label="Ask the tutor"
-          className="min-h-[48px] flex-1 rounded-full border border-white/15 bg-white/[0.04] px-4 text-sm text-slate-100 placeholder:text-slate-400 focus:border-gold/60 focus:outline-none"
+          className="min-h-[48px] flex-1 rounded-full border border-border/10 bg-surface/10 px-4 text-sm text-slate-100 placeholder:text-slate-400 focus:border-gold/60 focus:outline-none"
         />
         <button
           type="submit"
           disabled={busy || !input.trim()}
-          className="min-h-[48px] shrink-0 rounded-full bg-gold px-5 text-sm font-semibold text-slate-950 hover:bg-gold-hover transition-colors disabled:opacity-40"
+          className="min-h-[48px] shrink-0 rounded-full bg-gold px-5 text-sm font-semibold text-on-gold hover:bg-gold-hover transition-colors disabled:opacity-40"
         >
           Send
         </button>

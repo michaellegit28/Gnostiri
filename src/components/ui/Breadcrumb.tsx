@@ -20,7 +20,7 @@ export default function Breadcrumb({ items }: { items: Crumb[] }) {
         return (
           <span key={item.label} className="flex items-center gap-2">
             {i > 0 && (
-              <ChevronRight className="h-4 w-4 text-slate-600" aria-hidden="true" />
+              <ChevronRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
             )}
             {last || !item.href ? (
               <span

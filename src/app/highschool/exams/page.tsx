@@ -74,11 +74,11 @@ export default async function HighSchoolHubPage() {
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Hero */}
         <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-8 md:p-10 text-center space-y-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 text-xs font-semibold text-teal-300">
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
             <BookOpen className="h-3.5 w-3.5" aria-hidden /> High School · Exam Bank
           </span>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
@@ -94,7 +94,7 @@ export default async function HighSchoolHubPage() {
         {/* Resume banner */}
         {recentActivity && (
           <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3 text-amber-300">
+            <div className="flex items-center gap-3 text-gold">
               <History className="w-5 h-5 shrink-0 text-gold" />
               <span className="text-sm font-medium">{recentActivity.label}</span>
             </div>
@@ -119,11 +119,11 @@ export default async function HighSchoolHubPage() {
                   {String(ci + 1).padStart(2, "0")}
                 </span>
                 {classId === "cbt" ? (
-                  <MonitorPlay className="w-5 h-5 text-teal-300" aria-hidden />
+                  <MonitorPlay className="w-5 h-5 text-slate-400" aria-hidden />
                 ) : classId === "objective-theory" ? (
-                  <BookOpen className="w-5 h-5 text-teal-300" aria-hidden />
+                  <BookOpen className="w-5 h-5 text-slate-400" aria-hidden />
                 ) : (
-                  <HelpCircle className="w-5 h-5 text-teal-300" aria-hidden />
+                  <HelpCircle className="w-5 h-5 text-slate-400" aria-hidden />
                 )}
                 <h2 id={`class-${classId}`} className="text-xl md:text-2xl font-serif font-bold">{meta.label}</h2>
                 <span className="text-xs text-slate-400">· {boards.length} boards</span>
@@ -177,7 +177,7 @@ function BoardCard({ board, stats }: { board: ExamBankBoard; stats: { subjects: 
         <p className="text-xs font-medium text-slate-400 mb-3">{board.country}</p>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {board.formats.map((f) => (
-            <span key={f} className="text-[11px] font-medium text-teal-200 bg-teal-500/10 px-2 py-0.5 rounded-md border border-teal-500/20">
+            <span key={f} className="text-[11px] font-medium text-gold bg-gold/10 px-2 py-0.5 rounded-md border border-gold/30">
               {f}
             </span>
           ))}

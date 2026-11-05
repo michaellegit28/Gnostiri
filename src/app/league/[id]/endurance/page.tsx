@@ -30,7 +30,7 @@ export default async function EndurancePage({ params }: { params: { id: string }
         <p className="mt-3 text-slate-400">Your streak, your ladder position and your milestones all sit behind your account.</p>
         <Link
           href="/login"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           Sign in
         </Link>
@@ -49,7 +49,7 @@ export default async function EndurancePage({ params }: { params: { id: string }
         <p className="mt-3 text-slate-400">Endurance is a members-only ladder — take your place, then start the run.</p>
         <Link
           href={`/league/join`}
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           Join a cup
         </Link>

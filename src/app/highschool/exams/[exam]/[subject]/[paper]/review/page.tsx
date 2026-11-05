@@ -55,26 +55,26 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
   const base = paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber);
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Breadcrumb */}
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
           <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
             {examination.name.toUpperCase()}
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href={base} className="hover:text-gold transition-colors">
             {paper.subject} {paper.year} · {paper.paperNumber}
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <span className="text-slate-100 font-medium">Marking scheme</span>
         </nav>
 
         {/* Header */}
         <header className="space-y-3">
-          <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">
+          <p className="text-slate-400 text-xs font-semibold uppercase tracking-[0.25em]">
             Marking scheme · {examination.name.toUpperCase()}
           </p>
           <h1 className="text-3xl md:text-4xl font-serif font-bold">
@@ -95,7 +95,7 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
 
         {/* Latest attempt */}
         {latestAttempt && (
-          <section className="rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6 space-y-2">
+          <section className="rounded-xl border border-gold/30 bg-gradient-to-r from-gold/30 via-slate-900 to-slate-900 p-6 space-y-2">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Your latest attempt</p>
             <p className="text-3xl font-serif font-bold text-gold">
               {latestAttempt.score}/{latestAttempt.maxScore} marks
@@ -125,7 +125,7 @@ export default async function PaperReviewPage({ params }: ReviewPageProps) {
                 <article key={question.id} className="space-y-3 rounded-xl border border-slate-800 bg-slate-900 p-5 md:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <h2 className="text-base md:text-lg font-semibold">
-                      <span className="text-slate-500 font-serif mr-2">Q{index + 1}.</span>
+                      <span className="text-slate-400 font-serif mr-2">Q{index + 1}.</span>
                       {question.questionText}
                     </h2>
                     <span className="shrink-0 inline-flex items-center gap-1.5 text-xs font-medium text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">

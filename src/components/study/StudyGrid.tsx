@@ -37,7 +37,7 @@ export default function StudyGrid({ cards }: { cards: StudyCardSpec[] }) {
             <div className="mt-5">
               <h2 className="font-serif text-xl font-bold text-ink">{card.label}</h2>
               <p className="mt-1 text-sm text-muted">{card.line}</p>
-              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold">{card.count}</p>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">{card.count}</p>
             </div>
           </Link>
         );

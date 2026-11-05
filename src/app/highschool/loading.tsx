@@ -10,7 +10,7 @@ export default function HighSchoolLoading() {
       role="status"
       aria-busy="true"
       aria-label="Loading High School content"
-      className="min-h-screen bg-transparent text-slate-50"
+      className="min-h-screen bg-transparent text-slate-100"
     >
       <div className="mx-auto w-full max-w-6xl space-y-8 px-6 py-12 md:px-12">
         <Skeleton className="h-40 w-full" />

@@ -78,7 +78,7 @@ export default async function ProgressOverview({
   ];
 
   return (
-    <section aria-label="Your progress" className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 md:p-6">
+    <section aria-label="Your progress" className="rounded-2xl border border-border/10 bg-surface/10 p-5 md:p-6">
       <div className="flex items-center justify-between gap-3">
         <h2 className="font-serif text-lg font-bold text-slate-100">Progress</h2>
         <Link
@@ -90,19 +90,19 @@ export default async function ProgressOverview({
       </div>
       <dl className="mt-4 grid gap-4 sm:grid-cols-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-white/5 bg-slate-950/40 px-4 py-3.5">
+          <div key={s.label} className="rounded-xl border border-border/5 bg-surface/40 px-4 py-3.5">
             <dt className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">
               <s.icon className="h-3.5 w-3.5 text-gold" aria-hidden />
               {s.label}
             </dt>
-            <dd className="mt-2 font-serif text-2xl font-bold text-gold">{s.value}</dd>
-            <p className="mt-1 text-[11px] text-slate-500">{s.detail}</p>
+            <dd className="mt-2 font-serif text-2xl font-bold text-slate-100">{s.value}</dd>
+            <p className="mt-1 text-[11px] text-slate-400">{s.detail}</p>
           </div>
         ))}
       </dl>
       {!userId && (
-        <p className="mt-4 text-xs text-slate-500">
-          <Link href="/login" className="rounded text-gold underline-offset-4 hover:underline">Sign in</Link> to track
+        <p className="mt-4 text-xs text-slate-400">
+          <Link href="/login" className="rounded text-slate-400 underline-offset-4 hover:text-gold hover:underline">Sign in</Link> to track
           your progress and your transcript. {totalUniversityCourses} course{totalUniversityCourses === 1 ? "" : "s"} in
           the catalogue.
         </p>

@@ -67,7 +67,7 @@ export default async function NotificationsPage() {
         <p className="mt-3 text-slate-400">Your notification feed lives behind your account — cups, streaks and results, one place.</p>
         <Link
           href="/login"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           Sign in
         </Link>
@@ -144,7 +144,7 @@ export default async function NotificationsPage() {
                         </span>
                       </span>
                       {n.href && (
-                        <span className="mt-1 shrink-0 text-slate-600 transition-all group-hover:translate-x-1 group-hover:text-gold" aria-hidden="true">
+                        <span className="mt-1 shrink-0 text-slate-400 transition-all group-hover:translate-x-1 group-hover:text-gold" aria-hidden="true">
                           →
                         </span>
                       )}
