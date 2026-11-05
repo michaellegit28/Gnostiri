@@ -46,22 +46,22 @@ export default async function BoardPracticePage({ params, searchParams }: Practi
   if (!manifest) notFound();
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-4 md:p-10">
+    <div className="min-h-screen bg-transparent text-slate-100 p-4 md:p-10">
       <div className="max-w-3xl mx-auto space-y-6">
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
           <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href={`/highschool/practice/${manifest.boardId}`} className="hover:text-gold transition-colors">
             {manifest.board} practice
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <span className="text-slate-100 font-medium">{manifest.topic}</span>
         </nav>
 
         {/* RULE 5 — verification badge fields travel with every manifest surface */}
         <header className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg))_55%,rgb(var(--bg-deep))_100%)] p-8 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">
+            <p className="text-slate-400 text-xs font-semibold uppercase tracking-[0.25em]">
               {manifest.board} · Board-format practice
             </p>
             {manifest.lastVerified && (
@@ -79,7 +79,7 @@ export default async function BoardPracticePage({ params, searchParams }: Practi
           <h1 className="text-3xl md:text-4xl font-serif font-bold">
             {manifest.topic} <span className="text-gold">— {manifest.board} format</span>
           </h1>
-          {manifest.notes && <p className="text-amber-300/90 text-sm">{manifest.notes}</p>}
+          {manifest.notes && <p className="text-slate-400 text-sm">{manifest.notes}</p>}
         </header>
 
         {manifest.sections.length === 0 ? (

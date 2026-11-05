@@ -11,7 +11,7 @@ export default function UniversityLoading() {
       role="status"
       aria-busy="true"
       aria-label="Loading University content"
-      className="min-h-screen bg-transparent text-slate-50"
+      className="min-h-screen bg-transparent text-slate-100"
     >
       <div className="mx-auto w-full max-w-6xl space-y-10 px-6 py-12 md:py-16">
         <Skeleton className="h-64 w-full" />

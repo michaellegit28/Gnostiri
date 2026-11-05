@@ -38,12 +38,12 @@ export default function JoinQueueButton({ label = "Join the queue" }: { label?: 
         type="button"
         onClick={() => void join()}
         disabled={busy}
-        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
+        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
       >
         {busy ? "Finding your group…" : label}
       </button>
       {error && (
-        <p className="mt-2 text-sm text-rose-300" role="alert">
+        <p className="mt-2 text-sm text-rose-400" role="alert">
           {error}
         </p>
       )}

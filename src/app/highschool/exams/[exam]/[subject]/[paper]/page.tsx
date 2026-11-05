@@ -32,28 +32,28 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
   const base = paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber);
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Breadcrumb */}
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
           <Link href="/highschool" className="hover:text-gold transition-colors">High School</Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
             {examination.name.toUpperCase()}
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href={`/highschool/exams/${examination.slug}/${params.subject}`} className="hover:text-gold transition-colors">
             {paper.subject}
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <span className="text-slate-100 font-medium">{paper.year} · {paper.paperNumber}</span>
         </nav>
 
         {/* Header */}
         <header className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg))_55%,rgb(var(--bg-deep))_100%)] p-8 md:p-12 space-y-4">
-          <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">
+          <p className="text-slate-400 text-xs font-semibold uppercase tracking-[0.25em]">
             {examination.name.toUpperCase()} · {paper.subject}
           </p>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
@@ -103,9 +103,9 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
                 Start timed attempt
               </Link>
             </div>
-            <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-teal-500/40 transition-all">
+            <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all">
               <div>
-                <BookOpenCheck className="w-8 h-8 text-teal-300 mb-4" />
+                <BookOpenCheck className="w-8 h-8 text-gold mb-4" />
                 <h2 className="text-2xl font-serif font-bold mb-2">Open practice</h2>
                 <p className="text-slate-400 text-sm mb-6">
                   No clock. Sit the same paper at your own pace — ideal for first revision passes
@@ -114,7 +114,7 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
               </div>
               <Link
                 href={`${base}/take?mode=open`}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-teal-500 text-slate-950 font-semibold text-sm hover:bg-teal-400 transition-colors"
+                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
               >
                 Start open practice
               </Link>

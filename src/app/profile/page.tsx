@@ -45,7 +45,7 @@ export default async function ProfilePage() {
         </p>
         <Link
           href="/pricing"
-          className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           {premium ? "Manage membership" : "See Gnostiri Prime"}
         </Link>
@@ -75,7 +75,7 @@ export default async function ProfilePage() {
           {badges.map((badge) => (
             <li
               key={badge.id}
-              className="rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-amber-200"
+              className="rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-slate-100"
             >
               🏆 {badge.label}
             </li>

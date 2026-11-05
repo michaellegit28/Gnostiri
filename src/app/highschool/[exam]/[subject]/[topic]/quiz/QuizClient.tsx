@@ -102,7 +102,7 @@ export default function QuizClient({
   // Empty state if no questions
   if (initialQuestions.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6">
           <div className="w-16 h-16 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto">
             <HelpCircle className="w-8 h-8" />
@@ -278,7 +278,7 @@ export default function QuizClient({
     const isWeakTopic = !awaitingSync && accuracy < 60;
 
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 p-6 md:p-12 flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-slate-950 text-slate-100 p-6 md:p-12 flex flex-col items-center justify-center">
         <div className="max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-10 space-y-8 shadow-xl">
           {/* Header */}
           <div className="text-center space-y-3 border-b border-slate-800 pb-6">
@@ -309,7 +309,7 @@ export default function QuizClient({
                 Time Taken
               </div>
               <div className="text-2xl font-bold text-slate-100 flex items-center justify-center gap-1.5 mt-1">
-                <Clock className="w-5 h-5 text-teal-400" />
+                <Clock className="w-5 h-5 text-slate-400" />
                 <span>{formatTime(durationSeconds)}</span>
               </div>
             </div>
@@ -330,11 +330,11 @@ export default function QuizClient({
               Topic Analysis
             </h2>
             {awaitingSync && (
-              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex items-start gap-3 text-amber-200">
+              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex items-start gap-3 text-gold">
                 <CloudOff className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                 <div>
                   <div className="font-semibold text-gold text-sm">Offline — answers saved, will sync</div>
-                  <p className="text-xs text-amber-200/80 mt-1">
+                  <p className="text-xs text-slate-400/80 mt-1">
                     This paper was finished with no connection. Every answer is kept and graded by the server as soon as the submission syncs — nothing is scored from the device.
                   </p>
                 </div>
@@ -365,7 +365,7 @@ export default function QuizClient({
 
           {/* User Sign-In Banner / Save Status */}
           {!user ? (
-            <div className="bg-amber-950/30 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-amber-200">
+            <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-gold">
               <div className="flex items-center gap-3">
                 <LogIn className="w-5 h-5 text-gold shrink-0" />
                 <div className="text-xs md:text-sm text-slate-200">
@@ -432,21 +432,21 @@ export default function QuizClient({
 
   // Active Question UI
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 p-4 md:p-8 flex flex-col justify-between max-w-4xl mx-auto">
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-8 flex flex-col justify-between max-w-4xl mx-auto">
       {/* Top Bar Navigation & Progress */}
       <div className="space-y-4">
         <nav className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
           <Link href={examHubHref} className="hover:text-gold transition-colors">
             {examName}
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           <Link
             href={subjectHref}
             className="hover:text-gold transition-colors"
           >
             {subjectTitle}
           </Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           <span className="text-slate-200 font-medium truncate">{topicTitle}</span>
         </nav>
 
@@ -472,7 +472,7 @@ export default function QuizClient({
       </div>
 
       {savedOffline > 0 && (
-        <div className="flex items-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-200">
+        <div className="flex items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-4 py-2.5 text-sm text-gold">
           <CloudOff className="w-4 h-4 shrink-0" aria-hidden />
           <span>Offline — answers saved, will sync</span>
         </div>
@@ -505,7 +505,7 @@ export default function QuizClient({
                   optionStyle = "bg-slate-950/30 border-slate-800 text-slate-500 opacity-50";
                 }
               } else if (isSelected) {
-                optionStyle = "bg-gold/15 border-gold text-amber-300 font-semibold";
+                optionStyle = "bg-gold/15 border-gold text-gold font-semibold";
               }
 
               return (
@@ -592,7 +592,7 @@ export default function QuizClient({
           <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-3">
             <Link
               href={`/tutor?domain=${domain}&topicId=${encodeURIComponent(topicId)}`}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 text-teal-300 text-xs font-semibold border border-slate-700/50 flex items-center justify-center gap-1.5"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 text-slate-400 text-xs font-semibold border border-slate-700/50 flex items-center justify-center gap-1.5"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>Ask Tutor / Get Similar Question</span>

@@ -63,10 +63,10 @@ function displayName(member: {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  scheduled: "border-gold/40 bg-gold/10 text-gold",
-  live: "border-teal-500/40 bg-teal-500/10 text-teal-300",
+  scheduled: "border-slate-600 bg-slate-800/40 text-slate-400",
+  live: "border-teal-500/60 bg-teal-500/20 text-slate-100",
   finished: "border-white/15 bg-white/5 text-slate-400",
-  cancelled: "border-rose-500/40 bg-rose-500/10 text-rose-300",
+  cancelled: "border-rose-500/60 bg-rose-500/20 text-slate-100",
 };
 
 const STATUS_LABELS: Record<string, string> = {
@@ -74,6 +74,13 @@ const STATUS_LABELS: Record<string, string> = {
   live: "Live now",
   finished: "Finished",
   cancelled: "Cancelled",
+};
+
+const FORMAT_TEXT: Record<CompetitionFormat, string> = {
+  speed: "text-cup-speed",
+  endurance: "text-gold",
+  mastery: "text-cup-mastery",
+  bracket: "text-teal-500",
 };
 
 export default async function CompetitionPage({ params }: { params: { id: string } }) {
@@ -119,7 +126,7 @@ export default async function CompetitionPage({ params }: { params: { id: string
           </span>
         </div>
         <p className="mt-3 max-w-2xl text-sm text-slate-400">
-          <span className="font-semibold text-slate-300">{meta.label}</span> — {meta.blurb}
+          <span className={`font-semibold ${FORMAT_TEXT[format]}`}>{meta.label}</span> — {meta.blurb}
         </p>
         <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-slate-500">
           {competition.visibility === "public" ? "Public cup" : "Invite cup"} · entry: {competition.entryRule} ·
@@ -235,7 +242,7 @@ export default async function CompetitionPage({ params }: { params: { id: string
                 </p>
                 <Link
                   href="/login"
-                  className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
                   Sign in
                 </Link>
@@ -251,7 +258,7 @@ export default async function CompetitionPage({ params }: { params: { id: string
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     href={`/league/${competition.id}/${PLAY_PATH[format]}`}
-                    className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   >
                     {PLAY_LABEL[format]}
                   </Link>
@@ -274,7 +281,7 @@ export default async function CompetitionPage({ params }: { params: { id: string
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     href="/league/join"
-                    className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   >
                     Join cup
                   </Link>

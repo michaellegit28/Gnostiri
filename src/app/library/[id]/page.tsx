@@ -74,7 +74,7 @@ export default async function LibraryArtifactPage({ params }: { params: { id: st
         </section>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-amber-100">
+          <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-slate-100">
             <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-gold">
               <Trophy className="h-4 w-4" /> Rewards flow to the sharer
             </p>
@@ -84,7 +84,7 @@ export default async function LibraryArtifactPage({ params }: { params: { id: st
             </p>
           </div>
           <div className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-sm text-slate-300">
-            <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-emerald-300">
+            <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-slate-100">
               <ShieldCheck className="h-4 w-4" /> Artifacts, never files
             </p>
             <p className="text-slate-400">The source PDF is never stored or shared — only these processed notes and the quiz items exist.</p>

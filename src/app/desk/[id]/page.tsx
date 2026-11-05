@@ -77,7 +77,7 @@ export default async function DeskDocumentPage({ params }: { params: { id: strin
             {!owned ? " · shared artifact (same textbook as another student's)" : ""}
           </p>
           {document.errorNote && (
-            <p className="text-sm text-amber-300">{document.errorNote}</p>
+            <p className="text-sm text-slate-100">{document.errorNote}</p>
           )}
         </header>
 

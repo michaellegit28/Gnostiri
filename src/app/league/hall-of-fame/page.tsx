@@ -44,7 +44,7 @@ export default async function HallOfFamePage() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/league/ladder"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Climb the ladder
           </Link>

@@ -113,7 +113,7 @@ export default function LoginPage() {
         />
 
         <div>
-          <h1 className="font-serif text-3xl font-bold text-gold">
+          <h1 className="font-serif text-3xl font-bold text-slate-100">
             {mode === "signup" ? "Create your account" : "Welcome back"}
           </h1>
           <p className="mt-2 text-sm text-slate-400">
@@ -162,7 +162,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={busy}
-            className="min-h-12 w-full rounded-lg bg-gold font-semibold text-slate-950 transition-colors hover:bg-gold-hover disabled:opacity-50"
+            className="min-h-12 w-full rounded-lg bg-gold font-semibold text-on-gold transition-colors hover:bg-gold-hover disabled:opacity-50"
           >
             {busy ? "Please wait" : mode === "signup" ? "Sign up" : "Sign in"}
           </button>
@@ -194,7 +194,7 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => setMode(mode === "signup" ? "signin" : "signup")}
-            className="font-semibold text-teal-300 underline"
+            className="font-semibold text-slate-400 underline"
           >
             {mode === "signup" ? "Sign in" : "Create an account"}
           </button>

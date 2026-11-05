@@ -116,7 +116,7 @@ export default function AttemptClient({
     <div className="space-y-6">
       <header className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/80 p-5">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-teal-300">{mode === "timed" ? "Timed attempt" : "Open practice"}</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{mode === "timed" ? "Timed attempt" : "Open practice"}</p>
           <h1 className="mt-1 font-serif text-2xl font-bold">{headerTitle}</h1>
         </div>
         {mode === "timed" && !results && (
@@ -124,8 +124,8 @@ export default function AttemptClient({
             className={`px-5 py-3 rounded-xl border font-mono text-2xl font-bold tabular-nums ${
               timeUp
                 ? "border-rose-500/40 bg-rose-500/10 text-rose-300"
-                : remaining <= 300
-                  ? "border-gold/40 bg-gold/10 text-amber-300"
+                  : remaining <= 300
+                    ? "border-gold/40 bg-gold/10 text-gold"
                   : "border-slate-700 bg-slate-950 text-slate-100"
             }`}
             aria-label="Time remaining"
@@ -142,7 +142,7 @@ export default function AttemptClient({
           <section key={question.id} className="space-y-3 rounded-xl border border-slate-800 bg-slate-900 p-5 md:p-6">
             <div className="flex items-start justify-between gap-4">
               <h2 className="text-base md:text-lg font-semibold">
-                <span className="text-slate-500 font-serif mr-2">Q{index + 1}.</span>
+                <span className="text-slate-400 font-serif mr-2">Q{index + 1}.</span>
                 {question.questionText}
               </h2>
               {result && (
@@ -168,7 +168,7 @@ export default function AttemptClient({
                           ? "border-rose-500/60 bg-rose-500/10"
                           : "border-slate-800"
                       : selected === option
-                        ? "border-teal-500/60 bg-teal-500/10"
+                        ? "border-gold/60 bg-gold/10"
                         : "border-slate-700 hover:border-slate-600"
                   }`}
                 >
@@ -210,7 +210,7 @@ export default function AttemptClient({
           </p>
         </div>
       ) : (
-        <div className="space-y-5 rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-6">
+          <div className="space-y-5 rounded-xl border border-gold/30 bg-gradient-to-r from-gold/30 via-slate-900 to-slate-900 p-6">
           <div className="text-3xl font-serif font-bold text-gold">
             {score}/{maxScore} marks
           </div>

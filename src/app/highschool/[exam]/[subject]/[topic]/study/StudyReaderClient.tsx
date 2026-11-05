@@ -257,7 +257,7 @@ export default function StudyReaderClient({
   const hasBlocks = lessonContent && Array.isArray(lessonContent.blocks) && lessonContent.blocks.length > 0;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 flex flex-col pb-24 md:pb-28">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col pb-24 md:pb-28">
       {/* Top Header / Nav */}
       <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-30 px-4 py-3 md:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -269,14 +269,14 @@ export default function StudyReaderClient({
             >
               {examName}
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <Link
               href={`/highschool/${examCode}/${subjectSlug}`}
               className="hover:text-gold transition-colors whitespace-nowrap"
             >
               {subjectTitle}
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span className="text-slate-100 font-medium truncate max-w-[150px] sm:max-w-xs">
               {topicTitle}
             </span>
@@ -381,7 +381,7 @@ export default function StudyReaderClient({
             </article>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/50 p-8">
-              <BookOpen className="w-12 h-12 text-slate-600 mb-4" />
+              <BookOpen className="w-12 h-12 text-slate-400 mb-4" />
               <h3 className="text-xl font-semibold font-serif text-slate-200 mb-2">
                 Study notes on the way
               </h3>
@@ -404,7 +404,7 @@ export default function StudyReaderClient({
       </div>
 
       {savedOffline && (
-        <p className="mx-4 mb-2 flex items-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-200 md:mx-8">
+        <p className="mx-4 mb-2 flex items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-4 py-2.5 text-sm text-gold md:mx-8">
           <CloudOff className="h-4 w-4 shrink-0" aria-hidden />
           Offline — answers saved, will sync
         </p>
@@ -442,7 +442,7 @@ export default function StudyReaderClient({
             href={`/tutor?domain=highschool&topicId=${encodeURIComponent(fullTopicId)}`}
             className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs md:text-sm transition-colors border border-slate-700"
           >
-            <MessageSquare className="w-4 h-4 shrink-0 text-teal-400" />
+            <MessageSquare className="w-4 h-4 shrink-0 text-slate-400" />
             <span className="truncate">Ask Tutor</span>
           </Link>
         </div>

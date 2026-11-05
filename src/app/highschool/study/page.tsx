@@ -78,9 +78,9 @@ export default async function StudyBoard() {
             className="block rounded-xl border border-gold/30 bg-gold/10 p-4 hover:border-gold/60 transition-colors"
           >
             <div className="flex items-center justify-between gap-3">
-              <span className="text-sm text-amber-200">
+              <span className="text-sm text-slate-100">
                 Continue: <strong>{resume.subjectName} → {resume.topicTitle}</strong>
-                <span className="ml-2 text-xs text-amber-300/80">{resume.pct}% complete</span>
+                <span className="ml-2 text-xs text-slate-400">{resume.pct}% complete</span>
               </span>
               <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </div>
@@ -103,7 +103,7 @@ export default async function StudyBoard() {
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
                         <span className="rounded-lg border border-slate-700 bg-slate-800/60 p-2"><Icon className="w-5 h-5 text-gold" /></span>
-                        <h3 className="font-semibold text-slate-100 group-hover:text-amber-300">{subject.name}</h3>
+                        <h3 className="font-semibold text-slate-100 group-hover:text-gold">{subject.name}</h3>
                       </div>
                       <ProgressRing value={stats.total ? stats.done / stats.total : 0} />
                     </div>

@@ -209,14 +209,14 @@ export default async function CoursePage({
               <div className="pt-2">
                 <Link
                   href={`/university/${course.slug}/lessons/${nextLesson.id}`}
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 >
                   {doneSet.size > 0
                     ? `Continue — lesson ${course.lessons.indexOf(nextLesson) + 1} of ${course.lessons.length}`
                     : "Start here — lesson 1"}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
-                <p className="mt-2 text-xs text-slate-500">
+                <p className="mt-2 text-xs text-slate-400">
                   {nextModule ? `${nextModule.title} · ` : ""}{nextLesson.title} · ~{nextLesson.estimatedMinutes} min
                 </p>
               </div>

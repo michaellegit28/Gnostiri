@@ -47,9 +47,9 @@ export default async function ExamPage({ params, searchParams }: PageProps) {
         <span className="text-slate-300">Exam hall</span>
       </nav>
       <header className="border-b pb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-primary">Exam Hall</p>
+        <p className="text-sm font-medium uppercase tracking-widest text-slate-400">Exam Hall</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{course.title}</h1>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-slate-400">
           {examMode === "timed"
             ? "A blueprint-balanced paper drawn from published items across this course. Negative marking applies, answers are revealed only on submission, and the clock auto-submits."
             : "An open-book attempt on the same blueprint. No time pressure, and practice sittings do not graduate concepts."}
@@ -59,13 +59,13 @@ export default async function ExamPage({ params, searchParams }: PageProps) {
       <div className="mt-8 flex gap-2">
         <a
           href={`/university/${slug}/exams?mode=timed`}
-          className={`rounded-lg border px-4 py-2 text-sm font-medium ${examMode === "timed" ? "border-primary bg-primary/5 text-primary" : "hover:bg-muted/50"}`}
+          className={`rounded-lg border border-line px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-100 ${examMode === "timed" ? "border-gold bg-gold text-on-gold" : "hover:bg-slate-500/10"}`}
         >
           Timed
         </a>
         <a
           href={`/university/${slug}/exams?mode=open`}
-          className={`rounded-lg border px-4 py-2 text-sm font-medium ${examMode === "open" ? "border-primary bg-primary/5 text-primary" : "hover:bg-muted/50"}`}
+          className={`rounded-lg border border-line px-4 py-2 text-sm font-medium text-slate-400 hover:text-slate-100 ${examMode === "open" ? "border-gold bg-gold text-on-gold" : "hover:bg-slate-500/10"}`}
         >
           Open book
         </a>

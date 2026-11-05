@@ -55,8 +55,8 @@ export default function FilterChips({
             onClick={() => onChange(item.value)}
             className={`shrink-0 min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:cursor-not-allowed disabled:opacity-40 ${
               active
-                ? "border-transparent bg-gold text-slate-950"
-                : "border-white/10 bg-white/5 text-slate-200 hover:border-gold/50"
+                ? "border-transparent bg-gold text-on-gold"
+                : "border-line bg-surface/10 text-slate-400 hover:border-gold/50"
             }`}
           >
             {item.label}

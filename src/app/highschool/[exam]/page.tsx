@@ -68,7 +68,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
     : [];
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-800 pb-6">
@@ -87,7 +87,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
         {/* Battle Plan CTA */}
         <Link
           href="/battle-plan"
-          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-gold/30 bg-gradient-to-r from-amber-950/40 via-slate-900 to-slate-900 p-5 hover:border-gold/60 transition-colors group"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-gold/30 bg-gradient-to-r from-gold/30 via-slate-900 to-slate-900 p-5 hover:border-gold/60 transition-colors group"
         >
           <div>
             <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-gold transition-colors">
@@ -129,7 +129,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
                       <span>{topicCount} topics</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <HelpCircle className="w-4 h-4 text-teal-400" />
+                      <HelpCircle className="w-4 h-4 text-slate-400" />
                       <span>{totalQuestions} questions</span>
                     </div>
                   </div>

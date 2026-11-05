@@ -106,7 +106,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:font-semibold focus:text-slate-950"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-2 focus:font-semibold focus:text-on-gold"
       >
         Skip to content
       </a>
@@ -137,7 +137,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             type="button"
             aria-label="Search navigation (Command K)"
             onClick={() => setPalette(true)}
-            className="hidden min-h-[44px] items-center gap-2 rounded-lg border border-white/10 px-3 text-xs text-slate-400 hover:border-gold/50 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:flex"
+            className="hidden min-h-[44px] items-center gap-2 rounded-lg border border-line px-3 text-xs text-slate-400 hover:border-gold/50 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:flex"
           >
             <Command className="h-3.5 w-3.5" aria-hidden />
             Jump to…
@@ -192,7 +192,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             {NAV_ZONES.map((zone) => (
               <div key={zone.id} className="mb-7">
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">{zone.label}</p>
-                <ul className="divide-y divide-white/5 border-y border-white/5">
+                <ul className="divide-y divide-border/10 border-y border-border/10">
                   {zone.items.map((item) => {
                     const Icon = item.icon;
                     const active = isActive(pathname, item.href);
@@ -201,13 +201,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                         <Link
                           href={item.href}
                           aria-current={active ? "page" : undefined}
-                          className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                            active ? "border-gold" : "border-transparent hover:border-gold/40"
-                          }`}
+                            className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                              active ? "border-gold bg-gold/10 text-slate-100" : "border-transparent hover:border-gold/40"
+                            }`}
                         >
                           <Icon className={`h-5 w-5 ${active ? "text-gold" : "text-slate-400 group-hover:text-gold"}`} aria-hidden />
                           <span>
-                            <span className={`block font-serif text-lg font-bold ${active ? "text-gold" : "text-slate-100 group-hover:text-gold"}`}>
+                            <span className={`block font-serif text-lg font-bold ${active ? "text-slate-100" : "text-slate-100 group-hover:text-gold"}`}>
                               {item.label}
                             </span>
                             <span className="block text-xs text-muted">{item.note}</span>
@@ -221,7 +221,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             ))}
             <Link
               href="/profile"
-              className="flex min-h-[48px] items-center justify-center rounded-xl border border-white/15 text-sm font-semibold text-slate-200 hover:border-gold/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="flex min-h-[48px] items-center justify-center rounded-xl border border-border/10 text-sm font-semibold text-slate-400 hover:border-gold/50 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               Profile & settings
             </Link>
@@ -239,7 +239,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           aria-label="Jump to"
         >
           <div className="mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-line bg-surface/95 shadow-2xl">
-            <p className="border-b border-white/10 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-gold">Jump to</p>
+            <p className="border-b border-border/10 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-gold">Jump to</p>
             <ul className="max-h-[60vh] overflow-y-auto py-2">
               {allItems.map((item) => {
                 const Icon = item.icon;
@@ -247,7 +247,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="flex min-h-[44px] items-center gap-3 px-4 py-2.5 text-sm text-slate-200 hover:bg-white/5 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                      className="flex min-h-[44px] items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-surface/10 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                     >
                       <Icon className="h-4 w-4 text-slate-400" aria-hidden />
                       {item.label}
@@ -315,7 +315,7 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
       href={item.href}
       aria-current={active ? "page" : undefined}
       className={`flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 px-2 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-        active ? "border-gold bg-gold/10 text-gold" : "border-transparent text-slate-300 hover:bg-white/5 hover:text-gold"
+        active ? "border-gold bg-gold/10 text-slate-100" : "border-transparent text-slate-300 hover:bg-surface/10 hover:text-gold"
       }`}
     >
       <Icon className="h-4 w-4 shrink-0" aria-hidden />

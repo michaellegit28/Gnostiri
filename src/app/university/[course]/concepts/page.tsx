@@ -47,7 +47,7 @@ export default async function ConceptMapPage({ params }: { params: { course: str
         </nav>
 
         <header className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-xs font-semibold border border-violet-500/30">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 text-xs font-semibold border border-teal-500/30">
             <Brain className="w-4 h-4" />
             <span>How knowledge connects</span>
           </div>

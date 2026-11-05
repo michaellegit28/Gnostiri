@@ -96,8 +96,8 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
       </div>
 
       {eligibility.eligible ? (
-        <p className="mt-5 inline-flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-emerald-300">
-          <Sparkles className="h-4 w-4" aria-hidden />
+        <p className="mt-5 inline-flex items-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-slate-100">
+          <Sparkles className="h-4 w-4 text-gold" aria-hidden />
           You are eligible to host a Merit League cup.
         </p>
       ) : (
@@ -113,7 +113,7 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
 
       <Link
         href="/league/create"
-        className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
       >
         <PlusCircle className="h-4 w-4" aria-hidden />
         Create a cup
@@ -220,10 +220,18 @@ export default async function LeagueLobby() {
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {COMPETITION_FORMATS.map((format: CompetitionFormat) => {
             const meta = FORMAT_META[format];
+            const cupAccent =
+              format === "speed"
+                ? "border-cup-speed/60 text-cup-speed"
+                : format === "endurance"
+                  ? "border-gold/60 text-gold"
+                  : format === "mastery"
+                    ? "border-cup-mastery/60 text-cup-mastery"
+                    : "border-teal-500/60 text-teal-500";
             return (
-              <div key={format} className="rounded-xl border border-slate-800 bg-slate-900/70 p-5">
+              <div key={format} className={`rounded-xl border bg-slate-900/70 p-5 ${cupAccent}`}>
                 <div className="flex items-center gap-2">
-                  <Trophy className="h-5 w-5 text-gold" aria-hidden />
+                  <Trophy className={`h-5 w-5 ${cupAccent.split(" ")[1]}`} aria-hidden />
                   <h3 className="font-serif text-lg font-bold text-slate-100">{meta.label}</h3>
                 </div>
                 <p className="mt-2 text-sm text-slate-400">{meta.blurb}</p>
@@ -249,7 +257,7 @@ export default async function LeagueLobby() {
             </p>
             <Link
               href="/login"
-              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
             >
               Sign in
             </Link>

@@ -31,7 +31,7 @@ export default async function LadderPlayPage({ searchParams }: { searchParams: {
         </p>
         <Link
           href="/login"
-          className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover"
+          className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover"
         >
           Sign in
         </Link>

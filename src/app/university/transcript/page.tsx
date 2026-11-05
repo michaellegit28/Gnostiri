@@ -31,10 +31,10 @@ export default async function TranscriptPage() {
           <span className="text-slate-300">Transcript</span>
         </nav>
         <h1 className="text-2xl font-bold">Competency transcript</h1>
-        <p className="mt-4 text-muted-foreground">Sign in to view your competency record.</p>
+        <p className="mt-4 text-slate-400">Sign in to view your competency record.</p>
         <Link
           href="/login"
-          className="mt-5 inline-flex min-h-[44px] items-center rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-5 inline-flex min-h-[44px] items-center rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           Sign in to continue
         </Link>
@@ -58,37 +58,37 @@ export default async function TranscriptPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
       <header className="border-b pb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-primary">Gnostiri University</p>
+        <p className="text-sm font-medium uppercase tracking-widest text-slate-400">Gnostiri University</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Competency transcript</h1>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-slate-400">
           A live record of every concept you have demonstrated, drawn from your mastery data. Levels update the moment an exam or review is scored.
         </p>
       </header>
 
       <section className="mt-8 grid grid-cols-3 gap-4">
-        <div className="rounded-2xl border bg-card p-5">
+        <div className="rounded-2xl border border-line bg-surface p-5">
           <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{stats.mastery}</div>
-          <div className="text-sm text-muted-foreground">At mastery</div>
+          <div className="text-sm text-slate-400">At mastery</div>
         </div>
-        <div className="rounded-2xl border bg-card p-5">
-          <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.proficient}</div>
-          <div className="text-sm text-muted-foreground">Proficient</div>
+        <div className="rounded-2xl border border-line bg-surface p-5">
+          <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">{stats.proficient}</div>
+          <div className="text-sm text-slate-400">Proficient</div>
         </div>
-        <div className="rounded-2xl border bg-card p-5">
+        <div className="rounded-2xl border border-line bg-surface p-5">
           <div className="text-3xl font-bold text-amber-600 dark:text-gold">{stats.developing}</div>
-          <div className="text-sm text-muted-foreground">Developing</div>
+          <div className="text-sm text-slate-400">Developing</div>
         </div>
       </section>
 
       <section className="mt-10">
         <div className="flex items-baseline justify-between">
           <h2 className="text-xl font-semibold">Concept record</h2>
-          <span className="text-sm text-muted-foreground">{lines.length} concepts</span>
+          <span className="text-sm text-slate-400">{lines.length} concepts</span>
         </div>
 
-        <ul className="mt-4 divide-y rounded-2xl border bg-card">
+        <ul className="mt-4 divide-y rounded-2xl border border-line bg-surface">
           {lines.length === 0 ? (
-            <li className="p-8 text-center text-muted-foreground">
+            <li className="p-8 text-center text-slate-400">
               No concepts attempted yet. Visit a course and start a revision queue or exam.
             </li>
           ) : (
@@ -96,10 +96,10 @@ export default async function TranscriptPage() {
               const level = LEVELS[line.level] ?? LEVELS.developing;
               return (
                 <li key={`${line.code}-${line.title}`} className="flex items-start gap-4 p-5">
-                  <span className="mt-0.5 w-16 shrink-0 font-mono text-xs text-muted-foreground">{line.code}</span>
+                  <span className="mt-0.5 w-16 shrink-0 font-mono text-xs text-slate-400">{line.code}</span>
                   <div className="min-w-0 flex-1">
                     <p className="font-medium leading-snug">{line.title}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{line.evidence}</p>
+                    <p className="mt-1 text-sm text-slate-400">{line.evidence}</p>
                   </div>
                   <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${level.classes}`}>{level.label}</span>
                 </li>
@@ -109,16 +109,16 @@ export default async function TranscriptPage() {
         </ul>
       </section>
 
-      <section className="mt-12 rounded-2xl border bg-muted/30 p-6">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Programmes</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
+      <section className="mt-12 rounded-2xl border border-line bg-slate-500/10 p-6">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-400">Programmes</h2>
+        <p className="mt-2 text-sm text-slate-400">
           Transcripts are issued per programme once you are enrolled. The following programmes are open:
         </p>
         <ul className="mt-4 space-y-2">
           {programmes.map((p) => (
-            <li key={p.id} className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
+            <li key={p.id} className="flex items-center justify-between rounded-lg border border-line bg-surface px-4 py-3">
               <span className="font-medium">{p.name}</span>
-              <span className="text-sm text-muted-foreground">{p.degreeAwarded}</span>
+              <span className="text-sm text-slate-400">{p.degreeAwarded}</span>
             </li>
           ))}
         </ul>

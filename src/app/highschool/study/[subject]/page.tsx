@@ -122,7 +122,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
             className="sticky top-2 z-20 block rounded-xl border border-gold/30 bg-slate-950/90 backdrop-blur p-3 hover:border-gold/60"
           >
             <div className="flex items-center justify-between gap-2">
-              <span className="text-sm text-amber-200">Continue where you left off: <strong>{resume.title}</strong></span>
+              <span className="text-sm text-slate-100">Continue where you left off: <strong>{resume.title}</strong></span>
               <ArrowRight className="w-4 h-4 text-gold shrink-0" />
             </div>
           </Link>
@@ -130,8 +130,8 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
 
         <details className="rounded-xl border border-slate-800 bg-slate-900/70">
           <summary className="cursor-pointer select-none p-3 text-sm text-slate-400 flex items-center gap-2">
-            <Globe2 className="w-4 h-4 text-teal-400" /> Region filter
-            {regionParam && <span className="text-teal-300">· active</span>}
+            <Globe2 className="w-4 h-4 text-slate-400" /> Region filter
+            {regionParam && <span className="text-slate-400">· active</span>}
           </summary>
           <form method="get" className="flex flex-wrap items-center gap-2 border-t border-slate-800 p-3 text-sm">
             <select name="region" defaultValue={regionParam} className="rounded bg-slate-900 border border-slate-700 px-2 py-1.5">
@@ -174,7 +174,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
                       <SubtopicChips subtopics={t.subtopics} />
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-slate-600 mt-1 shrink-0" />
+                  <ArrowRight className="w-4 h-4 text-slate-400 mt-1 shrink-0" />
                 </div>
               </Link>
             </li>
@@ -188,10 +188,10 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
 function StatusChip({ tone, label }: { tone: "ready" | "amber" | "gold" | "retry" | "muted"; label: string }) {
   const cls = {
     ready: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
-    amber: "bg-gold/10 text-amber-300 border-gold/30",
+    amber: "bg-gold/10 text-gold border-gold/30",
     gold: "bg-gold/10 text-gold border-gold/30",
     retry: "bg-red-500/10 text-red-300 border-red-500/30",
-    muted: "bg-slate-800 text-slate-500 border-slate-700",
+    muted: "bg-slate-800 text-slate-400 border-slate-700",
   }[tone];
   return <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold border ${cls}`}>{label}</span>;
 }

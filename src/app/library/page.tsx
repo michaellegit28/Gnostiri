@@ -119,7 +119,7 @@ export default async function LibraryPage({
             Adopt one and the same processed content lands on your desk — no re-upload, no re-reading.
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-amber-100">
+            <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-slate-100">
               <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-gold">
                 <Trophy className="h-4 w-4" /> Dual rewards for sharers
               </p>
@@ -130,7 +130,7 @@ export default async function LibraryPage({
               </p>
             </div>
             <div className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-sm text-slate-300">
-              <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-emerald-300">
+              <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-slate-100">
                 <ShieldCheck className="h-4 w-4" /> We never share source files
               </p>
               <p className="text-slate-400">
@@ -156,7 +156,7 @@ export default async function LibraryPage({
           />
           <button
             type="submit"
-            className="rounded-lg bg-gold px-5 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-300"
+            className="rounded-lg bg-gold px-5 py-2 text-sm font-semibold text-on-gold transition-colors hover:bg-gold-hover"
           >
             Search
           </button>

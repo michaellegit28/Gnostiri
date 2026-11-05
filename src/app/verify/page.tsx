@@ -92,11 +92,11 @@ export default async function VerifyPage({
             spellCheck={false}
             autoComplete="off"
             maxLength={64}
-            className="min-h-[44px] flex-1 rounded-xl border border-slate-700 bg-slate-950/60 px-4 font-mono text-sm uppercase tracking-widest text-slate-100 placeholder:text-slate-600 focus:border-gold focus:outline-none"
+            className="min-h-[44px] flex-1 rounded-xl border border-slate-700 bg-slate-950/60 px-4 font-mono text-sm uppercase tracking-widest text-slate-100 placeholder:text-slate-400 focus:border-gold focus:outline-none"
           />
           <button
             type="submit"
-            className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
           >
             Verify
           </button>

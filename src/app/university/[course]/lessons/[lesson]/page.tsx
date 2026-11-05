@@ -136,12 +136,12 @@ export default async function LessonPage({ params }: PageProps) {
             {concept && (
               <Link
                 href={`/university/${course.slug}/concepts`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-semibold text-violet-200 transition-colors hover:border-violet-400/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex items-center gap-1.5 rounded-full border border-teal-500/30 bg-teal-500/10 px-3 py-1 font-semibold text-teal-200 transition-colors hover:border-teal-400/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               >
                 <Sparkles className="h-3.5 w-3.5" aria-hidden /> {concept.title}
               </Link>
             )}
-            <span className="inline-flex items-center gap-1.5 text-slate-500">
+            <span className="inline-flex items-center gap-1.5 text-slate-400">
               <Clock className="h-3.5 w-3.5" aria-hidden /> ~{lesson.estimatedMinutes} min
             </span>
             {isDone && (
@@ -152,7 +152,7 @@ export default async function LessonPage({ params }: PageProps) {
           </div>
           <h1 className="font-serif text-3xl font-bold tracking-tight md:text-4xl">{lesson.title}</h1>
           {concept && concept.bloomsLevel && (
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-slate-400">
               {concept.bloomsLevel} · {concept.estMinutes} min concept
             </p>
           )}
@@ -210,7 +210,7 @@ export default async function LessonPage({ params }: PageProps) {
               <ArrowLeft className="h-4 w-4" aria-hidden />
               <span className="text-left">
                 <span className="block">{prevLabel}</span>
-                {prevSub && <span className="block text-[11px] text-slate-500">{prevSub}</span>}
+                {prevSub && <span className="block text-[11px] text-slate-400">{prevSub}</span>}
               </span>
             </Link>
           ) : (

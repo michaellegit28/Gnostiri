@@ -140,20 +140,20 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
   const subjectOrder = order.filter((slug) => (groups.get(slug)?.topics.length ?? 0) > 0);
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-5xl mx-auto space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/highschool/exams" className="rounded hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Exams</Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
             {examination.name.toUpperCase()}
           </Link>
-          <ChevronRight className="w-4 h-4 text-slate-600" />
+          <ChevronRight className="w-4 h-4 text-slate-400" />
           <span className="text-slate-100 font-medium">Practice</span>
         </nav>
 
         <header className="space-y-3">
-          <p className="text-teal-300 text-xs font-semibold uppercase tracking-[0.25em]">Board-format practice</p>
+          <p className="text-slate-400 text-xs font-semibold uppercase tracking-[0.25em]">Board-format practice</p>
           <h1 className="text-3xl md:text-4xl font-serif font-bold">
             Practice {examination.name.toUpperCase()} in the <span className="text-gold">real format</span>
           </h1>
@@ -163,7 +163,7 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
             {examination.lastVerified ? " Board format verified." : ""}
           </p>
           {totalQuestions > 0 && (
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400">
               {totalQuestions.toLocaleString()} question{totalQuestions === 1 ? "" : "s"} tagged to this board&apos;s papers across{" "}
               {subjectOrder.length} subject{subjectOrder.length === 1 ? "" : "s"}.
             </p>
@@ -195,17 +195,17 @@ export default async function BoardPracticePickerPage({ params }: PickerPageProp
                         <div className="font-semibold text-slate-100 group-hover:text-gold transition-colors">{topic.title}</div>
                         <div className="mt-2 flex items-center gap-4 text-xs text-slate-400">
                           {topic.counts.mcq > 0 && (
-                            <span className="flex items-center gap-1"><HelpCircle className="w-3.5 h-3.5 text-teal-400" /> {topic.counts.mcq} objective</span>
+                            <span className="flex items-center gap-1"><HelpCircle className="w-3.5 h-3.5 text-slate-400" /> {topic.counts.mcq} objective</span>
                           )}
                           {topic.counts.theory > 0 && (
                             <span className="flex items-center gap-1"><ClipboardCheck className="w-3.5 h-3.5 text-gold" /> {topic.counts.theory} theory</span>
                           )}
                           {topic.counts.practical > 0 && (
-                            <span className="flex items-center gap-1"><FlaskConical className="w-3.5 h-3.5 text-emerald-400" /> {topic.counts.practical} practical</span>
+                            <span className="flex items-center gap-1"><FlaskConical className="w-3.5 h-3.5 text-slate-400" /> {topic.counts.practical} practical</span>
                           )}
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-gold group-hover:translate-x-0.5 transition-all shrink-0" />
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-gold group-hover:translate-x-0.5 transition-all shrink-0" />
                     </Link>
                   ))}
                 </div>

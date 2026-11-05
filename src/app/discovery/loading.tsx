@@ -10,7 +10,7 @@ export default function DiscoveryLoading() {
       role="status"
       aria-busy="true"
       aria-label="Loading Discovery content"
-      className="min-h-screen bg-transparent text-slate-50"
+      className="min-h-screen bg-transparent text-slate-100"
     >
       <div className="mx-auto w-full max-w-6xl space-y-8 px-6 py-16 text-center">
         <Skeleton className="mx-auto h-6 w-56" />
