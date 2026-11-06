@@ -94,12 +94,12 @@ export default function PreferencesForm() {
   };
 
   if (state === "loading") {
-    return <p className="text-sm text-slate-400">Loading your preferences…</p>;
+    return <p className="text-sm text-muted">Loading your preferences…</p>;
   }
 
   return (
     <div className="space-y-6">
-      <label className="flex items-start gap-3 text-sm text-slate-400">
+      <label className="flex items-start gap-3 text-sm text-muted">
         <input
           type="checkbox"
           checked={prefs.emailOptIn}
@@ -107,18 +107,18 @@ export default function PreferencesForm() {
             setPrefs((prev) => ({ ...prev, emailOptIn: e.target.checked }));
             setState("idle");
           }}
-          className="mt-0.5 h-4 w-4 rounded border-border/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-0.5 h-4 w-4 rounded border-line bg-bg accent-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         />
         <span>
           Email backup
-          <span className="mt-0.5 block text-xs text-slate-400">
+          <span className="mt-0.5 block text-xs text-muted">
             In-app is always on. Email is an optional copy for the moment you are away — nothing else leaves Gnostiri.
           </span>
         </span>
       </label>
 
       <div className="space-y-3">
-        <label className="flex items-center gap-3 text-sm text-slate-400">
+        <label className="flex items-center gap-3 text-sm text-muted">
           <input
             type="checkbox"
             checked={quietEnabled}
@@ -126,7 +126,7 @@ export default function PreferencesForm() {
               setQuietEnabled(e.target.checked);
               setState("idle");
             }}
-            className="h-4 w-4 rounded border-border/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="h-4 w-4 rounded border-line bg-bg accent-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           />
           Quiet hours
         </label>
@@ -141,7 +141,7 @@ export default function PreferencesForm() {
                 setState("idle");
               }}
               aria-label="Quiet hours start"
-              className="rounded-lg border border-border/10 bg-slate-900 px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="rounded-lg border border-line bg-bg px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             />
             <span>and</span>
             <input
@@ -152,16 +152,16 @@ export default function PreferencesForm() {
                 setState("idle");
               }}
               aria-label="Quiet hours end"
-              className="rounded-lg border border-border/10 bg-slate-900 px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="rounded-lg border border-line bg-bg px-3 py-1.5 text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             />
-            <span className="text-xs text-slate-400">The in-app row is still written; only the email waits.</span>
+            <span className="text-xs text-muted">The in-app row is still written; only the email waits.</span>
           </div>
         )}
       </div>
 
       <fieldset className="space-y-3">
-        <legend className="text-sm text-slate-400">Mute a type</legend>
-        <p className="text-xs text-slate-400">A muted type writes nothing — no bell entry, no email.</p>
+        <legend className="text-sm text-muted">Mute a type</legend>
+        <p className="text-xs text-muted">A muted type writes nothing — no bell entry, no email.</p>
         <div className="grid gap-2 sm:grid-cols-2">
           {NOTIFICATION_TYPES.map((type) => (
             <label key={type} className="flex items-center gap-3 text-sm text-slate-300">
@@ -169,7 +169,7 @@ export default function PreferencesForm() {
                 type="checkbox"
                 checked={prefs.mutedTypes.includes(type)}
                 onChange={() => toggleMuted(type)}
-                className="h-4 w-4 rounded border-border/20 bg-slate-900 accent-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="h-4 w-4 rounded border-line bg-bg accent-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               />
               {TYPE_LABELS[type] ?? type}
             </label>
@@ -182,7 +182,8 @@ export default function PreferencesForm() {
           type="button"
           onClick={save}
           disabled={state === "saving"}
-          className="flex min-h-[44px] items-center rounded-xl bg-gold px-5 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
+          aria-busy={state === "saving"}
+          className="gn-motion flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-5 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {state === "saving" ? "Saving…" : "Save preferences"}
         </button>

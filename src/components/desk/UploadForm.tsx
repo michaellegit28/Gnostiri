@@ -72,7 +72,7 @@ export default function UploadForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-xl border border-slate-800 bg-slate-900/80 p-6">
+    <form onSubmit={onSubmit} className="space-y-4 rounded-xl border border-line bg-surface p-6">
       <div>
         <label htmlFor="desk-file" className="mb-2 block text-sm font-medium text-slate-200">
           PDF (max 120 pages, 8MB)
@@ -83,7 +83,7 @@ export default function UploadForm() {
           type="file"
           accept="application/pdf,.pdf"
           required
-          className="block w-full text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-gold file:px-4 file:py-2 file:text-sm file:font-semibold file:text-slate-950 hover:file:bg-amber-400"
+          className="block w-full text-sm text-slate-300 file:mr-4 file:rounded-lg file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-on-primary hover:file:bg-primary-hover"
         />
         <p className="mt-2 text-xs text-slate-500">
           Your PDF is parsed in memory and discarded — only the processed notes and quiz are stored.
@@ -97,7 +97,7 @@ export default function UploadForm() {
             id="desk-minutes"
             value={minutesPerDay}
             onChange={(e) => setMinutesPerDay(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-gold focus:outline-none"
+            className="w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-200 focus:border-primary focus:outline-none"
           >
             <option value="30">30</option>
             <option value="60">60</option>
@@ -110,7 +110,7 @@ export default function UploadForm() {
             id="desk-days"
             value={days}
             onChange={(e) => setDays(e.target.value)}
-            className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 focus:border-gold focus:outline-none"
+            className="w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-200 focus:border-primary focus:outline-none"
           >
             <option value="3">3 days</option>
             <option value="7">7 days</option>
@@ -129,14 +129,14 @@ export default function UploadForm() {
           onChange={(e) => setSubject(e.target.value)}
           placeholder="e.g. biology"
           maxLength={60}
-          className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-gold focus:outline-none"
+          className="w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-primary focus:outline-none"
         />
       </div>
 
       <button
         type="submit"
         disabled={busy}
-        className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-400 disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
         {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
         {busy ? "Processing…" : "Upload & process"}
@@ -150,7 +150,7 @@ export default function UploadForm() {
       )}
 
       {result && (
-        <div className="space-y-2 rounded-lg border border-slate-700 bg-slate-950/60 p-4 text-sm" role="status">
+        <div className="space-y-2 rounded-lg border border-line bg-surface/40 p-4 text-sm" role="status">
           <p className="flex items-center gap-2 font-medium text-slate-100">
             <CheckCircle2 className="h-4 w-4 text-emerald-400" />
             {result.document.title}

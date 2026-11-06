@@ -43,7 +43,7 @@ export default function LaunchRedeemForm() {
 
   return (
     <div className="space-y-3">
-      <label className="text-sm text-slate-400" htmlFor="launch-token">
+      <label className="text-sm text-muted" htmlFor="launch-token">
         Your launch token
       </label>
       <div className="flex flex-col sm:flex-row gap-2">
@@ -52,7 +52,7 @@ export default function LaunchRedeemForm() {
           value={code}
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           placeholder="GN-XXXX-XXXX-XXXX"
-          className="min-h-12 flex-1 rounded-lg border border-slate-700 bg-slate-950 px-4 font-mono tracking-widest"
+          className="min-h-12 flex-1 rounded-lg border border-line bg-bg px-4 font-mono tracking-widest focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           autoComplete="off"
           spellCheck={false}
         />
@@ -60,12 +60,13 @@ export default function LaunchRedeemForm() {
           type="button"
           onClick={() => void redeem()}
           disabled={busy || code.trim().length < 8}
-          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-gold px-6 font-semibold text-on-gold hover:bg-gold-hover disabled:opacity-50"
+          aria-busy={busy}
+          className="gn-motion inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {busy ? "Redeeming…" : "Redeem"}
         </button>
       </div>
-      {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
+      {error && <p role="alert" className="text-sm text-rose-300">{error}</p>}
       {success && (
         <p className="text-sm text-slate-100 flex items-center gap-2">
           <Sparkles className="w-4 h-4" /> {success}

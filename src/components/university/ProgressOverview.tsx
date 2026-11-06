@@ -83,7 +83,7 @@ export default async function ProgressOverview({
         <h2 className="font-serif text-lg font-bold text-slate-100">Progress</h2>
         <Link
           href="/university/transcript"
-          className="rounded text-xs font-medium text-slate-400 underline-offset-4 hover:text-gold hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="rounded text-xs font-medium text-slate-400 underline-offset-4 hover:text-electric-text hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Transcript
         </Link>
@@ -102,7 +102,7 @@ export default async function ProgressOverview({
       </dl>
       {!userId && (
         <p className="mt-4 text-xs text-slate-400">
-          <Link href="/login" className="rounded text-slate-400 underline-offset-4 hover:text-gold hover:underline">Sign in</Link> to track
+          <Link href="/login" className="rounded text-slate-400 underline-offset-4 hover:text-electric-text hover:underline">Sign in</Link> to track
           your progress and your transcript. {totalUniversityCourses} course{totalUniversityCourses === 1 ? "" : "s"} in
           the catalogue.
         </p>

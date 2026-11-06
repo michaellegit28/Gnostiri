@@ -34,7 +34,7 @@ export default function AdoptButton({
     return (
       <Link
         href="/login"
-        className={`inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold transition-colors hover:border-gold/70 ${className}`}
+        className={`gn-motion inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold-text transition-colors hover:border-gold/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${className}`}
       >
         <LogIn className="h-4 w-4" /> Sign in to adopt
       </Link>
@@ -45,7 +45,7 @@ export default function AdoptButton({
     return (
       <Link
         href="/desk"
-        className={`inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500 ${className}`}
+        className={`gn-motion inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 active:scale-[0.98] ${className}`}
       >
         <PartyPopper className="h-4 w-4" /> On your desk — open it
       </Link>
@@ -56,7 +56,7 @@ export default function AdoptButton({
     return (
       <Link
         href="/desk"
-        className={`inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-slate-600 px-4 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-gold/50 ${className}`}
+        className={`inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-line-strong px-4 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-primary/50 ${className}`}
       >
         Already on your desk — open it
       </Link>
@@ -91,7 +91,8 @@ export default function AdoptButton({
         type="button"
         onClick={adopt}
         disabled={status === "busy"}
-        className="inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-300 disabled:opacity-60"
+        aria-busy={status === "busy"}
+        className="gn-motion inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "busy" ? <Loader2 className="h-4 w-4 animate-spin" /> : <Gift className="h-4 w-4" />}
         {status === "busy" ? "Adopting…" : label}

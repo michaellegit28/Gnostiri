@@ -32,7 +32,7 @@ export default function ExamTimer({
           ? "border-rose-500/40 bg-rose-500/10 text-rose-300"
           : warn
             ? "border-amber-500/40 bg-amber-500/10 text-amber-300"
-            : "border-slate-700 bg-slate-950 text-slate-100"
+            : "border-line bg-bg text-slate-100"
       }`}
     >
       {timeUp ? "Time's up" : formatClock(secondsLeft)}

@@ -95,7 +95,7 @@ export default function Step2Client({
                   <select
                     value={value ?? ""}
                     onChange={(e) => setSlots((prev) => prev.map((v, j) => (j === i ? e.target.value || null : v)))}
-                    className="min-h-[48px] w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 text-sm text-slate-100 focus:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="min-h-[48px] w-full rounded-xl border border-line bg-bg px-3 text-sm text-slate-100 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     <option value="">— Select subject —</option>
                     {opts.map((s) => (
@@ -112,7 +112,7 @@ export default function Step2Client({
       {/* Exam mode */}
       <section className={`${CBT.panel} p-5`} aria-labelledby="mode-h">
         <h2 id="mode-h" className="font-serif text-lg font-bold text-slate-50">Exam mode</h2>
-        <div role="radiogroup" aria-label="Exam mode" className="mt-3 grid gap-2 rounded-xl border border-white/10 bg-white/[0.02] p-1 sm:grid-cols-2">
+        <div role="radiogroup" aria-label="Exam mode" className="mt-3 grid gap-2 rounded-xl border border-line bg-bg p-1 sm:grid-cols-2">
           {(["simulation", "practice"] as Mode[]).map((m) => {
             const disabled = m === "simulation" && !simRules;
             return (
@@ -123,8 +123,8 @@ export default function Step2Client({
                 aria-checked={mode === m}
                 disabled={disabled}
                 onClick={() => setMode(m)}
-                className={`min-h-[44px] rounded-lg px-3 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                  mode === m ? "bg-gold text-slate-950" : "text-slate-300 hover:text-white"
+                className={`min-h-[44px] rounded-lg px-3 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  mode === m ? "bg-primary text-on-primary" : "text-slate-300 hover:text-white"
                 } ${disabled ? "opacity-40" : ""}`}
               >
                 {m === "simulation" ? "Complete Exam Simulation" : "Single Subject Practice"}
@@ -138,8 +138,8 @@ export default function Step2Client({
       <section className={`${CBT.panel} p-5`} aria-labelledby="duration-h">
         <h2 id="duration-h" className="font-serif text-lg font-bold text-slate-50">Session duration</h2>
         {mode === "simulation" && simRules ? (
-          <div className="mt-3 flex items-start gap-3 rounded-xl border border-gold/25 bg-gold/5 p-4">
-            <Timer className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+          <div className="mt-3 flex items-start gap-3 rounded-xl border border-primary/25 bg-primary/5 p-4">
+            <Timer className="mt-0.5 h-4 w-4 shrink-0 text-electric-text" aria-hidden />
             <p className="text-sm leading-relaxed text-slate-300">
               <strong className="text-slate-50">Fixed by the board — {simRules.durationMinutes} minutes total.</strong>{" "}
               The timer is not editable, runs once, and auto-submits your paper at 0:00, exactly
@@ -154,7 +154,7 @@ export default function Step2Client({
                 <select
                   value={practiceCount}
                   onChange={(e) => setPracticeCount(Number(e.target.value))}
-                  className="min-h-[48px] w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 text-sm text-slate-100 focus:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="min-h-[48px] w-full rounded-xl border border-line bg-bg px-3 text-sm text-slate-100 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   {practiceRules.countOptions.map((n) => <option key={n} value={n}>{n} questions</option>)}
                 </select>
@@ -164,7 +164,7 @@ export default function Step2Client({
                 <select
                   value={practiceMinutes}
                   onChange={(e) => setPracticeMinutes(Number(e.target.value))}
-                  className="min-h-[48px] w-full rounded-xl border border-white/10 bg-white/[0.03] px-3 text-sm text-slate-100 focus:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="min-h-[48px] w-full rounded-xl border border-line bg-bg px-3 text-sm text-slate-100 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   {practiceRules.durationOptionsMinutes.map((n) => <option key={n} value={n}>{n} minutes</option>)}
                 </select>
@@ -192,9 +192,9 @@ export default function Step2Client({
 
 function SubjectReadout({ index, title, count, locked }: { index: number; title: string; count: number; locked?: boolean }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3">
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-bg px-4 py-3">
       <span className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-        {locked && <Lock className="h-3.5 w-3.5 text-gold" aria-hidden />}
+        {locked && <Lock className="h-3.5 w-3.5 text-electric-text" aria-hidden />}
         {index}. {title}
       </span>
       <span className={CBT.chip}>{count} questions</span>

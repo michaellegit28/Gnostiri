@@ -67,7 +67,7 @@ export default function MasteryCupClient({ competitionId }: { competitionId: str
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-6 backdrop-blur-md">
+      <div className="rounded-2xl border border-line bg-surface/40 p-6 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <Target className="h-4 w-4 text-gold" aria-hidden />
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">Your progress</h2>
@@ -76,9 +76,9 @@ export default function MasteryCupClient({ competitionId }: { competitionId: str
           {myPercent === null ? "—" : `${myPercent}%`}
           <span className="ml-2 align-middle text-sm font-normal text-slate-500">of {view.targetLabel} target</span>
         </p>
-        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/5">
+        <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-surface-2">
           <div
-            className="h-full rounded-full bg-gold transition-all"
+            className="h-full rounded-full bg-primary transition-all"
             style={{ width: `${Math.min(100, myPercent ?? 0)}%` }}
           />
         </div>
@@ -99,22 +99,22 @@ export default function MasteryCupClient({ competitionId }: { competitionId: str
         )}
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-md">
+      <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 backdrop-blur-md">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-white/10 text-[11px] uppercase tracking-[0.2em] text-slate-500">
+          <thead className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-slate-500">
             <tr>
               <th scope="col" className="px-5 py-3 font-semibold">Rank</th>
               <th scope="col" className="px-5 py-3 font-semibold">Racer</th>
               <th scope="col" className="px-5 py-3 text-right font-semibold">Mastery</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-line">
             {view.rows.map((row, i) => (
               <tr key={`${row.handle}-${i}`} className={row.isCaller ? "bg-gold/5" : undefined}>
                 <td className="px-5 py-3.5 tabular-nums text-slate-400">{row.rank ?? "—"}</td>
                 <td className="px-5 py-3.5">
                   <span className="font-semibold text-slate-100">{row.handle}</span>
-                  {row.isCaller && <span className="ml-2 text-[11px] uppercase tracking-[0.2em] text-gold">You</span>}
+                  {row.isCaller && <span className="ml-2 text-[11px] uppercase tracking-[0.2em] text-electric-text">You</span>}
                 </td>
                 <td className="px-5 py-3.5 text-right font-serif text-lg font-bold tabular-nums text-slate-100">
                   {row.progress === null ? "—" : `${Math.round(row.progress * 100)}%`}

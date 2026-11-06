@@ -36,10 +36,10 @@ export default function AppearanceControls() {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+      <div className="gn-shadow flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
         <div>
           <h2 className="font-semibold text-slate-100">Colour theme</h2>
-          <p className="mt-1 max-w-md text-sm text-slate-400">
+          <p className="mt-1 max-w-md text-sm text-muted">
             Dark by default. Light mode uses the same refined palette — every surface passes contrast in both.
           </p>
         </div>
@@ -57,9 +57,9 @@ export default function AppearanceControls() {
         checked={reduced}
         onChange={toggleReduced}
       />
-      <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+      <div className="gn-shadow rounded-2xl border border-line bg-surface/40 p-5">
         <h2 className="font-semibold text-slate-100">Text-only Lite Mode</h2>
-        <p className="mt-1 text-sm text-slate-400">Hides diagrams and heavy media for slow connections and data-saving.</p>
+        <p className="mt-1 text-sm text-muted">Hides diagrams and heavy media for slow connections and data-saving.</p>
         <div className="mt-4">
           <LiteModeToggle />
         </div>
@@ -80,10 +80,10 @@ function Toggle({
   onChange: () => void;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+    <div className="flex items-start justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
       <div>
         <h2 className="font-semibold text-slate-100">{label}</h2>
-        <p className="mt-1 max-w-md text-sm text-slate-400">{note}</p>
+        <p className="mt-1 max-w-md text-sm text-muted">{note}</p>
       </div>
       <button
         type="button"
@@ -91,12 +91,12 @@ function Toggle({
         aria-checked={checked}
         aria-label={label}
         onClick={onChange}
-        className={`relative mt-1 h-7 w-12 shrink-0 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-          checked ? "border-gold/60 bg-gold/30" : "border-white/15 bg-white/5"
+        className={`gn-motion relative mt-1 h-7 w-12 shrink-0 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+          checked ? "border-primary/60 bg-primary/30" : "border-line-strong bg-surface-2"
         }`}
       >
         <span
-          className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${checked ? "left-6 bg-gold" : "left-0.5 bg-slate-400"}`}
+          className={`absolute top-0.5 h-5 w-5 rounded-full transition-all ${checked ? "left-6 bg-primary" : "left-0.5 bg-line-strong"}`}
         />
       </button>
     </div>

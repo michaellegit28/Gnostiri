@@ -72,7 +72,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
         </p>
         <ul className="space-y-3">
           {results.map((r) => (
-            <li key={r.itemId} className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
+            <li key={r.itemId} className="gn-shadow rounded-xl border border-line bg-surface p-4">
               <p className="flex items-start gap-2 text-sm font-medium text-slate-100">
                 {r.correct ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" /> : <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />}
                 {r.stem}
@@ -94,7 +94,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
         <button
           type="button"
           onClick={() => { setResults(null); setScore(null); setSelections({}); setIndex(0); }}
-          className="min-h-[40px] rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:border-gold/50"
+          className="min-h-[40px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           Try again
         </button>
@@ -108,8 +108,8 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
         <span>Question {index + 1} of {items.length}</span>
         <span>{answeredCount} answered</span>
       </div>
-      <div className="h-1 w-full rounded-full bg-slate-800">
-        <div className="h-1 rounded-full bg-gold transition-all" style={{ width: `${(answeredCount / items.length) * 100}%` }} />
+      <div className="h-1 w-full rounded-full bg-surface-2">
+        <div className="h-1 rounded-full bg-primary transition-all" style={{ width: `${(answeredCount / items.length) * 100}%` }} />
       </div>
 
       <p className="font-medium text-slate-100">{item.stem}</p>
@@ -120,12 +120,12 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
             type="button"
             aria-pressed={selected === option}
             onClick={() => setSelections((s) => ({ ...s, [item.id]: option }))}
-            className={`flex w-full items-start gap-2 rounded-lg border px-3 py-2.5 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 ${
-              selected === option ? "border-gold/60 bg-gold/10 text-amber-100" : "border-slate-800 bg-slate-950/40 text-slate-300 hover:border-slate-600"
+            className={`gn-motion gn-motion flex w-full items-start gap-2 rounded-lg border px-3 py-2.5 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 ${
+              selected === option ? "border-primary/60 bg-primary/10 text-slate-100" : "border-line bg-bg text-slate-300 hover:border-primary/50"
             }`}
           >
             <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-              selected === option ? "bg-gold text-slate-950" : "bg-slate-800 text-slate-400"
+              selected === option ? "bg-primary text-on-primary" : "bg-surface-2 text-slate-400"
             }`}>
               {String.fromCharCode(65 + oi)}
             </span>
@@ -141,7 +141,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
           type="button"
           disabled={index === 0}
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
-          className="min-h-[40px] rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-300 disabled:opacity-40"
+          className="min-h-[40px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Previous
         </button>
@@ -149,7 +149,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
           <button
             type="button"
             onClick={() => setIndex((i) => Math.min(items.length - 1, i + 1))}
-            className="min-h-[40px] rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 hover:border-gold/50"
+            className="min-h-[40px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Next
           </button>
@@ -158,7 +158,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
             type="button"
             disabled={busy}
             onClick={submit}
-            className="inline-flex min-h-[40px] items-center gap-2 rounded-lg bg-gold px-5 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 disabled:opacity-60"
+            className="inline-flex min-h-[40px] items-center gap-2 rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
           >
             {busy && <Loader2 className="h-4 w-4 animate-spin" />}
             Submit & score

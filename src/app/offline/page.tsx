@@ -51,9 +51,9 @@ export default function OfflinePage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 md:py-16">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Offline</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Offline</p>
       <h1 className="mt-3 flex items-center gap-3 font-serif text-3xl font-bold text-slate-100">
-        <WifiOff className="h-7 w-7 text-slate-400" aria-hidden />
+        <WifiOff className="h-7 w-7 text-electric-text" aria-hidden />
         No connection right now
       </h1>
       <p className="mt-3 text-sm text-muted">
@@ -62,19 +62,19 @@ export default function OfflinePage() {
         connection returns.
       </p>
 
-      <section className="mt-10 rounded-2xl border border-white/10 bg-slate-950/60 p-6">
+      <section className="gn-shadow mt-10 rounded-2xl border border-line bg-surface/40 p-6">
         <h2 className="flex items-center gap-2 font-serif text-xl font-bold text-slate-100">
-          <BookOpen className="h-5 w-5 text-gold" aria-hidden />
+          <BookOpen className="h-5 w-5 text-electric-text" aria-hidden />
           Available offline
         </h2>
         {views.length > 0 ? (
-          <ul className="mt-4 divide-y divide-white/5">
+          <ul className="mt-4 divide-y divide-line">
             {views.map((view) => (
               <li key={view.path} className="py-2.5">
-                <Link href={view.path} className="text-sm font-semibold text-slate-100 hover:text-gold">
+                <Link href={view.path} className="gn-motion rounded text-sm font-semibold text-slate-100 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   {view.title}
                 </Link>
-                <p className="mt-0.5 text-xs text-slate-400">{view.path}</p>
+                <p className="mt-0.5 text-xs text-muted">{view.path}</p>
               </li>
             ))}
           </ul>
@@ -86,21 +86,22 @@ export default function OfflinePage() {
         )}
       </section>
 
-      <section className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-6">
+      <section className="gn-shadow mt-6 rounded-2xl border border-line bg-surface/40 p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="font-serif text-xl font-bold text-slate-100">Saved submissions</h2>
           <button
             type="button"
             onClick={() => void retry()}
             disabled={busy}
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-white/15 bg-slate-950/80 px-4 text-sm font-semibold text-slate-200 hover:border-gold/60 hover:text-white disabled:opacity-40"
+            aria-busy={busy}
+            className="gn-motion inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-line-strong bg-surface/80 px-4 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <RefreshCw className={`h-4 w-4 ${busy ? "animate-spin" : ""}`} aria-hidden />
             {busy ? "Syncing…" : "Sync now"}
           </button>
         </div>
 
-        <p className="mt-2 text-sm text-slate-400">
+        <p className="mt-2 text-sm text-muted">
           {items.length === 0
             ? "The queue is empty."
             : `${pendingCount} waiting${failedCount ? `, ${failedCount} refused by the server` : ""}.`}
@@ -109,12 +110,12 @@ export default function OfflinePage() {
         {items.length > 0 && (
           <ul className="mt-4 space-y-3">
             {items.map((item) => (
-              <li key={item.id} className="rounded-xl border border-white/10 bg-slate-950/50 p-4">
+              <li key={item.id} className="rounded-xl border border-line bg-bg p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="text-sm font-semibold text-slate-100">{item.endpoint}</span>
                   <span
                     className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${
-                      item.state === "failed" ? "bg-rose-500/15 text-rose-200" : "bg-gold/15 text-amber-200"
+                      item.state === "failed" ? "bg-rose-500/15 text-rose-200" : "bg-amber-500/15 text-amber-200"
                     }`}
                   >
                     {item.state === "failed" ? "Needs a manual retry" : `Waiting · ${item.attempts}/${MAX_ATTEMPTS} attempts`}
@@ -146,13 +147,13 @@ export default function OfflinePage() {
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/study"
-          className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 text-sm font-semibold text-slate-950 hover:bg-gold-hover"
+          className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           Back to study
         </Link>
         <Link
           href="/highschool/study"
-          className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 text-sm font-semibold text-slate-200 hover:border-gold/60 hover:text-white"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong px-5 text-sm font-semibold text-slate-200 hover:border-primary/60 hover:text-white"
         >
           High school topics
         </Link>

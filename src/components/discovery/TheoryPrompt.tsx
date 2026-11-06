@@ -32,8 +32,8 @@ export default function TheoryPrompt({
   const words = countWords(draft);
 
   return (
-    <div className="my-6 rounded-xl border border-gold/30 bg-gold/[0.04] p-5">
-      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+    <div className="my-6 gn-shadow rounded-xl border border-primary/30 bg-primary/[0.04] p-5">
+      <div className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-electric-text">
         <PenLine className="h-3.5 w-3.5" />
         Theory — write your answer
       </div>
@@ -50,7 +50,7 @@ export default function TheoryPrompt({
         spellCheck={true}
         placeholder="Write your answer here — argue it in sentences, the way physics is actually argued…"
         aria-label={`${prompt} You have written ${words} words.`}
-        className="mt-3 min-h-[280px] w-full resize-y rounded-xl border border-gold/25 bg-slate-950/60 p-4 text-[15px] leading-relaxed text-slate-100 placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="mt-3 min-h-[280px] w-full resize-y rounded-xl border border-line bg-bg p-4 text-[15px] leading-relaxed text-slate-100 placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       />
 
       <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
@@ -62,7 +62,7 @@ export default function TheoryPrompt({
           onClick={() => setRevealed((v) => !v)}
           aria-expanded={revealed}
           aria-controls={answerId}
-          className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-gold/40 px-4 py-2 text-sm font-semibold text-gold transition-colors hover:border-gold hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="gn-motion inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-gold/40 px-4 py-2 text-sm font-semibold text-gold-text transition-colors hover:border-gold hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           <Lightbulb className="h-3.5 w-3.5" />
           {revealed ? "Hide model answer" : "Reveal model answer"}
@@ -72,10 +72,10 @@ export default function TheoryPrompt({
       {revealed && (
         <div
           id={answerId}
-          className="mt-3 space-y-2 border-t border-gold/20 pt-3"
+          className="mt-3 space-y-2 border-t border-line pt-3"
         >
           <p className="text-slate-300 font-reading leading-relaxed">
-            <span className="font-semibold text-gold">Model answer: </span>
+            <span className="font-semibold text-gold-text">Model answer: </span>
             {modelAnswer}
           </p>
           {explanation && (

@@ -95,7 +95,7 @@ export default function ModuleLessonNav({
     <nav aria-label="Course modules and lessons" className="space-y-3">
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="font-serif text-xl font-bold text-slate-100">Course contents</h2>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-muted">
           {doneCount} of {totalLessons} lesson{totalLessons === 1 ? "" : "s"} complete
         </p>
       </div>
@@ -106,7 +106,7 @@ export default function ModuleLessonNav({
         return (
           <section
             key={group.id}
-            className="overflow-hidden rounded-2xl border border-border/10 bg-surface/10"
+            className="gn-shadow overflow-hidden rounded-2xl border border-line bg-surface"
           >
             <h3 className="sr-only">{group.title}</h3>
             <button
@@ -118,7 +118,7 @@ export default function ModuleLessonNav({
               onKeyDown={(e) => onHeaderKeyDown(e, gi)}
               aria-expanded={isOpen}
               aria-controls={`module-panel-${group.id}`}
-              className="flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition-colors hover:bg-surface/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="gn-motion flex w-full items-center justify-between gap-3 px-4 py-3.5 text-left transition-colors hover:bg-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <span className="min-w-0">
                 <span className="block font-semibold text-sm text-slate-100">{group.title}</span>
@@ -128,9 +128,9 @@ export default function ModuleLessonNav({
                 </span>
               </span>
               <span className="flex shrink-0 items-center gap-3">
-                <span className="hidden h-1.5 w-16 overflow-hidden rounded-full bg-slate-800 sm:block">
+                <span className="hidden h-1.5 w-16 overflow-hidden rounded-full bg-bg sm:block">
                   <span
-                    className="block h-full rounded-full bg-gold"
+                    className="block h-full rounded-full bg-primary"
                     style={{
                       width: `${group.lessons.length ? Math.round((done / group.lessons.length) * 100) : 0}%`,
                     }}
@@ -144,7 +144,7 @@ export default function ModuleLessonNav({
             </button>
 
             <div id={`module-panel-${group.id}`} hidden={!isOpen}>
-              <ol className="space-y-1 border-t border-border/10 px-2 py-2">
+              <ol className="space-y-1 border-t border-line px-2 py-2">
                 {group.lessons.map((lesson, li) => {
                   const isDone = completed.has(lesson.id);
                   const isCurrent = lesson.id === currentLessonId;
@@ -154,8 +154,8 @@ export default function ModuleLessonNav({
                       <Link
                         href={`/university/${courseSlug}/lessons/${lesson.id}`}
                         aria-current={isCurrent ? "page" : undefined}
-                         className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                           isCurrent ? "bg-gold/10 text-on-gold" : "text-slate-300 hover:bg-surface/10 hover:text-slate-100"
+                         className={`gn-motion flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                           isCurrent ? "bg-primary/15 text-electric-text" : "text-slate-300 hover:bg-bg hover:text-slate-100"
                          }`}
                       >
                         <span className="w-5 shrink-0 text-center text-xs font-mono text-slate-400">
@@ -168,7 +168,7 @@ export default function ModuleLessonNav({
                               <Clock className="h-3 w-3" aria-hidden /> {lesson.estimatedMinutes} min
                             </span>
                             {isNext && (
-                              <span className="inline-flex items-center gap-1 font-semibold text-gold">
+                              <span className="inline-flex items-center gap-1 font-semibold text-electric-text">
                                 <ArrowRight className="h-3 w-3" aria-hidden /> Next up
                               </span>
                             )}

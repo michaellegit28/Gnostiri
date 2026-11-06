@@ -37,7 +37,7 @@ export default async function CbtSetupPage({ searchParams }: SetupPageProps) {
     <main className="min-h-screen bg-transparent pb-44 text-slate-100">
       <div className="mx-auto max-w-2xl px-4 pt-8 md:px-6">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/cbt" className="hover:text-gold">CBT</Link>
+          <Link href="/cbt" className="hover:text-electric-text">CBT</Link>
           <span className="text-slate-400">/</span>
           <span className="text-slate-100">{preset.name}</span>
         </nav>

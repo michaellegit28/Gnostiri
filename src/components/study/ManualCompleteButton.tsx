@@ -20,7 +20,7 @@ export default function ManualCompleteButton({ topicId, alreadyCompleted }: { to
 
   if (!confirming) {
     return (
-      <button onClick={() => setConfirming(true)} className="text-xs underline text-slate-400 hover:text-slate-200">
+      <button onClick={() => setConfirming(true)} className="gn-motion rounded text-xs text-slate-400 underline transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
         Skipping the quiz? Mark as complete
       </button>
     );
@@ -45,7 +45,7 @@ export default function ManualCompleteButton({ topicId, alreadyCompleted }: { to
               setBusy(false);
             }
           }}
-          className="rounded bg-gold px-3 py-1 font-semibold text-on-gold disabled:opacity-50"
+          className="gn-motion rounded bg-primary px-3 py-1 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {busy ? "Saving…" : "Mark complete anyway"}
         </button>

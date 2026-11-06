@@ -37,12 +37,12 @@ const BLOOMS_LABEL: Record<string, string> = {
 };
 
 const BLOOMS_COLOR: Record<string, string> = {
-  remember: "text-slate-400 border-slate-600",
-  understand: "text-slate-400 border-slate-600/60",
-  apply: "text-slate-400 border-slate-600/60",
-  analyze: "text-slate-400 border-slate-600/60",
-  evaluate: "text-slate-400 border-slate-600/60",
-  create: "text-slate-400 border-slate-600/60",
+  remember: "text-slate-400 border-line-strong",
+  understand: "text-slate-400 border-line-strong/60",
+  apply: "text-slate-400 border-line-strong/60",
+  analyze: "text-slate-400 border-line-strong/60",
+  evaluate: "text-slate-400 border-line-strong/60",
+  create: "text-slate-400 border-line-strong/60",
 };
 
 /**
@@ -55,7 +55,7 @@ export default function ConceptSpine({ concepts, modules, lite = false }: Concep
 
   if (lite) {
     return (
-      <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+      <section className="gn-shadow rounded-2xl border border-line bg-surface p-6">
         <h3 className="font-serif text-lg font-bold flex items-center gap-2">
           <Brain className="w-5 h-5 text-gold" /> Concept spine
         </h3>

@@ -18,11 +18,11 @@ const faint = "rgb(var(--bio-faint))";
 
 function Fig({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <figure className="my-4 overflow-x-auto rounded-xl border border-slate-700 bg-slate-950/60 p-3">
+    <figure className="my-4 overflow-x-auto rounded-xl border border-line bg-surface gn-shadow p-3">
       <svg viewBox="0 0 400 230" className="mx-auto w-full max-w-md" role="img" aria-label={title}>
         {children}
       </svg>
-      <figcaption className="mt-1 text-center text-xs text-slate-400">{title}</figcaption>
+      <figcaption className="mt-1 text-center text-xs text-muted">{title}</figcaption>
     </figure>
   );
 }

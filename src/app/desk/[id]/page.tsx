@@ -64,14 +64,14 @@ export default async function DeskDocumentPage({ params }: { params: { id: strin
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-5xl space-y-10">
-        <Link href="/desk" className="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-gold">
+        <Link href="/desk" className="gn-motion inline-flex items-center gap-1.5 rounded text-sm text-slate-400 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
           <ChevronLeft className="h-4 w-4" /> All documents
         </Link>
 
         <header className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Desk</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Desk</p>
           <h1 className="font-serif text-3xl font-bold">{document.title}</h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-muted">
             {document.pageCount} page{document.pageCount === 1 ? "" : "s"}
             {document.subjectSlug ? ` · ${document.subjectSlug}` : ""}
             {!owned ? " · shared artifact (same textbook as another student's)" : ""}
@@ -84,7 +84,7 @@ export default async function DeskDocumentPage({ params }: { params: { id: strin
         <section className="space-y-4">
           <h2 className="font-serif text-xl font-bold">Notes</h2>
           {sections.length === 0 ? (
-            <p className="rounded-xl border border-dashed border-slate-700 p-6 text-sm text-slate-500">
+            <p className="rounded-xl border border-dashed border-line p-6 text-sm text-muted">
               {document.status === "processing"
                 ? "Still processing — check back in a moment."
                 : document.status === "failed"
@@ -92,7 +92,7 @@ export default async function DeskDocumentPage({ params }: { params: { id: strin
                   : "No extractable text — this looks like a scanned PDF. Nothing was invented to fill the gap."}
             </p>
           ) : (
-            <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+            <div className="gn-shadow rounded-xl border border-line bg-surface p-6">
               <LessonRenderer content={{ blocks: sections.flatMap((section) => section.blocks) }} />
             </div>
           )}
@@ -103,7 +103,7 @@ export default async function DeskDocumentPage({ params }: { params: { id: strin
           {quizRows.length > 0 ? (
             <DocumentQuiz documentId={document.id} items={quizRows} />
           ) : (
-            <p className="rounded-xl border border-dashed border-slate-700 p-6 text-sm text-slate-500">
+            <p className="rounded-xl border border-dashed border-line p-6 text-sm text-muted">
               No quiz questions for this document yet.
               {document.status === "needs-ai" && !document.errorNote
                 ? " No AI model is configured in this environment, so quiz generation was skipped rather than fabricated."

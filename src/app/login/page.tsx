@@ -102,8 +102,8 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-transparent p-6 text-slate-100">
-      <div className="mx-auto mt-10 max-w-md space-y-6 rounded-2xl border border-slate-800 bg-slate-900 p-7">
-        <Link href="/" className="text-sm text-slate-400 transition-colors hover:text-slate-300">
+      <div className="gn-shadow mx-auto mt-10 max-w-md space-y-6 rounded-2xl border border-line bg-surface p-7">
+        <Link href="/" className="gn-motion rounded text-sm text-slate-400 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
           &#8592; Home
         </Link>
 
@@ -116,7 +116,7 @@ export default function LoginPage() {
           <h1 className="font-serif text-3xl font-bold text-slate-100">
             {mode === "signup" ? "Create your account" : "Welcome back"}
           </h1>
-          <p className="mt-2 text-sm text-slate-400">
+          <p className="mt-2 text-sm text-muted">
             Your progress syncs across every device you sign in on.
           </p>
         </div>
@@ -129,7 +129,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-2 min-h-12 w-full rounded-lg border border-slate-700 bg-slate-950 px-3"
+              className="mt-2 min-h-12 w-full rounded-lg border border-line bg-bg px-3 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             />
           </label>
           <label className="block text-sm">
@@ -140,7 +140,7 @@ export default function LoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-2 min-h-12 w-full rounded-lg border border-slate-700 bg-slate-950 px-3"
+              className="mt-2 min-h-12 w-full rounded-lg border border-line bg-bg px-3 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             />
           </label>
           {mode === "signup" && (
@@ -149,7 +149,7 @@ export default function LoginPage() {
               <select
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                className="mt-2 min-h-12 w-full rounded-lg border border-slate-700 bg-slate-950 px-3"
+                className="mt-2 min-h-12 w-full rounded-lg border border-line bg-bg px-3 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {COUNTRIES.map(([code, label]) => (
                   <option key={code} value={code}>
@@ -162,22 +162,23 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={busy}
-            className="min-h-12 w-full rounded-lg bg-gold font-semibold text-on-gold transition-colors hover:bg-gold-hover disabled:opacity-50"
+            aria-busy={busy}
+            className="gn-motion min-h-12 w-full rounded-lg bg-primary font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {busy ? "Please wait" : mode === "signup" ? "Sign up" : "Sign in"}
           </button>
         </form>
 
-        <div className="flex items-center gap-3 text-xs uppercase tracking-label text-slate-400">
-          <span className="h-px flex-1 bg-white/10" />
+        <div className="flex items-center gap-3 text-xs uppercase tracking-label text-muted">
+          <span className="h-px flex-1 bg-line" />
           or
-          <span className="h-px flex-1 bg-white/10" />
+          <span className="h-px flex-1 bg-line" />
         </div>
 
         <button
           type="button"
           onClick={() => void google()}
-          className="flex min-h-12 w-full items-center justify-center gap-3 rounded-lg border border-slate-700 bg-slate-950 font-semibold text-slate-200 transition-colors hover:border-slate-500"
+          className="gn-motion flex min-h-12 w-full items-center justify-center gap-3 rounded-lg border border-line bg-bg font-semibold text-slate-200 transition-colors hover:border-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           <GoogleIcon />
           Continue with Google
@@ -194,7 +195,7 @@ export default function LoginPage() {
           <button
             type="button"
             onClick={() => setMode(mode === "signup" ? "signin" : "signup")}
-            className="font-semibold text-slate-400 underline"
+            className="gn-motion rounded font-semibold text-slate-400 underline transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {mode === "signup" ? "Sign in" : "Create an account"}
           </button>

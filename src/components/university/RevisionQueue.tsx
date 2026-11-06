@@ -32,7 +32,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
 
   if (!current) {
     return (
-      <div className="rounded-3xl border border-emerald-500/30 bg-emerald-500/[0.07] p-10 text-center space-y-4">
+      <div className="gn-shadow rounded-3xl border border-emerald-500/30 bg-emerald-500/[0.07] p-10 text-center space-y-4">
         <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
         <h2 className="font-serif text-2xl font-bold">Queue cleared</h2>
         <p className="text-slate-300 text-sm max-w-xl mx-auto">
@@ -80,39 +80,39 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
 
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between text-xs text-slate-400">
+      <div className="flex items-center justify-between text-xs text-muted">
         <span>
           Card {index + 1} of {due.length}
         </span>
         <span>{done.length} reviewed</span>
       </div>
 
-      <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+      <div className="h-1.5 overflow-hidden rounded-full bg-surface-2">
         <div
-          className="h-full bg-gradient-to-r from-teal-500 to-gold transition-all duration-300"
+          className="h-full rounded-full bg-primary transition-all duration-300"
           style={{ width: `${(index / due.length) * 100}%` }}
         />
       </div>
 
-      <div className="rounded-3xl border border-border/10 bg-gradient-to-b from-surface-2 to-bg overflow-hidden">
+      <div className="gn-shadow overflow-hidden rounded-3xl border border-line bg-gradient-to-b from-surface-2 to-bg">
         <div className="px-7 py-8 md:px-10 md:py-10 space-y-5">
           <div className="flex items-center justify-between gap-3 flex-wrap">
-            <span className="font-mono text-[11px] tracking-[0.15em] text-slate-400 px-2.5 py-1 rounded-md border border-slate-600/40 bg-surface/20 uppercase">
+            <span className="rounded-md border border-line-strong bg-surface px-2.5 py-1 font-mono text-[11px] tracking-[0.15em] text-muted uppercase">
               {current.bloomsLevel}
             </span>
-            <span className="flex items-center gap-1.5 text-[11px] text-slate-400/80">
+            <span className="flex items-center gap-1.5 text-[11px] text-muted">
               <Clock className="w-3.5 h-3.5" /> {overdueLabel}
             </span>
           </div>
 
           <div className="space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-electric-text">
               {current.courseTitle}
             </p>
             <h2 className="font-serif text-2xl md:text-3xl font-bold leading-snug">
               {current.title}
             </h2>
-            <p className="text-slate-400 text-sm">~{current.estMinutes} min · recall and apply</p>
+            <p className="text-muted text-sm">~{current.estMinutes} min · recall and apply</p>
           </div>
 
           {result ? (
@@ -145,13 +145,13 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={next}
                   disabled={index >= due.length - 1}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl bg-gold px-6 py-3 font-semibold text-on-gold text-sm disabled:opacity-40"
+                  className="gn-motion inline-flex items-center justify-center min-h-[48px] rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-on-primary disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
                 >
                   Next concept <ChevronRight className="w-4 h-4 ml-1" />
                 </button>
                 <Link
                   href={`/university/${current.courseSlug}/concepts`}
-                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-border px-6 py-3 font-semibold text-slate-400 text-sm hover:border-gold/60 transition-colors"
+                  className="inline-flex items-center justify-center min-h-[48px] rounded-xl border border-border px-6 py-3 font-semibold text-slate-400 text-sm hover:border-primary/60 transition-colors"
                 >
                   Revisit the concept map
                 </Link>
@@ -159,7 +159,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
             </div>
           ) : (
             <div className="space-y-4 pt-2">
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <p className="text-muted text-sm leading-relaxed">
                 Recall this concept from memory, then rate your confidence. Honest self-rating
                 makes the schedule accurate — a guessed correct answer should not stretch the gap.
               </p>
@@ -168,7 +168,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={() => record(true, "high")}
                   disabled={recording}
-                  className="inline-flex items-center justify-center min-h-[48px] gap-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 px-4 py-3 font-semibold text-emerald-400 text-sm hover:bg-emerald-500/25 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center min-h-[48px] gn-motion gap-2 rounded-xl border border-emerald-500/40 bg-emerald-500/15 px-4 py-3 text-sm font-semibold text-emerald-400 transition-colors hover:bg-emerald-500/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <CheckCircle2 className="w-4 h-4" /> Knew it well
                 </button>
@@ -176,7 +176,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={() => record(false, "low")}
                   disabled={recording}
-                  className="inline-flex items-center justify-center min-h-[48px] gap-2 rounded-xl bg-rose-500/15 border border-rose-500/40 px-4 py-3 font-semibold text-rose-400 text-sm hover:bg-rose-500/25 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center min-h-[48px] gn-motion gap-2 rounded-xl border border-rose-500/40 bg-rose-500/15 px-4 py-3 text-sm font-semibold text-rose-400 transition-colors hover:bg-rose-500/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <RotateCcw className="w-4 h-4" /> Need a refresher
                 </button>
@@ -186,7 +186,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={() => record(true, "medium")}
                   disabled={recording}
-                  className="flex-1 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-slate-700 px-4 py-2 font-medium text-slate-300 text-xs hover:border-slate-500 transition-colors disabled:opacity-50"
+                  className="flex-1 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-line px-4 py-2 font-medium text-slate-300 text-xs hover:border-slate-500 transition-colors disabled:opacity-50"
                 >
                   Correct, but unsure
                 </button>
@@ -194,7 +194,7 @@ export default function RevisionQueue({ due }: RevisionQueueProps) {
                   type="button"
                   onClick={() => record(false, "medium")}
                   disabled={recording}
-                  className="flex-1 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-slate-700 px-4 py-2 font-medium text-slate-300 text-xs hover:border-slate-500 transition-colors disabled:opacity-50"
+                  className="flex-1 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-line px-4 py-2 font-medium text-slate-300 text-xs hover:border-slate-500 transition-colors disabled:opacity-50"
                 >
                   Wrong, but close
                 </button>

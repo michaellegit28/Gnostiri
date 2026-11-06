@@ -274,7 +274,7 @@ export default function PodPlayClient({
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover"
+              className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
             >
               Try again
             </button>
@@ -283,7 +283,7 @@ export default function PodPlayClient({
           )}
           <Link
             href="/league/ladder"
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500"
           >
             Back to the ladder
           </Link>
@@ -306,13 +306,13 @@ export default function PodPlayClient({
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/league/ladder"
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold hover:bg-gold-hover"
+            className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Back to the ladder
           </Link>
           <Link
             href="/offline"
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 hover:border-slate-500"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-5 font-semibold text-slate-200 hover:border-slate-500"
           >
             See what is saved
           </Link>
@@ -330,19 +330,19 @@ export default function PodPlayClient({
           {medal} <span className="text-gold">· {result.score} correct</span>
         </h1>
         <dl className="mt-8 grid grid-cols-2 gap-4 text-left">
-          <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+          <div className="rounded-xl border border-line bg-surface p-4">
             <dt className="text-xs uppercase tracking-[0.2em] text-slate-400">Stars awarded</dt>
             <dd className="mt-1 font-serif text-2xl font-bold tabular-nums text-gold">+{result.starsAwarded}</dd>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+          <div className="rounded-xl border border-line bg-surface p-4">
             <dt className="text-xs uppercase tracking-[0.2em] text-slate-400">Total stars</dt>
             <dd className="mt-1 font-serif text-2xl font-bold tabular-nums text-slate-100">{result.totalStars.toLocaleString()}</dd>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+          <div className="rounded-xl border border-line bg-surface p-4">
             <dt className="text-xs uppercase tracking-[0.2em] text-slate-400">Tier</dt>
             <dd className="mt-1 font-serif text-2xl font-bold text-slate-100">{result.tierLabel}</dd>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+          <div className="rounded-xl border border-line bg-surface p-4">
             <dt className="text-xs uppercase tracking-[0.2em] text-slate-400">Placement</dt>
             <dd className="mt-1 font-serif text-2xl font-bold text-slate-100">{medal}</dd>
           </div>
@@ -355,14 +355,14 @@ export default function PodPlayClient({
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/league/ladder"
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover"
+            className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Back to the ladder
           </Link>
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500"
           >
             Play the next pod
           </button>
@@ -408,14 +408,14 @@ export default function PodPlayClient({
       )}
 
       <div
-        className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-slate-800"
+        className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-2"
         role="progressbar"
         aria-label="Pod window"
         aria-valuenow={Math.round(elapsedRatio * 100)}
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="h-full bg-gold" style={{ width: `${elapsedRatio * 100}%` }} />
+        <div className="h-full rounded-full bg-primary" style={{ width: `${elapsedRatio * 100}%` }} />
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1.5fr_1fr]">
@@ -435,13 +435,13 @@ export default function PodPlayClient({
                   role="radio"
                   aria-checked={selected}
                   onClick={() => setAnswers((prev) => ({ ...prev, [question.id]: option }))}
-                  className={`flex w-full items-start gap-3 rounded-xl border px-4 py-3 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                    selected ? "border-gold/60 bg-gold/10 text-slate-100" : "border-slate-800 bg-slate-900/70 text-slate-300 hover:border-slate-600"
+                  className={`gn-motion flex w-full items-start gap-3 rounded-xl border px-4 py-3 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${
+                    selected ? "border-primary/60 bg-primary/10 text-slate-100" : "border-line bg-bg text-slate-300 hover:border-primary/50"
                   }`}
                 >
                   <span
                     className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold ${
-                      selected ? "border-gold bg-gold text-on-gold" : "border-slate-600 text-slate-400"
+                      selected ? "border-primary bg-primary text-on-primary" : "border-line-strong text-slate-400"
                     }`}
                     aria-hidden
                   >
@@ -458,7 +458,7 @@ export default function PodPlayClient({
               type="button"
               onClick={() => setIndex((i) => Math.max(0, i - 1))}
               disabled={index === 0}
-              className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500 disabled:opacity-40"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500 disabled:opacity-40"
             >
               Previous
             </button>
@@ -466,7 +466,7 @@ export default function PodPlayClient({
               type="button"
               onClick={() => setIndex((i) => Math.min(session.questions.length - 1, i + 1))}
               disabled={index >= session.questions.length - 1}
-              className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500 disabled:opacity-40"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500 disabled:opacity-40"
             >
               Next
             </button>
@@ -477,14 +477,14 @@ export default function PodPlayClient({
                 <button
                   type="button"
                   onClick={() => void submitPaper()}
-                  className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 font-semibold text-on-gold transition-colors hover:bg-gold-hover"
+                  className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-5 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
                 >
                   Yes, submit
                 </button>
                 <button
                   type="button"
                   onClick={() => setConfirming(false)}
-                  className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-4 text-sm font-semibold text-slate-300"
+                  className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-4 text-sm font-semibold text-slate-300"
                 >
                   Keep playing
                 </button>
@@ -493,7 +493,7 @@ export default function PodPlayClient({
               <button
                 type="button"
                 onClick={() => (unanswered > 0 ? setConfirming(true) : void submitPaper())}
-                className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover"
+                className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
               >
                 Submit paper
               </button>
@@ -508,7 +508,7 @@ export default function PodPlayClient({
         </section>
 
         <aside className="space-y-4">
-          <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+          <section className="rounded-2xl border border-line bg-surface p-5">
             <h2 className="font-serif text-lg font-bold text-slate-100">Standings</h2>
             <p className="mt-1 text-xs text-slate-400">Polls every 15s while the window is open.</p>
             {standings?.group ? (
@@ -530,7 +530,7 @@ export default function PodPlayClient({
             )}
           </section>
 
-          <section className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 text-sm text-slate-400">
+          <section className="rounded-2xl border border-line bg-surface/40 p-5 text-sm text-slate-400">
             <h2 className="font-serif text-lg font-bold text-slate-100">How a pod scores</h2>
             <ul className="mt-3 space-y-2">
               <li>1st takes 3 stars, 2nd takes 2, 3rd takes 1, and everyone else still takes 1 for finishing.</li>

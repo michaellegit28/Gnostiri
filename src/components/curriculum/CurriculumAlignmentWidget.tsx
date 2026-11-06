@@ -120,7 +120,7 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
   // Lite mode (?lite=1): static text summary, no heavy widgets
   if (lite) {
     return (
-      <div className="text-sm text-slate-300" aria-live="polite">
+      <div className="text-sm text-muted" aria-live="polite">
         {data ? `Core syllabus topic for ${data.board?.name || board?.name || "your board"}. Verified ${data.verifiedDate ? new Date(data.verifiedDate).toISOString().slice(0, 7) : "pending"}.` : "Alignment loading…"}
       </div>
     );
@@ -130,19 +130,19 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
   const showTrack = !!board && board.tracks.length > 0;
 
   return (
-    <div dir={rtl ? "rtl" : "ltr"} className="w-full md:w-72 rounded-xl border border-slate-800 bg-slate-900/70 p-3 space-y-2" aria-label="Curriculum alignment">
-      <label className="block text-xs font-semibold text-slate-400">
+    <div dir={rtl ? "rtl" : "ltr"} className="gn-shadow w-full rounded-xl border border-line bg-surface p-3 space-y-2 md:w-72" aria-label="Curriculum alignment">
+      <label className="block text-xs font-semibold text-muted">
         Country
-        <select aria-label="Select country" value={regionId} onChange={(e) => { setRegionId(e.target.value); setBoardId(""); setTrackId(""); }} className="mt-1 w-full bg-slate-900 border border-slate-700 rounded px-2 py-1.5 text-sm text-slate-100">
+        <select aria-label="Select country" value={regionId} onChange={(e) => { setRegionId(e.target.value); setBoardId(""); setTrackId(""); }} className="gn-motion mt-1 w-full rounded border border-line bg-bg px-2 py-1.5 text-sm text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
           <option value="">Select…</option>
           {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
         </select>
       </label>
 
       {showBoard && (
-        <label className="block text-xs font-semibold text-slate-400">
+        <label className="block text-xs font-semibold text-muted">
           Exam board
-          <select aria-label="Select exam board" value={boardId} onChange={(e) => { setBoardId(e.target.value); setTrackId(""); }} className="mt-1 w-full bg-slate-900 border border-slate-700 rounded px-2 py-1.5 text-sm text-slate-100">
+          <select aria-label="Select exam board" value={boardId} onChange={(e) => { setBoardId(e.target.value); setTrackId(""); }} className="gn-motion mt-1 w-full rounded border border-line bg-bg px-2 py-1.5 text-sm text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <option value="">Select…</option>
             {region!.boards.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
           </select>
@@ -150,9 +150,9 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
       )}
 
       {showTrack && (
-        <label className="block text-xs font-semibold text-slate-400">
+        <label className="block text-xs font-semibold text-muted">
           Track / stream
-          <select aria-label="Select study track" value={trackId} onChange={(e) => setTrackId(e.target.value)} className="mt-1 w-full bg-slate-900 border border-slate-700 rounded px-2 py-1.5 text-sm text-slate-100">
+          <select aria-label="Select study track" value={trackId} onChange={(e) => setTrackId(e.target.value)} className="gn-motion mt-1 w-full rounded border border-line bg-bg px-2 py-1.5 text-sm text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             <option value="">All tracks</option>
             {board!.tracks.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
           </select>
@@ -161,34 +161,34 @@ export default function CurriculumAlignmentWidget({ topicSlug, lite = false }: {
 
       <div aria-live="polite" className="pt-1">
         {!boardId ? (
-          <p className="text-xs text-slate-400">Select your country{region && region.boards.length > 1 ? " and board" : ""} to see syllabus alignment.</p>
+          <p className="text-xs text-muted">Select your country{region && region.boards.length > 1 ? " and board" : ""} to see syllabus alignment.</p>
         ) : loading ? (
-          <p className="text-xs text-slate-400">Checking syllabus…</p>
+          <p className="text-xs text-muted">Checking syllabus…</p>
         ) : data ? (
           <div className="space-y-1.5">
-            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${badgeClass(data.tier)}`}>
+            <span className={`gn-motion inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${badgeClass(data.tier)}`}>
               <CircleDot aria-hidden="true" className="w-3 h-3" />
               {badgeLabel(data.tier, data.pending)}
             </span>
             {data.verifiedDate && (
-              <p className="flex items-center gap-1 text-xs text-slate-400">
-                <ShieldCheck className="w-3.5 h-3.5 text-slate-400" aria-hidden />
+              <p className="flex items-center gap-1 text-xs text-muted">
+                <ShieldCheck className="w-3.5 h-3.5 text-electric-text" aria-hidden />
                 <span>
                   Verified {new Date(data.verifiedDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                 </span>
               </p>
             )}
             {data.board?.name && (
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-muted">
                 Verified against {data.board.name}{data.board?.year ? ` ${data.board.year} syllabus` : ""}
               </p>
             )}
             {data.board?.syllabusUrl && (
-              <a href={data.board.syllabusUrl} target="_blank" rel="noreferrer" className="text-[11px] underline text-slate-400">Official syllabus PDF</a>
+              <a href={data.board.syllabusUrl} target="_blank" rel="noreferrer" className="gn-motion rounded text-[11px] text-muted underline transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">Official syllabus PDF</a>
             )}
-            {data.pending && <p className="text-xs text-slate-400">Unverified — defaulted to elective per safety policy. Confirm with your syllabus.</p>}
+            {data.pending && <p className="text-xs text-muted">Unverified — defaulted to elective per safety policy. Confirm with your syllabus.</p>}
             <button
-              className="text-[11px] underline text-slate-400"
+              className="gn-motion rounded text-[11px] text-muted underline transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               onClick={async () => {
                 try {
                   await fetch("/api/auth/country", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ country: region?.isoCode }) });

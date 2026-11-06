@@ -6,6 +6,8 @@ import BattlePlanHero from "@/components/dashboard/BattlePlanHero";
 import StatsRow from "@/components/dashboard/StatsRow";
 import LeagueStatusWidget from "@/components/dashboard/LeagueStatusWidget";
 import TutorShortcut from "@/components/dashboard/TutorShortcut";
+import QuickLinks from "@/components/dashboard/QuickLinks";
+import RecentAchievements from "@/components/dashboard/RecentAchievements";
 import Landing from "@/components/landing/Landing";
 import { LogoMark } from "@/components/brand/Logo";
 
@@ -31,10 +33,12 @@ export default async function Home() {
           <section aria-label="Dashboard" className="space-y-8">
             <Greeting name={user.name} email={user.email} />
             <BattlePlanHero userId={user.id} />
+            <QuickLinks />
             <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
               <StatsRow userId={user.id} />
               <LeagueStatusWidget />
             </div>
+            <RecentAchievements userId={user.id} />
             <TutorShortcut />
           </section>
         </main>

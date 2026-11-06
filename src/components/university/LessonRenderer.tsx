@@ -21,8 +21,8 @@ const MCQ_OPTIONS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
 
 function CodeBlock({ language, code, output, caption }: { language: string; code: string; output?: string; caption?: string }) {
   return (
-    <figure className="my-4 overflow-hidden rounded-xl border border-slate-700 bg-slate-950">
-      <figcaption className="flex items-center gap-2 border-b border-slate-800 bg-slate-900/70 px-4 py-2 text-xs text-slate-400">
+    <figure className="my-4 overflow-hidden rounded-xl border border-line bg-bg">
+      <figcaption className="flex items-center gap-2 border-b border-line bg-surface px-4 py-2 text-xs text-slate-400">
         <FileCode2 className="h-3.5 w-3.5 shrink-0" />
         <span className="font-mono uppercase tracking-wide">{language}</span>
         {caption && <span className="ml-2 truncate text-slate-400">{caption}</span>}
@@ -31,7 +31,7 @@ function CodeBlock({ language, code, output, caption }: { language: string; code
         <code>{code}</code>
       </pre>
       {output && (
-        <div className="border-t border-slate-800 bg-slate-900/40 px-4 py-3">
+        <div className="border-t border-line bg-surface/40 px-4 py-3">
           <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-emerald-400">
             <CheckCircle2 className="h-3 w-3" /> Output
           </div>
@@ -46,12 +46,12 @@ function CodeBlock({ language, code, output, caption }: { language: string; code
 
 function TableBlock({ headers, rows }: { headers: string[]; rows: string[][] }) {
   return (
-    <div className="my-4 overflow-x-auto rounded-xl border border-slate-700">
+    <div className="my-4 overflow-x-auto rounded-xl border border-line">
       <table className="w-full border-collapse text-left text-sm">
-        <thead className="bg-slate-800/80">
+        <thead className="bg-surface-2/80">
           <tr>
             {headers.map((h, i) => (
-              <th key={i} className="border-b border-slate-700 px-4 py-2.5 font-semibold text-slate-200">
+              <th key={i} className="border-b border-line px-4 py-2.5 font-semibold text-slate-200">
                 <span className="inline-flex items-center gap-1.5">
                   <Table2 className="h-3.5 w-3.5 text-slate-400" /> {h}
                 </span>
@@ -59,7 +59,7 @@ function TableBlock({ headers, rows }: { headers: string[]; rows: string[][] }) 
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-800">
+        <tbody className="divide-y divide-line">
           {rows.map((row, ri) => (
             <tr key={ri}>
               {row.map((cell, ci) => (
@@ -79,7 +79,7 @@ function QuestionBlock({ prompt, answer, explanation }: { prompt: string; answer
   const [open, setOpen] = useState(false);
   const answerId = useId();
   return (
-    <div className="my-4 rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+    <div className="my-4 rounded-xl border border-line bg-surface/50 p-4">
       <div className="mb-2 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-slate-400">
         <CheckCircle2 className="h-3.5 w-3.5" /> Check
       </div>
@@ -89,7 +89,7 @@ function QuestionBlock({ prompt, answer, explanation }: { prompt: string; answer
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={answerId}
-        className="mt-3 inline-flex min-h-[36px] items-center rounded-lg border border-slate-600/40 px-3 py-1.5 text-sm font-medium text-slate-400 transition-colors hover:border-slate-400/70 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70"
+        className="mt-3 inline-flex min-h-[36px] items-center rounded-lg border border-line-strong/40 px-3 py-1.5 text-sm font-medium text-slate-400 transition-colors hover:border-slate-400/70 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
       >
         {open ? "Hide answer" : "Show answer"}
       </button>
@@ -117,7 +117,7 @@ function McqBlock({ stem, options, correctIndex, explanation }: { stem: string; 
   const letters = options.map((_, i) => MCQ_OPTIONS[i] ?? String(i + 1));
 
   return (
-    <div className="my-4 rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+    <div className="my-4 rounded-xl border border-line bg-surface/50 p-4">
       <p className="font-medium text-slate-200">{stem}</p>
       <div role="group" aria-labelledby={groupId} className="mt-3 space-y-2">
         <span id={groupId} className="sr-only">
@@ -134,17 +134,17 @@ function McqBlock({ stem, options, correctIndex, explanation }: { stem: string; 
               onClick={() => setSelected(oi)}
               disabled={answered}
               aria-pressed={chosen}
-              className={`flex w-full items-start gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/70 ${
+              className={`flex w-full items-start gap-2 rounded-lg border px-3 py-2 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 ${
                   reveal
                     ? "border-emerald-500/30 bg-emerald-500/[0.07]"
                     : chosen
-                      ? "border-gold/60 bg-gold/10"
-                      : "border-slate-800 bg-slate-950/40 hover:border-slate-600"
+                      ? "border-primary/60 bg-primary/10"
+                      : "border-line bg-surface/40 hover:border-line-strong"
               } ${answered && !chosen && !reveal ? "opacity-60" : ""}`}
             >
               <span
                 className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                  reveal ? "bg-emerald-500 text-slate-950" : chosen ? "bg-gold text-on-gold" : "bg-slate-800 text-slate-400"
+                  reveal ? "bg-emerald-500 text-slate-950" : chosen ? "bg-primary text-on-primary" : "bg-surface-2 text-slate-400"
                 }`}
               >
                 {letters[oi]}
@@ -191,7 +191,7 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "definition":
       return (
-        <div key={key} className="my-4 rounded-xl border border-slate-600/40 bg-surface/20 p-4">
+        <div key={key} className="my-4 rounded-xl border border-line-strong/40 bg-surface/20 p-4">
           <div className="flex items-start gap-2">
             <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
             <div>
@@ -204,7 +204,7 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "example":
       return (
-        <div key={key} className="my-4 rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+        <div key={key} className="my-4 rounded-xl border border-line bg-surface/50 p-4">
           <div className="mb-1 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wide text-slate-400">
             <Lightbulb className="h-3.5 w-3.5" /> Example
           </div>
@@ -214,7 +214,7 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "callout":
       return block.variant === "info" ? (
-        <div key={key} className="my-4 flex items-start gap-3 rounded-xl border border-slate-600/40 bg-surface/20 p-4">
+        <div key={key} className="my-4 flex items-start gap-3 rounded-xl border border-line-strong/40 bg-surface/20 p-4">
           <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
           <p className="text-slate-300">
             <span className="mb-0.5 block text-[11px] font-medium uppercase tracking-wide text-slate-400">Note</span>
@@ -253,7 +253,7 @@ function renderBlock(block: LessonBlock, key: number) {
 
     case "diagram":
       return (
-        <div key={key} className="my-4 rounded-xl border border-dashed border-slate-700 p-4 text-sm text-slate-400">
+        <div key={key} className="my-4 rounded-xl border border-dashed border-line p-4 text-sm text-slate-400">
           Diagram unavailable — {block.diagramId}. {block.caption}
         </div>
       );

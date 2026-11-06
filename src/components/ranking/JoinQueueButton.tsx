@@ -38,7 +38,8 @@ export default function JoinQueueButton({ label = "Join the queue" }: { label?: 
         type="button"
         onClick={() => void join()}
         disabled={busy}
-        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
+        aria-busy={busy}
+        className="gn-motion inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {busy ? "Finding your group…" : label}
       </button>

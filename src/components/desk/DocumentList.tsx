@@ -33,7 +33,7 @@ const STATUS_META: Record<string, { label: string; icon: typeof FileText; classe
 export default function DocumentList({ documents }: { documents: DeskDocument[] }) {
   if (documents.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-slate-700 p-6 text-sm text-slate-500">
+      <div className="rounded-xl border border-dashed border-line p-6 text-sm text-slate-500">
         No documents yet. Upload a textbook or lecture note above.
       </div>
     );
@@ -48,7 +48,7 @@ export default function DocumentList({ documents }: { documents: DeskDocument[] 
           <li key={doc.id}>
             <Link
               href={`/desk/${doc.id}`}
-              className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/80 p-4 transition-colors hover:border-gold/40"
+              className="flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-primary/40"
             >
               <FileText className="h-5 w-5 shrink-0 text-slate-400" />
               <div className="min-w-0 flex-1">

@@ -44,12 +44,12 @@ export default function ContentReportTab({
 
   if (!authenticated) {
     return (
-      <section className="border-t border-slate-800/60 pt-4">
+      <section className="border-t border-line/60 pt-4">
         <p className="text-xs text-slate-500">
           Spotted a problem with this content?{" "}
           <Link
             href="/login"
-            className="rounded underline hover:text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="rounded underline hover:text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Sign in
           </Link>{" "}
@@ -94,7 +94,7 @@ export default function ContentReportTab({
   }
 
   return (
-    <section className="border-t border-slate-800/60 pt-4">
+    <section className="border-t border-line/60 pt-4">
       {state === "done" ? (
         <p role="status" className="flex min-h-[44px] items-center gap-2 text-sm text-emerald-300">
           <CheckCircle2 aria-hidden="true" className="h-4 w-4 shrink-0" />
@@ -109,14 +109,14 @@ export default function ContentReportTab({
             setState("idle");
             setMessage("");
           }}
-          className="inline-flex min-h-[44px] items-center gap-1.5 rounded text-xs text-slate-500 transition-colors hover:text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="gn-motion inline-flex min-h-[44px] items-center gap-1.5 rounded text-xs text-slate-500 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           <Flag aria-hidden="true" className="h-3.5 w-3.5" />
           Spotted a problem with this content?
         </button>
       ) : (
-        <form onSubmit={submit} className="space-y-3 rounded-xl border border-gold/30 bg-gold/[0.04] p-4">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gold">
+        <form onSubmit={submit} className="gn-shadow space-y-3 rounded-xl border border-primary/30 bg-primary/[0.04] p-4">
+          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-electric-text">
             <Flag aria-hidden="true" className="h-3.5 w-3.5" />
             Report a problem
           </div>
@@ -125,7 +125,7 @@ export default function ContentReportTab({
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gold/25 bg-slate-950/60 p-2 text-sm text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="mt-1 w-full rounded-lg border border-line bg-bg p-2 text-sm text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               {REPORT_CATEGORIES.map((c) => (
                 <option key={c} value={c}>
@@ -142,13 +142,13 @@ export default function ContentReportTab({
             value={detail}
             onChange={(e) => setDetail(e.target.value)}
             placeholder="What did you see, and what should it say instead?"
-            className="w-full resize-y rounded-lg border border-gold/25 bg-slate-950/60 p-3 text-sm leading-relaxed text-slate-100 placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="w-full resize-y rounded-lg border border-line bg-bg p-3 text-sm leading-relaxed text-slate-100 placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           />
           <div className="flex flex-wrap gap-2">
             <button
               type="submit"
               disabled={state === "busy"}
-              className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50"
+              className="gn-motion gn-motion gn-motion inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
             >
               {state === "busy" && <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" />}
               {state === "busy" ? "Sending…" : "Send report"}
@@ -160,13 +160,13 @@ export default function ContentReportTab({
                 setState("idle");
                 setMessage("");
               }}
-              className="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-slate-600 px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-lg border border-line-strong px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-surface-2/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Cancel
             </button>
           </div>
           {state === "error" && (
-            <p role="alert" className="text-sm text-red-300">
+            <p role="alert" className="text-sm text-rose-300">
               {message}
             </p>
           )}

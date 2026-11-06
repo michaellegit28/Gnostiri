@@ -26,10 +26,10 @@ export interface ArtifactCardData {
 export default function ArtifactCard({ doc, signedIn }: { doc: ArtifactCardData; signedIn: boolean }) {
   const subject = doc.subjectSlug || "General";
   return (
-    <li className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-5 transition-colors hover:border-gold/40">
+    <li className="gn-motion gn-lift gn-shadow flex flex-col gap-3 rounded-2xl border border-line bg-surface p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[var(--shadow-lift)]">
       <div className="space-y-1">
         <Link href={`/library/${doc.id}`} className="block">
-          <h3 className="font-serif text-lg font-bold leading-snug text-slate-100 transition-colors hover:text-gold">
+          <h3 className="gn-motion rounded font-serif text-lg font-bold leading-snug text-slate-100 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             {doc.title}
           </h3>
         </Link>
@@ -37,11 +37,11 @@ export default function ArtifactCard({ doc, signedIn }: { doc: ArtifactCardData;
           {subject} · {doc.pageCount} page{doc.pageCount === 1 ? "" : "s"} · {doc.quizItemCount} quiz item{doc.quizItemCount === 1 ? "" : "s"}
         </p>
         {doc.notesPreview.length > 0 && (
-          <p className="line-clamp-1 text-xs text-slate-400">{doc.notesPreview.join(" · ")}</p>
+          <p className="line-clamp-1 text-xs text-muted">{doc.notesPreview.join(" · ")}</p>
         )}
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
         <span className="inline-flex items-center gap-1.5">
           <RefreshCw className="h-3.5 w-3.5 text-gold" />
           {doc.reuseCount > 0 ? `reused by ${doc.reuseCount} classmate${doc.reuseCount === 1 ? "" : "s"}` : "New to the library"}
@@ -55,7 +55,7 @@ export default function ArtifactCard({ doc, signedIn }: { doc: ArtifactCardData;
         <AdoptButton documentId={doc.id} signedIn={signedIn} label="Adopt" className="flex-1 sm:flex-none" />
         <Link
           href={`/library/${doc.id}`}
-          className="inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
+          className="inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-line px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-slate-500 hover:text-slate-100"
         >
           <BookOpen className="h-4 w-4" /> Read preview
         </Link>

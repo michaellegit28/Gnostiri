@@ -98,7 +98,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
     if (loading) {
     return (
-      <div className="rounded-2xl border bg-surface p-10 text-center text-muted" role="status">
+      <div className="gn-shadow rounded-2xl border border-line bg-surface p-10 text-center text-muted" role="status">
         Building blueprint-balanced exam…
       </div>
     );
@@ -106,10 +106,10 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
   if (error && !session) {
     return (
-      <div className="rounded-2xl border border-rose-400/30 bg-rose-500/[0.07] p-8">
+      <div className="gn-shadow rounded-2xl border border-rose-400/30 bg-rose-500/[0.07] p-8">
         <h3 className="font-semibold text-rose-400">Exam unavailable</h3>
         <p className="mt-2 text-sm text-slate-400">{error}</p>
-        <button onClick={() => void start()} className="mt-4 rounded-lg border border-gold px-4 py-2 text-sm font-medium text-on-gold hover:bg-gold/20">
+        <button onClick={() => void start()} className="gn-motion mt-4 rounded-lg border border-line px-4 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
           Try again
         </button>
       </div>
@@ -121,7 +121,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
     const pass = pct >= 50;
     return (
       <div className="space-y-6">
-        <div className={`rounded-2xl border p-8 text-center ${pass ? "border-emerald-400/30 bg-emerald-500/[0.07]" : "border-rose-400/30 bg-rose-500/[0.07]"}`}>
+        <div className={`gn-shadow rounded-2xl border p-8 text-center ${pass ? "border-emerald-400/30 bg-emerald-500/[0.07]" : "border-rose-400/30 bg-rose-500/[0.07]"}`}>
           <p className="text-sm font-medium uppercase tracking-widest text-muted">Result</p>
           <p className={`mt-2 text-5xl font-bold ${pass ? "text-emerald-400" : "text-rose-400"}`}>{pct}%</p>
           <p className="mt-3 text-muted">
@@ -133,7 +133,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Item review</h3>
           {result.answers.map((a) => (
-            <div key={a.id} className="rounded-xl border bg-surface p-5">
+            <div key={a.id} className="gn-shadow rounded-xl border border-line bg-surface p-5">
               <div className="flex items-start gap-3">
                 <span className={`mt-0.5 shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${a.marked ? "bg-emerald-500/[0.07] text-emerald-400" : "bg-rose-500/[0.07] text-rose-400"}`}>
                   {a.marked ? "Correct" : "Incorrect"}
@@ -146,7 +146,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                         const isCorrect = opt === a.correctAnswer;
                         const isChosen = opt === a.selected;
                           return (
-                            <li key={opt} className={`rounded-lg px-3 py-2 ${isCorrect ? "bg-emerald-500/[0.07] text-emerald-400" : isChosen ? "bg-rose-500/[0.07] text-rose-400" : "bg-surface/20"}`}>
+                            <li key={opt} className={`rounded-lg px-3 py-2 ${isCorrect ? "bg-emerald-500/[0.07] text-emerald-400" : isChosen ? "bg-rose-500/[0.07] text-rose-400" : "bg-bg"}`}>
                             {opt}
                             {isCorrect ? " — correct answer" : isChosen ? " — your answer" : ""}
                           </li>
@@ -162,10 +162,10 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={() => void start()} className="rounded-lg bg-gold px-5 py-2.5 font-medium text-on-gold hover:bg-gold-hover">
+          <button onClick={() => void start()} className="gn-motion rounded-lg bg-primary px-5 py-2.5 font-medium text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
             Sit another exam
           </button>
-          <a href="/university/transcript" className="rounded-lg border border-border px-5 py-2.5 font-medium hover:bg-surface/20">
+          <a href="/university/transcript" className="gn-motion rounded-lg border border-line px-5 py-2.5 font-medium text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
             View transcript
           </a>
         </div>
@@ -177,7 +177,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-4 z-10 flex items-center justify-between rounded-2xl border bg-surface/95 px-5 py-3 shadow-sm">
+      <div className="sticky top-4 z-10 flex items-center justify-between rounded-2xl border border-line gn-glass bg-surface/95 px-5 py-3 shadow-sm">
         <span className="text-sm font-medium text-muted">
           {answered} / {session.items.length} answered
         </span>
@@ -188,10 +188,10 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
 
       <ol className="space-y-5">
         {session.items.map((item, idx) => (
-          <li key={item.id} className="rounded-2xl border bg-surface p-6">
+          <li key={item.id} className="gn-shadow rounded-2xl border border-line bg-surface p-6">
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-sm text-muted">Q{idx + 1}</span>
-              <span className="rounded-full bg-surface/20 px-2.5 py-0.5 text-xs font-medium text-slate-400">{FORMAT_LABEL[item.format]}</span>
+              <span className="rounded-full bg-bg px-2.5 py-0.5 text-xs font-medium text-slate-400">{FORMAT_LABEL[item.format]}</span>
               {session.negativeMarking && item.negativeMarks != null && item.negativeMarks > 0 && (
                 <span className="rounded-full bg-rose-500/[0.07] px-2.5 py-0.5 text-xs font-medium text-rose-400">
                   −{item.negativeMarks} for wrong
@@ -209,11 +209,11 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                       type="button"
                       onClick={() => setAnswers((prev) => ({ ...prev, [item.id]: opt }))}
                       className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition-colors ${
-                        chosen ? "border-gold bg-gold/10 ring-1 ring-gold" : "hover:bg-surface/20"
+                        chosen ? "border-primary bg-primary/10 ring-1 ring-primary" : "hover:bg-bg"
                       }`}
                       aria-pressed={chosen}
                     >
-                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${chosen ? "border-gold bg-gold text-on-gold" : ""}`}>
+                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${chosen ? "border-primary bg-primary text-on-primary" : ""}`}>
                         {chosen && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
                       </span>
                       <span>{opt}</span>
@@ -227,7 +227,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
                 onChange={(e) => setAnswers((prev) => ({ ...prev, [item.id]: e.target.value }))}
                 rows={4}
                 placeholder="Write your answer…"
-                className="mt-4 w-full rounded-xl border bg-bg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
+                className="mt-4 w-full rounded-xl border bg-bg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
               />
             )}
           </li>
@@ -241,7 +241,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
         <button
           onClick={() => void submit()}
           disabled={submitting || answered === 0}
-          className="rounded-lg bg-gold px-6 py-2.5 font-semibold text-on-gold transition-opacity hover:bg-gold-hover disabled:opacity-50"
+          className="gn-motion rounded-lg bg-primary px-6 py-2.5 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting ? "Scoring…" : "Submit exam"}
         </button>

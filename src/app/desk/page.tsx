@@ -22,11 +22,11 @@ export default async function DeskPage() {
   if (!user) {
     return (
       <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-slate-800 bg-slate-900/80 p-8 text-center">
+        <div className="gn-shadow mx-auto max-w-2xl rounded-2xl border border-line bg-surface p-8 text-center">
           <FolderOpen className="mx-auto mb-4 h-10 w-10 text-gold" />
           <h1 className="font-serif text-2xl font-bold">Your Desk needs you signed in</h1>
           <p className="mt-2 text-sm text-slate-400">Uploads are private: notes, quizzes and plans stay on your account.</p>
-          <Link href="/login" className="mt-6 inline-block rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-on-gold">
+          <Link href="/login" className="gn-motion mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
             Sign in
           </Link>
         </div>
@@ -83,7 +83,7 @@ export default async function DeskPage() {
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-5xl space-y-10">
         <header className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Desk</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Desk</p>
           <h1 className="font-serif text-3xl font-bold">Turn any PDF into a study plan</h1>
           <p className="text-sm text-slate-400">
             Extracted and summarised on upload; scheduled into a 3- or 7-day plan. The source PDF is never stored.

@@ -86,7 +86,7 @@ export default function EnduranceCupClient({ competitionId }: { competitionId: s
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-6 backdrop-blur-md">
+      <div className="rounded-2xl border border-line bg-surface/40 p-6 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <Flame className="h-4 w-4 text-gold" aria-hidden />
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">Durability</h2>
@@ -107,7 +107,7 @@ export default function EnduranceCupClient({ competitionId }: { competitionId: s
             type="button"
             onClick={checkIn}
             disabled={busy || view.checkedInToday || !view.started}
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {view.checkedInToday ? "Checked in today" : busy ? "Logging…" : "I practised today"}
           </button>
@@ -122,22 +122,22 @@ export default function EnduranceCupClient({ competitionId }: { competitionId: s
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-md">
+      <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 backdrop-blur-md">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-white/10 text-[11px] uppercase tracking-[0.2em] text-slate-500">
+          <thead className="border-b border-line text-[11px] uppercase tracking-[0.2em] text-slate-500">
             <tr>
               <th scope="col" className="px-5 py-3 font-semibold">Rank</th>
               <th scope="col" className="px-5 py-3 font-semibold">Racer</th>
               <th scope="col" className="px-5 py-3 text-right font-semibold">Days</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-line">
             {view.leaderboard.map((row, i) => (
               <tr key={`${row.handle}-${i}`} className={row.isCaller ? "bg-gold/5" : undefined}>
                 <td className="px-5 py-3.5 tabular-nums text-slate-400">{row.rank ?? "—"}</td>
                 <td className="px-5 py-3.5">
                   <span className="font-semibold text-slate-100">{row.handle}</span>
-                  {row.isCaller && <span className="ml-2 text-[11px] uppercase tracking-[0.2em] text-gold">You</span>}
+                  {row.isCaller && <span className="ml-2 text-[11px] uppercase tracking-[0.2em] text-electric-text">You</span>}
                 </td>
                 <td className="px-5 py-3.5 text-right font-serif text-lg font-bold tabular-nums text-slate-100">{row.days}</td>
               </tr>

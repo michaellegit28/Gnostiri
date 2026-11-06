@@ -24,35 +24,35 @@ export default async function ProfilePage() {
 
   return (
     <main className="mx-auto max-w-2xl px-5 py-8 md:py-12">
-      <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Profile</p>
+      <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Profile</p>
       <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100 md:text-4xl">
         {user.name ?? user.email ?? "Your account"}
       </h1>
-      <p className="mt-2 text-sm text-slate-400">{user.email ?? ""}</p>
+      <p className="mt-2 text-sm text-muted">{user.email ?? ""}</p>
 
-      <div className="mt-8 rounded-2xl border border-gold/30 bg-gold/[0.06] p-6">
+      <div className="gn-shadow mt-8 rounded-2xl border border-gold/30 bg-gold/[0.06] p-6">
         <div className="flex items-center gap-2">
           <Crown className="h-4 w-4 text-gold" aria-hidden />
-          <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Membership</h2>
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Membership</h2>
         </div>
         <p className="mt-3 font-serif text-2xl font-bold text-slate-100">
           {premium ? "Gnostiri Prime" : "Free plan"}
         </p>
-        <p className="mt-2 text-sm text-slate-400">
+        <p className="mt-2 text-sm text-muted">
           {premium
             ? "Prime is active — paid cups, the full Desk pipeline and premium tutor access are open."
             : "Prime opens the full Desk pipeline, premium cups and the whole library."}
         </p>
         <Link
           href="/pricing"
-          className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="gn-motion mt-5 inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           {premium ? "Manage membership" : "See Gnostiri Prime"}
         </Link>
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+        <div className="gn-shadow rounded-2xl border border-line bg-surface/40 p-5">
           <div className="flex items-center gap-2">
             <Coins className="h-4 w-4 text-gold" aria-hidden />
             <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">Credits</h2>
@@ -60,7 +60,7 @@ export default async function ProfilePage() {
           <p className="mt-3 font-serif text-3xl font-bold tabular-nums text-slate-100">{balance}</p>
           <p className="mt-1 text-xs text-muted">Redeemable for Prime days — the team handles redemption during the founder period.</p>
         </div>
-        <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5">
+        <div className="gn-shadow rounded-2xl border border-line bg-surface/40 p-5">
           <div className="flex items-center gap-2">
             <Trophy className="h-4 w-4 text-gold" aria-hidden />
             <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">Badges</h2>
@@ -75,7 +75,7 @@ export default async function ProfilePage() {
           {badges.map((badge) => (
             <li
               key={badge.id}
-              className="rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-slate-100"
+              className="gn-badge is-new rounded-full border border-gold/40 bg-gold/10 px-3 py-1.5 text-xs font-semibold text-slate-100"
             >
               🏆 {badge.label}
             </li>
@@ -83,7 +83,7 @@ export default async function ProfilePage() {
         </ul>
       )}
 
-      <nav aria-label="Profile links" className="mt-8 divide-y divide-white/5 border-y border-white/5">
+      <nav aria-label="Profile links" className="mt-8 divide-y divide-line border-y border-line">
         {[
           { href: "/university/revision", label: "Revision Queue", note: "Concepts due for review", Icon: RotateCcw },
           { href: "/library/credits", label: "Credits & badges", note: "Full reward ledger", Icon: Coins },
@@ -93,14 +93,14 @@ export default async function ProfilePage() {
           <Link
             key={href}
             href={href}
-            className="group flex min-h-[52px] items-center gap-3 py-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="gn-motion group flex min-h-[52px] items-center gap-3 py-3.5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            <Icon className="h-5 w-5 text-slate-400 group-hover:text-gold" aria-hidden />
+            <Icon className="h-5 w-5 text-slate-400 transition-colors group-hover:text-electric-text" aria-hidden />
             <span>
-              <span className="block font-semibold text-slate-100 group-hover:text-gold">{label}</span>
+              <span className="block font-semibold text-slate-100 transition-colors group-hover:text-electric-text">{label}</span>
               <span className="block text-xs text-muted">{note}</span>
             </span>
-            <span className="ml-auto text-slate-400 group-hover:text-gold" aria-hidden>
+            <span className="ml-auto text-slate-400 group-hover:text-electric-text" aria-hidden>
               →
             </span>
           </Link>
