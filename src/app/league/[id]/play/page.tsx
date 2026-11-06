@@ -32,7 +32,7 @@ export default async function PlayPage({ params }: { params: { id: string } }) {
         <p className="mt-3 text-slate-400">Your paper, your score and your ladder position all sit behind your account.</p>
         <Link
           href="/login"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Sign in
         </Link>
@@ -55,7 +55,7 @@ export default async function PlayPage({ params }: { params: { id: string } }) {
         </p>
         <Link
           href="/league/join"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Join cup
         </Link>
@@ -71,7 +71,7 @@ export default async function PlayPage({ params }: { params: { id: string } }) {
         <p className="mt-3 text-slate-400">The ladder is final — see where the field finished.</p>
         <Link
           href={`${hrefBack}/results`}
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           See results
         </Link>

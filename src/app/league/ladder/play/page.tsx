@@ -24,14 +24,14 @@ export default async function LadderPlayPage({ searchParams }: { searchParams: {
   if (!user) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Pod play</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Pod play</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Sign in to play a pod</h1>
         <p className="mt-3 text-sm text-slate-400">
           Pods are group-wide: you need a rank state and a group to take a seat.
         </p>
         <Link
           href="/login"
-          className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover"
+          className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Sign in
         </Link>

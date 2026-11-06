@@ -31,7 +31,7 @@ export default function TopicCard({
   tone?: "slate" | "violet";
 }) {
   const tagColor = {
-    gold: "text-gold",
+    gold: "text-electric-text",
     teal: "text-slate-400",
     violet: "text-slate-400",
     emerald: "text-emerald-400",
@@ -41,7 +41,7 @@ export default function TopicCard({
   return (
     <Link
       href={href}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-line p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-gold/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+      className={`group gn-motion gn-shadow relative flex flex-col overflow-hidden rounded-2xl border border-line p-6 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
         tone === "violet"
           ? "bg-gradient-to-b from-surface via-surface-2 to-surface"
           : "bg-surface"
@@ -50,11 +50,11 @@ export default function TopicCard({
         <span
           aria-hidden="true"
           className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent ${
-            tone === "violet" ? "via-gold/40" : "via-gold/40"
+            tone === "violet" ? "via-electric/40" : "via-electric/40"
           }`}
         />
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-serif text-xl font-bold text-slate-100 transition-colors group-hover:text-gold">
+        <h3 className="font-serif text-xl font-bold text-slate-100 transition-colors group-hover:text-primary">
           {title}
         </h3>
         {tag && (
@@ -66,12 +66,12 @@ export default function TopicCard({
       {typeof progress === "number" && (
         <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-800">
           <div
-            className="h-full rounded-full bg-gold"
+            className="h-full rounded-full bg-primary"
             style={{ width: `${Math.max(0, Math.min(100, progress))}%` }}
           />
         </div>
       )}
-      <span className="mt-5 inline-flex min-h-[44px] items-center gap-2 self-start rounded-lg border border-line bg-surface/10 px-4 py-2 text-sm font-semibold text-slate-100 transition-colors group-hover:border-transparent group-hover:bg-gold group-hover:text-on-gold">
+      <span className="mt-5 inline-flex min-h-[44px] items-center gap-2 self-start rounded-lg border border-line bg-surface/10 px-4 py-2 text-sm font-semibold text-slate-100 transition-colors group-hover:border-transparent group-hover:bg-primary group-hover:text-primary-on">
         {cta}
         <ArrowRight className="w-4 h-4" />
       </span>

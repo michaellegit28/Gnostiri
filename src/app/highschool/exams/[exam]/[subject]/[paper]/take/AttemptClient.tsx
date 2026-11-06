@@ -125,7 +125,7 @@ export default function AttemptClient({
               timeUp
                 ? "border-rose-500/40 bg-rose-500/10 text-rose-300"
                   : remaining <= 300
-                    ? "border-gold/40 bg-gold/10 text-gold"
+                    ? "border-amber-400/40 bg-amber-500/10 text-amber-300"
                   : "border-slate-700 bg-slate-950 text-slate-100"
             }`}
             aria-label="Time remaining"
@@ -160,7 +160,7 @@ export default function AttemptClient({
               return (
                 <label
                   key={option}
-                  className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-lg border px-4 transition-colors focus-within:ring-2 focus-within:ring-gold ${
+                  className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-lg border px-4 transition-colors focus-within:ring-2 focus-within:ring-primary ${
                     results
                       ? isCorrectOption
                         ? "border-emerald-500/60 bg-emerald-500/10"
@@ -168,7 +168,7 @@ export default function AttemptClient({
                           ? "border-rose-500/60 bg-rose-500/10"
                           : "border-slate-800"
                       : selected === option
-                        ? "border-gold/60 bg-gold/10"
+                        ? "border-electric/60 bg-electric/10"
                         : "border-slate-700 hover:border-slate-600"
                   }`}
                 >
@@ -201,7 +201,7 @@ export default function AttemptClient({
           <button
             disabled={!allAnswered || busy}
             onClick={() => void submitAnswers()}
-            className="min-h-12 w-full sm:w-auto rounded-lg bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50"
+            className="min-h-12 w-full sm:w-auto rounded-lg bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
           >
             {busy ? "Marking…" : "Submit attempt"}
           </button>
@@ -225,7 +225,7 @@ export default function AttemptClient({
               : "Sign in to save attempts and track your progress over time."}
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href={`${backUrl}/review`} className="rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950">
+            <Link href={`${backUrl}/review`} className="rounded-lg bg-primary px-5 py-3 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
               Review marking scheme
             </Link>
             <Link href={backUrl} className="rounded-lg border border-slate-700 px-5 py-3 font-semibold text-slate-200 hover:border-slate-500">

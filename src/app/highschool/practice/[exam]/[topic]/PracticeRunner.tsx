@@ -350,7 +350,7 @@ export default function PracticeRunner({
             type="button"
             onClick={() => void startPractice()}
             disabled={busy}
-            className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50 hover:bg-gold-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="w-full min-h-12 rounded-lg bg-primary px-6 font-semibold text-on-primary disabled:opacity-50 hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {busy ? "Starting…" : "Start practice session"}
           </button>
@@ -391,14 +391,14 @@ export default function PracticeRunner({
                 <button
                   type="button"
                   onClick={() => setHintsOpen((p) => ({ ...p, [question.id]: !p[question.id] }))}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold border border-gold/30 bg-gold/10 rounded-full px-3 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-electric-text border border-electric/30 bg-electric/10 rounded-full px-3 py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   aria-expanded={hintsOpen[question.id] ?? false}
                 >
                   <Lightbulb className="w-3.5 h-3.5" /> Hint
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform ${hintsOpen[question.id] ? "rotate-180" : ""}`} />
                 </button>
                 {hintsOpen[question.id] && (
-                  <p className="mt-2 rounded-lg border border-gold/20 bg-gold/5 p-3 text-sm text-gold">
+                    <p className="mt-2 rounded-lg border border-electric/20 bg-electric/5 p-3 text-sm text-electric-text">
                     {question.hint}
                   </p>
                 )}
@@ -501,7 +501,7 @@ export default function PracticeRunner({
                 type="button"
                 onClick={() => void completeSection()}
                 disabled={busy}
-                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold-hover disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-primary px-5 font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {busy ? "Saving…" : sectionIndex < sections.length - 1 ? "Complete section" : "Finish & submit"}
               </button>
@@ -529,7 +529,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={advanceToNextSection}
-              className="w-full min-h-12 rounded-lg bg-gold px-6 font-semibold text-slate-950 hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="w-full min-h-12 rounded-lg bg-primary px-6 font-semibold text-on-primary hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Continue
             </button>
@@ -559,7 +559,7 @@ export default function PracticeRunner({
                       {s.score}/{s.maxScore} correct
                     </span>
                   ) : (
-                    <span className="text-xs text-gold border border-gold/30 bg-gold/10 rounded-full px-2.5 py-1">
+                    <span className="text-xs text-electric-text border border-electric/30 bg-electric/10 rounded-full px-2.5 py-1">
                       Self-assessment
                     </span>
                   )}
@@ -638,7 +638,7 @@ export default function PracticeRunner({
                               <button
                                 type="button"
                                 onClick={() => void markWithAi(s.sectionId, ma.questionId)}
-                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold border border-gold/40 bg-gold/10 rounded-full px-3 py-1.5 hover:bg-gold/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-electric-text border border-electric/40 bg-electric/10 rounded-full px-3 py-1.5 hover:bg-electric/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                               >
                                 <Sparkles className="w-3.5 h-3.5" /> Mark with AI
                               </button>
@@ -670,7 +670,7 @@ export default function PracticeRunner({
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-gold px-5 font-semibold text-slate-950 hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex items-center gap-2 min-h-11 rounded-lg bg-primary px-5 font-semibold text-on-primary hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <RefreshCw className="w-4 h-4" /> Practice again
             </button>

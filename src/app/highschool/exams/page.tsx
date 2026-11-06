@@ -78,11 +78,11 @@ export default async function HighSchoolHubPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Hero */}
         <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-8 md:p-10 text-center space-y-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
+          <span className="inline-flex items-center gap-2 rounded-full border border-electric/30 bg-electric/10 px-3 py-1 text-xs font-semibold text-electric-text">
             <BookOpen className="h-3.5 w-3.5" aria-hidden /> High School · Exam Bank
           </span>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            The open exam bank, <span className="text-gold">classified</span>
+            The open exam bank, <span className="text-electric-text">classified</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             Every board is classified by how it actually examines — full CBT
@@ -93,14 +93,14 @@ export default async function HighSchoolHubPage() {
 
         {/* Resume banner */}
         {recentActivity && (
-          <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3 text-gold">
-              <History className="w-5 h-5 shrink-0 text-gold" />
+          <div className="bg-electric/10 border border-electric/30 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3 text-electric-text">
+              <History className="w-5 h-5 shrink-0 text-electric-text" />
               <span className="text-sm font-medium">{recentActivity.label}</span>
             </div>
             <Link
               href={recentActivity.link}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-hover transition-colors shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <span>Resume</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -149,7 +149,7 @@ export default async function HighSchoolHubPage() {
           </p>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+            className="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-lg bg-primary text-on-primary font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Get notified — it&#39;s free
           </Link>
@@ -162,10 +162,10 @@ export default async function HighSchoolHubPage() {
 function BoardCard({ board, stats }: { board: ExamBankBoard; stats: { subjects: number; papers: number; questions: number } }) {
   const live = board.status === "live";
   return (
-    <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all duration-200 group shadow-lg">
+    <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-electric/40 transition-all duration-200 group gn-motion gn-shadow">
       <div>
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-100 group-hover:text-gold transition-colors">
+          <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-100 group-hover:text-electric-text transition-colors">
             {board.name}
           </h3>
           {!live && (
@@ -177,7 +177,7 @@ function BoardCard({ board, stats }: { board: ExamBankBoard; stats: { subjects: 
         <p className="text-xs font-medium text-slate-400 mb-3">{board.country}</p>
         <div className="flex flex-wrap gap-1.5 mb-4">
           {board.formats.map((f) => (
-            <span key={f} className="text-[11px] font-medium text-gold bg-gold/10 px-2 py-0.5 rounded-md border border-gold/30">
+            <span key={f} className="text-[11px] font-medium text-electric-text bg-electric/10 px-2 py-0.5 rounded-md border border-electric/30">
               {f}
             </span>
           ))}
@@ -187,17 +187,17 @@ function BoardCard({ board, stats }: { board: ExamBankBoard; stats: { subjects: 
       <div className="space-y-3">
         <div className="flex items-center gap-1.5 text-xs text-slate-400">
           <span className="flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded-md border border-slate-700/50">
-            <BookOpen className="w-3.5 h-3.5 text-gold" aria-hidden /> {stats.questions} practice Qs
+            <BookOpen className="w-3.5 h-3.5 text-electric-text" aria-hidden /> {stats.questions} practice Qs
           </span>
           <span className="flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded-md border border-slate-700/50">
-            <FileText className="w-3.5 h-3.5 text-gold" aria-hidden /> {stats.papers} papers
+            <FileText className="w-3.5 h-3.5 text-electric-text" aria-hidden /> {stats.papers} papers
           </span>
         </div>
         <div className={board.cbtReady ? "grid grid-cols-2 gap-2" : ""}>
           {board.cbtReady && live && (
             <Link
               href={`/cbt/setup?board=${board.code}`}
-              className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-primary text-on-primary font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <MonitorPlay className="w-4 h-4" aria-hidden /> Start CBT
             </Link>
@@ -206,8 +206,8 @@ function BoardCard({ board, stats }: { board: ExamBankBoard; stats: { subjects: 
             href={`/highschool/exams/${board.slug}`}
             className={`inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg font-semibold text-sm transition-colors ${
               board.cbtReady && live
-                ? "border border-white/15 text-slate-200 hover:border-gold/50"
-                : "bg-gold text-slate-950 hover:bg-gold-hover"
+                ? "border border-white/15 text-slate-200 hover:border-electric/50"
+                : "bg-primary text-on-primary hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             }`}
           >
             <span>Open board</span>

@@ -25,7 +25,7 @@ export const dynamic = "force-dynamic";
 function TierLadder({ currentTier, stars }: { currentTier: number | null; stars: number }) {
   return (
     <section>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">The ladder</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">The ladder</p>
       <h2 className="mt-2 font-serif text-2xl font-bold text-slate-100">Six tiers, one currency</h2>
       <ol className="mt-5 space-y-2">
         {TIERS.map((tier) => {
@@ -90,7 +90,7 @@ function Progress({ label, detail, ratio }: { label: string; detail: string; rat
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="h-full rounded-full bg-gold" style={{ width: `${pct}%` }} />
+        <div className="h-full rounded-full bg-electric" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
@@ -109,7 +109,7 @@ export default async function LadderPage() {
     // the ladder is public, the climb is not.
     return (
       <main className="mx-auto max-w-3xl px-4 py-10 md:py-14">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Global ranking</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Global ranking</p>
         <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100 md:text-4xl">The ladder</h1>
         <p className="mt-3 text-sm text-slate-400">
           Stars are the platform&apos;s single currency. Win pods to climb from Initiate to Paragon; at season close the top
@@ -132,7 +132,7 @@ export default async function LadderPage() {
             <>
               <Link
                 href="/login"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Sign in to join the queue
               </Link>
@@ -182,7 +182,7 @@ export default async function LadderPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-10 md:py-14">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Global ranking</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Global ranking</p>
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <h1 className="font-serif text-3xl font-bold text-slate-100 md:text-4xl">
           {info.label} <span className="text-gold">{stars.toLocaleString()} ★</span>
@@ -225,7 +225,7 @@ export default async function LadderPage() {
           </div>
           <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
             <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-500">
-              <Users className="h-3.5 w-3.5 text-gold" aria-hidden /> Group
+              <Users className="h-3.5 w-3.5 text-electric-text" aria-hidden /> Group
             </p>
             <p className="mt-1 font-serif text-2xl font-bold text-slate-100">
               {membership ? `${leaderRows.length} of ${membership.group.capacity}` : "—"}
@@ -237,7 +237,7 @@ export default async function LadderPage() {
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
         <div className="space-y-10">
           <section>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Your group</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Your group</p>
             <h2 className="mt-2 font-serif text-2xl font-bold text-slate-100">
               {membership ? membership.group.name : "No group yet"}
             </h2>
@@ -264,12 +264,12 @@ export default async function LadderPage() {
                   {leaderRows.map((row) => (
                     <tr
                       key={row.userId}
-                      className={`border-t border-slate-800 ${row.userId === user.id ? "text-gold" : "text-slate-200"}`}
+                      className={`border-t border-slate-800 ${row.userId === user.id ? "text-electric-text" : "text-slate-200"}`}
                     >
                       <td className="py-2.5 tabular-nums">{row.position}</td>
                       <td className="py-2.5">
                         {displayHandle(nameOf.get(row.userId) ?? null)}
-                        {row.userId === user.id && <span className="ml-2 text-[11px] uppercase tracking-[0.2em] text-gold">you</span>}
+                        {row.userId === user.id && <span className="ml-2 text-[11px] uppercase tracking-[0.2em] text-electric-text">you</span>}
                       </td>
                       <td className="py-2.5 text-right tabular-nums">{row.podScore}</td>
                       <td className="py-2.5 text-right tabular-nums">{row.stars.toLocaleString()}</td>
@@ -281,7 +281,7 @@ export default async function LadderPage() {
           </section>
 
           <section>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Open pods</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Open pods</p>
             <h2 className="mt-2 font-serif text-2xl font-bold text-slate-100">Live windows</h2>
             {openPods.length === 0 ? (
               <p className="mt-4 rounded-xl border border-white/10 bg-slate-950/60 px-6 py-8 text-center text-sm text-slate-400">
@@ -302,7 +302,7 @@ export default async function LadderPage() {
                     <div className="mt-3 flex flex-wrap items-start gap-4">
                       <Link
                         href={`/league/ladder/play?match=${seat.match.id}`}
-                        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-5 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                       >
                         <Clock className="h-4 w-4" aria-hidden />
                         {seat.submittedAt ? "Review window" : "Play this pod"}
@@ -325,16 +325,16 @@ export default async function LadderPage() {
         <div className="space-y-8">
           <TierLadder currentTier={tier} stars={stars} />
 
-          <section className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/15 via-slate-900 to-slate-950 p-6">
+          <section className="rounded-2xl border border-electric/30 bg-gradient-to-r from-electric/15 via-slate-900 to-slate-950 p-6">
             <h2 className="flex items-center gap-2 font-serif text-xl font-bold text-slate-100">
-              <Swords className="h-5 w-5 text-gold" aria-hidden /> Play a pod
+              <Swords className="h-5 w-5 text-electric-text" aria-hidden /> Play a pod
             </h2>
             <p className="mt-2 text-sm text-slate-400">
               2–4 of your group, one 20-minute window, the same paper at your own pace. First place takes 3 stars.
             </p>
             <Link
               href="/league/ladder/play"
-              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Open a pod
             </Link>

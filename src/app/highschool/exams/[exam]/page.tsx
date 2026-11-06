@@ -190,9 +190,9 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool" className="rounded hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">High School</Link>
+          <Link href="/highschool" className="rounded hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">High School</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href="/highschool/exams" className="rounded hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">Exams</Link>
+          <Link href="/highschool/exams" className="rounded hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
           <span className="text-slate-100 font-medium">{examination.name.toUpperCase()}</span>
         </nav>
@@ -204,7 +204,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
             <span>High School · Exams</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            {examination.name.toUpperCase()} <span className="text-gold">practice bank</span>
+            {examination.name.toUpperCase()} <span className="text-electric-text">practice bank</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto">
             {examination.country ? `${examination.country} — ` : ""}
@@ -235,16 +235,16 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
           {cbtPreset && (
             <Link
               href={`/cbt/setup?board=${examination.slug}`}
-              className={`flex flex-col justify-between gap-3 rounded-xl border p-6 transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+              className={`flex flex-col justify-between gap-3 rounded-xl border p-6 transition-colors group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary gn-motion gn-shadow ${
                 cbtReady
-                  ? "border-gold/40 bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-900 hover:border-gold"
+                  ? "border-electric/40 bg-gradient-to-br from-electric/10 via-slate-900 to-slate-900 hover:border-electric"
                   : "border-slate-800 bg-slate-900/60 hover:border-slate-700"
               }`}
             >
               <div className="flex items-center gap-3">
-                <MonitorPlay className={`w-6 h-6 ${cbtReady ? "text-gold" : "text-slate-500"}`} />
+                <MonitorPlay className={`w-6 h-6 ${cbtReady ? "text-electric-text" : "text-slate-500"}`} />
                 <div>
-                  <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-gold transition-colors">
+                  <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-electric-text transition-colors">
                     Start CBT simulation
                   </div>
                   <p className="text-sm text-slate-400 mt-1">
@@ -254,7 +254,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                   </p>
                 </div>
               </div>
-              <span className={`text-sm font-semibold ${cbtReady ? "text-gold" : "text-slate-400"}`}>
+              <span className={`text-sm font-semibold ${cbtReady ? "text-electric-text" : "text-slate-400"}`}>
                 {cbtReady ? "Open CBT setup →" : "Check CBT status →"}
               </span>
             </Link>
@@ -330,10 +330,10 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {coverage.map((subject) => (
-                <div key={subject.slug} className="flex flex-col bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all">
+                <div key={subject.slug} className="flex flex-col bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-electric/40 transition-all gn-motion gn-shadow">
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="text-xl font-serif font-bold text-slate-100">
-                      <Link href={subject.href} className="rounded hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+                      <Link href={subject.href} className="rounded hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                         {subject.title}
                       </Link>
                     </h3>
@@ -349,7 +349,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                       <li key={topic.id} className="flex items-center justify-between gap-3 text-sm">
                         <Link
                           href={`${sectionBase}/${subject.slug}/${topic.topicSlug}/study`}
-                          className="rounded text-slate-300 hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                          className="rounded text-slate-300 hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                         >
                           {topic.title}
                         </Link>
@@ -357,7 +357,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                           <span>{topic.questionCount.toLocaleString()} q</span>
                           <Link
                             href={`${sectionBase}/${subject.slug}/${topic.topicSlug}/quiz`}
-                            className="rounded font-semibold text-gold/80 hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                            className="rounded font-semibold text-electric-text/80 hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           >
                             Quiz
                           </Link>
@@ -413,7 +413,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                   </span>
                   <Link
                     href={`/highschool/exams/${examination.slug}/${subjectSlugOf(group.subject)}`}
-                    className="rounded text-xl md:text-2xl font-serif font-bold hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="rounded text-xl md:text-2xl font-serif font-bold hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     {group.subject}
                   </Link>
@@ -426,10 +426,10 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                     <Link
                       key={paper.id}
                       href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)}
-                      className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 shadow-lg hover:border-gold/40 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                      className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 transition-all group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary gn-motion gn-shadow"
                     >
                       <div className="flex items-start justify-between gap-3 mb-4">
-                        <span className="font-serif text-3xl font-bold text-gold group-hover:text-amber-300">
+                        <span className="font-serif text-3xl font-bold text-electric-text group-hover:text-cyan-300">
                           {paper.year}
                         </span>
                         <span className="text-xs font-medium text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded-md border border-slate-700/50">
@@ -446,7 +446,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
                           <span>{paper.totalMarks} marks</span>
                         </div>
                       </div>
-                      <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-400 group-hover:text-gold transition-colors">
+                      <div className="mt-6 pt-4 border-t border-slate-800 text-xs font-semibold text-slate-400 group-hover:text-electric-text transition-colors">
                         Open paper →
                       </div>
                     </Link>

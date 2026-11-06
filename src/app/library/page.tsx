@@ -110,7 +110,7 @@ export default async function LibraryPage({
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-5xl space-y-10">
         <header className="space-y-3">
-          <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-gold">
+          <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-cyan-300">
             <Library className="h-4 w-4" /> Public Library
           </p>
           <h1 className="font-serif text-3xl font-bold md:text-5xl">Study what your cohort studied</h1>
@@ -146,17 +146,17 @@ export default async function LibraryPage({
             name="q"
             defaultValue={q}
             placeholder="Search by title…"
-            className="min-w-[12rem] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold/50 focus:outline-none"
+            className="min-w-[12rem] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan-400/50 focus:outline-none"
           />
           <input
             name="subject"
             defaultValue={subject}
             placeholder="Subject slug (e.g. biology)"
-            className="min-w-[10rem] rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold/50 focus:outline-none"
+            className="min-w-[10rem] rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan-400/50 focus:outline-none"
           />
           <button
             type="submit"
-            className="rounded-lg bg-gold px-5 py-2 text-sm font-semibold text-on-gold transition-colors hover:bg-gold-hover"
+            className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Search
           </button>
@@ -188,14 +188,14 @@ export default async function LibraryPage({
           {(skip > 0 || hasNext) && (
             <div className="flex items-center justify-between pt-2">
               {skip > 0 ? (
-                <Link href={`/library?${prevQuery.toString()}`} className="text-sm text-gold hover:underline">
+                <Link href={`/library?${prevQuery.toString()}`} className="text-sm text-cyan-300 hover:underline">
                   ← Previous
                 </Link>
               ) : (
                 <span />
               )}
               {hasNext && (
-                <Link href={`/library?${nextQuery.toString()}`} className="text-sm text-gold hover:underline">
+                <Link href={`/library?${nextQuery.toString()}`} className="text-sm text-cyan-300 hover:underline">
                   Next →
                 </Link>
               )}

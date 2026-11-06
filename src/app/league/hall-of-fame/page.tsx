@@ -44,7 +44,7 @@ export default async function HallOfFamePage() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/league/ladder"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Climb the ladder
           </Link>
@@ -131,7 +131,7 @@ export default async function HallOfFamePage() {
       <div className="mt-12 flex flex-wrap gap-3">
         <Link
           href="/league/ladder"
-          className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-6 font-semibold text-gold transition-colors hover:bg-gold/10"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500"
         >
           Back to the ladder
         </Link>

@@ -19,7 +19,7 @@ interface TutorPanelProps {
 /**
  * TutorPanel — the tutor as a floating companion, not a destination.
  * Same brain as the full page (/api/tutor streaming), dressed like
- * a guide: greeting, starters, streaming answers, gold send.
+ * a guide: greeting, starters, streaming answers, primary send.
  */
 export default function TutorPanel({ onClose }: TutorPanelProps) {
   const { currentDomain } = useDomain();
@@ -104,13 +104,13 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
     <div
       role="dialog"
       aria-label="AI Tutor"
-      className="fixed z-[80] inset-x-3 bottom-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-[400px] flex flex-col overflow-hidden rounded-2xl border border-gold/30 bg-bg/98 shadow-2xl shadow-black/60 backdrop-blur-xl animate-[panel-up_0.3s_ease-out]"
+      className="fixed z-[80] inset-x-3 bottom-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-[400px] flex flex-col overflow-hidden rounded-2xl border border-electric/30 bg-bg/98 shadow-2xl shadow-black/60 backdrop-blur-xl animate-[panel-up_0.3s_ease-out]"
       style={{ maxHeight: "min(78vh, 620px)", height: "560px", maxWidth: "100%" }}
     >
       {/* Header */}
       <div className="flex items-start justify-between border-b border-border/10 px-5 py-4">
         <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-electric-text">
             Tutor
           </p>
           <p className="mt-1 font-serif text-xl italic text-slate-100">
@@ -132,7 +132,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
       {/* Messages */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3" aria-live="polite">
         {messages.length === 0 && (
-          <div className="rounded-xl border border-border/10 bg-surface/10 p-4 text-sm leading-relaxed text-slate-400 border-l-2 !border-l-gold">
+          <div className="rounded-xl border border-border/10 bg-surface/10 p-4 text-sm leading-relaxed text-slate-400 border-l-2 !border-l-electric">
             I&apos;m your Tutor. Right now we&apos;re here to help you learn anything.
             Ask me anything, or pick a starter below.
           </div>
@@ -143,7 +143,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
               {m.content}
             </div>
           ) : (
-            <div key={i} className="max-w-[95%] rounded-xl bg-surface/10 border border-border/10 px-4 py-3 text-sm leading-relaxed text-slate-400 border-l-2 !border-l-gold">
+            <div key={i} className="max-w-[95%] rounded-xl bg-surface/10 border border-border/10 px-4 py-3 text-sm leading-relaxed text-slate-400 border-l-2 !border-l-electric">
               {m.content || (busy ? "Thinking…" : "")}
             </div>
           )
@@ -155,7 +155,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
                 key={s}
                 type="button"
                 onClick={(e) => void send(e as unknown as FormEvent, s)}
-                className="rounded-full border border-border/10 px-3.5 py-2 text-xs text-slate-400 hover:border-gold/60 hover:text-slate-100 transition-colors"
+                className="rounded-full border border-border/10 px-3.5 py-2 text-xs text-slate-400 hover:border-electric/60 hover:text-slate-100 transition-colors"
               >
                 {s}
               </button>
@@ -185,12 +185,12 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about anything…"
           aria-label="Ask the tutor"
-          className="min-h-[48px] flex-1 rounded-full border border-border/10 bg-surface/10 px-4 text-sm text-slate-100 placeholder:text-slate-400 focus:border-gold/60 focus:outline-none"
+          className="min-h-[48px] flex-1 rounded-full border border-border/10 bg-surface/10 px-4 text-sm text-slate-100 placeholder:text-slate-400 focus:border-primary/60 focus:outline-none"
         />
         <button
           type="submit"
           disabled={busy || !input.trim()}
-          className="min-h-[48px] shrink-0 rounded-full bg-gold px-5 text-sm font-semibold text-on-gold hover:bg-gold-hover transition-colors disabled:opacity-40"
+          className="min-h-[48px] shrink-0 rounded-full bg-primary px-5 text-sm font-semibold text-primary-on hover:bg-primary-hover transition-colors disabled:opacity-40"
         >
           Send
         </button>

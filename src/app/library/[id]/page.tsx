@@ -49,12 +49,12 @@ export default async function LibraryArtifactPage({ params }: { params: { id: st
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-3xl space-y-8">
-        <Link href="/library" className="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-gold">
+        <Link href="/library" className="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-cyan-300">
           <ChevronLeft className="h-4 w-4" /> Library
         </Link>
 
         <header className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Shared artifact</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Shared artifact</p>
           <h1 className="font-serif text-3xl font-bold">{document.title}</h1>
           <p className="text-sm text-slate-400">
             {document.pageCount} page{document.pageCount === 1 ? "" : "s"}
@@ -91,8 +91,8 @@ export default async function LibraryArtifactPage({ params }: { params: { id: st
           </div>
         </div>
 
-        <section className="flex flex-col items-start gap-2 rounded-2xl border border-gold/30 bg-gold/5 p-6">
-          <h2 className="inline-flex items-center gap-2 font-serif text-xl font-bold text-gold">
+        <section className="flex flex-col items-start gap-2 rounded-2xl border border-electric/30 bg-electric/5 p-6">
+          <h2 className="inline-flex items-center gap-2 font-serif text-xl font-bold text-electric-text">
             <Gift className="h-5 w-5" /> Put it on your desk
           </h2>
           <p className="text-sm text-slate-300">

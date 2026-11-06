@@ -42,7 +42,7 @@ const FORMAT_TEXT: Record<CompetitionFormat, string> = {
   speed: "text-cup-speed",
   endurance: "text-gold",
   mastery: "text-cup-mastery",
-  bracket: "text-teal-500",
+  bracket: "text-cup-bracket",
 };
 
 export default async function ResultsPage({ params }: { params: { id: string } }) {
@@ -67,7 +67,7 @@ export default async function ResultsPage({ params }: { params: { id: string } }
   return (
     <main className="mx-auto max-w-4xl px-6 py-12 md:py-16">
       <header>
-        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Merit League · results</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Merit League · results</p>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <h1 className="font-serif text-3xl font-bold text-slate-100 md:text-4xl">{competition.title}</h1>
           <span
@@ -166,13 +166,13 @@ export default async function ResultsPage({ params }: { params: { id: string } }
           <>
             <Link
               href={`/league/${competition.id}/play`}
-              className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Play again — best score kept
             </Link>
             <Link
               href={`/league/${competition.id}`}
-              className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Back to the cup
             </Link>
@@ -180,7 +180,7 @@ export default async function ResultsPage({ params }: { params: { id: string } }
         ) : (
           <Link
             href="/league/join"
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Join cup
           </Link>

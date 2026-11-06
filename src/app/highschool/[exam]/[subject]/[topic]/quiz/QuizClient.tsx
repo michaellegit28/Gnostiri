@@ -104,7 +104,7 @@ export default function QuizClient({
     return (
       <div className="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-6">
         <div className="max-w-md w-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-gold/10 text-gold flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 rounded-full bg-electric/10 text-electric-text flex items-center justify-center mx-auto">
             <HelpCircle className="w-8 h-8" />
           </div>
           <div className="space-y-2">
@@ -116,7 +116,7 @@ export default function QuizClient({
           <div>
             <Link
               href={subjectHref}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors w-full"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-semibold text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary w-full"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to {subjectTitle}</span>
@@ -282,7 +282,7 @@ export default function QuizClient({
         <div className="max-w-2xl w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-10 space-y-8 shadow-xl">
           {/* Header */}
           <div className="text-center space-y-3 border-b border-slate-800 pb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 text-electric-text text-xs font-semibold">
               <Sparkles className="w-4 h-4" />
               <span>Quiz Completed</span>
             </div>
@@ -318,7 +318,7 @@ export default function QuizClient({
               <div className="text-slate-400 text-xs uppercase font-semibold tracking-wider mb-1">
                 Status
               </div>
-              <div className={`text-xl font-bold mt-1 ${awaitingSync ? "text-gold" : accuracy >= 70 ? "text-emerald-400" : "text-rose-400"}`}>
+              <div className={`text-xl font-bold mt-1 ${awaitingSync ? "text-amber-300" : accuracy >= 70 ? "text-emerald-400" : "text-rose-400"}`}>
                 {awaitingSync ? "Saved offline" : accuracy >= 70 ? "Passed" : "Needs Review"}
               </div>
             </div>
@@ -330,10 +330,10 @@ export default function QuizClient({
               Topic Analysis
             </h2>
             {awaitingSync && (
-              <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex items-start gap-3 text-gold">
-                <CloudOff className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+              <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex items-start gap-3 text-amber-200">
+                <CloudOff className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-semibold text-gold text-sm">Offline — answers saved, will sync</div>
+                  <div className="font-semibold text-amber-300 text-sm">Offline — answers saved, will sync</div>
                   <p className="text-xs text-slate-400/80 mt-1">
                     This paper was finished with no connection. Every answer is kept and graded by the server as soon as the submission syncs — nothing is scored from the device.
                   </p>
@@ -365,17 +365,17 @@ export default function QuizClient({
 
           {/* User Sign-In Banner / Save Status */}
           {!user ? (
-            <div className="bg-gold/10 border border-gold/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-gold">
+            <div className="bg-electric/10 border border-electric/30 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-electric-text">
               <div className="flex items-center gap-3">
-                <LogIn className="w-5 h-5 text-gold shrink-0" />
+                <LogIn className="w-5 h-5 text-electric-text shrink-0" />
                 <div className="text-xs md:text-sm text-slate-200">
-                  <span className="font-semibold text-gold">Sign in to save your progress</span>
+                  <span className="font-semibold text-electric-text">Sign in to save your progress</span>
                   <p className="text-slate-400 text-xs">Track your accuracy and weak topics across all subjects.</p>
                 </div>
               </div>
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-xs transition-colors shrink-0"
+                className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-on-primary font-semibold text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary shrink-0"
               >
                 Sign In
               </Link>
@@ -385,7 +385,7 @@ export default function QuizClient({
               {isSaving ? (
                 <span>Saving quiz results...</span>
               ) : awaitingSync ? (
-                <span className="text-gold flex items-center gap-1">
+                <span className="text-amber-300 flex items-center gap-1">
                   <CloudOff className="w-4 h-4" /> Offline — answers saved, will sync
                 </span>
               ) : saveSuccess ? (
@@ -411,7 +411,7 @@ export default function QuizClient({
 
             <Link
               href={subjectHref}
-              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-semibold text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <span>Back to {subjectTitle}</span>
             </Link>
@@ -436,13 +436,13 @@ export default function QuizClient({
       {/* Top Bar Navigation & Progress */}
       <div className="space-y-4">
         <nav className="flex items-center gap-2 text-xs md:text-sm text-slate-400">
-          <Link href={examHubHref} className="hover:text-gold transition-colors">
+          <Link href={examHubHref} className="hover:text-electric-text transition-colors">
             {examName}
           </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           <Link
             href={subjectHref}
-            className="hover:text-gold transition-colors"
+            className="hover:text-electric-text transition-colors"
           >
             {subjectTitle}
           </Link>
@@ -453,7 +453,7 @@ export default function QuizClient({
         {/* Progress Bar Header */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center justify-between sm:justify-start gap-4">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gold">
+            <span className="text-xs font-semibold uppercase tracking-wider text-electric-text">
               Question {currentIndex + 1} of {totalQuestions}
             </span>
             <span className="text-xs text-slate-400 bg-slate-800 px-2.5 py-1 rounded-md uppercase font-mono">
@@ -464,7 +464,7 @@ export default function QuizClient({
           {/* Visual Progress Bar */}
           <div className="w-full sm:w-48 bg-slate-800 rounded-full h-2.5 overflow-hidden">
             <div
-              className="bg-gold h-full transition-all duration-300 ease-out"
+              className="bg-electric h-full transition-all duration-300 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -472,7 +472,7 @@ export default function QuizClient({
       </div>
 
       {savedOffline > 0 && (
-        <div className="flex items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-4 py-2.5 text-sm text-gold">
+        <div className="flex items-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-200">
           <CloudOff className="w-4 h-4 shrink-0" aria-hidden />
           <span>Offline — answers saved, will sync</span>
         </div>
@@ -505,7 +505,7 @@ export default function QuizClient({
                   optionStyle = "bg-slate-950/30 border-slate-800 text-slate-500 opacity-50";
                 }
               } else if (isSelected) {
-                optionStyle = "bg-gold/15 border-gold text-gold font-semibold";
+                optionStyle = "bg-electric/15 border-electric text-electric-text font-semibold";
               }
 
               return (
@@ -520,11 +520,11 @@ export default function QuizClient({
                   <div
                     className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
                       isSelected
-                        ? "border-gold bg-gold/20"
+                        ? "border-electric bg-electric/20"
                         : "border-slate-700"
                     }`}
                   >
-                    {isSelected && <div className="w-2 h-2 rounded-full bg-gold" />}
+                    {isSelected && <div className="w-2 h-2 rounded-full bg-electric" />}
                   </div>
                 </button>
               );
@@ -583,7 +583,7 @@ export default function QuizClient({
               type="button"
               onClick={handleSubmitQuestion}
               disabled={!selectedOption || submittingAnswer}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover disabled:opacity-40 disabled:hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover disabled:opacity-40 disabled:hover:bg-primary-hover text-on-primary font-semibold text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Submit Answer
             </button>
@@ -601,7 +601,7 @@ export default function QuizClient({
             <button
               type="button"
               onClick={handleNextQuestion}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold hover:bg-gold-hover text-slate-950 font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-semibold text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary flex items-center justify-center gap-2"
             >
               <span>{currentIndex < totalQuestions - 1 ? "Next Question" : "View Results"}</span>
               <ChevronRight className="w-4 h-4" />

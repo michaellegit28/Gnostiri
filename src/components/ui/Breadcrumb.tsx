@@ -32,7 +32,7 @@ export default function Breadcrumb({ items }: { items: Crumb[] }) {
             ) : (
               <Link
                 href={item.href}
-                className="transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {item.label}
               </Link>
