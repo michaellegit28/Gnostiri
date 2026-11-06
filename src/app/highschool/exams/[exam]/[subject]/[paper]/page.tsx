@@ -36,15 +36,15 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Breadcrumb */}
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-gold transition-colors">High School</Link>
+          <Link href="/highschool" className="hover:text-electric-text transition-colors">High School</Link>
           <ChevronRight className="w-4 h-4 text-slate-400" />
-          <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="hover:text-electric-text transition-colors">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-400" />
-          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
+          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-electric-text transition-colors">
             {examination.name.toUpperCase()}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-400" />
-          <Link href={`/highschool/exams/${examination.slug}/${params.subject}`} className="hover:text-gold transition-colors">
+          <Link href={`/highschool/exams/${examination.slug}/${params.subject}`} className="hover:text-electric-text transition-colors">
             {paper.subject}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -57,7 +57,7 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
             {examination.name.toUpperCase()} · {paper.subject}
           </p>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            {paper.year} <span className="text-gold">{paper.paperNumber}</span>
+            {paper.year} <span className="text-electric-text">{paper.paperNumber}</span>
           </h1>
           <div className="flex flex-wrap gap-4 text-sm text-slate-400">
             <div className="flex items-center gap-2">
@@ -87,9 +87,9 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
           </section>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all">
+            <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-electric/40 transition-all gn-motion gn-shadow">
               <div>
-                <Timer className="w-8 h-8 text-gold mb-4" />
+                <Timer className="w-8 h-8 text-electric-text mb-4" />
                 <h2 className="text-2xl font-serif font-bold mb-2">Timed attempt</h2>
                 <p className="text-slate-400 text-sm mb-6">
                   Exam conditions: a {formatDuration(paper.durationMinutes)} countdown, answers locked
@@ -98,14 +98,14 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
               </div>
               <Link
                 href={`${base}/take`}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Start timed attempt
               </Link>
             </div>
-            <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all">
+            <div className="flex flex-col justify-between bg-slate-900/80 border border-slate-800 rounded-xl p-6 hover:border-electric/40 transition-all gn-motion gn-shadow">
               <div>
-                <BookOpenCheck className="w-8 h-8 text-gold mb-4" />
+                <BookOpenCheck className="w-8 h-8 text-electric-text mb-4" />
                 <h2 className="text-2xl font-serif font-bold mb-2">Open practice</h2>
                 <p className="text-slate-400 text-sm mb-6">
                   No clock. Sit the same paper at your own pace — ideal for first revision passes
@@ -114,7 +114,7 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
               </div>
               <Link
                 href={`${base}/take?mode=open`}
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Start open practice
               </Link>
@@ -125,10 +125,10 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
         {/* Marking scheme */}
         <Link
           href={`${base}/review`}
-          className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-slate-600 transition-colors group"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/80 p-5 hover:border-electric/40 transition-colors group gn-motion gn-shadow"
         >
           <div>
-            <div className="font-semibold text-slate-100 group-hover:text-gold transition-colors">
+            <div className="font-semibold text-slate-100 group-hover:text-electric-text transition-colors">
               Marking scheme & review
             </div>
             <p className="text-sm text-slate-400 mt-1">
@@ -136,7 +136,7 @@ export default async function PaperOverviewPage({ params }: PaperPageProps) {
               {paper.markingSchemeUrl ? ", plus the official scheme" : ""}.
             </p>
           </div>
-          <span className="text-sm text-slate-400 group-hover:text-gold transition-colors shrink-0">Open →</span>
+          <span className="text-sm text-slate-400 group-hover:text-electric-text transition-colors shrink-0">Open →</span>
         </Link>
       </div>
     </div>

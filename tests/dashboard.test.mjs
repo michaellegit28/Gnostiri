@@ -69,9 +69,9 @@ test("the signed-out landing is category-free with one CTA and a real hero", () 
 test("design tokens exist for both themes with a measured floor", () => {
   const css = q("src/app/globals.css");
   assert.match(css, /\[data-theme="light"\]/, "a light theme exists");
-  assert.match(css, /--text-muted: 148 163 184/, "dark muted is #94A3B8");
-  assert.match(css, /--text-muted: 100 116 139/, "light muted is #64748B");
-  assert.match(css, /--gold-text: 138 109 11/, "light-mode gold text is #8A6D0B");
+  assert.match(css, /--text-muted: 170 184 211/, "dark muted is #AAB8D3");
+  assert.match(css, /--text-muted: 83 97 123/, "light muted is #53617B");
+  assert.match(css, /--gold-text: 122 74 0/, "light-mode gold text is #7A4A00");
   assert.match(css, /:focus-visible/, "a global focus ring");
   assert.match(css, /--paper:/, "the paper medium is a token, not a hardcoded hex in components");
   assert.match(css, /gn-btn-gold/, "the gold hero button recipe exists");

@@ -52,7 +52,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
         setTheme(next);
       }}
       aria-label={mounted ? `Switch to ${next} mode` : "Switch colour theme"}
-      className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-300 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${className ?? ""}`}
+      className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-300 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${className ?? ""}`}
     >
       {mounted && theme === "light" ? (
         <Moon className="h-5 w-5" aria-hidden />

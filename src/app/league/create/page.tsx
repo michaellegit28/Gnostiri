@@ -12,14 +12,14 @@ export default async function CreateCupPage() {
   if (!user) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Merit League</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Merit League</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Sign in to host a cup</h1>
         <p className="mx-auto mt-3 max-w-md text-sm text-slate-400">
           Hosting is gated on Prime tenure and demonstrated performance. Sign in so we can check your eligibility.
         </p>
         <Link
           href="/login"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Sign in
         </Link>
@@ -51,7 +51,7 @@ export default async function CreateCupPage() {
         <Link href="/league" className="text-sm text-slate-400 hover:text-white">
           ← Merit League
         </Link>
-        <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Host a cup</p>
+        <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Host a cup</p>
         <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100">Create a Merit League cup</h1>
         <p className="mt-2 text-sm text-slate-400">
           Four formats, open or invite-only. You join as the host (anonymous by default). Scores are always reconciled server-side.

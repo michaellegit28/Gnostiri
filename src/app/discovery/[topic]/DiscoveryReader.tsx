@@ -371,7 +371,8 @@ export default function DiscoveryReader({
   return (
     <div className="min-h-screen bg-transparent text-slate-100">
       {/* Cosmic header */}
-      <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_50%,rgb(var(--bg))_100%)]">
+      <div className="gn-aurora relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_50%,rgb(var(--bg))_100%)]">
+        <div aria-hidden="true" className="gn-aurora-bar absolute inset-x-0 top-0 h-1.5" />
         <div className="relative max-w-4xl mx-auto px-6 py-10 md:py-14">
           <nav className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm text-slate-400">
             <Link href="/discovery" className="hover:text-slate-100 transition-colors">
@@ -386,7 +387,7 @@ export default function DiscoveryReader({
               </span>
             ))}
           </nav>
-          <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/40 border border-slate-600/40 text-xs font-semibold text-slate-400">
+          <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-mod-disc-a/40 bg-mod-disc-a/10 text-xs font-semibold text-violet-200">
             <Telescope className="w-4 h-4" />
             <span>
               Depth {Math.min(depth + 1, 4)} of 4 — {DEPTHS[Math.min(depth, 3)]}
@@ -420,7 +421,7 @@ export default function DiscoveryReader({
           role="tabpanel"
           aria-labelledby={`depth-${depth}`}
           tabIndex={0}
-          className="focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-2xl"
+          className="focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-2xl"
         >
 
         {/* Body */}
@@ -442,7 +443,7 @@ export default function DiscoveryReader({
             </p>
             <Link
               href={`/tutor?domain=extras&topicId=${encodeURIComponent(topicId)}`}
-              className="mt-5 inline-flex items-center gap-2 min-h-[48px] px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+              className="mt-5 inline-flex items-center gap-2 min-h-[48px] px-5 py-2.5 rounded-lg bg-primary text-primary-on font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <MessageSquare className="w-4 h-4" />
               Ask the tutor
@@ -463,7 +464,7 @@ export default function DiscoveryReader({
                 <Link
                   key={c.id}
                   href={`/discovery/${c.id}`}
-                  className="group rounded-xl border border-white/10 bg-slate-900/40 p-5 hover:border-slate-400 transition-colors"
+                  className="group gn-motion gn-shadow gn-lift rounded-xl border border-white/10 bg-slate-900/40 p-5 hover:border-mod-disc-b/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <div className="font-semibold text-slate-100 transition-colors flex items-center justify-between gap-2">
                     {c.title}
@@ -501,7 +502,7 @@ export default function DiscoveryReader({
           {hasQuiz && (
             <Link
               href={`/discovery/${topicId}/quiz`}
-              className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+              className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] px-5 py-3 rounded-lg bg-primary text-primary-on font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <HelpCircle className="w-4 h-4" />
               Test yourself

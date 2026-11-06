@@ -123,7 +123,7 @@ export default async function CoursePage({
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-400">
           <Link
             href="/university"
-            className="inline-flex items-center gap-1.5 rounded transition-colors hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex items-center gap-1.5 rounded transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden /> University
           </Link>
@@ -132,12 +132,12 @@ export default async function CoursePage({
         </nav>
 
         {/* Course header */}
-        <header className="relative overflow-hidden rounded-3xl border border-white/10">
-          <div className="absolute inset-0 bg-[radial-gradient(110%_100%_at_90%_0%,rgb(var(--gold)/0.12)_0%,rgb(var(--bg)/0.9)_45%,rgb(var(--bg-deep))_100%)]" />
+        <header className="gn-aurora relative overflow-hidden rounded-3xl border border-white/10">
+          <div aria-hidden="true" className="gn-aurora-bar absolute inset-x-0 top-0 h-1.5" />
           <div className="relative space-y-5 px-6 py-9 md:px-10 md:py-11">
             <div className="flex flex-wrap items-center gap-2">
               {course.code && (
-                <span className="rounded-md border border-gold/25 bg-gold/10 px-2.5 py-1 font-mono text-xs tracking-[0.18em] text-gold">
+                <span className="rounded-md border border-mod-uni-a/40 bg-mod-uni-a/10 px-2.5 py-1 font-mono text-xs tracking-[0.18em] text-electric-text">
                   {course.code}
                 </span>
               )}
@@ -166,7 +166,7 @@ export default async function CoursePage({
 
             <div className="space-y-3">
               {course.programme && (
-                <p className="text-sm text-teal-300">
+                <p className="text-sm text-electric-text">
                   {course.programme.degreeAwarded} · {course.programme.name}
                 </p>
               )}
@@ -209,7 +209,7 @@ export default async function CoursePage({
               <div className="pt-2">
                 <Link
                   href={`/university/${course.slug}/lessons/${nextLesson.id}`}
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-on transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   {doneSet.size > 0
                     ? `Continue — lesson ${course.lessons.indexOf(nextLesson) + 1} of ${course.lessons.length}`
@@ -235,15 +235,15 @@ export default async function CoursePage({
               userId={user?.id ?? null}
             />
             {flatConcepts.length > 0 && (
-              <details className="group rounded-2xl border border-white/10 bg-white/[0.02] p-5">
-                <summary className="flex cursor-pointer items-center justify-between gap-3 rounded text-sm font-semibold text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold">
+              <details className="group gn-shadow rounded-2xl border border-white/10 bg-white/[0.02] p-5">
+                <summary className="flex cursor-pointer items-center justify-between gap-3 rounded text-sm font-semibold text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
                   <span className="flex items-center gap-2">
-                    <Brain className="h-4 w-4 text-gold" aria-hidden />
+                    <Brain className="h-4 w-4 text-electric-text" aria-hidden />
                     Concept spine
                   </span>
                   <Link
                     href={`/university/${course.slug}/concepts`}
-                    className="rounded text-xs font-medium text-gold underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="rounded text-xs font-medium text-electric-text underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     Full map →
                   </Link>
@@ -271,19 +271,19 @@ export default async function CoursePage({
         <nav aria-label="Assessments" className="flex flex-wrap gap-3 border-t border-white/5 pt-8">
           <Link
             href={`/university/${course.slug}/quiz`}
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-teal-500/40 bg-teal-500/10 px-5 py-2.5 text-sm font-semibold text-teal-200 transition-colors hover:bg-teal-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-mod-uni-a/40 bg-mod-uni-a/10 px-5 py-2.5 text-sm font-semibold text-electric-text transition-colors hover:bg-mod-uni-a/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Course quiz
           </Link>
           <Link
             href={`/university/${course.slug}/concepts`}
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-mod-uni-a/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Concept map
           </Link>
           <Link
             href={`/university/${course.slug}/exams`}
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-slate-200 transition-colors hover:border-mod-uni-a/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Exam hall
           </Link>

@@ -60,7 +60,7 @@ export default async function StudyPage() {
 
   return (
     <main className="mx-auto max-w-4xl px-5 py-8 md:py-12">
-      <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Study</p>
+      <p className="text-[11px] uppercase tracking-[0.3em] text-primary">Study</p>
       <h1 className="mt-3 font-serif text-3xl font-bold text-ink md:text-4xl">Pick your lane</h1>
       <p className="mt-3 max-w-2xl text-sm text-muted">
         Four ways in: the verified exam banks, full university courses, open research trails, and your

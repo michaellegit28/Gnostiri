@@ -17,19 +17,12 @@
 body {
   color: rgb(var(--text));
   background-color: rgb(var(--bg));
-  /* Hero spotlight: faint teal (left) and gold (right), ~10% max. No purple. */
+  /* Ambient aurora orbs (vibrant academic futurism). Blue/violet/cyan only,
+     ever-muted. Never cream. The user's "solid background" preference clears it. */
   background-image:
-    radial-gradient(90% 55% at 50% -5%, rgb(var(--teal) / 0.10), transparent 70%),
-    radial-gradient(60% 45% at 88% 28%, rgb(var(--gold) / 0.10), transparent 70%),
-    radial-gradient(55% 40% at 8% 72%, rgb(var(--teal) / 0.05), transparent 70%),
-    radial-gradient(1px 1px at 18% 22%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1px 1px at 73% 12%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1.5px 1.5px at 41% 38%, rgba(212, 175, 55, 0.5), transparent),
-    radial-gradient(1px 1px at 88% 58%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 8% 82%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1px 1px at 55% 88%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 33% 63%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 63% 78%, rgba(255, 255, 255, 0.35), transparent);
+    radial-gradient(70% 50% at 12% -5%, var(--aurora-1), transparent 70%),
+    radial-gradient(55% 45% at 90% 10%, var(--aurora-2), transparent 72%),
+    radial-gradient(50% 42% at 72% 96%, var(--aurora-3), transparent 70%);
   background-attachment: fixed;
 }
 
@@ -90,7 +83,7 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
    cannot resolve: `gold` is an object in tailwind.config.ts, so the DEFAULT
    segment must be named explicitly or the build fails. */
 :focus-visible {
-  outline: 2px solid theme(colors.gold.DEFAULT);
+  outline: 2px solid rgb(var(--focus));
   outline-offset: 2px;
 }
 
@@ -120,74 +113,122 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
    --gold-text in light mode (raw gold on white is 2.0:1).                  */
 :root,
 [data-theme="dark"] {
-  --bg-deep: 11 17 32;        /* #0B1120 — deepest navy */
-  --bg: 16 29 56;             /* #101D38 Royal Navy */
-  --surface: 23 42 73;        /* #172A49 Secondary Navy */
-  --surface-2: 36 70 117;     /* #244675 Sapphire (elevated hover) */
-  --cup-speed: 36 70 117;     /* #244675 Sapphire — Speed Cup accent */
-  --cup-mastery: 99 102 241;  /* #6366F1 Indigo — Mastery Cup accent */
-  --cup-bracket: 20 184 166;  /* #14B8A6 Teal — Cohort Bracket accent */
-  --border: 220 227 236;      /* #DCE3EC Border */
-  --border-strong: 71 85 105; /* #475569 */
-  --text: 248 250 252;        /* #F8FAFC — light typography */
-  --text-muted: 148 163 184;  /* #94A3B8 */
-  --text-subtle: 100 116 139; /* #64748B — decorative only */
-  --gold: 213 173 99;         /* #D5AD63 Champagne Gold */
-  --gold-hover: 232 200 140;
-  --gold-text: 213 173 99;
-  --gold-soft: 213 173 99;
-  --gold-from: 213 173 99;
-  --gold-to: 168 132 31;
-  --on-gold: 16 29 56;
-  --teal: 20 184 166;         /* #14B8A6 */
-  --teal-text: 20 184 166;
-  --teal-soft: 20 184 166;
-  --success: 34 197 94;   --success-text: 134 239 172; --success-soft: 34 197 94;
-  --error: 239 68 68;     --error-text: 252 165 165;   --error-soft: 239 68 68;
-  --warning: 245 158 11;  --warning-text: 253 186 116; --warning-soft: 245 158 11;
-  --danger: 239 68 68;
-  --muted-fill: 148 163 184;  /* #94A3B8 */
-  --focus: 212 175 55;
+  --bg-deep: 8 16 34;         /* #081122 — deepest night */
+  --bg: 16 27 51;             /* #101B33 — main navy */
+  --surface: 23 38 66;        /* #172642 — secondary surface */
+  --surface-2: 38 57 86;      /* #263956 — elevated surface (real depth) */
+  --cup-speed: 49 92 255;     /* Electric Blue — Speed Cup accent */
+  --cup-mastery: 181 154 255; /* Royal Violet — Mastery Cup accent */
+  --cup-bracket: 20 184 166;  /* Teal — Cohort Bracket accent */
+  --cup-endurance: 245 166 35;/* Solar Gold — Endurance Cup accent */
+  --border: 44 61 92;         /* #2C3D5C — visible on navy */
+  --border-strong: 62 82 118; /* #3E5276 */
+  --text: 255 255 255;        /* #FFFFFF — primary text */
+  --text-muted: 170 184 211;  /* #AAB8D3 — secondary text */
+  --text-subtle: 138 154 184; /* #8A9AB8 — decorative only */
+  --primary: 102 139 255;     /* #668BFF — Electric Blue action (dark) */
+  --primary-hover: 130 160 255;
+  --on-primary: 10 21 48;     /* #0A1530 — ink on primary */
+  /* Brand accents (dark = luminous; double as accent text on navy) */
+  --electric: 49 92 255;      /* #315CFF */
+  --electric-text: 130 160 255;  /* accent text on navy (AA) */
+  --cyan: 66 214 220;         /* #42D6DC */
+  --cyan-text: 66 214 220;
+  --violet: 181 154 255;      /* #B59AFF */
+  --violet-text: 181 154 255;
+  --pink-text: 244 160 214;
+  --gold: 255 209 122;        /* #FFD17A — premium / rewards */
+  --gold-hover: 255 226 160;
+  --gold-text: 255 209 122;
+  --gold-soft: 245 166 35;
+  --gold-from: 245 166 35;    /* #F5A623 Solar Gold */
+  --gold-to: 255 209 122;
+  --on-gold: 23 38 66;        /* navy ink on gold */
+  --mint: 84 224 190;         /* #54E0BE */
+  --coral: 255 138 128;
+  --pink: 244 160 214;
+  --ink: 170 184 211;         /* ink is light in dark mode */
+  --success: 54 201 165;   --success-text: 134 239 172; --success-soft: 54 201 165;
+  --error: 255 107 94;     --error-text: 255 138 128;   --error-soft: 255 107 94;
+  --warning: 245 166 35;   --warning-text: 255 209 122; --warning-soft: 245 166 35;
+  --danger: 255 107 94;
+  --muted-fill: 170 184 211;
+  --focus: 102 139 255;       /* primary */
   --radius: 14px;
-  /* card depth: inset highlight on dark surfaces */
-  --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  --card-shadow: 0 1px 2px rgba(2, 6, 23, 0.4);
-  --header-bg: rgb(var(--bg) / 0.82);
+  /* Module identities (a = primary accent, b = secondary accent) */
+  --mod-university-a: 49 92 255;   --mod-university-b: 181 154 255;
+  --mod-highschool-a: 66 214 220;  --mod-highschool-b: 84 224 190;
+  --mod-discovery-a: 181 154 255;  --mod-discovery-b: 244 160 214;
+  /* Depth: aurora glow + premium shadows + glass */
+  --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 1px 2px rgba(3, 7, 18, 0.5), 0 8px 24px rgba(3, 7, 18, 0.35);
+  --shadow-lift: 0 2px 6px rgba(3, 7, 18, 0.5), 0 16px 40px rgba(3, 7, 18, 0.45);
+  --glow-primary: 0 0 0 1px rgba(102, 139, 255, 0.35), 0 8px 30px rgba(49, 92, 255, 0.28);
+  --glass-bg: rgba(23, 38, 66, 0.6);
+  --glass-border: rgba(170, 184, 211, 0.16);
+  --aurora-1: rgba(49, 92, 255, 0.22);
+  --aurora-2: rgba(121, 82, 217, 0.20);
+  --aurora-3: rgba(8, 175, 194, 0.16);
+  --header-bg: rgb(var(--bg) / 0.72);
   color-scheme: dark;
 }
 [data-theme="light"] {
-  --bg-deep: 253 251 247;
-  --bg: 245 242 234;          /* #F5F2EA Warm Ivory */
-  --surface: 255 255 255;     /* #FFFFFF */
-  --surface-2: 255 255 255;
-  --cup-speed: 36 70 117;     /* #244675 Sapphire — Speed Cup accent */
-  --cup-mastery: 99 102 241;  /* #6366F1 Indigo — Mastery Cup accent */
-  --cup-bracket: 15 118 110;  /* #0F766E Teal — Cohort Bracket accent */
-  --border: 100 116 139;      /* #64748B — visible on ivory (AA UI) */
-  --border-strong: 71 85 105; /* #475569 */
-  --text: 23 36 58;           /* #17243A Navy typography */
-  --text-muted: 71 85 105;    /* #475569 — AA on ivory */
-  --text-subtle: 100 116 139; /* #64748B — decorative only */
-  --gold: 213 173 99;         /* #D5AD63 Champagne Gold (light text on it passes AA) */
-  --gold-hover: 168 132 31;
-  --gold-text: 106 79 15;     /* #6A4F0F — gold body text on ivory (AA body) */
-  --gold-soft: 213 173 99;
-  --gold-from: 176 138 40;
-  --gold-to: 138 109 16;
-  --on-gold: 16 29 56;
-  --teal: 15 118 110;         /* #0F766E — fills read on ivory */
-  --teal-text: 15 118 110;
-  --teal-soft: 20 184 166;
-  --success: 35 134 106;   --success-text: 21 128 61;   --success-soft: 34 197 94;
-  --error: 185 28 28;     --error-text: 155 48 48;     --error-soft: 239 68 68;
-  --warning: 180 83 9;    --warning-text: 146 64 14;   --warning-soft: 245 158 11;
-  --danger: 155 48 48;
-  --muted-fill: 71 85 105;
-  --focus: 138 109 11;
+  --bg-deep: 233 237 250;     /* #E9EDFA */
+  --bg: 247 249 255;          /* #F7F9FF — main light bg */
+  --surface: 255 255 255;     /* #FFFFFF — primary surface */
+  --surface-2: 233 237 250;   /* #E9EDFA — secondary surface */
+  --cup-speed: 49 92 255;     /* Electric Blue — Speed Cup accent */
+  --cup-mastery: 121 82 217;  /* Royal Violet — Mastery Cup accent */
+  --cup-bracket: 20 184 166;  /* Teal — Cohort Bracket accent */
+  --cup-endurance: 245 166 35;/* Solar Gold — Endurance Cup accent */
+  --border: 214 222 238;      /* #D6DEEE — subtle */
+  --border-strong: 190 202 224;
+  --text: 23 38 74;           /* #17264A Ink — primary text */
+  --text-muted: 83 97 123;    /* #53617B — secondary text */
+  --text-subtle: 100 116 139; /* #64748B — decorative only (>=3:1) */
+  --primary: 49 92 255;       /* #315CFF — Electric Blue action */
+  --primary-hover: 37 75 230;
+  --on-primary: 255 255 255;  /* white on electric (5.12:1) */
+  /* Brand accents (light = vivid fills; *-text variants are AA as text) */
+  --electric: 49 92 255;  --electric-text: 37 71 214;   /* #2547D6 */
+  --cyan: 8 175 194;      --cyan-text: 6 118 130;       /* #067682 */
+  --violet: 121 82 217;   --violet-text: 107 63 208;     /* #6B3FD0 */
+  --mint: 54 201 165;     /* #54E0BE */
+  --coral: 255 107 94;    /* #FF6B5E */
+  --pink: 236 121 183;    /* #EC79B7 */
+  --ink: 23 38 74;
+  --gold: 245 166 35;         /* #F5A623 Solar Gold — premium / rewards */
+  --gold-hover: 214 138 20;
+  --gold-text: 122 74 0;      /* #7A4A00 — gold body text (AA) */
+  --gold-soft: 245 166 35;
+  --gold-from: 245 166 35;
+  --gold-to: 232 174 92;
+  --on-gold: 23 38 74;        /* ink on gold (7.34:1) */
+  --teal: 8 175 194;          /* Amber→cyan alias so existing teal utilities read cyan */
+  --teal-text: 6 118 130;     /* #067682 */
+  --teal-soft: 54 201 165;
+  --success: 35 134 106;   --success-text: 20 108 67;   --success-soft: 54 201 165;
+  --error: 207 85 85;     --error-text: 168 50 50;     --error-soft: 255 107 94;
+  --warning: 214 155 54;   --warning-text: 180 83 9;    --warning-soft: 245 166 35;
+  --danger: 168 50 50;
+  --muted-fill: 83 97 123;
+  --focus: 49 92 255;
   --radius: 14px;
+  /* Module identities */
+  --mod-university-a: 49 92 255;   --mod-university-b: 121 82 217;
+  --mod-highschool-a: 8 175 194;   --mod-highschool-b: 54 201 165;
+  --mod-discovery-a: 121 82 217;   --mod-discovery-b: 236 121 183;
+  /* Depth + premium */
   --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
-  --header-bg: rgb(255 255 255 / 0.82);
+  --card-shadow: 0 1px 2px rgba(23, 38, 74, 0.06), 0 8px 24px rgba(23, 38, 74, 0.08);
+  --shadow-lift: 0 2px 8px rgba(23, 38, 74, 0.10), 0 20px 48px rgba(23, 38, 74, 0.12);
+  --glow-primary: 0 0 0 1px rgba(49, 92, 255, 0.20), 0 8px 26px rgba(49, 92, 255, 0.20);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(23, 38, 74, 0.08);
+  --aurora-1: rgba(49, 92, 255, 0.14);
+  --aurora-2: rgba(121, 82, 217, 0.12);
+  --aurora-3: rgba(8, 175, 194, 0.10);
+  --header-bg: rgb(255 255 255 / 0.72);
   color-scheme: light;
 }
 
@@ -235,21 +276,30 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --bio-cone-violet: 142 68 173; /* #8E44AD */
 }
 
-/* ── 60/30/10 ──────────────────────────────────────────────────────────────
-   60%  zinc surfaces (--bg/--surface/--surface-2) — the calm base
-   30%  neutrals for structure and text (--border/--text/--text-muted)
-   10%  ONE accent: refined brass gold. It is allowed on: primary CTAs,
-        active states, key figures, the mark, and the hero gradient.
-        Nothing else. If a screen looks "gold", the 10% was exceeded.      */
-/* Warm gradient pair — the mark, the hero art and the primary CTA only. */
-:root, [data-theme="dark"] { --gold-from: 214 170 60; --gold-to: 240 190 95; }
-[data-theme="light"] { --gold-from: 176 138 40; --gold-to: 214 170 60; }
+/* ── Vibrant Academic Futurism ────────────────────────────────────────────
+   60%  calm surfaces (--bg/--surface/--surface-2) — the base
+   30%  neutrals for structure + text (--border/--text/--text-muted)
+   10%  electric blue is the PRIMARY action; brand accents (cyan/violet/
+        mint/pink) carry module identities; gold (#F5A623) is reserved for
+        premium, rewards and achievements only — never general chrome.
+   Aurora gradients + selective glassmorphism are opt-in via the .gn-*
+   utilities below; blur is neutralised under reduce-motion / lite-mode. */
+/* Solar-gold pair — premium CTAs, rewards and achievement highlights only. */
+:root, [data-theme="dark"] { --gold-from: 245 166 35; --gold-to: 255 209 122; }
+[data-theme="light"] { --gold-from: 245 166 35; --gold-to: 232 174 92; }
 
-/* Engineered, not glowy: no aurora, no backdrop blur, anywhere. */
-[class*="backdrop-blur"] { backdrop-filter: none !important; }
-.bg-aurora, .aurora { background-image: none !important; }
+/* Solid-background preference clears the ambient aurora. */
+html.solid-bg body { background-image: none; }
+
 html:not([data-theme]) body,
 [data-theme] body { background-color: rgb(var(--bg)); color: rgb(var(--text)); }
+
+/* Blur is a deliberate premium effect, but it must never hurt a11y or Lite
+   Mode. Glass utilities (.gn-glass / backdrop-blur utilities) are neutralised
+   only when the user opts into reduced motion or Lite Mode. */
+html.reduce-motion [class*="backdrop-blur"],
+html.lite-mode [class*="backdrop-blur"],
+html.lite [class*="backdrop-blur"] { backdrop-filter: none !important; }
 
 /* Gold carries text safely in light mode only via --gold-text. */
 [data-theme="light"] .text-gold { color: rgb(var(--gold-text)); }
@@ -328,3 +378,105 @@ html.lite-mode *::after {
 @media (max-width: 400px) { .prime-label { display: none; } }
 html.reduce-motion .gn-press:active, html.reduce-motion .gn-press:hover { transform: none; }
 html.lite-mode .gn-shimmer { animation: none; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Part 4 — Premium visual effects (opt-in utilities).
+   Every effect here is subtle, purpose-led, and silenced under
+   reduce-motion / lite-mode / prefers-reduced-motion. Colour comes from the
+   theme tokens, so the same class reads correctly on navy (dark) and ivory
+   (light). No effect is applied by default to ordinary cards/paragraphs.
+   ----------------------------------------------------------------------------- */
+
+/* AURORA GRADIENTS — hero sections, AI workspaces, feature highlights only.
+   Blue → violet → cyan, restrained. Never a default surface. */
+.gn-aurora {
+  background:
+    radial-gradient(120% 120% at 8% -10%, var(--aurora-1), transparent 55%),
+    radial-gradient(110% 120% at 95% 8%, var(--aurora-2), transparent 55%),
+    radial-gradient(120% 120% at 50% 120%, var(--aurora-3), transparent 60%),
+    rgb(var(--bg-deep));
+}
+.gn-aurora-bar {
+  background-image: linear-gradient(100deg,
+    rgb(var(--electric)) 0%,
+    rgb(var(--violet)) 52%,
+    rgb(var(--cyan)) 100%);
+}
+
+/* GRADIENT TYPOGRAPHY — restrained hero headlines / special feature titles. */
+.gn-aurora-text {
+  background-image: linear-gradient(100deg,
+    rgb(var(--electric)) 0%,
+    rgb(var(--violet)) 55%,
+    rgb(var(--cyan)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* SELECTIVE GLASSMORPHISM — floating panels, overlays, selected nav only.
+   Has a solid fallback so it never blocks readability. */
+.gn-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+@supports (backdrop-filter: blur(14px)) {
+  .gn-glass { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+}
+html.reduce-motion .gn-glass, html.lite-mode .gn-glass, html.lite .gn-glass {
+  background: rgb(var(--surface));
+  backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+}
+
+/* CARD ELEVATION — subtle lift on hover/focus; a pressed state on mobile. */
+.gn-lift {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+}
+.gn-lift:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.gn-lift:focus-visible { transform: translateY(-2px); box-shadow: var(--glow-primary); }
+.gn-lift:active { transform: translateY(0) scale(0.995); }
+
+/* SOFT LUMINOUS ACCENTS — around important buttons / active nav / AI tools.
+   A subtle glow, never a heavy outline. */
+.gn-luminous { box-shadow: 0 0 0 1px rgb(var(--primary) / 0.35), 0 6px 24px rgb(var(--primary) / 0.22); }
+.gn-luminous:hover { box-shadow: 0 0 0 1px rgb(var(--primary) / 0.5), 0 10px 30px rgb(var(--primary) / 0.3); }
+
+/* PREMIUM CARD — the default recipe: layered shadow + optional inset. */
+.gn-shadow { box-shadow: var(--card-shadow); }
+.gn-shadow-lift { box-shadow: var(--shadow-lift); }
+
+/* SHIMMER SKELETONS — loading placeholders. */
+@keyframes gn-skeleton { 0% { background-position: -180% 0; } 100% { background-position: 180% 0; } }
+.gn-skel {
+  background-image: linear-gradient(100deg,
+    rgb(var(--text) / 0.04) 30%,
+    rgb(var(--text) / 0.10) 50%,
+    rgb(var(--text) / 0.04) 70%);
+  background-size: 220% 100%;
+  animation: gn-skeleton 1.4s ease-in-out infinite;
+  border-radius: var(--radius);
+}
+html.reduce-motion .gn-skel, html.lite-mode .gn-skel, html.lite .gn-skel { animation: none; }
+
+/* MICRO-INTERACTION BASE — consistent 150–250ms easing on interactive chrome.
+   Individual components keep component-level durations; this is the floor. */
+.gn-motion { transition: transform 180ms ease-out, opacity 180ms ease-out, background-color 180ms ease-out, border-color 180ms ease-out, color 180ms ease-out, box-shadow 180ms ease-out; }
+
+/* CELEBRATION — a tasteful one-shot pop for achievement reveals / badges.
+   Never loops; disabled under reduced motion. */
+@keyframes gn-pop { 0% { transform: scale(0.85); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+.gn-pop { animation: gn-pop 420ms ease-out 1; }
+@media (prefers-reduced-motion: reduce) { .gn-pop { animation: none; } }
+html.reduce-motion .gn-pop, html.lite-mode .gn-pop, html.lite .gn-pop { animation: none; }
+
+/* PROGRESS RING — SVG stroke utility used by mastery / streak rings.
+   Sets the stroke to the current primary accent; JS animates stroke-dashoffset. */
+.gn-ring-track { stroke: rgb(var(--text) / 0.12); }
+.gn-ring-value { stroke: rgb(var(--primary)); transition: stroke-dashoffset 600ms ease-out; }
+.gn-ring-gold .gn-ring-value { stroke: rgb(var(--gold)); }
+html.reduce-motion .gn-ring-value { transition: none; }
+
+/* THEME-TRANSITION — a single, cheap colour crossfade when the theme flips,
+   applied to the root so mode switching feels intentional, not janky. */
+html.theme-transition, html.theme-transition body { transition: background-color 220ms ease-out, color 220ms ease-out; }

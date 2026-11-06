@@ -23,7 +23,7 @@ export default async function CreditsPage() {
           <Coins className="mx-auto mb-4 h-10 w-10 text-gold" />
           <h1 className="font-serif text-2xl font-bold">Sign in to see your rewards</h1>
           <p className="mt-2 text-sm text-slate-400">Your badge shelf and Prime-day credit balance live on your account.</p>
-          <Link href="/login" className="mt-6 inline-block rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-on-gold">
+          <Link href="/login" className="mt-6 inline-block rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             Sign in
           </Link>
         </div>

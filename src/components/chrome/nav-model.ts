@@ -26,8 +26,8 @@ import {
  *    no matter which surface rendered them. Never re-type these strings.
  *  - An item's active state is NEVER colour-only. Every surface pairs
  *    aria-current="page" (see isActive) with a visible indicator that is not
- *    a colour: a gold dot on the bottom tabs, a left border in the drawer and
- *    sidebar. Gold text alone is not an answer.
+ *    a colour: a primary dot on the bottom tabs, a left border in the drawer and
+ *    sidebar. Accent text alone is not an answer.
  *  - Every NavItem carries a `note` — the sub-copy the drawer and palette
  *    render at 12px, which must stay on the .text-muted floor.
  */

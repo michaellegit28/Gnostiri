@@ -262,17 +262,17 @@ export default function StudyReaderClient({
       <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-30 px-4 py-3 md:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Breadcrumbs: Exam > Subject > Topic */}
-          <nav aria-label="Breadcrumb" tabIndex={0} className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-slate-400 overflow-x-auto py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+          <nav aria-label="Breadcrumb" tabIndex={0} className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm text-slate-400 overflow-x-auto py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
             <Link
               href={`/highschool/${examCode}`}
-              className="hover:text-gold transition-colors whitespace-nowrap"
+              className="hover:text-electric-text transition-colors whitespace-nowrap"
             >
               {examName}
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <Link
               href={`/highschool/${examCode}/${subjectSlug}`}
-              className="hover:text-gold transition-colors whitespace-nowrap"
+              className="hover:text-electric-text transition-colors whitespace-nowrap"
             >
               {subjectTitle}
             </Link>
@@ -302,7 +302,7 @@ export default function StudyReaderClient({
           className="flex items-center justify-between w-full text-sm font-medium text-slate-200 bg-slate-800/80 rounded-lg px-3.5 py-2"
         >
           <div className="flex items-center gap-2">
-            <List className="w-4 h-4 text-gold" />
+            <List className="w-4 h-4 text-electric-text" />
             <span>Topic: {topicTitle}</span>
           </div>
           <ChevronDown className={`w-4 h-4 transition-transform ${mobileTocOpen ? "rotate-180" : ""}`} />
@@ -319,7 +319,7 @@ export default function StudyReaderClient({
                   onClick={() => setMobileTocOpen(false)}
                   className={`block px-4 py-2 text-sm rounded-md transition-colors ${
                     isActive
-                      ? "bg-gold/10 text-gold font-semibold"
+                      ? "bg-electric/10 text-electric-text font-semibold"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
                   }`}
                 >
@@ -336,7 +336,7 @@ export default function StudyReaderClient({
         {/* Desktop Left Sidebar TOC */}
         {sidebarOpen && (
           <aside className="hidden md:block w-72 shrink-0 border-r border-slate-800 pr-6 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-semibold text-gold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-semibold text-electric-text uppercase tracking-wider">
               <BookOpen className="w-4 h-4" />
               <span>{subjectTitle} Topics</span>
             </div>
@@ -349,7 +349,7 @@ export default function StudyReaderClient({
                     href={`/highschool/${examCode}/${subjectSlug}/${t.slug}/study`}
                     className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-all ${
                       isActive
-                        ? "bg-gold/10 text-gold font-semibold border-l-2 border-gold"
+                        ? "bg-electric/10 text-electric-text font-semibold border-l-2 border-electric"
                         : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
                     }`}
                   >
@@ -404,7 +404,7 @@ export default function StudyReaderClient({
       </div>
 
       {savedOffline && (
-        <p className="mx-4 mb-2 flex items-center gap-2 rounded-xl border border-gold/40 bg-gold/10 px-4 py-2.5 text-sm text-gold md:mx-8">
+        <p className="mx-4 mb-2 flex items-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-200 md:mx-8">
           <CloudOff className="h-4 w-4 shrink-0" aria-hidden />
           Offline — answers saved, will sync
         </p>
@@ -432,7 +432,7 @@ export default function StudyReaderClient({
 
           <Link
             href={`/highschool/${examCode}/${subjectSlug}/${topicSlug}/quiz`}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-gold text-slate-950 hover:bg-gold-hover font-semibold text-xs md:text-sm transition-colors text-center"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 md:gap-2 px-3 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-hover font-semibold text-xs md:text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary text-center"
           >
             <HelpCircle className="w-4 h-4 shrink-0" />
             <span className="truncate">Practice Questions</span>

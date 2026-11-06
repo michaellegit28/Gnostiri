@@ -62,15 +62,15 @@ export default async function UniversityIndexPage() {
     <main className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto max-w-6xl px-6 py-12 md:py-16 space-y-14">
         {/* Hero — one screen, one message */}
-        <header className="relative overflow-hidden rounded-3xl border border-white/10">
-          <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_85%_0%,rgb(var(--gold)/0.14)_0%,rgb(var(--bg)/0.9)_45%,rgb(var(--bg-deep))_100%)]" />
+        <header className="gn-aurora relative overflow-hidden rounded-3xl border border-white/10">
+          <div aria-hidden="true" className="gn-aurora-bar absolute inset-x-0 top-0 h-1.5" />
           <div className="relative space-y-6 px-7 py-12 md:px-12 md:py-16">
-            <p className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-amber-300">
+            <p className="inline-flex items-center gap-2 rounded-full border border-mod-uni-a/40 bg-mod-uni-a/10 px-3 py-1 text-xs font-semibold text-electric-text">
               <GraduationCap className="h-4 w-4" aria-hidden />
               Gnostiri University
             </p>
             <h1 className="max-w-3xl font-serif text-4xl font-bold tracking-tight md:text-6xl">
-              One degree, studied <span className="text-gold">in order.</span>
+              One degree, studied <span className="gn-aurora-text">in order.</span>
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
               The full MBBS degree is the spine of this catalogue — nine subjects, taught
@@ -91,7 +91,7 @@ export default async function UniversityIndexPage() {
         {/* The MBBS degree — the catalogue spine */}
         <section aria-labelledby="mbbs-heading" className="space-y-6">
           <div className="space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">
               {degreeProgramme ? degreeProgramme.degreeAwarded : "The degree"}
             </p>
             <h2 id="mbbs-heading" className="font-serif text-3xl font-bold">
@@ -116,13 +116,13 @@ export default async function UniversityIndexPage() {
                   <li key={course.id}>
                     <Link
                       href={`/university/${course.slug}`}
-                      className="group grid gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition-colors hover:border-gold/40 hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6"
+                      className="group gn-motion gn-shadow gn-lift grid gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5 hover:border-mod-uni-a/40 hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary md:grid-cols-[auto_1fr_auto] md:items-center md:gap-6"
                     >
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-slate-950/60 font-mono text-sm font-semibold text-gold">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-mod-uni-a/30 bg-mod-uni-a/10 font-mono text-sm font-semibold text-electric-text">
                         {course.code?.replace(/\s+\d+$/, "") ?? index + 1}
                       </span>
                       <span className="min-w-0">
-                          <span className="block font-serif text-lg font-bold text-slate-100 group-hover:text-gold">
+                          <span className="block font-serif text-lg font-bold text-slate-100 group-hover:text-electric-text">
                           {course.title}
                         </span>
                         <span className="mt-1 block text-sm leading-relaxed text-slate-400">
@@ -155,7 +155,7 @@ export default async function UniversityIndexPage() {
                               aria-label={`${course.title} progress`}
                             >
                               <span
-                                className="block h-full rounded-full bg-gold"
+                                className="block h-full rounded-full bg-mod-uni-a"
                                 style={{
                                   width: `${course.lessons.length ? Math.round((done / course.lessons.length) * 100) : 0}%`,
                                 }}
@@ -163,7 +163,7 @@ export default async function UniversityIndexPage() {
                             </span>
                           </span>
                         )}
-                        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-gold">
+                        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-electric-text">
                           {premium ? "Open" : "Preview"}
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
                         </span>
@@ -180,7 +180,7 @@ export default async function UniversityIndexPage() {
         {foundation.length > 0 && (
           <section aria-labelledby="foundation-heading" className="space-y-6">
             <div className="space-y-2">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-violet-200">
                 Foundation courses
               </p>
               <h2 id="foundation-heading" className="font-serif text-3xl font-bold">
@@ -198,12 +198,12 @@ export default async function UniversityIndexPage() {
                   <li key={course.id}>
                     <Link
                       href={`/university/${course.slug}`}
-                      className="group flex h-full flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-colors hover:border-gold/40 hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                      className="group gn-motion gn-shadow gn-lift flex h-full flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-6 hover:border-mod-uni-b/40 hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       <span className="space-y-2">
                         <span className="flex items-center gap-2">
-                          <Notebook className="h-4 w-4 text-gold" aria-hidden />
-                          <span className="font-mono text-xs tracking-[0.15em] text-gold">
+                          <Notebook className="h-4 w-4 text-violet-200" aria-hidden />
+                          <span className="font-mono text-xs tracking-[0.15em] text-violet-200">
                             {course.code || course.department}
                           </span>
                         </span>
@@ -221,7 +221,7 @@ export default async function UniversityIndexPage() {
                           {course.lessons.length} lesson{course.lessons.length === 1 ? "" : "s"}
                           {user && done > 0 ? ` · ${done} done` : ""}
                         </span>
-                        <span className="font-semibold text-gold">Open →</span>
+                        <span className="font-semibold text-violet-200">Open →</span>
                       </span>
                     </Link>
                   </li>

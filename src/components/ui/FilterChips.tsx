@@ -53,11 +53,11 @@ export default function FilterChips({
             aria-pressed={isTabs ? undefined : active}
             disabled={item.disabled}
             onClick={() => onChange(item.value)}
-            className={`shrink-0 min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:cursor-not-allowed disabled:opacity-40 ${
-              active
-                ? "border-transparent bg-gold text-on-gold"
-                : "border-line bg-surface/10 text-slate-400 hover:border-gold/50"
-            }`}
+              className={`shrink-0 min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-40 ${
+                active
+                  ? "border-transparent bg-primary text-primary-on"
+                  : "border-line bg-surface/10 text-slate-400 hover:border-electric/50"
+              }`}
           >
             {item.label}
           </button>

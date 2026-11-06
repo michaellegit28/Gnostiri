@@ -38,7 +38,7 @@ export default async function TakePaperPage({ params, searchParams }: TakePagePr
           <h1 className="font-serif text-3xl font-bold">This paper has no questions transcribed yet</h1>
           <Link
             href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)}
-            className="inline-flex rounded-lg bg-gold px-5 py-3 font-semibold text-slate-950"
+            className="inline-flex rounded-lg bg-primary px-5 py-3 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             ← Back to paper
           </Link>
@@ -51,13 +51,13 @@ export default async function TakePaperPage({ params, searchParams }: TakePagePr
     <div className="min-h-screen bg-transparent text-slate-50 p-4 md:p-10">
       <div className="max-w-3xl mx-auto space-y-4">
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool/exams" className="hover:text-gold transition-colors">Exams</Link>
+          <Link href="/highschool/exams" className="hover:text-electric-text transition-colors">Exams</Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-gold transition-colors">
+          <Link href={`/highschool/exams/${examination.slug}`} className="hover:text-electric-text transition-colors">
             {examination.name.toUpperCase()}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <Link href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)} className="hover:text-gold transition-colors">
+          <Link href={paperUrl(examination.slug, paper.subject, paper.year, paper.paperNumber)} className="hover:text-electric-text transition-colors">
             {paper.subject} {paper.year}
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />

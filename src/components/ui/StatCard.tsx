@@ -3,7 +3,7 @@ import type { LucideIcon } from "lucide-react";
 export type StatAccent = "gold" | "teal" | "violet" | "emerald" | "rose";
 
 const ACCENT_TEXT: Record<StatAccent, string> = {
-  gold: "text-gold",
+  gold: "text-electric-text",
   teal: "text-slate-400",
   violet: "text-slate-400",
   emerald: "text-emerald-400",
@@ -32,7 +32,7 @@ export default function StatCard({
   children?: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-line bg-surface p-5">
+    <div className="gn-shadow relative overflow-hidden rounded-2xl border border-line bg-surface p-5">
       {Icon && (
         <span
           aria-hidden="true"

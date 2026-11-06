@@ -72,7 +72,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="border-b border-slate-800 pb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-electric/10 text-electric-text text-xs font-semibold mb-3">
             <GraduationCap className="w-4 h-4" />
             <span>High School</span>
           </div>
@@ -87,17 +87,17 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
         {/* Battle Plan CTA */}
         <Link
           href="/battle-plan"
-          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-gold/30 bg-gradient-to-r from-gold/30 via-slate-900 to-slate-900 p-5 hover:border-gold/60 transition-colors group"
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-electric/30 bg-gradient-to-r from-electric/30 via-slate-900 to-slate-900 p-5 hover:border-electric/60 transition-colors group gn-motion gn-shadow"
         >
           <div>
-            <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-gold transition-colors">
+            <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-electric-text transition-colors">
               Get your JAMB battle plan
             </div>
             <p className="text-sm text-slate-400 mt-1">
               Pick your exam date — we turn the syllabus into a day-by-day mission, weak topics first.
             </p>
           </div>
-          <span className="inline-flex items-center justify-center gap-2 shrink-0 min-h-[44px] px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm group-hover:bg-gold-hover transition-colors">
+          <span className="inline-flex items-center justify-center gap-2 shrink-0 min-h-[44px] px-5 py-2.5 rounded-lg bg-primary text-on-primary font-semibold text-sm group-hover:bg-primary-hover transition-colors">
             Build my plan
           </span>
         </Link>
@@ -117,15 +117,15 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
             return (
               <div
                 key={subject.id}
-                className="flex flex-col justify-between bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-gold/40 transition-all duration-200 group"
+                className="flex flex-col justify-between bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-electric/40 transition-all duration-200 group gn-motion gn-shadow"
               >
                 <div>
-                  <h2 className="text-2xl font-semibold font-serif text-slate-100 group-hover:text-gold transition-colors">
+                  <h2 className="text-2xl font-semibold font-serif text-slate-100 group-hover:text-electric-text transition-colors">
                     {subject.title}
                   </h2>
                   <div className="mt-4 flex items-center gap-4 text-sm text-slate-400">
                     <div className="flex items-center gap-1.5">
-                      <BookOpen className="w-4 h-4 text-gold" />
+                      <BookOpen className="w-4 h-4 text-electric-text" />
                       <span>{topicCount} topics</span>
                     </div>
                     <div className="flex items-center gap-1.5">
@@ -138,7 +138,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
                 <div className="mt-8">
                   <Link
                     href={`/highschool/${examination.code.toLowerCase()}/${subjectSlug}`}
-                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+                    className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-semibold text-sm hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     <span>Start studying</span>
                     <ArrowRight className="w-4 h-4" />

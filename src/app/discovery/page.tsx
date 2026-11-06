@@ -22,18 +22,19 @@ export default async function ExtrasPage() {
   return (
     <main className="min-h-screen bg-transparent text-slate-100">
       {/* Immersive hero — distinct from the structured exam pages */}
-      <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_45%,rgb(var(--bg))_100%)]">
+      <div className="gn-aurora relative overflow-hidden border-b border-white/10 bg-[radial-gradient(120%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg-deep))_45%,rgb(var(--bg))_100%)]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(1px_1px_at_20%_30%,rgba(255,255,255,0.7),transparent),radial-gradient(1px_1px_at_70%_20%,rgba(255,255,255,0.5),transparent),radial-gradient(1.5px_1.5px_at_40%_70%,rgba(212,175,55,0.6),transparent),radial-gradient(1px_1px_at_85%_65%,rgba(255,255,255,0.5),transparent),radial-gradient(1px_1px_at_55%_45%,rgba(255,255,255,0.4),transparent)]"
+          className="pointer-events-none absolute inset-0 opacity-60 bg-[radial-gradient(1px_1px_at_20%_30%,rgba(255,255,255,0.7),transparent),radial-gradient(1px_1px_at_70%_20%,rgba(255,255,255,0.5),transparent),radial-gradient(1.5px_1.5px_at_40%_70%,rgba(181,154,255,0.6),transparent),radial-gradient(1px_1px_at_85%_65%,rgba(255,255,255,0.5),transparent),radial-gradient(1px_1px_at_55%_45%,rgba(255,255,255,0.4),transparent)]"
         />
+        <div aria-hidden="true" className="gn-aurora-bar absolute inset-x-0 top-0 h-1.5" />
         <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/40 border border-slate-600/40 text-xs font-semibold text-slate-400">
-            <SectionMark variant="discovery" className="w-4 h-4 text-slate-400" accent="rgb(var(--surface-2))" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-mod-disc-a/40 bg-mod-disc-a/10 text-xs font-semibold text-violet-200">
+            <SectionMark variant="discovery" className="w-4 h-4 text-violet-200" accent="rgb(var(--surface-2))" />
             <span>Discovery — beyond the syllabus</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight">
-            Read past <span className="text-gold">your syllabus</span>
+            Read past <span className="gn-aurora-text">your syllabus</span>
           </h1>
           <p className="text-slate-400 text-base md:text-lg max-w-2xl mx-auto font-light">
             Pick a field and read from the basics up to research level — topics your
@@ -45,7 +46,7 @@ export default async function ExtrasPage() {
                 <span
                   className={`px-3 py-1 rounded-full border ${
                     i === 0
-                      ? "border-gold/40 bg-gold/10 text-gold"
+                      ? "border-mod-disc-a/50 bg-mod-disc-a/10 text-violet-200"
                       : "border-white/10 bg-white/5"
                   }`}
                 >
@@ -61,16 +62,16 @@ export default async function ExtrasPage() {
       {/* Fields */}
       <div className="max-w-6xl mx-auto px-6 py-12 md:py-16 space-y-8">
         <dl className="grid gap-4 sm:grid-cols-3">
-          <StatCard label="Fields open" value={fields.length} accent="gold" />
+          <StatCard label="Fields open" value={fields.length} accent="violet" />
           <StatCard
             label="Trails"
             value={fields.reduce((s, f) => s + f.children.length, 0)}
             accent="violet"
           />
-          <StatCard label="Depth levels" value={DEPTHS.length} accent="gold" />
+          <StatCard label="Depth levels" value={DEPTHS.length} accent="violet" />
         </dl>
         <div className="flex items-center gap-2 text-sm text-slate-400">
-          <Sparkles className="w-4 h-4 text-gold" />
+          <Sparkles className="w-4 h-4 text-violet-200" />
           <span>Fields of knowledge — pick where to start</span>
         </div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">

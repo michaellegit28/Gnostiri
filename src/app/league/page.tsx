@@ -72,7 +72,7 @@ function ProgressBar({ label, detail, ratio }: { label: string; detail: string; 
         aria-valuemin={0}
         aria-valuemax={100}
       >
-        <div className="h-full rounded-full bg-gold" style={{ width: `${pct}%` }} />
+        <div className="h-full rounded-full bg-electric" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
@@ -81,7 +81,7 @@ function ProgressBar({ label, detail, ratio }: { label: string; detail: string; 
 function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
   return (
     <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
-      <div className="flex items-center gap-2 text-gold">
+      <div className="flex items-center gap-2 text-electric-text">
         <Crown className="h-5 w-5" aria-hidden />
         <h2 className="font-serif text-xl font-bold text-slate-100">Create-cup eligibility</h2>
       </div>
@@ -96,8 +96,8 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
       </div>
 
       {eligibility.eligible ? (
-        <p className="mt-5 inline-flex items-center gap-2 rounded-lg border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-slate-100">
-          <Sparkles className="h-4 w-4 text-gold" aria-hidden />
+        <p className="mt-5 inline-flex items-center gap-2 rounded-lg border border-electric/40 bg-electric/10 px-4 py-2 text-sm font-semibold text-slate-100">
+          <Sparkles className="h-4 w-4 text-electric-text" aria-hidden />
           You are eligible to host a Merit League cup.
         </p>
       ) : (
@@ -111,10 +111,10 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
         </ul>
       )}
 
-      <Link
-        href="/league/create"
-        className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-      >
+        <Link
+          href="/league/create"
+          className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
         <PlusCircle className="h-4 w-4" aria-hidden />
         Create a cup
       </Link>
@@ -125,13 +125,13 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
 function SeasonBanner() {
   const season = SEASONS.find((s) => s.slug === CURRENT_SEASON) ?? SEASONS[SEASONS.length - 1];
   return (
-    <section className="rounded-2xl border border-gold/30 bg-gradient-to-r from-gold/15 via-slate-900 to-slate-950 p-6 md:p-8">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Merit League season</p>
+    <section className="rounded-2xl border border-electric/30 bg-gradient-to-r from-electric/15 via-slate-900 to-slate-950 p-6 md:p-8">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Merit League season</p>
       <h2 className="mt-2 font-serif text-3xl font-bold text-slate-100">
-        {season.label} <span className="text-gold">is live</span>
+        {season.label} <span className="text-electric-text">is live</span>
       </h2>
       <p className="mt-2 inline-flex items-center gap-2 text-sm text-slate-400">
-        <CalendarRange className="h-4 w-4 text-gold" aria-hidden />
+        <CalendarRange className="h-4 w-4 text-electric-text" aria-hidden />
         {season.window} · mid-season entry open, finals + certificates land at season close
       </p>
     </section>
@@ -155,7 +155,7 @@ function CupSection({
 }) {
   return (
     <section>
-      <div className="flex items-center gap-2 text-gold">
+      <div className="flex items-center gap-2 text-electric-text">
         {icon}
         <h2 className="font-serif text-xl font-bold text-slate-100">{title}</h2>
       </div>
@@ -215,7 +215,7 @@ export default async function LeagueLobby() {
 
       {/* Four cup formats */}
       <section className="mt-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Four cups</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Four cups</p>
         <h2 className="mt-2 font-serif text-2xl font-bold text-slate-100">Pick your format, host or join</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {COMPETITION_FORMATS.map((format: CompetitionFormat) => {
@@ -227,7 +227,7 @@ export default async function LeagueLobby() {
                   ? "border-gold/60 text-gold"
                   : format === "mastery"
                     ? "border-cup-mastery/60 text-cup-mastery"
-                    : "border-teal-500/60 text-teal-500";
+                    : "border-cup-bracket/60 text-cup-bracket";
             return (
               <div key={format} className={`rounded-xl border bg-slate-900/70 p-5 ${cupAccent}`}>
                 <div className="flex items-center gap-2">
@@ -257,7 +257,7 @@ export default async function LeagueLobby() {
             </p>
             <Link
               href="/login"
-              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Sign in
             </Link>
