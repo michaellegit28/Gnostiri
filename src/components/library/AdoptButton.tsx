@@ -34,7 +34,7 @@ export default function AdoptButton({
     return (
       <Link
         href="/login"
-        className={`gn-motion inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold-text transition-colors hover:border-gold/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${className}`}
+        className={`gn-motion inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${className}`}
       >
         <LogIn className="h-4 w-4" /> Sign in to adopt
       </Link>

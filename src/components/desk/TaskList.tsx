@@ -29,7 +29,16 @@ const KIND_ICON: Record<string, typeof BookOpen> = {
   quiz: ListChecks,
 };
 
-export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; heading: string }) {
+export default function TaskList({
+  tasks,
+  heading,
+  uploadHref,
+}: {
+  tasks: DeskTask[];
+  heading: string;
+  /** Set only where the upload form exists on the page — the CTA then points at it. */
+  uploadHref?: string;
+}) {
   const router = useRouter();
   const [pendingId, setPendingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -57,9 +66,23 @@ export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; headin
   }
 
   if (tasks.length === 0) {
+    const onDesk = uploadHref?.startsWith("#") ?? false;
     return (
-      <div className="rounded-xl border border-line bg-surface p-6 text-sm text-slate-400">
-        {heading}: nothing scheduled. Upload a PDF above to build a plan.
+      <div className="gn-shadow rounded-xl border border-dashed border-line bg-surface/40 p-6 text-sm">
+        <p className="text-slate-100">{heading}: nothing scheduled yet.</p>
+        <p className="mt-1 text-muted">
+          {onDesk
+            ? "Reading and quiz tasks appear here when a document is processed — upload a PDF to build a plan."
+            : "No study tasks are attached to this document."}
+        </p>
+        {uploadHref && (
+          <Link
+            href={uploadHref}
+            className="gn-motion mt-3 inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            {onDesk ? "Go to the upload form" : "Open your desk"}
+          </Link>
+        )}
       </div>
     );
   }
@@ -75,14 +98,14 @@ export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; headin
           const when = new Date(task.scheduledFor).toLocaleDateString(undefined, { month: "short", day: "numeric" });
           const done = task.status !== "pending";
           return (
-            <li key={task.id} className="flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface p-4">
-              <Icon className="h-5 w-5 shrink-0 text-gold" />
+            <li key={task.id} className="gn-shadow flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface p-4">
+              <Icon className="h-5 w-5 shrink-0 text-cyan-300" aria-hidden />
               <div className="min-w-0 flex-1">
                 <p className={`text-sm font-medium ${done ? "text-slate-500 line-through" : "text-slate-100"}`}>{task.title}</p>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-muted">
                   {when} · {task.minutes} min ·{" "}
                   {task.documentId ? (
-                    <Link href={`/desk/${task.documentId}`} className="text-gold underline">open document</Link>
+                    <Link href={`/desk/${task.documentId}`} className="rounded text-electric-text underline">open document</Link>
                   ) : (
                     "document removed"
                   )}

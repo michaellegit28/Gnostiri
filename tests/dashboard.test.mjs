@@ -63,7 +63,7 @@ test("the signed-out landing is category-free with one CTA and a real hero", () 
     assert.ok(!banned.test(landing), "no category navigation on Home");
   }
   assert.match(landing, /HeroVisual/, "the brand art is on the landing");
-  assert.match(landing, /bg-gradient-to-r from-gold-from to-gold-to/, "the primary CTA uses the brand gradient");
+  assert.match(landing, /bg-primary/, "the primary CTA uses the electric brand primary");
 });
 
 test("design tokens exist for both themes with a measured floor", () => {

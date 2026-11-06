@@ -9,19 +9,20 @@ import WaitlistForm from "@/components/university/WaitlistForm";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Gnostiri University — the MBBS degree and foundation courses",
+  title: "Gnostiri University — courses, degrees and mastery",
   description:
-    "The full MBBS degree taught in order, then the foundation courses that feed it — one concept and lesson at a time.",
+    "Courses, degrees and mastery across programmes — one concept and lesson at a time, in teaching order.",
 };
 
 /**
  * University index — the course index a student opens first.
  *
- * Simple by design: the MBBS degree is the spine of the catalogue and is
- * listed subject by subject in teaching order (foundations → systems →
- * clinical), then the two foundation courses that do not belong to it. No
+ * Simple by design: a degree is the spine of the catalogue and is listed
+ * subject by subject in teaching order (foundations → systems → clinical),
+ * then the standalone foundation courses that do not belong to it. No
  * faculty grids, no marketing stack, no walls of empty cards — a course is
- * either open to study or it is not listed.
+ * either open to study or it is not listed. Every count printed here is the
+ * Prisma count computed above, never a remembered figure.
  */
 export default async function UniversityIndexPage() {
   const user = await getCurrentUser();
@@ -70,14 +71,19 @@ export default async function UniversityIndexPage() {
               Gnostiri University
             </p>
             <h1 className="max-w-3xl font-serif text-4xl font-bold tracking-tight md:text-6xl">
-              One degree, studied <span className="gn-aurora-text">in order.</span>
+              Courses and degrees, studied <span className="gn-aurora-text">in order.</span>
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
-              The full MBBS degree is the spine of this catalogue — nine subjects, taught
-              pre-clinical to clinical, each lesson built on the one before it. Every lesson listed
-              here is open to study. Nothing is padded to look finished.
+              A full degree is the spine of this catalogue — {mbbs.length} subject
+              {mbbs.length === 1 ? "" : "s"}, taught pre-clinical to clinical, each lesson built on the one
+              before it — with {foundation.length} standalone foundation course{foundation.length === 1 ? "" : "s"} around it. Every
+              lesson listed here is open to study. Nothing is padded to look finished.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-400">
+              <span className="flex items-center gap-1.5">
+                <GraduationCap className="h-3.5 w-3.5" aria-hidden /> {courses.length} course
+                {courses.length === 1 ? "" : "s"}
+              </span>
               <span className="flex items-center gap-1.5">
                 <BookOpen className="h-3.5 w-3.5" aria-hidden /> {totalLessons} lessons
               </span>
@@ -88,7 +94,7 @@ export default async function UniversityIndexPage() {
           </div>
         </header>
 
-        {/* The MBBS degree — the catalogue spine */}
+        {/* The degree — the catalogue spine */}
         <section aria-labelledby="mbbs-heading" className="space-y-6">
           <div className="space-y-2">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">
@@ -98,8 +104,9 @@ export default async function UniversityIndexPage() {
               {degreeProgramme ? degreeProgramme.name : "Medicine & Surgery (MBBS)"}
             </h2>
             <p className="max-w-2xl text-sm text-slate-400">
-              Nine subjects in teaching order. The pre-clinical sciences come first, then the
-              clinical specialties that use them — the same order a medical school teaches in.
+              {mbbs.length} subject{mbbs.length === 1 ? "" : "s"} in teaching order. Foundations come
+              first, then the specialties that build on them — the same order the programme teaches
+              them in.
             </p>
           </div>
 
@@ -176,7 +183,7 @@ export default async function UniversityIndexPage() {
           )}
         </section>
 
-        {/* Foundation courses — the two core courses outside the degree */}
+        {/* Foundation courses — the standalone courses outside the degree */}
         {foundation.length > 0 && (
           <section aria-labelledby="foundation-heading" className="space-y-6">
             <div className="space-y-2">
@@ -187,8 +194,8 @@ export default async function UniversityIndexPage() {
                 Skills that feed every degree.
               </h2>
               <p className="max-w-2xl text-sm text-slate-400">
-                Standalone courses, not part of the MBBS spine — study them alongside it, or on
-                their own.
+                {foundation.length} standalone course{foundation.length === 1 ? "" : "s"} outside the
+                degree spine — study them alongside it, or entirely on their own.
               </p>
             </div>
             <ul className="grid gap-4 md:grid-cols-2">
@@ -238,12 +245,12 @@ export default async function UniversityIndexPage() {
           >
             <div>
               <strong className="font-serif text-xl text-amber-300">
-                {premium ? "New lessons, as they open" : "Study the whole degree"}
+                {premium ? "New lessons, as they open" : "Study the whole catalogue"}
               </strong>
               <p className="mt-2 max-w-2xl text-sm text-slate-300">
                 {premium
                   ? `${totalLessons} catalogue lessons are open to study. Leave an address and hear about each release.`
-                  : "Every lesson of the MBBS degree, the concept map behind it, and the competency transcript. Payments are not live yet — reserve your place instead."}
+                  : `Every lesson of the degree, the concept map behind it, and the competency transcript. Payments are not live yet — reserve your place instead.`}
               </p>
             </div>
             <WaitlistForm />

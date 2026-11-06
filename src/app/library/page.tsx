@@ -115,11 +115,11 @@ export default async function LibraryPage({
           </p>
           <h1 className="font-serif text-3xl font-bold md:text-5xl">Study what your cohort studied</h1>
           <p className="max-w-2xl text-slate-400">
-            Machine-verified notes and quiz items other students processed from their textbooks, shared as artifacts.
+            Processed notes and quiz items other students extracted from their textbooks, shared as artifacts.
             Adopt one and the same processed content lands on your desk — no re-upload, no re-reading.
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-slate-100">
+            <div className="gn-shadow rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-slate-100">
               <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-gold">
                 <Trophy className="h-4 w-4" /> Dual rewards for sharers
               </p>
@@ -129,11 +129,11 @@ export default async function LibraryPage({
                 <span className="text-gold">+10</span> per adoption.
               </p>
             </div>
-            <div className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-sm text-slate-300">
+            <div className="gn-shadow rounded-xl border border-line bg-surface/40 p-4 text-sm text-slate-300">
               <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-slate-100">
-                <ShieldCheck className="h-4 w-4" /> We never share source files
+                <ShieldCheck className="h-4 w-4 text-cyan-300" /> We never share source files
               </p>
-              <p className="text-slate-400">
+              <p className="text-muted">
                 The source PDF is never stored — not on your desk, not here. Only the processed notes and quiz items exist to share,
                 and they carry no personal data.
               </p>
@@ -141,42 +141,69 @@ export default async function LibraryPage({
           </div>
         </header>
 
-        <form method="get" className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+        <form method="get" className="gn-shadow flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface/40 p-4">
           <input
             name="q"
             defaultValue={q}
             placeholder="Search by title…"
-            className="min-w-[12rem] flex-1 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan-400/50 focus:outline-none"
+            className="min-w-[12rem] flex-1 rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary focus:outline-none"
           />
           <input
             name="subject"
             defaultValue={subject}
             placeholder="Subject slug (e.g. biology)"
-            className="min-w-[10rem] rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-cyan-400/50 focus:outline-none"
+            className="min-w-[10rem] rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary focus:outline-none"
           />
           <button
             type="submit"
-            className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="gn-motion rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Search
           </button>
           {(q || subject) && (
-            <Link href="/library" className="text-sm text-slate-400 underline-offset-2 hover:text-slate-200 hover:underline">
-              Clear
+            <Link href="/library" className="gn-motion rounded text-sm text-cyan-300 underline-offset-2 hover:underline">
+              Clear filters
             </Link>
           )}
         </form>
 
         <section className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="font-serif text-xl font-bold">Shared artifacts</h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-muted">
               {total} available{total === 1 ? "" : ""} · most-reused first
             </p>
           </div>
           {artifacts.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-700 p-8 text-center text-sm text-slate-500">
-              {q || subject ? "No shared artifact matches that search." : "Nothing shared yet — process a document on your desk, then share it."}
+            <div className="gn-shadow rounded-2xl border border-dashed border-line bg-surface/40 p-8 text-center">
+              {q || subject ? (
+                <>
+                  <p className="text-sm font-medium text-slate-100">No resources match yet.</p>
+                  <p className="mx-auto mt-1 max-w-md text-xs text-muted">
+                    Nothing matches {q ? `“${q}”` : "that subject"}. Try clearing the filters — the whole library opens up again.
+                  </p>
+                  <Link
+                    href="/library"
+                    className="gn-motion mt-4 inline-flex min-h-[40px] items-center rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
+                    Clear filters
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm font-medium text-slate-100">Nothing shared yet.</p>
+                  <p className="mx-auto mt-1 max-w-md text-xs text-muted">
+                    The library fills as classmates publish the artifacts their cohort adopts. Process a document on your desk, then
+                    check back here.
+                  </p>
+                  <Link
+                    href="/desk"
+                    className="gn-motion mt-4 inline-flex min-h-[40px] items-center rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
+                    Open your desk
+                  </Link>
+                </>
+              )}
             </div>
           ) : (
             <ul className="grid gap-4 sm:grid-cols-2">
@@ -188,14 +215,14 @@ export default async function LibraryPage({
           {(skip > 0 || hasNext) && (
             <div className="flex items-center justify-between pt-2">
               {skip > 0 ? (
-                <Link href={`/library?${prevQuery.toString()}`} className="text-sm text-cyan-300 hover:underline">
+                <Link href={`/library?${prevQuery.toString()}`} className="gn-motion rounded text-sm text-cyan-300 hover:underline">
                   ← Previous
                 </Link>
               ) : (
                 <span />
               )}
               {hasNext && (
-                <Link href={`/library?${nextQuery.toString()}`} className="text-sm text-cyan-300 hover:underline">
+                <Link href={`/library?${nextQuery.toString()}`} className="gn-motion rounded text-sm text-cyan-300 hover:underline">
                   Next →
                 </Link>
               )}

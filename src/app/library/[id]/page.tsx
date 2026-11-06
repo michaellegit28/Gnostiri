@@ -56,25 +56,35 @@ export default async function LibraryArtifactPage({ params }: { params: { id: st
         <header className="space-y-2">
           <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Shared artifact</p>
           <h1 className="font-serif text-3xl font-bold">{document.title}</h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-muted">
             {document.pageCount} page{document.pageCount === 1 ? "" : "s"}
             {document.subjectSlug ? ` · ${document.subjectSlug}` : ""} · {document._count.quizItems} quiz item
             {document._count.quizItems === 1 ? "" : "s"} · shared by {uploader}
             {document.reuseCount > 0 ? ` · reused by ${document.reuseCount} classmate${document.reuseCount === 1 ? "" : "s"}` : ""}
           </p>
+          <p className="text-xs text-muted">
+            The notes below are the shared preview — the full artifact lands on your desk when you adopt
+            {document.sharedAt ? ` · published ${document.sharedAt.toISOString().slice(0, 10)}` : ""}.
+          </p>
         </header>
 
-        <section className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+        <section className="gn-card gn-shadow space-y-4 rounded-2xl p-6">
           <h2 className="font-serif text-xl font-bold">Notes</h2>
           {blocks.length === 0 ? (
-            <p className="text-sm text-slate-500">This artifact has no extractable notes.</p>
+            <p className="text-sm text-muted">This artifact has no extractable notes.</p>
           ) : (
             <LessonRenderer content={{ blocks }} />
+          )}
+          {document._count.quizItems > 0 && (
+            <p className="border-t border-line pt-4 text-xs text-muted">
+              The {document._count.quizItems} quiz item{document._count.quizItems === 1 ? "" : "s"} for this artifact stay
+              answer-safe until you adopt it — answers are scored on the server, never shown here.
+            </p>
           )}
         </section>
 
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-slate-100">
+          <div className="gn-shadow rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm text-slate-100">
             <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-gold">
               <Trophy className="h-4 w-4" /> Rewards flow to the sharer
             </p>
@@ -83,15 +93,15 @@ export default async function LibraryArtifactPage({ params }: { params: { id: st
               artifact. Adopting is always free for you.
             </p>
           </div>
-          <div className="rounded-xl border border-slate-700 bg-slate-900/60 p-4 text-sm text-slate-300">
+          <div className="gn-shadow rounded-xl border border-line bg-surface/40 p-4 text-sm text-slate-300">
             <p className="mb-1 inline-flex items-center gap-1.5 font-semibold text-slate-100">
-              <ShieldCheck className="h-4 w-4" /> Artifacts, never files
+              <ShieldCheck className="h-4 w-4 text-cyan-300" /> Artifacts, never files
             </p>
-            <p className="text-slate-400">The source PDF is never stored or shared — only these processed notes and the quiz items exist.</p>
+            <p className="text-muted">The source PDF is never stored or shared — only these processed notes and the quiz items exist.</p>
           </div>
         </div>
 
-        <section className="flex flex-col items-start gap-2 rounded-2xl border border-electric/30 bg-electric/5 p-6">
+        <section className="gn-shadow flex flex-col items-start gap-2 rounded-2xl border border-electric/30 bg-electric/5 p-6">
           <h2 className="inline-flex items-center gap-2 font-serif text-xl font-bold text-electric-text">
             <Gift className="h-5 w-5" /> Put it on your desk
           </h2>
