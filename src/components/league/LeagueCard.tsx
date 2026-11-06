@@ -50,8 +50,8 @@ function relativeFromNow(date: Date, now: number): string {
 const STATUS_CHIP: Record<string, string> = {
   live: "border-emerald-400/40 bg-emerald-500/10 text-emerald-300",
   scheduled: "border-gold/40 bg-gold/10 text-gold",
-  finished: "border-slate-600 bg-slate-800/60 text-slate-400",
-  cancelled: "border-slate-600 bg-slate-800/60 text-slate-400",
+  finished: "border-line-strong bg-surface-2/60 text-slate-400",
+  cancelled: "border-line-strong bg-surface-2/60 text-slate-400",
 };
 
 export default function LeagueCard({ cup }: { cup: LeagueCompetition }) {
@@ -67,11 +67,11 @@ export default function LeagueCard({ cup }: { cup: LeagueCompetition }) {
     <Link
       href={`/league/${cup.id}`}
       aria-label={`${meta?.label ?? "Cup"}: ${cup.title} — ${status}${cup.isMember ? ", joined" : ""}`}
-      className="group flex flex-col justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/70 p-5 transition-colors hover:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      className="group flex flex-col justify-between gap-4 rounded-xl border border-line bg-surface p-5 transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-300">
+          <span className="inline-flex items-center gap-1 rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-300">
             <Trophy className="h-3.5 w-3.5 text-gold" aria-hidden />
             {meta?.label ?? cup.format}
           </span>
@@ -79,7 +79,7 @@ export default function LeagueCard({ cup }: { cup: LeagueCompetition }) {
             className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-[0.15em] ${
               cup.entryRule === "prime"
                 ? "border-gold/40 bg-gold/10 text-gold"
-                : "border-white/10 bg-white/5 text-slate-300"
+                : "border-line bg-surface-2 text-slate-300"
             }`}
           >
             {cup.entryRule === "prime" ? "Prime entry" : "Free entry"}
@@ -92,20 +92,20 @@ export default function LeagueCard({ cup }: { cup: LeagueCompetition }) {
             {status}
           </span>
           {!isPublic && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold text-slate-400">
+            <span className="inline-flex items-center gap-1 rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold text-slate-400">
               <Lock className="h-3 w-3" aria-hidden />
               Private
             </span>
           )}
           {isPublic && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[11px] font-semibold text-slate-400">
+            <span className="inline-flex items-center gap-1 rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11px] font-semibold text-slate-400">
               <Globe2 className="h-3 w-3" aria-hidden />
               Public
             </span>
           )}
         </div>
 
-        <h3 className="font-serif text-lg font-bold text-slate-100 group-hover:text-gold">
+        <h3 className="font-serif text-lg font-bold text-slate-100 group-hover:text-electric-text">
           {cup.title}
         </h3>
 
@@ -118,7 +118,7 @@ export default function LeagueCard({ cup }: { cup: LeagueCompetition }) {
         </p>
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-white/5 pt-3 text-xs text-slate-400">
+      <div className="flex items-center justify-between gap-3 border-t border-line pt-3 text-xs text-slate-400">
         <span className="inline-flex items-center gap-1.5">
           <Users className="h-3.5 w-3.5 text-gold" aria-hidden />
           {cup.memberCount}/{cup.maxMembers}

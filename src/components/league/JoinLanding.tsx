@@ -138,14 +138,14 @@ export default function JoinLanding({
   if (loadError || !data) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Merit League</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Merit League</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Invite not available</h1>
         <p role="alert" className="mx-auto mt-3 max-w-md text-sm text-slate-400">
           {loadError || "This invite link is invalid or has expired."}
         </p>
         <Link
           href="/league"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Back to the League
         </Link>
@@ -161,14 +161,14 @@ export default function JoinLanding({
   if (joined || caller.isMember) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-20 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Merit League</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Merit League</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">You&apos;re in</h1>
         <p className="mx-auto mt-3 max-w-md text-sm text-slate-400">
           You joined “{c.title}”{c.visibility === "private" ? " via invite" : ""}. You compete anonymously by default.
         </p>
         <Link
           href={`/league/${c.id}`}
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Go to the cup
         </Link>
@@ -178,24 +178,24 @@ export default function JoinLanding({
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-10 md:py-14">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Merit League invite</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Merit League invite</p>
       <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100">{c.title}</h1>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <span className={`${chip} border-white/10 bg-white/5 text-slate-300`}>
+        <span className={`${chip} border-line bg-surface-2 text-slate-300`}>
           <Trophy className="h-3.5 w-3.5 text-gold" aria-hidden />
           {meta?.label ?? c.format}
         </span>
-        <span className={`${chip} ${c.entryRule === "prime" ? "border-gold/40 bg-gold/10 text-gold" : "border-white/10 bg-white/5 text-slate-300"}`}>
+        <span className={`${chip} ${c.entryRule === "prime" ? "border-gold/40 bg-gold/10 text-gold" : "border-line bg-surface-2 text-slate-300"}`}>
           {c.entryRule === "prime" ? "Prime entry" : "Free entry"}
         </span>
-        <span className={`${chip} border-white/10 bg-white/5 text-slate-400`}>
+        <span className={`${chip} border-line bg-surface-2 text-slate-400`}>
           {c.visibility === "private" ? <Lock className="h-3 w-3" aria-hidden /> : <Globe2 className="h-3 w-3" aria-hidden />}
           {c.visibility === "private" ? "Private" : "Public"}
         </span>
       </div>
 
-      <section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+      <section className="mt-6 rounded-2xl border border-line bg-surface p-6">
         <dl className="space-y-3 text-sm">
           <div className="flex items-center justify-between gap-4">
             <dt className="inline-flex items-center gap-2 text-slate-400">
@@ -227,7 +227,7 @@ export default function JoinLanding({
           {caller.reason === "sign-in" ? (
             <Link
               href="/login"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <LogIn className="h-4 w-4" aria-hidden />
               Sign in to join
@@ -241,7 +241,7 @@ export default function JoinLanding({
               type="button"
               onClick={() => void doJoin()}
               disabled={joinBusy || !caller.canJoin}
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
             >
               {joinBusy ? "Joining…" : "Join cup"}
             </button>
@@ -250,7 +250,7 @@ export default function JoinLanding({
           {joinReason === "premium" && (
             <Link
               href="/pricing"
-              className="ml-3 inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="ml-3 inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               See Prime
             </Link>

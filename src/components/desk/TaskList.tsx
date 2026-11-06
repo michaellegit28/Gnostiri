@@ -58,7 +58,7 @@ export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; headin
 
   if (tasks.length === 0) {
     return (
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-400">
+      <div className="rounded-xl border border-line bg-surface p-6 text-sm text-slate-400">
         {heading}: nothing scheduled. Upload a PDF above to build a plan.
       </div>
     );
@@ -66,7 +66,7 @@ export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; headin
 
   return (
     <div className="space-y-3">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">{heading}</h2>
+      <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-electric-text">{heading}</h2>
       {error && <p role="alert" className="text-sm text-amber-300">{error}</p>}
       <ul className="space-y-2">
         {tasks.map((task) => {
@@ -75,7 +75,7 @@ export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; headin
           const when = new Date(task.scheduledFor).toLocaleDateString(undefined, { month: "short", day: "numeric" });
           const done = task.status !== "pending";
           return (
-            <li key={task.id} className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/80 p-4">
+            <li key={task.id} className="flex flex-wrap items-center gap-3 rounded-xl border border-line bg-surface p-4">
               <Icon className="h-5 w-5 shrink-0 text-gold" />
               <div className="min-w-0 flex-1">
                 <p className={`text-sm font-medium ${done ? "text-slate-500 line-through" : "text-slate-100"}`}>{task.title}</p>
@@ -102,7 +102,7 @@ export default function TaskList({ tasks, heading }: { tasks: DeskTask[]; headin
                     type="button"
                     disabled={busy}
                     onClick={() => update(task.id, "skipped")}
-                    className="inline-flex min-h-[36px] items-center rounded-lg border border-slate-700 px-3 py-1.5 text-xs font-semibold text-slate-400 transition-colors hover:text-slate-200 disabled:opacity-50"
+                    className="inline-flex min-h-[36px] items-center rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-slate-400 transition-colors hover:text-slate-200 disabled:opacity-50"
                   >
                     Skip
                   </button>

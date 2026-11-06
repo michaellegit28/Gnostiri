@@ -25,30 +25,30 @@ export default function FormatPreviewCard({
   return (
     <section
       aria-label={`Format preview: ${board}`}
-      className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-7"
+      className="gn-shadow rounded-2xl border border-line bg-surface p-6 md:p-7"
     >
       <p className="flex items-center gap-2 font-serif text-xl font-bold text-slate-50">
         <BadgeCheck aria-hidden="true" className="h-5 w-5 text-teal-400" />
         {board}
         {country != null && country !== "" ? ` — ${country}` : ""}
       </p>
-      <dl className="mt-3 space-y-1 text-sm text-slate-300">
+      <dl className="mt-3 space-y-1 text-sm text-muted">
         <div className="flex gap-2">
-          <dt className="text-slate-500">Format:</dt>
+          <dt className="text-muted">Format:</dt>
           <dd>{formatLabel}</dd>
         </div>
         <div className="flex gap-2">
-          <dt className="text-slate-500">Papers:</dt>
+          <dt className="text-muted">Papers:</dt>
           <dd>{papers}</dd>
         </div>
         <div className="flex gap-2">
-          <dt className="text-slate-500">Duration:</dt>
+          <dt className="text-muted">Duration:</dt>
           <dd>{durationLabel}</dd>
         </div>
       </dl>
       <Link
         href={href}
-        className="mt-5 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="gn-motion gn-motion mt-5 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
         Start practice
       </Link>

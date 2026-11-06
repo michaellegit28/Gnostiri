@@ -480,3 +480,38 @@ html.reduce-motion .gn-ring-value { transition: none; }
 /* THEME-TRANSITION — a single, cheap colour crossfade when the theme flips,
    applied to the root so mode switching feels intentional, not janky. */
 html.theme-transition, html.theme-transition body { transition: background-color 220ms ease-out, color 220ms ease-out; }
+
+/* LEARNING ENGAGEMENT — tasteful celebration + reward visuals (Part 6).
+   All self-contained (no JS dependency), silenced under reduced motion / lite. */
+@keyframes gn-confetti-fall {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate3d(var(--x), var(--y), 0) rotate(var(--r)); opacity: 0; }
+}
+.gn-confetti-piece {
+  position: absolute; top: -14px; left: 0;
+  width: 8px; height: 14px; border-radius: 2px; opacity: 0;
+  will-change: transform, opacity;
+  animation: gn-confetti-fall var(--dur, 2200ms) cubic-bezier(.2,.6,.4,1) forwards;
+}
+@media (prefers-reduced-motion: reduce) { .gn-confetti-piece { display: none; } }
+html.reduce-motion .gn-confetti-piece, html.lite-mode .gn-confetti-piece, html.lite .gn-confetti-piece { display: none; }
+
+/* REWARD BADGE — a restrained sheen sweep on achievement chips. */
+@keyframes gn-badge-sheen { 0% { transform: translateX(-120%); } 60%,100% { transform: translateX(220%); } }
+.gn-badge { position: relative; overflow: hidden; }
+.gn-badge::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 38%, rgba(255,255,255,0.35) 50%, transparent 62%);
+  transform: translateX(-120%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gn-badge.is-new::after { animation: gn-badge-sheen 1400ms ease-out 1; }
+}
+html.reduce-motion .gn-badge::after, html.lite-mode .gn-badge::after, html.lite .gn-badge::after { display: none; }
+
+/* STREAK FLAME — a gentle pulse on the streak stat (respects motion prefs). */
+@keyframes gn-flame { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@media (prefers-reduced-motion: no-preference) {
+  .gn-flame { animation: gn-flame 1800ms ease-in-out infinite; transform-origin: center; }
+}
+html.reduce-motion .gn-flame, html.lite-mode .gn-flame, html.lite .gn-flame { animation: none; }

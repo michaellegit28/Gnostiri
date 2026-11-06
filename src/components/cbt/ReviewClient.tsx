@@ -65,7 +65,7 @@ export default function ReviewClient() {
                         className={`flex items-start gap-2 rounded-lg border px-3 py-2 text-sm ${
                           isKey ? "border-emerald-500/40 bg-emerald-950/20 text-emerald-100"
                           : isChosen ? "border-rose-500/40 bg-rose-950/20 text-rose-100"
-                          : "border-white/5 text-slate-400"
+                          : "border-line text-slate-400"
                         }`}
                       >
                         <span className="mt-0.5 shrink-0 font-bold">{String.fromCharCode(65 + oi)}.</span>

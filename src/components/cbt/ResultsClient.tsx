@@ -88,7 +88,7 @@ export default function ResultsClient() {
             )}
           </p>
         )}
-        {report.grade && <p className="mt-2 text-sm font-semibold text-gold">Grade: {report.grade}</p>}
+        {report.grade && <p className="mt-2 text-sm font-semibold text-gold-text">Grade: {report.grade}</p>}
         <p className={`mt-1 text-xs ${CBT.faint}`}>
           {report.boardName} · {report.mode === "simulation" ? "Complete simulation" : "Practice"} · {report.answeredCount}/{report.questionCount} answered · {minutes} min
         </p>
@@ -97,17 +97,17 @@ export default function ResultsClient() {
       {/* Per-subject breakdown */}
       <section className={`${CBT.panel} p-5`} aria-labelledby="breakdown-h">
         <h2 id="breakdown-h" className="flex items-center gap-2 font-serif text-lg font-bold">
-          <TrendingUp className="h-4 w-4 text-gold" aria-hidden /> Score breakdown
+          <TrendingUp className="h-4 w-4 text-electric-text" aria-hidden /> Score breakdown
         </h2>
         <ul className="mt-3 space-y-2.5">
           {report.subjects.map((s) => (
-            <li key={s.topicId} className="rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3">
+            <li key={s.topicId} className="rounded-xl border border-line bg-bg px-4 py-3">
               <div className="flex items-center justify-between gap-3">
                 <span className="truncate text-sm font-semibold text-slate-100">{s.title}</span>
-                <span className="shrink-0 font-mono text-sm font-bold text-gold">{s.scaled} marks</span>
+                <span className="shrink-0 font-mono text-sm font-bold text-gold-text">{s.scaled} marks</span>
               </div>
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full rounded-full bg-gold" style={{ width: `${s.rawPercent}%` }} />
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-2">
+                <div className="h-full rounded-full bg-primary" style={{ width: `${s.rawPercent}%` }} />
               </div>
               <p className={`mt-1.5 text-xs ${CBT.muted}`}>
                 {s.correct}/{s.total} correct · {s.rawPercent}% accuracy
@@ -121,7 +121,7 @@ export default function ResultsClient() {
       {/* Scoring model explainer */}
       <section className={`${CBT.panel} p-5`} aria-labelledby="model-h">
         <h2 id="model-h" className="flex items-center gap-2 font-serif text-lg font-bold">
-          <Info className="h-4 w-4 text-gold" aria-hidden /> How this score was calculated
+          <Info className="h-4 w-4 text-electric-text" aria-hidden /> How this score was calculated
         </h2>
         <ul className="mt-3 space-y-2">
           {explainer.map((line, i) => (

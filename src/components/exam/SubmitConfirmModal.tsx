@@ -45,9 +45,9 @@ export default function SubmitConfirmModal({
       aria-modal="true"
       aria-labelledby="submit-confirm-heading"
       tabIndex={-1}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm focus:outline-none"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-surface/80 p-4 backdrop-blur-sm focus:outline-none"
     >
-      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-900 px-6 py-8 text-center">
+      <div className="w-full max-w-md gn-shadow rounded-2xl border border-line bg-surface px-6 py-8 text-center">
         <h2 id="submit-confirm-heading" className="font-serif text-2xl font-bold text-slate-50">
           Submit this section?
         </h2>
@@ -56,7 +56,7 @@ export default function SubmitConfirmModal({
             <dd className="text-2xl font-bold tabular-nums text-emerald-300">{answered}</dd>
             <dt className="mt-1 text-[11px] uppercase tracking-widest text-slate-400">Answered</dt>
           </div>
-          <div className="rounded-xl border border-slate-700 bg-slate-950 p-3">
+          <div className="rounded-xl border border-line bg-bg p-3">
             <dd className="text-2xl font-bold tabular-nums text-slate-200">{unanswered}</dd>
             <dt className="mt-1 text-[11px] uppercase tracking-widest text-slate-400">Open</dt>
           </div>
@@ -76,7 +76,7 @@ export default function SubmitConfirmModal({
             <button
               type="button"
               onClick={onReview}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-line-strong px-6 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Review flagged questions
             </button>
@@ -85,14 +85,14 @@ export default function SubmitConfirmModal({
             <button
               type="button"
               onClick={onCancel}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-slate-700 px-6 py-3 text-sm font-semibold text-slate-300 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500"
+              className="inline-flex min-h-[48px] items-center justify-center gn-motion rounded-lg border border-line px-6 py-3 text-sm font-semibold text-slate-300 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
             >
               Keep working
             </button>
             <button
               type="button"
               onClick={onSubmit}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="gn-motion inline-flex min-h-[48px] items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               {submitLabel}
             </button>

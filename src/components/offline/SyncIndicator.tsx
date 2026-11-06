@@ -72,8 +72,8 @@ export default function SyncIndicator({ className }: { className?: string }) {
         offline
           ? "border-amber-400/40 bg-amber-500/10 text-amber-200"
           : phase === "syncing"
-            ? "border-white/15 bg-white/5 text-slate-300"
-            : "border-white/10 bg-white/5 text-slate-400"
+            ? "border-line-strong bg-surface-2 text-slate-200"
+            : "border-line bg-surface-2 text-muted"
       } ${className ?? ""}`}
     >
       <Icon className={`h-3.5 w-3.5 shrink-0 ${phase === "syncing" && !offline ? "animate-spin" : ""}`} aria-hidden />

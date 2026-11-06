@@ -26,7 +26,7 @@ function toLocalInput(d: Date): string {
 }
 
 const inputClass =
-  "mt-1.5 block min-h-[44px] w-full rounded-xl border border-slate-700 bg-slate-950 px-3 text-sm text-slate-100 focus:border-gold/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold";
+  "mt-1.5 block min-h-[44px] w-full rounded-xl border border-line bg-bg px-3 text-sm text-slate-100 focus:border-primary/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 const selectClass = inputClass;
 const labelClass = "block text-sm font-medium text-slate-300";
 
@@ -131,14 +131,14 @@ export default function CreateCupForm({
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <Link
             href={`/league/${result.id}`}
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Open cup
           </Link>
           <button
             type="button"
             onClick={() => setResult(null)}
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-white/15 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-line-strong px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <PlusCircle className="h-4 w-4" aria-hidden />
             Create another
@@ -146,13 +146,13 @@ export default function CreateCupForm({
         </div>
 
         {result.visibility === "private" && inviteLink && (
-          <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+          <div className="mt-6 rounded-xl border border-line bg-surface/40 p-4">
             <p className="text-sm font-medium text-slate-300">Invite link</p>
             <p className="mt-1 break-all text-sm text-slate-400">{inviteLink}</p>
             <button
               type="button"
               onClick={() => void copyInvite()}
-              className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <Copy className="h-4 w-4" aria-hidden />
               {copied ? "Copied" : "Copy link"}
@@ -164,7 +164,7 @@ export default function CreateCupForm({
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5 rounded-2xl border border-slate-800 bg-slate-900/70 p-6 md:p-8">
+    <form onSubmit={onSubmit} className="space-y-5 rounded-2xl border border-line bg-surface p-6 md:p-8">
       {!initialEligible && reasons.length > 0 && (
         <div className="rounded-xl border border-rose-500/30 bg-rose-950/30 p-4 text-sm" role="alert">
           <p className="inline-flex items-center gap-2 font-semibold text-rose-200">
@@ -241,8 +241,8 @@ export default function CreateCupForm({
                 type="button"
                 aria-pressed={visibility === v}
                 onClick={() => setVisibility(v)}
-                className={`min-h-[44px] flex-1 rounded-xl border px-4 text-sm font-semibold capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                  visibility === v ? "border-transparent bg-gold text-slate-950" : "border-white/10 bg-white/5 text-slate-200 hover:border-gold/50"
+                className={`min-h-[44px] flex-1 rounded-xl border px-4 text-sm font-semibold capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  visibility === v ? "border-transparent bg-primary text-on-primary" : "border-line bg-surface-2 text-slate-200 hover:border-primary/50"
                 }`}
               >
                 {v}
@@ -263,8 +263,8 @@ export default function CreateCupForm({
                 type="button"
                 aria-pressed={entryRule === r}
                 onClick={() => setEntryRule(r)}
-                className={`min-h-[44px] flex-1 rounded-xl border px-4 text-sm font-semibold capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                  entryRule === r ? "border-transparent bg-gold text-slate-950" : "border-white/10 bg-white/5 text-slate-200 hover:border-gold/50"
+                className={`min-h-[44px] flex-1 rounded-xl border px-4 text-sm font-semibold capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  entryRule === r ? "border-transparent bg-primary text-on-primary" : "border-line bg-surface-2 text-slate-200 hover:border-primary/50"
                 }`}
               >
                 {r === "prime" ? "Prime" : "Free"}
@@ -319,7 +319,7 @@ export default function CreateCupForm({
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
         >
           <Link2 className="h-4 w-4" aria-hidden />
           {busy ? "Creating…" : "Create cup"}

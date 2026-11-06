@@ -155,7 +155,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
   return (
     <main className="flex min-h-screen flex-col bg-transparent text-slate-50">
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-bg/95 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-line bg-bg/95 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between gap-2">
             <div className="flex min-w-0 gap-1 overflow-x-auto" role="tablist" aria-label="Subjects">
@@ -165,8 +165,8 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
                   role="tab"
                   aria-selected={i === subjectIdx}
                   onClick={() => { setSubjectIdx(i); setQIdx(0); setPaperTab("objective"); }}
-                  className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                    i === subjectIdx ? "bg-gold text-slate-950" : "border border-white/10 bg-white/5 text-slate-300"
+                  className={`gn-motion shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${
+                    i === subjectIdx ? "bg-primary text-on-primary hover:bg-primary-hover" : "border border-line bg-surface-2 text-slate-300 hover:border-primary/50 hover:text-white"
                   }`}
                 >
                   {s.title}
@@ -177,7 +177,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
               role="timer"
               aria-label={`Time remaining ${formatClock(remaining)}`}
               className={`shrink-0 rounded-lg border px-2.5 py-1 font-mono text-sm font-bold tabular-nums ${
-                lowTime ? CBT.timerLow : "border-white/10 bg-white/5 text-gold"
+                lowTime ? CBT.timerLow : "border-line bg-surface-2 text-electric-text"
               }`}
             >
               {formatClock(remaining)}
@@ -188,8 +188,8 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
             <span>Question {Math.min(activeIdx + 1, activeQuestions.length)} of {activeQuestions.length}</span>
             <span>{answeredCount} answered{markedCount > 0 ? ` · ${markedCount} flagged` : ""}</span>
           </div>
-          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-valuenow={activeIdx + 1} aria-valuemin={1} aria-valuemax={activeQuestions.length}>
-            <div className="h-full rounded-full bg-gold transition-all" style={{ width: `${((activeIdx + 1) / Math.max(activeQuestions.length, 1)) * 100}%` }} />
+          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-surface-2" role="progressbar" aria-valuenow={activeIdx + 1} aria-valuemin={1} aria-valuemax={activeQuestions.length}>
+            <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${((activeIdx + 1) / Math.max(activeQuestions.length, 1)) * 100}%` }} />
           </div>
 
           {showTheoryTab && (
@@ -200,8 +200,8 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
                   role="tab"
                   aria-selected={paperTab === tab}
                   onClick={() => setPaperTab(tab)}
-                  className={`rounded-lg px-3 py-1 text-xs font-semibold capitalize focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                    paperTab === tab ? "border border-gold/60 bg-gold/15 text-gold" : "border border-white/10 text-slate-400"
+                  className={`gn-motion rounded-lg px-3 py-1 text-xs font-semibold capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${
+                    paperTab === tab ? "border border-primary/60 bg-primary/15 text-electric-text" : "border border-line text-slate-400 hover:border-primary/50 hover:text-white"
                   }`}
                 >
                   {tab} paper
@@ -217,7 +217,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
         {activeQ && (
           <article aria-live="polite">
             {activeQ.hint && (
-              <p className={`mb-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-xs leading-relaxed ${CBT.muted}`}>
+              <p className={`mb-3 rounded-xl border border-line bg-bg px-4 py-2.5 text-xs leading-relaxed ${CBT.muted}`}>
                 Hint: {activeQ.hint}
               </p>
             )}
@@ -236,7 +236,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
                       onClick={() => pick(i)}
                       className={`${CBT.optionBase} ${picked ? CBT.optionPicked : CBT.optionIdle}`}
                     >
-                      <span className={`${CBT.optionLetter} ${picked ? "border-gold bg-gold text-slate-950" : "text-slate-400"}`}>
+                      <span className={`${CBT.optionLetter} ${picked ? "border-primary bg-primary text-on-primary" : "text-slate-400"}`}>
                         {String.fromCharCode(65 + i)}
                       </span>
                       <span className="min-w-0">{option}</span>
@@ -253,7 +253,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
                   onChange={(e) => setTheory(e.target.value)}
                   rows={9}
                   placeholder="Write your full answer — examiners reward structured points, definitions and examples."
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-relaxed text-slate-100 placeholder:text-slate-600 focus:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                  className="w-full rounded-xl border border-line bg-bg p-4 text-sm leading-relaxed text-slate-100 placeholder:text-slate-600 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 />
                 <p className={`mt-1 text-right text-xs ${CBT.faint}`}>
                   {(answers[activeQ.id]?.text ?? "").trim().split(/\s+/).filter(Boolean).length} words
@@ -271,9 +271,9 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
             type="button"
             onClick={() => setGridOpen((v) => !v)}
             aria-expanded={gridOpen}
-            className="flex w-full items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="gn-motion flex w-full items-center justify-between rounded-xl border border-line bg-bg px-4 py-2 text-xs font-semibold text-slate-300 transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
-            <span className="flex items-center gap-2"><Grid3X3 className="h-4 w-4 text-gold" aria-hidden /> Question navigator</span>
+            <span className="flex items-center gap-2"><Grid3X3 className="h-4 w-4 text-electric-text" aria-hidden /> Question navigator</span>
             <span>{gridOpen ? "Hide" : "Show"}</span>
           </button>
 
@@ -290,10 +290,10 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
                     aria-label={`Question ${i + 1}${a?.chosen != null ? ", answered" : ""}${a?.marked ? ", flagged" : ""}`}
                     aria-current={isCurrent ? "true" : undefined}
                     className={`${CBT.gridCell} ${
-                      isCurrent ? "border-gold text-gold"
+                      isCurrent ? "border-primary text-electric-text"
                       : a?.marked ? "border-violet-400/60 bg-violet-500/15 text-violet-200"
-                      : a?.chosen != null ? "border-transparent bg-gold text-slate-950"
-                      : "border-white/10 bg-white/5 text-slate-400"
+                      : a?.chosen != null ? "border-transparent bg-primary text-on-primary"
+                      : "border-line bg-surface-2 text-slate-400"
                     }`}
                   >
                     {i + 1}
@@ -334,9 +334,9 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
           <div className={`${CBT.panel} w-full max-w-md bg-bg p-6`}>
             <div className="flex items-start justify-between gap-3">
               <h2 id="confirm-h" className="flex items-center gap-2 font-serif text-lg font-bold">
-                <AlertTriangle className="h-5 w-5 text-gold" aria-hidden /> Submit your paper?
+                <AlertTriangle className="h-5 w-5 text-amber-300" aria-hidden /> Submit your paper?
               </h2>
-              <button type="button" onClick={() => setConfirmOpen(false)} aria-label="Close" className="rounded p-1 text-slate-400 hover:text-white">
+              <button type="button" onClick={() => setConfirmOpen(false)} aria-label="Close" className="gn-motion rounded p-1 text-slate-400 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
                 <X className="h-5 w-5" aria-hidden />
               </button>
             </div>
@@ -347,7 +347,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
             </p>
             {error && <p className="mt-2 text-sm text-rose-300">{error}</p>}
             <div className="mt-5 grid gap-2">
-              <button type="button" onClick={() => void submit()} disabled={submitting} className={CBT.primaryBtn}>
+              <button type="button" onClick={() => void submit()} disabled={submitting} aria-busy={submitting} className={CBT.primaryBtn}>
                 {submitting ? "Grading…" : "Yes — submit & grade"}
               </button>
               <button type="button" onClick={() => setConfirmOpen(false)} className={CBT.ghostBtn}>Keep working</button>

@@ -41,12 +41,12 @@ export default function AddToRevision({ conceptId, conceptTitle, authenticated }
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <Sparkles className="h-4 w-4 text-gold" />
+        <Sparkles className="h-4 w-4 text-electric-text" />
         <h2 className="font-serif text-lg font-bold">Make this stick</h2>
       </div>
 
       {state === "done" ? (
-        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.07] p-4 space-y-3">
+        <div className="gn-shadow rounded-xl border border-emerald-500/30 bg-emerald-500/[0.07] space-y-3 p-4">
           <div className="flex items-center gap-2 text-emerald-400">
             <CheckCircle2 className="h-4 w-4" />
             <span className="text-sm font-medium">In your revision queue</span>
@@ -54,7 +54,7 @@ export default function AddToRevision({ conceptId, conceptTitle, authenticated }
           <p className="text-sm text-slate-300 leading-relaxed">{message}</p>
           <Link
             href="/university/revision"
-            className="inline-flex items-center justify-center min-h-[44px] rounded-xl bg-gold px-5 py-2 font-semibold text-on-gold text-sm hover:bg-gold-hover transition-colors"
+            className="gn-motion inline-flex items-center justify-center min-h-[44px] rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Go to my revision queue
           </Link>
@@ -70,14 +70,14 @@ export default function AddToRevision({ conceptId, conceptTitle, authenticated }
             type="button"
             onClick={() => void subscribe()}
             disabled={state === "busy"}
-            className="shrink-0 inline-flex items-center justify-center min-h-[44px] rounded-xl border border-gold/60 px-5 py-2 font-semibold text-slate-400 text-sm hover:bg-gold/10 transition-colors disabled:opacity-50"
+            className="gn-motion inline-flex shrink-0 items-center justify-center min-h-[44px] rounded-xl border border-line px-5 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {state === "busy" ? "Adding…" : "Add to revision queue"}
           </button>
         </div>
       )}
 
-      {message && state !== "done" && <p className="text-sm text-slate-400">{message}</p>}
+      {message && state !== "done" && <p className="text-sm text-muted">{message}</p>}
     </div>
   );
 }

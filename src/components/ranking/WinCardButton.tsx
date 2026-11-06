@@ -22,7 +22,7 @@ export default function WinCardButton({
   delta,
   context,
   label = "Share win card",
-  className = "inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-slate-400 transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60",
+  className = "inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-slate-400 gn-motion transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60",
 }: {
   matchId?: string;
   tier?: number;
@@ -72,7 +72,7 @@ export default function WinCardButton({
       <button type="button" onClick={() => void share()} disabled={busy} className={className}>
         {busy ? "Rendering your card…" : label}
       </button>
-      <p className="mt-1.5 text-[11px] text-slate-400">Sized for WhatsApp Status</p>
+      <p className="mt-1.5 text-[11px] text-muted">Sized for WhatsApp Status</p>
       {error && (
         <p className="mt-2 text-sm text-rose-400" role="alert">
           {error}

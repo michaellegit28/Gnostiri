@@ -14,13 +14,13 @@ export default function NotFound() {
   return (
     <div className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 py-24 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">
           404 — page not found
         </p>
         <h1 className="mt-4 font-serif text-3xl font-bold md:text-5xl">
           That page isn&apos;t here.
         </h1>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-base">
           This page doesn&apos;t exist, or it moved. Pick a doorway below.
         </p>
         <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
@@ -28,12 +28,12 @@ export default function NotFound() {
             <Link
               key={door.href}
               href={door.href}
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-left transition-all hover:-translate-y-0.5 hover:border-gold/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="gn-motion gn-lift gn-shadow group rounded-2xl border border-line bg-surface p-6 text-left transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-[var(--shadow-lift)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <span className="block font-serif text-lg font-bold text-slate-100 group-hover:text-gold">
+              <span className="block font-serif text-lg font-bold text-slate-100 transition-colors group-hover:text-electric-text">
                 {door.title}
               </span>
-              <span className="mt-1 block text-sm text-slate-400">
+              <span className="mt-1 block text-sm text-muted">
                 {door.note}
               </span>
             </Link>
@@ -41,7 +41,7 @@ export default function NotFound() {
         </div>
         <Link
           href="/"
-          className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="mt-8 inline-flex min-h-[48px] items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Back to home
         </Link>

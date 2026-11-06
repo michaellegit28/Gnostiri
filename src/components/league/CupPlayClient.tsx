@@ -206,19 +206,19 @@ export default function CupPlayClient({
   if (phase === "error") {
     return (
       <main className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Speed Cup</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Speed Cup</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">This run cannot start</h1>
         <p className="mt-3 text-slate-400">{error}</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href={hrefResults}
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong bg-surface/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             See the leaderboard
           </Link>
           <Link
             href={hrefBack}
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Back to the cup
           </Link>
@@ -230,7 +230,7 @@ export default function CupPlayClient({
   if (phase === "queued") {
     return (
       <main className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Speed Cup · saved</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Speed Cup · saved</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Offline — answers saved, will sync</h1>
         <p className="mt-3 text-sm text-slate-400">
           This paper is queued on the device with the time it took. It is submitted the moment the
@@ -241,13 +241,13 @@ export default function CupPlayClient({
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href={hrefBack}
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 text-sm font-semibold text-slate-950 hover:bg-gold-hover"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary hover:bg-primary-hover"
           >
             Back to the cup
           </Link>
           <Link
             href="/offline"
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 hover:border-gold/60 hover:text-white"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong bg-surface/80 px-5 text-sm font-semibold text-slate-200 hover:border-primary/60 hover:text-white"
           >
             See what is saved
           </Link>
@@ -260,7 +260,7 @@ export default function CupPlayClient({
     return (
       <main className="mx-auto max-w-3xl px-6 py-12 md:py-16">
         <header className="text-center">
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Speed Cup · results</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Speed Cup · results</p>
           <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100">{title}</h1>
           <p className="mt-3 text-slate-400">
             {result.score} of {total} correct
@@ -269,14 +269,14 @@ export default function CupPlayClient({
         </header>
 
         <section className="mt-8 grid gap-3 sm:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5 text-center backdrop-blur-md">
+          <div className="rounded-2xl border border-line bg-surface/40 p-5 text-center backdrop-blur-md">
             <p className="text-[11px] uppercase tracking-[0.3em] text-slate-500">Score</p>
-            <p className="mt-2 font-serif text-3xl font-bold text-gold">
+            <p className="mt-2 font-serif text-3xl font-bold text-gold-text">
               {result.score}
               <span className="text-lg text-slate-500">/{total}</span>
             </p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-5 text-center backdrop-blur-md">
+          <div className="rounded-2xl border border-line bg-surface/40 p-5 text-center backdrop-blur-md">
             <p className="text-[11px] uppercase tracking-[0.3em] text-slate-500">Ladder rank</p>
             <p className="mt-2 font-serif text-3xl font-bold text-slate-100">{result.rank ? `#${result.rank}` : "—"}</p>
           </div>
@@ -284,7 +284,7 @@ export default function CupPlayClient({
 
         <section className="mt-10 space-y-3">
           <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">Per-question breakdown</h2>
-          <ul className="divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-md">
+          <ul className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface/40 backdrop-blur-md">
             {result.breakdown.map((row, i) => (
               <li key={row.questionId} className="px-5 py-4">
                 <div className="flex items-start gap-3">
@@ -315,13 +315,13 @@ export default function CupPlayClient({
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Link
             href={hrefResults}
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             See the final leaderboard
           </Link>
           <Link
             href={`${hrefBack}/play`}
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong bg-surface/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Play again — best score kept
           </Link>
@@ -344,7 +344,7 @@ export default function CupPlayClient({
     <main className="mx-auto max-w-3xl px-6 py-8 md:py-12">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Speed Cup · live</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Speed Cup · live</p>
           <h1 className="mt-1 font-serif text-2xl font-bold text-slate-100">{title}</h1>
         </div>
         <div className="text-right">
@@ -359,9 +359,9 @@ export default function CupPlayClient({
       </header>
 
       {/* Time bar: the remaining clock, server-anchored. */}
-      <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+      <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
         <div
-          className={`h-full rounded-full transition-[width] duration-1000 ease-linear ${remaining < 60_000 ? "bg-rose-400" : "bg-gold"}`}
+          className={`h-full rounded-full transition-[width] duration-1000 ease-linear ${remaining < 60_000 ? "bg-rose-400" : "bg-primary"}`}
           style={{ width: `${(1 - timeElapsed) * 100}%` }}
         />
       </div>
@@ -386,15 +386,15 @@ export default function CupPlayClient({
           <span
             key={q.id}
             className={`h-1.5 flex-1 rounded-full ${
-              answers[q.id] ? "bg-gold" : i === index ? "bg-slate-500" : "bg-white/10"
+              answers[q.id] ? "bg-primary" : i === index ? "bg-primary/50" : "bg-surface-2"
             }`}
           />
         ))}
       </div>
 
-      <section className="mt-6 rounded-2xl border border-white/10 bg-slate-950/60 p-6 backdrop-blur-md">
+      <section className="mt-6 rounded-2xl border border-line bg-surface/40 p-6 backdrop-blur-md">
         <div className="flex items-center gap-2">
-          <span className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.2em] text-slate-400">
+          <span className="rounded-full border border-line px-2 py-0.5 text-[10px] uppercase tracking-[0.2em] text-slate-400">
             {question.difficulty}
           </span>
           {question.hint && <span className="text-[11px] text-slate-500">Hint available</span>}
@@ -408,10 +408,10 @@ export default function CupPlayClient({
             return (
               <label
                 key={option}
-                className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 text-sm transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-gold ${
+                className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3.5 text-sm transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-primary ${
                   active
-                    ? "border-gold/70 bg-gold/10 text-slate-100"
-                    : "border-white/10 bg-slate-950/40 text-slate-300 hover:border-white/25 hover:bg-white/5"
+                    ? "border-primary/70 bg-primary/10 text-slate-100"
+                    : "border-line bg-surface/40 text-slate-300 hover:border-line-strong hover:bg-surface-2"
                 }`}
               >
                 <input
@@ -424,11 +424,11 @@ export default function CupPlayClient({
                 />
                 <span
                   className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
-                    active ? "border-gold bg-gold" : "border-white/25"
+                    active ? "border-primary bg-primary" : "border-line-strong"
                   }`}
                   aria-hidden="true"
                 >
-                  {active && <span className="h-1.5 w-1.5 rounded-full bg-slate-950" />}
+                  {active && <span className="h-1.5 w-1.5 rounded-full bg-bg" />}
                 </span>
                 <span className="font-medium">{option}</span>
               </label>
@@ -446,7 +446,7 @@ export default function CupPlayClient({
           type="button"
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
           disabled={index === 0}
-          className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong bg-surface/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Previous
         </button>
@@ -455,7 +455,7 @@ export default function CupPlayClient({
             <button
               type="button"
               onClick={() => setIndex((i) => Math.min(total - 1, i + 1))}
-              className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong bg-surface/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Next
             </button>
@@ -464,7 +464,7 @@ export default function CupPlayClient({
             type="button"
             onClick={() => void submit(false)}
             disabled={phase === "submitting" || answered === 0}
-            className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {phase === "submitting" ? "Scoring…" : "Submit answers"}
           </button>
@@ -478,7 +478,7 @@ export default function CupPlayClient({
           aria-modal="true"
           aria-labelledby="cup-confirm-title"
         >
-          <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-950/95 p-6 shadow-2xl shadow-black/50">
+          <div className="w-full max-w-md rounded-2xl border border-line bg-surface/95 p-6 shadow-2xl shadow-black/50">
             <h2 id="cup-confirm-title" className="font-serif text-xl font-bold text-slate-100">
               Submit now?
             </h2>
@@ -490,7 +490,7 @@ export default function CupPlayClient({
               <button
                 type="button"
                 onClick={() => setConfirming(false)}
-                className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 bg-slate-950/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong bg-surface/80 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Keep playing
               </button>
@@ -498,7 +498,7 @@ export default function CupPlayClient({
                 type="button"
                 onClick={() => void submit(true)}
                 disabled={phase === "submitting"}
-                className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-5 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {phase === "submitting" ? "Scoring…" : "Submit now"}
               </button>

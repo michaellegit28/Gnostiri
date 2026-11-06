@@ -62,12 +62,12 @@ export default async function NotificationsPage() {
   if (!user) {
     return (
       <main className="mx-auto max-w-3xl px-6 py-20 text-center">
-        <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Notifications</p>
+        <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Notifications</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Enter Gnostiri first</h1>
-        <p className="mt-3 text-slate-400">Your notification feed lives behind your account — cups, streaks and results, one place.</p>
+        <p className="mt-3 text-muted">Your notification feed lives behind your account — cups, streaks and results, one place.</p>
         <Link
           href="/login"
-          className="mt-8 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="gn-motion mt-8 inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           Sign in
         </Link>
@@ -96,9 +96,9 @@ export default async function NotificationsPage() {
     <main className="mx-auto max-w-4xl px-6 py-12 md:py-16">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Notification centre</p>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Notification centre</p>
           <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100">Everything that needs you</h1>
-          <p className="mt-2 text-sm text-slate-400">
+          <p className="mt-2 text-sm text-muted">
             {unreadCount > 0 ? `${unreadCount} unread` : "All caught up"} · in-app is primary, email is an opt-in backup
           </p>
         </div>
@@ -106,7 +106,7 @@ export default async function NotificationsPage() {
           <form action={markAllRead}>
             <button
               type="submit"
-              className="flex min-h-[44px] items-center gap-2 rounded-xl border border-white/15 bg-slate-950/80 px-4 text-sm font-semibold text-slate-200 backdrop-blur-md transition-colors hover:border-gold/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="flex min-h-[44px] items-center gap-2 rounded-xl border border-line-strong bg-surface/80 px-4 text-sm font-semibold text-slate-200 backdrop-blur-md transition-colors hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Mark all read
             </button>
@@ -116,35 +116,35 @@ export default async function NotificationsPage() {
 
       <div className="mt-10 space-y-10">
         {groups.length === 0 ? (
-          <p className="rounded-2xl border border-white/10 bg-slate-950/60 px-6 py-10 text-center text-sm text-slate-400">
+          <p className="gn-shadow rounded-2xl border border-line bg-surface/40 px-6 py-10 text-center text-sm text-muted">
             Nothing yet. We&apos;ll nudge you when a cup starts or a streak needs a freeze.
           </p>
         ) : (
           groups.map((group) => (
             <section key={group.key} className="space-y-3">
-              <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">{group.label}</h2>
-              <ul className="divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-md">
+              <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-muted">{group.label}</h2>
+              <ul className="gn-shadow divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface/40 backdrop-blur-md">
                 {group.items.map((n) => (
                   <li key={n.id}>
                     <Link
                       href={n.href ?? "/notifications"}
-                      className={`group flex items-start justify-between gap-4 px-5 py-4 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                      className={`group flex items-start justify-between gap-4 px-5 py-4 transition-colors hover:bg-surface-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                         n.read ? "" : "bg-gold/5"
                       }`}
                     >
                       <span className="min-w-0 flex-1">
                         <span className="flex items-center gap-2">
                           {!n.read && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />}
-                          <span className="font-semibold text-slate-100 group-hover:text-gold">{n.title}</span>
+                          <span className="font-semibold text-slate-100 group-hover:text-electric-text">{n.title}</span>
                         </span>
-                        <span className="mt-1 block text-sm text-slate-400">{n.body}</span>
-                        <span className="mt-1.5 flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                        <span className="mt-1 block text-sm text-muted">{n.body}</span>
+                        <span className="mt-1.5 flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-muted">
                           <span>{TYPE_LABELS[n.type] ?? n.type}</span>
                           <span>{relativeTime(n.createdAt)}</span>
                         </span>
                       </span>
                       {n.href && (
-                        <span className="mt-1 shrink-0 text-slate-400 transition-all group-hover:translate-x-1 group-hover:text-gold" aria-hidden="true">
+                        <span className="mt-1 shrink-0 text-slate-400 transition-all group-hover:translate-x-1 group-hover:text-electric-text" aria-hidden="true">
                           →
                         </span>
                       )}
@@ -157,9 +157,9 @@ export default async function NotificationsPage() {
         )}
       </div>
 
-      <section className="mt-14 rounded-2xl border border-white/10 bg-slate-950/60 p-6 backdrop-blur-md">
+      <section className="gn-shadow mt-14 rounded-2xl border border-line bg-surface/40 p-6 backdrop-blur-md">
         <h2 className="font-serif text-xl font-bold text-slate-100">Delivery preferences</h2>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-muted">
           Email backup is opt-in and respects quiet hours. A muted type writes nothing at all.
         </p>
         <div className="mt-6">

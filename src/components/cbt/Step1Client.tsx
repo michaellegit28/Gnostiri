@@ -38,7 +38,7 @@ export function badgeFor(boardCode: string, history: AttemptRecord[]): string | 
 function LogoTile({ name }: { name: string }) {
   const initials = name.split(/[\s(]+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
   return (
-    <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 font-serif text-lg font-bold text-gold">
+    <span aria-hidden className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-primary/40 bg-primary/10 font-serif text-lg font-bold text-electric-text">
       {initials}
     </span>
   );
@@ -71,7 +71,7 @@ export default function Step1Client({ boards }: { boards: CbtBoardCard[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search exam boards or countries…"
           aria-label="Search exam boards"
-          className="min-h-[48px] w-full rounded-xl border border-white/10 bg-white/[0.03] pl-11 pr-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="min-h-[48px] w-full rounded-xl border border-line bg-bg pl-11 pr-4 text-sm text-slate-100 placeholder:text-slate-500 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         />
       </div>
 
@@ -97,7 +97,7 @@ export default function Step1Client({ boards }: { boards: CbtBoardCard[] }) {
                       {board.country ?? "Global"}
                       {board.questionCount > 0 && ` · ${board.questionCount.toLocaleString()} questions`}
                     </p>
-                    {badge && <p className="mt-1 text-[11px] font-medium text-gold">{badge}</p>}
+                    {badge && <p className="mt-1 text-[11px] font-medium text-electric-text">{badge}</p>}
                   </div>
                 </div>
                 <button
@@ -105,7 +105,7 @@ export default function Step1Client({ boards }: { boards: CbtBoardCard[] }) {
                   disabled={disabled}
                   onClick={() => setSelected(isSelected ? null : board.code)}
                   aria-pressed={isSelected}
-                  className={`${CBT.ghostBtn} mt-3 min-h-[40px] w-full text-sm ${isSelected && !disabled ? "border-gold/60 bg-gold/15 text-gold" : ""}`}
+                  className={`${CBT.ghostBtn} mt-3 min-h-[40px] w-full text-sm ${isSelected && !disabled ? "border-primary/60 bg-primary/15 text-electric-text" : ""}`}
                 >
                   {isSelected ? (<><Check className="h-4 w-4" aria-hidden /> Selected</>) : "Select"}
                 </button>

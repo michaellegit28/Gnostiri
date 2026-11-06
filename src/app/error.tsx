@@ -15,13 +15,13 @@ export default function RootError({ error, reset }: RootErrorProps) {
   return (
     <div className="min-h-screen bg-transparent text-slate-100">
       <div className="mx-auto flex w-full max-w-2xl flex-col items-center px-6 py-24 text-center">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">
           Something went wrong
         </p>
         <h1 className="mt-4 font-serif text-3xl font-bold md:text-4xl">
           This page didn&apos;t load.
         </h1>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-400 md:text-base">
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-base">
           Something broke on our side. Try again, or head back home.
         </p>
         {error?.digest && (
@@ -33,13 +33,13 @@ export default function RootError({ error, reset }: RootErrorProps) {
           <button
             type="button"
             onClick={() => reset()}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-8 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Try again
           </button>
           <Link
             href="/"
-            className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-slate-600 px-8 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-line-strong px-8 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Back to home
           </Link>

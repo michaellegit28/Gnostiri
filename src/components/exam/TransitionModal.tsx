@@ -51,8 +51,8 @@ export default function TransitionModal({
       tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-bg/95 p-4 backdrop-blur focus:outline-none"
     >
-      <div className="w-full max-w-xl rounded-2xl border border-gold/40 bg-slate-950 px-6 py-10 text-center md:px-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">
+      <div className="w-full max-w-xl gn-shadow rounded-2xl border border-gold/40 bg-bg px-6 py-10 text-center md:px-10">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">
           Section complete
         </p>
         <h2 id="bridge-heading" className="mt-3 font-serif text-3xl font-bold text-slate-50">
@@ -75,7 +75,7 @@ export default function TransitionModal({
             <button
               type="button"
               onClick={onReviewFlagged}
-              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-slate-600 px-6 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-lg border border-line-strong px-6 py-3 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Review flagged questions
             </button>
@@ -83,7 +83,7 @@ export default function TransitionModal({
           <button
             type="button"
             onClick={onStartTheory}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="gn-motion inline-flex min-h-[48px] items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {primaryLabel}
           </button>

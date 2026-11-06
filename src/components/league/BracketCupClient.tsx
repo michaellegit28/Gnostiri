@@ -139,7 +139,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
       )}
 
       {phase === "briefing" && me && (
-        <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-6 backdrop-blur-md">
+        <div className="rounded-2xl border border-line bg-surface/40 p-6 backdrop-blur-md">
           <div className="flex items-center gap-2">
             <Swords className="h-4 w-4 text-gold" aria-hidden />
             <h2 className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500">Your match</h2>
@@ -154,7 +154,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
           <button
             type="button"
             onClick={() => setPhase("playing")}
-            className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="mt-5 inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Start quickfire
           </button>
@@ -162,7 +162,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
       )}
 
       {phase === "playing" && current && (
-        <div className="rounded-2xl border border-white/10 bg-slate-950/60 p-6 backdrop-blur-md">
+        <div className="rounded-2xl border border-line bg-surface/40 p-6 backdrop-blur-md">
           <p className="text-[11px] uppercase tracking-[0.3em] text-slate-500">
             Question {index + 1} of {questions.length}
           </p>
@@ -174,7 +174,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
                 className={`flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors ${
                   answers[current.id] === option
                     ? "border-gold/60 bg-gold/10 text-slate-100"
-                    : "border-white/10 bg-slate-950/40 text-slate-300 hover:border-white/25"
+                    : "border-line bg-surface/40 text-slate-300 hover:border-line-strong"
                 }`}
               >
                 <input
@@ -194,7 +194,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
               type="button"
               onClick={() => setIndex((i) => Math.max(0, i - 1))}
               disabled={index === 0}
-              className="inline-flex min-h-[44px] items-center rounded-xl border border-white/15 px-5 text-sm font-semibold text-slate-200 disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong px-5 text-sm font-semibold text-slate-200 disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               Back
             </button>
@@ -203,7 +203,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
                 type="button"
                 onClick={() => setIndex((i) => i + 1)}
                 disabled={!answers[current.id]}
-                className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 Next
               </button>
@@ -212,7 +212,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
                 type="button"
                 onClick={submit}
                 disabled={busy || Object.keys(answers).length < questions.length}
-                className="inline-flex min-h-[44px] items-center rounded-xl bg-gold px-6 font-semibold text-slate-950 disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {busy ? "Marking…" : "Submit round"}
               </button>
@@ -231,11 +231,11 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
         </div>
       )}
 
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-md">
-        <h2 className="border-b border-white/10 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+      <div className="overflow-hidden rounded-2xl border border-line bg-surface/40 backdrop-blur-md">
+        <h2 className="border-b border-line px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
           {view.roundOne.label} — {view.size} teams
         </h2>
-        <ul className="divide-y divide-white/5">
+        <ul className="divide-y divide-line">
           {view.roundOne.matches.map((match) => (
             <li key={match.matchIndex} className="flex items-center justify-between gap-3 px-5 py-3 text-sm">
               <span className="text-slate-300">
@@ -248,7 +248,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
           ))}
         </ul>
         {view.projectedRounds.length > 0 && (
-          <p className="border-t border-white/10 px-5 py-3 text-xs text-slate-500">
+          <p className="border-t border-line px-5 py-3 text-xs text-slate-500">
             Later rounds render as projected slots until the persistent bracket tree lands (next iteration).
           </p>
         )}

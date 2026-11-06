@@ -64,14 +64,14 @@ export default function TheoryEditor({
         spellCheck={true}
         aria-label={`${questionLabel}. ${words} words, ${chars} characters.`}
         placeholder="Write your answer here…"
-        className="min-h-[280px] w-full resize-y rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-relaxed text-slate-950 placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        className="min-h-[280px] w-full resize-y rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-relaxed text-slate-950 placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--paper-ink))]"
       />
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={onSave}
           disabled={readOnly || saveState === "empty"}
-          className="inline-flex min-h-[48px] items-center justify-center rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="gn-motion inline-flex min-h-[48px] items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           {saveState === "saving" ? "Saving…" : "Save draft"}
         </button>

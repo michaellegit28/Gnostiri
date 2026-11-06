@@ -72,15 +72,15 @@ export default async function VerifyPage({
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-12 md:py-20">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Verify a certificate</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Verify a certificate</p>
       <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100 md:text-4xl">Check a season certificate</h1>
-      <p className="mt-3 text-sm text-slate-400">
+      <p className="mt-3 text-sm text-muted">
         Every season certificate carries a 12-character verification code. Paste it below and we recompute the signature of
         every Hall of Fame entry, live: the code only resolves if a real engraving produced it.
       </p>
 
       <form action="/verify" method="get" className="mt-8">
-        <label htmlFor="code" className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+        <label htmlFor="code" className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
           Verification code
         </label>
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
@@ -92,11 +92,11 @@ export default async function VerifyPage({
             spellCheck={false}
             autoComplete="off"
             maxLength={64}
-            className="min-h-[44px] flex-1 rounded-xl border border-slate-700 bg-slate-950/60 px-4 font-mono text-sm uppercase tracking-widest text-slate-100 placeholder:text-slate-400 focus:border-gold focus:outline-none"
+            className="min-h-[44px] flex-1 rounded-xl border border-line bg-bg px-4 font-mono text-sm uppercase tracking-widest text-slate-100 placeholder:text-muted focus:border-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           />
           <button
             type="submit"
-            className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-gold px-6 font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Verify
           </button>
@@ -106,14 +106,14 @@ export default async function VerifyPage({
       {code && (
         <div className="mt-8" aria-live="polite">
           {result ? (
-            <section className="rounded-2xl border border-gold/40 bg-slate-900/70 p-6">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">Certificate verified</p>
+            <section className="gn-shadow rounded-2xl border border-gold/40 bg-surface p-6">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-electric-text-text">Certificate verified</p>
               <h2 className="mt-2 font-serif text-2xl font-bold text-slate-100">
                 Season {result.seasonName} · {tierInfo(result.entry.tier).label}
               </h2>
               <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
                 <div>
-                  <dt className="text-slate-500">Placement</dt>
+                  <dt className="text-muted">Placement</dt>
                   <dd className="font-semibold text-slate-100">
                     {result.entry.rank === 1
                       ? "Champion"
@@ -126,26 +126,26 @@ export default async function VerifyPage({
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-slate-500">Group</dt>
+                  <dt className="text-muted">Group</dt>
                   <dd className="font-semibold text-slate-100">{result.entry.groupName}</dd>
                 </div>
                 <div>
-                  <dt className="text-slate-500">Season</dt>
+                  <dt className="text-muted">Season</dt>
                   <dd className="font-semibold text-slate-100">
                     {result.seasonName} ({result.entry.seasonSlug})
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-slate-500">Group size</dt>
+                  <dt className="text-muted">Group size</dt>
                   <dd className="font-semibold text-slate-100">{result.entry.rosterSize} members</dd>
                 </div>
               </dl>
-              <p className="mt-4 font-mono text-xs text-slate-500">code {result.code}</p>
+              <p className="mt-4 font-mono text-xs text-muted">code {result.code}</p>
             </section>
           ) : (
-            <section className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+            <section className="gn-shadow rounded-2xl border border-line bg-surface p-6">
               <p className="font-serif text-xl font-bold text-slate-100">No matching certificate</p>
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-muted">
                 No Hall of Fame entry in any season produces this code. Check the characters, or ask the winner for the
                 code printed at the bottom of their certificate.
               </p>

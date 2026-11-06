@@ -19,7 +19,7 @@ export default async function LaunchPage() {
     return (
       <div className="min-h-screen bg-transparent text-slate-100 p-10 text-center">
         <p className="text-slate-400">The 1st launch gate is not active.</p>
-        <Link href="/" className="inline-flex mt-4 rounded-lg bg-gold px-5 py-3 font-semibold text-on-gold">
+        <Link href="/" className="gn-motion inline-flex min-h-12 mt-4 items-center justify-center rounded-lg bg-primary px-5 py-3 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
           Go home
         </Link>
       </div>
@@ -39,7 +39,7 @@ export default async function LaunchPage() {
     return (
       <div className="min-h-screen bg-transparent text-slate-100 p-10 text-center space-y-4">
         <p className="text-slate-100 font-semibold">You already have launch access{benefactor ? " (benefactor)" : ""}.</p>
-        <Link href="/" className="inline-flex rounded-lg bg-gold px-5 py-3 font-semibold text-on-gold">
+        <Link href="/" className="gn-motion inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-5 py-3 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]">
           Enter Gnostiri
         </Link>
       </div>
@@ -50,22 +50,22 @@ export default async function LaunchPage() {
 
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
-      <div className="max-w-2xl mx-auto space-y-8 py-10">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(110%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg))_55%,rgb(var(--bg-deep))_100%)] px-6 py-12 md:px-12 md:py-16 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/30 text-slate-400 text-xs font-semibold border border-slate-600">
+      <div className="mx-auto max-w-2xl space-y-8 py-10">
+        <div className="relative overflow-hidden rounded-2xl border border-line bg-[radial-gradient(110%_100%_at_50%_0%,rgb(var(--surface))_0%,rgb(var(--bg))_55%,rgb(var(--bg-deep))_100%)] px-6 py-12 md:px-12 md:py-16 text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-2/30 text-slate-400 text-xs font-semibold border border-line-strong">
             <SectionMark variant="school" className="w-4 h-4" />
             <span>1st Launch · Limited Access</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            Gnostiri opens for <span className="text-gold">220 learners</span> first
+            Gnostiri opens for <span className="text-electric-text">220 learners</span> first
           </h1>
-          <p className="text-slate-400 text-base md:text-lg max-w-xl mx-auto">
+          <p className="text-muted mx-auto max-w-xl text-base md:text-lg">
             Full curriculum rebuilt. Exam practice in your board&apos;s real format. AI marking.
             {endsLabel ? ` Free access runs until ${endsLabel}.` : ""} Redeem your launch token to enter.
           </p>
         </div>
 
-        <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-6 md:p-8 space-y-5">
+        <div className="gn-shadow rounded-xl border border-line bg-surface p-6 md:p-8 space-y-5">
           <h2 className="font-serif text-2xl font-bold">Redeem your token</h2>
           {!user ? (
             <div className="space-y-3">
@@ -75,14 +75,14 @@ export default async function LaunchPage() {
               </p>
               <Link
                 href="/login"
-                className="inline-flex min-h-12 items-center rounded-lg bg-gold px-6 font-semibold text-on-gold hover:bg-gold-hover"
+                className="gn-motion inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
               >
                 Sign in / Create account
               </Link>
             </div>
           ) : (
             <div className="space-y-5">
-              <div className="flex flex-wrap items-center gap-3 text-sm text-slate-400">
+              <div className="flex flex-wrap items-center gap-3 text-sm text-muted">
                 <span>Signed in as <span className="text-slate-200 font-medium">{email}</span></span>
                 <span className="inline-flex items-center gap-1.5">
                   <Globe2 className="w-4 h-4 text-slate-400" />
@@ -102,7 +102,7 @@ export default async function LaunchPage() {
           )}
         </div>
 
-        <p className="text-xs text-slate-400 text-center">
+        <p className="text-muted text-center text-xs">
           Benefactor tokens also open university premium for the launch. Standard tokens open the full
           launch experience; premium university stays subscription-gated.
         </p>
