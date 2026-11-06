@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/server-auth";
 import prisma from "@/lib/db";
+import { isAiConfigured } from "@/lib/desk-ai";
 import UploadForm from "@/components/desk/UploadForm";
 import TaskList, { type DeskTask } from "@/components/desk/TaskList";
 import DocumentList, { type DeskDocument } from "@/components/desk/DocumentList";
-import { FolderOpen } from "lucide-react";
+import StageFlow, { DOCUMENT_STATUS_LABEL, type Stage } from "@/components/desk/StageFlow";
+import { FolderOpen, ShieldCheck } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -79,28 +81,69 @@ export default async function DeskPage() {
     taskCount: d._count.tasks,
   }));
 
+  // The pipeline explainer — every stage below is a step the upload route
+  // really performs, read off the same fields the document pages render. The
+  // quiz stage reports this environment's real AI state rather than promising
+  // a quiz that the pipeline will skip.
+  const aiConfigured = isAiConfigured();
+  const pipelineStages: Stage[] = [
+    { key: "upload", label: "Upload", hint: "Choose a PDF — up to 120 pages, 8 MB.", state: "pending", href: "#desk-upload" },
+    { key: "process", label: "Process", hint: "Text is extracted in memory; a content hash keeps the same textbook from processing twice.", state: "pending" },
+    { key: "notes", label: "Notes", hint: "Extracted sections become the document's notes — the only artifact that persists.", state: "pending" },
+    { key: "plans", label: "Plans", hint: "Your minutes-per-day and streak length schedule reading and quiz tasks.", state: "pending" },
+    {
+      key: "quizzes",
+      label: "Quizzes",
+      hint: aiConfigured
+        ? "Practice questions are generated and invariant-checked before they are stored."
+        : "No AI model is configured in this environment, so quizzes are skipped — the notes still stand alone.",
+      state: aiConfigured ? "pending" : "skipped",
+    },
+  ];
+
+  // Document organisation — the real status mix, counted from the rows.
+  const statusBuckets = new Map<string, number>();
+  for (const doc of documentRows) statusBuckets.set(doc.status, (statusBuckets.get(doc.status) ?? 0) + 1);
+  const statusSummary = Array.from(statusBuckets.entries())
+    .map(([status, count]) => `${count} ${DOCUMENT_STATUS_LABEL[status] ?? status}`)
+    .join(" · ");
+
   return (
     <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="mx-auto max-w-5xl space-y-10">
-        <header className="space-y-2">
+        <header className="space-y-3">
           <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Desk</p>
           <h1 className="font-serif text-3xl font-bold">Turn any PDF into a study plan</h1>
           <p className="text-sm text-slate-400">
-            Extracted and summarised on upload; scheduled into a 3- or 7-day plan. The source PDF is never stored.
+            Extracted and summarised on upload, then scheduled into a 3- or 7-day plan.
+          </p>
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/40 px-3 py-1.5 text-xs text-muted">
+            <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
+            Your PDF is processed in memory and never stored — only the extracted notes persist.
           </p>
         </header>
 
-        <section className="space-y-4">
+        <StageFlow stages={pipelineStages} label="How a document moves through the Desk" />
+
+        <section id="desk-upload" className="space-y-4 scroll-mt-24">
           <h2 className="font-serif text-xl font-bold">New document</h2>
           <UploadForm />
         </section>
 
         <section className="space-y-4">
-          <TaskList tasks={taskRows} heading="Today's plan" />
+          <TaskList tasks={taskRows} heading="Today's plan" uploadHref="#desk-upload" />
         </section>
 
         <section className="space-y-4">
-          <h2 className="font-serif text-xl font-bold">Your documents</h2>
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="font-serif text-xl font-bold">Your documents</h2>
+            {documentRows.length > 0 && (
+              <p className="text-xs text-muted">
+                {documentRows.length} document{documentRows.length === 1 ? "" : "s"}
+                {statusSummary ? ` · ${statusSummary}` : ""}
+              </p>
+            )}
+          </div>
           <DocumentList documents={documentRows} />
         </section>
       </div>

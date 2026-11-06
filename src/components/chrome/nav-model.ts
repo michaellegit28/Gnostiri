@@ -11,6 +11,10 @@ import {
   Crown,
   RotateCcw,
   Coins,
+  ClipboardList,
+  MonitorPlay,
+  Settings,
+  BarChart3,
   type LucideIcon,
 } from "lucide-react";
 
@@ -18,32 +22,37 @@ import {
  * One navigation model for every surface: the desktop sidebar, the mobile
  * drawer, the bottom tab bar and the command palette all render from this.
  * Adding a destination here adds it everywhere — there is no second list to
- * drift (the old SiteMenu GROUPS array is gone).
+ * drift.
  *
- * Accessibility contract (Phase 6d):
- *  - The accessible names below are SHARED constants, so the sidebar, the
- *    drawer and the tab bar announce themselves identically to a screen reader
- *    no matter which surface rendered them. Never re-type these strings.
- *  - An item's active state is NEVER colour-only. Every surface pairs
- *    aria-current="page" (see isActive) with a visible indicator that is not
- *    a colour: a primary dot on the bottom tabs, a left border in the drawer and
- *    sidebar. Accent text alone is not an answer.
- *  - Every NavItem carries a `note` — the sub-copy the drawer and palette
- *    render at 12px, which must stay on the .text-muted floor.
+ * Information architecture (second-phase audit): the six global-learning
+ * pillars — Study, Competitions, AI Studio, Examinations, Public Library,
+ * My Learning — plus a separate Membership zone (profile/subscription/
+ * settings stay out of the learning flow).
+ *
+ * Accessibility contract (unchanged):
+ *  - The accessible names are SHARED constants so every surface announces
+ *    identically. Never re-type these strings.
+ *  - An item's active state is NEVER colour-only: aria-current="page" plus a
+ *    visible non-colour indicator on every surface.
+ *  - Every NavItem carries a `note` at the .text-muted floor (12px sub-copy).
+ *
+ * Integrity: destinations are REAL routes only. Planned-but-unbuilt surfaces
+ * (Live Voice Transcriber, Notes Studio, AI theory-marking) are intentionally
+ * absent here rather than faked — see the phase-2 report.
  */
 
-/** Accessible name of the desktop sidebar and the mobile drawer (both are the
- *  same "Primary" landmark to a screen reader — only one is ever displayed). */
+/** Accessible name of the desktop sidebar and the mobile drawer. */
 export const NAV_LABEL = "Primary";
-
-/** Accessible name of the mobile bottom tab bar. Deliberately distinct from
- *  NAV_LABEL so the two landmarks are not collapsed into one. */
+/** Accessible name of the mobile bottom tab bar. */
 export const TAB_BAR_LABEL = "Primary tabs";
+
 export interface NavItem {
   href: string;
   label: string;
   icon: LucideIcon;
   note: string;
+  /** Planned-but-unbuilt items render as a disabled "Soon" chip, never a dead link. */
+  soon?: boolean;
 }
 
 export interface NavZone {
@@ -54,31 +63,60 @@ export interface NavZone {
 
 export const NAV_ZONES: NavZone[] = [
   {
-    id: "study",
-    label: "Study",
+    id: "start",
+    label: "Start",
     items: [
-      { href: "/study", label: "Study", icon: BookOpen, note: "High school, university, discovery, desk" },
-      { href: "/highschool", label: "High School", icon: BookOpen, note: "Exam questions, verified" },
-      { href: "/university", label: "University", icon: GraduationCap, note: "Courses, full depth" },
-      { href: "/discovery", label: "Discovery", icon: Compass, note: "Explore past the syllabus" },
+      { href: "/", label: "Home", icon: Home, note: "Your dashboard & daily mission" },
     ],
   },
   {
-    id: "workspace",
-    label: "Your workspace",
+    id: "study",
+    label: "Study",
     items: [
-      { href: "/battle-plan", label: "Battle Plan", icon: Swords, note: "Your day-by-day mission" },
-      { href: "/desk", label: "Desk", icon: FolderOpen, note: "Your uploads, notes and plans" },
-      { href: "/tutor", label: "AI Tutor", icon: Sparkles, note: "Your AI study assistant" },
-      { href: "/progress", label: "My Progress", icon: Trophy, note: "Streaks, accuracy, history" },
+      { href: "/study", label: "Study", icon: BookOpen, note: "Every way to study, in one place" },
+      { href: "/university", label: "University", icon: GraduationCap, note: "Courses, degrees, mastery" },
+      { href: "/highschool", label: "High School", icon: BookOpen, note: "Boards, syllabuses, past papers" },
+      { href: "/discovery", label: "Discovery", icon: Compass, note: "Explore past the syllabus" },
+      { href: "/desk", label: "PDF Desk", icon: FolderOpen, note: "Notes, plans & quizzes from your PDFs" },
     ],
   },
   {
     id: "compete",
-    label: "Compete & share",
+    label: "Competitions",
     items: [
-      { href: "/league", label: "Merit League", icon: Trophy, note: "Cups, brackets and seasons" },
+      { href: "/league", label: "Competitions", icon: Trophy, note: "Speed · Endurance · Mastery · Bracket" },
+    ],
+  },
+  {
+    id: "ai",
+    label: "AI Studio",
+    items: [
+      { href: "/tutor", label: "AI Tutor", icon: Sparkles, note: "Your AI study assistant" },
+      { href: "/desk", label: "Notes from PDFs", icon: FolderOpen, note: "Transcription-to-notes via your documents" },
+    ],
+  },
+  {
+    id: "exams",
+    label: "Examinations",
+    items: [
+      { href: "/highschool/exams", label: "Examination boards", icon: ClipboardList, note: "Countries, boards, papers" },
+      { href: "/cbt", label: "MCQ practice", icon: MonitorPlay, note: "Timed computer-based tests" },
+    ],
+  },
+  {
+    id: "library",
+    label: "Public Library",
+    items: [
       { href: "/library", label: "Public Library", icon: Library, note: "Shared notes and quizzes" },
+    ],
+  },
+  {
+    id: "mine",
+    label: "My Learning",
+    items: [
+      { href: "/battle-plan", label: "Battle Plan", icon: Swords, note: "Your day-by-day mission" },
+      { href: "/progress", label: "Progress", icon: BarChart3, note: "Streaks, accuracy, history" },
+      { href: "/university/revision", label: "Revision queue", icon: RotateCcw, note: "Concepts due for review" },
     ],
   },
   {
@@ -86,16 +124,16 @@ export const NAV_ZONES: NavZone[] = [
     label: "Membership",
     items: [
       { href: "/pricing", label: "Gnostiri Prime", icon: Crown, note: "Every feature, one subscription" },
-      { href: "/university/revision", label: "Revision Queue", icon: RotateCcw, note: "Concepts due for review" },
-      { href: "/library/credits", label: "Credits & Badges", icon: Coins, note: "Rewards earned in the Library" },
+      { href: "/settings", label: "Settings", icon: Settings, note: "Appearance & accessibility" },
+      { href: "/library/credits", label: "Credits & badges", icon: Coins, note: "Rewards earned in the Library" },
     ],
   },
 ];
 
-/** The four mobile bottom tabs — the four places a student actually lives. */
+/** The four mobile bottom tabs — where a student lives. */
 export const BOTTOM_TABS: NavItem[] = [
-  { href: "/", label: "Home", icon: Home, note: "Dashboard" },
-  { href: "/study", label: "Study", icon: BookOpen, note: "High school, university, discovery, desk" },
+  { href: "/", label: "Home", icon: Home, note: "Your dashboard" },
+  { href: "/study", label: "Study", icon: BookOpen, note: "University, High School, Discovery, Desk" },
   { href: "/league", label: "Compete", icon: Trophy, note: "Merit League and rankings" },
   { href: "/profile", label: "Profile", icon: GraduationCap, note: "Membership and settings" },
 ];

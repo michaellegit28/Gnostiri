@@ -158,7 +158,7 @@ export default function UploadForm() {
           {result.deduped ? (
             <p className="text-slate-300">
               Same textbook already processed — your notes and quiz link to the shared artifact{" "}
-              <Link href={`/desk/${result.document.id}`} className="text-gold underline">Open desk document</Link>.
+              <Link href={`/desk/${result.document.id}`} className="rounded text-electric-text underline">Open desk document</Link>.
             </p>
           ) : (
             <>
@@ -168,7 +168,7 @@ export default function UploadForm() {
                 {result.document.status === "ready" ? ` · ${result.quizCreated} quiz item${result.quizCreated === 1 ? "" : "s"}` : ""}
                 {result.quizDropped > 0 ? ` · ${result.quizDropped} generated item${result.quizDropped === 1 ? "" : "s"} dropped (failed invariants)` : ""}
               </p>
-              <Link href={`/desk/${result.document.id}`} className="inline-flex items-center gap-1.5 text-gold underline">
+              <Link href={`/desk/${result.document.id}`} className="gn-motion inline-flex items-center gap-1.5 rounded text-electric-text underline">
                 <FileUp className="h-4 w-4" /> Open desk document
               </Link>
             </>
