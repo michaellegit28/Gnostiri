@@ -5,8 +5,9 @@ Live URL: gnostiri.vercel.app · Repo: github.com/michaellegit28/Gnostiri · Bra
 ## Architecture
 
 Next.js 14 (App Router) · TypeScript · Prisma + Supabase PostgreSQL ·
-Firebase Auth (email/password) · Vercel deploy (single project) ·
-Atria-Dawn-Preview for AI (OpenAI-compatible base URL) · Tailwind CSS
+Supabase Auth (Google OAuth + email/password, @supabase/ssr cookie sessions) ·
+Vercel deploy (single project) · Atria-Dawn-Preview for AI
+(OpenAI-compatible base URL) · Tailwind CSS
 
 Three domains: highschool (exam bank + study), university (academic
 structure + mastery/SM-2), extras (discovery). 1st-launch token gate
@@ -18,10 +19,14 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 - `src/lib/exam-manifest.ts` — blueprint engine (boards, sections, scoring)
 - `src/lib/launch.ts` — token mint/redeem/access
 - `src/lib/spaced-repetition.ts` — SM-2 scheduling
+- `src/lib/auth.ts` — client auth actions (Google OAuth redirect, email/password, sign out)
+- `src/lib/supabase/` — browser/server/middleware Supabase SSR clients
+- `src/lib/server-auth.ts` — THE auth seam: getUser() → Prisma User (lazy row creation, email adoption)
+- `src/app/auth/callback/` — OAuth code exchange → session → redirect
 - `src/app/api/practice/` — manifest, session, draft, submit, ai-mark
 - `src/app/api/admin/launch-tokens/generate/` — owner token mint (secret-guarded)
-- `middleware.ts` — launch gate (edge HMAC) + IP rate limiting
-- `prisma/schema.prisma` — all models
+- `middleware.ts` — Supabase session refresh + launch gate (edge HMAC) + IP rate limiting
+- `prisma/schema.prisma` — all models (User keyed by `supabaseUid`; `firebaseUid` deprecated)
 - `prisma/migrations/` — migration history (applied via Supabase SQL editor)
 
 ## Environment variable NAMES (never commit values)
@@ -29,15 +34,10 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 | Name | Status | Notes |
 |---|---|---|
 | DATABASE_URL | set (sensitive) | Supabase PostgreSQL |
-| FIREBASE_ADMIN_PROJECT_ID | set | |
-| FIREBASE_ADMIN_CLIENT_EMAIL | set | |
-| FIREBASE_ADMIN_PRIVATE_KEY | set (sensitive) | |
-| NEXT_PUBLIC_FIREBASE_API_KEY | set | |
-| NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN | set | |
-| NEXT_PUBLIC_FIREBASE_PROJECT_ID | set | |
-| NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET | set | |
-| NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID | set | |
-| NEXT_PUBLIC_FIREBASE_APP_ID | set | |
+| NEXT_PUBLIC_SUPABASE_URL | set | https://djkdszhhajsakwpxaznu.supabase.co |
+| NEXT_PUBLIC_SUPABASE_ANON_KEY | STALE (sensitive) | Project rejects the stored key — refresh from Dashboard > Project Settings > API |
+| NEXT_PUBLIC_AUTH_REDIRECT_BASE_URL | set | https://gnostiri.vercel.app (preview/localhost fall back to their own origin) |
+| NEXT_PUBLIC_AUTH_GOOGLE_ENABLED | set | "true" — gates the Google button |
 | OPENAI_API_KEY | set (sensitive) | Atria Dawn key |
 | OPENAI_BASE_URL | set | https://api.atria-asi.ai/v1 |
 | OPENAI_TUTOR_MODEL | set | Atria-Dawn-Preview |
@@ -118,8 +118,11 @@ All seeded to production; all rows needs-human-review, nothing "verified". Seede
 1. **Rate limiting NOT ENFORCED** — Upstash env vars empty; all AI endpoints
    are unlimited (cost risk on Atria quota)
 2. **Payments not wired** — all provider keys empty; no revenue possible
-3. **Google sign-in DISABLED** — Firebase provider not enabled; domain auth
-   fixed by A1 but user must enable the provider in Firebase console
+3. **Supabase Google OAuth pending dashboard config** — code migrated off
+   Firebase; user must still (a) run the 20261115120000_supabase_auth
+   migration SQL, (b) paste a fresh anon key over the stale
+   NEXT_PUBLIC_SUPABASE_ANON_KEY, (c) enable the Google provider with the
+   Google Cloud OAuth client (redirect URI: Supabase /auth/v1/callback)
 4. **Version A gap in the JAMB banks** — 0 of 6,000 JAMB coreIds yet have an
    official ZA/TZ Version A counterpart (G13); official NSC/NECTA transcription
    queue owned by A2 next round
@@ -572,3 +575,38 @@ Merged and deployed tonight (CI green on every merge; full suite now 339/339):
 - Acceptance: AA on every text pair in both themes (exceptions: --text-subtle is decorative/UI-only
   at 3.6:1, by design; --muted-fill #94A3B8 is a chart fill only). Screenshots were not capturable in
   this environment — verified via DOM/curl + the contrast test instead.
+
+## Auth migration to Supabase (2026-11-15, orchestrator)
+
+Owner directive: retire Firebase Auth entirely; Google OAuth moves to Supabase
+Auth (Google Cloud Console OAuth client). Email/password also moved to
+Supabase. Full audit: nothing outside the login page, AuthContext,
+`src/lib/firebase/*`, `/api/auth/session`, and `server-auth.ts` referenced
+Firebase — the seam swap covered the whole app.
+
+- **New**: `src/lib/supabase/{client,server,middleware}.ts` (@supabase/ssr),
+  `src/lib/auth.ts` (client actions), `src/app/auth/callback/route.ts`
+  (code exchange + safe `next`), `prisma/migrations/20261115120000_supabase_auth`
+  (`ADD COLUMN "supabaseUid"` + unique index; `firebaseUid` kept nullable so
+  the pre-migration deploy keeps working — zero-downtime switch).
+- **Changed**: `server-auth.ts` — getUser() validates the token against the
+  Supabase Auth server, then maps to Prisma User by `supabaseUid`; missing
+  rows are created lazily (Google metadata: full_name/avatar_url); pre-
+  Supabase rows with the same email are adopted (history preserved).
+  `middleware.ts` — updateSession() runs first; gate/rate-limit responses
+  carry the rotated cookies. `AuthContext.tsx` — onAuthStateChange mirror.
+  Login page — Google = full-page redirect (Android/in-app-browser safe),
+  gated by NEXT_PUBLIC_AUTH_GOOGLE_ENABLED; signup shows the email-
+  confirmation notice when Supabase returns no session.
+- **Removed**: `firebase` + `firebase-admin` deps (and the jwks-rsa/jose
+  override), `src/lib/firebase/`, `/api/auth/session`, Firebase env block.
+- **Gates**: tsc clean · next lint clean · 279/279 node --test · build OK ·
+  local smoke: /login 200, /auth/callback?code=bogus → 307 /login?error=auth_failed,
+  GET /api/auth/country → {country:null}.
+- **DB migration is MANUAL (port 6543 unreachable from agent boxes)**: paste
+  prisma/migrations/20261115120000_supabase_auth/migration.sql into the
+  Supabase SQL editor BEFORE the production deploy lands.
+- **Stale key found**: every Supabase API key stored in Vercel
+  (NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_ANON_KEY, publishable) is REJECTED
+  by the project ("Invalid API key") — URL (djkdszhhajsakwpxaznu) is correct,
+  keys are from a different/rotated project. Fresh anon key required.

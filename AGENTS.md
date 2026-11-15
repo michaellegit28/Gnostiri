@@ -3,7 +3,8 @@
 Gnostiri is an AI-powered learning platform: highschool exam banks (JAMB/WAEC/boards), university
 curriculum (MBBS spine, SM-2 mastery), AI tutor (Atria-Dawn), and payments wiring.
 Stack: Next.js 14 App Router · TypeScript (strict) · Tailwind · Prisma + Supabase Postgres (pooler 6543) ·
-Firebase Auth · Vercel (gnostiri.vercel.app) · opencode multi-agent workflow.
+Supabase Auth (Google OAuth + email/password, @supabase/ssr) · Vercel (gnostiri.vercel.app) · opencode
+multi-agent workflow.
 
 ## Source of truth
 - `STATE.md` — architecture, key paths, env var NAMES registry (names only), blockers, session log. Update after lane work.

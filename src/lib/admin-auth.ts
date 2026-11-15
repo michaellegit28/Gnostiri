@@ -1,7 +1,7 @@
 import { getCurrentUser } from "@/lib/server-auth";
 
 /**
- * Phase 3 admin gate — REUSES existing Firebase session auth (getCurrentUser).
+ * Phase 3 admin gate — REUSES existing Supabase session auth (getCurrentUser).
  * No new auth system: allowlist via ADMIN_EMAILS env (comma-separated).
  * Deviation noted: repo had no admin middleware; this wraps existing auth.
  */

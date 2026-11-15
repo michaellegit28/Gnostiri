@@ -1,6 +1,6 @@
 # Gnostiri
 
-AI-powered learning platform. Built with Next.js (App Router), TypeScript, Tailwind CSS, Prisma, and Firebase Auth.
+AI-powered learning platform. Built with Next.js (App Router), TypeScript, Tailwind CSS, Prisma, and Supabase Auth.
 
 ## Setup
 
@@ -15,7 +15,7 @@ AI-powered learning platform. Built with Next.js (App Router), TypeScript, Tailw
 
 - Next.js 14 (App Router) + TypeScript + Tailwind CSS
 - Prisma ORM
-- Firebase Auth (email/password, Google, and Apple) with verified HTTP-only server sessions
+- Supabase Auth (Google OAuth + email/password) with `@supabase/ssr` cookie sessions, validated server-side through `src/lib/server-auth.ts`; the OAuth callback is `/auth/callback`
 - Supabase PostgreSQL through Prisma; the server is the only database access layer
 - Upstash Redis rate limits, OpenAI Tutor, Stripe, Paystack, and Razorpay (configure keys in `.env`)
 
