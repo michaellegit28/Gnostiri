@@ -15,7 +15,11 @@ enum AppDomain {
 
 model User {
   id             String         @id @default(cuid())
-  firebaseUid    String         @unique
+  // Auth identity — Supabase Auth uid (Google OAuth / email+password).
+  supabaseUid    String?        @unique
+  // Deprecated (Firebase era, pre-migration) — retained for history; null on
+  // all rows created after the Supabase auth migration.
+  firebaseUid    String?        @unique
   email          String         @unique
   name           String?
   avatar         String?

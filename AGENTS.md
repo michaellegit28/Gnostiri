@@ -3,7 +3,8 @@
 Gnostiri is an AI-powered learning platform: highschool exam banks (JAMB/WAEC/boards), university
 curriculum (MBBS spine, SM-2 mastery), AI tutor (Atria-Dawn), and payments wiring.
 Stack: Next.js 14 App Router · TypeScript (strict) · Tailwind · Prisma + Supabase Postgres (pooler 6543) ·
-Firebase Auth · Vercel (gnostiri.vercel.app) · opencode multi-agent workflow.
+Supabase Auth (Google OAuth + email/password, @supabase/ssr) · Vercel (gnostiri.vercel.app) · opencode
+multi-agent workflow.
 
 ## Source of truth
 - `STATE.md` — architecture, key paths, env var NAMES registry (names only), blockers, session log. Update after lane work.
@@ -49,8 +50,13 @@ Playwright needs browsers: `npx playwright install chromium`.
 dual-version-question-banks · sm2-spaced-repetition · assessment-items · prisma-supabase-pooler ·
 nextjs-repo-conventions · qa-gates · study-content-accessibility · seo-public-pages ·
 secrets-and-env-hygiene · vercel-github-ops. Lanes must read the skills that match their work.
-
 ## Mailbox protocol
+
 Lanes append findings to `/tmp/opencode/mailbox/agent-agents/AGENT-MESSAGES.md` (one file, dated
 entries, lane-tagged). The orchestrator digests via scribe-lane. Keep entries short: what, counts,
 blockers, next.
+
+Cross-session visibility (all four sessions, any machine): **`AGENT_CHAT.md`** in the repo —
+append-only, newest entry on top, lane-tagged. Start/blocker/review-request/done posts go there;
+the /tmp mailbox stays for same-machine quick notes. Per-session boundaries and merge protocol:
+`AGENTS-WORKFLOW.md`.

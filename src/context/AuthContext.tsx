@@ -1,11 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { User, onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 interface AuthContextType {
-  user: User | null;
+  user: SupabaseUser | null;
   loading: boolean;
 }
 
@@ -15,57 +15,38 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Auth disabled (e.g. NEXT_PUBLIC_FIREBASE_* not set on Vercel):
+    // Auth disabled (e.g. NEXT_PUBLIC_SUPABASE_* not set on Vercel):
     // render the app without a user instead of crashing.
-    if (!auth) {
+    if (!isSupabaseConfigured()) {
       setLoading(false);
       return;
     }
 
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        try {
-          const idToken = await currentUser.getIdToken();
-          const response = await fetch("/api/auth/session", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ idToken }),
-          });
-          // Server session is the truth: if it cannot be established (twice),
-          // never keep a client-side "signed in" state that the server rejects —
-          // that half-state makes every authenticated feature fail confusingly.
-          if (!response.ok) {
-            const retry = await fetch("/api/auth/session", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ idToken }),
-            });
-            if (!retry.ok && auth) await signOut(auth);
-          }
-        } catch (error) {
-          console.error("Failed to sync session with Postgres:", error);
-        }
-      }
-      else {
-        await fetch("/api/auth/session", { method: "DELETE" });
-      }
+    const supabase = createClient();
+
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user ?? null);
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    // Session cookies are the single source of truth (SSR pattern) — this
+    // listener only mirrors the login state into React for UI decisions.
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user, loading }}>{children}</AuthContext.Provider>
   );
 };
 

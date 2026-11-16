@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import { signInWithEmail, signInWithGoogle, signUpWithEmail } from "@/lib/firebase/auth-helpers";
+import { signInWithEmail, signInWithGoogle, signUpWithEmail } from "@/lib/auth";
 import { GnostiriLogo } from "@/components/logo/GnostiriLogo";
 import { GOOGLE_G_BLUE, GOOGLE_G_GREEN, GOOGLE_G_RED, GOOGLE_G_YELLOW } from "@/components/brand/Logo";
 
@@ -52,18 +52,11 @@ export default function LoginPage() {
   const [country, setCountry] = useState("NG");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState("");
 
-  async function syncSession(
-    credential: Awaited<ReturnType<typeof signInWithEmail>>,
-    saveCountry = false,
-  ) {
-    const idToken = await credential.user.getIdToken(true);
-    const response = await fetch("/api/auth/session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ idToken }),
-    });
-    if (!response.ok) throw new Error("Could not create a secure session");
+  // Supabase Auth: the session lives in cookies written by the client SDK.
+  // The app's Prisma User row is created lazily on the first server render.
+  async function afterAuth(saveCountry = false) {
     if (saveCountry) {
       await fetch("/api/auth/country", {
         method: "POST",
@@ -78,12 +71,22 @@ export default function LoginPage() {
     e.preventDefault();
     setBusy(true);
     setError("");
+    setNotice("");
     try {
-      const credential =
-        mode === "signup"
-          ? await signUpWithEmail(email, password)
-          : await signInWithEmail(email, password);
-      await syncSession(credential, mode === "signup");
+      if (mode === "signup") {
+        const { data, error } = await signUpWithEmail(email, password);
+        if (error) throw error;
+        // Email confirmation enabled in Supabase: no session until confirmed.
+        if (!data.session) {
+          setNotice("Check your inbox to confirm your account, then sign in.");
+          return;
+        }
+        await afterAuth(true);
+      } else {
+        const { error } = await signInWithEmail(email, password);
+        if (error) throw error;
+        await afterAuth(false);
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not authenticate");
     } finally {
@@ -93,9 +96,12 @@ export default function LoginPage() {
 
   async function google() {
     setError("");
+    setBusy(true);
     try {
-      await syncSession(await signInWithGoogle());
+      // Full-page redirect to Google, then back through /auth/callback.
+      await signInWithGoogle();
     } catch (e) {
+      setBusy(false);
       setError(e instanceof Error ? e.message : "Could not authenticate");
     }
   }
@@ -169,20 +175,32 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="flex items-center gap-3 text-xs uppercase tracking-label text-muted">
-          <span className="h-px flex-1 bg-line" />
-          or
-          <span className="h-px flex-1 bg-line" />
-        </div>
+        {process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED === "true" && (
+          <>
+            <div className="flex items-center gap-3 text-xs uppercase tracking-label text-muted">
+              <span className="h-px flex-1 bg-line" />
+              or
+              <span className="h-px flex-1 bg-line" />
+            </div>
 
-        <button
-          type="button"
-          onClick={() => void google()}
-          className="gn-motion flex min-h-12 w-full items-center justify-center gap-3 rounded-lg border border-line bg-bg font-semibold text-slate-200 transition-colors hover:border-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
-        >
-          <GoogleIcon />
-          Continue with Google
-        </button>
+            <button
+              type="button"
+              onClick={() => void google()}
+              disabled={busy}
+              aria-busy={busy}
+              className="gn-motion flex min-h-12 w-full items-center justify-center gap-3 rounded-lg border border-line bg-bg font-semibold text-slate-200 transition-colors hover:border-primary hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <GoogleIcon />
+              Continue with Google
+            </button>
+          </>
+        )}
+
+        {notice && (
+          <p role="status" className="text-sm text-teal-300">
+            {notice}
+          </p>
+        )}
 
         {error && (
           <p role="alert" className="text-sm text-red-300">

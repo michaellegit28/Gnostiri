@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { LAUNCH_GATE, LAUNCH_ENDS_AT } from "@/lib/access";
+import { carrySessionCookies, updateSession } from "@/lib/supabase/middleware";
 
 // 1st-launch token gate (edge): the whole site sits behind /launch until the
 // user redeems a token, EXCEPT the allowlisted auth/launch/static routes.
 // Access proof = the __launch cookie, an HMAC signature minted only by the
 // verified redemption endpoint — unforgeable without LAUNCH_SECRET.
 // No database calls at the edge; Prisma checks happen in server components.
+// Supabase session refresh runs FIRST (updateSession) so the auth cookies it
+// rotates are carried onto every response, including gate redirects.
 
 function isLaunchAllowlisted(pathname: string): boolean {
   return (
@@ -52,22 +55,33 @@ function launchStillActive(): boolean {
 }
 
 export async function middleware(request: NextRequest) {
+  // ---- Supabase Auth session refresh (runs for every matched request) ----
+  const sessionResponse = await updateSession(request);
+
   // ---- 1st-launch token gate ----
   if (LAUNCH_GATE && launchStillActive() && !isLaunchAllowlisted(request.nextUrl.pathname)) {
     if (!(await hasValidLaunchCookie(request))) {
       if (request.nextUrl.pathname.startsWith("/api")) {
-        return NextResponse.json({ error: "Launch access required" }, { status: 401 });
+        const unauthorized = NextResponse.json({ error: "Launch access required" }, { status: 401 });
+        carrySessionCookies(sessionResponse, unauthorized);
+        return unauthorized;
       }
-      return NextResponse.redirect(new URL("/launch", request.url));
+      const redirect = NextResponse.redirect(new URL("/launch", request.url));
+      carrySessionCookies(sessionResponse, redirect);
+      return redirect;
     }
   }
 
-  // ---- IP rate limiting for /api (unchanged behavior) ----
+  // ---- IP rate limiting for /api ----
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) {
-    if (process.env.NODE_ENV === "production") return NextResponse.json({ error: "Rate limiting is not configured" }, { status: 503 });
-    return NextResponse.next();
+    if (process.env.NODE_ENV === "production") {
+      const unavailable = NextResponse.json({ error: "Rate limiting is not configured" }, { status: 503 });
+      carrySessionCookies(sessionResponse, unavailable);
+      return unavailable;
+    }
+    return sessionResponse;
   }
   const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const ip = request.ip || forwarded || "unknown";
@@ -79,10 +93,16 @@ export async function middleware(request: NextRequest) {
     const result = await response.json();
     const count = Number(result.result || 0);
     if (count === 1) await fetch(`${url}/expire/${encodeURIComponent(key)}/70`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
-    if (count > 100) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
-    return NextResponse.next();
+    if (count > 100) {
+      const tooMany = NextResponse.json({ error: "Too many requests" }, { status: 429 });
+      carrySessionCookies(sessionResponse, tooMany);
+      return tooMany;
+    }
+    return sessionResponse;
   } catch {
-    return NextResponse.json({ error: "Rate limiting unavailable" }, { status: 503 });
+    const unavailable = NextResponse.json({ error: "Rate limiting unavailable" }, { status: 503 });
+    carrySessionCookies(sessionResponse, unavailable);
+    return unavailable;
   }
 }
 
