@@ -36,17 +36,35 @@ export async function GET() {
 
   checks.userColumn = "missing";
   let dbErrorCode = "";
+  let dbErrorDetail = "";
   try {
-    await prisma.user.findFirst({ select: { supabaseUid: true } });
-    checks.userColumn = "supabaseUid";
-  } catch (error) {
-    // Surface the Prisma code so a missing migration (P2022) is never
-    // confused with an unreachable MIGRATED-ELSEWHERE database (P1001+).
+    await prisma.$queryRawUnsafe("SELECT 1");
+    checks.userColumn = "db-reachable";
+    try {
+      await prisma.user.findFirst({ select: { supabaseUid: true } });
+      checks.userColumn = "supabaseUid";
+    } catch (schemaError) {
+      // Schema-level (migration) failure — vs the connectivity answer above.
+      dbErrorCode =
+        schemaError && typeof schemaError === "object" && "code" in schemaError
+          ? String((schemaError as { code: unknown }).code)
+          : schemaError instanceof Error
+            ? schemaError.message.split("\n")[0].slice(0, 180)
+            : "unknown";
+      checks.userColumn = `schema-error:${dbErrorCode.slice(0, 60)}`;
+    }
+  } catch (connectError) {
     dbErrorCode =
-      error && typeof error === "object" && "code" in error
-        ? String((error as { code: unknown }).code)
+      connectError && typeof connectError === "object" && "code" in connectError
+        ? String((connectError as { code: unknown }).code)
         : "unknown";
-    checks.userColumn = `error:${dbErrorCode}`;
+    // Connectivity failure. Truncated only; Prisma error text never carries
+    // credentials — it names the host at most, which is already public.
+    dbErrorDetail =
+      connectError instanceof Error
+        ? connectError.message.replace(/\s+/g, " ").slice(0, 180)
+        : "unreachable";
+    checks.userColumn = "db-unreachable";
   }
 
   const healthy =
@@ -55,7 +73,13 @@ export async function GET() {
     checks.userColumn === "supabaseUid";
 
   return NextResponse.json(
-    { healthy, checks, ...(dbErrorCode ? { dbErrorCode } : {}), service: "auth" },
+    {
+      healthy,
+      checks,
+      ...(dbErrorCode && dbErrorCode !== "unknown" ? { dbErrorCode } : {}),
+      ...(dbErrorDetail ? { dbErrorDetail } : {}),
+      service: "auth",
+    },
     { status: healthy ? 200 : 503 }
   );
 }
