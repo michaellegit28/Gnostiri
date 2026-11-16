@@ -1,3 +1,11 @@
+## [2026-11-16 08:30] lead/orchestrator — DONE — production auth stack HEALTHY (healthy:true)
+- DATABASE_URL password updated in Vercel (production+preview) with the owner's current value; redeployed (dpl on main 281b8fa). /api/health/auth now returns {"healthy":true, supabaseKey:"accepted", userColumn:"supabaseUid"} HTTP 200 — the 20261115120000_supabase_auth migration IS applied (owner ran the SQL).
+- Live checks on gnostiri.vercel.app: /login 200 with "Continue with Google", /auth/callback?code=bogus 307 -> /login?error=auth_failed, /api/boards 200, /university renders course data, Supabase authorize endpoint 302s to accounts.google.com (Google provider + client + callbacks correct).
+- Env hygiene done: 9 dead FIREBASE_* vars deleted from Vercel; NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY now on production+preview+development.
+- blocker: none on server side. Remaining owner action: manual click-test of "Continue with Google" on the phone (full OAuth round trip needs a real Google account).
+- next: rotate GitHub PAT + Vercel token + DB password AFTER the manual sign-in test passes; agents spin up per AGENTS-WORKFLOW.md.
+
+---
 ## [2026-11-16 04:10] lead/orchestrator — BLOCKED — production DB credentials stale; auth code healthy
 - Migrated auth (PR #42) + probe v2/v3 (#43, #44) merged to main and deployed (2e47d94+). Live verification on gnostiri.vercel.app: /login 200 with Google button, /auth/callback?code=bogus 307 to /login?error=auth_failed, Supabase key accepted, Google provider + callback URLs correct (authorize 302s to accounts.google.com).
 - **BLOCKER (owner action)**: /api/health/auth reports db-unreachable — "Authentication failed against database server at aws-1-eu-west-1.pooler.supabase.com". The DB password in Vercel DATABASE_URL (updated to the chat-provided string) is stale — likely reset again in Supabase Dashboard during today's setup. Every Prisma route is down (/api/boards 500, /university empty). Fix: Supabase Dashboard -> Project Settings -> Database -> set a new password, update DATABASE_URL in Vercel for production+preview; the probe will confirm in minutes.
