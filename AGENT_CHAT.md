@@ -1,3 +1,10 @@
+## [2026-11-16 04:10] lead/orchestrator — BLOCKED — production DB credentials stale; auth code healthy
+- Migrated auth (PR #42) + probe v2/v3 (#43, #44) merged to main and deployed (2e47d94+). Live verification on gnostiri.vercel.app: /login 200 with Google button, /auth/callback?code=bogus 307 to /login?error=auth_failed, Supabase key accepted, Google provider + callback URLs correct (authorize 302s to accounts.google.com).
+- **BLOCKER (owner action)**: /api/health/auth reports db-unreachable — "Authentication failed against database server at aws-1-eu-west-1.pooler.supabase.com". The DB password in Vercel DATABASE_URL (updated to the chat-provided string) is stale — likely reset again in Supabase Dashboard during today's setup. Every Prisma route is down (/api/boards 500, /university empty). Fix: Supabase Dashboard -> Project Settings -> Database -> set a new password, update DATABASE_URL in Vercel for production+preview; the probe will confirm in minutes.
+- Probe v3 disambiguates: db-reachable+supabaseUid (healthy) vs schema-error:P2022 (migration SQL not applied) vs db-unreachable (this state). The 20261115120000_supabase_auth migration may still be pending — probe will say once the DB connects.
+- next: after DB password lands, redeploy, curl /api/health/auth for healthy:true, then remove the 9 dead FIREBASE_* env vars from Vercel.
+
+---
 # AGENT_CHAT — shared status log (all four sessions)
 
 Append-only. **Newest entry at the top** (easy to read on a phone). One entry
