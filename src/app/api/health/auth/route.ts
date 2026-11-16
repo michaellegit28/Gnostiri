@@ -35,11 +35,18 @@ export async function GET() {
   }
 
   checks.userColumn = "missing";
+  let dbErrorCode = "";
   try {
     await prisma.user.findFirst({ select: { supabaseUid: true } });
     checks.userColumn = "supabaseUid";
-  } catch {
-    checks.userColumn = "missing-or-migration-not-applied";
+  } catch (error) {
+    // Surface the Prisma code so a missing migration (P2022) is never
+    // confused with an unreachable MIGRATED-ELSEWHERE database (P1001+).
+    dbErrorCode =
+      error && typeof error === "object" && "code" in error
+        ? String((error as { code: unknown }).code)
+        : "unknown";
+    checks.userColumn = `error:${dbErrorCode}`;
   }
 
   const healthy =
@@ -48,7 +55,7 @@ export async function GET() {
     checks.userColumn === "supabaseUid";
 
   return NextResponse.json(
-    { healthy, checks, service: "auth" },
+    { healthy, checks, ...(dbErrorCode ? { dbErrorCode } : {}), service: "auth" },
     { status: healthy ? 200 : 503 }
   );
 }
