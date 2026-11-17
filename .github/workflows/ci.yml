@@ -18,12 +18,7 @@ jobs:
       - run: npx prisma generate
       - run: npx tsc --noEmit
       - run: npx next lint
-      - run: node --test tests/alignment-engine.test.mjs
-      - run: node --test tests/spaced-repetition.test.mjs
-      - run: node --test tests/assessment.test.mjs
-      # NOTE(orchestrator): full glob `node --test tests/*.test.mjs` is deferred —
-      # tests/lesson-python.test.mjs asserts exact CPython traceback text and fails
-      # on the CI runner's newer Python. QA lane to make it version-agnostic first.
+      - run: node --test tests/*.test.mjs
       - run: npm run build
         env:
           DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
