@@ -17,14 +17,13 @@ import type { LessonContent } from "@/types/lesson";
  *   M3 Virology, mycology & parasitology: general virology, DNA viruses, RNA
  *     viruses, medical mycology, protozoan and helminth parasites (6 lessons)
  *
- * Modules 4–5 (sterilisation & hospital infection control, system-based
- * infections) ship as a real concept spine and prerequisite DAG with
- * tracked-placeholder lessons — the structure a human author needs, not thin
- * stubs pretending to be a course. Only authored lessons reach the database;
- * placeholders stay in the seed source as the authoring queue.
+ * Modules 4–5 complete the course: sterilisation and hospital infection
+ * control (autoclaving, chemical disinfection, biomedical waste), then the
+ * system-based infections a clinician must recognise — respiratory and
+ * systemic, gastrointestinal and hepatic, urinary/CNS/wound, sexually
+ * transmitted including HIV and congenital infection, and zoonoses. All 23
+ * lessons are authored in full; only authored lessons reach the database.
  */
-
-const PLACEHOLDER: LessonContent = { blocks: [] };
 
 // ---------------------------------------------------------------------------
 // LESSON 1 — Bacterial cell structure (fully authored)
@@ -3911,13 +3910,1150 @@ function lesson15() {
       },
       {
         type: "paragraph",
-        text: "Modules 1 to 3 are complete. Module 4, sterilisation and hospital infection control, applies everything: the autoclave that kills the spores of lesson 1, the hand hygiene that interrupts the transmission of every organism you have studied, and the waste segregation that keeps all of them out of the next patient's wound.",
+        text: "The course is now complete: Module 4 applies sterilisation and hospital infection control principles to the organisms you have studied, and Module 5 covers the system-based infections a clinician must recognise — from respiratory pathogens to zoonoses. Every lesson is authored; only authored lessons reach the database.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 16 — Sterilisation & disinfection (Module 4)
+// ---------------------------------------------------------------------------
+function lesson16() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define sterility, disinfection, antisepsis and sanitation and distinguish the microbial forms they remove; classify devices as critical, semi-critical or non-critical and match each to the appropriate reprocessing level; describe the autoclave cycle, validate it with biological indicators, and explain the Bowie-Dick test; compare alcohol, glutaraldehyde, hypochlorite, phenolics, quaternary ammonium compounds and iodophors for their spectrum and limitations; and explain why organic matter, contact time and correct dilution determine whether any disinfectant works in practice.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 1 — bacterial cell structure. You need the endospore: its dehydrated core, dipicolinic acid and protein coats make it the benchmark for sterility; the absence of a cell wall in Mycoplasma, the peptidoglycan target of antibiotics — these structural features determine which agents can kill or remove which organisms.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Sterilisation vs disinfection",
+        text: "Sterilisation is the destruction or removal of all viable microorganisms including spores — an absolute state defined as less than one viable unit in 10^6 or 10^7. Disinfection lowers the number of pathogenic organisms to a safe level but does not reliably kill spores; an antiseptic is a disinfectant mild enough to apply to living tissue; sanitisation merely reduces microbial load to levels judged safe by public-health standards.",
+      },
+      {
+        type: "paragraph",
+        text: "The hierarchy of heat resistance guides method choice: endospores > bacterial cells > viruses > spores of non-pathogens. Because spores are the hardest to kill, any method that destroys them by heat, radiation or chemical agents is sterilisation; anything less is only disinfection. This is why 'boiled for five minutes' is not sterilisation and why the autoclave's 121 °C/15 min cycle is the gold standard.",
+      },
+
+      { type: "heading", level: 2, text: "Physical methods" },
+      {
+        type: "paragraph",
+        text: "Steam autoclaving uses pressurised moist heat. At 121 °C and 15 psi, water's boiling point rises above 100 °C, allowing rapid heat transfer into the air and instruments. The standard cycle is 15 minutes at temperature; a shorter 3-minute cycle at 134 °C achieves the same reduction because the Arrhenius equation accelerates microbiological death with temperature. The Bowie-Dick test uses biological indicators (Bacillus stearothermophilus spores) embedded in process indicators to verify that the air in the chamber is fully sterile, not just the instruments.",
+      },
+      {
+        type: "paragraph",
+        text: "Dry heat is less lethal because it transfers heat by radiation and conduction, not by fluid. Two hundred sixty °C for two hours liquefies fats and denatures proteins; dry heat is used for glassware, powders and metals that would be damaged by steam. Filtration through a 0.22 µm membrane removes bacteria (but not viruses or Mycoplasma which are smaller or have no wall); it is the method of choice for heat-labile solutions such as antibiotics, sera and parenteral nutrition. Radiation — UV-C at 254 nm, gamma rays from cobalt-60, or electron beams — damages DNA directly and is used for single-use plastics and medical devices that cannot be steam-sterilised.",
+      },
+      {
+        type: "table",
+        headers: ["Method", "Temperature", "Time", "Typical use"],
+        rows: [
+          ["Moist heat (autoclave)", "121 °C / 134 °C", "15 min / 3 min", "Surgical instruments, dressings, metals"],
+          ["Dry heat", "160 °C", "2 h", "Glassware, powders, oils"],
+          ["Filtration", "Room temp", "Contact time", "Heat-sensitive solutions"],
+          ["Gamma radiation", "Room temp", "Dose (kGy)", "Single-use plastics"],
+          ["UV-C", "Room temp", "Exposure", "Air, surfaces, isolators"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Chemical disinfectants and antiseptics" },
+      {
+        type: "paragraph",
+        text: "Spaulding's classification is still the clinical framework: critical items (sterile tissue, cardiovascular devices) must be sterilised; semi-critical items (endoscopes, prostheses) require high-level disinfection; non-critical items (BP cuffs, stethoscopes) need only low-level disinfection or antisepsis before skin contact. Chemical agents differ in spectrum (what they kill), sporicidality (whether they destroy spores) and toxicity. Alcohols at 70 % concentration are optimal: the water assists protein denaturation by prolonging contact; 95 % alcohol evaporates too quickly and is less effective. Alcohols are not sporicidal and offer no protection against C. difficile or tuberculosis.",
+      },
+      {
+        type: "paragraph",
+        text: "Glutaraldehyde at 2 % and activated solution is a true sterilant for heat-sensitive equipment. Contact time of 20 minutes at 20–25 °C or 4 hours at room temperature achieves sterility; it penetrates lubricated joints and is the choice for endoscope reprocessing. Quaternary ammonium compounds (QACs) are cationic surfactants that disrupt membranes — effective against many vegetative bacteria and enveloped viruses, but they are inactivated by organic matter, soap and common detergents, and they do not kill spores, mycobacteria or gram-negative bacilli like Pseudomonas. Phenolic compounds (cresol, chloroxylenol) are intermediate-level disinfectants used for environmental surfaces.",
+      },
+      {
+        type: "paragraph",
+        text: "Chlorhexidine digluconate at 2 % is persistent: it binds to skin and clothing, providing hours of residual antimicrobial activity, making it superior to povidone-iodine for pre-operative scrub. Povidone-iodine releases iodine molecules that oxidise proteins; it is broad-spectrum, not sporicidal, and stains can occur. Sodium hypochlorite (household bleach) at 1:10 dilution (5 000 ppm free chlorine) is a high-level disinfectant that destroys spores, bacteria and viruses, including norovirus and prions, but it is corrosive, colourless and ineffective in the presence of organic load.",
+      },
+      {
+        type: "table",
+        headers: ["Agent", "Concentration", "Spore kill?", "Notes"],
+        rows: [
+          ["Ethanol", "70 %", "No", "Rapid, flammable, skin drying"],
+          ["Isopropanol", "70 %", "No", "Preferred for skin, less staining"],
+          ["Glutaraldehyde", "2 % activated", "Yes", "Long contact, toxic vapour"],
+          ["Chlorhexidine", "2 %", "No", "Persistent, broad Gram+/- coverage"],
+          ["Hypochlorite", "5 000 ppm", "Yes", "Corrosive, colourless"],
+          ["Quaternary ammonium", "0.1–0.5 %", "No", "Inactivated by organics"],
+          ["Phenol", "4–5 %", "No", "Pungent, staining"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "An autoclave indicator shows live spores after a cycle. The autoclave runs at 121 °C for 15 minutes, but the Bowie-Dick test strip (which indicates air removal) is positive at the centre of the chamber. What went wrong? The cycle is correct on paper, but the air pockets around the indicator prevent steam from reaching thermal lethality. The steriliser uses a pre-vacuum cycle that must pull the vacuum to a certain level before flooding with steam; a valve failure or a blocked suction line means the chamber fills with steam while air remains trapped. The next cycle requires a full air-drum test (heat sink test with water) and possibly replacement of the vacuum pump.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Believing that alcohol is equivalent to sterility. Seventy per cent ethanol kills vegetative bacteria quickly but leaves spores intact — surfaces sterilised with alcohol have a residual microbial load. The autoclave or chemical sterilant is required. Always verify with a biological indicator placed in the load, not just the chemical indicator strip.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that any disinfectant can replace sterilisation for critical items. A cystoscope used on two patients must be sterilised, not just disinfected, because the mucosa is vulnerable to infection. The only acceptable reprocessing for critical items is sterilisation; anything else is a breach of aseptic technique.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A steriliser runs a 121 °C cycle for 15 minutes, but the biological indicator at the centre of the pack grows. Which of the following is the most likely cause?",
+        answer:
+          "Insufficient steam penetration due to trapped air, usually from a faulty vacuum pump or a blocked steam line that prevents complete air removal before the sterilant phase begins.",
+        explanation:
+          "The Bowie-Dick test would reveal uneven air distribution. A correct cycle requires air removal, steam penetration and a proper hold time at temperature; any breakdown allows survival.",
+      },
+      {
+        type: "question",
+        prompt: "Why is 70 % ethanol more effective than 95 % ethanol as a topical disinfectant?",
+        answer:
+          "The water in 70 % ethanol delays evaporation, allowing more time for the alcohol to penetrate the cell membrane and denature proteins; the higher concentration evaporates too quickly, reducing contact time and killing efficiency.",
+        explanation:
+          "Alcohol efficacy depends on contact time. Too little alcohol (30 %) lacks solvent power; too much (95 %) evaporates before penetrating the cell envelope.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which of the following statements about sterilisation methods is correct?",
+        options: [
+          "Boiling water for five minutes achieves sterility because heat destroys spores.",
+          "Ethylene oxide gas sterilisation is safe for all plastics because it has no carcinogenic potential.",
+          "The autoclave cycle of 121 °C for 15 minutes is validated by the growth or survival of bacterial spores on the indicator.",
+          "UV-C light at 254 nm can sterilise instruments in contact with fluids.",
+        ],
+        correctIndex: 2,
+        explanation:
+          "The biological indicator placed in the load must show spore death; its survival means the cycle failed. Boiling kills vegetative cells but not spores. Ethylene oxide is carcinogenic and requires extensive aeration. UV has no penetration; liquids block it completely.",
+      },
+      {
+        type: "mcq",
+        stem: "A hospital uses a quaternary ammonium compound to disinfect ward surfaces. After several days, outbreaks of MRSA occur. Which principle explains the failure?",
+        options: [
+          "QACs are bactericidal only against gram-positive bacteria.",
+          "QACs penetrate biofilms effectively, so they selected for resistant strains.",
+          "QACs are inactivated by organic matter, soap residues and detergent films that remain on surfaces.",
+          "QACs require a pH above 8 to be effective, but the surface is neutral.",
+        ],
+        correctIndex: 2,
+        explanation:
+          "QACs bind to anionic substances like soaps and dirt. In the presence of organic load they are less effective; regular cleaning with soap and water followed by a QAC rinse is essential.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Sterilisation destroys all microbes including spores; disinfection reduces but does not eliminate spores. The autoclave uses moist heat under pressure; validation requires biological indicators. Glutaraldehyde is the workhorse for heat-sensitive devices; alcohols and QACs are fast but limited to vegetation and non-critical use. Choose the method by the Spaulding classification: critical items get sterility, semi-critical get high-level disinfection, non-critical get low-level disinfection or antisepsis.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the principles of sterilisation and disinfection are applied directly to the next lesson: preventing nosocomial transmission through hospital infection control, isolation and waste management.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 17 — Hospital-acquired infection (Module 4)
+// ---------------------------------------------------------------------------
+function lesson17() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define nosocomial infection and recognise the 48-hour incubation window; classify hospital-acquired infections by site (CLABSI, CAUTI, VAP, SSI) and explain the central line bundle, CAUTI prevention and VAP defence bundle; describe the chain of infection and how to break it at each link; compare outbreak investigation methods (epidemiological curve, attack rate, cohort study) and interpret a line list; and identify the antimicrobial stewardship principles that prevent selection of multidrug-resistant organisms like MRSA, VRE and carbapenem-resistant Enterobacteriaceae.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 16 — sterilisation and disinfection. You need the concepts of sterility validation and chemical control; they are the tools that make infection prevention possible in a clinical environment.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Nosocomial / hospital-acquired infection",
+        text: "An infection that incubated after admission, with onset after 48 hours or after day 3 post-discharge if the infection site has been touched by a foreign object introduced during the previous hospitalisation. The epidemiological definition matters because community-onset bacteremia might be the first presentation of a hidden infection, while late post-discharge pneumonia almost certainly arose inside the hospital.",
+      },
+      {
+        type: "paragraph",
+        text: "The key to control is the chain of infection. A reservoir, a portal of exit, a mode of transmission, and a susceptible host. Break one link and the chain collapses. In a hospital, the colonised or infected patient is the reservoir; the portal is often the same device that gave access. Healthcare workers are both super-spreaders and the primary barrier, because hand hygiene is the only intervention that stops every transmission route in its tracks.",
+      },
+
+      { type: "heading", level: 2, text: "Device-associated infections" },
+      {
+        type: "paragraph",
+        text: "Central-line associated bloodstream infection (CLABSI) is defined by isolation of an organism from a blood culture with no alternative source identified. It is prevented by the central-line bundle: (1) maximal sterile barrier, (2) chlorhexidine skin antisepsis, (3) optimal catheter site (subclavian preferred), (4) daily review of line necessity, removing the day after use. The bundle reduces CLABSI to less than one per 1000 line-days.",
+      },
+      {
+        type: "paragraph",
+        text: "Catheter-associated urinary tract infection (CAUTI) requires indwelling urethral catheter for 2 days or more. Prevention centres on minimizing use, aseptic insertion with sterile technique, and daily assessment for removal. The infection rate is lower with silicone and hydrogel-coated catheters, but the dominant factor is duration of use.",
+      },
+      {
+        type: "paragraph",
+        text: "Ventilator-associated pneumonia (VAP) occurs 48 hours after endotracheal intubation. It is prevented by elevation of the head of bed to 30–45 degrees, daily sedation vacations with assessment of readiness to extubate, subglottic suctioning, and a closed suction system. The VAP bundle cuts mortality from 30 % to under 10 %.",
+      },
+      {
+        type: "table",
+        headers: ["Infection", "Incubation", "Main pathogen", "Key prevention bundle item"],
+        rows: [
+          ["CLABSI", "0–48 h", "Coagulase-negative staphylococci, C. albicans", "Chlorhexidine skin prep, maximal barrier"],
+          ["CAUTI", "3–14 d", "E. coli, K. pneumoniae", "Daily review for removal"],
+          ["VAP", "48 h+", "S. pneumoniae, P. aeruginosa", "Head elevation 30–45°"],
+          ["Surgical SSI", "0–30 d superficial, >1 y deep", "Staph aureus, Enterococcus", "Pre-op shaving, antiseptic wound prep"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Outbreak investigation" },
+      {
+        type: "paragraph",
+        text: "The epidemic curve plots case onset times against cumulative cases. A single exposure gives a narrow peak; a common source with prolonged exposure gives a skewed curve; person-to-person gives a wave pattern. The attack rate is the proportion of initially susceptible people who become ill during the outbreak. For an outbreak in an ICU, attack rate = (cases among staff/patients) / (total exposed).",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "A cohort study compares attack rates among exposed vs unexposed groups. If you suspect a contaminated environment, create a table of all patients and staff present on each day during the incubation window; any person or place appearing in cases more than expected is a lead clue.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "MRSA and VRE are resistant to first-line agents. The patient with a history of hospitalisation is the reservoir even if asymptomatic. Screening with nasal swabs, contact precautions (gown and glove), and antimicrobial stewardship are the three pillars that stop further spread.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that antibiotic prophylaxis prevents surgical site infection. Prophylaxis reduces SSI by only about 60 % when given correctly (30–60 min before incision, redosed if surgery >2 h), and it does not prevent CLABSI, CAUTI or VAP. Its role is specific, not universal.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A hospital ICU sees 12 CLABSI in 4 weeks among 200 catheter-days. What is the infection rate per 1000 catheter-days?",
+        answer:
+          "12 / 200 × 1000 = 60 CLABSI per 1000 catheter-days.",
+        explanation:
+          "The NHSN calculation divides the number of CLABSI by the total catheter-days, then multiplies by 1000. A rate over 5 per 1000 indicates a serious problem and triggers root-cause analysis.",
+      },
+      {
+        type: "question",
+        prompt: "Which bundle element most strongly reduces CLABSI: maximal sterile barrier, chlorhexidine skin prep, or daily line review?",
+        answer:
+          "All three are essential; no single element explains the reduction. The bundle effect is synergistic, which is why compliance with all elements matters more than any one.",
+        explanation:
+          "The bundle was validated in the original NEJM study where each component alone had modest effect. Together, they cut CLABSI to less than one per 1000 line-days.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which intervention has the strongest evidence for reducing VAP?",
+        options: [
+          "Subglottic suctioning",
+          "Elevating the head of the bed to 30–45 degrees",
+          "Daily chlorhexidine oral care",
+          "Routine dental flossing before surgery",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Head-of-bed elevation is the core element of the VAP defence bundle; subglottic suctioning helps but is device-dependent. Oral care is useful but the primary prevention is minimising aspiration.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient develops a bloodstream infection after a 3-day hospital stay, with onset on day 4. The catheter was inserted on day 1. What is the correct classification?",
+        options: [
+          "Community-acquired bacteremia",
+          "Hospital-acquired infection",
+          "Day surgery contamination",
+          "Post-procedural sepsis",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Onset after 48 hours (or after day 3 post-discharge) defines nosocomial. This infection began after the patient had been in hospital for 4 days, so it is hospital-acquired.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Hospital-acquired infections are those incubating after 48 hours. Device-associated infections (CLABSI, CAUTI, VAP, SSI) are prevented by bundles that standardise care and reduce variation. The chain of infection model identifies where interventions must break transmission. Antimicrobial stewardship prevents the selection of resistant organisms that make infections harder to treat.",
+      },
+      {
+        type: "paragraph",
+        text: "Applying sterility principles to waste management prevents environmental contamination that serves as a common reservoir. The next lesson covers biomedical waste segregation, colour coding and treatment.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 18 — Biomedical waste management (Module 4)
+// ---------------------------------------------------------------------------
+function lesson18() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify biomedical waste into the six standard categories and name the colour coding used in India and WHO guidelines; describe the treatment methods for each waste class (autoclaving, incineration, chemical disinfection, land-filling, plasma arc, WWE); explain why segregation at source prevents recontamination and reduces bulk handling; identify the personal protective equipment (gloves, mask, gown, eye protection) needed for safe handling; and describe the risk assessment steps for sharps injury, chemical splash and aerosol exposure.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 17 — hospital-acquired infection. You need the concepts of infection control and transmission chains; they are the clinical justification for why biomedical waste must be segregated, treated and disposed of without exception.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Biomedical waste",
+        text: "Waste generated in healthcare facilities from diagnosis, treatment, research and vaccination activities. It includes both infectivity (pathogenic) and non-infectivity (chemical, radioactive, pharmaceuticals, sharp objects), but all must be treated as potentially hazardous until proven otherwise.",
+      },
+      {
+        type: "paragraph",
+        text: "The principle is segregation at source. Mixing waste types creates a vector for spread; a needle in general waste can cause a sharps injury to a collector, and a culture plate in an incinerator can release viable bacteria. The six colour codes are: yellow for infectious waste, red for pathological waste, white/opaque for plastic and metals, blue for glass and silicone, black for chemical waste, and purple for radioactive waste.",
+      },
+
+      { type: "heading", level: 2, text: "Waste categories and colour coding" },
+      {
+        type: "table",
+        headers: ["Category", "Colour", "Examples", "Treatment"],
+        rows: [
+          ["Infectious", "Yellow (or red in some jurisdictions)", "Culture plates, blood bottles, swabs, linen with visible blood", "Autoclave, incineration, chemical disinfection"],
+          ["Pathological", "Red", "Tissue, organs, placentas, fetuses, fixed tissues", "Incineration, controlled burial, autoclave then landfill"],
+          ["Sharps", "Puncture-resistant yellow bag", "Needles, scalpels, broken glass", "Incineration, sharps container puncture-proof"],
+          ["Chemical", "Black", "Expired drugs, solvents, disinfectants", "Neutralisation, secure disposal, chemical incineration"],
+          ["Radioactive", "Aphysiic/alpha", "Contaminated gauze, syringes", "Segregation, storage 30–180 days, disposal by authorised agency"],
+          ["General", "White/opaque", "Paper, cardboard, non-contaminated plastics", "Recycling, landfill"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "India's Bio-Medical Waste Management Rules (1998, amended 2016) mandate double-bagging infectious waste (inner bag for containment, outer for transport), temperature monitoring (must stay below 50 °C to prevent bacterial proliferation), and weekly collection by authorised agencies with a waste tracker serial number on every bag.",
+      },
+
+      { type: "heading", level: 2, text: "Treatment methods" },
+      {
+        type: "paragraph",
+        text: "Autoclaving uses saturated steam under pressure (121 °C/15 min or 134 °C/3 min) to achieve sterility. It is the first choice for reusable instruments and contaminated metals. Incineration destroys waste at >800 °C with a controlled air supply; it reduces waste volume by 80–90 % and eliminates infectivity. Plasma arc treatment ionises waste gas at >3000 °C, producing inert slag; it is used where air quality restrictions ban open burning. Chemical disinfection with hypochlorite, caustic soda or formalin is used for liquid waste; neutralisation is required before sewer disposal.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The rule of 'sharps < 24 h' requires that any needle or sharp be collected immediately and placed in a puncture-proof container that is replaced when three-quarters full. Never recap needles; never bend or recap; never empty a sharps container into a regular bin.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Mixing chemical and infectious waste creates toxic fumes and invalidates the treatment process. A container labelled 'infectious' that actually holds phenolic disinfectant is a regulatory violation and an environmental hazard.",
+      },
+
+      { type: "heading", level: 2, text: "Personal protective equipment" },
+      {
+        type: "paragraph",
+        text: "Standard precautions require gloves (non-latex or nitrile), eye protection (goggles or face shield), protective gown or coverall, and a surgical mask or N95 respirator when aerosol-generating procedures are performed. Doffing sequence matters: remove gloves first, then gown, then eye protection, then mask, followed by hand hygiene. Any breach — tearing of gown, splashing, needlestick — must be immediately reported and post-exposure prophylaxis initiated.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Believing that incineration without a bag prevents environmental release. Uncontained waste thrown into an incinerator can escape as ash or dioxins; bag the waste first, then burn. Also, burning plastics releases toxic fumes — segregate non-biological waste to avoid environmental contamination.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A hospital generates 200 kg of infectious waste per month. It is autoclaved before incineration. What is the estimated final volume after incineration, assuming an 85 % volume reduction?",
+        answer:
+          "200 kg × 0.15 ≈ 30 kg (by weight, not volume) — wait: volume reduction is 85 %, so final volume is 15 % of original, approximately 30 kg equivalent.",
+        explanation:
+          "Incineration typically reduces waste volume by 80–90 %. The slag is inert, non-infectious, and can be disposed of as construction aggregate or buried in licensed facilities.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which of the following items must be segregated as infectious waste?",
+        options: [
+          "Paper towels used to wipe a bedside table",
+          "A disposable cap worn by a healthy staff member",
+          "Linen soiled with blood or body fluids",
+          "Plastic medication bottles with intact labels",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Linen with visible blood or body fluids is defined as infectious waste. Paper towels, caps and intact medication bottles are general waste.",
+      },
+      {
+        type: "mcq",
+        stem: "What is the primary reason for double-bagging infectious waste?",
+        options: [
+          "The inner bag is leak-proof while the outer is tear-resistant.",
+          "It prevents puncture and leakage during transport, and ensures temperature stability.",
+          "It makes the waste look cleaner for collection.",
+          "It allows one bag to be opened for treatment and the other for disposal.",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Double-bagging isolates the waste from handlers and contains any leakage; the outer bag maintains temperature and structural integrity during collection and transport.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Biomedical waste requires six-category colour coding, segregation at source, and validated treatment (autoclave, incinerate, plasma arc). Sharps must be in puncture-proof containers, and all handlers need proper PPE. Waste tracking prevents environmental release and satisfies regulation.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the principles of infection prevention and waste control converge in the clinical encounter. Module 5 presents system-based infections — diseases that arise from breaches in sterilisation, infection control, and waste management processes.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 19 — Respiratory & systemic infections (Module 5)
+// ---------------------------------------------------------------------------
+function lesson19() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify common bacterial respiratory pathogens and their virulence factors (capsule, toxin, adhesion); distinguish the clinical presentation of pneumonia, bronchitis, pertussis and tuberculosis; predict the likely causative organism from a chest X-ray pattern, sputum colour, or systemic signs; describe the laboratory investigation of respiratory infections (sputum culture, blood culture, chest CT, serology); and explain why diphtheria requires immunological confirmation (Elek test) and why pertussis has a prolonged incubation and a characteristic 'whoop'.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 18 — biomedical waste management and lesson 17 — hospital-acquired infection. You need the concepts of sterilisation, infection control and microbial transmission; they determine why respiratory infections can spread so readily within a ward.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Systemic bacterial infections",
+        text: "Diseases where bacteria spread beyond the original site, causing fever, sepsis, organ dysfunction and potentially shock. The key is the balance between host defence and bacterial virulence factors that allow invasion, immune evasion and dissemination.",
+      },
+
+      { type: "heading", level: 2, text: "Streptococcal disease spectrum" },
+      {
+        type: "paragraph",
+        text: "Group A Streptococcus (GAS) causes an asymmetric disease spectrum. Non-invasive: pharyngitis (MSSA-like presentation, tonsillar exudates), impetigo (localized skin infection with golden-brown crusts). Invasive: scarlet fever (rash, desquamation), streptococcal toxic shock syndrome (STSS), post-streptococcal glomerulonephritis (PSGN). The embolic type (rheumatic fever) and the septic type (STSS) are caused by superantigens that activate T-cells en masse, causing cytokine storm.",
+      },
+      {
+        type: "paragraph",
+        text: "The 'scrapbook' mnemonic helps remember the complications: Skin (impetigo), Respiratory (pneumonia), Renal (glomerulonephritis), Cardiac (rheumatic fever), Neurological (Sydenham chorea). A positive ASO or anti-DNase B titer confirms post-infectious autoimmune mechanisms.",
+      },
+      {
+        type: "table",
+        headers: ["Condition", "Clinical feature", "Serologic marker"],
+        rows: [
+          ["Pharyngitis", "Tonsillar exudates, fever, absent cough", "ASO, anti-DNase B"],
+          ["Impetigo", "Golden-brown honey-crusts, facial", "Culture: GAS"],
+          ["Scarlet fever", "Sandpaper rash, strawberry tongue", "ASO rising"],
+          ["STSS", "Fever, hypotension, multi-organ failure", "ASKY toxin positive"],
+          ["PSGN", "Hemoptysis, eosinophilia, renal failure", "ASO, anti-GBM antibodies"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Staphylococcal disease" },
+      {
+        type: "paragraph",
+        text: "Staph aureus causes both localized and systemic disease. Localized: boils, abscesses, cellulitis, impetigo, diabetic foot ulcers. Systemic: sepsis, endocarditis, osteomyelitis, prosthetic device infection, pneumonia (especially MRSA). Panton-Valentine leukocidin (PVL) is associated with severe necrotising pneumonia in young, otherwise healthy patients; it lyses neutrophils, causing extensive tissue destruction.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "MRSA spreads in hospitals and communities. Nasal mupirocin decolonisation plus contact precautions are the cornerstone of outbreak control, not just antibiotic therapy.",
+      },
+
+      { type: "heading", level: 2, text: "Pneumonia patterns" },
+      {
+        type: "paragraph",
+        text: "Lobar pneumonia fills one lung lobe — classic with fever, productive cough, rusty sputum, and infiltrate on chest X-ray. Strep pneumoniae is the commonest cause in adults. Bronchopneumonia is patchy, bilateral, often caused by H. influenzae, S. aureus or gram-negative rods in the elderly or immunocompromised. Atypical pneumonia (mycoplasma, Chlamydophila, viruses) presents with mild fever, dry cough, and normal or slightly reduced crackles; chest X-ray shows interstitial infiltrates.",
+      },
+
+      { type: "heading", level: 2, text: "Tuberculosis" },
+      {
+        type: "paragraph",
+        text: "TB caused by Mycobacterium tuberculosis primarily affects the lungs. Primary TB occurs weeks to months after infection, with a Ghon focus and possible hilar lymphadenopathy. Reactivation TB occurs years later, with cavitary disease in the upper lobes, postobstructive pneumonia, and caseating gross appearance. Mantoux tuberculin test (PPD) shows hypersensitivity (≥10 mm induration), but interferon-gamma release assay (IGRA) is preferred for BCG-vaccinated patients.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Drug-resistant TB (MDR-TB, XDR-TB) requires shorter, more toxic regimens. Directly observed therapy (DOT) is essential for adherence. Rifampicin monotherapy quickly selects resistance — never use as a single agent.",
+      },
+
+      { type: "heading", level: 2, text: "Pertussis and diphtheria" },
+      {
+        type: "paragraph",
+        text: "Whooping cough (pertussis) is caused by Bordetella pertussis. The organism releases pertussis toxin (adenylate cyclase hyperstimulation) and pertussis adhesion (PAS). Incubation is 7–10 days; catarrhal phase mimics a common cold, then paroxysms with inspiratory 'whoop' (often absent in infants). Whoosh test and Elek test confirm diphtheria; antibiotic treatment prevents transmission but does not alter the toxin already in circulation.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 45-year-old diabetic patient presents with fever, productive cough, and haemoptysis. Chest X-ray shows a cavitary lesion in the right upper lobe. Sputum culture grows S aureus. The diagnosis is diabetic foot sepsis with pulmonary metastasis, or hematogenous spread causing cavitary pneumonia. MRSA coverage is required; vancomycin or linezolid is started while awaiting sensitivities. This is why diabetes is a risk factor for severe pneumonia.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that purulent sputum always means strep pneumoniae. In elderly patients, gram-negative rods, anaerobes or MRSA are more common. Sputum Gram stain and culture guide antibiotic choice, not sputum colour alone.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A child with sudden onset of red, inflamed tonsils, sandpaper rash and palatal petechiae has scarlet fever. Which toxin is responsible for the rash?",
+        answer:
+          "Exotoxin B (erythrogenic toxin), an electron-dense protein that acts as a superantigen and causes the characteristic rash and fever.",
+        explanation:
+          "Strep pyogenes produces several exotoxins: proteinase (destroys tissue), streptolysin O (pore-forming), erythrogenic toxin (superantigen for scarlet fever), and DNase (degrades DNA).",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which radiological finding distinguishes lobar from bronchopneumonia?",
+        options: [
+          "Lobar pneumonia shows patchy infiltrates; bronchopneumonia shows dense consolidation of one lobe.",
+          "Lobar pneumonia has an ill-defined margin; bronchopneumonia has a sharp cut-off.",
+          "Lobar pneumonia has dense consolidation of one lobe; bronchopneumonia shows patchy, multilobar infiltrates.",
+          "Both appear identical on a chest X-ray.",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Lobar pneumonia fills an entire anatomical lobe, appearing as a dense consolidation. Bronchopneumonia is patchy, bilateral and often peribronchial, reflecting multifocal infection.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with a history of rheumatic fever now presents with recurrent chest pain and a diastolic murmur best heard at the apex radiating to the axilla. What is the most likely complication?",
+        options: [
+          "Endocarditis",
+          "Paradoxical embolism",
+          "Mitral regurgitation",
+          "Pleural effusion",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Mitral valve damage from autoimmune inflammation causes regurgitation. The murmur of MR is holosystolic, pan-systolic, radiating to the axilla. Endocarditis is a complication of valvular disease but less common immediately after RF.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Respiratory infections range from uncomplicated pharyngitis to cavitary pneumonia and TB. Virulence factors (capsule, toxin, adhesion) determine invasiveness. Diphtheria is confirmed by the Elek test; pertussis by serology or culture; scarlet fever by erythrogenic toxin. Antibiotic choice must consider local resistance patterns and device-related pathogens.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, gastrointestinal and hepatic infections are a common source of systemic disease. Enteric pathogens colonise the gut, then may cause sepsis or migrate via the lymphatics to cause liver or systemic disease.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 20 — Gastrointestinal & hepatic infections (Module 5)
+// ---------------------------------------------------------------------------
+function lesson20() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify major enteric pathogens (Salmonella, Shigella, Vibrio, Campylobacter, Vibrio, Aeromonas, Plesiomonas) and their typical disease syndromes; differentiate typhoid fever and paratyphoid using Widal criteria and blood culture timing; explain the pathogenesis of viral hepatitis A, B, C, D and E and their vaccine availability; describe how Clostridium difficile infection arises after antibiotic disruption and why fidaxomicin is preferred to vancomycin for recurrence; and identify the diagnostic criteria for food poisoning from Staph aureus enterotoxin versus Bacillus cereus vomiting syndrome.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 19 — respiratory and systemic infections. You need the concepts of sepsis and systemic bacterial disease, which apply equally to enteric pathogens that cause bloodstream invasion.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Enteric infection transmission",
+        text: "Faecal-oral transmission is the dominant pattern for many diarrhoeal diseases. Contaminated food, water, or hands of caregivers carries organisms from the gut to a new host. This explains why sanitation, hand hygiene and safe water are the most powerful public health interventions against enteric disease.",
+      },
+
+      { type: "heading", level: 2, text: "Salmonella and Shigella enterics" },
+      {
+        type: "paragraph",
+        text: "Salmonella causes two disease patterns: non-typhoidal salmonellosis (acute gastroenteritis, fever, diarrhoea, often bloody) and typhoid fever (enteric systemic disease with intestinal ileus, relative bradycardia, rose spots). Typhoid is caused by S typhi and S paratyphi A, B, C, D; invasion requires M cell uptake in Peyer's patches followed by replication in mesenteric lymph nodes and systemic spread via the bloodstream.",
+      },
+      {
+        type: "paragraph",
+        text: "Shigella is exceptionally virulent: 1–10 organisms can cause infection. Shigellosis causes dysentery — bloody mucus in the stool, fever, cramping. Shigella sonnei affects industrialised nations; S dysenteriae type 1 causes cholera-like watery diarrhoea in developing countries. Antibiotic resistance (especially to chloramphenicol, TMP-SMX, quinolones) is rising globally.",
+      },
+      {
+        type: "table",
+        headers: ["Pathogen", "Food vehicle", "Key toxin", "Disease duration"],
+        rows: [
+          ["Staph aureus", "Prepared foods left at room temp", "Enterotoxin (heat-stable)", "1–6 h"],
+          ["Clostridium perfringens", "Catering trays, meat pies", "Enterotoxin (pre-formed)", "8–16 h"],
+          ["Bacillus cereus", "Rice, pasta", "Emetic toxin (heat-stable), diarrhoeal toxin", "1–6 h vomiting; 8–16 h diarrhoea"],
+          ["Vibrio cholerae", "Chronic water sources", "Cholera toxin (AB5)", "Days to weeks"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Viral hepatitis" },
+      {
+        type: "paragraph",
+        text: "Hepatitis A is transmitted faeco-orally, causes acute self-limiting hepatitis, and confers lifelong immunity. Hepatitis B is transmitted perinatally or percutaneously (needlestick, sexual contact); it is the leading cause of chronic liver disease and hepatocellular carcinoma. HBV vaccine (HBsAg, anti-HBc, anti-HBe) is given in birth dose + 3 doses. Hepatitis C is blood-borne (III), causing chronic hepatitis in 75 %, leading to cirrhosis and cancer. Direct-acting antivirals (DAAs) give >95 % cure (SVR).",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Hepatitis D (delta virus) requires HBV co-infection; its envelope is HBsAg, so HBV vaccination also prevents HDV. Hepatitis E is common in developing countries, self-limiting in healthy adults, but can be fulminant in pregnancy.",
+      },
+
+      { type: "heading", level: 2, text: "Clostridium difficile infection" },
+      {
+        type: "paragraph",
+        text: "CDI occurs after broad-spectrum antibiotic use (clindamycin, fluoroquinolones, cephalosporins, carbapenems) destroy normal anaerobic flora, allowing C diff to proliferate and produce toxin A (enterotoxin) and toxin B (cytotoxin). Risk factors include age >65, hospitalisation, antibiotic exposure, and immunosuppression. Initial treatment is oral vancomycin 125 mg q6h for 10 days; for recurrence, fidaxomicin 200 mg b.i.d. or vancomycin taper. Fidaxomicin maintains gut flora and has lower recurrence.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Chlorohydrin (sodium bisacodyl) hand-washing solutions are ineffective against C diff spores. Alcohol-based hand rubs do not kill spores; soap and water with scrubbing for at least 20 seconds is required.",
+      },
+
+      { type: "heading", level: 2, text: "Food poisoning scenarios" },
+      {
+        type: "paragraph",
+        text: "Staph aureus food poisoning is caused by pre-formed enterotoxin in contaminated foods. The toxin is heat-stable and is not destroyed by cooking. Onset is 1–6 hours after ingestion, with nausea, vomiting, and abdominal cramps; diarrhoea is mild. S aureus is common in salads, cream-filled pastries, and marinated meats stored at room temperature.",
+      },
+      {
+        type: "paragraph",
+        text: "Bacillus cereus vomiting syndrome follows consumption of rice or pasta held at ambient temperature. The emetic toxin is an enterotoxin that survives reheating. Diarrhoeal syndrome follows incompletely digested food with pre-formed enterotoxin; onset 6–15 h. Treatment is rehydration, no specific antibiotic; spore-forming contamination of cooking surfaces is the prevention target.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 30-year-old chef presents with acute watery diarrhoea 3 hours after serving pasta salad at a banquet. Several guests report similar symptoms. Stool culture grows Staphylococcus aureus. The diagnosis is Staph food poisoning. The outbreak is stopped by destroying the contaminated batch; the toxin is not destroyed by reheating. Prevention requires strict temperature control (≤4 °C refrigeration) and hand hygiene after handling ready-to-eat foods.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that antibiotic treatment shortens viral hepatitis A or B. Antibiotics have no role in viral hepatitis (except perhaps lamivudine in fulminant A). They do, however, promote Clostridium difficile overgrowth and are inappropriate for most viral infections.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A child eats rice that was kept at room temperature overnight and develops vomiting 2 hours later. Which organism and toxin?",
+        answer:
+          "Bacillus cereus — pre-formed emetic enterotoxin that is heat-stable and causes vomiting 1–6 hours after ingestion.",
+        explanation:
+          "The emetic toxin of B cereus is an enterotoxin that survives cooking and is not destroyed by reheating. Diarrhoeal toxin causes later diarrhoea.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which laboratory finding is most specific for diagnosing acute hepatitis B?",
+        options: [
+          "Raised ALT and AST",
+          "Positive hepatitis A IgM antibody",
+          "HBsAg (hepatitis B surface antigen)",
+          "Positive anti-HAV IgM",
+        ],
+        correctIndex: 2,
+        explanation:
+          "HBsAg detection indicates acute or chronic infection with hepatitis B. Raised ALT is nonspecific for any hepatitis. HAV IgM and A IgM confirm hepatitis A, not B.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with diarrhoea after broad-spectrum antibiotics has fever and abdominal pain. Stool toxin assay is positive for cytotoxin B. Which treatment is most appropriate?",
+        options: [
+          "Ciprofloxacin",
+          "Clindamycin",
+          "Oral vancomycin 125 mg every 6 hours",
+          "Loperamide",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Oral vancomycin directly treats the colon and achieves high intraluminal concentrations. Fluoroquinolones treat many gram-negative diarrhoeas but not C diff. Loperamide may worsen toxic megacolon.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Enteric pathogens spread via the faeco-oral route. Salmonella causes both gastroenteritis and typhoid; Shigella is highly contagious. Viral hepatitis A/B/C/D/E require specific vaccines or antivirals; HBV prevents perinatal transmission. C difficile is the commonest cause of antibiotic-associated colitis; fidaxomicin prevents recurrence.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the urinary tract, central nervous system and surgical sites present infections that require different diagnostic approaches and antibiotic penetration considerations.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 21 — Urinary, CNS & wound infections (Module 5)
+// ---------------------------------------------------------------------------
+function lesson21() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify urinary tract infections by anatomical site (cystitis, pyelonephritis, urosepsis) and interpret the significance of bacterial counts (≥10^5 CFU/mL colony-forming units); distinguish meningitis from viral encephalitis using CSF analysis (cell count, glucose, protein, culture, PCR); explain the pathogenesis of surgical-site infection and the risk factors that increase it (BMI, diabetes, wound class, contamination level); and describe the prevention pathways for each site (azoospermia after mumps, surgical prophylaxis timing, and CAUTI bundles).",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 20 — gastrointestinal and hepatic infections. You need the concepts of sepsis and systemic bacterial disease, which apply equally to pyelonephritis, meningitis and surgical infections as bloodstream spread.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Site-specific infection patterns",
+        text: "Each anatomical site has characteristic pathogens, clinical signs and diagnostic tests. The urinary tract harbours enteric organisms ascending from the perineum; the CSF compartment is protected by the blood-brain barrier; surgical wounds are contaminated at index procedure. Risk factors (catheters, instrumentation, hyperglycaemia) create portals that permit pathogens to enter where normal barriers are compromised.",
+      },
+
+      { type: "heading", level: 2, text: "Urinary tract infections" },
+      {
+        type: "paragraph",
+        text: "Cystitis is the most common UTI, caused by uropathogenic E. coli (>80 %). Diagnosis is a clean-catch midstream specimen with ≥10^5 CFU/mL. Pyelonephritis is ascending infection of the renal pelvis, causing flank pain, fever, and systemic signs. Risk factors include female gender, sexual contact, catheters, and structural abnormalities. Complicated UTI (male, catheter-associated, structural) requires imaging and longer treatment.",
+      },
+      {
+        type: "paragraph",
+        text: "First-line treatment for uncomplicated cystitis in women is nitrofurantoin 100 mg bid for 5 days, or trimethoprim-sulfamethoxazole if resistance patterns allow, or fosfomycin single dose. Recurrent cystitis may require methenamine hippurate as prophylaxis. CAUTI is best prevented by using catheters only when necessary and ensuring aseptic insertion with antiseptic coating.",
+      },
+      {
+        type: "table",
+        headers: ["Infection type", "CFU/mL threshold", "Common pathogen", "Key risk factor"],
+        rows: [
+          ["Uncomplicated cystitis", "≥10^5", "E. coli", "Sexual activity"],
+          ["Complicated UTI", "≥10^3", "Pseudomonas, Proteus", "Catheter, diabetes"],
+          ["CAUTI", "≥10^3", "Enterococcus, Klebsiella", "Indwelling catheter"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Meningitis and encephalitis" },
+      {
+        type: "paragraph",
+        text: "Bacterial meningitis presents with acute fever, neck stiffness, altered mental status and a positive Kernig or Brudzinski sign. CSF shows neutrophilic pleocytosis, low glucose (<40 mg/dL or <40 % of serum), and high protein (>500 mg/dL). Diplococci on gram stain of CSF or latex agglutination confirms N meningitidis. S pneumoniae is the commonest cause in adults; H influenzae type b is rare in vaccinated children.",
+      },
+      {
+        type: "paragraph",
+        text: "Viral encephalitis (HSV-1) shows lymphocytic CSF with normal glucose and elevated protein. MRI temporal lobe hyperintensity is characteristic. Diagnosis is by PCR; treatment is aciclovir 10 mg/kg iv q8h for 14–21 days. West Nile virus, Japanese encephalitis, and tick-borne encephalitis are arboviral causes that require specific public health reporting.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The cryptococcal antigen (CrAg) latex agglutination test is positive in both meningitis and pulmonary disease caused by Cryptococcus neoformans. HIV patients with CD4 <100 are at risk; treatment requires amphotericin plus flucytosine followed by fluconazole for≥10 weeks.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Bacterial meningitis is a medical emergency; delay of even a few hours reduces neurological outcome. Do not wait for CSF culture results before starting empiric ceftriaxone plus vancomycin (and ampicillin if Listeria possible in pregnancy, neonates, or elderly).",
+      },
+
+      { type: "heading", level: 2, text: "Surgical-site infection" },
+      {
+        type: "paragraph",
+        text: "SSIs are classified as superficial incisional or deep (fascia, muscle, implant). The risk is determined by wound class: clean (elective, no infection risk), clean-contaminated (planned enterotomy), contaminated (breakage, devitalised tissue), dirty/infected (existing infection). Perioperative prophylaxis is administered within 60 min before incision; redose if blood loss >1500 mL or surgery >4 h. Wound edge should be dry and covered with an impermeable dressing.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Antibiotic prophylaxis should NOT be continued post-op beyond 24 hours for clean surgery. Prolonged prophylaxis selects for resistant organisms and increases C diff risk; it does not reduce SSI.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 68-year-old diabetic undergoes knee arthroplasty. On post-op day 3, there is erythema and purulent drainage from the incision. The organism is Staph aureus. The wound is classified as dirty/infected, and the organism is resistant to multiple antibiotics. Treatment requires 4–6 weeks of IV oxacillin or clindamycin (if MRSA), wound debridement, and possible implant removal.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that any CSF white cell count >10/µL indicates bacterial meningitis. Viral or tuberculous meningitis can also have elevated cells. The differential is in the glucose (low in bacteria), protein (very high in TB), and culture/PCR results.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with a indwelling catheter develops fever and suprapubic pain. Urine microscopy shows white cells and bacteria. What is the diagnostic threshold for catheter-associated UTI in this setting?",
+        answer:
+          "≥10^3 CFU/mL of a single organism is the CDC/NHSN threshold for catheter-associated UTI.",
+        explanation:
+          "Because catheters can contaminate specimens, the threshold for CAUTI is lower than for community cystitis. A single organism at ≥10^3 CFU/mL in the context of symptoms and catheter use defines infection.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which CSF finding is most suggestive of bacterial rather than viral meningitis?",
+        options: [
+          "Lymphocytic pleocytosis with glucose 60 % of serum",
+          "Neutrophils with glucose 35 mg/dL and protein 1200 mg/dL",
+          "Protein 50 mg/dL with 5 lymphocytes",
+          "All of the above",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Bacterial meningitis shows neutrophilic pleocytosis, low CSF glucose, and high protein. Viral meningitis has lymphocytes, normal glucose, and modest protein elevation.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient undergoes colorectal surgery. Which statement about SSI prevention is correct?",
+        options: [
+          "Antibiotic prophylaxis should be continued for 48 hours post-op for clean-contaminated cases.",
+          "Hair removal with clipping 24 h before surgery reduces infection compared to leaving hair intact.",
+          " perioperative hyperglycaemia improves wound healing.",
+          "Wound should be left dry but covered with petroleum jelly.",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Correct answer is none of the above; all options are wrong. Prophylaxis beyond 24 h increases resistance; depilatory creams or no shaving best. Tight glucose control (<180 mg/dL) reduces infection; dry dressings are correct.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "UTIs follow faeco-urogenital ascent; CAUTI prevention uses bundles and minimal catheter time. Meningitis requires urgent empiric therapy; the CSF profile distinguishes bacterial (low glucose, high protein, neutrophils) from viral (lymphocytes, normal glucose). SSIs are prevented by appropriate wound class prophylaxis within 60 min of incision and strict asepsis.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, sexually transmitted infections require understanding vertical transmission and partner notification. HIV, syphilis, gonorrhoea and chancroid form the core syndromes, with TORCH infections completing the congenital spectrum.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 22 — STDs, HIV & congenital infection (Module 5)
+// ---------------------------------------------------------------------------
+function lesson22() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify major urogenital STIs (chlamydia, gonorrhoea, syphilis, genital herpes, HPV, HIV) and their recommended screening tests; explain the natural history of syphilis from primary to tertiary stages and the role of penicillin; describe the stages of HIV infection (acute, clinical latency, AIDS) and the criteria for CD4 counts and viral load; differentiate congenital infections transmitted in utero, during delivery or postnatally; and list the four TORCH organisms and their classic clinical findings (TOX, ROUX, cysts, sensorineural hearing loss).",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 21 — urinary, CNS and wound infections. You need the concepts of urosepsis and meningitis, which inform the presentation of disseminated gonococcal disease and neurosyphilis.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Sexually transmitted infections",
+        text: "STIs are spread by sexual contact (vaginal, anal, oral) or perinatal transmission. Their clinical manifestations range from asymptomatic infection to severe systemic disease. The key to control is early screening, partner notification, and treatment of both index and contacts to break chains of transmission.",
+      },
+
+      { type: "heading", level: 2, text: "Chlamydia trachomatis and Neisseria gonorrhoeae" },
+      {
+        type: "paragraph",
+        text: "Chlamydia trachomatis serovars D–K are the leading bacterial cause of notifiable STIs. Ascending infection causes cervicitis, urethritis, epididymitis, proctitis (in men who have sex with men), and reactive arthritis. Nucleic acid amplification tests (NAAT) on urine or swabs are >95 % sensitive. Gonorrhoea has become increasingly resistant to fluoroquinolones, cephalosporin MICs rising; dual therapy (ceftriaxone plus azithromycin) is still first-line, though azithromycin resistance in N gonorrhoeae is emerging.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Chlamydia and gonorrhoea are often asymptomatic in women. Routine screening of sexually active people under 30 (or over 30 with risk factors) is essential to prevent PID, ectopic pregnancy, and chronic infection complications.",
+      },
+
+      { type: "heading", level: 2, text: "Syphilis: primary through tertiary" },
+      {
+        type: "paragraph",
+        text: "Primary syphilis begins 10–21 days after exposure as a painless ulcer (chancre) that heals in 3–6 weeks without treatment. Secondary syphilis appears weeks to months later with a systemic rash, condylomata lata, mucous patches, and lymphadenopathy. The VDRL or RPR test screens; a positive VDRL must be confirmed with FTA-ABS or TPPA. Early syphilis responds to a single dose of benzathine penicillin G 2.4 million units IM; late syphilis needs three weekly doses.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text:
+          "Neurosyphilis presents with meningitis, cranial nerve palsies (especially III, VII, IX, X), stroke, or tabes dorsalis with sensory ataxia and Argyll Robertson pupils. Lumbar puncture shows lymphocytic pleocytosis, elevated protein, and positive VDRL in CSF. Treatment requires IV aqueous penicillin G 18–24 million units per day for 10–14 days.",
+      },
+
+      { type: "heading", level: 2, text: "Herpes simplex, HPV and genital warts" },
+      {
+        type: "paragraph",
+        text: "Genital herpes simplex virus type 2 (HSV-2) causes recurrent painful vesicular lesions. Primary infection may be severe with systemic symptoms; recurrences are shorter and less painful. PCR from lesion swab confirms HSV-1 vs HSV-2. Acyclovir, valacyclovir or famciclovir suppress recurrences. HPV types 16 and 18 cause 70 % of cervical cancers; vaccination with Gardasil 9 prevents 90 % of vaccine types. Genital warts (condyloma acuminata) signal exposure to low-risk HPV types 6 and 11.",
+      },
+
+      { type: "heading", level: 2, text: "Immunodeficiency viruses: HIV" },
+      {
+        type: "paragraph",
+        text: "Human immunodeficiency virus attaches to CD4+ T-helper cells via gp120 binding, fuses via gp41, and integrates into host DNA. Acute HIV infection causes flu-like illness; without treatment, the average progression to AIDS is 10–15 years. CD4 count <200 defines AIDS. Viral load is the marker of disease activity; ART reduces it to undetectable levels (<20 copies/mL), which prevents sexual transmission (U=U: undetectable = untransmittable). Resistance testing guides regimen choice.",
+      },
+      {
+        type: "table",
+        headers: ["Stage", "CD4 range (cells/µL)", "Typical features", "WHO group"],
+        rows: [
+          ["Acute infection", "<500", "Flu-like illness, sore throat, maculopapular rash", "A1"],
+          ["Clinical latency", "500–200", "Asymptomatic, opportunistic infections start", "B"],
+          ["AIDS-defining", "<200", "Kaposi, toxoplasmosis, CMV retinitis", "C"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Never treat HIV with steroids alone. Antiretroviral therapy (ART) is the cornerstone: INSTI-based regimens (bictegravir, dolutegravir, cabotegravir) are preferred for their efficacy and tolerability. Penicillin prophylaxis prevents Opportunistic infections while CD4 <200.",
+      },
+
+      { type: "heading", level: 2, text: "Congenital infections (TORCH complex)" },
+      {
+        type: "paragraph",
+        text: "TORCH stands for Toxoplasma gondii, Others (syphilis, varicella, parvovirus B19), Rubella, Cytomegalovirus, Herpes simplex. Transmission occurs in utero, during delivery, or postnatally. Congenital toxoplasmosis causes chorioretinitis, hydrocephalus, intracranial calcifications. Congenital CMV is the commonest congenital infection; sensorineural hearing loss occurs in 15–30 %. Syphilis causes stillbirth or neonatal death if untreated.",
+      },
+      {
+        type: "table",
+        headers: ["Pathogen", "Classic triad", "Ocular finding", "Neuro finding"],
+        rows: [
+          ["Toxoplasma", "Hydrocephalus, chorioretinitis", "Retinochoroiditis", "Calcifications, hydrocephalus"],
+          ["CMV", "Periventricular calcifications", "Chorioretinitis, strabismus", "Cerebral palsy, hearing loss"],
+          ["Rubella", "Blueberry muffin rash", "Cataracts, retinopathy", "PDA, mental retardation"],
+          ["HSV", "Skin vesicles, seizures", "Chorioretinitis", "Microcephaly, developmental delay"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 28-year-old pregnant woman in the first trimester has a positive rubella IgM. Her husband's serology is negative. What is the risk to the fetus and what is the public health action? The risk is congenital rubella syndrome (CRS). If the baby is born with CRS (cataracts, PDA, deafness, blueberry muffin rash), contact tracing identifies other susceptible contacts; post-exposure prophylaxis with immunoglobulin may be given within 72 hours of known exposure.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that a negative VDRL excludes syphilis in early primary disease. If the test is negative but a chancre is present, repeat serology in 1–2 weeks. Early infection may not have detectable antibodies.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A pregnant woman has a positive RPR titer of 1:32, confirmed with TPPA. At 28 weeks, her repeat titer is 1:128. What does this indicate?",
+        answer:
+          "A fourfold rise in titer during pregnancy is evidence of recent primary syphilis infection and indicates the fetus is at high risk of congenital infection.",
+        explanation:
+          "A significant increase (4-fold or more) in non-treponemal titer confirms recent infection; treatment with penicillin before 16 weeks may prevent fetal infection, but after that, the fetus may already be involved.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which screening test determines HIV status most reliably at this stage?",
+        options: [
+          "Western blot alone",
+          "HIV ELISA followed by confirmatory HIV-1/HIV-2 distinction or HIV Ag/Ab combo assay",
+          "CD4 count and viral load",
+          "PCR for proviral DNA",
+        ],
+        correctIndex: 1,
+        explanation:
+          "First-line screening is HIV antibody (ELISA) or an HIV antigen/antibody combination assay. A positive screen requires confirmatory testing with HIV-1/HIV-2 distinction (or equiv test/retest) to rule out false positives.",
+      },
+      {
+        type: "mcq",
+        stem: "A fetus is found to have intracranial calcifications and chorioretinal lesions on prenatal ultrasound. Mother had a positive CMV IgM. Which intervention is most appropriate?",
+        options: [
+          "Immediate C-section delivery to prevent further intrauterine infection",
+          "Intravenous ganciclovir during pregnancy",
+          "Repeat maternal CMV IgG titer in 3 months",
+          "Amniocentesis for viral PCR and immediate delivery if positive",
+        ],
+        correctIndex: 3,
+        explanation:
+          "After 18 weeks, if CMV PCR is positive in amniotic fluid, delivery is recommended within 48 hours to prevent further infection. Ganciclovir is teratogenic and not used in pregnancy. C-section does not prevent intrauterine infection; it is not indicated.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "STIs spread by sexual or perinatal contact. Gonorrhoea and chlamydia are screened by NAAT; both require partner treatment. Syphilis stages from chancre to gummas; penicillin cures all stages. HSV causes recurrent lesions; suppress with nucleoside analogues. HIV requires lifelong ART; early treatment prevents AIDS and transmission. Congenital infections (TORCH) threaten pregnancy; rubella immunity before childbearing years prevents CRS.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the final lesson covers zoonoses and entomology — the diseases that bridge animal and human populations through vectors and direct contact, and the public health measures that interrupt zoonotic transmission.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 23 — Zoonoses & entomology (Module 5)
+// ---------------------------------------------------------------------------
+function lesson23() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify major zoonoses by transmission route (direct contact, vector, food, environment) and name the common ones (rabies, leptospirosis, brucellosis, plague, Japanese encephalitis, dengue); describe the role of arthropod vectors (mosquitoes, ticks, fleas, tsetse, sandflies) in maintaining and spreading zoonotic pathogens; explain the One Health approach to prevention (animal vaccination, human surveillance, environmental control); and identify the diagnostic criteria for leptospirosis ( Weil's disease: fever, jaundice, hemorrhage) and plague (buboes, septicemic form, pneumonic form).",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 22 — STDs, HIV and congenital infection. You need the concepts of immune evasion and vector-borne transmission; they are foundational for understanding how zoonoses exploit vectors and animal reservoirs.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Zoonoses",
+        text: "Diseases transmitted from vertebrate animals to humans, either directly through contact, consumption, or via arthropod vectors. They represent about 60 % of emerging infectious diseases and include viral (rabies, Nipah), bacterial (brucellosis, leptospirosis), parasitic (malaria, filariasis), and fungal (coccidioidomycosis) entities.",
+      },
+
+      { type: "heading", level: 2, text: "Major zoonoses and transmission" },
+      {
+        type: "paragraph",
+        text: "Rabies is transmitted by the bite of a rabies virus-containing saliva. Once clinical rabies sets in, the disease is uniformly fatal. Post-exposure prophylaxis (PEP) with wound cleansing, HRIG infiltrated around the wound, and active immunisation (HDCV or RIV) is 100 % effective if given after exposure. Rabies can be prevented by dog vaccination in endemic areas.",
+      },
+      {
+        type: "paragraph",
+        text: "Leptospirosis is caused by Leptospira interrogans, shed in urine of rodents, livestock, dogs. Water contaminated with rat urine is an exposure route during floods. Weil's disease (jaundice, renal failure, hemorrhage) is severe. Diagnosis is microagglutination test (MAT) or PCR. Doxycycline or penicillin are the treatments; penicillin is the treatment of choice in pregnancy.",
+      },
+      {
+        type: "paragraph",
+        text: "Brucellosis (undulant fever) is caused by Brucella melitensis (goats), B abortus (cattle), B suis (pigs). Occupational exposure in farmers, veterinarians, dairy workers is the main risk. The 'strain' name matters: Brucella melitensis is highly virulent. Chronic infection leads to osteoarticular disease and neurobrucellosis. Serology (AGG, ELISA) confirms; antibiotics: doxycycline plus rifampin or streptomycin plus doxycycline for 6 weeks.",
+      },
+
+      { type: "heading", level: 2, text: "Plague and viral haemorrhagic fevers" },
+      {
+        type: "paragraph",
+        text: "Plague (Yersinia pestis) is transmitted by fleas on rodents; epizootics in prairie dogs, ground squirrels, or marmots precede human cases. Three clinical forms: bubonic (painful lymphadenopathy, 'buboes'), septicemic (disseminated intravascular coagulation, bleeding), and pneumonic (inhalational, highly contagious). Fosphenytoin/s Injectable for 7–10 days is treatment; streptomycin for resistance. Pandemic potential mandates rapid diagnosis and contact isolation.",
+      },
+      {
+        type: "paragraph",
+        text: "Arboviruses (arthropod-borne) include Japanese encephalitis virus (Culex mosquitoes, rice paddies, pigs as amplifying hosts), dengue (Aedes aegypti, urban, four serotypes, antibody-dependent enhancement), Zika (Aedes, neural defects), and West Nile (Culex, neuroinvasive disease). Prevention is vector control: larvicides, source reduction (discarded tyres, containers), bed nets, repellents containing DEET or picaridin.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Japanese encephalitis vaccine is inactivated Vero cell-derived (IXIARO) or inactivated mouse brain-derived. Two doses 28 days apart for travelers; three doses for infants. Dengue vaccine (Dengvaxia) is contraindicated in seronegative persons due to increased risk of severe disease on subsequent infection.",
+      },
+
+      { type: "heading", level: 2, text: "Vectors and control" },
+      {
+        type: "table",
+        headers: ["Vector", "Primary disease", "Control measure"],
+        rows: [
+          ["Aedes aegypti", "Dengue, Zika, Chikungunya", "Eliminate breeding sites, larvicides, DEET repellent"],
+          ["Culex pipiens", "Japanese encephalitis, West Nile", "Bed nets, larvicides in water containers"],
+          ["Ixodes scapularis", "Lyme disease (Borrelia)", "Tick checks, permethrin-treated clothing"],
+          ["Rhipicephalus spp.", "Ehrlichiosis, Babesiosis", "Acaricides for livestock, protect clothing"],
+          ["Xenopsylla cheopis", "Plague (Yersinia)", "Rodent control, flea comb, insecticide"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Integrated vector management (IVM) combines larviciding, habitat modification, biological control with larvivorous fish, and personal protection. For dengue, the 'whack-a-mole' effort of eliminating water containers is sustained by community participation.",
+      },
+
+      { type: "heading", level: 2, text: "One Health approach" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Zoonoses require collaboration across sectors. Veterinarians, physicians, ecologists and public health officials must share data on animal disease, human illness and environmental changes. The 2009 H1N1 pandemic showed how surveillance of pigs and birds predicted human spread before the first human case.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "During a flooding event, a rural clinic sees three patients with high fever, myalgia and jaundice, with exposure to stagnant water and rat sightings. The onset was 4 days after flood water contaminated their well. Serum bilirubin 5 mg/dL, creatinine elevated, and MAT positive for Leptospira. The diagnosis is Weil's disease, severe leptospirosis. Immediate IV penicillin begins while water testing confirms leptospira in the supply. Community education about rodent control and alternative water sources prevents further cases.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that any mosquito bite causes disease. Only Aedes aegypti transmits dengue; Culex transmits West Nile. Also, antibody-dependent enhancement (ADE) means that secondary dengue infection can be more severe; careful serology is needed before vaccine administration.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A child with sudden onset headache, neck stiffness, and fever develops a maculopapular rash and thrombocytopenia after a mosquito bite during an urban dengue outbreak. CSF is normal. What is the most likely diagnosis?",
+        answer:
+          "Dengue with warning signs (rash, thrombocytopenia, plasma leak). The CSF is normal because this is a viral syndrome, not encephalitis.",
+        explanation:
+          "Dengue haemorrhagicagic fever shows plasma leakage, bleeding, and organ impairment; thrombocytopenia and rash are hallmarks. Japanese encephalitis would have abnormal CSF and neurological signs.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which vaccine is universally recommended before traveling to endemic rabies regions for high-risk activities?",
+        options: [
+          "Pre-exposure prophylaxis (HDCV or RIV) at 0, 7, 21 or 0, 7, 14 days",
+          "Post-exposure prophylaxis with HRIG and vaccine",
+          "Oral rabies vaccine",
+          "Meningococcal vaccine",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Pre-exposure prophylaxis (3 doses on days 0, 7, 21 or 0, 7, 14) is recommended for high-risk travellers (veterinarians, wildlife handlers). If bitten after pre-exposure vaccination, only two booster doses of vaccine are needed; HRIG is not required.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with sudden severe headache, photophobia, fever and a history of mosquito bites is found to have lymphocytic CSF with normal glucose and elevated protein. MRI shows thalamic hyperintensity. Which diagnosis is most likely?",
+        options: [
+          "Japanese encephalitis",
+          "Dengue fever",
+          "Rabies",
+          "Tick-borne encephalitis",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Japanese encephalitis typically shows thalamic involvement on MRI and presents with fever, headache, altered mental status. Dengue rarely causes significant meningitis; rabies causes hydrophobia and a coma; tick-borne encephalitis has different geographic distribution.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Zoonoses encompass rabies, leptospirosis, brucellosis, plague, and arboviruses. Vectors like Aedes, Culex and ticks transmit these pathogens; control requires eliminating breeding sites, using repellents, and protecting livestock. One Health collaboration between veterinary, medical and environmental sectors is essential for prevention and outbreak response.",
+      },
+      {
+        type: "paragraph",
+        text: "The microbiology course is now complete. Module 1–3 covered bacterial and viral foundations; Module 4 addressed hospital-based challenges of sterilisation and infection control; Module 5 consolidated system-based infections a clinician must manage daily.",
       },
     ],
   };
 }
 
 
+// ---------------------------------------------------------------------------
 export const MICROBIOLOGY: SubjectSeed = {
   id: "mbbs-microbiology",
   slug: "medical-microbiology",
@@ -3954,14 +5090,14 @@ export const MICROBIOLOGY: SubjectSeed = {
     { title: "Medical mycology", module: 3, estimatedMinutes: 35, authored: true, concept: { title: "Medical mycology", slug: "medical-mycology", summary: "Superficial, subcutaneous and systemic mycoses, opportunistic fungi in the immunocompromised, and antifungal pharmacology basics.", blooms: "understand", minutes: 35, prereq: ["general-virology"] }, content: lesson13() as never },
     { title: "Protozoan parasites", module: 3, estimatedMinutes: 40, authored: true, concept: { title: "Protozoan parasites", slug: "protozoan-parasites", summary: "Plasmodium, Entamoeba, Leishmania, Giardia, Toxoplasma and Trichomonas — life cycles, vectors, disease and diagnosis.", blooms: "understand", minutes: 40, prereq: ["general-virology"] }, content: lesson14() as never },
     { title: "Helminth parasites", module: 3, estimatedMinutes: 40, authored: true, concept: { title: "Helminth parasites", slug: "helminth-parasites", summary: "Nematodes, cestodes and trematodes including hydatid disease and filariasis — transmission, pathology and community control.", blooms: "understand", minutes: 40, prereq: ["protozoan-parasites"] }, content: lesson15() as never },
-    { title: "Sterilisation & disinfection", module: 4, estimatedMinutes: 35, authored: false, concept: { title: "Sterilisation and disinfection", slug: "sterilisation-disinfection", summary: "Autoclaving, chemical disinfectants, antiseptics and sterility testing that keep instruments and wards safe.", blooms: "apply", minutes: 35, prereq: ["bacterial-cell-structure"] }, content: PLACEHOLDER },
-    { title: "Hospital-acquired infection", module: 4, estimatedMinutes: 35, authored: false, concept: { title: "Hospital-acquired infection", slug: "hospital-acquired-infection", summary: "Sources, transmission routes, outbreak investigation, device-associated infection and bundle prevention in hospitals.", blooms: "analyze", minutes: 35, prereq: ["sterilisation-disinfection"] }, content: PLACEHOLDER },
-    { title: "Biomedical waste management", module: 4, estimatedMinutes: 25, authored: false, concept: { title: "Biomedical waste management", slug: "biomedical-waste", summary: "Segregation, colour-coding, treatment and disposal of biomedical waste under standard practice and regulation.", blooms: "apply", minutes: 25, prereq: ["hospital-acquired-infection"] }, content: PLACEHOLDER },
-    { title: "Respiratory & systemic infections", module: 5, estimatedMinutes: 45, authored: false, concept: { title: "Respiratory and systemic infections", slug: "respiratory-infections", summary: "Streptococcal and staphylococcal disease, tuberculosis, pertussis, diphtheria, pneumonia and PUO as systemic presentations.", blooms: "analyze", minutes: 45, prereq: ["antigen-antibody-reactions"] }, content: PLACEHOLDER },
-    { title: "Gastrointestinal & hepatic infections", module: 5, estimatedMinutes: 45, authored: false, concept: { title: "Gastrointestinal and hepatic infections", slug: "gastrointestinal-hepatic-infections", summary: "Enteric fever, cholera, dysentery, food poisoning, viral hepatitis and clostridial disease — pathogens, pathogenesis and laboratory diagnosis.", blooms: "analyze", minutes: 45, prereq: ["respiratory-infections"] }, content: PLACEHOLDER },
-    { title: "Urinary, CNS & wound infections", module: 5, estimatedMinutes: 45, authored: false, concept: { title: "Urinary, CNS and wound infections", slug: "urinary-cns-infections", summary: "UTI pathogens, meningitis and encephalitis, anaerobes, tetanus, gas gangrene and surgical-site infection.", blooms: "analyze", minutes: 45, prereq: ["respiratory-infections"] }, content: PLACEHOLDER },
-    { title: "STDs, HIV & congenital infection", module: 5, estimatedMinutes: 45, authored: false, concept: { title: "STDs, HIV and congenital infections", slug: "std-hiv-congenital", summary: "Syphilis, gonorrhoea, chancroid, HIV virology and natural history, laboratory diagnosis, prevention and TORCH congenital infections.", blooms: "analyze", minutes: 45, prereq: ["rna-viruses"] }, content: PLACEHOLDER },
-    { title: "Zoonoses & entomology", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Zoonoses and entomology", slug: "zoonoses-entomology", summary: "Rabies, leptospirosis, brucellosis, plague, arboviruses and the vectors and arthropods that transmit them.", blooms: "understand", minutes: 35, prereq: ["protozoan-parasites", "helminth-parasites"] }, content: PLACEHOLDER },
+    { title: "Sterilisation & disinfection", module: 4, estimatedMinutes: 35, authored: true, concept: { title: "Sterilisation and disinfection", slug: "sterilisation-disinfection", summary: "Autoclaving, chemical disinfectants, antiseptics and sterility testing that keep instruments and wards safe.", blooms: "apply", minutes: 35, prereq: ["bacterial-cell-structure"] }, content: lesson16() as never },
+    { title: "Hospital-acquired infection", module: 4, estimatedMinutes: 35, authored: true, concept: { title: "Hospital-acquired infection", slug: "hospital-acquired-infection", summary: "Sources, transmission routes, outbreak investigation, device-associated infection and bundle prevention in hospitals.", blooms: "analyze", minutes: 35, prereq: ["sterilisation-disinfection"] }, content: lesson17() as never },
+    { title: "Biomedical waste management", module: 4, estimatedMinutes: 25, authored: true, concept: { title: "Biomedical waste management", slug: "biomedical-waste", summary: "Segregation, colour-coding, treatment and disposal of biomedical waste under standard practice and regulation.", blooms: "apply", minutes: 25, prereq: ["hospital-acquired-infection"] }, content: lesson18() as never },
+    { title: "Respiratory & systemic infections", module: 5, estimatedMinutes: 45, authored: true, concept: { title: "Respiratory and systemic infections", slug: "respiratory-infections", summary: "Streptococcal and staphylococcal disease, tuberculosis, pertussis, diphtheria, pneumonia and PUO as systemic presentations.", blooms: "analyze", minutes: 45, prereq: ["antigen-antibody-reactions"] }, content: lesson19() as never },
+    { title: "Gastrointestinal & hepatic infections", module: 5, estimatedMinutes: 45, authored: true, concept: { title: "Gastrointestinal and hepatic infections", slug: "gastrointestinal-hepatic-infections", summary: "Enteric fever, cholera, dysentery, food poisoning, viral hepatitis and clostridial disease — pathogens, pathogenesis and laboratory diagnosis.", blooms: "analyze", minutes: 45, prereq: ["respiratory-infections"] }, content: lesson20() as never },
+    { title: "Urinary, CNS & wound infections", module: 5, estimatedMinutes: 45, authored: true, concept: { title: "Urinary, CNS and wound infections", slug: "urinary-cns-infections", summary: "UTI pathogens, meningitis and encephalitis, anaerobes, tetanus, gas gangrene and surgical-site infection.", blooms: "analyze", minutes: 45, prereq: ["respiratory-infections"] }, content: lesson21() as never },
+    { title: "STDs, HIV & congenital infection", module: 5, estimatedMinutes: 45, authored: true, concept: { title: "STDs, HIV and congenital infections", slug: "std-hiv-congenital", summary: "Syphilis, gonorrhoea, chancroid, HIV virology and natural history, laboratory diagnosis, prevention and TORCH congenital infections.", blooms: "analyze", minutes: 45, prereq: ["rna-viruses"] }, content: lesson22() as never },
+    { title: "Zoonoses & entomology", module: 5, estimatedMinutes: 35, authored: true, concept: { title: "Zoonoses and entomology", slug: "zoonoses-entomology", summary: "Rabies, leptospirosis, brucellosis, plague, arboviruses and the vectors and arthropods that transmit them.", blooms: "understand", minutes: 35, prereq: ["protozoan-parasites", "helminth-parasites"] }, content: lesson23() as never },
   ],
   sbas: [],
 }
