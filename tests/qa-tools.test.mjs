@@ -221,8 +221,12 @@ test("catalogue: every entry is well formed", () => {
       assert.ok(captured, `${entry.path} expectCount must capture the number in group 1`);
     }
     if (entry.api) {
-      assert.ok(typeof entry.api.field === "string" && entry.api.field.length > 0, `${entry.path} api probe needs a field`);
-      assert.equal(typeof entry.api.min, "number", `${entry.path} api probe needs a numeric min`);
+      const hasField = typeof entry.api.field === "string" && entry.api.field.length > 0;
+      const hasBooleanField = typeof entry.api.booleanField === "string" && entry.api.booleanField.length > 0;
+      assert.ok(hasField || hasBooleanField, `${entry.path} api probe needs a field or booleanField`);
+      if (hasField) {
+        assert.equal(typeof entry.api.min, "number", `${entry.path} api probe needs a numeric min`);
+      }
     }
   }
 });
@@ -246,6 +250,8 @@ test("catalogue: the full priority surface is covered", () => {
     "/university/gross-anatomy-i",
     "/university/physiology-cell-and-general",
     "/login",
+    "/auth/callback?code=bogus",
+    "/api/health/auth",
     "/api/questions?boardId=jamb&topicId=jamb-physics-motion-and-kinematics",
     "/api/boards",
   ];

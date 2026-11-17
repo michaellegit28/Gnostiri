@@ -110,7 +110,7 @@ export default async function StatsRow({ userId }: { userId: string }) {
                   {w.value}
                   {empty ? null : w.key === "streak" ? " days" : null}
                 </p>
-                <p className="mt-1 truncate text-xs text-slate-500">{w.hint}</p>
+                <p className="mt-1 truncate text-xs text-muted">{w.hint}</p>
               </div>
               <div className="flex shrink-0 flex-col items-center gap-2">
                 <Icon className={`h-7 w-7 ${w.accent}`} aria-hidden />

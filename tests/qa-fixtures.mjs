@@ -156,7 +156,7 @@ export function quizPageHtml(board, topic) {
 const STATIC_PAGES = {
   "/": "High School · University",
   "/highschool": "Textbooks and exams · Open textbooks",
-  "/login": "Password · Google",
+  "/login": "Password · Continue with Google",
   "/cbt/results": "Your result",
   "/cbt/review": "Review every question",
   "/university": "MBBS · Gnostiri University · module",
@@ -165,6 +165,8 @@ const STATIC_PAGES = {
   "/discovery": "Discovery · deeper",
   "/cbt/setup?board=jamb": "Session setup · JAMB (UTME)",
   "/cbt/session?board=jamb&mode=simulation": "Mark for review · JAMB (UTME)",
+  "/auth/callback?code=bogus": { status: 307, contentType: "text/html", body: "", headers: { location: "/login?error=auth_failed" } },
+  "/api/health/auth": json({ healthy: true, checks: { env: "configured", supabaseKey: "accepted", userColumn: "supabaseUid" } }),
 };
 
 export const DEFAULT_BOARDS = [
@@ -225,7 +227,13 @@ export function buildSite(boards = DEFAULT_BOARDS) {
     durationSec: 750,
     subjects: [{ topicId: "jamb-physics", title: "Physics", questions: Array.from({ length: 10 }, (_, i) => ({ id: `c-${i}` })) }],
   });
-  for (const [path, body] of Object.entries(STATIC_PAGES)) routes[path] = page(body);
+  for (const [path, body] of Object.entries(STATIC_PAGES)) {
+    if (typeof body === "string") {
+      routes[path] = page(body);
+    } else {
+      routes[path] = body;
+    }
+  }
   return routes;
 }
 
@@ -241,7 +249,8 @@ export async function startFixture(routes, mutate = (path, rendered) => rendered
       return;
     }
     const rendered = typeof found === "string" ? { status: 200, contentType: "text/html", body: found } : found;
-    res.writeHead(rendered.status, { "content-type": rendered.contentType ?? "text/html" });
+    const headers = { "content-type": rendered.contentType ?? "text/html", ...(rendered.headers ?? {}) };
+    res.writeHead(rendered.status, headers);
     res.end(rendered.body);
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));

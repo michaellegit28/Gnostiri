@@ -79,7 +79,7 @@ const CATALOGUE = [
   {
     path: "/highschool",
     name: "highschool-hub",
-    markers: [/Textbooks and exams/i, /Open textbooks/i],
+    markers: [/Read the textbook/i, /Open textbooks/i],
   },
   {
     path: "/highschool/exams",
@@ -175,7 +175,17 @@ const CATALOGUE = [
   {
     path: "/login",
     name: "login",
-    markers: [/Password/i, /Google/i],
+    markers: [/Password/i, /Continue with Google/i],
+  },
+  {
+    path: "/auth/callback?code=bogus",
+    name: "auth-callback-bogus",
+    expectRedirect: "/login?error=auth_failed",
+  },
+  {
+    path: "/api/health/auth",
+    name: "api-health-auth",
+    api: { booleanField: "healthy", textMatches: [/"healthy"\s*:\s*true/] },
   },
 
   // ── API probes ──────────────────────────────────────────────────────────
@@ -270,6 +280,22 @@ async function probeHtml(entry) {
   }
   const ms = Date.now() - started;
 
+  // Handle redirect expectations
+  if (entry.expectRedirect) {
+    if (res.status < 300 || res.status >= 400) {
+      failures.push(`expected redirect (3xx), got status ${res.status}`);
+    } else {
+      const location = res.headers.get("location") ?? "";
+      const expected = entry.expectRedirect;
+      if (!location.includes(expected)) {
+        failures.push(`redirect location "${location}" does not contain expected "${expected}"`);
+      } else {
+        notes.push(`redirect → ${location}`);
+      }
+    }
+    return { entry, failures, notes, ms };
+  }
+
   if (res.status >= 300 && res.status < 400) {
     failures.push(`status ${res.status} redirect → ${res.headers.get("location") ?? "?"} (expected 200)`);
     return { entry, failures, notes, ms };
@@ -324,6 +350,7 @@ async function probeApi(entry) {
   const notes = [];
   const {
     field,
+    booleanField,
     min = 0,
     max = Number.MAX_SAFE_INTEGER,
     method = "GET",
@@ -365,6 +392,16 @@ async function probeApi(entry) {
     json = JSON.parse(text);
   } catch {
     failures.push("response is not JSON");
+    return { entry, failures, notes, ms };
+  }
+
+  if (booleanField) {
+    const value = dig(json, booleanField);
+    if (value !== true) {
+      failures.push(`field "${booleanField}" is not true (got ${JSON.stringify(value)})`);
+    } else {
+      notes.push(`${booleanField}=true`);
+    }
     return { entry, failures, notes, ms };
   }
 
