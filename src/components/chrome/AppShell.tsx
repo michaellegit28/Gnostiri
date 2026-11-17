@@ -9,6 +9,7 @@ import ThemeToggle from "@/components/chrome/ThemeToggle";
 import PrimeBadge from "@/components/chrome/PrimeBadge";
 import SyncIndicator from "@/components/offline/SyncIndicator";
 import { LogoMark } from "@/components/brand/Logo";
+import useDialogFocus from "@/components/ui/useDialogFocus";
 import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
 
 /**
@@ -28,31 +29,18 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebar, setSidebar] = useState(false);
   const [palette, setPalette] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const paletteRef = useRef<HTMLDivElement>(null);
-  const paletteReturnTo = useRef<HTMLElement | null>(null);
+  const paletteRef = useDialogFocus<HTMLDivElement>(palette);
+  const drawerRef = useDialogFocus<HTMLDivElement>(drawer);
+  const firstPath = useRef(pathname);
 
-  // Close overlays on navigation.
   useEffect(() => {
     setDrawer(false);
     setPalette(false);
+    if (firstPath.current !== pathname) {
+      firstPath.current = pathname;
+      window.requestAnimationFrame(() => document.getElementById("main")?.focus());
+    }
   }, [pathname]);
-
-  // Command-palette focus management (WCAG 2.4.3): on open, remember the
-  // element that had focus and move focus to the first destination inside the
-  // dialog; on close — Escape, navigation or the unmount that follows — hand
-  // focus back so a keyboard user never loses their place in the chrome.
-  // No focus trap is attempted (the palette is a short list of links and Esc
-  // always leaves), only enter + restore.
-  useEffect(() => {
-    if (!palette) return;
-    paletteReturnTo.current = document.activeElement as HTMLElement | null;
-    const firstLink = paletteRef.current?.querySelector<HTMLElement>("a[href]");
-    firstLink?.focus();
-    return () => {
-      paletteReturnTo.current?.focus();
-      paletteReturnTo.current = null;
-    };
-  }, [palette]);
 
   // Escape closes; Cmd/Ctrl+K opens the palette (desktop power-user nav).
   useEffect(() => {
@@ -101,6 +89,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, [drawer, palette]);
 
   const allItems = NAV_ZONES.flatMap((z) => z.items);
+  const paletteItems = allItems.filter(
+    (item, index, items) => items.findIndex((candidate) => candidate.href === item.href) === index
+  );
 
   return (
     <>
@@ -120,6 +111,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <button
           type="button"
           aria-label="Open navigation"
+          aria-controls="mobile-navigation"
           aria-expanded={drawer || sidebar}
           onClick={() => (window.innerWidth >= 1024 ? setSidebar((v) => !v) : setDrawer(true))}
           className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:hidden"
@@ -135,7 +127,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <div className="ml-auto flex items-center gap-1">
           <button
             type="button"
-            aria-label="Search navigation (Command K)"
+            aria-label="Jump to navigation (Command K)"
+            aria-haspopup="dialog"
+            aria-controls="command-palette"
+            aria-expanded={palette}
             onClick={() => setPalette(true)}
             className="hidden min-h-[44px] items-center gap-2 rounded-lg border border-line px-3 text-xs text-slate-400 hover:border-electric/50 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary md:flex"
           >
@@ -176,7 +171,15 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Mobile drawer ───────────────────────────────────────────────── */}
       {drawer && (
-        <div className="fixed inset-0 z-[60] overflow-y-auto bg-bg/97 backdrop-blur-lg lg:hidden">
+        <div
+          ref={drawerRef}
+          id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Primary navigation"
+          tabIndex={-1}
+          className="fixed inset-0 z-[60] overflow-y-auto bg-bg/97 backdrop-blur-lg lg:hidden"
+        >
           <div className="flex h-14 items-center justify-between px-3">
             <span className="font-serif text-lg font-bold text-slate-100">Gnostiri</span>
             <button
@@ -233,20 +236,36 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {palette && (
         <div
           ref={paletteRef}
+          id="command-palette"
           className="fixed inset-0 z-[80] bg-bg/80 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label="Jump to"
+          aria-labelledby="command-palette-title"
+          tabIndex={-1}
         >
           <div className="mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-line bg-surface/95 shadow-2xl">
-            <p className="border-b border-border/10 px-4 py-3 text-[11px] uppercase tracking-[0.3em] text-electric-text">Jump to</p>
+            <div className="flex items-center justify-between border-b border-border/10 px-4 py-2">
+              <h2 id="command-palette-title" className="text-[11px] uppercase tracking-[0.3em] text-electric-text">
+                Jump to
+              </h2>
+              <button
+                type="button"
+                aria-label="Close command palette"
+                onClick={() => setPalette(false)}
+                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-300 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <X className="h-5 w-5" aria-hidden />
+              </button>
+            </div>
             <ul className="max-h-[60vh] overflow-y-auto py-2">
-              {allItems.map((item) => {
+              {paletteItems.map((item) => {
                 const Icon = item.icon;
+                const active = isActive(pathname, item.href);
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      aria-current={active ? "page" : undefined}
                       className="flex min-h-[44px] items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-surface/10 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     >
                       <Icon className="h-4 w-4 text-slate-400" aria-hidden />
@@ -263,7 +282,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
       <div className="pt-14 lg:pl-64">
-        <main id="main" className="min-h-[calc(100vh-3.5rem)] pb-28 lg:pb-10">
+        <main id="main" tabIndex={-1} className="min-h-[calc(100vh-3.5rem)] pb-28 lg:pb-10">
           {children}
         </main>
         <footer className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pb-28 pt-4 lg:pb-6">

@@ -8,7 +8,7 @@ import { deltaLabel, winCardSvg, type WinCardInput } from "@/lib/win-card";
 export const dynamic = "force-dynamic";
 
 // GET /api/ranking/win-card?match=<matchId>            → a pod win card
-// GET /api/ranking/win-card?tier=<n>&delta=<n>&context=<s>  → a rank-up card
+// GET /api/ranking/win-card?tier=<n>&delta=<n>              → a rank-up card
 //
 // A 1080x1920 PNG sized for WhatsApp Status. Authorisation is per-variant
 // and reads from the caller's OWN rows only:
@@ -17,14 +17,11 @@ export const dynamic = "force-dynamic";
 //              it decides the delta, so it cannot be inflated).
 //  - rank-up:  the caller must have a RankState, the tier must be THEIR tier
 //              (from their own stars) and delta must equal the delta of
-//              their MOST RECENT StarLedger row. A spoofed delta is a 400,
-//              not a card.
+//              their MOST RECENT StarLedger row. That award must also have
+//              crossed a tier boundary. A spoofed delta is a 400, not a card.
 //
 // The SVG carries a display name and nothing else — the renderer has no
 // parameter for an email or a user id (see src/lib/win-card.ts).
-
-/** Longest context line accepted — keeps the card legible on a phone. */
-const MAX_CONTEXT_LENGTH = 80;
 
 /** Rasterise the card. sharp is the only rasteriser: librsvg does the SVG.
  *  Returned as a Uint8Array so it is valid Response body input. */
@@ -58,6 +55,9 @@ export async function GET(req: NextRequest) {
       include: { match: { include: { group: { select: { name: true } } } } },
     });
     if (!seat) return NextResponse.json({ error: "You are not a member of that pod" }, { status: 403 });
+    if (!seat.submittedAt) {
+      return NextResponse.json({ error: "Submit your pod paper before sharing a win card" }, { status: 409 });
+    }
 
     const seats = await prisma.podMember.findMany({
       where: { matchId },
@@ -65,14 +65,17 @@ export async function GET(req: NextRequest) {
     });
     const placement = rankPodMembers(seats).find((row) => row.userId === user.id)?.placement ?? seats.length;
     const tier = seat.match.tier;
+    const settled = seat.match.windowClosesAt.getTime() <= Date.now();
 
     return pngResponse(
       await toPng({
         handle: displayHandle(user.name),
         tierLabel: tierInfo(tier).label,
         delta: podStars(placement),
-        context: `Pod quickfire · ${seat.match.group?.name ?? "your group"}`,
-        title: placement === 1 ? "Pod victory" : "Pod finished",
+        context: settled
+          ? `Pod quickfire · ${seat.match.group?.name ?? "your group"}`
+          : `Provisional pod result · ${seat.match.group?.name ?? "your group"}`,
+        title: settled ? (placement === 1 ? "Pod victory" : "Pod finished") : "Pod result",
         dateLabel: seat.match.windowClosesAt.toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",
@@ -86,7 +89,6 @@ export async function GET(req: NextRequest) {
   // ── rank-up: the caller's own ladder state and their last award ──────────
   const tierParam = Number(params.get("tier"));
   const deltaParam = Number(params.get("delta"));
-  const context = (params.get("context") ?? "").trim().slice(0, MAX_CONTEXT_LENGTH);
 
   if (!Number.isInteger(tierParam) || tierParam < MIN_TIER || tierParam > MAX_TIER || !Number.isInteger(deltaParam)) {
     return NextResponse.json({ error: "tier and delta are required integers" }, { status: 400 });
@@ -103,11 +105,15 @@ export async function GET(req: NextRequest) {
   const lastAward = await prisma.starLedger.findFirst({
     where: { userId: user.id },
     orderBy: { createdAt: "desc" },
-    select: { delta: true },
+    select: { delta: true, balanceAfter: true },
   });
   if (!lastAward) return NextResponse.json({ error: "No star award to share yet" }, { status: 404 });
   if (lastAward.delta !== deltaParam) {
     return NextResponse.json({ error: "delta must equal your most recent star award" }, { status: 400 });
+  }
+  const previousBalance = lastAward.balanceAfter - lastAward.delta;
+  if (tierFor(lastAward.balanceAfter) <= tierFor(previousBalance)) {
+    return NextResponse.json({ error: "Your latest award did not move you into a new tier" }, { status: 400 });
   }
 
   return pngResponse(
@@ -115,7 +121,7 @@ export async function GET(req: NextRequest) {
       handle: displayHandle(user.name),
       tierLabel: tierInfo(tierParam).label,
       delta: deltaParam,
-      context: context || `Rank up · ${tierInfo(tierParam).label}`,
+      context: `Tier up · ${tierInfo(tierParam).label}`,
       title: "Rank up",
       dateLabel: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
     }),

@@ -14,18 +14,35 @@ export const dynamic = "force-dynamic";
 //
 // Phase 5 adds the reward itself: a member engraved here downloads their
 // VERIFIED certificate (the button is rendered only when the signed-in
-// member's own display name sits on that roster — the API re-checks), and
-// anyone can check a certificate's code on /verify.
+// learner has a real LeagueGroupMember row for that winning group — the API
+// re-checks the same ownership), and anyone can check a certificate's code on
+// /verify.
 
 const RANK_LABEL = ["Champion", "Runner-up", "Third"];
 
+function membershipKey(group: { seasonSlug: string; tier: number; name: string }) {
+  return `${group.seasonSlug}:${group.tier}:${group.name}`;
+}
+
+function entryKey(entry: { seasonSlug: string; tier: number; groupName: string }) {
+  return `${entry.seasonSlug}:${entry.tier}:${entry.groupName}`;
+}
+
 export default async function HallOfFamePage() {
   const user = await getCurrentUser();
-  // Server-checked entitlement: the download button only appears when the
-  // signed-in member's DISPLAY NAME is engraved on that roster. The route
-  // re-checks this against the row — this is the UI half of that gate.
+  const myGroups = user
+    ? await prisma.leagueGroupMember.findMany({
+        where: { userId: user.id },
+        select: { group: { select: { seasonSlug: true, tier: true, name: true } } },
+      })
+    : [];
+  const myGroupKeys = new Set(myGroups.map((membership) => membershipKey(membership.group)));
   const myHandle = user ? displayHandle(user.name) : null;
   const canDownload = (roster: string[]) => Boolean(myHandle && roster.includes(myHandle));
+  const canDownloadEntry = (entry: { seasonSlug: string; tier: number; groupName: string; rosterJson: string[] }) => {
+    if (!myGroupKeys.has(entryKey(entry))) return false;
+    return !myHandle || canDownload(entry.rosterJson) || !entry.rosterJson.includes(myHandle);
+  };
 
   const entries = await prisma.hallOfFameEntry.findMany({
     orderBy: [{ seasonSlug: "desc" }, { tier: "asc" }, { rank: "asc" }],
@@ -34,7 +51,7 @@ export default async function HallOfFamePage() {
 
   if (entries.length === 0) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center md:py-24">
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center md:py-24">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Hall of Fame</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100 md:text-4xl">The first hall is empty</h1>
         <p className="mt-4 text-slate-400">
@@ -57,14 +74,14 @@ export default async function HallOfFamePage() {
             </Link>
           )}
         </div>
-      </main>
+      </div>
     );
   }
 
   const seasons = Array.from(new Set(entries.map((e) => e.seasonSlug)));
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 md:py-14">
+    <div className="mx-auto max-w-5xl px-4 py-10 md:py-14">
       <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold">Hall of Fame</p>
       <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100 md:text-4xl">Engraved by season</h1>
       <p className="mt-3 max-w-2xl text-sm text-slate-400">
@@ -108,10 +125,10 @@ export default async function HallOfFamePage() {
                           <p className="mt-1 text-xs text-slate-500">
                             {Math.round(entry.avgStars).toLocaleString()} average stars
                           </p>
-                          {canDownload(entry.rosterJson) && (
+                          {canDownloadEntry(entry) && (
                             <a
                               href={`/api/ranking/certificate?season=${encodeURIComponent(entry.seasonSlug)}&member=${encodeURIComponent(user!.id)}`}
-                              className="mt-3 inline-flex min-h-[36px] items-center gap-2 rounded-lg border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                              className="mt-3 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-gold/40 px-4 text-xs font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                             >
                               <FileBadge className="h-3.5 w-3.5" aria-hidden />
                               Download certificate
@@ -136,12 +153,18 @@ export default async function HallOfFamePage() {
           Back to the ladder
         </Link>
         <Link
+          href="/certificates"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          My certificates
+        </Link>
+        <Link
           href="/verify"
-          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           Verify a certificate
         </Link>
       </div>
-    </main>
+    </div>
   );
 }

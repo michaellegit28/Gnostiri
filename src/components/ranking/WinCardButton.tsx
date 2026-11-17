@@ -33,10 +33,12 @@ export default function WinCardButton({
 }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
 
   async function share() {
     setBusy(true);
     setError("");
+    setStatus("");
     try {
       const params = new URLSearchParams();
       if (matchId) params.set("match", matchId);
@@ -60,6 +62,7 @@ export default function WinCardButton({
       anchor.click();
       anchor.remove();
       URL.revokeObjectURL(url);
+      setStatus("Your win card is ready and has been downloaded.");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Could not build your win card");
     } finally {
@@ -73,6 +76,9 @@ export default function WinCardButton({
         {busy ? "Rendering your card…" : label}
       </button>
       <p className="mt-1.5 text-[11px] text-muted">Sized for WhatsApp Status</p>
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        {status}
+      </p>
       {error && (
         <p className="mt-2 text-sm text-rose-400" role="alert">
           {error}

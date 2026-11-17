@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import JoinQueueButton from "@/components/ranking/JoinQueueButton";
+import WinCardButton from "@/components/ranking/WinCardButton";
 import { enqueue } from "@/lib/offline-queue";
 
 /**
@@ -79,6 +80,14 @@ function clock(ms: number): string {
   return hours > 0 ? `${hours}:${pad(minutes)}:${pad(seconds)}` : `${pad(minutes)}:${pad(seconds)}`;
 }
 
+function LiveStatus({ message }: { message: string }) {
+  return (
+    <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+      {message}
+    </p>
+  );
+}
+
 export default function PodPlayClient({
   groupName,
   tier,
@@ -105,6 +114,7 @@ export default function PodPlayClient({
   const [standings, setStandings] = useState<RankStatePayload | null>(null);
 
   const submittedRef = useRef(false);
+  const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [offline, setOffline] = useState(false);
 
   const windowMs = session ? session.windowSeconds * 1000 : 0;
@@ -251,19 +261,21 @@ export default function PodPlayClient({
 
   if (phase === "joining" || phase === "loading" || phase === "submitting") {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center">
+      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+        <LiveStatus message={phase === "submitting" ? "Your pod paper is being marked." : "Preparing your pod."} />
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">Pod play</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">
           {phase === "submitting" ? "Marking your paper…" : "Seating your pod…"}
         </h1>
         <p className="mt-3 text-sm text-slate-400">The draw is server-side: every member gets their own question order.</p>
-      </main>
+      </div>
     );
   }
 
   if (phase === "waiting" || phase === "error") {
     return (
-      <main className="mx-auto max-w-2xl px-4 py-16">
+      <div className="mx-auto max-w-2xl px-4 py-16">
+        <LiveStatus message={error || "Waiting for enough pod members."} />
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">Pod play</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">
           {phase === "waiting" ? "Not enough ready members" : "This pod cannot start"}
@@ -288,13 +300,14 @@ export default function PodPlayClient({
             Back to the ladder
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   if (phase === "queued") {
     return (
-      <main className="mx-auto max-w-2xl px-4 py-16 text-center">
+      <div className="mx-auto max-w-2xl px-4 py-16 text-center">
+        <LiveStatus message="Your pod paper is saved on this device and will sync when the connection returns." />
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">Pod play · saved</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Offline — answers saved, will sync</h1>
         <p className="mt-3 text-sm text-slate-400">
@@ -317,14 +330,15 @@ export default function PodPlayClient({
             See what is saved
           </Link>
         </div>
-      </main>
+      </div>
     );
   }
 
   if (phase === "done" && result) {
     const medal = result.placement === 1 ? "1st" : result.placement === 2 ? "2nd" : result.placement === 3 ? "3rd" : `${result.placement}th`;
     return (
-      <main className="mx-auto max-w-2xl px-4 py-16 text-center">
+      <div className="mx-auto max-w-2xl px-4 py-16 text-center">
+        <LiveStatus message={`Your paper was graded. You placed ${medal} with ${result.score} correct answers.`} />
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">Pod result</p>
         <h1 className="mt-3 font-serif text-4xl font-bold text-slate-100">
           {medal} <span className="text-gold">· {result.score} correct</span>
@@ -353,6 +367,13 @@ export default function PodPlayClient({
           </p>
         )}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {matchId ? (
+            <WinCardButton
+              matchId={matchId}
+              label="Share win card"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-gold/40 px-5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-60"
+            />
+          ) : null}
           <Link
             href="/league/ladder"
             className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
@@ -367,16 +388,27 @@ export default function PodPlayClient({
             Play the next pod
           </button>
         </div>
-      </main>
+      </div>
     );
   }
 
   if (!session || !question) return null;
 
   const elapsedRatio = windowMs > 0 ? Math.min(1, Math.max(0, 1 - remaining / windowMs)) : 0;
+  const selectedOption = answers[question.id];
+  const timeAnnouncement =
+    remaining === 0
+      ? " Time is up. Your paper is being submitted."
+      : remaining <= 60_000
+        ? " One minute remains in this pod."
+        : "";
+  const liveMessage = `Question ${index + 1} of ${session.questions.length}. ${
+    selectedOption ? `Selected ${selectedOption}.` : "No answer selected."
+  } ${answeredCount} answered.${timeAnnouncement}`;
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 md:py-12">
+    <div className="mx-auto max-w-5xl px-4 py-8 md:py-12">
+      <LiveStatus message={liveMessage} />
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">Pod play</p>
@@ -428,13 +460,37 @@ export default function PodPlayClient({
           <div className="mt-5 space-y-3" role="radiogroup" aria-label="Answers">
             {question.options.map((option, i) => {
               const selected = answers[question.id] === option;
+              const selectedIndex = question.options.findIndex(
+                (candidate) => candidate === answers[question.id]
+              );
               return (
                 <button
                   key={`${question.id}-${i}`}
+                  ref={(element) => {
+                    optionRefs.current[i] = element;
+                  }}
                   type="button"
                   role="radio"
                   aria-checked={selected}
+                  tabIndex={selected || (selectedIndex < 0 && i === 0) ? 0 : -1}
                   onClick={() => setAnswers((prev) => ({ ...prev, [question.id]: option }))}
+                  onKeyDown={(event) => {
+                    const lastIndex = question.options.length - 1;
+                    const nextIndex =
+                      event.key === "ArrowRight" || event.key === "ArrowDown"
+                        ? (i + 1) % question.options.length
+                        : event.key === "ArrowLeft" || event.key === "ArrowUp"
+                          ? (i - 1 + question.options.length) % question.options.length
+                          : event.key === "Home"
+                            ? 0
+                            : event.key === "End"
+                              ? lastIndex
+                              : null;
+                    if (nextIndex === null) return;
+                    event.preventDefault();
+                    setAnswers((prev) => ({ ...prev, [question.id]: question.options[nextIndex] }));
+                    optionRefs.current[nextIndex]?.focus();
+                  }}
                   className={`gn-motion flex w-full items-start gap-3 rounded-xl border px-4 py-3 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] ${
                     selected ? "border-primary/60 bg-primary/10 text-slate-100" : "border-line bg-bg text-slate-300 hover:border-primary/50"
                   }`}
@@ -540,6 +596,6 @@ export default function PodPlayClient({
           </section>
         </aside>
       </div>
-    </main>
+    </div>
   );
 }
