@@ -4,6 +4,7 @@ import prisma from "@/lib/db";
 import { SUBJECTS, topicBySlug } from "@/lib/curriculum";
 import { ChevronRight, ClipboardCheck, HelpCircle, FlaskConical } from "lucide-react";
 import { boardTopicQuestionCounts, totalOf, type TopicTypeCounts } from "@/lib/board-bank";
+import { boardBySlug } from "@/lib/exam-bank";
 
 export const dynamic = "force-dynamic";
 
@@ -55,10 +56,16 @@ function resolveSubject(
 // board page, the exams hub, /api/questions and the blueprint manifest always
 // agree. Tags are no longer the bank source.
 export default async function BoardPracticePickerPage({ params }: PickerPageProps) {
+  const examSlug = params.exam.toLowerCase();
+
+  // Registry check FIRST — retired boards return proper 404.
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) notFound();
+
   const examination = await prisma.examination.findFirst({
     where: {
       domain: "highschool",
-      slug: { equals: params.exam.toLowerCase(), mode: "insensitive" },
+      slug: { equals: examSlug, mode: "insensitive" },
     },
   });
   if (!examination) notFound();

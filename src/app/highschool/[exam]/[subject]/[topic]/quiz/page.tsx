@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import prisma from "@/lib/db";
 import QuizClient, { QuestionItem } from "./QuizClient";
+import { boardBySlug } from "@/lib/exam-bank";
 
 interface QuizPageProps { params: { exam: string; subject: string; topic: string } }
 
@@ -8,6 +9,11 @@ export default async function QuizPage({ params }: QuizPageProps) {
   const examSlug = params.exam.toLowerCase();
   const subjectSlug = params.subject.toLowerCase();
   const topicSlug = params.topic.toLowerCase();
+
+  // Registry check FIRST — retired boards return proper 404.
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) notFound();
+
   const examination = await prisma.examination.findFirst({ where: { domain: "highschool", code: { equals: examSlug, mode: "insensitive" } } });
   if (!examination) notFound();
   const subjectTopicId = `${examination.code.toLowerCase()}-${subjectSlug}`;

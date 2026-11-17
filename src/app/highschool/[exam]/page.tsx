@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import prisma from "@/lib/db";
 import { BookOpen, HelpCircle, ArrowRight, GraduationCap } from "lucide-react";
+import { boardBySlug } from "@/lib/exam-bank";
 
 interface ExamHubPageProps {
   params: {
@@ -11,6 +12,12 @@ interface ExamHubPageProps {
 
 export default async function ExamHubPage({ params }: ExamHubPageProps) {
   const examSlug = params.exam.toLowerCase();
+
+  // Registry check FIRST — retired boards return proper 404.
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) {
+    notFound();
+  }
 
   // Scoped to domain: 'highschool'
   const examination = await prisma.examination.findFirst({
@@ -24,7 +31,6 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
   });
 
   if (!examination) {
-
     notFound();
   }
 

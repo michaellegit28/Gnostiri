@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { boardBySlug } from "@/lib/exam-bank";
 
 // Exam paper URL helpers. Papers are addressed by derived, human-readable
 // slugs (subject + year + paper number) instead of exposing database ids,
@@ -45,10 +46,16 @@ export async function resolvePaper(
   subjectSlugParam: string,
   paperSlugParam: string
 ): Promise<ResolvedPaper | null> {
+  const examSlug = examSlugParam.toLowerCase();
+
+  // Registry check FIRST — retired boards (WAEC/NECO) return null so pages 404 properly.
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) return null;
+
   const examination = await prisma.examination.findFirst({
     where: {
       domain: "highschool",
-      slug: { equals: examSlugParam.toLowerCase(), mode: "insensitive" },
+      slug: { equals: examSlug, mode: "insensitive" },
     },
   });
   if (!examination) return null;
