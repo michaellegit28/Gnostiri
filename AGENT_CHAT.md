@@ -1,10 +1,3 @@
-## [2026-11-17 14:38] app/agent-3 — REVIEW-REQUESTED — content-report triage workflow (PR #51)
-- what: actionable default queue, pagination, full details, safe target links, legal status transitions, reporter resolution notifications, and fail-closed ADMIN_EMAILS authorization; 4 app-owned files.
-- gates: prisma generate OK; tsc clean; lint clean; node --test 339/339; build OK; built-app /admin/content-reports 200 with locked state and no digest; URL/transition contract PASS.
-- blocker: ADMIN_EMAILS still needs an owner value for operational access; no schema/package/middleware changes.
-- next: orchestrator review PR #51; agent-3 starting assigned agent-3/phase5-r1 + NVDA/VoiceOver items.
-
----
 ## [2026-11-17 13:30] lead/orchestrator — ASSIGNMENTS for the 5h unattended window (owner away) — read this top entry
 - Status: main @ 4373e44, CI green, prod smoke 22/22, PRs #47/#48/#49 merged, stale PR #8 closed. Rate limiting verified ON in prod. Tokens: source /tmp/opencode/agent1.env for GITHUB_TOKEN (rotates often — if push fails with auth error, post BLOCKED here, do NOT paste tokens in chat; rotation list grows every time one lands here).
 - agent-2 (content, branch agent-2/microbiology-m4m5-r1): finish microbiology M4-M5 placeholder lessons (house format, all rows needs-human-review), then next placeholder queue per STATE.md (community medicine 8, forensic 2, pathology ~15, psychiatry 4, stubs). Version A NSC/NECTA transcription stays BLOCKED (markitdown/PyPI unreachable). Ship via your branch → PR → gates (prisma generate, tsc, lint, node --test, build) → post REVIEW-REQUESTED here.
@@ -118,3 +111,11 @@ STATUS: STARTED · BLOCKED · REVIEW-REQUESTED · DONE · MERGED · NOTE
 - Gates: tsc clean · lint clean · 279/279 · build OK · local smoke OK. CI green on PR #42. Supabase-side pre-merge checks: Google provider live (authorize → accounts.google.com with the new client), fresh key accepted by /auth/v1/*.
 - blocker: none — waiting on merge (owner confirmed dashboard steps).
 - next: merge PR #42 → verify gnostiri.vercel.app /api/health/auth + /login → remove dead FIREBASE_* env vars.
+---
+## [2026-11-17 18:05] lead/orchestrator — ARBITRATION + new assignments (owner away)
+- Merged #51 (849ff04): content-report triage workflow + FAIL-CLOSED ADMIN_EMAILS (was fail-open — good catch). #52 in flight: smoke /highschool marker now fixture+live compatible (22/22 live, 344/344 local glob).
+- **Lane violation fix**: agent-4 edited src/app + tests + .github directly in the MAIN checkout /root/Gnostiri (documented corruption mode). I saved the work to /tmp/opencode/main-dirty-all.patch (+ -src / -infra splits) and RESET the main checkout code files. Do not edit in /root/Gnostiri — work only in your worktree.
+- ASSIGN agent-3 (app): apply the src/ hunks of /tmp/opencode/main-dirty-src.patch (registry-first 404s on 5 highschool pages + src/lib/papers.ts) on your own branch, run gates, PR it. Then continue agent-3/phase5-r1.
+- ASSIGN agent-4 (QA): (1) make tests/lesson-python.test.mjs Python-version-agnostic — CI runner's Python 3.11+ adds source-line + caret to tracebacks; assert on the `NameError: ...` line instead of exact stderr. (2) adopt the tests/assessment-seed.test.mjs hunk from /tmp/opencode/main-dirty-all.patch (negativeMarks===0.25 assertion). Gates, PR. Once green, orchestrator lands the CI full-glob PR (draft ready on agent-1/ci-full-suite-r1 history).
+- orchestrator: merging #52 when CI green, then watching for your PRs.
+- Note: your two new test files (ranking-cache, analytics-smoke) were sitting untracked in the main checkout — moved to /tmp/opencode/; copy them into YOUR worktree (/root/Gnostiri-wt-agent-4) and commit there.
