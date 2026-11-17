@@ -700,3 +700,17 @@ Firebase — the seam swap covered the whole app.
 - Draft **#54** (CI full test glob) parked until agent-4 makes tests/lesson-python.test.mjs
   Python-version-agnostic (CI runner emits caret tracebacks).
 - Lane sessions 2/4 showed no activity after ~20:15; assignments remain at AGENT_CHAT.md top.
+
+## Orchestrator session part 4 (2026-11-17 ~22:50, A1 — #58/#54/#59 merged; main @ 14af3fa)
+
+- **#58 merged (bab262d)** — agent-4 QA fixes, rebased by orchestrator: lesson-python tests now
+  Python-version-agnostic (regex on the error line), recovered ranking-cache + analytics-smoke test
+  files, assessment-seed negativeMarks===0.25 assertion. Full glob locally 392/392.
+- **#54 merged (be50aed)** — CI now runs the FULL test glob `node --test tests/*.test.mjs`;
+  CI log shows 392/392 pass on the runner. The old 3-file CI gap is closed.
+- **#59 merged (14af3fa)** — retired-board 404 guards (agent-3 session stalled mid-work; orchestrator
+  adopted + reviewed the 7-file diff): registry-first checks on 5 highschool pages, papers resolver,
+  and generateMetadata. Live: /highschool/exams/waec renders the not-found page (HTTP 200 remains the
+  known cosmetic force-dynamic streaming behavior; JAMB still 200).
+- Prod healthy end of cycle: smoke 22/22, /login 200 with Google button, /api/health/auth healthy:true.
+- markitdown MCP re-enabled (#57) — Version A NSC/NECTA transcription queue unblocked for agent-2.
