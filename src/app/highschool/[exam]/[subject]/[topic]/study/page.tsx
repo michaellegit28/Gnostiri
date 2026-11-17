@@ -4,6 +4,7 @@ import { LessonContent } from "@/types/lesson";
 import { topicSlugOf } from "@/app/highschool/exams/[exam]/topic-slug";
 import StudyReaderClient from "./StudyReaderClient";
 import { masterTopicFor } from "@/lib/study-crosswalk";
+import { boardBySlug } from "@/lib/exam-bank";
 
 interface StudyPageProps {
   params: {
@@ -20,6 +21,12 @@ export default async function StudyPage({ params, searchParams }: StudyPageProps
   const examSlug = params.exam.toLowerCase();
   const subjectSlug = params.subject.toLowerCase();
   const topicSlug = params.topic.toLowerCase();
+
+  // Registry check FIRST — retired boards return proper 404.
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) {
+    notFound();
+  }
 
   // Scoped to domain: 'highschool'
   const examination = await prisma.examination.findFirst({

@@ -46,6 +46,11 @@ interface BoardPageProps {
   };
 }
 
+export async function generateMetadata({ params }: { params: { exam: string } }) {
+  if (!boardBySlug(params.exam.toLowerCase())) notFound();
+  return { title: "Examination board" };
+}
+
 function formatDuration(minutes: number): string {
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
@@ -60,6 +65,14 @@ function formatDuration(minutes: number): string {
 // exist — are listed below the practice bank, never instead of it.
 export default async function ExamBoardPage({ params }: BoardPageProps) {
   const examSlug = params.exam.toLowerCase();
+
+  // Registry check FIRST — before any DB query — so retired boards (WAEC/NECO)
+  // return proper 404 status instead of 200 with "In preparation" (force-dynamic
+  // streaming limitation: notFound() after async work returns 200 shell).
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) {
+    notFound();
+  }
 
   const examination = await prisma.examination.findFirst({
     where: {
@@ -78,11 +91,6 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
   });
 
   if (!examination) {
-    notFound();
-  }
-
-  const registryBoard = boardBySlug(examSlug);
-  if (!registryBoard) {
     notFound();
   }
   const cbtPreset = presetFor(examination.code);

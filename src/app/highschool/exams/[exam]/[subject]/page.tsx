@@ -3,6 +3,7 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { ChevronRight, Clock, Target, FileText, ArrowRight } from "lucide-react";
 import { subjectSlugOf, paperSlugOf, paperUrl } from "@/lib/papers";
+import { boardBySlug } from "@/lib/exam-bank";
 
 export const dynamic = "force-dynamic";
 
@@ -23,10 +24,18 @@ function formatDuration(minutes: number): string {
 
 // All published papers for one subject of one board, newest year first.
 export default async function ExamSubjectPage({ params }: SubjectPageProps) {
+  const examSlug = params.exam.toLowerCase();
+
+  // Registry check FIRST — before any DB query — so retired boards return proper 404.
+  const registryBoard = boardBySlug(examSlug);
+  if (!registryBoard) {
+    notFound();
+  }
+
   const examination = await prisma.examination.findFirst({
     where: {
       domain: "highschool",
-      slug: { equals: params.exam.toLowerCase(), mode: "insensitive" },
+      slug: { equals: examSlug, mode: "insensitive" },
     },
   });
   if (!examination) notFound();
