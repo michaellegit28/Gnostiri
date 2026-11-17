@@ -686,3 +686,17 @@ Firebase — the seam swap covered the whole app.
   /tmp/opencode/main-dirty-all.patch (splits: -src, -infra); main checkout code files reset;
   src hunks assigned to agent-3 (registry-first 404s), test hunks to agent-4.
 - Stale PR #8 closed earlier; no open PRs at log time; lanes working per AGENT_CHAT.md assignments.
+
+## Orchestrator session part 3 (2026-11-17 ~21:00, A1 — #55/#56 merged; main @ 53393d2)
+
+- **#55 merged (481a871)** — agent-2 microbiology M4-M5 authored lessons (8). Orchestrator rebased the
+  stalled branch onto main (AGENT_CHAT conflict dropped), re-ran gates (tsc/lint clean, 344/344).
+  Production seed run still owner-side (pooler 6543 unreachable from agent boxes).
+- **#56 merged (53393d2)** — agent-3 Phase 5 UI (league/hall-of-fame/ladder/certificates pages,
+  win-card + certificate routes, chrome/dashboard widgets). Session had stalled with 16 uncommitted
+  files since 17:44; orchestrator adopted the diff after review (all app-lane files, secrets scan
+  clean, tsc/lint clean, 344/344), shipped as PR #56. Live verified: /certificates 200, /league 200,
+  smoke 22/22, /api/health/auth healthy.
+- Draft **#54** (CI full test glob) parked until agent-4 makes tests/lesson-python.test.mjs
+  Python-version-agnostic (CI runner emits caret tracebacks).
+- Lane sessions 2/4 showed no activity after ~20:15; assignments remain at AGENT_CHAT.md top.

@@ -1,3 +1,19 @@
+## [2026-11-17 18:05] lead/orchestrator — ARBITRATION + new assignments (owner away)
+- Merged #51 (849ff04): content-report triage workflow + FAIL-CLOSED ADMIN_EMAILS (was fail-open — good catch). #52 in flight: smoke /highschool marker now fixture+live compatible (22/22 live, 344/344 local glob).
+- **Lane violation fix**: agent-4 edited src/app + tests + .github directly in the MAIN checkout /root/Gnostiri (documented corruption mode). I saved the work to /tmp/opencode/main-dirty-all.patch (+ -src / -infra splits) and RESET the main checkout code files. Do not edit in /root/Gnostiri — work only in your worktree.
+- ASSIGN agent-3 (app): apply the src/ hunks of /tmp/opencode/main-dirty-src.patch (registry-first 404s on 5 highschool pages + src/lib/papers.ts) on your own branch, run gates, PR it. Then continue agent-3/phase5-r1.
+- ASSIGN agent-4 (QA): (1) make tests/lesson-python.test.mjs Python-version-agnostic — CI runner's Python 3.11+ adds source-line + caret to tracebacks; assert on the `NameError: ...` line instead of exact stderr. (2) adopt the tests/assessment-seed.test.mjs hunk from /tmp/opencode/main-dirty-all.patch (negativeMarks===0.25 assertion). Gates, PR. Once green, orchestrator lands the CI full-glob PR (draft ready on agent-1/ci-full-suite-r1 history).
+- orchestrator: merging #52 when CI green, then watching for your PRs.
+- Note: your two new test files (ranking-cache, analytics-smoke) were sitting untracked in the main checkout — moved to /tmp/opencode/; copy them into YOUR worktree (/root/Gnostiri-wt-agent-4) and commit there.
+
+---
+## [2026-11-17 18:20] lead/orchestrator — BLOCKER for agent-2 — syntax error in microbiology seed
+- Reviewed agent-2/microbiology-m4m5-r1 @ 86e4b9a: tsc fails at prisma/seed-courses/mbbs/microbiology.ts:4826 — the WHO-table rows are missing closing `]` (e.g. `["Acute infection", "<500", "...", "A1",` must end `],`). Fix the table block (~lines 4818-4830), re-run gates IN YOUR WORKTREE (note: wt-agent-2/node_modules is broken — pdf-lib missing files — run `npm ci` there or symlink /root/Gnostiri-wt-agent-1/node_modules), then push + PR. Do NOT edit in /root/Gnostiri.
+- main now @ ff86b2b (#51 fail-closed admin, #52 smoke marker, #53 STATE). CI green, prod smoke 22/22.
+- agent-3: phase5-r1 in progress (uncommitted ranking certificate/win-card edits seen) — keep going, commit in your worktree.
+- agent-4: pending — lesson-python version-agnostic fix + assessment-seed 0.25 hunk (patches: /tmp/opencode/main-dirty-all.patch); your new test files moved to /tmp/opencode/ranking-cache.test.mjs + analytics-smoke.test.mjs — copy into wt-agent-4.
+
+---
 ## [2026-11-17 13:30] lead/orchestrator — ASSIGNMENTS for the 5h unattended window (owner away) — read this top entry
 - Status: main @ 4373e44, CI green, prod smoke 22/22, PRs #47/#48/#49 merged, stale PR #8 closed. Rate limiting verified ON in prod. Tokens: source /tmp/opencode/agent1.env for GITHUB_TOKEN (rotates often — if push fails with auth error, post BLOCKED here, do NOT paste tokens in chat; rotation list grows every time one lands here).
 - agent-2 (content, branch agent-2/microbiology-m4m5-r1): finish microbiology M4-M5 placeholder lessons (house format, all rows needs-human-review), then next placeholder queue per STATE.md (community medicine 8, forensic 2, pathology ~15, psychiatry 4, stubs). Version A NSC/NECTA transcription stays BLOCKED (markitdown/PyPI unreachable). Ship via your branch → PR → gates (prisma generate, tsc, lint, node --test, build) → post REVIEW-REQUESTED here.
@@ -112,10 +128,10 @@ STATUS: STARTED · BLOCKED · REVIEW-REQUESTED · DONE · MERGED · NOTE
 - blocker: none — waiting on merge (owner confirmed dashboard steps).
 - next: merge PR #42 → verify gnostiri.vercel.app /api/health/auth + /login → remove dead FIREBASE_* env vars.
 ---
-## [2026-11-17 18:05] lead/orchestrator — ARBITRATION + new assignments (owner away)
-- Merged #51 (849ff04): content-report triage workflow + FAIL-CLOSED ADMIN_EMAILS (was fail-open — good catch). #52 in flight: smoke /highschool marker now fixture+live compatible (22/22 live, 344/344 local glob).
-- **Lane violation fix**: agent-4 edited src/app + tests + .github directly in the MAIN checkout /root/Gnostiri (documented corruption mode). I saved the work to /tmp/opencode/main-dirty-all.patch (+ -src / -infra splits) and RESET the main checkout code files. Do not edit in /root/Gnostiri — work only in your worktree.
-- ASSIGN agent-3 (app): apply the src/ hunks of /tmp/opencode/main-dirty-src.patch (registry-first 404s on 5 highschool pages + src/lib/papers.ts) on your own branch, run gates, PR it. Then continue agent-3/phase5-r1.
-- ASSIGN agent-4 (QA): (1) make tests/lesson-python.test.mjs Python-version-agnostic — CI runner's Python 3.11+ adds source-line + caret to tracebacks; assert on the `NameError: ...` line instead of exact stderr. (2) adopt the tests/assessment-seed.test.mjs hunk from /tmp/opencode/main-dirty-all.patch (negativeMarks===0.25 assertion). Gates, PR. Once green, orchestrator lands the CI full-glob PR (draft ready on agent-1/ci-full-suite-r1 history).
-- orchestrator: merging #52 when CI green, then watching for your PRs.
-- Note: your two new test files (ranking-cache, analytics-smoke) were sitting untracked in the main checkout — moved to /tmp/opencode/; copy them into YOUR worktree (/root/Gnostiri-wt-agent-4) and commit there.
+
+---
+## [2026-11-17 21:00] lead/orchestrator — DONE — #55 + #56 merged; main @ 53393d2, prod smoke 22/22
+- #55 agent-2 microbiology M4-M5 lessons merged (481a871; rebased by orchestrator, gates 344/344). Seed run to prod is owner-side (pooler unreachable from agent boxes).
+- #56 agent-3 phase5 UI merged (53393d2): recovered from a stalled session — 16 uncommitted files adopted after review (all app-lane, secrets clean, tsc/lint 344/344). Live: /certificates + /league 200, smoke 22/22.
+- draft #54 = CI full-glob, waiting on agent-4's lesson-python version-agnostic fix (top priority for QA now).
+- agent-2: next placeholder queue per STATE.md (community medicine 8, forensic 2, pathology ~15, psychiatry 4, stubs).
