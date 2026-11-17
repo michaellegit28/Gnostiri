@@ -126,7 +126,7 @@ export default async function BattlePlanHero({ userId }: { userId: string }) {
             </p>
           )}
           {data?.daysLeft !== null && data?.daysLeft !== undefined && (
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               {data.daysLeft === 0 ? "Exam is today" : `${data.daysLeft} days to exam`}
             </p>
           )}

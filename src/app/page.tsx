@@ -29,18 +29,19 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col font-sans">
       {user ? (
-        <main className="mx-auto w-full max-w-4xl px-5 py-8 md:py-10">
-          <section aria-label="Dashboard" className="space-y-8">
-            <Greeting name={user.name} email={user.email} />
-            <BattlePlanHero userId={user.id} />
-            <QuickLinks />
-            <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-              <StatsRow userId={user.id} />
-              <LeagueStatusWidget />
-            </div>
-            <RecentAchievements userId={user.id} />
-            <TutorShortcut />
-          </section>
+<main className="mx-auto w-full max-w-4xl px-5 py-8 md:py-10">
+            <section aria-label="Dashboard" className="space-y-8">
+              <Greeting name={user.name} email={user.email} />
+              <BattlePlanHero userId={user.id} />
+              <QuickLinks />
+              <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+                <StatsRow userId={user.id} />
+                <LeagueStatusWidget />
+              </div>
+              <RecentAchievements userId={user.id} />
+              <TutorShortcut />
+            </section>
+
         </main>
       ) : (
         <>

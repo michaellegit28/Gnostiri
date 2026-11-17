@@ -131,10 +131,10 @@ export default function BattlePlanPage() {
   const progress = total > 0 ? Math.round((doneCount / total) * 100) : 0;
 
   return (
-    <main className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
+    <main className="min-h-screen bg-transparent text-slate-100 px-5 py-8 md:p-10">
       <div className="mx-auto max-w-4xl space-y-8">
-        <nav className="flex items-center gap-2 text-sm text-slate-400">
-          <Link href="/highschool" className="hover:text-gold transition-colors">
+        <nav className="flex items-center gap-2 text-sm text-muted">
+          <Link href="/highschool" className="hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             High School
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
@@ -165,21 +165,21 @@ export default function BattlePlanPage() {
             </div>
             <Link
               href="/login"
-              className="px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors"
+              className="inline-flex min-h-[44px] items-center rounded-lg gn-btn-gold px-5 py-2.5 font-semibold text-sm transition-colors"
             >
               Sign In
             </Link>
           </div>
         ) : hasPlan === false || hasPlan === null ? (
-          <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6 md:p-8 space-y-5">
+          <section className="gn-card gn-lift p-6 md:p-8 space-y-6">
             <h2 className="text-xl font-bold">Build my plan</h2>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block text-sm text-slate-300">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <label className="block text-sm text-muted">
                 Exam
                 <select
                   value={exam}
                   onChange={(e) => setExam(e.target.value)}
-                  className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3"
+                  className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-slate-100"
                 >
                   {EXAMS.map((e) => (
                     <option key={e.code} value={e.code}>
@@ -188,14 +188,14 @@ export default function BattlePlanPage() {
                   ))}
                 </select>
               </label>
-              <label className="block text-sm text-slate-300">
+              <label className="block text-sm text-muted">
                 Exam date
                 <input
                   type="date"
                   value={examDate}
                   min={new Date().toISOString().slice(0, 10)}
                   onChange={(e) => setExamDate(e.target.value)}
-                  className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3"
+                  className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-slate-100"
                 />
               </label>
             </div>
@@ -203,7 +203,7 @@ export default function BattlePlanPage() {
               type="button"
               onClick={() => void generate()}
               disabled={busy}
-              className="inline-flex items-center gap-2 min-h-[48px] px-6 py-3 rounded-lg bg-gold text-slate-950 font-semibold text-sm hover:bg-gold-hover transition-colors disabled:opacity-50"
+              className="gn-btn-gold inline-flex items-center gap-2 min-h-[48px] px-6 py-3 rounded-lg font-semibold text-sm transition-all disabled:opacity-50"
             >
               <Swords className="w-4 h-4" />
               {busy ? "Building your mission…" : "Generate Battle Plan"}
@@ -267,15 +267,15 @@ export default function BattlePlanPage() {
                 today.map((item) => (
                   <div
                     key={`${item.topicId}-${item.kind}`}
-                    className="rounded-xl border border-slate-800 bg-slate-900 p-5 flex flex-col gap-3"
+                    className="gn-card gn-lift p-5 flex flex-col gap-4"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="text-xs text-slate-400">
+                      <div className="space-y-1">
+                        <div className="text-xs text-muted">
                           {item.subject} • {item.kind === "quiz" ? "Practice" : "Study"} •{" "}
                           {item.duration} min
                         </div>
-                        <div className="font-semibold text-slate-100 mt-1">{item.topic}</div>
+                        <div className="font-semibold text-slate-100">{item.topic}</div>
                       </div>
                       <span
                         className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border ${priorityStyle[item.priority]}`}
@@ -287,7 +287,7 @@ export default function BattlePlanPage() {
                             : "Review"}
                       </span>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-2">
+                    <div className="flex flex-col sm:flex-row gap-3">
                       <Link
                         href={`/highschool/${item.examCode}/${item.subjectSlug}/${item.topicSlug}/study`}
                         className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-sm font-semibold transition-colors"
@@ -297,7 +297,7 @@ export default function BattlePlanPage() {
                       </Link>
                       <Link
                         href={`/highschool/${item.examCode}/${item.subjectSlug}/${item.topicSlug}/quiz`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg bg-gold hover:bg-gold-hover text-slate-950 text-sm font-semibold transition-colors"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg gn-btn-gold text-sm font-semibold transition-colors"
                       >
                         <HelpCircle className="w-4 h-4" />
                         Quiz
@@ -354,7 +354,7 @@ export default function BattlePlanPage() {
             <button
               type="button"
               onClick={() => setHasPlan(false)}
-              className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors"
+              className="inline-flex min-h-[44px] items-center gap-2 text-sm text-muted hover:text-slate-200 transition-colors"
             >
               <RotateCcw className="w-4 h-4" />
               Rebuild with a new exam date
