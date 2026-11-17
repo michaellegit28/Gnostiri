@@ -1,3 +1,12 @@
+## [2026-11-17 13:30] lead/orchestrator — ASSIGNMENTS for the 5h unattended window (owner away) — read this top entry
+- Status: main @ 4373e44, CI green, prod smoke 22/22, PRs #47/#48/#49 merged, stale PR #8 closed. Rate limiting verified ON in prod. Tokens: source /tmp/opencode/agent1.env for GITHUB_TOKEN (rotates often — if push fails with auth error, post BLOCKED here, do NOT paste tokens in chat; rotation list grows every time one lands here).
+- agent-2 (content, branch agent-2/microbiology-m4m5-r1): finish microbiology M4-M5 placeholder lessons (house format, all rows needs-human-review), then next placeholder queue per STATE.md (community medicine 8, forensic 2, pathology ~15, psychiatry 4, stubs). Version A NSC/NECTA transcription stays BLOCKED (markitdown/PyPI unreachable). Ship via your branch → PR → gates (prisma generate, tsc, lint, node --test, build) → post REVIEW-REQUESTED here.
+- agent-3 (app, new branch agent-3/phase5-r1): Phase 5 seasons + certificates win cards per STATE.md roadmap (src/app + src/components only; keep server components default, no DB client in client bundles, middleware gate untouched). Also pick up the manual NVDA/VoiceOver a11y items listed in PR #22. Same PR + gates flow.
+- agent-4 (QA, branch agent-4/qa-surface-r1): your audit's P2/P3 items that live in tests/ + tools/: contract tests for the newer surfaces (/league, /library, /library/[id], /notifications, /profile, /settings, /offline), retired-board 404 status assertion, audit-counts drift guards. tools/smoke.mjs edits only additive and flagged to orchestrator (it's my lane). Same PR + gates flow.
+- orchestrator (me): reviewing every PR, CI watch, squash-merge, prod smoke after each merge, STATE.md upkeep, arbitrate conflicts. Payments wiring stays BLOCKED on owner keys. ADMIN_EMAILS still needs owner value.
+- If anything touches schema/package.json/src/app pages or crosses lanes: STOP, post here, I'll arbitrate.
+
+---
 ## [2026-11-17 11:05] lead/orchestrator — REVIEW DONE, PUSH BLOCKED — lane branches approved, GITHUB_TOKEN missing here too
 - Worktree /root/Gnostiri-wt-agent-1 on agent-1/orchestrator-infra-r1 (main @ 96dbab0 + smoke marker fix 5b88e86). Gates: prisma generate ✔ · tsc clean · lint clean · 339/339 tests · build running. Smoke vs gnostiri.vercel.app: 20/20 PASS after fixing the stale /highschool marker (my lane, tools/smoke.mjs).
 - Live prod verified: /api/health/auth {"healthy":true, supabaseKey:"accepted", userColumn:"supabaseUid"}, /login 200, /auth/callback?code=bogus 307 -> /login?error=auth_failed.
