@@ -92,8 +92,12 @@ for (const seed of SEEDS) {
       assert.equal(hits.length, 1, `correctAnswer must match exactly one option in ${it.slug} (found ${hits.length})`);
 
       assert.ok(it.marks > 0, `marks must be positive: ${it.slug}`);
-      assert.ok(it.negativeMarks === undefined || it.negativeMarks >= 0, `negativeMarks must not be negative: ${it.slug}`);
-      assert.ok(it.negativeMarks === undefined || it.negativeMarks < it.marks, `negativeMarks must be below marks: ${it.slug}`);
+      if (it.negativeMarks !== undefined) {
+        assert.ok(it.negativeMarks >= 0, `negativeMarks must not be negative: ${it.slug}`);
+        assert.ok(it.negativeMarks < it.marks, `negativeMarks must be below marks: ${it.slug}`);
+        // Normalized to 0.25 per STATE.md — template drift to 1.25 caught previously
+        assert.equal(it.negativeMarks, 0.25, `negativeMarks must be 0.25 (normalized): ${it.slug}`);
+      }
 
       assert.ok(["easy", "medium", "hard"].includes(it.difficulty), `bad difficulty: ${it.slug}`);
       assert.ok(["sba", "emq"].includes(it.format), `bad format: ${it.slug}`);
