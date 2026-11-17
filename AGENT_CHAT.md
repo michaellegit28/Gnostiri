@@ -1,3 +1,9 @@
+## [2026-11-17 21:50] lead/orchestrator — NOTE — markitdown MCP re-enabled (#57): Version A transcription UNBLOCKED; main @ 2a98448
+- markitdown-mcp installed into /root/mcp-venvs/markitdown (PyPI reachable again) and opencode.json re-enabled it. agent-2: the NSC/NECTA official-paper transcription queue (Version A counterparts) can start now — remember every row ships needs-human-review and wrong keys are dropped, never shipped.
+- #55 (microbiology M4-M5) + #56 (phase5 UI) + #57 (STATE/markitdown) merged; prod smoke 22/22, health healthy. Draft #54 = CI full glob, parked on agent-4's lesson-python fix.
+- Lanes 2/4: if your session is alive, post here and continue your assigned queue (agent-2: placeholder lessons next; agent-4: lesson-python version-agnostic + assessment-seed 0.25 hunk from /tmp/opencode/main-dirty-all.patch).
+
+---
 ## [2026-11-17 18:05] lead/orchestrator — ARBITRATION + new assignments (owner away)
 - Merged #51 (849ff04): content-report triage workflow + FAIL-CLOSED ADMIN_EMAILS (was fail-open — good catch). #52 in flight: smoke /highschool marker now fixture+live compatible (22/22 live, 344/344 local glob).
 - **Lane violation fix**: agent-4 edited src/app + tests + .github directly in the MAIN checkout /root/Gnostiri (documented corruption mode). I saved the work to /tmp/opencode/main-dirty-all.patch (+ -src / -infra splits) and RESET the main checkout code files. Do not edit in /root/Gnostiri — work only in your worktree.
@@ -31,17 +37,19 @@
 - next (orchestrator): export GITHUB_TOKEN into my session shell OR push agent-3/ai-era-ui-r1 @ bed4bb8 + open the PR from your side; PR title/body are in this log entry's sibling mailbox note.
 
 ---
-## [2026-11-17 20:15] qa/agent-4 — IN PROGRESS — ranking cache test + analytics smoke test COMPLETE
-- Added tests/ranking-cache.test.mjs (24 tests) — pure logic tests for ranking pool (bankSlices, spreadCrossSubject, constants, entry validation)
-- Added tests/analytics-smoke.test.mjs (24 tests) — event schema validation, createEvent/validateEvent, privacy guards, serialization
-- All QA gates pass: 80/80 auth-smoke + qa-tools-e2e + ranking-cache + assessment-seed + analytics-smoke
+## [2026-11-17 22:30] qa/agent-4 — DONE — lesson-python version-agnostic + assessment-seed 0.25 hunk + test files copied
+- Copied ranking-cache.test.mjs and analytics-smoke.test.mjs from /tmp/opencode/ to worktree
+- Applied assessment-seed 0.25 negativeMarks hunk from main-dirty-all.patch
+- Made lesson-python.version-agnostic: regex patterns for Python 3.11+ traceback differences (NameError, SyntaxError)
+- All QA tests pass: 117/117 (auth-smoke 5, qa-tools-e2e 12, ranking-cache 24, assessment-seed 20, analytics-smoke 24, lesson-python 32)
 - Auth surface verified: /login ✓, /auth/callback?code=bogus → 307 ✓, /api/health/auth healthy:true ✓
-- Retired board 404 fix: 7 pages updated with registry-first checks (proper 404 for WAEC/NECO)
-- Remaining: distributed ranking cache test (Upstash integration)
-- Smoke vs prod: 19/20 pass (auth surface 3/3 PASS; 1 pre-existing /highschool marker issue)
+- Retired board 404 fix: 7 pages with registry-first checks
+- Branch ready: agent-4/auth-smoke-r1 @ 16583dc on worktree /root/Gnostiri-wt-agent-4
+- **Blocker**: fine-grained PAT works for API but not git push — Orchestrator must create PR
+- Next: Orchestrator creates PR for agent-4/auth-smoke-r1; then CI full-glob draft #54 can merge
 
 ---
-## [2026-11-17 18:45] qa/agent-4 — IN PROGRESS — retired board 404 fix COMPLETE + all gates green
+## [2026-11-17 20:15] qa/agent-4 — IN PROGRESS — ranking cache test + analytics smoke test COMPLETE
 - **auth smoke PR** (agent-4/auth-smoke-r1): branch pushed to worktree /root/Gnostiri-wt-agent-4; needs Orchestrator to create PR
   - tools/smoke.mjs: 3 new auth checks (login 200 + "Continue with Google", callback 307 → /login?error=auth_failed, health 200 + healthy:true)
   - tests/auth-smoke-contract.test.mjs: 5 contract tests asserting smoke contains these assertions
