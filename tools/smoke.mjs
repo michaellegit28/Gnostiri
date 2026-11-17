@@ -79,7 +79,7 @@ const CATALOGUE = [
   {
     path: "/highschool",
     name: "highschool-hub",
-    markers: [/Read the textbook/i, /Open textbooks/i],
+    markers: [/Open textbooks/i, /exams/i],
   },
   {
     path: "/highschool/exams",
