@@ -4,9 +4,7 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import {
   COMPETITION_FORMATS,
-  CURRENT_SEASON,
   FORMAT_META,
-  SEASONS,
   evaluateLeagueEligibility,
   type CompetitionFormat,
   type LeagueEligibility,
@@ -122,18 +120,45 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
   );
 }
 
-function SeasonBanner() {
-  const season = SEASONS.find((s) => s.slug === CURRENT_SEASON) ?? SEASONS[SEASONS.length - 1];
+function SeasonBanner({ season }: { season: { name: string; status: string; endsAt: Date } | null }) {
   return (
     <section className="rounded-2xl border border-electric/30 bg-gradient-to-r from-electric/15 via-slate-900 to-slate-950 p-6 md:p-8">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Merit League season</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Global Ranking season</p>
       <h2 className="mt-2 font-serif text-3xl font-bold text-slate-100">
-        {season.label} <span className="text-electric-text">is live</span>
+        {season ? (
+          <>
+            {season.name} <span className="text-electric-text">{season.status === "active" ? "is live" : season.status}</span>
+          </>
+        ) : (
+          "No ranking season is open"
+        )}
       </h2>
       <p className="mt-2 inline-flex items-center gap-2 text-sm text-slate-400">
         <CalendarRange className="h-4 w-4 text-electric-text" aria-hidden />
-        {season.window} · mid-season entry open, finals + certificates land at season close
+        {season
+          ? `Global Ranking closes ${season.endsAt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} · certificates land at season close`
+          : "The ladder will open when the next Global Ranking season begins."}
       </p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <Link
+          href="/league/ladder"
+          className="inline-flex min-h-[44px] items-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          Open the ladder
+        </Link>
+        <Link
+          href="/league/hall-of-fame"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          Hall of Fame
+        </Link>
+        <Link
+          href="/certificates"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          My certificates
+        </Link>
+      </div>
     </section>
   );
 }
@@ -183,15 +208,23 @@ export default async function LeagueLobby() {
     ? { OR: [{ visibility: "public" }, { hostId: user.id }, { members: { some: { userId: user.id } } }] }
     : { visibility: "public" };
 
-  const cups = (await prisma.competition.findMany({
-    where,
-    orderBy: { startsAt: "asc" },
-    take: 60,
-    include: {
-      host: { select: { name: true } },
-      _count: { select: { members: true } },
-    },
-  })) as CupRow[];
+  const [cupRows, rankingSeason] = await Promise.all([
+    prisma.competition.findMany({
+      where,
+      orderBy: { startsAt: "asc" },
+      take: 60,
+      include: {
+        host: { select: { name: true } },
+        _count: { select: { members: true } },
+      },
+    }),
+    prisma.season.findFirst({
+      where: { status: "active" },
+      orderBy: { startsAt: "desc" },
+      select: { name: true, status: true, endsAt: true },
+    }),
+  ]);
+  const cups = cupRows as CupRow[];
 
   // Mark which cups the viewer already belongs to so the card can say so.
   const joinedIds = new Set<string>();
@@ -210,8 +243,8 @@ export default async function LeagueLobby() {
   const eligibility = user ? await evaluateLeagueEligibility(user.id) : null;
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 md:py-14">
-      <SeasonBanner />
+    <div className="mx-auto max-w-5xl px-4 py-10 md:py-14">
+      <SeasonBanner season={rankingSeason} />
 
       {/* Four cup formats */}
       <section className="mt-10">
@@ -290,6 +323,6 @@ export default async function LeagueLobby() {
           You are in {joinedIds.size} cup{joinedIds.size === 1 ? "" : "s"} — joined cards are marked.
         </p>
       )}
-    </main>
+    </div>
   );
 }

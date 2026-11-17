@@ -45,7 +45,10 @@ export default function NotificationBell() {
   const [open, setOpen] = useState(false);
   const [items, setItems] = useState<BellNotification[]>([]);
   const [unread, setUnread] = useState(0);
+  const [announcement, setAnnouncement] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
+  const bellRef = useRef<HTMLButtonElement>(null);
+  const previousUnread = useRef<number | null>(null);
 
   const load = useCallback(async () => {
     try {
@@ -56,8 +59,17 @@ export default function NotificationBell() {
       }
       if (!res.ok) return;
       const data = (await res.json()) as { notifications: BellNotification[]; unreadCount: number };
+      const nextUnread = data.unreadCount ?? 0;
       setItems(data.notifications ?? []);
-      setUnread(data.unreadCount ?? 0);
+      setUnread(nextUnread);
+      if (previousUnread.current !== null && previousUnread.current !== nextUnread) {
+        setAnnouncement(
+          nextUnread > 0
+            ? `${nextUnread} unread notification${nextUnread === 1 ? "" : "s"}.`
+            : "All notifications are read."
+        );
+      }
+      previousUnread.current = nextUnread;
       setStatus("ready");
     } catch {
       // A dropped poll must never blank the bell — the last good state stays.
@@ -74,7 +86,10 @@ export default function NotificationBell() {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        window.requestAnimationFrame(() => bellRef.current?.focus());
+      }
     };
     const onClick = (e: MouseEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
@@ -89,6 +104,7 @@ export default function NotificationBell() {
 
   const markAllRead = async () => {
     setUnread(0);
+    setAnnouncement("All notifications are read.");
     setItems((prev) => prev.map((n) => ({ ...n, read: true })));
     try {
       await fetch("/api/notifications", {
@@ -114,10 +130,15 @@ export default function NotificationBell() {
   if (status === "anonymous") return null;
 
   return (
-    <div ref={rootRef} className="fixed top-6 right-[4.5rem] z-[70]">
+    <div ref={rootRef} className="relative z-[70]">
+      <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        {announcement}
+      </span>
       <button
+        ref={bellRef}
         type="button"
         aria-label={unread > 0 ? `Notifications — ${unread} unread` : "Notifications"}
+        aria-controls="notification-panel"
         aria-expanded={open}
         onClick={() => {
           setOpen((v) => !v);
@@ -134,19 +155,27 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-[3.25rem] w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-surface/95 shadow-2xl shadow-black/50 backdrop-blur-lg backdrop-blur-lg">
+        <div
+          id="notification-panel"
+          role="region"
+          aria-label="Notifications"
+          className="absolute right-0 top-[3.25rem] w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-surface/95 shadow-2xl shadow-black/50 backdrop-blur-lg backdrop-blur-lg"
+        >
           <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Notifications</p>
-            {unread > 0 && (
-              <button
-                type="button"
-                onClick={markAllRead}
-                className="gn-motion flex min-h-[44px] items-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-slate-300 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <CheckCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                Mark all read
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => {
+                if (unread > 0) void markAllRead();
+              }}
+              aria-disabled={unread === 0}
+              className={`gn-motion flex min-h-[44px] items-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-slate-300 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                unread === 0 ? "cursor-default opacity-60" : ""
+              }`}
+            >
+              <CheckCheck className="h-3.5 w-3.5" aria-hidden="true" />
+              {unread > 0 ? "Mark all read" : "All read"}
+            </button>
           </div>
 
           {items.length === 0 ? (

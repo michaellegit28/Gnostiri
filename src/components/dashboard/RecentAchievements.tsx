@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Award, GraduationCap, Star, Trophy } from "lucide-react";
 import prisma from "@/lib/db";
 import Confetti from "@/components/dashboard/Confetti";
@@ -57,11 +58,19 @@ export default async function RecentAchievements({ userId }: { userId: string })
           <Trophy className="h-5 w-5 text-gold" aria-hidden />
           Recent achievements
         </h2>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-sm font-bold text-gold">
-          <Star className="h-4 w-4 gn-flame" aria-hidden />
-          {stars.toLocaleString()}
-          <span className="sr-only"> stars, tier {tier}</span>
-        </span>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/certificates"
+            className="inline-flex min-h-[44px] items-center rounded-lg border border-line-strong px-3 text-xs font-semibold text-muted transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            Certificates
+          </Link>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-sm font-bold text-gold">
+            <Star className="h-4 w-4 gn-flame" aria-hidden />
+            {stars.toLocaleString()}
+            <span className="sr-only"> stars, tier {tier}</span>
+          </span>
+        </div>
       </div>
 
       {badges.length === 0 && certs.length === 0 ? (

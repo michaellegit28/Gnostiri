@@ -15,6 +15,7 @@ import {
   MonitorPlay,
   Settings,
   BarChart3,
+  FileBadge,
   type LucideIcon,
 } from "lucide-react";
 
@@ -116,6 +117,7 @@ export const NAV_ZONES: NavZone[] = [
     items: [
       { href: "/battle-plan", label: "Battle Plan", icon: Swords, note: "Your day-by-day mission" },
       { href: "/progress", label: "Progress", icon: BarChart3, note: "Streaks, accuracy, history" },
+      { href: "/certificates", label: "Certificates", icon: FileBadge, note: "Season awards & course completion" },
       { href: "/university/revision", label: "Revision queue", icon: RotateCcw, note: "Concepts due for review" },
     ],
   },

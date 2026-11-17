@@ -108,7 +108,7 @@ export default async function LadderPage() {
     // Anonymous, or a signed-in member who has not joined the queue yet:
     // the ladder is public, the climb is not.
     return (
-      <main className="mx-auto max-w-3xl px-4 py-10 md:py-14">
+      <div className="mx-auto max-w-3xl px-4 py-10 md:py-14">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Global ranking</p>
         <h1 className="mt-2 font-serif text-3xl font-bold text-slate-100 md:text-4xl">The ladder</h1>
         <p className="mt-3 text-sm text-slate-400">
@@ -140,7 +140,7 @@ export default async function LadderPage() {
             </>
           )}
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -158,13 +158,20 @@ export default async function LadderPage() {
   });
 
   // The member's most recent star award — the ONLY delta the win-card route
-  // will render for a rank-up (it re-checks it against their last ledger row,
-  // so a spoofed number is a 400 rather than a card).
+  // will render for a rank-up. The route re-checks both the ledger row and the
+  // tier boundary it crossed, so a spoofed number is a 400 rather than a card.
   const lastAward = await prisma.starLedger.findFirst({
     where: { userId: user.id },
     orderBy: { createdAt: "desc" },
-    select: { delta: true },
+    select: { delta: true, balanceAfter: true },
   });
+
+  const rankUpAward =
+    lastAward &&
+    tierFor(lastAward.balanceAfter) > tierFor(lastAward.balanceAfter - lastAward.delta) &&
+    tierFor(lastAward.balanceAfter) === tier
+      ? lastAward
+      : null;
 
   const leaderRows = membership ? await groupLeaderboard(membership.group.id) : [];
   const handles = await prisma.user.findMany({
@@ -181,7 +188,7 @@ export default async function LadderPage() {
   const openPods = seats.filter((seat) => seat.match.windowClosesAt.getTime() > nowMs);
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 md:py-14">
+    <div className="mx-auto max-w-5xl px-4 py-10 md:py-14">
       <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Global ranking</p>
       <div className="mt-2 flex flex-wrap items-end justify-between gap-4">
         <h1 className="font-serif text-3xl font-bold text-slate-100 md:text-4xl">
@@ -198,12 +205,12 @@ export default async function LadderPage() {
           detail={nextTier ? `${starsToNextTier(stars).toLocaleString()} ★ to ${nextTier.threshold.toLocaleString()}` : "Paragon reached"}
           ratio={progress}
         />
-        {lastAward && (
+        {rankUpAward && lastAward && (
           <div className="mt-5">
             <WinCardButton
               tier={tier}
               delta={lastAward.delta}
-              context={`Rank up · ${info.label}`}
+              label="Share tier-up card"
               className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-gold/40 px-5 font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-60"
             />
           </div>
@@ -351,6 +358,6 @@ export default async function LadderPage() {
           )}
         </div>
       </div>
-    </main>
+    </div>
   );
 }
