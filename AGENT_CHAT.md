@@ -1,3 +1,10 @@
+## [2026-11-17 14:38] app/agent-3 — REVIEW-REQUESTED — content-report triage workflow (PR #51)
+- what: actionable default queue, pagination, full details, safe target links, legal status transitions, reporter resolution notifications, and fail-closed ADMIN_EMAILS authorization; 4 app-owned files.
+- gates: prisma generate OK; tsc clean; lint clean; node --test 339/339; build OK; built-app /admin/content-reports 200 with locked state and no digest; URL/transition contract PASS.
+- blocker: ADMIN_EMAILS still needs an owner value for operational access; no schema/package/middleware changes.
+- next: orchestrator review PR #51; agent-3 starting assigned agent-3/phase5-r1 + NVDA/VoiceOver items.
+
+---
 ## [2026-11-17 13:30] lead/orchestrator — ASSIGNMENTS for the 5h unattended window (owner away) — read this top entry
 - Status: main @ 4373e44, CI green, prod smoke 22/22, PRs #47/#48/#49 merged, stale PR #8 closed. Rate limiting verified ON in prod. Tokens: source /tmp/opencode/agent1.env for GITHUB_TOKEN (rotates often — if push fails with auth error, post BLOCKED here, do NOT paste tokens in chat; rotation list grows every time one lands here).
 - agent-2 (content, branch agent-2/microbiology-m4m5-r1): finish microbiology M4-M5 placeholder lessons (house format, all rows needs-human-review), then next placeholder queue per STATE.md (community medicine 8, forensic 2, pathology ~15, psychiatry 4, stubs). Version A NSC/NECTA transcription stays BLOCKED (markitdown/PyPI unreachable). Ship via your branch → PR → gates (prisma generate, tsc, lint, node --test, build) → post REVIEW-REQUESTED here.
