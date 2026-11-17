@@ -1,3 +1,38 @@
+## [2026-11-17 11:05] lead/orchestrator — REVIEW DONE, PUSH BLOCKED — lane branches approved, GITHUB_TOKEN missing here too
+- Worktree /root/Gnostiri-wt-agent-1 on agent-1/orchestrator-infra-r1 (main @ 96dbab0 + smoke marker fix 5b88e86). Gates: prisma generate ✔ · tsc clean · lint clean · 339/339 tests · build running. Smoke vs gnostiri.vercel.app: 20/20 PASS after fixing the stale /highschool marker (my lane, tools/smoke.mjs).
+- Live prod verified: /api/health/auth {"healthy":true, supabaseKey:"accepted", userColumn:"supabaseUid"}, /login 200, /auth/callback?code=bogus 307 -> /login?error=auth_failed.
+- Reviewed + APPROVED (gates re-run by me): agent-3/ai-era-ui-r1 @ bb85e47 (tsc/lint clean, 339/339) and agent-4/auth-smoke-r1 @ 6aed1ec (tsc/lint clean, 344/344; its 3 new smoke probes verified live). Secrets scan clean on both.
+- blocker: GITHUB_TOKEN absent from this session too (env, profiles, .env, git-credentials all empty/stub) — git push fails "could not read Username", gh unauthenticated. Cannot push lane branches, open PRs, merge, or close stale PR #8. Owner: export GITHUB_TOKEN into the agent sessions (or push agent-3/ai-era-ui-r1 + agent-4/auth-smoke-r1 + agent-1/orchestrator-infra-r1 and open PRs from a shell that has it).
+- next: on token arrival — push 3 branches, open PRs, watch CI, squash-merge, re-smoke prod, close PR #8.
+
+---
+## [2026-11-17 08:15] qa/agent-4 — NOTE — comprehensive platform audit complete; P0-P3 distribution requested
+- Full audit report: 348 TS/TSX files, schema, 23 test suites, CI, deployment — 27 features done, 11 partial, 23 missing, 17 critical bugs (4 P0, 7 P1, 6 P2), 22 improvements.
+- P0s: Supabase anon key rejected (since FIXED 11-16), Upstash empty, payment keys empty, no CI history (since FIXED), stale DB password (since FIXED).
+- P1 data-integrity: 330 stale JAMB tags, 0 Version A counterparts, 0 verified rows, negativeMarks drift risk, psychiatry spine gap (since fixed).
+- Need from orchestrator: assign remaining P0-P3 per lane boundaries; provide GITHUB_TOKEN for pushes.
+
+---
+## [2026-11-17 06:45] qa/agent-4 — REVIEW-REQUESTED — auth smoke extended, contract test added
+- tools/smoke.mjs: 3 auth checks vs https://gnostiri.vercel.app (/login 200 + "Continue with Google"; /auth/callback?code=bogus 307 -> /login?error=auth_failed; /api/health/auth 200 {healthy:true}) + expectRedirect in probeHtml + booleanField in probeApi; tests/auth-smoke-contract.test.mjs (5 tests) + qa-fixtures/qa-tools updates.
+- QA gates: prisma generate ✓, next lint ✓, node --test 17/17 on the touched suites. Build blocked on Google Fonts fetch in that env (pre-existing).
+- PR ready: agent-4/auth-smoke-r1 @ 6aed1ec on worktree /root/Gnostiri-wt-agent-4. blocker: no GITHUB_TOKEN in shell.
+- next: orchestrator push + PR (verdict 11-17 11:05: APPROVED, gates re-run 344/344).
+
+---
+## [2026-11-16 09:20] app/agent-3 — BLOCKED — push/PR blocked: no GITHUB_TOKEN in my session (work DONE, gates green)
+- AI-era interface pass on agent-3/ai-era-ui-r1 (worktree /root/Gnostiri-wt-agent-3): /, /battle-plan, /highschool + BattlePlanHero/StatsRow — container rhythm px-5 py-8 md:p-10 space-y-8, gn-card/gn-lift/gn-btn-gold, text-muted on 12px copy, min-h-[44px] CTAs, focus rings. Server components kept; no new deps; no lane violations.
+- Gates: prisma generate ✔ · tsc clean · lint clean · 339/339 · build exit 0. Smoke vs prod 19/20 — the 1 fail (/highschool marker) pre-existing on main; fixed by orchestrator 11-17 (5b88e86).
+- blocker: no GITHUB_TOKEN anywhere in my session; ~/.git-credentials is a blank stub. Branch later advanced to bb85e47 (JSX indent fix).
+- next: orchestrator push + PR (verdict 11-17 11:05: APPROVED, gates re-run clean).
+
+---
+## [2026-11-16 08:56] app/agent-3 — STARTED — AI-era interface pass (dashboard, battle-plan, highschool cards)
+- worktree /root/Gnostiri-wt-agent-3 on agent-3/ai-era-ui-r1 (from main @ 96dbab0).
+- scope: spacing/typography tightening on /, battle-plan, /highschool; token classes only; 44px targets; focus-visible; server components; honest empty states.
+- next: implement, then gates + prod smoke + PR.
+
+---
 ## [2026-11-16 08:30] lead/orchestrator — DONE — production auth stack HEALTHY (healthy:true)
 - DATABASE_URL password updated in Vercel (production+preview) with the owner's current value; redeployed (dpl on main 281b8fa). /api/health/auth now returns {"healthy":true, supabaseKey:"accepted", userColumn:"supabaseUid"} HTTP 200 — the 20261115120000_supabase_auth migration IS applied (owner ran the SQL).
 - Live checks on gnostiri.vercel.app: /login 200 with "Continue with Google", /auth/callback?code=bogus 307 -> /login?error=auth_failed, /api/boards 200, /university renders course data, Supabase authorize endpoint 302s to accounts.google.com (Google provider + client + callbacks correct).

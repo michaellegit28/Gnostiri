@@ -1,4 +1,4 @@
-# Gnostiri — STATE.md (2026-10-20)
+# Gnostiri — STATE.md (2026-11-17)
 
 Live URL: gnostiri.vercel.app · Repo: github.com/michaellegit28/Gnostiri · Branch: main
 
@@ -35,7 +35,7 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 |---|---|---|
 | DATABASE_URL | set (sensitive) | Supabase PostgreSQL |
 | NEXT_PUBLIC_SUPABASE_URL | set | https://djkdszhhajsakwpxaznu.supabase.co |
-| NEXT_PUBLIC_SUPABASE_ANON_KEY | STALE (sensitive) | Project rejects the stored key — refresh from Dashboard > Project Settings > API |
+| NEXT_PUBLIC_SUPABASE_ANON_KEY | set (sensitive) | Accepted by the project — /api/health/auth reports supabaseKey:"accepted" (2026-11-16) |
 | NEXT_PUBLIC_AUTH_REDIRECT_BASE_URL | set | https://gnostiri.vercel.app (preview/localhost fall back to their own origin) |
 | NEXT_PUBLIC_AUTH_GOOGLE_ENABLED | set | "true" — gates the Google button |
 | OPENAI_API_KEY | set (sensitive) | Atria Dawn key |
@@ -115,22 +115,31 @@ All seeded to production; all rows needs-human-review, nothing "verified". Seede
 
 ## Open blockers
 
-1. **Rate limiting NOT ENFORCED** — Upstash env vars empty; all AI endpoints
-   are unlimited (cost risk on Atria quota)
+1. **Rate limiting — appears ENFORCED again**: middleware is fail-closed in
+   production (503 when UPSTASH_* is empty) and live routes return 200, so the
+   Upstash vars must be set on Vercel now; confirm in the dashboard when a
+   VERCEL_TOKEN is available (last env dump here is stale, 2026-11-15)
 2. **Payments not wired** — all provider keys empty; no revenue possible
-3. **Supabase Google OAuth pending dashboard config** — code migrated off
-   Firebase; user must still (a) run the 20261115120000_supabase_auth
-   migration SQL, (b) paste a fresh anon key over the stale
-   NEXT_PUBLIC_SUPABASE_ANON_KEY, (c) enable the Google provider with the
-   Google Cloud OAuth client (redirect URI: Supabase /auth/v1/callback)
+3. **Supabase OAuth — code+DB side DONE (2026-11-16)**: migration
+   20261115120000_supabase_auth applied (userColumn supabaseUid confirmed by
+   /api/health/auth), fresh anon key accepted, Google provider live
+   (authorize 302s to accounts.google.com), 9 dead FIREBASE_* vars deleted.
+   Remaining: owner's manual click-test of "Continue with Google" on a phone
 4. **Version A gap in the JAMB banks** — 0 of 6,000 JAMB coreIds yet have an
    official ZA/TZ Version A counterpart (G13); official NSC/NECTA transcription
    queue owned by A2 next round
 5. **Secrets exposed in chat** — GitHub PAT, Vercel token, Atria key,
    Firebase service-account key, Supabase DB password all need rotation at
-   project completion
+   project completion (owner action after the manual sign-in test passes)
 6. **Admin alignment panel dead** — ADMIN_EMAILS is empty
-7. **No CI history yet** — workflow just created, needs one PR to validate
+7. **CI validated** — green on PRs #42–#46 and on main check-runs
+   (2026-11-16); workflow .github/workflows/ci.yml healthy
+8. **Agent shells lack GITHUB_TOKEN / VERCEL_TOKEN** (2026-11-17) — lane
+   branches agent-3/ai-era-ui-r1 and agent-4/auth-smoke-r1 are reviewed and
+   gate-green locally but CANNOT be pushed/PR'd from any agent session;
+   owner must export GITHUB_TOKEN into the sessions or push from a shell
+   that has it. Stale PR #8 (orchestrator-pr, diverged 166 ahead) should be
+   closed, not merged — its content already landed via later PRs
 
 ## Content that went live without independent review
 
@@ -610,3 +619,27 @@ Firebase — the seam swap covered the whole app.
   (NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_ANON_KEY, publishable) is REJECTED
   by the project ("Invalid API key") — URL (djkdszhhajsakwpxaznu) is correct,
   keys are from a different/rotated project. Fresh anon key required.
+
+## Orchestrator session (2026-11-17, A1 — worktree agent-1/orchestrator-infra-r1 @ 96dbab0)
+
+- Worktree `/root/Gnostiri-wt-agent-1` on branch `agent-1/orchestrator-infra-r1` (from main @ 96dbab0).
+- Gates on main + 1 infra commit (5b88e86, smoke marker fix): `npx prisma generate` ✔ v5.22.0 ·
+  `npx tsc --noEmit` clean · `npx next lint` "No ESLint warnings or errors" ·
+  `node --test tests/*.test.mjs` 339/339 pass · `npm run build` OK (compiled, 56/56 static pages;
+  only Google Fonts fetch retries in the log — known sandbox network flakiness, CI fetches fine).
+- **smoke fix (my lane, tools/smoke.mjs)**: stale `/highschool` marker `Textbooks and exams`
+  never existed on the shipped page (pre-existing 19/20 failure flagged by agent-3) → replaced with
+  `/Read the textbook/i` (verified in live HTML). Smoke vs https://gnostiri.vercel.app now **20/20 PASS**.
+- Production verified live: `/login` 200 · `/auth/callback?code=bogus` 307 → `/login?error=auth_failed` ·
+  `/api/health/auth` 200 `{"healthy":true,...,"supabaseKey":"accepted","userColumn":"supabaseUid"}` ·
+  `/highschool/exams/jamb` advertises 5,997. Main check-runs green (2026-11-16).
+- **Lane branch review verdicts (both = main + small diffs, secrets scan clean)**:
+  - `agent-3/ai-era-ui-r1` @ bb85e47 (app lane; 4 files, className/token-only): tsc clean · lint clean ·
+    339/339 tests — **APPROVED**, blocked only on push (no GITHUB_TOKEN in any agent shell).
+  - `agent-4/auth-smoke-r1` @ 6aed1ec (QA lane; tools/smoke.mjs auth checks + tests/): tsc clean · lint clean ·
+    344/344 tests (5 new auth-smoke contract) — **APPROVED**, same push blocker. Live-verified the three new
+    smoke probes against production before approving.
+- Stale PR #8 (`orchestrator-pr`, diverged 166 ahead / 3 behind) — recommend CLOSE (content already on main
+  via later PRs); needs a token to action.
+- Blocker added (#8 above): GITHUB_TOKEN / VERCEL_TOKEN absent from all agent sessions on this box —
+  PR push/merge and Vercel env audit are owner-side until a token is exported.
