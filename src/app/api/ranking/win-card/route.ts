@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import sharp from "sharp";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
-import { MIN_TIER, MAX_TIER, displayHandle, podStars, rankPodMembers, tierFor, tierInfo } from "@/lib/ranking";
+import { MIN_TIER, MAX_TIER, displayHandle, podAwardKey, podStars, rankPodMembers, tierFor, tierInfo } from "@/lib/ranking";
 import { deltaLabel, winCardSvg, type WinCardInput } from "@/lib/win-card";
 
 export const dynamic = "force-dynamic";
@@ -13,8 +13,9 @@ export const dynamic = "force-dynamic";
 // A 1080x1920 PNG sized for WhatsApp Status. Authorisation is per-variant
 // and reads from the caller's OWN rows only:
 //
-//  - match:    the caller must hold a seat in that pod (their placement in
-//              it decides the delta, so it cannot be inflated).
+//  - match:    the caller must hold a seat in that pod and must have submitted
+//              (the credited pod ledger delta is shown, with placement as the
+//              fallback, so it cannot be inflated).
 //  - rank-up:  the caller must have a RankState, the tier must be THEIR tier
 //              (from their own stars) and delta must equal the delta of
 //              their MOST RECENT StarLedger row. That award must also have
@@ -59,23 +60,28 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Submit your pod paper before sharing a win card" }, { status: 409 });
     }
 
-    const seats = await prisma.podMember.findMany({
-      where: { matchId },
-      select: { userId: true, score: true, submittedAt: true },
-    });
+    const [seats, awardedRows] = await Promise.all([
+      prisma.podMember.findMany({
+        where: { matchId },
+        select: { userId: true, score: true, submittedAt: true },
+      }),
+      prisma.starLedger.findMany({
+        where: { userId: user.id, reason: podAwardKey(matchId, user.id) },
+        select: { delta: true },
+      }),
+    ]);
     const placement = rankPodMembers(seats).find((row) => row.userId === user.id)?.placement ?? seats.length;
+    const placementAward = podStars(placement);
+    const creditedAward = awardedRows.reduce((total, row) => total + row.delta, 0);
     const tier = seat.match.tier;
-    const settled = seat.match.windowClosesAt.getTime() <= Date.now();
 
     return pngResponse(
       await toPng({
         handle: displayHandle(user.name),
         tierLabel: tierInfo(tier).label,
-        delta: podStars(placement),
-        context: settled
-          ? `Pod quickfire · ${seat.match.group?.name ?? "your group"}`
-          : `Provisional pod result · ${seat.match.group?.name ?? "your group"}`,
-        title: settled ? (placement === 1 ? "Pod victory" : "Pod finished") : "Pod result",
+        delta: creditedAward || placementAward,
+        context: `Snapshot · Pod result · ${seat.match.group?.name ?? "your group"}`,
+        title: "Pod result",
         dateLabel: seat.match.windowClosesAt.toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",
@@ -112,6 +118,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "delta must equal your most recent star award" }, { status: 400 });
   }
   const previousBalance = lastAward.balanceAfter - lastAward.delta;
+  if (tierFor(lastAward.balanceAfter) !== tierParam) {
+    return NextResponse.json({ error: "tier does not match the tier reached by your latest award" }, { status: 400 });
+  }
   if (tierFor(lastAward.balanceAfter) <= tierFor(previousBalance)) {
     return NextResponse.json({ error: "Your latest award did not move you into a new tier" }, { status: 400 });
   }

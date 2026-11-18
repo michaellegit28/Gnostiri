@@ -51,7 +51,7 @@ export default async function CertificatesPage() {
       orderBy: { issuedAt: "desc" },
       select: { id: true, issuedAt: true, course: { select: { title: true } } },
     }),
-    prisma.season.findMany({ select: { slug: true, name: true } }),
+    prisma.season.findMany({ select: { slug: true, name: true, startsAt: true } }),
   ]);
 
   const uniqueGroups = Array.from(
@@ -70,6 +70,13 @@ export default async function CertificatesPage() {
       })
     : [];
   const seasonName = new Map(seasons.map((season) => [season.slug, season.name]));
+  const seasonStart = new Map(seasons.map((season) => [season.slug, season.startsAt.getTime()]));
+  awards.sort(
+    (left, right) =>
+      (seasonStart.get(right.seasonSlug) ?? 0) - (seasonStart.get(left.seasonSlug) ?? 0) ||
+      left.tier - right.tier ||
+      left.rank - right.rank
+  );
   const memberHandle = displayHandle(user.name);
   const canVerify = Boolean(process.env.LAUNCH_SECRET);
 
