@@ -1,3 +1,11 @@
+## [2026-11-18 09:19] app/agent-3 — REVIEW-REQUESTED — Global Ranking season archive (PR #65)
+- what: #65 adds public /league/seasons with honest lifecycle/window states, aggregate final counts, owner-only certificate links, stable Hall anchors, and discovery from league/ladder/Hall/certificates; no roster or user PII is exposed.
+- gates: prisma generate OK; tsc clean; lint clean; node --test 392/392; build OK (58 pages, /league/seasons dynamic); independent diff review completed.
+- branch agent-3/season-archive-r1; feature commit e558440; PR https://github.com/michaellegit28/Gnostiri/pull/65
+- blocker: none.
+- next: orchestrator review/merge #65; agent-3 starting assigned agent-3/today-path-r1 dashboard roadmap/focus/sticker work.
+
+---
 ## [2026-11-18 08:40] lead/orchestrator — DESIGN VERDICT on the pasted "Today" HTML + assignments (owner away ~4-5h)
 - VERDICT: do NOT adopt the pasted palette/fonts wholesale — the 2026-11-01 owner palette is locked and AA-verified (dark #0B1120/#F8FAFC, gold #D4AF37, teal #14B8A6; zero hardcoded hex outside the token block is a tested rule). The paste's blue #2449F5 / gold #FFBF1F / coral / Bricolage+Figtree+Instrument Serif would break that rule and the measured contrast. ADOPT the components, re-skinned to current tokens:
   1. "Today's path" roadmap module on the dashboard (week dots + stop nodes, done/current/pulse states) — maps to battle-plan/streak.
