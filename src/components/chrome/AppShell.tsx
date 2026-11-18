@@ -51,12 +51,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       }
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setPalette((v) => !v);
+        if (!palette) setDrawer(false);
+        setPalette(!palette);
       }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, []);
+  }, [palette]);
 
   // Appearance prefs (solid background / reduced motion) are device-local —
   // reapply the stored choice on every mount so the first paint is right.
@@ -113,12 +114,16 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           aria-label="Open navigation"
           aria-controls="mobile-navigation"
           aria-expanded={drawer || sidebar}
-          onClick={() => (window.innerWidth >= 1024 ? setSidebar((v) => !v) : setDrawer(true))}
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary lg:hidden"
+          onClick={() => {
+            setPalette(false);
+            if (window.innerWidth >= 1024) setSidebar((v) => !v);
+            else setDrawer(true);
+          }}
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none lg:hidden"
         >
           <Menu className="h-5 w-5" aria-hidden />
         </button>
-        <Link href="/" className="flex items-center gap-2 rounded-lg px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        <Link href="/" className="flex items-center gap-2 rounded-lg px-1 focus:outline-none">
           <LogoMark size={22} />
           <span className="font-serif text-lg font-bold tracking-tight text-ink">
             Gnostiri
@@ -131,8 +136,11 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             aria-haspopup="dialog"
             aria-controls="command-palette"
             aria-expanded={palette}
-            onClick={() => setPalette(true)}
-            className="hidden min-h-[44px] items-center gap-2 rounded-lg border border-line px-3 text-xs text-slate-400 hover:border-electric/50 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary md:flex"
+            onClick={() => {
+              setDrawer(false);
+              setPalette(true);
+            }}
+            className="hidden min-h-[44px] items-center gap-2 rounded-lg border border-line px-3 text-xs text-slate-400 hover:border-electric/50 hover:text-slate-200 focus:outline-none md:flex"
           >
             <Command className="h-3.5 w-3.5" aria-hidden />
             Jump to…
@@ -186,7 +194,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               type="button"
               aria-label="Close navigation"
               onClick={() => setDrawer(false)}
-              className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none"
             >
               <X className="h-5 w-5" aria-hidden />
             </button>
@@ -204,7 +212,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                         <Link
                           href={item.href}
                           aria-current={active ? "page" : undefined}
-                            className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                            className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none ${
                               active ? "border-primary/40 bg-primary/10 text-slate-100" : "border-transparent hover:border-primary/40"
                             }`}
                         >
@@ -224,7 +232,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             ))}
             <Link
               href="/profile"
-              className="flex min-h-[48px] items-center justify-center rounded-xl border border-border/10 text-sm font-semibold text-slate-400 hover:border-electric/50 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="flex min-h-[48px] items-center justify-center rounded-xl border border-border/10 text-sm font-semibold text-slate-400 hover:border-electric/50 hover:text-electric-text focus:outline-none"
             >
               Profile & settings
             </Link>
@@ -252,7 +260,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 type="button"
                 aria-label="Close command palette"
                 onClick={() => setPalette(false)}
-                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-300 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-300 transition-colors hover:text-electric-text focus:outline-none"
               >
                 <X className="h-5 w-5" aria-hidden />
               </button>
@@ -266,7 +274,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className="flex min-h-[44px] items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-surface/10 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      className="flex min-h-[44px] items-center gap-3 px-4 py-2.5 text-sm text-slate-400 hover:bg-surface/10 hover:text-primary focus:outline-none"
                     >
                       <Icon className="h-4 w-4 text-slate-400" aria-hidden />
                       {item.label}
@@ -287,7 +295,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </main>
         <footer className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pb-28 pt-4 lg:pb-6">
           <p className="text-xs text-muted">Gnostiri — built for the December launch.</p>
-          <Link href="/settings" className="rounded text-xs text-slate-400 underline-offset-2 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+          <Link href="/settings" className="rounded text-xs text-slate-400 underline-offset-2 hover:text-electric-text focus:outline-none">
             Appearance & accessibility
           </Link>
         </footer>
@@ -307,7 +315,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <Link
                   href={tab.href}
                   aria-current={active ? "page" : undefined}
-                  className={`flex min-h-[56px] flex-col items-center justify-center gap-0.5 pt-1 text-[10px] font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary ${
+                  className={`flex min-h-[56px] flex-col items-center justify-center gap-0.5 pt-1 text-[10px] font-semibold focus:outline-none ${
                     active ? "text-primary" : "text-slate-400"
                   }`}
                 >
@@ -333,7 +341,7 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
     <Link
       href={item.href}
       aria-current={active ? "page" : undefined}
-      className={`flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 px-2 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+      className={`flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 px-2 text-sm transition-colors focus:outline-none ${
         active ? "border-primary/40 bg-primary/10 text-slate-100" : "border-transparent text-slate-300 hover:bg-surface/10 hover:text-primary"
       }`}
     >

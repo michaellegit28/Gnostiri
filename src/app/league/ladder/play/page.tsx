@@ -23,7 +23,7 @@ export default async function LadderPlayPage({ searchParams }: { searchParams: {
   const user = await getCurrentUser();
   if (!user) {
     return (
-      <main className="mx-auto max-w-2xl px-4 py-20 text-center">
+      <div className="mx-auto max-w-2xl px-4 py-20 text-center">
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">Pod play</p>
         <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100">Sign in to play a pod</h1>
         <p className="mt-3 text-sm text-slate-400">
@@ -35,7 +35,7 @@ export default async function LadderPlayPage({ searchParams }: { searchParams: {
         >
           Sign in
         </Link>
-      </main>
+      </div>
     );
   }
 
@@ -55,7 +55,7 @@ export default async function LadderPlayPage({ searchParams }: { searchParams: {
   const live = held && held.match.windowClosesAt.getTime() > Date.now() ? held.match : null;
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 md:py-14">
+    <div className="mx-auto max-w-5xl px-4 py-10 md:py-14">
       <PodPlayClient
         groupName={membership?.group.name ?? null}
         tier={membership ? tierFor(rankState?.stars ?? 0) : null}
@@ -63,6 +63,6 @@ export default async function LadderPlayPage({ searchParams }: { searchParams: {
         resumeMatchId={live?.id ?? null}
         requestedMatchId={searchParams.match ?? null}
       />
-    </main>
+    </div>
   );
 }

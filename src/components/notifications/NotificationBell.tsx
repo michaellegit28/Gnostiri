@@ -104,16 +104,19 @@ export default function NotificationBell() {
 
   const markAllRead = async () => {
     setUnread(0);
-    setAnnouncement("All notifications are read.");
     setItems((prev) => prev.map((n) => ({ ...n, read: true })));
     try {
-      await fetch("/api/notifications", {
+      const res = await fetch("/api/notifications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ all: true }),
       });
+      if (!res.ok) throw new Error("Mark all read failed");
+      previousUnread.current = 0;
+      setAnnouncement("All notifications are read.");
     } catch {
-      // Optimistic paint; the next poll reconciles with the server.
+      setAnnouncement("Could not mark all notifications as read. Try again.");
+      await load();
     }
   };
 
@@ -144,7 +147,7 @@ export default function NotificationBell() {
           setOpen((v) => !v);
           if (!open) load();
         }}
-        className="gn-motion relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-line bg-surface/80 text-slate-200 backdrop-blur-md transition-all hover:border-primary/60 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
+        className="gn-motion relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-line bg-surface/80 text-slate-200 backdrop-blur-md transition-all hover:border-primary/60 hover:text-white focus:outline-none active:scale-[0.98]"
       >
         <Bell className="h-4 w-4" aria-hidden="true" />
         {unread > 0 && (
@@ -169,7 +172,7 @@ export default function NotificationBell() {
                 if (unread > 0) void markAllRead();
               }}
               aria-disabled={unread === 0}
-              className={`gn-motion flex min-h-[44px] items-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-slate-300 transition-colors hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+              className={`gn-motion flex min-h-[44px] items-center gap-1.5 rounded-lg px-2 text-xs font-semibold text-slate-300 transition-colors hover:text-electric-text focus:outline-none ${
                 unread === 0 ? "cursor-default opacity-60" : ""
               }`}
             >
@@ -189,7 +192,7 @@ export default function NotificationBell() {
                   <Link
                     href={n.href ?? "/notifications"}
                     onClick={() => !n.read && markRead(n.id)}
-                    className={`gn-motion block px-4 py-3 transition-colors hover:bg-surface-2/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                    className={`gn-motion block px-4 py-3 transition-colors hover:bg-surface-2/40 focus:outline-none ${
                       n.read ? "" : "bg-gold/5"
                     }`}
                   >
@@ -211,7 +214,7 @@ export default function NotificationBell() {
 
           <Link
             href="/notifications"
-            className="gn-motion flex min-h-[44px] items-center justify-center border-t border-line px-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition-colors hover:bg-surface-2/40 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="gn-motion flex min-h-[44px] items-center justify-center border-t border-line px-4 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 transition-colors hover:bg-surface-2/40 hover:text-electric-text focus:outline-none"
           >
             All notifications
           </Link>

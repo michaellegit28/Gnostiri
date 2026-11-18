@@ -308,7 +308,6 @@ html.lite [class*="backdrop-blur"] { backdrop-filter: none !important; }
 
 /* Focus is always visible — a 2px gold ring, on every focusable element. */
 :focus-visible { outline: 2px solid rgb(var(--focus)); outline-offset: 2px; }
-:where([class*="focus-visible:ring-2"]):focus-visible { outline: none; }
 
 /* Reduce motion: no card, menu, countdown or celebration animation anywhere. */
 html.reduce-motion *,

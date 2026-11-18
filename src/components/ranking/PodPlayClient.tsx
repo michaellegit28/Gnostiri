@@ -402,7 +402,7 @@ export default function PodPlayClient({
       : remaining <= 60_000
         ? " One minute remains in this pod."
         : "";
-  const liveMessage = `Question ${index + 1} of ${session.questions.length}. ${
+  const liveMessage = `Question ${index + 1} of ${session.questions.length}: ${question.questionText}. ${
     selectedOption ? `Selected ${selectedOption}.` : "No answer selected."
   } ${answeredCount} answered.${timeAnnouncement}`;
 
