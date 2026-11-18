@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { LAUNCH_GATE, LAUNCH_ENDS_AT } from "@/lib/access";
+import { boardBySlug } from "@/lib/exam-bank";
 import { carrySessionCookies, updateSession } from "@/lib/supabase/middleware";
 
 // 1st-launch token gate (edge): the whole site sits behind /launch until the
@@ -54,6 +55,18 @@ function launchStillActive(): boolean {
   return new Date() < new Date(LAUNCH_ENDS_AT);
 }
 
+// Retired-board 404 guard (edge): page-level notFound() in a force-dynamic
+// route streams the not-found UI with HTTP 200 — the status can only be fixed
+// here. exam-bank.ts is pure data, safe for the edge bundle.
+const HIGHSCOOL_STATIC_SEGMENTS = new Set(["study", "exams", "practice"]);
+function examSegmentOf(pathname: string): string | null {
+  const seg = pathname.split("/").filter(Boolean);
+  if (seg[0] !== "highschool" || seg.length < 2) return null;
+  if (seg[1] === "exams" || seg[1] === "practice") return seg[2] ?? null;
+  if (HIGHSCOOL_STATIC_SEGMENTS.has(seg[1])) return null;
+  return seg[1];
+}
+
 export async function middleware(request: NextRequest) {
   // ---- Supabase Auth session refresh (runs for every matched request) ----
   const sessionResponse = await updateSession(request);
@@ -70,6 +83,14 @@ export async function middleware(request: NextRequest) {
       carrySessionCookies(sessionResponse, redirect);
       return redirect;
     }
+  }
+
+  // ---- retired-board 404 (real status, not a streamed 200) ----
+  const examSeg = examSegmentOf(request.nextUrl.pathname);
+  if (examSeg && !boardBySlug(examSeg.toLowerCase())) {
+    const notFound = new NextResponse(null, { status: 404 });
+    carrySessionCookies(sessionResponse, notFound);
+    return notFound;
   }
 
   // ---- IP rate limiting for /api ----
