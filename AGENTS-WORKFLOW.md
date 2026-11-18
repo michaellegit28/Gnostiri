@@ -29,7 +29,7 @@ worktree** so no two sessions ever edit the same file or fight over `main`.
 ## Session 1 — Orchestrator (this session)
 
 - **Branch pattern**: `agent-1/*`
-- **Owns**: repo-root infra — `middleware.ts`, `package.json`,
+- **Owns**: repo-root infra — `src/middleware.ts`, `package.json`,
   `prisma/schema.prisma` (+ migration SQL for the owner's SQL editor),
   `.github/`, `.opencode/`, `opencode.json`, `AGENTS.md`, `README.md`,
   `STATE.md`, `tools/smoke.mjs`, cross-cutting `src/lib/{server-auth,auth}.ts`

@@ -86,6 +86,11 @@ const CATALOGUE = [
     name: "exams-hub",
     markers: [/Computer-Based Test boards/i, /JAMB \(UTME\)/i, /Open board/i],
   },
+  {
+    path: "/highschool/exams/waec",
+    name: "retired-board-real-404",
+    expectStatus: 404,
+  },
 
   // ── Boards ──────────────────────────────────────────────────────────────
   {
@@ -279,6 +284,16 @@ async function probeHtml(entry) {
     };
   }
   const ms = Date.now() - started;
+
+  // Handle exact status expectations (e.g. retired boards must be a real 404)
+  if (entry.expectStatus) {
+    if (res.status !== entry.expectStatus) {
+      failures.push(`status ${res.status} (expected ${entry.expectStatus})`);
+    } else {
+      notes.push(`status ${res.status}`);
+    }
+    return { entry, failures, notes, ms };
+  }
 
   // Handle redirect expectations
   if (entry.expectRedirect) {
