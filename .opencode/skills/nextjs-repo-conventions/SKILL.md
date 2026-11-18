@@ -9,7 +9,7 @@ description: Use when writing or editing any code under src/ (App Router pages, 
 - **Routes**: app-router tree under `src/app/` (`study`, `university`, `discovery`, `highschool`, `cbt`, `arena`, `battle-plan`, `progress`, `study-plan`, `tutor`, `admin`, `certificates`, `pricing`, `launch`, `login`). API routes under `src/app/api/`.
 - **Data access**: server-only via Prisma through `src/lib/`; never expose the DB client to the browser. Sessions are Supabase Auth cookies validated server-side (middleware refresh + `src/lib/supabase/`; OAuth callback `/auth/callback`).
 - **force-dynamic pages are NOT exercised by `next build`** — a green build says nothing about them. Runtime smoke against the deployed URL is mandatory for dynamic routes (see qa-gates).
-- **middleware.ts** carries the launch gate (edge HMAC) and IP rate limiting — touch it only with the access skill's owner present; breaking it gates the whole site.
+- **src/middleware.ts** carries the launch gate (edge HMAC) and IP rate limiting — touch it only with the access skill's owner present; breaking it gates the whole site.
 - **Styling**: Tailwind with `tailwind.config.ts` tokens; UI primitives in `src/components/ui/`; keep new visual effects in `src/components/effects/` patterns, respect `prefers-reduced-motion`.
 - **Copy framework docs accurately with context7** rather than from memory — Next 14.2 and Prisma 5 specifics matter here.
 - TypeScript is strict (`tsconfig.json`); no `any` in new code without a comment justifying it.

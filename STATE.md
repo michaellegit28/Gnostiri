@@ -25,7 +25,7 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 - `src/app/auth/callback/` — OAuth code exchange → session → redirect
 - `src/app/api/practice/` — manifest, session, draft, submit, ai-mark
 - `src/app/api/admin/launch-tokens/generate/` — owner token mint (secret-guarded)
-- `middleware.ts` — Supabase session refresh + launch gate (edge HMAC) + IP rate limiting
+- `src/middleware.ts` — Supabase session refresh + launch gate (edge HMAC) + IP rate limiting
 - `prisma/schema.prisma` — all models (User keyed by `supabaseUid`; `firebaseUid` deprecated)
 - `prisma/migrations/` — migration history (applied via Supabase SQL editor)
 
@@ -606,7 +606,7 @@ Firebase — the seam swap covered the whole app.
   Supabase Auth server, then maps to Prisma User by `supabaseUid`; missing
   rows are created lazily (Google metadata: full_name/avatar_url); pre-
   Supabase rows with the same email are adopted (history preserved).
-  `middleware.ts` — updateSession() runs first; gate/rate-limit responses
+  `src/middleware.ts` — updateSession() runs first; gate/rate-limit responses
   carry the rotated cookies. `AuthContext.tsx` — onAuthStateChange mirror.
   Login page — Google = full-page redirect (Android/in-app-browser safe),
   gated by NEXT_PUBLIC_AUTH_GOOGLE_ENABLED; signup shows the email-
