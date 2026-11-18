@@ -131,8 +131,9 @@ All seeded to production; all rows needs-human-review, nothing "verified". Seede
 5. **Secrets exposed in chat** — rotate at project completion (owner action
    after the manual sign-in test passes): GitHub PATs (×3 sent 2026-11-17),
    Vercel project token (vcp_…, sent 2026-11-17), Upstash REST token + URL
-   (sent 2026-11-17), plus the older Atria key, Firebase service-account key,
-   Supabase DB password
+   (sent 2026-11-17), a second Supabase project URL (sent 2026-11-18 — NOT the
+   wired project; confirm before any switch), plus the older Atria key,
+   Firebase service-account key, Supabase DB password
 6. **Admin panel LOCKED (fail-closed since #51)** — ADMIN_EMAILS is empty, so
    requireAdmin denies everyone with "Admin access is not configured" (PR #51
    removed the old fail-open dev path). Owner must set ADMIN_EMAILS to reopen
@@ -714,3 +715,20 @@ Firebase — the seam swap covered the whole app.
   known cosmetic force-dynamic streaming behavior; JAMB still 200).
 - Prod healthy end of cycle: smoke 22/22, /login 200 with Google button, /api/health/auth healthy:true.
 - markitdown MCP re-enabled (#57) — Version A NSC/NECTA transcription queue unblocked for agent-2.
+
+## Orchestrator session (2026-11-18, A1 — #63 merged, middleware LIVE, main @ 4b2cd0f)
+
+- **#63 merged (4b2cd0f)** — `git mv middleware.ts src/middleware.ts`: with `src/app` present, Next.js
+  only bundles `src/middleware.ts`; the root copy produced an empty middleware-manifest, i.e. the
+  launch gate / Supabase session refresh / IP rate limiter had NEVER executed (gate was OFF; the
+  burst-blocking seen in prod was Vercel platform-level). Upstash URL+token wired into Vercel
+  (production+preview+development) via API BEFORE activating, since the limiter is fail-closed in prod.
+- **#62 merged (b40a103)** — edge 404 guard for retired boards (exam-bank registry, pure data).
+  Prod verified post-#63: `/highschool/exams/waec` → **true 404**, jamb/hub/home/login all 200,
+  `/api/health/auth` healthy, `/api/boards` 200. Smoke 22/22 earlier; re-run at next merge.
+- **Design verdict (owner-pasted "Today" HTML)**: components adopted (Today's-path roadmap, focus
+  timer, sticker chips), palette/fonts NOT (owner palette locked 2026-11-01, AA-verified). Assigned
+  agent-3/today-path-r1 + agent-4 QA markers — see AGENT_CHAT.md top.
+- **Launch tokens**: minted owner-side via POST /api/admin/launch-tokens/generate?secret=<REVALIDATE_SECRET>
+  (secret currently unset in Vercel; LAUNCH_GATE=false until Dec 1). Tokens never in chat/repo.
+- New chat-exposed Supabase project URL (2026-11-18) added to rotation list; NOT switched.
