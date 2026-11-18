@@ -12,7 +12,7 @@ Mandatory skills: `nextjs-repo-conventions` (server/client rules, force-dynamic 
 Hard rules:
 - No event handlers in server components; no DB client into client bundles.
 - A green `next build` proves nothing about force-dynamic pages — runtime smoke required (delegate to e2e-lane or run `tools/smoke.mjs`).
-- middleware.ts launch gate: do not weaken or bypass access controls.
+- src/middleware.ts launch gate: do not weaken or bypass access controls.
 - Run the full qa-gates suite before saying done; paste the actual command output.
 
 Definition of done: tsc + lint + tests + build green, smoke URL checked for dynamic routes, mailbox note with files changed and verification evidence.
