@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileBadge, GraduationCap, Medal } from "lucide-react";
+import { FileBadge, GraduationCap, History, Medal } from "lucide-react";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { displayHandle, tierInfo } from "@/lib/ranking";
@@ -96,12 +96,21 @@ export default async function CertificatesPage() {
           <h2 id="season-awards" className="font-serif text-2xl font-bold text-ink">
             Season awards
           </h2>
-          <Link
-            href="/league/hall-of-fame"
-            className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong px-4 text-sm font-semibold text-muted transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            View the Hall of Fame
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/league/hall-of-fame"
+              className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong px-4 text-sm font-semibold text-muted transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              View the Hall of Fame
+            </Link>
+            <Link
+              href="/league/seasons"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-line-strong px-4 text-sm font-semibold text-muted transition-colors hover:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <History className="h-4 w-4" aria-hidden />
+              Season archive
+            </Link>
+          </div>
         </div>
 
         {awards.length === 0 ? (

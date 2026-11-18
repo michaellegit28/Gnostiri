@@ -153,6 +153,12 @@ function SeasonBanner({ season }: { season: { name: string; status: string; ends
           Hall of Fame
         </Link>
         <Link
+          href="/league/seasons"
+          className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          Season archive
+        </Link>
+        <Link
           href="/certificates"
           className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-5 text-sm font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >

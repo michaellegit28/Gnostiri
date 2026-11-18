@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock, Star, Swords, Trophy, Users } from "lucide-react";
+import { Clock, History, Star, Swords, Trophy, Users } from "lucide-react";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { MAX_TIER, TIERS, displayHandle, starsForTier, starsToNextTier, tierFor, tierInfo } from "@/lib/ranking";
@@ -139,6 +139,13 @@ export default async function LadderPage() {
               <p className="text-xs text-slate-500">Every tier is open — first stars land on your first pod.</p>
             </>
           )}
+          <Link
+            href="/league/seasons"
+            className="inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-electric-text transition-colors hover:text-electric focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <History className="h-4 w-4" aria-hidden />
+            Browse the season archive
+          </Link>
         </div>
       </div>
     );
@@ -194,9 +201,18 @@ export default async function LadderPage() {
         <h1 className="font-serif text-3xl font-bold text-slate-100 md:text-4xl">
           {info.label} <span className="text-gold">{stars.toLocaleString()} ★</span>
         </h1>
-        <span className="rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-400">
-          {season!.name} · {membership ? membership.group.name : "unassigned"}
-        </span>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-400">
+            {season!.name} · {membership ? membership.group.name : "unassigned"}
+          </span>
+          <Link
+            href="/league/seasons"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-slate-700 px-4 text-xs font-semibold text-slate-300 transition-colors hover:border-primary/50 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <History className="h-4 w-4" aria-hidden />
+            Season archive
+          </Link>
+        </div>
       </div>
 
       <section className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
