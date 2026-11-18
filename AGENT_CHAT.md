@@ -1,3 +1,22 @@
+## [2026-11-18 08:40] lead/orchestrator — DESIGN VERDICT on the pasted "Today" HTML + assignments (owner away ~4-5h)
+- VERDICT: do NOT adopt the pasted palette/fonts wholesale — the 2026-11-01 owner palette is locked and AA-verified (dark #0B1120/#F8FAFC, gold #D4AF37, teal #14B8A6; zero hardcoded hex outside the token block is a tested rule). The paste's blue #2449F5 / gold #FFBF1F / coral / Bricolage+Figtree+Instrument Serif would break that rule and the measured contrast. ADOPT the components, re-skinned to current tokens:
+  1. "Today's path" roadmap module on the dashboard (week dots + stop nodes, done/current/pulse states) — maps to battle-plan/streak.
+  2. Focus timer widget (25/50/90 seg control, ring) as a study-focus tool on the dashboard.
+  3. Sticker-style stat chips (hard-shadow chips) using token colors.
+  Pill nav + bottom tab bar already exist in AppShell — keep as is.
+- ASSIGN agent-3 (branch agent-3/today-path-r1): port items 1-3 into the dashboard (src/app/page.tsx + new client component(s) under src/components/dashboard/), existing CSS tokens only (gn-card, --gold, --surface, --blue-text equivalents), NO new fonts/deps, server components default, 44px targets, focus-visible, prefers-reduced-motion respected. Gates + PR.
+- ASSIGN agent-4 (branch agent-4/today-path-qa-r1): smoke catalogue markers for the new dashboard sections + contract test (no RSC digest, sections render); keep smoke.mjs edits additive.
+- ASSIGN agent-2: continue placeholder-lesson queue (community-medicine in progress) then Version A NSC/NECTA transcription (markitdown MCP is ON since #57).
+- LAUNCH TOKENS (owner Q): cannot touch your phone — mint owner-side via POST /api/admin/launch-tokens/generate?secret=<REVALIDATE_SECRET> (REVALIDATE_SECRET currently unset in Vercel; set it first). Never paste tokens in chat; LAUNCH_GATE stays false until Dec 1 activation.
+- NEW chat-exposed Supabase project URL (2026-11-18): different project ref than the one wired in Vercel (djkdszhhajsakwpxaznu). NOT switched — owner to confirm if it's a deliberate new project (then: new anon key + DATABASE_URL + run migration SQL there). Added to rotation list (STATE.md #5).
+- main @ 4b2cd0f (#63: src/middleware.ts now LIVE — root copy was dead code; Upstash wired on Vercel). Prod verified: waec now true 404, all routes 200, health healthy.
+
+---
+## [2026-11-17 00:20] lead/orchestrator — DONE — #61 merged; main @ 607d0e6; CI full glob live (392/392); prod smoke 22/22
+- This cycle merged: #58 (agent-4 QA fixes: lesson-python version-agnostic, recovered ranking/analytics tests, 0.25 assertion), #54 (CI now runs full glob), #59 (retired-board 404 guards), #60 (STATE), #61 (agent-3 phase5 polish, recovered from stalled session).
+- agent-2: markitdown MCP is ON — Version A NSC/NECTA transcription queue unblocked; placeholder lessons queue after that. agent-4: next QA items per your audit (surface contract tests for /league /library /notifications /profile /settings /offline).
+
+---
 ## [2026-11-17 21:50] lead/orchestrator — NOTE — markitdown MCP re-enabled (#57): Version A transcription UNBLOCKED; main @ 2a98448
 - markitdown-mcp installed into /root/mcp-venvs/markitdown (PyPI reachable again) and opencode.json re-enabled it. agent-2: the NSC/NECTA official-paper transcription queue (Version A counterparts) can start now — remember every row ships needs-human-review and wrong keys are dropped, never shipped.
 - #55 (microbiology M4-M5) + #56 (phase5 UI) + #57 (STATE/markitdown) merged; prod smoke 22/22, health healthy. Draft #54 = CI full glob, parked on agent-4's lesson-python fix.
