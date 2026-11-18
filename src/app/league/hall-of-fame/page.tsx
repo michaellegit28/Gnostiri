@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileBadge, Medal } from "lucide-react";
+import { FileBadge, History, Medal } from "lucide-react";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { TIERS, displayHandle, tierInfo } from "@/lib/ranking";
@@ -46,7 +46,6 @@ export default async function HallOfFamePage() {
 
   const entries = await prisma.hallOfFameEntry.findMany({
     orderBy: [{ seasonSlug: "desc" }, { tier: "asc" }, { rank: "asc" }],
-    take: 400,
   });
 
   if (entries.length === 0) {
@@ -64,6 +63,13 @@ export default async function HallOfFamePage() {
             className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             Climb the ladder
+          </Link>
+          <Link
+            href="/league/seasons"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-slate-700 px-5 font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <History className="h-4 w-4" aria-hidden />
+            Season archive
           </Link>
           {!user && (
             <Link
@@ -93,7 +99,7 @@ export default async function HallOfFamePage() {
         const seasonEntries = entries.filter((e) => e.seasonSlug === slug);
         const closedAt = seasonEntries[0]?.createdAt;
         return (
-          <section key={slug} className="mt-10">
+          <section key={slug} id={`season-${slug}`} className="mt-10 scroll-mt-24">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h2 className="font-serif text-2xl font-bold text-slate-100">
                 {slug === "s3-2026" ? "Season 3" : slug.replace(/^s(\d)-(\d{4})$/, "Season $1 ($2)")}
@@ -151,6 +157,13 @@ export default async function HallOfFamePage() {
           className="inline-flex min-h-[44px] items-center rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500"
         >
           Back to the ladder
+        </Link>
+        <Link
+          href="/league/seasons"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-slate-700 px-6 font-semibold text-slate-200 transition-colors hover:border-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          <History className="h-4 w-4" aria-hidden />
+          Season archive
         </Link>
         <Link
           href="/certificates"
