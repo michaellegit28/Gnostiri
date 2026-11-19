@@ -15,11 +15,14 @@ test("the signed-in dashboard shows no study categories", () => {
   assert.match(home, /TutorShortcut/, "the tutor shortcut is on Home");
 });
 
-test("the dashboard keeps the greeting, hero and stats", () => {
+test("the dashboard keeps the greeting, path module and stats", () => {
   const home = q(HOME);
-  for (const part of ["Greeting", "BattlePlanHero", "StatsRow"]) {
+  for (const part of ["Greeting", "StatsRow"]) {
     assert.match(home, new RegExp(part), `${part} stays on Home`);
   }
+  // The day-planning module: the legacy BattlePlanHero or the new TodaysPath
+  // (agent-3/today-path-r1 replaces the hero with the seven-day path module).
+  assert.match(home, /BattlePlanHero|TodaysPath/, "a today's-path / battle-plan module stays on Home");
 });
 
 test("the signed-out landing is numbers-first and category-free", () => {

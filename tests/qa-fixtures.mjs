@@ -167,6 +167,13 @@ const STATIC_PAGES = {
   "/cbt/session?board=jamb&mode=simulation": "Mark for review · JAMB (UTME)",
   "/auth/callback?code=bogus": { status: 307, contentType: "text/html", body: "", headers: { location: "/login?error=auth_failed" } },
   "/api/health/auth": json({ healthy: true, checks: { env: "configured", supabaseKey: "accepted", userColumn: "supabaseUid" } }),
+  // App-shell surfaces (smoke catalogue probes them; green fixture must serve them)
+  "/league": "Cup · league",
+  "/library": "cohort studied",
+  "/notifications": "Enter Gnostiri first",
+  "/profile": { status: 200, contentType: "text/html", body: "NEXT_REDIRECT /login" }, // streamed redirect form
+  "/settings": "Appearance",
+  "/offline": "Saved submissions · offline",
 };
 
 export const DEFAULT_BOARDS = [
