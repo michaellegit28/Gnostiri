@@ -2152,6 +2152,342 @@ function lesson10() {
   };
 }
 
+// ---------------------------------------------------------------------------
+// LESSON 13 — National health programmes (fully authored)
+// ---------------------------------------------------------------------------
+function lesson13() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the architecture of the National Health Mission and the distinction between the Rural and Urban missions; reproduce the Universal Immunisation Programme schedule from birth to 16 years and name the disease prevented by each antigen; explain the five components of DOTS in the National Tuberculosis Elimination Programme and its reporting tool; describe the National AIDS Control Programme from counselling and testing to lifelong first-line ART; outline the malaria control strategy of the National Vector Borne Disease Control Programme; and name the other flagship programmes — blindness, iodine deficiency disorders, leprosy, pulse polio — with their marker.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 11 — communicable disease control. You need the concepts of transmission, incubation periods, herd immunity and notification, because every programme in this lesson is the delivery arm of the infection-control principles already studied.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "National health programme",
+        text: "A centrally sponsored scheme with defined disease targets, a budget line, a delivery cadre and mandatory reporting. Unlike the universal service of primary health care, a programme has a vertical delivery channel, a measurable target and an evaluation report — a structure that makes it fast to launch and hard to close.",
+      },
+      {
+        type: "paragraph",
+        text: "India's umbrella is the National Health Mission: the National Rural Health Mission launched in 2005 merged the vertical rural programmes with the Reproductive and Child Health programme, and the National Urban Health Mission joined it in 2013. The umbrella matters because the old vertical programmes were strong in reporting and weak in outreach — the same nurse could not run one register for each of eight diseases.",
+      },
+
+      { type: "heading", level: 2, text: "Universal Immunisation Programme" },
+      {
+        type: "paragraph",
+        text: "The UIP reaches every newborn with BCG at birth, oral polio at birth, hepatitis B at birth, and then a primary series of pentavalent (diphtheria, pertussis, tetanus, hepatitis B and Haemophilus influenzae type b), oral polio, inactivated polio, rotavirus and pneumococcal vaccines between 6 weeks and 14 weeks. The infant is boosted with measles–rubella at 9–12 months, Japanese encephalitis where endemic, and a second measles dose at 16–24 months; the DPT boosters at 16–24 months and 5–6 years complete the childhood series, with adult tetanus-diphtheria doses at 10 years and 16 years or at first check of pregnancy.",
+      },
+      {
+        type: "table",
+        headers: ["Age", "Vaccines", "Notes"],
+        rows: [
+          ["Birth", "BCG, OPV-0, hepatitis B-0", "Within 24 h; institutional births only for HepB-0"],
+          ["6, 10, 14 weeks", "Pentavalent 1–3, OPV 1–3, IPV 1/2, rotavirus, PCV", "Two fractional doses of IPV at 6 and 14 weeks"],
+          ["9–12 months", "Measles–rubella 1, JE (endemic districts), OPV", "Catch-up to age 5 for MR"],
+          ["16–24 months", "Measles–rubella 2, JE (endemic), DPT booster 1, OPV booster", "Second MR dose at least 4 weeks after the first"],
+          ["5–6 years", "DT at 10 years, Td at 16 years, DPT booster 2", "TT/Td for pregnant women"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Mission Indradhanush and its intensifications target the 190 high-focus districts and blocks where coverage stalls, using a session-site microplan mapped by the ASHA, a cold chain that depends on the walk from the ice-lined refrigerator to the sub-centre, and an AEFI reporting line that catches every event within 24 hours.",
+      },
+
+      { type: "heading", level: 2, text: "Tuberculosis: RNTCP to NTEP" },
+      {
+        type: "paragraph",
+        text: "The Revised National Tuberculosis Control Programme began as a pilot in 1993, universalised by 1997, and was renamed the National Tuberculosis Elimination Programme in 2020. Its five DOTS components are: political commitment, case detection by quality-assured sputum microscopy or nucleic acid amplification, directly observed therapy with short-course chemotherapy, an uninterrupted drug supply delivered in patient-wise boxes, and systematic cohort recording and reporting — which since 2012 runs through the Nikshay web platform and TB notification is mandatory.",
+      },
+      {
+        type: "table",
+        headers: ["Component", "Detail"],
+        rows: [
+          ["Case detection", "Sputum smear microscopy in a network of Designated Microscopy Centres; CB-NAAT where available"],
+          ["Regimen", "Two months of HRZE then four months of HR — daily, weighted-band dosing since 2018"],
+          ["Drug supply", "Patient-wise boxes per regimen, 4-weekly replenishment from the district drug store"],
+          ["Reporting", "Cohort analysis with the outcome cured, treatment completed, defaulted, failed, died"],
+          ["Nikshay", "Case-based web reporting + treatment adherence; TB notification mandatory"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "HIV: NACP" },
+      {
+        type: "paragraph",
+        text: "The National AIDS Control Programme runs a chain of Integrered Counselling and Testing Centres, Anti-Retroviral Therapy centres and Prevent-of-Parent-to-Child Transmission-linked services. First-line ART is a single fixed-dose combination of tenofovir, lamivudine and dolutegravir (TLD) — an integrase inhibitor that replaced efavirenz because of its tolerability, resistance barrier and rapid viral suppression. All persons living with HIV are offered test-and-treat regardless of CD4 count.",
+      },
+
+      { type: "heading", level: 2, text: "Malaria: NVBDCP" },
+      {
+        type: "paragraph",
+        text: "The National Vector Borne Disease Control Programme centres on Artemisinin-based Combination Therapy for Plasmodium falciparum (artesunate plus sulfa-pyrimethamine in most of India), long-lasting insecticidal bed nets distributed to endemic households, and indoor residual spraying with a synthetic pyrethroid in high-transmission pockets. Dengue, chikungunya, kala-azar and lymphatic filariasis moved into the same programme with lymph filariasis elimination delivered by mass drug administration of diethylcarbamazine plus albendazole, three yearly rounds to endemic blocks.",
+      },
+
+      { type: "heading", level: 2, text: "Other flagship programmes" },
+      {
+        type: "table",
+        headers: ["Programme", "Markers"],
+        rows: [
+          ["National Programme for Control of Blindness (Vision 2020)", "Cataract surgical rate, intraocular lens percentage"],
+          ["National Iodine Deficiency Disorders Control Programme", "Salt iodine content at 30% iodine by median urinary iodine concentration"],
+          ["National Leprosy Eradication Programme", "MDT (multi-drug therapy) 3-drug regimen; elimination <1 per 10,000 achieved 2005; NLEPP renamed NATP"],
+          ["Pulse polio initiative", "Administrative plus surveillance AFP by the Acute Flaccid Paralysis network; India certified polio-free 2014"],
+          ["Rashtriya Bal Swasthya Karyakram", "Screen-eligible ages birth to 18 years for 4 Ds — birth defects, diseases, deficiencies, development delays and disability"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "An auxiliary nurse-midwife discovers that her sub-centre has 12 fainted polio vaccines between the session and the sub-centre. Her village mapped to Mission Indradhanush would need the microplan to arrange the cold chain (left-side insulin with icepacks), permission for which is an ASHA-driven protocol. In a high-focus block the sub-centre microplan lists every child by name on a token card, which is the administrative difference between a successful and stalled campaign.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Saying that the UIP includes BCG for everyone or repeat it. BCG is a single birth dose protecting the child from disseminated TB — revaccination is not recommended by IAP and not part of the national schedule. Similarly, the DPT series is between 6 and 14 weeks, not birth to 6 weeks.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Assuming that leprosy is a DOTS programme. Leprosy is treated with MDT (multi-drug therapy) under the NATP/NLEP, which uses a 3-drug regimen of dapsone, rifampicin and clofazimine — tuberculosis uses a different regimen and the names sound similar.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Which component of DOTS is broken when a patient misses a dose but is lost to follow-up?",
+        answer:
+          "The systematic recording and reporting component — the cohort register should have flagged the missed dose early; adherence support is the third component.",
+        explanation:
+          "Cohort analysis with the outcome 'defaulter' is exactly how NTEP monitors both treatment and the patients at risk of treatment failure. The same duty passes to Nikshay.",
+      },
+      {
+        type: "question",
+        prompt: "A newborn is given BCG at birth. Which disease is it primarily preventing?",
+        answer:
+          "Severe childhood forms of TB — miliary TB and TB meningitis — in addition to some protection against leprosy.",
+        explanation:
+          "BCG protects best against disseminated disease, not against adult pulmonary infection, which is why TB control rests on DOTS, not on the vaccine alone.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which vaccine is contraindicated in a child with severe immunodeficiency?",
+        options: [
+          "Hepatitis B",
+          "BCG",
+          "DT",
+          "Tetanus",
+        ],
+        correctIndex: 1,
+        explanation:
+          "BCG is a live attenuated vaccine, so severe immunodeficiency or HIV with clinical signs is a contraindication; in India, asymptomatic HIV-exposed infants still receive BCG per programme guidance.",
+      },
+      {
+        type: "mcq",
+        stem: "The first-line ART regimen currently recommended by the National AIDS Control Programme is:",
+        options: [
+          "Zidovudine + lamivudine + efavirenz",
+          "Tenofovir + lamivudine + dolutegravir",
+          "Stavudine + nevirapine + lopinavir",
+          "Abacavir + lamivudine + raltegravir (first-line only in children)",
+        ],
+        correctIndex: 1,
+        explanation:
+          "TLD — tenofovir, lamivudine and dolutegravir — is the recommended first-line single tablet in India; efavirenz-based regimens are now alternative.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "National programmes are vertical schemes with defined targets. UIP immunises from birth through adolescence with BCG, OPV/IPV, pentavalent, rotavirus, PCV and MR under Mission Indradhanush in focused blocks. NTEP delivers DOTS with cohort reporting on Nikshay. NACP tests, treats and suppresses with lifelong TLDr therapy. NVBDCP deploys ACT, bed nets and IRS and folds the elimination programmes of leprosy, lymphatic filariasis and polio into a cadenced schedule.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the workplace: occupational health is the applied science of keeping workers healthy through hazard recognition, medical surveillance and prevention at source.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 14 — Occupational health (fully authored)
+// ---------------------------------------------------------------------------
+function lesson14() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define occupational health and classify workplace hazards as physical, chemical, biological, mechanical or psychosocial; name the major pneumoconioses with their causative dust and exposure industry; recognise occupational cancers and map them to their carcinogens; explain the biological risks of blood-borne and zoon exposures in health workers and agricultural workers; demonstrate the hierarchy of controls from elimination to personal protective equipment; and describe pre-placement and periodic medical examinations and fitness certification.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 4 — environmental health. You need the exposure-response relationship and the concept of multiple routes of entry (inhalation, ingestion, dermal), and the standards of permissible exposure limits.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Occupational health (WHO / ILO)",
+        text: "The promotion and maintenance of the highest degree of physical, mental and social well-being of workers in all occupations — by preventing departures from health, controlling risks, and adapting work to the person rather than the person to the work.",
+      },
+      {
+        type: "paragraph",
+        text: "An occupational disease is one caused or aggravated by exposure at work. The logic of the discipline is prevention at source: engineering controls first, administrative controls second, personal protective equipment last, because only the first two protect every worker regardless of behaviour.",
+      },
+
+      { type: "heading", level: 2, text: "Hazard classes" },
+      {
+        type: "table",
+        headers: ["Class", "Examples", "Health effect"],
+        rows: [
+          ["Physical", "Noise, heat, radiation, vibration", "Noise-induced hearing loss, heat stress, cataract, hand-arm vibration syndrome"],
+          ["Chemical", "Lead, silica, asbestos, solvents, benzene", "Poisoning, pneumoconiosis, cancer, dermatitis"],
+          ["Biological", "Further occupational exposure further accentuated in occupational exposure-", "needlestick, zoonosis, TB in healthcare and abattoir workers"],
+          ["Mechanical", "Unguarded machinery, lifting ergonomics", "Trauma, musculoskeletal disorders"],
+          ["Psychosocial", "Shift work, workload, workplace violence", "Burnout, depression, sleep disruption"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Pneumoconioses" },
+      {
+        type: "definition",
+        term: "Pneumoconiosis",
+        text: "An occupational fibrotic lung disease caused by the accumulation of inhaled inorganic dust: fibrosis, restriction, and progressive dyspnoea without an infective cause.",
+      },
+      {
+        type: "table",
+        headers: ["Disease", "Dust and industry", "Pattern"],
+        rows: [
+          ["Silicosis", "Silica — mining, stonecutting, sandblasting", "Upper zone nodular fibrosis, egg-shell calcification"],
+          ["Asbestosis", "Asbestos — insulation, shipbuilding, brakes", "Lower zone fibrosis, pleural plaques, mesothelioma risk"],
+          ["Coal workers' pneumoconiosis", "Coal dust — mines", "Simple and progressive CWP; Caplan syndrome includes nodules with nodules"],
+          ["Byssinosis", "Cotton dust — textile mills", "Monday fever, reversible early, fixed late"],
+          ["Bagassosis", "Sugarcane bagasse — paper mills", "Hypersensitivity pneumonitis (thermophilic actinomycetes)"],
+          ["Farmer's lung", "Mouldy hay — agriculture", "Extrinsic allergic alveolitis, positive precipitins"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Occupational cancers" },
+      {
+        type: "table",
+        headers: ["Cancer", "Carcinogen and industry"],
+        rows: [
+          ["Mesothelioma", "Asbestos — all industries using lagging"],
+          ["Lung cancer", "Asbestos, arsenic smelting, chromates, nickel refining, dioxins"],
+          ["Bladder cancer", "Aromatic amines — dye, rubber and leather work"],
+          ["Leukaemia", "Benzene — petrochemical and printing"],
+          ["Hepatic angiosarcoma", "Vinyl chloride — PVC manufacture"],
+          ["Skin cancer", "Arsenical pesticides; coal tar and shale oils"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Occupational cancers have long latency: mesothelioma appears 20–40 years after first asbestos exposure, which is why the exposure history, not the presenting symptom, makes the diagnosis of causation.",
+      },
+
+      { type: "heading", level: 2, text: "Biological and infectious occupational risk" },
+      {
+        type: "paragraph",
+        text: "Health workers acquire hepatitis B and C and HIV by needlestick and blood exposure; the risk after a hollow-bore needlestick from a source with high viral load is about 30% for HBV, 3% for HCV and 0.3% for HIV, which is why immediate PEP within hours, not at leisure, is the rule. Agricultural and veterinary workers acquire anthrax, brucellosis, leptospirosis and tetanus from soil and livestock; abattoir workers get Q fever and orf; laboratory staff handling cultures have the highest occupational risk by time-weighting.",
+      },
+
+      { type: "heading", level: 2, text: "Hierarchy of controls and surveillance" },
+      {
+        type: "paragraph",
+        text: "The hierarchy, strongest first: eliminate the hazard (do not use asbestos), substitute a safer agent, install engineering controls (enclosure, ventilation), add administrative controls (rotation, training), and only then rely on personal protective equipment (dust masks, gloves, aprons). Medical surveillance runs in parallel: a pre-placement examination to detect conditions the job would worsen, periodic examinations to catch early work-related change and a post-exit examination to close the account — each with a fitness certificate issued in confidence.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Silicosis and asbestosis are preventable and irreversible. Once fibrosis has begun, neither dust masks nor ventilation reverse it; only stopping exposure before the radiological nodule appears prevents disease.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 58-year-old stone crusher reports breathlessness with upper-zone small rounded opacities and egg-shell hilar nodes. Disability is likely silicosis, and the correct sequence is: stop exposure, issue a fitness certificate, notify the occupational disease to the factory inspectorate, and register with the Workers Compensation mechanism — not simply dispose with inhalers. The employer is liable for compensation because exposure, not treatment, determines cure.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Attributing any respiratory disease in a dusty worker to pneumoconiosis. Silicosis needs a silica exposure history; byssinosis needs cotton. Also, pneumoconioses are fibrotic, while hypersensitivity pneumonitides (bagassosis, farmer's lung) resolve when exposure stops.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deferring the fitness certificate. In India, a worker in a hazardous process must have a pre-placement examination before commencing work — not after the first symptoms — so that baseline function is on record.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "Which hazard is best controlled by LEV rather than PPE — and why?",
+        answer:
+          "Any respirable dust or fume. Local exhaust ventilation removes the hazard at source; masks depend on fit, filter blockage and human factors, and are the last line.",
+        explanation:
+          "This is the hierarchy of controls: engineering controls protect everyone regardless of behaviour, PPE protects only the wearer and only when worn correctly.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A textile worker has chest tightness on Mondays that clears by Wednesday. Which diagnosis fits?",
+        options: [
+          "Silicosis",
+          "Byssinosis",
+          "Asbestosis",
+          "Bagassosis",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Monday fever is byssinosis — cotton dust in textile mills. Silicosis produces progressive upper-zone fibrosis; bagassosis follows mouldy bagasse in paper mills.",
+      },
+      {
+        type: "mcq",
+        stem: "A health worker is splashed with blood from an HIV-positive patient. Which is the single most time-critical action?",
+        options: [
+          "Report to the infection-control officer in 24 hours",
+          "Take a pregnancy test and wait",
+          "Start post-exposure prophylaxis within hours, after washing and wound care",
+          "Check the patient's CD4 count before deciding",
+        ],
+        correctIndex: 2,
+        explanation:
+          "PEP is time-critical — started within hours, ideally before 72 hours — because antiretroviral prophylaxis prevents integration of the virus; delay loses effectiveness quickly.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Occupational health is prevention at source: classify hazards, recognise pneumoconioses and occupational cancers by their causal exposures, protect health workers and farm workers against biological agents, apply the hierarchy of controls with engineering measures above PPE, and maintain pre-placement, periodic and post-exit medical surveillance with fitness certification.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the system that delivers all of this: health administration and management — levels of care, planning cycles, and the health information systems that make programmes accountable.",
+      },
+    ],
+  };
+}
+
 export const COMMUNITY_MEDICINE: SubjectSeed = {
   id: "mbbs-community-medicine",
   slug: "community-medicine",
