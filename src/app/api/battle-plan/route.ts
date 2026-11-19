@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
   // Weakness map from quiz history.
   const topicIds = topics.map((t) => t.topicId);
   const attempts = await prisma.quizAttempt.findMany({
-    where: { userId: user.id, domain: "highschool", topicId: { in: topicIds } },
+    where: { userId: user.id, domain: "highschool", topicId: { in: topicIds }, maxScore: { gt: 0 } },
     select: { topicId: true, score: true, maxScore: true },
   });
   const byTopic = new Map<string, { got: number; max: number }>();

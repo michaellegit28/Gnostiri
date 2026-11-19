@@ -44,6 +44,7 @@ interface QuizClientProps {
   topicSlug: string;
   topicTitle: string;
   topicId: string;
+  sessionId: string | null;
   domain?: "highschool" | "university" | "extras";
   initialQuestions: QuestionItem[];
 }
@@ -56,12 +57,14 @@ export default function QuizClient({
   topicSlug,
   topicTitle,
   topicId,
+  sessionId,
   domain = "highschool",
   initialQuestions,
 }: QuizClientProps) {
   const { user } = useAuth();
 
   const [activeQuestions, setActiveQuestions] = useState<QuestionItem[]>(initialQuestions);
+  const [activeSessionId, setActiveSessionId] = useState<string | null>(sessionId);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -73,6 +76,7 @@ export default function QuizClient({
 
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [submittingAnswer, setSubmittingAnswer] = useState(false);
+  const [answerError, setAnswerError] = useState("");
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
 
   const [savedOffline, setSavedOffline] = useState<number>(0);
@@ -138,9 +142,14 @@ export default function QuizClient({
 
   const handleSubmitQuestion = async () => {
     if (!selectedOption || !currentQuestion || isSubmitted) return;
+    if (!user || !activeSessionId) {
+      setAnswerError("Sign in to check this answer.");
+      return;
+    }
+    setAnswerError("");
     setSubmittingAnswer(true);
     try {
-      const result = await fetch("/api/quiz/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domain, topicId, questionId: currentQuestion.id, answer: selectedOption }) });
+      const result = await fetch("/api/quiz/answer", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ domain, topicId, questionId: currentQuestion.id, answer: selectedOption, sessionId: activeSessionId }) });
     if (!result.ok) throw new Error("Could not check this answer");
     const feedback = await result.json() as { isCorrect: boolean; correctAnswer: string; explanation?: string | null };
     const isCorrect = feedback.isCorrect;
@@ -156,10 +165,10 @@ export default function QuizClient({
     setIsSubmitted(true);
     } catch (error) {
       if (isOffline) {
-        setUserAnswers((prev) => [...prev, { questionId: currentQuestion.id, selectedAnswer: selectedOption, isCorrect: false, correctAnswer: "" }]);
-        setSavedOffline((count) => count + 1);
-        setIsSubmitted(true);
+        setAnswerError("Reconnect before checking this answer so the server can record it.");
       } else {
+        const message = error instanceof Error ? error.message : "Could not check this answer";
+        setAnswerError(message);
         console.error(error);
       }
     }
@@ -176,6 +185,7 @@ export default function QuizClient({
       const payload = {
         domain,
         topicId,
+        sessionId: activeSessionId,
         score: correctCount,
         maxScore: finalAnswers.length,
         answers: finalAnswers,
@@ -213,41 +223,57 @@ export default function QuizClient({
     }
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (currentIndex < totalQuestions - 1) {
       setCurrentIndex((prev) => prev + 1);
       setSelectedOption(null);
       setIsSubmitted(false);
     } else {
-      // Quiz finished
       const finishTime = Date.now();
-      setEndTime(finishTime);
-      setIsFinished(true);
-
       const durationSec = Math.max(1, Math.round((finishTime - startTime) / 1000));
       if (user) {
         const finalAnswers = userAnswers.some((answer) => answer.questionId === currentQuestion.id)
           ? userAnswers
           : [...userAnswers, { questionId: currentQuestion.id, selectedAnswer: selectedOption || "", isCorrect: false, correctAnswer: currentQuestion.correctAnswer || "" }];
         setUserAnswers(finalAnswers);
-        void persistAttempt(finalAnswers, durationSec);
+        await persistAttempt(finalAnswers, durationSec);
       }
+      setEndTime(finishTime);
+      setIsFinished(true);
     }
   };
 
-  const handleRetryMissed = () => {
-    // Find questions where the last attempt was wrong
+  const handleRetryMissed = async () => {
     const wrongQuestionIds = new Set(
-      userAnswers.filter((a) => !a.isCorrect).map((a) => a.questionId)
+      userAnswers.filter((answer) => !answer.isCorrect).map((answer) => answer.questionId)
     );
+    const missed = initialQuestions.filter((question) => wrongQuestionIds.has(question.id));
+    if (missed.length === 0) return;
+    if (!activeSessionId) {
+      setAnswerError("Sign in before retrying missed questions.");
+      return;
+    }
 
-    const missed = initialQuestions.filter((q) => wrongQuestionIds.has(q.id));
-    if (missed.length > 0) {
+    try {
+      const response = await fetch("/api/quiz/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          previousSessionId: activeSessionId,
+          questionIds: missed.map((question) => question.id),
+        }),
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data?.sessionId) {
+        throw new Error(data?.error || "Could not start the retry session");
+      }
+      setActiveSessionId(data.sessionId);
       setActiveQuestions(missed);
       setCurrentIndex(0);
       setSelectedOption(null);
       setIsSubmitted(false);
       setUserAnswers([]);
+      setAnswerError("");
       setStartTime(Date.now());
       setEndTime(null);
       setIsFinished(false);
@@ -256,6 +282,8 @@ export default function QuizClient({
       setSavedOffline(0);
       setQueuedToSync(false);
       isSavingAttemptRef.current = false;
+    } catch (error) {
+      setAnswerError(error instanceof Error ? error.message : "Could not start the retry session");
     }
   };
 
@@ -574,6 +602,12 @@ export default function QuizClient({
           </div>
         </div>
       </main>
+
+      {answerError && (
+        <p role="alert" className="mb-4 rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+          {answerError}
+        </p>
+      )}
 
       {/* Action Navigation Footer */}
       <footer className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
