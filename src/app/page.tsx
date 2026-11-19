@@ -2,7 +2,8 @@ import Link from "next/link";
 import { getCurrentUser } from "@/lib/server-auth";
 import type { Metadata } from "next";
 import Greeting from "@/components/dashboard/Greeting";
-import BattlePlanHero from "@/components/dashboard/BattlePlanHero";
+import BattlePlanHero from "@/components/dashboard/TodaysPath";
+import FocusTimer from "@/components/dashboard/FocusTimer";
 import StatsRow from "@/components/dashboard/StatsRow";
 import LeagueStatusWidget from "@/components/dashboard/LeagueStatusWidget";
 import TutorShortcut from "@/components/dashboard/TutorShortcut";
@@ -32,13 +33,16 @@ export default async function Home() {
         <main className="mx-auto w-full max-w-4xl px-5 py-8 md:py-10">
           <section aria-label="Dashboard" className="space-y-8">
             <Greeting name={user.name} email={user.email} />
-            <BattlePlanHero userId={user.id} />
-            <QuickLinks />
-            <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-              <StatsRow userId={user.id} />
-              <LeagueStatusWidget />
+            <div className="grid gap-6 lg:grid-cols-[1.45fr_0.75fr]">
+              <BattlePlanHero userId={user.id} />
+              <FocusTimer />
             </div>
-            <RecentAchievements userId={user.id} />
+            <QuickLinks />
+            <StatsRow userId={user.id} />
+            <div className="grid gap-6 lg:grid-cols-2">
+              <LeagueStatusWidget />
+              <RecentAchievements userId={user.id} />
+            </div>
             <TutorShortcut />
           </section>
         </main>
