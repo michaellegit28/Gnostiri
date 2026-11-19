@@ -93,6 +93,23 @@ export async function middleware(request: NextRequest) {
     return notFound;
   }
 
+  // ---- answer-key oracle stopgap (edge) ----
+  // POST /api/quiz/answer returns correctAnswer+explanation for ANY questionId —
+  // anonymously that is the whole 6,000-question key (proven live 2026-11-18).
+  // Require a Supabase session cookie until the app-lane fix binds reveals to an
+  // active session (agent-3/api-security-fixes-r1). Auth cookies are named
+  // sb-<projectRef>-auth-token by @supabase/ssr.
+  if (request.method === "POST" && request.nextUrl.pathname === "/api/quiz/answer") {
+    const hasSession = Array.from(request.cookies.getAll()).some(
+      (c) => c.name.startsWith("sb-") && c.name.endsWith("-auth-token") && c.value.length > 0
+    );
+    if (!hasSession) {
+      const unauthorized = NextResponse.json({ error: "Sign in required" }, { status: 401 });
+      carrySessionCookies(sessionResponse, unauthorized);
+      return unauthorized;
+    }
+  }
+
   // ---- IP rate limiting for /api ----
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
