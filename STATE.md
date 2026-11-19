@@ -42,7 +42,7 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 | OPENAI_BASE_URL | set | https://api.atria-asi.ai/v1 |
 | OPENAI_TUTOR_MODEL | set | Atria-Dawn-Preview |
 | LAUNCH_SECRET | set (sensitive) | HMAC signing for launch cookies |
-| REVALIDATE_SECRET | set (sensitive) | Guards temp/admin routes |
+| REVALIDATE_SECRET | set (sensitive) | Rotated to a fresh random value 2026-11-18 via Vercel API (read it in the Vercel dashboard — never in chat); guards temp/admin routes incl. launch-token mint |
 | UPSTASH_REDIS_REST_URL | EMPTY | Rate limiter fail-open — cost risk |
 | UPSTASH_REDIS_REST_TOKEN | EMPTY | Same |
 | STRIPE_SECRET_KEY | EMPTY | Payments not wired |
@@ -51,7 +51,7 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 | RAZORPAY_KEY_ID | NOT SET | Same |
 | RAZORPAY_KEY_SECRET | NOT SET | Same |
 | RAZORPAY_WEBHOOK_SECRET | NOT SET | Same |
-| ADMIN_EMAILS | EMPTY | Admin alignment panel unusable |
+| ADMIN_EMAILS | set (sensitive) | 2026-11-18: set to the owner's Vercel account email via API — admin panel + content-report triage unlocked for the owner (fail-closed for everyone else since #51) |
 | NEXTAUTH_SECRET | EMPTY | Vestigial — no next-auth in codebase |
 | NEXTAUTH_URL | EMPTY | Vestigial |
 | SUPABASE_URL | set | Vestigial — code uses DATABASE_URL |
@@ -134,10 +134,8 @@ All seeded to production; all rows needs-human-review, nothing "verified". Seede
    (sent 2026-11-17), a second Supabase project URL (sent 2026-11-18 — NOT the
    wired project; confirm before any switch), plus the older Atria key,
    Firebase service-account key, Supabase DB password
-6. **Admin panel LOCKED (fail-closed since #51)** — ADMIN_EMAILS is empty, so
-   requireAdmin denies everyone with "Admin access is not configured" (PR #51
-   removed the old fail-open dev path). Owner must set ADMIN_EMAILS to reopen
-   the content-report triage queue and the alignment panel
+6. **Admin panel unlocked for the owner** — ADMIN_EMAILS set 2026-11-18 (owner's Vercel
+   account email); requireAdmin stays fail-closed for everyone else (since #51)
 7. **CI validated** — green on PRs #42–#46 and on main check-runs
    (2026-11-16); workflow .github/workflows/ci.yml healthy
 8. ~~Agent shells lacked GITHUB_TOKEN~~ **RESOLVED 2026-11-17**: owner
@@ -732,3 +730,17 @@ Firebase — the seam swap covered the whole app.
 - **Launch tokens**: minted owner-side via POST /api/admin/launch-tokens/generate?secret=<REVALIDATE_SECRET>
   (secret currently unset in Vercel; LAUNCH_GATE=false until Dec 1). Tokens never in chat/repo.
 - New chat-exposed Supabase project URL (2026-11-18) added to rotation list; NOT switched.
+
+## Orchestrator session (2026-11-18, A1 part 2 — #65 merged; env fixes; P1 security fix assigned)
+
+- **#65 merged (0b2f055)** — Global Ranking season archive page (/league/seasons) + hall-of-fame wiring; live-verified 200s.
+- **Vercel env fixed via API** (my lane): `REVALIDATE_SECRET` rotated to a fresh random value and
+  `ADMIN_EMAILS` set to the owner's account email on production+preview, then a production redeploy of
+  main was triggered and verified READY (63cbc28). Values live only in Vercel — never in chat/repo.
+  Launch tokens can now be minted owner-side via POST /api/admin/launch-tokens/generate?secret=<REVALIDATE_SECRET>.
+- **P1 security defects proven by QA PR #66** (red by design): /api/quiz/answer answer-key oracle (no auth,
+  returns correctAnswer for any id) and /api/practice/* IDOR (no session ownership check). Assigned to
+  agent-3 as agent-3/api-security-fixes-r1 branching off the QA branch so the contract tests ride along;
+  #66 closes as superseded once the fix merges green. See AGENT_CHAT.md top.
+- Middleware is LIVE since #63 (src/middleware.ts): retired boards true 404, rate limiter fail-closed with
+  Upstash wired, session refresh active. Prod smoke 23/23.

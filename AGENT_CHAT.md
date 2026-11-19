@@ -1,9 +1,19 @@
-## [2026-11-18 09:19] app/agent-3 — REVIEW-REQUESTED — Global Ranking season archive (PR #65)
-- what: #65 adds public /league/seasons with honest lifecycle/window states, aggregate final counts, owner-only certificate links, stable Hall anchors, and discovery from league/ladder/Hall/certificates; no roster or user PII is exposed.
-- gates: prisma generate OK; tsc clean; lint clean; node --test 392/392; build OK (58 pages, /league/seasons dynamic); independent diff review completed.
-- branch agent-3/season-archive-r1; feature commit e558440; PR https://github.com/michaellegit28/Gnostiri/pull/65
-- blocker: none.
-- next: orchestrator review/merge #65; agent-3 starting assigned agent-3/today-path-r1 dashboard roadmap/focus/sticker work.
+## [2026-11-18 14:40] lead/orchestrator — P1 SECURITY ASSIGNMENT (from PR #66 QA audit) — agent-3 fix now
+- PR #66 (agent-4/today-path-qa-r1) proves 2 defects in tests/api-security-contract.test.mjs:
+  **P1** /api/quiz/answer is an unauthenticated answer-key oracle (returns correctAnswer for any questionId — whole 6,000-question key harvestable).
+  **P2** /api/practice/{draft,section/start,submit} trust a client-supplied sessionId with no ownership check (IDOR).
+- ASSIGN agent-3 (branch agent-3/api-security-fixes-r1, BRANCH OFF origin/agent-4/today-path-qa-r1 so the contract tests are in your PR and go green):
+  1. /api/quiz/answer: require getCurrentUser (401 signed out); bind to the user's ACTIVE session for (domain, topicId) — create via the same session logic if none; require questionId ∈ that session's question set; record the attempt server-side; only then return isCorrect/correctAnswer/explanation. Update QuizClient/PracticeRunner/MasterQuizClient/OptionCard if the request shape changes. No mass enumeration possible.
+  2. /api/practice/draft + section/start + submit: require getCurrentUser and verify practiceSession.userId === user.id (403 otherwise).
+  3. Gates: prisma generate, tsc, next lint, node --test tests/*.test.mjs (must be green INCLUDING the new contract tests), npm run build. Push, PR, post REVIEW-REQUESTED.
+- #66 stays OPEN until #fix lands (its tests fail on main by design). Orchestrator merges the fix PR (which contains the tests), then closes #66 as superseded.
+- Everything else continues per the 08:55 GO entry.
+
+---
+## [2026-11-18 08:55] lead/orchestrator — GO — start your assigned task now (main @ 63cbc28, all green)
+- agent-3: agent-3/today-path-r1 (Today's-path roadmap + focus timer + sticker chips on the dashboard, current tokens only). agent-4: agent-4/today-path-qa-r1 (smoke markers + contract test for the new sections). agent-2: placeholder lessons (community-medicine in progress), then Version A transcription (markitdown ON).
+- Flow per lane: worktree → branch → gates (prisma generate, tsc, next lint, node --test tests/*.test.mjs, npm run build) → push (source /tmp/opencode/agent1.env for GITHUB_TOKEN; if auth fails, post BLOCKED — do NOT paste tokens) → PR → post REVIEW-REQUESTED at the top of this file. Orchestrator reviews + merges + prod smoke.
+- main @ 63cbc28: middleware live (src/middleware.ts), Upstash wired, retired boards true 404, prod smoke 23/23, /api/health/auth healthy.
 
 ---
 ## [2026-11-18 08:40] lead/orchestrator — DESIGN VERDICT on the pasted "Today" HTML + assignments (owner away ~4-5h)
