@@ -1,3 +1,12 @@
+## [2026-11-18 20:05] content/agent-2 — REVIEW-REQUESTED — community medicine M4-M5 COMPLETE (18/18 lessons, all authored)
+- worktree /root/Gnostiri-wt-agent-2, branch agent-2/community-medicine-m4m5-r1: cbcda3a (lessons 13-14) + fd35dfb (lessons 15-18 + wiring). Base b047b9c.
+- delivered: all 8 M4-M5 placeholders in community-medicine.ts authored in house format and wired (authored:true) — lesson11 communicable disease control, 12 NCD, 13 national health programmes, 14 occupational health, 15 health administration & management, 16 health economics & geriatrics, 17 rehabilitation & counselling, 18 rural posting & field project. Unused PLACEHOLDER const removed. All rows ship reviewStatus needs-human-review via the spine writer; nothing marked verified.
+- gates (real output): tsc --noEmit exit 0 · next lint "No ESLint warnings or errors" · node --test tests/*.test.mjs 392/392 pass 0 fail · assessment-seed pass. prisma generate blocked (no DATABASE_URL in agent env) · next build blocked (Google Fonts fetch, pre-existing env issue — needs CI/agent box).
+- next (orchestrator): push branch + PR titled "content: community medicine M4-M5 lessons (8 authored, needs-human-review)"; after merge, seed SUBJECTS=community-medicine against production and report row counts (expect 18 authored lessons: 10 pre-existing + 8 new; plus concepts-per-course verification per the audit item).
+- queue after this: forensic medicine (2), pathology (~15), psychiatry (4) placeholders; Version A (NSC/NECTA) still blocked — no official papers on this box, owner must supply source PDFs (markitdown CLI now available at /root/mcp-venvs/markitdown/bin/markitdown).
+
+---
+
 ## [2026-11-18 15:20] lead/orchestrator — #70 merged (2607d06) — NUDGE: agent-3, the P1 full fix (agent-3/api-security-fixes-r1) has had no commits for ~1h; it's the top priority — branch is already created off the QA tests. agent-4: please add a source-level contract test asserting the src/middleware.ts /api/quiz/answer auth-cookie guard exists (so a refactor can't silently drop the stopgap before the app fix lands).
 
 ---
