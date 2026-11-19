@@ -2153,6 +2153,305 @@ function lesson10() {
 }
 
 // ---------------------------------------------------------------------------
+// LESSON 11 — Communicable disease control (fully authored)
+// ---------------------------------------------------------------------------
+function lesson11() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: list the six links in the chain of infection and say where each type of control measure breaks it; classify transmission routes — direct contact, indirect contact, droplet, airborne, vehicle-borne and vector-borne — with a pathogen example of each; distinguish common-source from propagated epidemics using an epidemic curve; carry out an outbreak investigation from confirmation to control; explain the role of notification, isolation and quarantine in communicable disease law; and compute a herd-immunity threshold from R-nought for any disease.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 6 — epidemiological methods. You need the measures of disease frequency, the study designs, the concepts of sensitivity and specificity, and the steps of outbreak investigation, which this lesson applies to real communicable disease control.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Chain of infection",
+        text: "The sequence: infectious agent → reservoir → portal of exit → mode of transmission → portal of entry → susceptible host. Each link is a potential point of control: treat sterilise or cases to shrink the reservoir (isolate infected individuals), interrupt transmission (hand hygiene, ventilation), boost host defences (vaccinate) or increase herd immunity.",
+      },
+      {
+        type: "paragraph",
+        text: "An infectious disease circulates when every link is intact. Control measures fail when we protect only one link. Hospital sterilisation (module 4 of microbiology) destroys the agent; contact tracing shortens the period of infectivity; vaccination removes the susceptible host from the chain; quarantine separates those exposed but not yet ill.",
+      },
+
+      { type: "heading", level: 2, text: "Transmission routes" },
+      {
+        type: "table",
+        headers: ["Route", "Mechanism", "Example pathogen", "Control"],
+        rows: [
+          ["Direct contact", "Skin, mucosa, body fluids", "Herpes simplex, scabies", "Barriers, hand hygiene"],
+          ["Droplet", "Respiratory particles >5 µm, close range", "Neisseria meningitidis, SARS-CoV-2", "Mask, distancing, ventilation"],
+          ["Airborne", "Particles <5 µm, suspended in air", "Measles, tuberculosis", "Negative pressure, N95, ventilation"],
+          ["Vehicle-borne", "Water, food, blood, fomites", "Vibrio cholerae, Salmonella", "Water treatment, food safety"],
+          ["Vector-borne", "Arthropod or animal vector", "Plasmodium, Yersinia pestis", "Vector control, animal vaccination"],
+          ["Vertical", "Transplacental or perinatal", "Rubella, HIV", "Maternal screening, prophylaxis"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Epidemic types and curves" },
+      {
+        type: "paragraph",
+        text: "A point-source epidemic from a single exposure has a sharp epidemic curve with a peak after one incubation period and a fall as the source is exhausted. A continuous common-source epidemic has a plateau (a contaminated water tank). A propagated epidemic rises and falls as serial generations of cases — person-to-person transmission — produce waves spaced by the serial interval.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "The serial interval is the time between symptom onset in successive cases. In Covid-19 it was about 5 days; a propagated curve therefore peaks in waves every 7–14 days if uncontrolled. The epidemic curve is the fastest way to test the propagated hypothesis.",
+      },
+
+      { type: "heading", level: 2, text: "Outbreak investigation" },
+      {
+        type: "paragraph",
+        text: "The WHO steps, in order: (1) confirm the diagnosis and verify that an outbreak is occurring above expected background; (2) define cases (clinical criteria + time + place + person); (3) build the line list and describe the curve by time, place and person; (4) compute attack rates by exposure; (5) generate and test hypotheses (a table of exposure history is often enough); (6) pursue control measures simultaneously — do not delay control for data; (7) report and debrief, including lessons for surveillance.",
+      },
+
+      { type: "heading", level: 2, text: "Isolation, quarantine and notification" },
+      {
+        type: "paragraph",
+        text: "Isolation separates people confirmed ill to prevent transmission; quarantine restricts the movement of exposed but healthy contacts for one incubation period. Notification means every designated case (or suspected case) is legally reported to public health authorities for tracking and response. Contact tracing is the systematic identification, testing and quarantine of contacts of an infected person, the backbone of smallpox eradication and the modern COVID-19 response.",
+      },
+
+      { type: "heading", level: 2, text: "Herd immunity and R0" },
+      {
+        type: "definition",
+        term: "Basic reproduction number (R0)",
+        text: "The average number of secondary infections produced by one infectious person in a fully susceptible population. If R0 > 1 the disease spreads; if R0 < 1 it dies out. Control aims to cut the effective reproduction number below unity.",
+      },
+      {
+        type: "definition",
+        term: "Herd immunity threshold",
+        text: "The proportion of immune individuals above which an infectious disease cannot maintain transmission: HIT = 1 − 1/R0. Measles (R0 12–18) needs 92–95 % immune; coronavirus (R0 2–3) needs 50–67 %; polio (R0 5–7) needs 80–86 %.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A cholera outbreak begins in a relief camp four days after flooding: cases rise steeply and plateau. You define a case as acute watery diarrhoea with onset on or after the flood date; the attack rate among households drawing water from river intake A is 23 % versus 2 % among tank-supplied households. The epidemic curve is a continuous common-source pattern, not propagated. Control: chlorination of intake A, boil-water advisory, ORS corners, and a sanitary survey of the intake — while stool cultures confirm V cholerae for attribution, not for notification.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Confusing isolation with quarantine. Isolation applies to the ill; quarantine applies to the exposed but well. Quarantine depends entirely on the incubation period: for measles it is about 10 days from last exposure; for cholera it is 2 days.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Waiting for laboratory confirmation before intervening. Control measures — chlorination, ORS, isolation, disinfection — follow the epidemiological hypothesis, not the culture result. Likewise, do not use quarantine as the sole control for airborne diseases; ventilation and immunity decide the outcome.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "An epidemic curve shows a sharp peak four days after a wedding dinner. Which epidemic type does this suggest, and why?",
+        answer:
+          "A point-source epidemic from a single exposure at the wedding dinner; the four-day incubation places the peak after one incubation period, followed by a decline as the source is exhausted.",
+        explanation:
+          "A propagated epidemic would show successive waves spaced by the serial interval; a continuous source would plateau rather than peak sharply.",
+      },
+      {
+        type: "question",
+        prompt: "Measles has an R0 of 15. What proportion of the population must be immune to prevent sustained transmission?",
+        answer:
+          "HIT = 1 − 1/15 = 93.3 % immune — why measles outbreaks track any dip below 95 % vaccination coverage.",
+        explanation:
+          "Herd immunity thresholds derive directly from R0. This is why the national immunisation programme targets >95 % coverage for measles, requiring a two-dose MMR schedule.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which measure most directly interrupts the portal of entry link in the chain of infection?",
+        options: [
+          "Cooking food thoroughly",
+          "Wearing a mask in the operating theatre",
+          "Treating infected patients",
+          "Disinfecting drinking water",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Masks and other barriers block the organism at the portal of entry; cooking and water treatment remove the vehicle; treatment reduces the reservoir and infectiousness.",
+      },
+      {
+        type: "mcq",
+        stem: "A propagated epidemic curve is best distinguished from a common-source one by which feature?",
+        options: [
+          "A single, sharp peak",
+          "Successive waves spaced by the serial interval",
+          "A plateau after the peak",
+          "Secondary cases only in the first generation",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Propagated epidemics generate successive waves of secondary cases spaced by the serial interval; common-source events peak or plateau according to the source, not to serial generations.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Communicable disease control works by breaking the chain of infection. Transmission route determines the chosen measure — hand hygiene for contact, ventilation for airborne, water treatment for vehicle-borne. Epidemic curves classify outbreaks into common-source and propagated, and investigation proceeds from case definition to attack-rate analysis to simultaneous control. Herd immunity thresholds from R0 set vaccination coverage targets. Quarantine depends on the incubation period, not on arbitrary durations.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the diseases that do not transmit — non-communicable disease — which now dominate the population disease burden and require a different preventive logic entirely.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 12 — Non-communicable disease (fully authored)
+// ---------------------------------------------------------------------------
+function lesson12() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: name the four major non-communicable diseases and the four shared behavioural risk factors in WHO's strategic framing; distinguish primordial, primary, secondary and tertiary prevention applied to an NCD; compute a population attributable fraction and interpret the prevention paradox; explain how risk-factor screening, life-course prevention and absolute risk prediction work; and describe the control strategy for tobacco, harmful alcohol, unhealthy diet and physical inactivity in a national NCD programme.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 11 — communicable disease control, and lesson 6 — epidemiological methods. The incidence and prevalence measures, study designs and bias concepts carry over; NCDs differ chiefly in having multiple causes, long latency and no single chain to break.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Non-communicable diseases",
+        text: "Chronic conditions that do not transmit between people: cardiovascular disease, diabetes mellitus, cancer, chronic respiratory disease — plus mental disorders, the fifth WHO category. They account for about 74 % of deaths worldwide and are driven by tobacco, harmful use of alcohol, unhealthy diet, physical inactivity and air pollution.",
+      },
+      {
+        type: "paragraph",
+        text: "An NCD has no single necessary and sufficient cause. Diet, activity, tobacco and blood pressure each contribute partially, so population health shifts happen only when the whole distribution of risk shifts — a high-risk individual strategy alone never prevents more cases than a population strategy.",
+      },
+
+      { type: "heading", level: 2, text: "Prevention levels applied to NCDs" },
+      {
+        type: "table",
+        headers: ["Level", "Definition", "NCD example"],
+        rows: [
+          ["Primordial", "Prevent risk factors arising", "Taxing tobacco and sugar-sweetened beverages; urban design for activity"],
+          ["Primary", "Reduce exposure in those at risk", "Smoking cessation programmes; sodium-reduction reformulation"],
+          ["Secondary", "Early detection and prompt treatment", "BP screening at PHC; opportunistic screening for diabetes"],
+          ["Tertiary", "Limit disability from established disease", "Cardiac rehabilitation; dialysis continuation; palliative care"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Risk measures and the prevention paradox" },
+      {
+        type: "definition",
+        term: "Population attributable fraction (PAF)",
+        text: "The proportion of disease that would be prevented if the entire population moved to the lowest exposure category: PAF = P(E) × (RR − 1) / [P(E) × (RR − 1) + 1], where P(E) is exposure prevalence and RR the relative risk.",
+      },
+      {
+        type: "paragraph",
+        text: "Rose's prevention paradox: a large number of people each taking a small risk produces more cases than a few people taking a large risk. A coronary risk reduction of 2 mm Hg in blood pressure across a population prevents more myocardial infarctions than treating the small hypertensive group — which is why taxation, labelling and environment beat clinic-centred risk reduction at scale.",
+      },
+
+      { type: "heading", level: 2, text: "Cardiovascular disease, diabetes, cancer, chronic respiratory disease" },
+      {
+        type: "paragraph",
+        text: "Cardiovascular disease prevention is built on absolute-risk prediction — the Framingham, WHO and QRISK scores, and WHO's simple non-laboratory risk charts used when lipid testing is unavailable. Treatment thresholds follow absolute risk, not single risk factor levels. Diabetes prevention is the best-evidenced lifestyle story: the Diabetes Prevention Program achieved a 58 % reduction in progression to type 2 diabetes with intensive lifestyle change, versus 31 % with metformin.",
+      },
+      {
+        type: "paragraph",
+        text: "Cancer control pairs primary prevention — tobacco control, HBV vaccination against liver cancer, HPV vaccination against cervical cancer, occupational carcinogen limits — with early detection: oral visual inspection, breast clinical examination and mammography where feasible, cervical cytology or HPV testing in the eligible age band. Chronic respiratory disease control centres on tobacco, indoor and ambient air pollution, and early spirometry for COPD in symptomatic smokers.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "MPOWER is the WHO tobacco strategy: Monitor use and prevention policies, Protect people from smoke, Offer help to quit, Warn about dangers, Enforce bans, Raise taxes. Tax increases are the single most effective intervention because they price risk, not knowledge.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "In a district of 100 000 people, 30 % smoke and the RR for ischaemic heart disease from smoking is 2.0. PAF = 0.30 × (2 − 1) / [0.30 + 1.0] = 0.23, so about 23 % of IHD in this district is attributable to smoking. Eliminating smoking would remove roughly a quarter of cases — the arithmetic behind taxation and cessation investment.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Equating screening with prevention. BP screening detects but does not prevent; the diagnosis matters to the patient only because treatment reduces absolute risk. Primordial prevention — preventing high blood pressure from developing — is the more effective population strategy.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Using relative risk of one in a hundred to nominate a 'high-risk group'. Absolute risk and prevalence decide the size of the burden: hypertension is high-risk but rare (miss the many), while mild dyslipidaemia is low-risk but common (miss the few). Population strategy reaches both.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A population is 40 % exposed to factor X with RR 1.5. What proportion of disease is attributable to factor X?",
+        answer:
+          "PAF = 0.4 × 0.5 / (0.4 × 0.5 + 1) = 0.2, so 20 % of disease cases are attributable to X.",
+        explanation:
+          "PAF combines exposure prevalence and relative risk — a common weak risk factor can account for more cases than a rare strong one, which is the quantitative core of Rose's prevention paradox.",
+      },
+      {
+        type: "question",
+        prompt: "Which element of MPOWER is considered the single most effective intervention for reducing tobacco use?",
+        answer:
+          "Enforcement and raising taxes — price increases reduce consumption at population level, especially among young people and low-income groups.",
+        explanation:
+          "Taxation raises the cost of a harmful behaviour, shifting the entire distribution of consumption downward; education alone affects the informed minority.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "The WHO target of reducing premature NCD mortality by 25 × 25 means:",
+        options: [
+          "25 % reduction in NCD incidence by year 25",
+          "25 % relative reduction in premature NCD deaths by 2025 related to 2010 levels",
+          "25 % reduction in NCD risk-factor prevalence in 25 years",
+          "25 % reduction in NCD treatment costs by year 25",
+        ],
+        correctIndex: 1,
+        explanation:
+          "The voluntary global target is a 25 % relative reduction in premature deaths from CVD, cancer, diabetes and chronic respiratory disease by 2025 related to 2010 levels — the indicator set for NCD programme evaluation.",
+      },
+      {
+        type: "mcq",
+        stem: "In the Diabetes Prevention Program, intensive lifestyle change reduced progression to type 2 diabetes by 58 %, compared with 31 % for metformin. What does this tell a planner?",
+        options: [
+          "Metformin has no role in diabetes prevention",
+          "Lifestyle intervention is more effective than metformin at preventing diabetes, and is the first choice in prediabetes",
+          "Only high-risk individuals need any intervention",
+          "Diet change affects Type 1 diabetes",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Lifestyle beat metformin. Metformin remains an option for the highest-risk and younger groups, but intensive lifestyle is the most effective first-line strategy.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "NCDs — cardiovascular disease, diabetes, cancer, chronic respiratory disease, mental illness — are caused by exposed populations, not chains of transmission. Prevention follows the four levels, and population strategy beats high-risk strategy because most cases arise in the many at small risk. Absolute-risk prediction guides individual treatment; taxation and environment carry population impact. The control agenda is shared with the next lesson: national health programmes.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, those programme designs — immunisation, tuberculosis, HIV, malaria, reproductive health — are the delivery vehicles for everything in this module, each with its own structure, target groups and monitoring.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
 // LESSON 13 — National health programmes (fully authored)
 // ---------------------------------------------------------------------------
 function lesson13() {
