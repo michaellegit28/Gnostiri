@@ -39,13 +39,18 @@ test("Home keeps the greeting, stats, league widget, achievements and tutor shor
   }
 });
 
-test("when Today's path is wired, Home also wires the focus timer beside it", () => {
-  const home = has(PAGE) ? read(PAGE) : "";
-  if (/TodaysPath/.test(home)) {
-    assert.match(home, /FocusTimer/, "TodaysPath and FocusTimer ship together on Home");
-    // The path module is a server component taking userId — Home must pass it.
-    assert.match(home, /TodaysPath[\s\S]{0,200}userId=\{user\.id\}/, "Home passes user.id to TodaysPath");
-  }
+test("Home wires the focus timer beside the day-planning module and passes userId", () => {
+  const page = has(PAGE) ? read(PAGE) : "";
+  // The day module may be the legacy BattlePlanHero file or the new TodaysPath
+  // (which main imports aliased as BattlePlanHero). Either way it must be
+  // user-scoped server-side, and FocusTimer ships beside it.
+  assert.match(page, /BattlePlanHero|TodaysPath/, "Home renders a day-planning module");
+  assert.match(page, /FocusTimer/, "FocusTimer is wired on Home");
+  assert.match(
+    page,
+    /(BattlePlanHero|TodaysPath)[\s\S]{0,120}userId=\{user\.id\}/,
+    "the day module receives userId={user.id} (server-scoped, not client-derived)",
+  );
 });
 
 // ─── TodaysPath: server component invariants ──────────────────────────────────

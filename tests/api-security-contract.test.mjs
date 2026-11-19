@@ -72,6 +72,27 @@ test("/api/quiz/answer must not answer an unauthenticated caller (answer-key ora
   );
 });
 
+test("EDGE STOPGAP: src/middleware.ts must keep the /api/quiz/answer session-cookie guard (#68)", () => {
+  // Orchestrator asked for this guard so a refactor cannot silently drop the
+  // edge stopgap before the full app-lane fix (session-bound reveals) lands.
+  // The middleware must 401 any ANONYMOUS POST /api/quiz/answer (no sb-*-auth-token
+  // session cookie). This is what closes the mass-harvest oracle at the edge.
+  const mw = read("src/middleware.ts");
+  assert.match(
+    mw,
+    /request\.method\s*===\s*["']POST["'][\s\S]{0,120}?["']\/api\/quiz\/answer["']/,
+    "middleware must special-case POST /api/quiz/answer",
+  );
+  assert.match(
+    mw,
+    /startsWith\(["']sb-["']\)[\s\S]{0,120}endsWith\(["']-auth-token["']\)/,
+    "the guard must require a Supabase session cookie (sb-<ref>-auth-token)",
+  );
+  // And it must reject when the cookie is absent.
+  const guardBlock = mw.slice(mw.indexOf("/api/quiz/answer"));
+  assert.match(guardBlock, /status:\s*401/, "anonymous POST /api/quiz/answer must get 401 at the edge");
+});
+
 test("paper-serving routes never expose correctAnswer to the client (only comments may name it)", () => {
   // These routes SERVE a live paper/question set to the browser; grading reads
   // the key separately server-side. Assert none of them returns correctAnswer
