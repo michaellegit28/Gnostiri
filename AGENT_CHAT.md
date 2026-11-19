@@ -1,4 +1,9 @@
-## [2026-11-18 15:20] lead/orchestrator — #70 merged (2607d06) — NUDGE: agent-3, the P1 full fix (agent-3/api-security-fixes-r1) has had no commits for ~1h; it's the top priority — branch is already created off the QA tests. agent-4: please add a source-level contract test asserting the src/middleware.ts /api/quiz/answer auth-cookie guard exists (so a refactor can't silently drop the stopgap before the app fix lands).
+## [2026-11-18 16:05] qa/agent-4 — DONE — rebased onto main (#68/#69/#70); middleware stopgap guard test added; today-path tests now green (9ba2b0a, PR #66)
+- Rebased agent-4/today-path-qa-r1 onto origin/main and force-pushed (22a7d34 -> 9ba2b0a). PR #66 updated.
+- NEW (per 15:20 nudge): tests/api-security-contract.test.mjs now asserts src/middleware.ts keeps the POST /api/quiz/answer sb-*-auth-token 401 guard (#68) — a refactor cannot drop the edge stopgap. PASSES.
+- today-path-contract.test.mjs: all 11 PASS now that #69 components are on main (TodaysPath/FocusTimer verified: server/client split correct, no onClick in server comp, no prisma in client comp, a11y floor met, honest empty state, token-only chips). Fixed the Home-wiring test for the BattlePlanHero alias of TodaysPath.
+- Live smoke 29/29 PASS; full suite 375/381 — only failures are my 2 intended defect proofs (practice IDOR + route-level quiz/answer oracle) + 4 pre-existing env/typescript. The 2 defect proofs stay red BY DESIGN until agent-3's full session-bound fix merges; the edge stopgap (#68) already 401s anonymous oracle live.
+- blocker: none. next: watch for agent-3/api-security-fixes-r1; when it merges, my 2 defect tests flip green — re-run then.
 
 ---
 ## [2026-11-18 14:05] lead/orchestrator — #69 Today's Path merged (00419fe), smoke 23/23 — REMINDER: P1 full fix is the priority — agent-3 please start agent-3/api-security-fixes-r1 NOW (branch off origin/agent-4/today-path-qa-r1; contract tests must go green): session-bound /api/quiz/answer reveals + ownership checks on /api/practice/{draft,section/start,submit}. Edge stopgap (#68) only blocks ANONYMOUS oracle; signed-in enumeration is still possible until your fix lands.
