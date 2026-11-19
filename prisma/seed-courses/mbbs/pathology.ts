@@ -3385,7 +3385,32 @@ function lesson16() {
         explanation:
           "Left-sided obstruction (aortic stenosis) or failure raises pulmonary venous hydrostatic pressure; leaked red cells are scavenged as haemosiderin = heart failure cells = chronic passive congestion of lung.",
       },
-
+      {
+        type: "mcq",
+        stem: "In chronic venous congestion of the liver, the nutmeg pattern is produced because the centrilobular region is affected first. Which acinar zone fills that region?",
+        options: [
+          "Zone 1 — periportal parenchyma nearest the portal triad",
+          "Zone 2 — midzonal parenchyma",
+          "Zone 3 — centrilobular parenchyma around the central vein",
+          "The portal tracts themselves",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Zone 3 hepatocytes surround the central vein, so raised hepatic venous pressure distends them first, producing the dark centrilobular pattern against the paler periportal periphery.",
+      },
+      {
+        type: "mcq",
+        stem: "The pigment inside heart failure cells is best demonstrated by which stain?",
+        options: [
+          "Congo red",
+          "Prussian blue",
+          "Von Kossa",
+          "Ziehl-Neelsen",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Haemosiderin inside alveolar macrophages is iron-containing and stains blue with Prussian blue; the intracellular location of that pigment is the cytological signature of chronic pulmonary congestion.",
+      },
       { type: "heading", level: 2, text: "Summary and next" },
       {
         type: "paragraph",
@@ -3538,7 +3563,34 @@ function lesson17() {
           "Alternating platelet and red-cell layers only form when blood is flowing across a forming surface; a postmortem clot lacks them.",
       },
 
-      { type: "heading", level: 2, text: "Summary and next" },
+            {
+        type: "mcq",
+        stem: "Heparin-induced thrombocytopenia produces thromboses rather than bleeding. The mechanism is:",
+        options: [
+          "Direct platelet membrane disruption by heparin",
+          "IgG antibodies against platelet factor 4-heparin complexes that activate platelets",
+          "Consumption of factors in DIC",
+          "Inhibition of vitamin K-dependent factors",
+        ],
+        correctIndex: 1,
+        explanation:
+          "HIT is an immune activation — antibodies against PF4-heparin complexes trigger platelet activation, so the count falls while the patient clots. Diagnosis: 4T score; treatment: a non-heparin anticoagulant.",
+      },
+      {
+        type: "mcq",
+        stem: "A thrombus ends with recanalisation of the lumen. Which fate produced this?",
+        options: [
+          "Propagation",
+          "Embolisation",
+          "Organisation with ingrowth of new capillaries",
+          "Surface calcification",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Organisation replaces fibrin with granulation tissue; capillaries that coalesce across the mass recanalise the lumen, though usually incompletely.",
+      },
+
+{ type: "heading", level: 2, text: "Summary and next" },
       {
         type: "paragraph",
         text: "Thrombosis is the triad of endothelial injury, stasis and hypercoagulability acting through a sequence of platelet adhesion, activation, aggregation and fibrin consolidation. Arterial thrombi are platelet-rich, venous thrombi red-cell rich; their fates are propagation, embolisation, organisation and lysis. Recognising the triad in the clinic — surgery, atrial fibrillation, malignancy, HIT — is the whole job of prophylaxis.",
@@ -3684,6 +3736,32 @@ function lesson18() {
         correctIndex: 0,
         explanation:
           "Tocilizumab blocks IL-6, the driver of cytokine release syndrome after CAR-T infusion; the same logic underlies steroid treatment of other immune-related adverse events.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with squamous cell carcinoma of the lung develops hypercalcaemia. The mediator is:",
+        options: [
+          "Parathyroid hormone",
+          "Parathyroid hormone-related peptide",
+          "Erythropoietin",
+          "Arginine vasopressin",
+        ],
+        correctIndex: 1,
+        explanation:
+          "PTHrP mimics PTH at the receptor and is the classic humoral hypercalcaemia of malignancy, especially from squamous lung, breast and renal tumours; serum PTH stays suppressed.",
+      },
+      {
+        type: "mcq",
+        stem: "A tumour evades immune destruction by upregulating PD-L1. What effect does this have?",
+        options: [
+          "It enhances antigen presentation through class I MHC",
+          "It engages PD-1 receptors on T cells and switches off their attack",
+          "It secretes IL-2, activating T cells",
+          "It fixes complement and recruits neutrophils",
+        ],
+        correctIndex: 1,
+        explanation:
+          "PD-L1 on tumour cells ligates PD-1 on T cells, delivering an inhibitory signal — the target of checkpoint-inhibitor monoclonal antibodies.",
       },
 
       { type: "heading", level: 2, text: "Summary and next" },
@@ -3836,6 +3914,32 @@ function lesson19() {
         correctIndex: 1,
         explanation:
           "Myotonic dystrophy (CTG repeats) and Huntington (CAG repeats) show anticipation; the expansion lengthens each meiosis, lifting severity and lowering age of onset.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with hypotonia, hyperphagia and hypogonadism carries a deletion of the paternal 15q11-q13 region. What distinguishes this from Angelman syndrome?",
+        options: [
+          "Angel syndrome is the same deletion on the maternal chromosome",
+          "The same interval deleted on the maternal chromosome produces Angelman syndrome instead",
+          "Both are the deletion on the paternal side; only severity differs",
+          "Imprinting does not apply to this region",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Imprinting means parent of origin decides the disease: paternal deletion gives Prader-Willi (maternal copy normally silenced), maternal deletion gives Angelman (paternal copy normally silenced).",
+      },
+      {
+        type: "mcq",
+        stem: "Which mechanism causes most Down syndrome karyotypes?",
+        options: [
+          "Meiotic nondisjunction in the mother",
+          "Robertsonian translocation 21;21",
+          "Mosaicism from mitotic error after fertilisation",
+          "Deletion of 21q",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Trisomy 21 arises from maternal meiotic nondisjunction in about 95%; Robertsonian 14;21 translocation is the minority familial form, and mitotic mosaicism the rarest.",
       },
 
       { type: "heading", level: 2, text: "Summary and next" },
@@ -3990,6 +4094,32 @@ function lesson20() {
         explanation:
           "Cross-reactive antibodies and T cells against streptococcal antigens attack heart, joint and basal ganglia — Aschoff bodies are the histological record.",
       },
+      {
+        type: "mcq",
+        stem: "A patient with diffuse cutaneous scleroderma and anti-Scl-70 positivity. Which pattern of disease fits best?",
+        options: [
+          "Limited scleroderma (CREST) with anti-centromere",
+          "Diffuse scleroderma with early skin, lung and kidney involvement",
+          "Sjogren syndrome with anti-SSA",
+          "Mixed connective tissue disease with anti-U1-RNP",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Anti-topoisomerase I (Scl-70) marks diffuse disease with renal crisis, pulmonary fibrosis and rapid skin progression; anti-centromere marks limited CREST disease with later pulmonary hypertension.",
+      },
+      {
+        type: "mcq",
+        stem: "Which autoantibody is most useful for tracking lupus nephritis activity?",
+        options: [
+          "ANA titre",
+          "Anti-histone",
+          "Anti-double-stranded DNA",
+          "Anti-Smith",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Anti-dsDNA titre falls with treatment and rises before flare, especially renal flare; anti-Smith is specific but not activity-correlated, and ANA is only a screen.",
+      },
 
       { type: "heading", level: 2, text: "Summary and next" },
       {
@@ -3999,6 +4129,370 @@ function lesson20() {
       {
         type: "paragraph",
         text: "Next, the environment turned toxic: pollution, dusts, metals and the pathology of injury from outside the body.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 21 — Environmental & occupational pathology (fully authored)
+// ---------------------------------------------------------------------------
+function lesson21() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: explain what ambient air pollution is, which particles and gases matter, and which diseases they cause; describe the ionising-radiation syndromes of acute exposure and the stochastic cancer risk of chronic low-dose exposure; distinguish deterministic from stochastic effects and know which of them has no threshold; recognise the toxic effects of lead, mercury, arsenic and cadmium and their clinical markers; connect occupational dusts and carcinogens to their diseases; and apply the dose-response principle, latency and host susceptibility to any environmental question.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 — acute inflammation and lesson 10 — carcinogenesis; environmental exposures injure by both mechanisms, and their cancers follow the mutation-selection model of the carcinogenesis lesson.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Environmental pathology",
+        text: "The branch that studies disease caused by ambient and workplace exposures — air, water, soil, radiation and chemicals — where the agent is present in the environment rather than delivered by a microorganism, and the injury depends on dose, duration and the susceptibility of the host.",
+      },
+      {
+        type: "paragraph",
+        text: "Environmental exposures obey the dose-response principle (more exposure, more disease), show latency (years between exposure and cancer, hours between pollutant exposure and crisis) and vary with host susceptibility (children, the elderly, the asthmatic and the genetically slow-to-excrete). Outdoor air pollution is the fourth leading risk factor for death globally, and indoor smoke from biomass cooking is close behind in rural households.",
+      },
+
+      { type: "heading", level: 2, text: "Ambient and indoor air" },
+      {
+        type: "table",
+        headers: ["Pollutant", "Source", "Health effect"],
+        rows: [
+          ["PM2.5", "Vehicle exhaust, industry, biomass burning, construction dust", "Asthma and COPD exacerbations, ischaemic heart disease, stroke, lung cancer"],
+          ["Ozone", "Sunlight acting on vehicle exhaust NOx and VOCs", "Airway inflammation, reduced exercise performance"],
+          ["NO2 and SO2", "Combustion, coal, diesel", "Bronchoconstriction, murky haze, mortality in cardiopulmonary disease"],
+          ["Carbon monoxide", "Incomplete combustion, indoor stoves", "Carboxyhaemoglobin reduces oxygen-carrying capacity; cardiovascular and neurological death"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Household air pollution from cooking with biomass (wood, dung, crop waste) on open stoves is a leading risk factor for childhood pneumonia and for COPD in women exposed to decades of indoor smoke — and the same house often has an indoor PM2.5 concentration far above the worst recorded day outdoors.",
+      },
+      {
+        type: "definition",
+        term: "Household air pollution",
+        text: "Indoor contamination from cooking, heating and lighting with unprocessed fuels. Signs of the exposure: chronic productive cough, chronic bronchitis and COPD in never-smokers, and a background rate of neonatal low birth weight that falls when households switch to gas."
+      },
+
+      { type: "heading", level: 2, text: "Ionising and non-ionising radiation" },
+      {
+        type: "paragraph",
+        text: "Ionising radiation (X-rays, gamma rays, alpha and beta particles) kills cells by DNA damage, and the whole-body response is a classic three-syndrome sequence because the tissues die by proliferative turnover rather than by bulk destruction: a cerebrovascular syndrome at doses above 30-50 Gy kills within days from cerebral oedema and shock; a gastrointestinal syndrome at 6-30 Gy from stem-cell loss in the gut lining; and a haematopoietic syndrome at 1-6 Gy, where marrow failure and sepsis decide survival over another 3-8 weeks. The only treatment is supportive — fluids, sterile isolation, blood products, cytokines — and stem-cell rescue in survivors.",
+      },
+      {
+        type: "table",
+        headers: ["Effect type", "Definition", "Examples"],
+        rows: [
+          ["Deterministic", "Threshold dose, severity rises with dose, same in everybody", "Erythema, cataracts, sterility, marrow suppression, skin necrosis"],
+          ["Stochastic", "No threshold — probability (not severity) rises with dose", "Cancer induction, hereditary genetic effects"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Radon, a decay product of uranium in soil and rock, seeps into basements and is the second leading cause of lung cancer after tobacco — and the risk multiplies with smoking. Fractured granites, rock-rich soils, sealed basements. Non-ionising UV does not ionise molecules; instead it cross-links pyrimidines and damages DNA by photochemistry, producing basal cell carcinoma, squamous cell carcinoma and melanoma at sun-exposed sites, and cataract in the eyes of tropical farmers and surfers.",
+      },
+
+      { type: "heading", level: 2, text: "Toxic metals" },
+      {
+        type: "table",
+        headers: ["Metal", "Exposure", "Clinical markers"],
+        rows: [
+          ["Lead", "Old paint dust, contaminated soil, battery recycling, folk eye cosmetics, water through lead piping", "Foot and wrist drop, abdominal colic, anaemia with basophilic stippling, Burton\'s gingival line, encephalopathy in children"],
+          ["Mercury", "Methylmercury in fish (Minamata), inorganic mercury in gold mining and industry", "Constricted visual fields, paraesthesia, tremor, ataxia (Mad Hatter), renal tubular injury"],
+          ["Arsenic", "Contaminated tube-well water, smelting, wood preservatives", "Raindrop hyperpigmentation and keratoses, Mee\'s nail bands, Bowen disease, cancers of skin, lung and bladder"],
+          ["Cadmium", "Battery and pigment factories, smelting", "Itai-itai bone pain with osteomalacia, renal tubular proteinuria, lung cancer"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Children are not small adults in toxicology. The developing brain absorbs more lead from a given exposure than an adult brain, and hand-to-mouth behaviour amplifies the dose from chipping paint and contaminated soil. \"Levels that worry a baby are levels that would not bother a man.\"",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A family renovating an older house develops fatigue, headache and abdominal pain; the toddler\'s blood lead is 45 µg/dL with basophilic stippling. The source is paint dust from sanding old lead paint, the diagnosis is lead poisoning, and the first control is stopping the sanding and wet-cleaning the house — not just chelating the child, because the child will re-absorb the exposure if the paint remains.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving with the radon as a threshold disease. Radon\'s cancer risk is stochastic — linear, no threshold, and the only \"safe\" level is the lowest achievable level, which is why building codes specify radon-resistant construction rather than an acceptable concentration." },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving with the organic mercury as the same as inorganic mercury. Methylmercury crosses the blood-brain barrier and concentrates in fish — neurodevelopment in the fetus; metallic/inorganic vapour causes psychiatric disturbance and tremor in the occupational case. The antidote, source and risk are different.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient after whole-body irradiation at 8 Gy develops nausea, bloody diarrhea and severe leukopenia within two weeks. Which radiation syndrome is this?",
+        answer:
+          "Gastrointestinal/hematopoietic syndrome — 6-30 Gy from stem-cell loss in gut and marrow; management is aggressive supportive care in a specialist centre.",
+        explanation:
+          "Dose severity and tissue turnover predict the syndrome; doses above 30 Gy kill faster by the cerebrovascular route.",
+      },
+      {
+        type: "question",
+        prompt: "Which exposure is the second leading cause of lung cancer, and how does its risk interact with smoking?",
+        answer:
+          "Radon accumulates in poorly ventilated lower floors; the combined risk with tobacco is multiplicative, not additive.",
+        explanation:
+          "Lung cancer risk in houses with high radon and heavy indoor smoking exceeds the sum of each alone — the classic multiplicative pattern of an environmental mutagen and a powered carcinogen.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient has abdominal colic, wrist drop, anaemia with basophilic stippling and a blue-black gingival line. Which is the toxic exposure?",
+        options: [
+          "Arsenic",
+          "Mercury",
+          "Lead",
+          "Cadmium",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Lead poisoning: colic, peripheral neuropathy, basophilic stippling and Burton\'s gingival line; chelation with succimer or CaNa2EDTA follows removing the source.",
+      },
+      {
+        type: "mcq",
+        stem: "Which radiation effect has no threshold?",
+        options: [
+          "Cataract",
+          "Radiodermatitis",
+          "Induction of cancer",
+          "Sterility",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Cancer induction is stochastic — probability without threshold; cataract, dermatitis and sterility are deterministic, with a threshold and severity increasing beyond it.",
+      },
+      {
+        type: "mcq",
+        stem: "Transverse white bands across all fingernails after chronic arsenic exposure are called:",
+        options: [
+          "Burton lines",
+          "Beau lines",
+          "Mee lines",
+          "Koilonychia",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Arsenic deposits in keratin, producing Mee lines moving distally with the nail; Burton line is a gingival lead deposit, and koilonychia is iron-deficiency spooning.",
+      },
+      {
+        type: "mcq",
+        stem: "Long-term exposure to PM2.5 is causally associated with which disease pattern?",
+        options: [
+          "Hepatocellular carcinoma",
+          "Cardiopulmonary disease — ischaemic heart disease, stroke, COPD and lung cancer",
+          "Tropical sprue",
+          "Mesothelioma",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Fine particles penetrate to alveoli, cross into circulation, and drive systemic inflammation — cardiovascular and respiratory mortality and lung cancer (IARC group 1 carcinogen).",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Environmental pathology is dose, latency and susceptibility applied to air, metal, radiation and dust. Ionising radiation kills by DNA damage, with deterministic threshold effects and stochastic cancer risk; the metals each leave a diagnostic marker — Burton\'s line for lead, tremor for mercury, Mee\'s bands for arsenic, Itai-itai for cadmium.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the environment turned dietary: the diseases of malnutrition, deficiency and excess.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 22 — Nutritional disorders (fully authored)
+// ---------------------------------------------------------------------------
+function lesson22() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: distinguish marasmus from kwashiorkor by pathogenesis, morphology and the presence of oedema; recognise the micronutrient deficiency disorders by their hallmark findings — Bitot spots for vitamin A, corkscrew hairs for scurvy, the 3Ds for pellagra, the Haenel ring for rickets; explain why vitamin B12 deficiency produces neurological as well as haematological disease and how it differs from folate deficiency; apply WHO and IAp growth standards to classify malnutrition; and describe the metabolic syndrome of overnutrition with its obesity, diabetes, dyslipidaemia and hypertension.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 19 — genetic and immune disease, and the growth-monitoring material of maternal and child health (other subject). Nutritional disease sits where intake, absorption and metabolic demand fail.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Protein-energy malnutrition",
+        text: "The disease of inadequate intake or utilisation of energy and protein, expressed as marasmus (energy/calorie deficiency with no oedema) or kwashiorkor (protein deficiency with adequate calories, producing oedema). Their distinction matters because the child with oedema needs different triage, antibiotics and rehabilitation.",
+      },
+
+      { type: "heading", level: 2, text: "Marasmus vs kwashiorkor" },
+      {
+        type: "table",
+        headers: ["", "Marasmus", "Kwashiorkor"],
+        rows: [
+          ["Driving nutrient", "Total energy (calories)", "Protein (calories adequate from starch)"],
+          ["Oedema", "Absent", "Present — hypoalbuminaemia"],
+          ["Facies", "Wizened, anxious, alert", "Moon face, miserable, apathetic"],
+          ["Skin and hair", "Skin thin, hair sparse", "Enamel paint dermatosis, flag-sign hair, depigmented hair"],
+          ["Liver", "Wasted, atrophied", "Enlarged, fatty (failed lipoprotein synthesis)"],
+          ["Appetite", "Ravenous", "Anorexic"],
+          ["Immunity", "Relatively preserved function", "Impaired — infections kill"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Anthropometry decides the classification, not the textbook photograph: weight-for-height, mid-upper-arm circumference and the WHO z-score, with severe acute malnutrition defined as weight-for-height below -3 z, MUAC below 115 mm in young children, or bilateral oedema (any one suffices).",
+      },
+
+      { type: "heading", level: 2, text: "Micronutrient deficiencies" },
+      {
+        type: "table",
+        headers: ["Nutrient", "Hallmark lesion", "Clinical sign"],
+        rows: [
+          ["Vitamin A", "Bitot spots, keratomalacia", "Night blindness, xerophthalmia; corneal blindness is irreversible"],
+          ["Vitamin D", "Rickets in child, osteomalacia in adult", "Rachitic rosary, genu valgum, waddling gait, myopathy"],
+          ["Vitamin C", "Poor wound healing, gingival haemorrhage", "Corkscrew hairs, perifollicular petechiae, internal bleeding"],
+          ["Vitamin B1 (thiamine)", "Dry beriberi (neuropathy), wet beriberi (high-output failure), Wernicke-Korsakoff", "Peripheral neuropathy with burning feet, or cardiomegaly and oedema"],
+          ["Niacin (B3)", "Pellagra — dermatitis, diarrhoea, dementia, death", "Casal necklace in the neck, glossitis, dysmenorrhoea"],
+          ["Folate / B12", "Megaloblastic anaemia; B12 adds subacute combined degeneration", "Macroovalocytes, low platelets and leukocytes, neurological loss in B12"],
+          ["Iron", "Microcytic hypochromic anaemia", "Koilonychia, glossitis, dysphagia, impaired cognition"],
+          ["Iodine", "Goitre and cretinism", "Endemic swelling of neck in women; delayed milestones in infants"],
+          ["Zinc", "Acrodermatitis enteropathica", "Periorificial dermatitis, alopecia, diarrhoea, poor healing"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Overnutrition" },
+      {
+        type: "definition",
+        term: "Metabolic syndrome",
+        text: "The cluster of central obesity, fasting hyperglycaemia, hypertension, low HDL cholesterol and raised triglycerides, which shares one substrate — insulin resistance — and multiplies the risk of type 2 diabetes, ischaemic heart disease and non-alcoholic fatty liver disease.",
+      },
+      {
+        type: "paragraph",
+        text: "Body mass index — weight over height squared — classifies underweight, normal, overweight and obese cuts, but central adiposity (waist circumference, waist-to-hip) carries more predictive power than BMI alone: visceral fat is metabolically active, secreting adipokines and free fatty acids that drive the insulin-resistant phenotype. The same country may now carry a double burden: obese adults in a village where children still present with wasting.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "An 18-month-old, 6.2 kg, has bilateral pitting oedema, flaky-paint dermatosis, sparse depigmented hair with banding, hepatomegaly and misery without crying. Anthropometry and weight-for-height place severe acute malnutrition. The reading is kwashiorkor: adequate starch calories kept the child alive but the protein shortage collapsed the oncotic gradient and the protein-bound immune system; initial treatment feeds F75 (protein-restricted recovery formula) with antibiotics before rising to F100 catch-up.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving with the oedema as nephrotic until history. Kwashiorkor oedema is hypoalbuminaemic and anasarcous with no urine sediment and no hematuria; it is a nutritional shock-photocopy of nephrosis, not a glomerular disease.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the word \"flag\" as hair. Flag sign refers to alternating depigmented bands in kwashiorkor hair that record alternating periods of adequacy and deficiency; it is a marker of severe protein deficiency, not of scalp disease.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A child from a famine district is small, alert, ravenous and has no oedema. What deficiency is this?",
+        answer:
+          "Marasmus — total calorie deficiency with relative sparing of protein, producing wasting without oedema.",
+        explanation:
+          "Marasmus is the pure calorie disease; the child mobilises fat and protein (including muscle) but keeps albumin long enough to avoid oedema.",
+      },
+      {
+        type: "question",
+        prompt: "Which two features separate vitamin B12 deficiency from folate deficiency clinically?",
+        answer:
+          "Neurological involvement (subacute combined degeneration of the cord) and, etimologically, B12\'s ileal receptor (intrinsic factor, terminal ileum resection, pernicious anaemia) versus upstream absorption or diet.",
+        explanation:
+          "Megaloblastic anaemia is shared; giving folate to a B12-deficient patient fixes the blood and lets the spinal disease progress.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with severe malabsorption develops anaemia, microovalocytes, stomatitis and neurological signs with Babinski response. What single test best separates B12 from folate as the deficient vitamin?",
+        options: [
+          "Serum folate alone",
+          "Serum vitamin B12 (plus MMA and homocysteine)",
+          "Reticulocyte count",
+          "The peripheral smear",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Serum B12 with raised methylmalonic acid confirms tissue deficiency; the smear and the anaemia cannot distinguish the two causes, and giving folate can mask the haematological response.",
+      },
+      {
+        type: "mcq",
+        stem: "A malnourished child with dry eyes, Bitot spots and corneal clouding lacks which vitamin, and what is the consequence of missing it?",
+        options: [
+          "Vitamin C — capillary fragility",
+          "Vitamin A — xerophthalmia and irreversible keratomalacia",
+          "Vitamin D — rickets",
+          "Vitamin E — haemolysis",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Vitamin A deficiency produces the xerophthalmia sequence — night blindness, Bitot spots, keratomalacia; corneal destruction is irreversible, and high-dose vitamin A in measles reduces mortality.",
+      },
+      {
+        type: "mcq",
+        stem: "The oedema of kwashiorkor is primarily driven by:",
+        options: [
+          "Hypoalbuminaemia lowering plasma oncotic pressure",
+          "Right-sided heart failure",
+          "Lymphatic obstruction by tumour",
+          "Renal salt retention from nephrotic syndrome",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Inadequate protein intake and defective hepatic synthesis lower plasma albumins; the fall in oncotic pressure plus sodium-water and oxidative injury produces the bilateral oedema — the same physics as nephrosis, with absent urine sediment.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with dermatitis, diarrhoea and dementia after a maize-dominant diet lacks which vitamin?",
+        options: [
+          "Thiamine",
+          "Niacin",
+          "Riboflavin",
+          "Pyridoxine",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Pellagra is niacin (vitamin B3) deficiency — the 3 Ds of dermatitis, diarrhoea and dementia, on a niacin-poor maize diet in which tryptophan conversion is also inadequate.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Protein-energy malnutrition is marasmus (energy, no oedema) or kwashiorkor (protein, oedema, skin/hair/liver signs), classified anthropometrically, triaged by MUAC and oedema. Each micronutrient leaves a marker — Bitot spots, corkscrew hairs, Casal necklace, Mee-like z-scores — and B12 must be distinguished from folate because the nerves are at stake. Overnutrition is the same coin: central obesity and insulin resistance.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the deliberate poisons: toxicology and adverse drug reactions, where the dose, the mechanism and the antidote decide survival.",
       },
     ],
   };
@@ -4025,8 +4519,8 @@ const DEEPER_LESSONS: LessonSeed[] = [
   { title: "Amyloidosis", module: 4, estimatedMinutes: 30, authored: true, concept: { title: "Amyloidosis", slug: "amyloidosis", summary: "Extracellular deposition of misfolded protein fibrils, its classification, and the organ consequences — an application of the protein-structure chemistry taught in BCHM 101.", blooms: "apply", minutes: 30, prereq: ["chronic-inflammation"] }, content: lesson14() as never },
 
   // --- M5 Environmental & nutritional pathology ---
-  { title: "Environmental & occupational pathology", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Environmental and occupational injury", slug: "environmental-pathology", summary: "Air pollution, tobacco, ionising and non-ionising radiation, occupational dusts and heavy metal toxicity.", blooms: "understand", minutes: 35, prereq: [] }, content: { blocks: [] } },
-  { title: "Nutritional disorders", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Nutritional disorders", slug: "nutritional-disorders", summary: "Protein-energy malnutrition, the deficiency diseases, obesity, and the metabolic consequences of overnutrition.", blooms: "apply", minutes: 35, prereq: [] }, content: { blocks: [] } },
+  { title: "Environmental & occupational pathology", module: 5, estimatedMinutes: 35, authored: true, concept: { title: "Environmental and occupational injury", slug: "environmental-pathology", summary: "Air pollution, tobacco, ionising and non-ionising radiation, occupational dusts and heavy metal toxicity.", blooms: "understand", minutes: 35, prereq: [] }, content: lesson21() as never },
+  { title: "Nutritional disorders", module: 5, estimatedMinutes: 35, authored: true, concept: { title: "Nutritional disorders", slug: "nutritional-disorders", summary: "Protein-energy malnutrition, the deficiency diseases, obesity, and the metabolic consequences of overnutrition.", blooms: "apply", minutes: 35, prereq: [] }, content: lesson22() as never },
   { title: "Toxicology & adverse drug reactions", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Toxicology and adverse drug reactions", slug: "toxicology-adrs", summary: "Dose and exposure, the mechanisms of toxin injury, and the classification of adverse drug reactions.", blooms: "apply", minutes: 35, prereq: [] }, content: { blocks: [] } },
   { title: "Infectious disease pathology", module: 5, estimatedMinutes: 40, authored: false, concept: { title: "General principles of infectious disease", slug: "infectious-disease-principles", summary: "Routes of transmission, mechanisms of microbial injury, the patterns of host response, and the pathology of the major organism groups.", blooms: "apply", minutes: 40, prereq: ["acute-inflammation"] }, content: { blocks: [] } },
   { title: "Ageing & death", module: 5, estimatedMinutes: 25, authored: false, concept: { title: "Ageing and the pathology of dying", slug: "ageing-death", summary: "The cellular and molecular biology of ageing, and the definition and certification of death.", blooms: "remember", minutes: 25, prereq: [] }, content: { blocks: [] } },
