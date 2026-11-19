@@ -98,6 +98,7 @@ export default async function BoardPracticePage({ params, searchParams }: Practi
           <PracticeRunner
             boardName={manifest.board}
             boardSlug={manifest.boardId}
+            subjectSlug={manifest.subject}
             topicId={manifest.topicId}
             topicTitle={manifest.topic}
             sections={manifest.sections}

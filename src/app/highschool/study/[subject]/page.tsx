@@ -55,7 +55,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
     });
     completed = new Set(progress.filter((p) => p.status === "completed").map((p) => p.entityId));
     const attempts = await prisma.quizAttempt.findMany({
-      where: { userId: user.id, domain: "highschool", topicId: { in: ids } },
+      where: { userId: user.id, domain: "highschool", topicId: { in: ids }, maxScore: { gt: 0 } },
       orderBy: { createdAt: "desc" },
     });
     const latest = new Map<string, { score: number; maxScore: number }>();

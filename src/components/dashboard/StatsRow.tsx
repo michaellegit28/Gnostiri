@@ -27,7 +27,7 @@ async function loadStats(userId: string): Promise<StatsSnapshot> {
         select: { streak: true, lastActive: true },
       }),
       prisma.quizAttempt.aggregate({
-        where: { userId },
+        where: { userId, maxScore: { gt: 0 } },
         _sum: { score: true, maxScore: true, durationSeconds: true },
         _count: { _all: true },
       }),

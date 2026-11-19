@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
+import { getCurrentUser } from "@/lib/server-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -7,6 +8,8 @@ export const dynamic = "force-dynamic";
 // starts, every earlier section is locked server-side: drafts to it return
 // 409 and submit ignores it. Forward-only, one step at a time.
 export async function POST(req: NextRequest) {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   const body = await req.json().catch(() => null);
   const sessionId = String(body?.sessionId || "");
   const sequence = Number(body?.sequence);
@@ -16,6 +19,9 @@ export async function POST(req: NextRequest) {
 
   const session = await prisma.practiceSession.findUnique({ where: { id: sessionId } });
   if (!session) return NextResponse.json({ error: "Session not found" }, { status: 404 });
+  if (session.userId !== user.id) {
+    return NextResponse.json({ error: "This session belongs to another learner" }, { status: 403 });
+  }
   if (session.status !== "active") return NextResponse.json({ error: "Session already submitted" }, { status: 409 });
   if (session.expiresAt && session.expiresAt < new Date()) {
     return NextResponse.json({ error: "Session expired" }, { status: 410 });

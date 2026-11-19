@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import useDialogFocus from "@/components/ui/useDialogFocus";
+import { useAuth } from "@/context/AuthContext";
 import {
   ArrowRight,
   CheckCircle2,
@@ -72,16 +73,19 @@ function formatClock(totalSeconds: number): string {
 export default function PracticeRunner({
   boardName,
   boardSlug,
+  subjectSlug,
   topicId,
   topicTitle,
   sections,
 }: {
   boardName: string;
   boardSlug: string;
+  subjectSlug: string;
   topicId: string;
   topicTitle: string;
   sections: Section[];
 }) {
+  const { user } = useAuth();
   const [phase, setPhase] = useState<Phase>("overview");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [sectionIndex, setSectionIndex] = useState(0);
@@ -128,13 +132,17 @@ export default function PracticeRunner({
   }, [secondsLeft, phase]);
 
   async function startPractice() {
+    if (!user) {
+      setError("Sign in to start a practice session.");
+      return;
+    }
     setBusy(true);
     setError("");
     try {
       const res = await fetch("/api/practice/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ boardId: boardSlug, subjectId: "auto", topicId }),
+        body: JSON.stringify({ boardId: boardSlug, subjectId: subjectSlug, topicId }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Could not start session");
@@ -162,6 +170,10 @@ export default function PracticeRunner({
 
   async function answerMcq(q: Question, option: string) {
     if (reveals[q.id] || busy) return;
+    if (!sessionId) {
+      setError("Start a practice session before answering.");
+      return;
+    }
     setBusy(true);
     setError("");
     setAnswers((prev) => ({
@@ -172,7 +184,14 @@ export default function PracticeRunner({
       const res = await fetch("/api/quiz/answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain: "highschool", topicId, questionId: q.id, answer: option }),
+        body: JSON.stringify({
+          domain: "highschool",
+          topicId,
+          questionId: q.id,
+          answer: option,
+          practiceSessionId: sessionId,
+          sectionId: section.sectionId,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Could not check answer");
@@ -349,11 +368,16 @@ export default function PracticeRunner({
           <button
             type="button"
             onClick={() => void startPractice()}
-            disabled={busy}
+            disabled={busy || !user}
             className="w-full min-h-12 rounded-lg bg-primary px-6 font-semibold text-on-primary disabled:opacity-50 hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
-            {busy ? "Starting…" : "Start practice session"}
+            {busy ? "Starting…" : user ? "Start practice session" : "Sign in to start practice"}
           </button>
+          {!user && (
+            <Link href="/login" className="block w-full rounded-lg border border-line px-6 py-3 text-center text-sm font-semibold text-muted">
+              Sign in
+            </Link>
+          )}
           <p className="text-xs text-slate-400 text-center">
             Sections advance in board order — once you move on, earlier sections lock (just like the real thing).
           </p>

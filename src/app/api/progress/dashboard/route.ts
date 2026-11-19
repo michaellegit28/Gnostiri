@@ -21,6 +21,7 @@ export async function GET(req: NextRequest) {
       where: {
         userId: user.id,
         domain: targetDomain,
+        maxScore: { gt: 0 },
       },
       orderBy: {
         createdAt: "desc",

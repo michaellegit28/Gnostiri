@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
+import { buildRenderManifest } from "@/lib/exam-manifest";
 
 // Stage 2 theory marking: AI grades the learner's SERVER-STORED draft answer
 // against the official marking points — point-by-point, rubric-clamped, with
@@ -79,10 +80,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "sessionId, sectionId and questionId are required" }, { status: 400 });
     }
 
-    const session = await prisma.practiceSession.findUnique({ where: { id: sessionId } });
+    const session = await prisma.practiceSession.findUnique({
+      where: { id: sessionId },
+      include: { examination: { select: { slug: true } } },
+    });
     if (!session) return NextResponse.json({ error: "Session not found" }, { status: 404 });
-    if (session.userId && session.userId !== user.id) {
+    if (session.userId !== user.id) {
       return NextResponse.json({ error: "This session belongs to another learner" }, { status: 403 });
+    }
+    if (session.expiresAt && session.expiresAt < new Date()) {
+      return NextResponse.json({ error: "Practice session expired" }, { status: 410 });
     }
 
     // The answer graded is the one stored server-side — never client-supplied.
@@ -91,6 +98,16 @@ export async function POST(req: NextRequest) {
     const learnerAnswer = drafted?.selectedAnswer?.trim() ?? "";
     if (!learnerAnswer) {
       return NextResponse.json({ error: "No typed answer to mark for this question" }, { status: 400 });
+    }
+
+    const manifest = await buildRenderManifest(
+      session.examination.slug,
+      session.subjectSlug,
+      session.topicId
+    );
+    const manifestSection = manifest?.sections.find((candidate) => candidate.sectionId === sectionId);
+    if (!manifestSection?.questions.some((candidate) => candidate.id === questionId)) {
+      return NextResponse.json({ error: "Question is not part of this practice section" }, { status: 403 });
     }
 
     const question = await prisma.question.findUnique({ where: { id: questionId } });

@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import prisma from "@/lib/db";
+import { getCurrentUser } from "@/lib/server-auth";
+import { createQuizAnswerSession } from "@/lib/quiz-answer-session";
 import QuizClient, { QuestionItem } from "./QuizClient";
 import { boardBySlug } from "@/lib/exam-bank";
 
@@ -43,5 +45,15 @@ export default async function QuizPage({ params }: QuizPageProps) {
     options: Array.isArray(question.options) ? question.options.map(String) : [],
     difficulty: question.difficulty,
   }));
-  return <QuizClient examCode={examSlug} examName={examination.name.toUpperCase()} subjectSlug={subjectSlug} subjectTitle={subjectTopic.title} topicSlug={topicSlug} topicTitle={currentTopic.title} topicId={topicId} initialQuestions={questions} />;
+  const user = await getCurrentUser();
+  const quizSession = user && questions.length
+    ? await createQuizAnswerSession({
+        userId: user.id,
+        domain: "highschool",
+        topicId,
+        examCode: examSlug,
+        questionIds: questions.map((question) => question.id),
+      })
+    : null;
+  return <QuizClient examCode={examSlug} examName={examination.name.toUpperCase()} subjectSlug={subjectSlug} subjectTitle={subjectTopic.title} topicSlug={topicSlug} topicTitle={currentTopic.title} topicId={topicId} sessionId={quizSession?.id ?? null} initialQuestions={questions} />;
 }
