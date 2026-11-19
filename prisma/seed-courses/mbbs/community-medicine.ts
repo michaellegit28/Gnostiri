@@ -1,7 +1,4 @@
 import { prisma, seedMbbsCourse, type SubjectSeed } from "./spine";
-import type { LessonContent } from "@/types/lesson";
-
-const PLACEHOLDER: LessonContent = { blocks: [] };
 
 // ---------------------------------------------------------------------------
 // LESSON 1 — Concepts of health & disease (fully authored)
@@ -2787,6 +2784,633 @@ function lesson14() {
   };
 }
 
+// ---------------------------------------------------------------------------
+// LESSON 15 — Health administration & management (fully authored)
+// ---------------------------------------------------------------------------
+function lesson15() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe the three levels of the health system and the staffing norms of sub-centre, PHC, CHC and district hospital; state the principles of primary health care from Alma-Ata and explain how they differ from selective primary care; run the planning cycle from situation analysis to monitoring and evaluation using a logic model; apply the basic management functions — planning, organising, staffing, directing, controlling — to materials, finance, human resources and information systems; and explain the quality infrastructure (5S, accreditation, patient safety) that keeps a facility accountable.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 — health education and planning, which introduced the steps of planning an intervention; this lesson adds the administrative machinery around the plan.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Health system",
+        text: "All the people, institutions, resources and actions whose primary purpose is to protect and improve health. Its four functions are stewardship, financing, service provision and resource generation — and a failure in any one function disables the others.",
+      },
+      {
+        type: "paragraph",
+        text: "Primary health care is the foundation: essential care that is universal, accessible, affordable and community-participatory. Alma-Ata 1978 made five elements normative — health education, nutrition, water and sanitation, maternal and child health, immunisation plus prevention and control of locally endemic diseases, and appropriate treatment of common conditions — on four principles: accessibility, community participation, intersectoral coordination and appropriate technology.",
+      },
+
+      { type: "heading", level: 2, text: "Levels of care and facility norms" },
+      {
+        type: "table",
+        headers: ["Level", "Facility", "Population norm", "Staffing anchor"],
+        rows: [
+          ["Primary", "Sub-centre (outreach)", "5 000 plain area (3 000 hilly)", "ANM and male multipurpose worker"],
+          ["Primary", "Primary health centre (6 beds)", "30 000", "Medical officer, lady nurse, paramedics"],
+          ["Secondary", "Community health centre (30 beds)", "120 000", "Specialists in medicine, surgery, OBG, paediatrics"],
+          ["Tertiary", "Medical college hospital", "District referral load", "Subspecialty care and teaching"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Ayushman Bharat — Health and Wellness Centres upgraded the sub-centre and PHC network into comprehensive primary care: 12 service packages that now include screening for hypertension and diabetes, geriatric care and palliative care — an explicit shift from selective primary care back toward the Alma-Ata principle.",
+      },
+
+      { type: "heading", level: 2, text: "The planning cycle" },
+      {
+        type: "paragraph",
+        text: "Situation analysis (needs, problems, resources, epidemiology) → objectives (SMART: specific, measurable, achievable, relevant, time-bound) → strategy and activities → resource plan (money, people, materials, method) → implementation with a schedule → monitoring (are we doing what we planned?) → evaluation (did it achieve the objective?). A logic model keeps the chain honest: inputs → activities → outputs → outcomes → impact.",
+      },
+      {
+        type: "table",
+        headers: ["Logic model tier", "Example (immunisation session)"],
+        rows: [
+          ["Inputs", "Vaccine stock, cold chain, ANM time, transport"],
+          ["Activities", "Session held, due children listed, ASHA mobilised"],
+          ["Outputs", "Children vaccinated; session register signed"],
+          ["Outcomes", "Coverage for the dose rises; drop-out falls"],
+          ["Impact", "Measles incidence declines; herd immunity crosses the threshold"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Management functions" },
+      {
+        type: "paragraph",
+        text: "POSDCORB is the classic list: Planning, Organising, Staffing, Directing, Coordinating, Reporting, Budgeting. Materials management runs on inventory arithmetic — the buffer stock prevents stock-outs, the lead time is the delay between order and arrival, and the reorder level is the stock at which the order must be placed. Finance management follows the budget cycle: estimate, sanction, expenditure, audit. Human resource management covers manpower planning, induction, training and performance appraisal. The health information system closes the loop: the HMIS collects the monthly returns, IDSP the outbreaks, and each feeds the next planning cycle.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the register is a management failure, not a data failure. Reporting problems show up as a data-quality audit — targets marked complete on paper, coverage untested in the field. The monthly HMIS return is only as good as the review meeting that reads it.",
+      },
+
+      { type: "heading", level: 2, text: "Quality and patient safety" },
+      {
+        type: "paragraph",
+        text: "Quality management in facilities runs on 5S (sort, set in order, shine, standardise, sustain), checklists, standard operating procedures and the National Accreditation Board for Hospitals and Healthcare Providers standards for process and outcomes. Patient safety is a quality speciality: adverse event reporting, root cause analysis and fire-equipment drills; infection prevention is the one safety practice with a direct mortality payoff.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A PHC wants to raise antenatal registration by 40% in one year. The plan: situation analysis (current registration 55%, three mapped hamlets lack transport) → objective → activities (ASHA listing, monthly VHND day, referral transport) → resources (fuel for the ambulance, printed templates) → monitoring (registration count monthly) → evaluation (coverage per quarter against 58%, 70%, 88%, 112% milestones). The logic model tier at each step distinguishes outputs from outcomes.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Confusing monitoring with evaluation. Monitoring is continuous and internal (are we doing what we said?), evaluation is periodic and judgmental (did it achieve the objective?). Planning passes that skip the logic model tend to produce outputs with no outcomes.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Treating community participation as consultation after decisions are made. Alma-Ata's principle is participation in identifying problems and choosing priorities, not enrolment in a delivery schedule.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A DMO finds that a CHC has stock-outs of oxytocin quarterly, every June. Which management tool explains this?",
+        answer:
+          "Materials management: the annual budget cycle releases funds late, so the buffer stock is consumed by stock sent in the last quarter and the June shortage follows a predictable pattern.",
+        explanation:
+          "Inventory dead-stock analysis — buffer stock, lead time, reorder level — is the standard answer to seasonal stock-out questioning; cadence, not corruption, is usually the cause.",
+      },
+      {
+        type: "question",
+        prompt: "Which element of primary health care is most often the casualty of vertical programmes?",
+        answer:
+          "Community participation — vertical delivery addresses people, not with them, so intersectoral coordination weakens.",
+        explanation:
+          "Alma-Ata's five elements can be delivered by vertical programmes, but the principles (participation, intersectoral coordination) are the first to go when programmes become targets.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A sub-centre covers a population of:",
+        options: [
+          "3 500 plain area",
+          "30 000",
+          "120 000",
+          "5 000 plain area",
+        ],
+        correctIndex: 3,
+        explanation:
+          "A sub-centre serves 5 000 in plain areas (3 000 hilly) — the front line of delivery with an ANM and a male multipurpose worker.",
+      },
+      {
+        type: "mcq",
+        stem: "In a logic model, 'coverage for the dose rises; drop-out falls' belongs to which tier?",
+        options: [
+          "Outputs",
+          "Outcomes",
+          "Inputs",
+          "Impact",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Outcomes are the intermediate changes in service use and behaviour; outputs are the products delivered (sessions held, children vaccinated), and impact is the population-level effect.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The health system runs on three levels of facilities with population norms, guided by the Alma-Ata principles of primary health care. Planning is a cycle — analysis, SMART objectives, logic model, resources, monitoring, evaluation — and management keeps it stocked, financed, staffed and reported. Quality and safety infrastructure (5S, accreditation, adverse event reporting) make the delivery accountable.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the economics of the system: costs, cost-effectiveness, health financing, and the care of an ageing population.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 16 — Health economics & geriatrics (fully authored)
+// ---------------------------------------------------------------------------
+function lesson16() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify costs as fixed or variable, direct or indirect, and identify opportunity cost in a health decision; distinguish cost-benefit, cost-effectiveness and cost-utility analyses and interpret a cost per DALY averted; describe health financing architectures and the catastrophic expenditure ceiling used in monitoring; and explain the demography and physiological basis of ageing, recognise the geriatric syndromes, and outline the care models and social security for the elderly.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 15 — health administration and management. The budget cycle, resource planning and HMIS are the machinery through which economic choices are made and reported.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Economic evaluation in health",
+        text: "The comparison of alternative courses of action in terms of their costs and consequences. Cost-benefit analysis monetises both sides; cost-effectiveness analysis keeps consequences natural (cases prevented, DALYs averted); cost-utility analysis prices outcomes in quality-adjusted life years and DALYs.",
+      },
+      {
+        type: "paragraph",
+        text: "Health is unlike ordinary consumption because demand is uncertain, prices are opaque and supply can create demand. Economics makes the scarcity explicit: every rupee spent on one activity is not spent on another, and a threshold of $150 per DALY averted — the GDP-per-capita rule — was long used as a screen of very cost-effective.",
+      },
+
+      { type: "heading", level: 2, text: "Cost concepts" },
+      {
+        type: "table",
+        headers: ["Concept", "Meaning", "Example"],
+        rows: [
+          ["Fixed vs variable", "Costs independent of volume vs rising with volume", "Building rent vs vaccines per child"],
+          ["Direct vs indirect", "Medical and patient-borne cash costs vs productivity losses", "Drugs vs days of work lost"],
+          ["Opportunity cost", "Value of the next-best use of the resource", "The ward that could have been a screening hall"],
+          ["Tangible vs intangible", "Measurable vs pain, grief, stigma", "Patient travel vs anxiety"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Financing and catastrophic expenditure" },
+      {
+        type: "paragraph",
+        text: "Health financing architectures compare general taxation with payroll social insurance (the ESIC pattern), community health insurance, and out-of-pocket payment. Catastrophic expenditure — out-of-pocket health spending exceeding a set share of household capacity to pay — is the financing metric that matters: the WHO report an upper-bound 10% ceiling, and India's National Health Accounts track this. Pradhan Mantri Jan Arogya Yojana replaced tax with insurance for the bottom income quintiles by giving cashless secondary and tertiary care, exactly to avoid the borrowing that catastrophic expenditure triggers.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Discounted, future costs and outcomes count less than present ones in economic analysis. A vaccination programme spent now compared with a treatment cost avoided in 30 years requires discounting; at 3% the annual discounting reflects time preference, not uncertainty.",
+      },
+
+      { type: "heading", level: 2, text: "The ageing population" },
+      {
+        type: "definition",
+        term: "Geriatrics",
+        text: "The branch of medicine concerned with the health of older adults — not merely the diseases of old age, but their modified presentation, atypical disease, the risk of iatrogenesis from polypharmacy, and functional independence rather than cure as the end point.",
+      },
+      {
+        type: "paragraph",
+        text: "Ageing shifts the disease profile: reduced physiological reserve makes the same stressor (infection, surgery, a hot day) destabilise the whole person. The geriatric syndromes — falls, delirium, dementia, incontinence, frailty, immobility, pressure ulcers and weight loss — rarely map to one organ and often signal a reversal of a small cause: a urinary infection, a new drug, a dark staircase.",
+      },
+      {
+        type: "table",
+        headers: ["Syndrome", "Atypical trigger"],
+        rows: [
+          ["Delirium", "Urinary infection, opioids, dehydration, ICU stay"],
+          ["Falls", "Orthostatic hypotension, vision loss, sedatives, loose rugs"],
+          ["Frailty", "Sarcopenia, poor intake, depression, sarcopenia"],
+          ["Pressure ulcer", "Immobility, incontinence, malnutrition, sensory loss"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving with 'age-related' is the classic error. Pneumonia in the elderly can present as confusion with no fever; a myocardial infarction as abdominal pain or a fall. The atypical presentation is the geriatric presentation.",
+      },
+
+      { type: "heading", level: 2, text: "Care models and social security" },
+      {
+        type: "paragraph",
+        text: "Elderly care spans geriatric wards in district hospitals, day-care and respite centres, domiciliary care and palliative care. Social protection in India is anchored by the National Social Assistance Programme and its Indira Gandhi National Old Age Pension Scheme, the Maintenance and Welfare of Parents and Senior Citizens Act 2007, which made maintenance of parents legally enforceable and created the elderline helpline and senior-citizen welfare funds.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A district compares two hypertension strategies: mass screening with annual follow-up versus targeted screening of the over-60s. Screening everyone uses more resources per case found; the over-60 strategy is more cost-effective in cases per rupee but misses the young strokes. The DALY arithmetic — cases prevented weighted by disability lost — settles the choice in a way a case-catch rate cannot, because the young stroke is a bigger DALY than the old one.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the word 'free'. Services paid by insurance or tax are not free to the system; the question is who pays and whether the payment pools risk. A facility with no stock because the payer reimburses nothing has learned the same economics the wrong way.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the elderly 'stiffness and slowing' age gets you. Frailty is a distinct clinical syndrome with its own management (exercise, nutrition review, deprescribing) — and depression, hypothyroidism and anaemia can mimic it, so 'age' is never the diagnosis.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A new drug costs more per patient but prevents more strokes and hospitalisations. Of the two purchasing options, which is more cost-effective?",
+        answer:
+          "One cannot tell from price alone: divide the additional cost by the additional events prevented (the incremental cost-effectiveness ratio).",
+        explanation:
+          "Cost-effectiveness is a ratio, not a comparison of totals; a costlier option can be the cheaper per outcome gained when the extra outcome is large.",
+      },
+      {
+        type: "question",
+        prompt: "Which geriatric syndrome is the most common reason an elderly patient with a urinary infection is admitted?",
+        answer:
+          "Delirium — acute confusion often the only presentation.",
+        explanation:
+          "Delirium is the classic atypical presentation in elderly infection; look for the reversible cause rather than accepting 'confusion of age'.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A strategy reduces DALYs by 1,500 for a net cost of ₹4.5 crore. Its cost per DALY averted is:",
+        options: [
+          "₹3 per DALY",
+          "₹30 per DALY",
+          "₹30 000 per DALY",
+          "It cannot be calculated without a QALY",
+        ],
+        correctIndex: 2,
+        explanation:
+          "4.5 crore / 1,500 DALYs = ₹30,000 per DALY averted — the standard ICER expression for cost-effectiveness analysis.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the single strongest predictor of catastrophic expenditure in a low-income household?",
+        options: [
+          "A hospitalisation requiring borrow",
+          "A doctor's consultation fee",
+          "The patient's age",
+          "The currency of payment",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Inpatient hospitalisation drives catastrophic costs; consultations, outpatient drugs and small costs rarely breach the 10% catastrophic threshold.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Economic evaluation compares costs with consequences — cost-benefit monetises, cost-effectiveness saves natural units, cost-utility rescales in DALYs. Financing architecture decides who pays, and out-of-pocket exposure beyond a tenth of capacity to pay is catastrophic. Ageing shifts medicine toward atypical presentations and functional outcomes; the geriatric syndromes are management targets, not diagnoses.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the support that follows the cure: rehabilitation, disability and counselling — the disciplines that restore participation when pathology cannot be undone.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 17 — Rehabilitation & counselling (fully authored)
+// ---------------------------------------------------------------------------
+function lesson17() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: apply the ICF model — impairment, activity limitation, participation restriction — to a disabled person and decide what rehabilitation is trying to change; describe the certification of disability and the protections of the Rights of Persons with Disabilities Act; explain community-based rehabilitation and the assistive devices it provides; name the members of a rehabilitation team and their complementary roles; and demonstrate counselling principles and the counselling needed for HIV, chronic illness, terminal illness, bereavement and genetic testing.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 16 — health economics and geriatrics, whose ageing and disability themes lead directly into rehabilitation practice.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "International Classification of Functioning, Disability and Health (ICF)",
+        text: "A framework that separates body function and structure (impairment), the execution of tasks (activity limitation) and involvement in life situations (participation restriction), set against environmental and personal contextual factors — shifting the target of care from the disease to the person's function.",
+      },
+      {
+        type: "paragraph",
+        text: "Rehabilitation is the restoration of function and independence after illness or injury, at three levels: the impairment itself (restore range of movement), the activity (teach a compensating strategy), and the participation (change the environment — a ramp, an assistive device, an employer's attitude). Where restoration falls short, adaptation continues.",
+      },
+
+      { type: "heading", level: 2, text: "Disability, certification and law" },
+      {
+        type: "paragraph",
+        text: "The Rights of Persons with Disabilities Act 2016 India recognises 21 disability types and reserves its entitlements for those certified with 40% or more disability, a certificate issued by a designated district medical board. The Act guarantees equality, protection from discrimination and safety net access; the National Policy for Persons with Disabilities sets the programme side. Benchmark disability (40%) is what unlocks reservations, assistive devices and pensions.",
+      },
+      {
+        type: "table",
+        headers: ["Concept", "Meaning"],
+        rows: [
+          ["Impairment", "Loss of body structure or function — a paralysed hand"],
+          ["Activity limitation", "Difficulty executing a task — cannot grip a pen"],
+          ["Participation restriction", "Involvement in life situation — cannot attend school"],
+          ["Contextual factors", "Environmental (no ramp) and personal (motivation)"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Community-based rehabilitation and assistive devices" },
+      {
+        type: "paragraph",
+        text: "Community-based rehabilitation (CBR) delivers rehabilitation where the person lives, through the primary care worker supported by specialists, with five components: health-promoting rehabilitation, education, livelihood promotion, social mobilisation, and empowerment. Referral pathways link the village to the district rehabilitation centre for devices and therapy that generalists cannot supply. Assistive devices are chosen by function: a wheelchair by postural need (folding for transport, rigid for self-propulsion), prosthetics and orthotics by the amputation level or joint involved, low-vision aids by acuity, hearing aids after audiological assessment.",
+      },
+
+      { type: "heading", level: 2, text: "The rehabilitation team" },
+      {
+        type: "table",
+        headers: ["Member", "Core contribution"],
+        rows: [
+          ["Physiatrist", "Builds the plan and owns the disability certificate"],
+          ["Physiotherapist", "Mobility, strength, gait, respiratory therapy"],
+          ["Occupational therapist", "Functional tasks — feeding, writing, work adaptation"],
+          ["Speech and language therapist", "Communication, hearing, swallowing"],
+          ["Prosthetist / orthotist", "Fabricates and fits appliances"],
+          ["Psychologist / social worker", "Adjustment, family, livelihood and benefits"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Counselling" },
+      {
+        type: "definition",
+        term: "Counselling",
+        text: "A confidential, empathic conversation whose purpose is to help the client explore feelings and make their own informed decision — it is not advice-giving, not interrogation, and not once-off: it is a process with a rapport that lasts.",
+      },
+      {
+        type: "paragraph",
+        text: "Types map to the setting: preventive counselling before harm (smoking cessation), facilitative for decisions (contraceptive choice), supportive during chronic illness, and crisis counselling in acute distress. The rules are the same everywhere: privacy guaranteed, confidentiality explained and its limits stated, active listening without interruption, empathy over sympathy, non-judgemental acceptance, and no decision imposed. HIV pre- and post-test counselling is the model taught everywhere: pre-test explores what the result would mean for the client; post-test delivers the result, discusses disclosure, partner testing and treatment, and ends with a follow-up date.",
+      },
+      {
+        type: "table",
+        headers: ["Situation", "Counselling emphasis"],
+        rows: [
+          ["HIV pre-test", "Risk review, what a positive implies, confidentiality"],
+          ["Post-result", "Disclosure support, partner testing, treatment start"],
+          ["Genetic counselling", "Recurrence risk, inheritance pattern, options"],
+          ["Chronic illness", "Adherence, adjustments, family roles"],
+          ["Terminal illness", "Palliative goals, symptom control, family talk"],
+          ["Bereavement", "Normalise grief, screen for depression, supports"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 28-year-old factory worker after a crush injury has an above-knee amputation, can transfer with help, and is withdrawing from the family. The ICF reading: impairment (limb loss), activity limitation (walking), participation restriction (work, social role). The plan: prosthetist for a prosthesis, physiotherapy for gait training, occupational therapy for the work station adaptation, psychological adjustment sessions, and the revenue officer for the disability certificate — five professions around one worker's identity, not one prescriber around one wound.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the disabled person as passive rehabilitation. CBR's point is participation and empowerment — the family and community are agents of change, and the certificate is the beginning of entitlement, not the end.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the word 'sympathy' for empathy. Sympathy is feeling for the person; empathy is understanding from their side, which is what lets a counsellor be useful without pitying. The difference shows in the room.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A child with cerebral palsy cannot attend school because the classroom has stairs. What does the ICF label this?",
+        answer:
+          "Participation restriction — with an environmental contextual factor (stairs) that a ramp removes.",
+        explanation:
+          "Impairment is the brain lesion; activity limitation is walking; participation restriction is school exclusion — and the fix is environmental, not only therapeutic.",
+      },
+      {
+        type: "question",
+        prompt: "Which counselling element applies in every type of counselling?",
+        answer:
+          "Confidentiality with its limits explained, plus active listening; without these, no type of counselling is authentic.",
+        explanation:
+          "The rules (privacy, confidentiality, empathy, non-judgement) are the constant; the topics (pre- and post-test HIV, genetic, terminal) vary.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "The minimum degree of disability required for a certificate under the Rights of Persons with Disabilities Act 2016 is:",
+        options: [
+          "No benchmark",
+          "40% or more",
+          "21%",
+          "80%",
+        ],
+        correctIndex: 1,
+        explanation:
+          "The benchmark is 40% for certification; severe (80% or more) disability unlocks higher-intensity support under the Act.",
+      },
+      {
+        type: "mcq",
+        stem: "A physiotherapist, occupational therapist, prosthetist, psychologist and social worker meet around a patient after amputation. Who owns the overall plan and disability certification?",
+        options: [
+          "The physiotherapist",
+          "The prosthetist",
+          "The physiatrist",
+          "The social worker",
+        ],
+        correctIndex: 2,
+        explanation:
+          "The physiatrist owns the overall rehabilitation plan and signs the disability certificate; each other member supplies a domain within it.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Rehabilitation works on the ICF hierarchy — impairment, activity, participation — with environmental fix and assistive devices where restoration falls short. CBR brings the discipline to the village; the physiatrist leads a team of therapy professions; disability certification unlocks the law's protections. Counselling is the process that makes every clinical decision genuinely the patient's own.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the final lesson: the rural posting and field project that turns all five modules into measurement, delivery and a written community diagnosis.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 18 — Rural posting & field project (fully authored)
+// ---------------------------------------------------------------------------
+function lesson18() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: describe what a rural posting covers — the sub-centre, PHC and CHC, and their registers, sessions and outreach; design a household survey using the WHO 30-cluster sampling technique and construct the household questionnaire (socioeconomic classification, family size, water source, latrine); carry out a water and sanitation assessment including the presumptive coliform test and sanitary survey; assess the delivery of programmes in the field — the immunisation session, the ANC clinic, malaria slide surveys and DOTS; and write a field project report with aim, objectives, methodology, results and recommendations that stands as a community diagnosis.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 7 — screening and surveillance. The sampling logic, the measures of frequency and the epidemic curve are the tools the survey and the project reuse.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Community diagnosis",
+        text: "The systematic description of a community's health problems — magnitude by time, place and person, risk factors and available resources — which is to a community what diagnosis is to a patient: the necessary first step before any plan of action.",
+      },
+      {
+        type: "paragraph",
+        text: "The posting teaches the discipline of seeing patients inside their households: the house, the well, the cooking smoke, the school, the ASHA. The field project is its written product — a student-run survey, its analysis, and recommendations that the village can actually use.",
+      },
+
+      { type: "heading", level: 2, text: "Household survey: the 30-cluster technique" },
+      {
+        type: "paragraph",
+        text: "The WHO 30-cluster method samples 30 villages (clusters), and in each the first household is chosen at random and then the neighbouring households are taken until 7 are collected per cluster — 210 households in all. It is a fast, probability-ish approximation, adequate for prevalence estimates where a full frame does not exist. The questionnaire records the household composition, the socioeconomic classification (modified Kuppuswamy or BG Prasad), the water source, the latrine, fuel used, possessions, and the health events of the last two weeks (morbidity).",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Socioeconomic classification matters because health data are worthless without it: the modified Kuppuswamy score (education, occupation, family income) divides families into I–V classes, and every other variable — housing, nutrition, antenatal care — stratifies by it.",
+      },
+      { type: "heading", level: 2, text: "Water and sanitation assessment" },
+      {
+        type: "paragraph",
+        text: "The assessment has four parts: the water source (type, depth, seasonality), the sanitary survey of the surroundings (distance to the latrine, soakage pits, drainage), the physical tests (pH, chloride, ammonia, hardness on a portable kit) and the bacteriological test for faecal contamination — the presumptive coliform test, where growth with acid and gas signals the presence of coliforms. A sanitary survey of the source often explains the results of the laboratory long before they confirm it.",
+      },
+      {
+        type: "table",
+        headers: ["Test", "Positive result means"],
+        rows: [
+          ["pH", "Corrosive or incrusting water; affects plumbing"],
+          ["Chloride", "Saline intrusion in coastal wells; taste and pressure"],
+          ["Ammonia", "Decomposing organic contamination nearby"],
+          ["Presumptive coliform (medium)", "Acid and gas — probable faecal contamination"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Programme delivery in the field" },
+      {
+        type: "paragraph",
+        text: "An immunisation session is observed for the cold chain, the session site, the mobilisation, the tally and the AEFI box; the ANC clinic for risk approach, tetanus toxoid and IFA; the malaria line for slide collection, RDT use and the treatment register; the DOTS provider for adherence registers and blister packs. Delivery quality is judged against the service package the sub-centre is supposed to run — nutrition, water, hygiene, maternal and child care, immunisation, treatment, referral and referral transport.",
+      },
+
+      { type: "heading", level: 2, text: "The field project report" },
+      {
+        type: "paragraph",
+        text: "The report runs: aim and objectives, review of the problem, methodology (design, sampling, tools, ethical consent), results with tables and an epidemic-style description (magnitude, time-place-person), discussion and recommendations. Ethical minimums run through all of it: informed consent from the head of household, confidentiality of names, and an ethics committee approval for student surveys that publish anything. The recommendations must be actionable: a soakage pit at coordinates X, an immunisation microplan for hamlets Y, a report to the CHC medical officer.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the village is the worst outcome of a survey: promised follow-ups that never come. The ethical rule is participants first — findings shared with the community itself, not only with the department.",
+      },
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A student team surveys 210 households, finds under-5s in 12% with weight-for-age below −2 SD, latrines absent in 38%, and wells on the hill mixing with the drainage line. The community diagnosis: moderate protein-energy malnutrition with clustered sanitation breaks. The plan: an adolescent girls' group, a soakage-pit schedule, and a report to the CHC with the map — the three-level outcome a posting can actually leave behind.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving with the 30-cluster method as fully random. It is a cluster (systematic within cluster) sample; reports should say so and analyse without claiming individual randomisation.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the household questionnaire with an open-ended style. Semi-structured, pre-tested and coded questions produce analysable data; the interview is fixed, and recording is either numeric or from a short fixed option list.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "How many households does the WHO 30-cluster technique examine, and how are they chosen within each cluster?",
+        answer:
+          "Thirty clusters × 7 households = 210; within each cluster, systematically after a random first household.",
+        explanation:
+          "This balances a probability frame with field feasibility, and its bias (clustered households) must be stated in the report.",
+      },
+      {
+        type: "question",
+        prompt: "A presumptive coliform test produces acid and gas in broth. What is the interpretation and the immediate action?",
+        answer:
+          "Probable faecal contamination — advise immediate stop-use with a safe alternative source, chlorination, and send for confirmation.",
+        explanation:
+          "The presumptive test flags; confirmation and sanitary survey trace the source. The public-health action precedes the laboratory confirmation.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "In a 30-cluster survey, 30 villages are sampled and 7 households are studied per cluster. The total sample is:",
+        options: [
+          "30",
+          "37",
+          "210",
+          "7",
+        ],
+        correctIndex: 2,
+        explanation:
+          "30 × 7 = 210 households — the standard WHO EPI sampling size for community surveys.",
+      },
+      {
+        type: "mcq",
+        stem: "Which is the single most important scientific element of a community diagnosis?",
+        options: [
+          "A nice map",
+          "The distribution by time, place and person",
+          "A doctor's letter",
+          "A budget table",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Magnitude by time-place-person is the epidemiological core; it separates a description from a diagnosis and directs the plan.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "The rural posting turns community medicine into practice: observe the facilities, survey 210 households by the 30-cluster technique, test the water, watch the sessions deliver, and write the community diagnosis that returns findings to the village itself. The field project closes the course — every module from health education to national programmes is judged by whether a household's health actually improved.",
+      },
+    ],
+  };
+}
+
 export const COMMUNITY_MEDICINE: SubjectSeed = {
   id: "mbbs-community-medicine",
   slug: "community-medicine",
@@ -2818,14 +3442,14 @@ export const COMMUNITY_MEDICINE: SubjectSeed = {
     { title: "Nutrition assessment", module: 3, estimatedMinutes: 45, authored: true, concept: { title: "Nutrition assessment", slug: "nutrition-assessment", summary: "Macronutrients and micronutrients, dietary assessment, growth monitoring, protein-energy malnutrition and nutritional deficiency disorders.", blooms: "apply", minutes: 45, prereq: [] }, content: lesson8() as never },
     { title: "Maternal & child health", module: 3, estimatedMinutes: 45, authored: true, concept: { title: "Maternal and child health", slug: "maternal-child-health", summary: "Antenatal, intranatal and postnatal care, risk approach, low birth weight, breastfeeding and child survival programmes.", blooms: "apply", minutes: 45, prereq: ["nutrition-assessment"] }, content: lesson9() as never },
     { title: "Family welfare & contraception", module: 3, estimatedMinutes: 40, authored: true, concept: { title: "Family welfare and contraception", slug: "family-welfare-contraception", summary: "Demographic cycle, fertility indicators, contraceptive methods, spacing and the population policy context.", blooms: "apply", minutes: 35, prereq: ["maternal-child-health"] }, content: lesson10() as never },
-    { title: "Communicable disease control", module: 4, estimatedMinutes: 50, authored: false, concept: { title: "Communicable disease control", slug: "communicable-disease-control", summary: "Chain of infection, contact tracing, quarantine, disinfection and the epidemiology and control of major epidemic-prone diseases.", blooms: "analyze", minutes: 50, prereq: ["epidemiology-methods"] }, content: PLACEHOLDER },
-    { title: "Non-communicable disease", module: 4, estimatedMinutes: 40, authored: false, concept: { title: "Non-communicable disease", slug: "non-communicable-disease", summary: "Epidemiology and prevention of cardiovascular disease, diabetes, cancer, chronic respiratory disease and mental disorders.", blooms: "analyze", minutes: 40, prereq: ["communicable-disease-control"] }, content: PLACEHOLDER },
-    { title: "National health programmes", module: 4, estimatedMinutes: 45, authored: false, concept: { title: "National health programmes", slug: "national-health-programs", summary: "Structure, target groups and delivery of the national programmes for immunisation, tuberculosis, HIV, malaria, reproductive health and disease elimination.", blooms: "understand", minutes: 45, prereq: ["communicable-disease-control"] }, content: PLACEHOLDER },
-    { title: "Occupational health", module: 5, estimatedMinutes: 40, authored: false, concept: { title: "Occupational health", slug: "occupational-health", summary: "Workplace hazards, dust diseases, pneumoconioses, occupational infections, fitness certification and prevention at work.", blooms: "apply", minutes: 40, prereq: ["environmental-health"] }, content: PLACEHOLDER },
-    { title: "Health administration & management", module: 5, estimatedMinutes: 40, authored: false, concept: { title: "Health administration and management", slug: "health-administration-management", summary: "Health system levels, primary health care, planning and management of materials, finance and human resources, and health information systems.", blooms: "apply", minutes: 40, prereq: [] }, content: PLACEHOLDER },
-    { title: "Health economics & geriatrics", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Health economics and geriatrics", slug: "health-economics-geriatrics", summary: "Cost, cost-effectiveness and health financing, plus the health problems and care of ageing populations.", blooms: "understand", minutes: 35, prereq: ["health-administration-management"] }, content: PLACEHOLDER },
-    { title: "Rehabilitation & counselling", module: 5, estimatedMinutes: 35, authored: false, concept: { title: "Rehabilitation and counselling", slug: "rehabilitation-counselling", summary: "Disability assessment, community-based rehabilitation, assistive devices and counselling in chronic and terminal illness.", blooms: "apply", minutes: 35, prereq: ["health-economics-geriatrics"] }, content: PLACEHOLDER },
-    { title: "Rural posting & field project", module: 5, estimatedMinutes: 60, authored: false, concept: { title: "Rural posting and field project", slug: "rural-posting-field-project", summary: "The rural health centre posting: household surveys, water and sanitation assessment, programme delivery and the community field project report.", blooms: "evaluate", minutes: 60, prereq: ["screening-surveillance"] }, content: PLACEHOLDER },
+    { title: "Communicable disease control", module: 4, estimatedMinutes: 50, authored: true, concept: { title: "Communicable disease control", slug: "communicable-disease-control", summary: "Chain of infection, contact tracing, quarantine, disinfection and the epidemiology and control of major epidemic-prone diseases.", blooms: "analyze", minutes: 50, prereq: ["epidemiology-methods"] }, content: lesson11() as never },
+    { title: "Non-communicable disease", module: 4, estimatedMinutes: 40, authored: true, concept: { title: "Non-communicable disease", slug: "non-communicable-disease", summary: "Epidemiology and prevention of cardiovascular disease, diabetes, cancer, chronic respiratory disease and mental disorders.", blooms: "analyze", minutes: 40, prereq: ["communicable-disease-control"] }, content: lesson12() as never },
+    { title: "National health programmes", module: 4, estimatedMinutes: 45, authored: true, concept: { title: "National health programmes", slug: "national-health-programs", summary: "Structure, target groups and delivery of the national programmes for immunisation, tuberculosis, HIV, malaria, reproductive health and disease elimination.", blooms: "understand", minutes: 45, prereq: ["communicable-disease-control"] }, content: lesson13() as never },
+    { title: "Occupational health", module: 5, estimatedMinutes: 40, authored: true, concept: { title: "Occupational health", slug: "occupational-health", summary: "Workplace hazards, dust diseases, pneumoconioses, occupational infections, fitness certification and prevention at work.", blooms: "apply", minutes: 40, prereq: ["environmental-health"] }, content: lesson14() as never },
+    { title: "Health administration & management", module: 5, estimatedMinutes: 40, authored: true, concept: { title: "Health administration and management", slug: "health-administration-management", summary: "Health system levels, primary health care, planning and management of materials, finance and human resources, and health information systems.", blooms: "apply", minutes: 40, prereq: [] }, content: lesson15() as never },
+    { title: "Health economics & geriatrics", module: 5, estimatedMinutes: 35, authored: true, concept: { title: "Health economics and geriatrics", slug: "health-economics-geriatrics", summary: "Cost, cost-effectiveness and health financing, plus the health problems and care of ageing populations.", blooms: "understand", minutes: 35, prereq: ["health-administration-management"] }, content: lesson16() as never },
+    { title: "Rehabilitation & counselling", module: 5, estimatedMinutes: 35, authored: true, concept: { title: "Rehabilitation and counselling", slug: "rehabilitation-counselling", summary: "Disability assessment, community-based rehabilitation, assistive devices and counselling in chronic and terminal illness.", blooms: "apply", minutes: 35, prereq: ["health-economics-geriatrics"] }, content: lesson17() as never },
+    { title: "Rural posting & field project", module: 5, estimatedMinutes: 60, authored: true, concept: { title: "Rural posting and field project", slug: "rural-posting-field-project", summary: "The rural health centre posting: household surveys, water and sanitation assessment, programme delivery and the community field project report.", blooms: "evaluate", minutes: 60, prereq: ["screening-surveillance"] }, content: lesson18() as never },
   ],
   sbas: [],
 }

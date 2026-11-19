@@ -3254,10 +3254,760 @@ const MODULE_ONE_SBAS: SbaSeed[] = [
 // ---------------------------------------------------------------------------
 // Deeper modules 2-6: a real concept spine, tracked-placeholder lessons.
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// LESSON 16 — Hyperaemia, congestion & haemorrhage (fully authored)
+// ---------------------------------------------------------------------------
+function lesson16() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: distinguish active hyperaemia from passive congestion by mechanism and by the colour and weight of the involved tissue; explain why acute and chronic passive congestion produce different morphologies in lung, liver and spleen; describe the four capillary mechanisms that displace fluid in oedema and contrast them with congestion; name the spectrum of haemorrhage from petechiae to haematoma and their underlying causes; and connect each of these to its common clinical setting — left-sided failure, right-sided failure, bleeding into a body cavity and chronic occult blood loss.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 — acute inflammation, which introduced the vascular pattern of hyperaemia as the first phase of the acute response. This lesson separates that purposeful hyperaemia from the passive congestion of failing outflow.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Hyperaemia vs congestion",
+        text: "Hyperaemia is an ACTIVE process — arteriolar vasodilatation increases inflow to a tissue, making it red, warm and heavier (exercise, blushing, inflammation). Congestion is a PASSIVE process — impaired venous outflow increases blood content without increasing delivery, making tissue blue-cyanotic, cold and swollen. The same increased blood volume behaves differently because the flow through it differs.",
+      },
+      {
+        type: "paragraph",
+        text: "Capillary exchange follows Starling forces, and congestion changes only one of them: hydrostatic pressure rises at the venular end. Transudate leaks out — a protein-poor fluid with low specific gravity — until oedema develops; with enough chronicity the raised venous pressure also damages the capillary bed, red cells escape, and haemoglobin-derived iron accumulates in macrophages.",
+      },
+
+      { type: "heading", level: 2, text: "Passive congestion organ by organ" },
+      {
+        type: "table",
+        headers: ["Organ", "Acute congestion", "Chronic congestion", "Clinical cause"],
+        rows: [
+          ["Lung (left heart failure)", "Heavy, wet, oedematous alveoli", "Brown induration with haemosiderin-laden macrophages — heart failure cells", "Acute pulmonary oedema, mitral stenosis"],
+          ["Liver (right heart failure)", "Centrilobular distension", "Nutmeg liver — centrilobular congestion with fatty periphery; cardiac cirrhosis late", "Cor pulmonale, constrictive pericarditis"],
+          ["Spleen", "Enlarged, tense", "Fibrotic, firm — congestive splenomegaly with hypersplenism", "Portal hypertension, right heart failure"],
+          ["Lower limb veins", "Dependent swelling", "Varicosities, stasis dermatitis, ulceration", "Immobility, valve incompetence"],
+        ],
+      },
+      {
+        type: "definition",
+        term: "Heart failure cells",
+        text: "Alveolar macrophages that have phagocytosed red cells extravasated from congested pulmonary capillaries and stored haemosiderin; golden-brown granular cytoplasm on Prussian blue stain. Their presence in sputum is the cytological signature of chronic pulmonary congestion.",
+      },
+
+      { type: "heading", level: 2, text: "Haemorrhage" },
+      {
+        type: "definition",
+        term: "Haemorrhage",
+        text: "The extravasation of blood outside the circulation, whether onto a surface, into a tissue or into a body cavity. Its significance is decided by rate, volume and site: a trickle into a joint destroys it slowly, the same volume into the brain kills in minutes.",
+      },
+      {
+        type: "table",
+        headers: ["Size", "Name", "Typical association"],
+        rows: [
+          ["< 1-2 mm", "Petechiae", "Platelet disorders, vasculitis, DIC, infective endocarditis"],
+          ["1 mm to 1 cm", "Purpura", "Vasculitis, sepsis, steroid use"],
+          ["1-2 cm and larger", "Ecchymosis (a bruise)", "Minor trauma with poor coagulation"],
+          ["Any confined collection", "Haematoma", "Trauma, aneurysm rupture, anticoagulation"],
+          ["Fluid blood in a cavity", "Haemothorax, haemoperitoneum", "Rupture, penetrating injury"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The causes of haemorrhage divide into: trauma to a vessel; intrinsic vascular or wall disease (atheroma, aneurysm, vasculitis); disorders of platelets (number, e.g. ITP, or function, e.g. uraemia and aspirin); disorders of coagulation (factor deficiencies, anticoagulants, DIC consumption); and raised intravascular pressure with a weak vessel (hypertensive intracerebral haemorrhage, variceal bleeding).",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A patient with rheumatic mitral stenosis has a cut surface of lung that is brown and firm, and sputum macrophages stain blue with Prussian blue. The morphologic reading: chronic passive pulmonary congestion — the stenotic mitral valve raises left atrial and pulmonary venous pressure until capillaries leak red cells, whose iron is scavenged as haemosiderin = heart failure cells = brown induration. The bedside correlate is orthopnoea, pink frothy sputum in decompensation and a mid-diastolic murmur at the apex.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the direction of flow in congestion. Congestion does not bring more oxygen — it traps blood in a tissue and demands more from it, so congestion and hyperaemia arrive at the same 'more blood' by opposite routes and opposite physiology.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the size of a petechia. Petechiae are the smallest (1-2 mm), purpura the larger (to 1 cm), ecchymosis the largest — and small size does not mean small cause: petechiae from thrombocytopenia are the dangerous ones.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with right heart failure has a nutmeg liver on cut surface. What produces the nutmeg pattern?",
+        answer:
+          "Centrilobular (zone 3) blood accumulates first because the hepatic veins drain there; the periportal parenchyma stays pale and often fatty, giving dark-red centres against pale periphery.",
+        explanation:
+          "This is chronic passive congestion of the liver; sustained severe form extends fibrosis from centrilobular zones — cardiac cirrhosis — but the cardiac output failure, not the liver, kills first.",
+      },
+      {
+        type: "question",
+        prompt: "Which element is constant between transudate and exudate, and which separates them?",
+        answer:
+          "Both are tissue fluid; exudates carry high protein, specific gravity and inflammatory cells from a leaky inflamed vessel, transudates are protein-poor with low specific gravity from a pressure or osmotic imbalance.",
+        explanation:
+          "Light's criteria sort them in pleural fluid; the same Starling logic governs the difference between oedema fluid in heart failure and pleural pus in empyema.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which pair correctly matches the process with its mechanism?",
+        options: [
+          "Hyperaemia = venular obstruction; congestion = arteriolar dilatation",
+          "Hyperaemia = arteriolar dilatation; congestion = venular back-pressure",
+          "Both are active dilatations; congestion simply lasts longer",
+          "Hyperaemia = thrombosis; congestion = embolism",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Hyperaemia is active inflow (arteriolar), congestion is passive outflow failure (venular). The colour of the tissue tells them apart — red and warm versus blue and cold.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with severe aortic stenosis develops exertional dyspnoea with golden-brown granular sputum macrophages on stain. The finding is:",
+        options: [
+          "Pulmonary haemosiderosis from autoimmune disease",
+          "Anthracotic pigment in hilar nodes",
+          "Heart failure cells from chronic pulmonary congestion",
+          "Haemosiderin from resolved pulmonary infarction",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Left-sided obstruction (aortic stenosis) or failure raises pulmonary venous hydrostatic pressure; leaked red cells are scavenged as haemosiderin = heart failure cells = chronic passive congestion of lung.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Congestion is passive, hyperaemia active; the lung answers with brown induration and heart failure cells, the liver with a nutmeg pattern, the spleen with congestion. Haemorrhage is graded by size — petechiae, purpura, ecchymosis, haematoma — and by cause — trauma, vessel wall, platelets, factors or pressure.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the most clinically significant fate of stagnant blood: thrombosis — the coagulation of blood inside the intact circulation.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 17 — Thrombosis: mechanism & outcomes (fully authored)
+// ---------------------------------------------------------------------------
+function lesson17() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: state Virchow's triad and rank its three contributors for the common thromboses you will meet; describe the platelet and coagulation sequence that builds a thrombus and recognise lines of Zahn; distinguish arterial from venous thrombi by composition and by the risk they carry; enumerate the fates of a thrombus and say which one is destructive and which one is reparative; recognise the thrombotic settings of surgery, malignancy, heparin-induced thrombocytopenia and antiphospholipid syndrome; and explain why an anticoagulated or fibrinolytic strategy targets the sequence just described.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 — acute inflammation, for the endothelium's normal antithrombotic nature; and lesson 16, for why stasis matters.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Thrombosis",
+        text: "The formation of a solid mass of blood constituents — platelets, fibrin and trapped cells — within the intact circulation during life. A thrombus is not a clot: a clot forms in stagnant dead blood, a thrombus forms in flowing blood under the control of Virchow's triad.",
+      },
+
+      { type: "heading", level: 2, text: "Virchow's triad" },
+      {
+        type: "table",
+        headers: ["Contributor", "Mechanism", "Clinical examples"],
+        rows: [
+          ["Endothelial injury", "Loss of antithrombotic surface, exposure of subendothelial collagen and tissue factor", "Myocardial infarction with mural thrombus, vasculitis, smoking, catheter trauma"],
+          ["Stasis or turbulence", "Loss of the dilutional flow; activated factors concentrate", "Atrial fibrillation with left atrial appendage thrombus, immobilisation, varicose veins, aneurysms"],
+          ["Hypercoagulability", "Inherited or acquired shift in procoagulant balance", "Factor V Leiden, protein C/S deficiency, malignancy, oestrogen therapy, pregnancy, post-surgical state"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Surgery is the paradigm of all three at once: endothelial damage at the wound, stasis on the table, and a post-operative hypercoagulable state. That is why prophylaxis pairs early mobilisation with prophylactic dose low-molecular-weight heparin.",
+      },
+
+      { type: "heading", level: 2, text: "Building the thrombus" },
+      {
+        type: "paragraph",
+        text: "An intact endothelium is the strongest antithrombotic surface: it makes prostaglandin I2 and nitric oxide, it expresses thrombomodulin to activate protein C, and it carries heparan sulfate to potentiate antithrombin. Denuded endothelium exposes collagen, which binds von Willebrand factor, which captures platelets through glycoprotein Ib. The adherent platelet activates, changes shape, releases granule contents, and exposes glycoprotein IIb/IIIa, which cross-links fibrinogen and aggregates further platelets. Tissue factor from the injured wall triggers the extrinsic cascade, and the thrombin burst it generates converts fibrinogen to fibrin; the fibrin mesh traps red cells and consolidates the platelet aggregate into a firm thrombus.",
+      },
+      {
+        type: "definition",
+        term: "Lines of Zahn",
+        text: "Alternating pale layers of aggregated platelets and fibrin with dark red layers of red cells, the signature of a thrombus formed in flowing blood. Postmortem clots are homogeneous — currant-jelly red cells settled below, chicken-fat plasma above — with no layering.",
+      },
+
+      { type: "heading", level: 2, text: "Arterial vs venous thrombosis" },
+      {
+        type: "table",
+        headers: ["", "Arterial / cardiac thrombus", "Venous thrombus"],
+        rows: [
+          ["Driving factor", "Endothelial injury at a plaque or a scarred valve", "Stasis, often with low-grade hypercoagulability"],
+          ["Composition", "Platelet-rich, white, lines of Zahn prominent", "Red-cell rich, gelatinous, red"],
+          ["Risk", "Artery occlusion: infarction, stroke", "Embolisation: pulmonary embolism"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Fates of a thrombus" },
+      {
+        type: "table",
+        headers: ["Fate", "Meaning", "Consequence"],
+        rows: [
+          ["Propagation", "The thrombus grows along the vessel", "Increasing occlusion or embolic load"],
+          ["Embolisation", "A fragment detaches and travels", "Pulmonary embolism; systemic embolism from left heart"],
+          ["Organisation", "Ingrowth of fibroblasts and capillaries, later recanalisation", "The only repair; the vessel may never reopen fully"],
+          ["Dissolution", "Fibrinolysis lysed by plasmin", "Restored lumen, especially with early therapy"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "An elderly man with atrial fibrillation develops a large right middle cerebral artery infarct. The source is a thrombus in the left atrial appendage — Virchow's stasis at work in a fibrillating chamber with no contraction to wash the appendage. The lesion is an embolus, and the fate of its origin is anticoagulation; had the question been why the leg DVT embolised, the answer would be the same triad in the venous tree.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the thrombus with the postmortem clot. A postmortem clot lacks lines of Zahn and is not attached; if your specimen has laminated layers and is stuck to the wall, it formed in life.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving HIT as a bleeding problem. Heparin-induced thrombocytopenia is antibody against platelet factor 4-heparin complexes that ACTIVATES platelets — the platelet count falls while the patient clots; continuing heparin makes the thrombosis worse.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with nephrotic syndrome, on oestrogen therapy, is immobile after surgery. Which of Virchow's contributors is dominant?",
+        answer:
+          "Hypercoagulability — nephrotic loss of antithrombin III, oestrogen increase of coagulant factors and post-surgical state all shift the same direction.",
+        explanation:
+          "This is the acquired hypercoagulable stack: renal loss of protein in urine, hormonal factors, and the reactive state after surgery.",
+      },
+      {
+        type: "question",
+        prompt: "Which fate of a thrombus produces recanalisation?",
+        answer:
+          "Organisation — new capillaries grow into the fibrin mass and, as they coalesce, form channels across the old lumen.",
+        explanation:
+          "Lysis restores patency quickly, but organisation is the long-term route to restored flow — often partial, with a residual wall of organisation.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which mechanism is dominant in myocardial infarction complicated by mural thrombus?",
+        options: [
+          "Turbulent stasis in the ventricle",
+          "Endothelial injury over the infarcted wall",
+          "Hypercoagulability from the infarction itself",
+          "All three contribute equally",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Mural thrombus after MI forms over infarcted (injury) endocardium; stasis in the akinetic segment contributes, but injury over the scar is the initiating lesion.",
+      },
+      {
+        type: "mcq",
+        stem: "Lines of Zahn are significant because they:",
+        options: [
+          "Indicate septic embolisation",
+          "Prove the thrombus formed ante-mortem in flowing blood",
+          "Show the clot was venous, not arterial",
+          "Are deposits of haemosiderin in macrophages",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Alternating platelet and red-cell layers only form when blood is flowing across a forming surface; a postmortem clot lacks them.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Thrombosis is the triad of endothelial injury, stasis and hypercoagulability acting through a sequence of platelet adhesion, activation, aggregation and fibrin consolidation. Arterial thrombi are platelet-rich, venous thrombi red-cell rich; their fates are propagation, embolisation, organisation and lysis. Recognising the triad in the clinic — surgery, atrial fibrillation, malignancy, HIT — is the whole job of prophylaxis.",
+      },
+      {
+        type: "paragraph",
+        text: "Next in module 3: the molecular changes that make a cell a tumour, and the syndromes a tumour produces beyond its mass.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 18 — Paraneoplastic syndromes & tumour immunology (fully authored)
+// ---------------------------------------------------------------------------
+function lesson18() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: define a paraneoplastic syndrome and name its endocrine, neurologic, haematologic and dermatologic forms with their tumours; distinguish paraneoplastic endocrine production from metastasis and from ectopic hormone action; explain immune surveillance and the mechanisms by which tumours evade it; describe tumour-specific and shared antigens and how immunotherapy exploits them; and recognise the immune-related adverse events that checkpoint inhibition produces.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 8-11 — the neoplasia block, which defined benignity, anaplasia and the hallmarks of cancer. This lesson covers the systemic phenomena that sit outside direct tumour biology.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Paraneoplastic syndrome",
+        text: "Symptom complexes that accompany malignancy but cannot be explained by the mass or its metastases — produced by hormones, peptides, antibodies or other mediators the tumour generates or induces. They are remote, they may precede the tumour, and they can be more dangerous than the cancer.",
+      },
+      {
+        type: "paragraph",
+        text: "The neoplastic cell keeps the output machinery of its cell of origin and sometimes re-expresses a fetal or foreign programme. Small cell lung cancer, of neuroendocrine origin, secretes ACTH and ADH like an endocrine gland; renal cell carcinoma, a perivascular-juxtaglomerular-lineage tumour, secretes erythropoietin. The syndrome, not the metastasis, is the tumour speaking.",
+      },
+
+      { type: "heading", level: 2, text: "The paraneoplastic catalogue" },
+      {
+        type: "table",
+        headers: ["Syndrome", "Mediator", "Tumours"],
+        rows: [
+          ["Syndrome of inappropriate ADH", "Arginine vasopressin", "Small cell lung, intracranial"],
+          ["Cushing syndrome", "ACTH or corticotrophin-releasing hormone", "Small cell lung, bronchial carcinoid"],
+          ["Hypercalcaemia", "PTH-related peptide (also osteolytic metastases)", "Squamous lung, breast, renal, adult T-cell leukaemia-lymphoma"],
+          ["Polycythaemia", "Erythropoietin", "Renal cell carcinoma, hepatocellular carcinoma"],
+          ["Lambert-Eaton myasthenic syndrome", "Antibodies against presynaptic calcium channels", "Small cell lung (classic)"],
+          ["Cerebellar degeneration", "Anti-Yo / anti-Hu antibodies", "Breast, ovary, small cell lung"],
+          ["Hypertrophic osteoarthropathy", "Vagally mediated periosteal reaction", "Non-small cell lung"],
+          ["Migrating thrombophlebitis (Trousseau)", "Mucins activating coagulation", "Pancreatic, gastric, lung adenocarcinoma"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Hypercalcaemia of malignancy has three routes: PTHrP secretion (humoral, low PTH), osteolytic metastases (myeloma, breast, local cytokine release), and excess 1,25-dihydroxyvitamin D from lymphomas. PTH itself stays suppressed in all three.",
+      },
+
+      { type: "heading", level: 2, text: "Tumour immunology" },
+      {
+        type: "definition",
+        term: "Immune surveillance",
+        text: "The concept that cytotoxic CD8+ lymphocytes and natural killer cells continuously eliminate nascent transformed cells, evidenced by the increased cancer risk of immunosuppressed transplant patients and of rare immunodeficiencies such as bare lymphocyte syndrome.",
+      },
+      {
+        type: "paragraph",
+        text: "Tumour antigens divide into tumour-specific antigens (neo-antigens from driver mutations, unique to the patient) and shared tumour differentiation antigens (melanoma MART/MAGE, prostate PSA, CEA). Escape from immunity works by antigen loss, loss of class I MHC presentation, secretion of immunosuppressive cytokines (TGF-beta, IL-10), recruiting regulatory T cells, and upregulating PD-L1 on the tumour surface to switch off the attacking T cell.",
+      },
+      {
+        type: "table",
+        headers: ["Immunotherapy", "Target", "Note"],
+        rows: [
+          ["Ipilimumab", "CTLA-4 — releases the brake on T-cell priming", "Systemic immune activation, colitis risk"],
+          ["Pembrolizumab, nivolumab", "PD-1 / PD-L1 axis", "Renal, melanoma, lung, many indications"],
+          ["CAR-T cells", "Engineered T cell against CD19", "B-cell leukaemia; cytokine release syndrome risk"],
+          ["Tumour-infiltrating lymphocyte therapy", "Expanded tumour-reactive T cells", "Melanoma, after lymphodepletion"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 65-year-old smoker loses weight, is hyponatraemic (Na 122) with low serum osmolality and concentrated urine, and has proximally weak legs that improve on repetition — Lambert-Eaton pattern — with a chest mass on CT. The reading: two paraneoplastic syndromes of one small cell lung cancer (SIADH and LEMS); the tumour was found because of hormones and antibodies, not its size.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the lambert-eaton with myasthenia gravis. Lambert-Eaton WEAKENS with rest and IMPROVES with repeated use (presynaptic, antibodies against voltage-gated calcium channels, paraneoplastic); myasthenia gravis fatiguates with use and improves with rest (postsynaptic, anti-AChR).",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the immune-related adverse events with infection. Colitis, hypophysitis, pneumonitis and rash after checkpoint inhibition are immune toxicity; treatment is steroids, not antibiotics, and infections must be excluded alongside.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with small cell lung cancer develops hyponatraemia with inappropriately concentrated urine and normal thyroid/adrenal axes. What paraneoplastic mechanism explains this?",
+        answer:
+          "Ectopic ADH (arginine vasopressin) secretion from the neuroendocrine tumour — the SIADH paraneoplastic syndrome.",
+        explanation:
+          "Tumours of neuroendocrine lineage keep hormone-output programs; SIADH raises water reabsorption, diluting sodium without oedema.",
+      },
+      {
+        type: "question",
+        prompt: "Why are transplant recipients on calcineurin inhibitors at increased cancer risk, specifically skin and post-transplant lymphoproliferative disease?",
+        answer:
+          "Loss of immune surveillance — the T-cell control over viral oncogenesis (EBV in PTLD) and over keratinocyte transformation is pharmacologically suppressed.",
+        explanation:
+          "This clinical experiment-in-nature is the best human evidence for immune surveillance.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A breast cancer patient develops cerebellar degeneration with circulating anti-Yo antibodies. The mechanism is:",
+        options: [
+          "Direct metastasis to cerebellum",
+          "Immune attack triggered by tumour antigens cross-reacting with Purkinje cells",
+          "PTHrP secretion from the tumour",
+          "Hypercoagulable microinfarcts",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Paraneoplastic cerebellar degeneration is an antibody-mediated remote injury: anti-Yo antibodies raised against the tumour cross-react with Purkinje cell cytoplasm. MRI is normal — a key discriminator from metastasis.",
+      },
+      {
+        type: "mcq",
+        stem: "Which adjuvant to checkpoint inhibition best prevents a cytokine release-like toxicity?",
+        options: [
+          "Tocilizumab — IL-6 blockade for severe CRS in CAR-T",
+          "Pembrolizumab rechallenge at higher dose",
+          "Administering anti-CTLA-4 instead",
+          "Anticoagulation for Trousseau",
+        ],
+        correctIndex: 0,
+        explanation:
+          "Tocilizumab blocks IL-6, the driver of cytokine release syndrome after CAR-T infusion; the same logic underlies steroid treatment of other immune-related adverse events.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Paraneoplastic syndromes are the tumour speaking through hormones, peptides and antibodies — SIADH, Cushing, hypercalcaemia, polycythaemia, Lambert-Eaton, cerebellar degeneration, Trousseau. Immune surveillance is real but evadable; PD-1/PD-L1 and CAR-T therapies restore it at the price of immune toxicity.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the inherited substrate on which cancer and every other disease expresses itself: genetic and chromosomal disease.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 19 — Mendelian, chromosomal & multifactorial disease (fully authored)
+// ---------------------------------------------------------------------------
+function lesson19() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: classify mutations by their molecular effect — missense, nonsense, frameshift, splice-site, trinucleotide repeat expansion — and their functional effect, loss-of-function versus gain-of-function; recognise the four classical Mendelian inheritance patterns from a pedigree and explain why they behave as they do; define penetrance, expressivity, pleiotropy, anticipation and imprinting and recognise an imprinting disorder; describe the mechanisms of aneuploidy and name the common trisomies, sex-chromosome disorders and microdeletion syndromes; and counsel a couple about multifactorial recurrence risk using the empirical risk model.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 10 — carcinogenesis, which covered mutation as a somatic event; this lesson treats mutation as a heritable, germline event.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Mutation",
+        text: "A permanent change in the DNA sequence. Its effect is decided by what it does to the protein — loss-of-function (the protein does less; recessive when one allele still suffices) versus gain-of-function (the protein does something new or excessive; dominantly expressed even against one normal allele).",
+      },
+      {
+        type: "paragraph",
+        text: "A dominant disease usually means one allele cannot cover the work (haploinsufficiency), the mutant protein actively poisons the complex (dominant-negative, as in fibrillin in Marfan), or the mutation creates a new harmful activity. A recessive disease means fifty per cent of product is enough — until it is not, and carrier detection is the clinical tool.",
+      },
+
+      { type: "heading", level: 2, text: "The Mendelian patterns" },
+      {
+        type: "table",
+        headers: ["Pattern", "Pedigree signature", "Mechanistic note", "Examples"],
+        rows: [
+          ["Autosomal dominant", "Every generation, male-to-male transmission, both sexes", "Rarely homozygous; carriers clinically well", "Huntington disease, Marfan, familial hypercholesterolaemia"],
+          ["Autosomal recessive", "Skips generations; consanguinity risk", "Carrier state asymptomatic; pseudodominance in isolated groups", "Cystic fibrosis, sickle cell, Tay-Sachs, PKU"],
+          ["X-linked recessive", "No male-to-male; carrier mothers transmit to sons", "Males hemizygous; daughters carriers", "Haemophilia A, Duchenne, G6PD deficiency"],
+          ["Mitochondrial (maternal)", "Only mothers transmit; all children at risk", "Heteroplasmy explains variable severity", "Leber hereditary optic neuropathy, MELAS"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "The concepts that bend the patterns" },
+      {
+        type: "definition",
+        term: "Anticipation",
+        text: "Earlier onset and greater severity in successive generations, the signature of trinucleotide repeat expansion (Huntington disease, myotonic dystrophy, fragile X) — each meiosis adds repeats.",
+      },
+      {
+        type: "definition",
+        term: "Imprinting",
+        text: "Parent-of-origin-specific expression: the same allele behaves differently depending on whether the mother or father transmitted it. Prader-Willi (paternal 15q deletion) versus Angelman (maternal deletion) is the classic pair; the region is epigenetically silenced on one chromosome.",
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Penetrance is the proportion of genotype carriers who show any phenotype; expressivity is how severely. Huntington penetrance approaches 100% by age 60 but expressivity varies by repeat length; a hereditary retinoblastoma pedigree shows incomplete penetrance.",
+      },
+
+      { type: "heading", level: 2, text: "Chromosomal disease" },
+      {
+        type: "paragraph",
+        text: "Aneuploidy comes from meiotic nondisjunction or mitotic anaphase lag — one extra copy, or one missing. Down syndrome is trisomy 21 (about 95%, meiotic nondisjunction; a minority from Robertsonian translocation 14;21 — the familial form). Turner syndrome is 45,X — the only viable monosomy, because the X is one of the two that is normally inactivated in each female cell. Klinefelter is 47,XXY — tall, small firm testes, azoospermia, gynaecomastia. Microdeletions are submicroscopic: 22q11 deletion gives DiGeorge (CATCH-22: cardiac anomaly, abnormal facies, thymic aplasia, cleft palate, hypocalcaemia) — diagnosed by FISH or chromosomal microarray, not karyotype.",
+      },
+
+      { type: "heading", level: 2, text: "Multifactorial disease" },
+      {
+        type: "definition",
+        term: "Multifactorial threshold model",
+        text: "Disease expresses when a genetically loaded liability plus environmental hits crosses a threshold; liability is normally distributed in the population, and relatives share the genes, so their risk rises in proportion to how much of the threshold they share.",
+      },
+      {
+        type: "paragraph",
+        text: "Recurrence counseling uses empirical risks: for a congenital anomaly such as cleft lip or pyloric stenosis, the risk to a sibling is about 2-4%, to a child of an affected parent similar, and the risk falls in second-degree relatives. Heritability is a population statistic, not an individual destination — a high heritability does not mean an individual's fate is fixed, because environment still moves the liability.",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A couple's first child has neural-tube defect; the mother has low folate intake. The counseling: recurrence risk about 3-5% (multifactorial, with a potential environmental contributor), dramatically reduced by high-dose preconception folate for the next pregnancy, and diagnosed by maternal serum AFP and ultrasound at 18-20 weeks. The empirical risk plus a preventive action is the shape of modern genetic counselling.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the autosomal-dominant rule 'affected children require an affected parent'. New mutations break the rule — achondroplasia classically arises de novo from advanced paternal age, so a sporadic case does not contradict the pedigree.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the imprinting syndromes as the same disease. Prader-Willi (paternal deletion, hypotonia and hyperphagia) and Angelman (maternal deletion, ataxia and inappropriate laughter) differ by parent of origin, not by locus.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A child with hypotonia, hyperphagia, hypogonadism and small hands has the paternal 15q11-q13 deletion. Which syndrome, and why not the same region on the maternal side?",
+        answer:
+          "Prader-Willi syndrome — the paternally expressed genes in that region are lost; on the maternal chromosome the same region is normally imprinted-silenced anyway, so maternal deletion manifests differently (Angelman).",
+        explanation:
+          "Imprinting means the two parental genomes are not interchangeable in this region — the same deleted base pair interval produces different disease depending on which parent transmitted it.",
+      },
+      {
+        type: "question",
+        prompt: "A Duchenne muscular dystrophy boy has two unaffected brothers. What does this tell you about the mother?",
+        answer:
+          "Probably she is a carrier (about two-thirds of cases are maternal); carrier detection uses creatine kinase levels and DNA testing, and germline mosaicism can explain a negative carrier test.",
+        explanation:
+          "One-third of Duchenne cases arise as new mutations; the unaffected brothers still have a 50% carrier risk if the mother is confirmed a carrier.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A fetus has 47,XXY. Which clinical picture is expected?",
+        options: [
+          "Female with short stature and webbed neck",
+          "Male with tall stature, small firm testes and azoospermia",
+          "Ambiguous genitalia with salt wasting",
+          "Female phenotype with streak gonads only",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Klinefelter syndrome (47,XXY): tall, gynaecomastia, small firm testes, azoospermia, elevated gonadotrophins. Turner 45,X gives short stature and webbed neck.",
+      },
+      {
+        type: "mcq",
+        stem: "A trait shows anticipation through generations with trinucleotide repeat expansion. Which disease fits?",
+        options: [
+          "Cystic fibrosis",
+          "Myotonic dystrophy",
+          "DiGeorge syndrome",
+          "Turner syndrome",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Myotonic dystrophy (CTG repeats) and Huntington (CAG repeats) show anticipation; the expansion lengthens each meiosis, lifting severity and lowering age of onset.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Mutation classes produce loss or gain of function; pedigrees reveal dominant, recessive, X-linked and mitochondrial transmission; penetrance, anticipation and imprinting bend every rule. Chromosomal disease is the aneuploidy of nondisjunction and the microdeletions. Multifactorial disease is a threshold model, counselled with empirical risks and prevented where the environment is known.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the immune system aimed inward — the mechanisms of autoimmune disease.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 20 — Autoimmune mechanisms (fully authored)
+// ---------------------------------------------------------------------------
+function lesson20() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: explain central and peripheral tolerance and how their failure produces autoimmunity; list the mechanisms that break tolerance — molecular mimicry, polyclonal activation, sequestered antigens, epitope spreading and superantigens; map each effector mechanism (type II, III and IV hypersensitivity) onto its autoimmune disease; interpret the autoantibody patterns of systemic lupus erythematosus, Sjogren syndrome, scleroderma and mixed connective tissue disease; and recognise drug-induced lupus and its distinguishing serology.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lessons 5-9 — the immunology of innate and adaptive responses; this lesson turns the same machinery against the self.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Autoimmunity",
+        text: "An adaptive immune response against self-antigens, which becomes autoimmune DISEASE only when the response produces tissue injury — anti-red-cell antibodies without haemolysis are autoimmunity; with haemolysis they are autoimmune haemolytic anaemia.",
+      },
+
+      { type: "heading", level: 2, text: "Tolerance and how it fails" },
+      {
+        type: "paragraph",
+        text: "Central tolerance deletes self-reactive lymphocytes during development: T cells in the thymus against self-peptide-MHC — the AIRE gene presents tissue antigens there, and its mutation gives autoimmune polyendocrine syndrome type 1. Peripheral tolerance mops up what slips through: anergy (signal without costimulation), suppression by regulatory T cells, and ignorance of sequestered antigens. Autoimmunity follows when these fail: HLA associations determine which antigens are presented (HLA-B27 with ankylosing spondylitis, HLA-DR3/DR4 with type 1 diabetes), and female predominance across most autoimmune disease points to hormonal and X-chromosome dose effects.",
+      },
+      {
+        type: "table",
+        headers: ["Mechanism of tolerance failure", "Example"],
+        rows: [
+          ["Molecular mimicry — microbial antigen resembles self", "Rheumatic fever (M protein against heart); Guillain-Barre (Campylobacter against ganglioside)"],
+          ["Polyclonal lymphocyte activation", "Epstein-Barr virus driving autoantibody production"],
+          ["Release of sequestered antigens", "Sympathetic ophthalmia after eye trauma; orchitis after testicular injury"],
+          ["Epitope spreading", "Damage releases new self-epitopes that broaden the response"],
+          ["Superantigen dysregulation", "Staphylococcal toxic shock syndrome toxin-1"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Effector mechanisms" },
+      {
+        type: "table",
+        headers: ["Hypersensitivity type", "Autoimmune disease", "Target"],
+        rows: [
+          ["Type II — antibody against fixed tissue or receptors", "Myasthenia gravis; Goodpasture syndrome; pemphigus vulgaris; Graves disease", "Acetylcholine receptor; glomerular/alveolar basement membrane; desmoglein; TSH receptor"],
+          ["Type III — immune complex deposition", "Systemic lupus erythematosus nephritis; serum sickness; Arthus reaction", "DNA-anti-DNA complexes in glomeruli and skin"],
+          ["Type IV — T-cell mediated", "Type 1 diabetes; multiple sclerosis; contact dermatitis", "Beta cells; myelinated axons; hapten-modified skin"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Graves disease is the antibody that stimulates; myasthenia gravis is the antibody that blocks. Both hit receptors by type II mechanisms, with opposite signalling consequences — agonist versus antagonist.",
+      },
+
+      { type: "heading", level: 2, text: "The connective tissue disease patterns" },
+      {
+        type: "paragraph",
+        text: "Systemic lupus erythematosus is the archetype: ANA positive with anti-double-stranded DNA (specific, tracks renal activity) and anti-Smith (most specific, no activity correlation), low complement during flares, and a pathology of haematoxylin bodies, wire-loop glomerular deposits, Libman-Sacks vegetations and onion-skin splenic arterioles. Drug-induced lupus mimics the arthralgia and serositis but spares kidney and CNS, and is anti-histone positive, from procainamide, hydralazine and isoniazid — and settles on drug withdrawal.",
+      },
+      {
+        type: "table",
+        headers: ["Disease", "Signature serology"],
+        rows: [
+          ["SLE", "ANA, anti-dsDNA, anti-Smith, low complement"],
+          ["Drug-induced lupus", "Anti-histone, ANA; anti-dsDNA negative"],
+          ["Sjogren syndrome", "Anti-SSA/Ro, anti-SSB/La; dry eyes, parotid enlargement"],
+          ["Diffuse scleroderma", "Anti-Scl-70 (topoisomerase I); early skin, lung, kidney"],
+          ["Limited scleroderma (CREST)", "Anti-centromere; long-standing disease, pulmonary hypertension"],
+          ["Mixed connective tissue disease", "Anti-U1-RNP; Raynaud with overlapping features"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A 28-year-old woman has malar rash, oral ulcers, arthritis, proteinuria, anaemia and a raised antinuclear antibody titre. Anti-dsDNA positive with low C3 and C4. The reading is SLE with active lupus nephritis — anti-dsDNA rising titre and falling complement are the activity markers; a renal biopsy confirms the class of nephritis and guides immunosuppression.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the ANA as diagnostic. ANA is sensitive but not specific — positive in autoimmune disease, but also in healthy relatives, infection and malignancy. Diagnosis needs the pattern: anti-dsDNA activity, anti-Smith specificity, complement levels and clinical criteria.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the lambert-eaton with myasthenia gravis again: the paraneoplastic antibody blocks the presynaptic channel and strengthens with effort; the autoimmune MG antibody blocks the postsynaptic receptor and fatigues with effort.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient on hydralazine develops arthralgia, fever and pleuritis; ANA and anti-histone are positive but anti-dsDNA is negative and kidneys are quiet. What is this?",
+        answer:
+          "Drug-induced lupus — anti-histone positive, dsDNA negative, renal and CNS spared, and withdrawal of hydralazine reverses it.",
+        explanation:
+          "Drug-induced lupus is the commonest hydralazine/procainamide/isoniazid adverse pattern, with a serology that distinguishes it from idiopathic SLE.",
+      },
+      {
+        type: "question",
+        prompt: "Which two autoantibodies best separate SLE-specificity from ANA sensitivity?",
+        answer:
+          "Anti-Smith (most specific for SLE) and anti-double-stranded DNA (specific and disease-activity tracking).",
+        explanation:
+          "ANA is the screening window; the dsDNA and Smith antibodies close the diagnosis.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "A patient with haemoptysis and haematuria has linear IgG along glomerular and alveolar basement membranes. The mechanism is:",
+        options: [
+          "Type I anaphylactic",
+          "Type II — antibody against fixed basement membrane",
+          "Type III — immune complex deposition",
+          "Type IV — T-cell mediated injury",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Goodpasture syndrome is anti-GBM type II injury: antibodies bind the alpha-3 chain of type IV collagen, giving the linear immunofluorescence pattern.",
+      },
+      {
+        type: "mcq",
+        stem: "Which mechanism best explains rheumatic carditis after pharyngitis?",
+        options: [
+          "Direct bacterial invasion of myocardium",
+          "Immune-complex deposition in valves",
+          "Molecular mimicry between streptococcal M protein and cardiac antigens",
+          "Superantigen-driven T-cell activation",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Cross-reactive antibodies and T cells against streptococcal antigens attack heart, joint and basal ganglia — Aschoff bodies are the histological record.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Autoimmunity is tolerance failure: HLA association, molecular mimicry, sequestered antigens, polyclonal activation and superantigens open the door; type II, III and IV hypersensitivity build the injury. SLE rides on anti-dsDNA activity and anti-Smith specificity, drug-induced lupus on anti-histone, and each connective tissue disease carries its signature serology.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the environment turned toxic: pollution, dusts, metals and the pathology of injury from outside the body.",
+      },
+    ],
+  };
+}
+
 const DEEPER_LESSONS: LessonSeed[] = [
   // --- M2 Haemodynamic disorders & thrombosis ---
-  { title: "Hyperaemia, congestion & haemorrhage", module: 2, estimatedMinutes: 30, authored: false, concept: { title: "Hyperaemia, congestion and haemorrhage", slug: "hyperaemia-congestion", summary: "Active and passive hyperaemia, the effects of chronic venous congestion on liver, lung and spleen, and the consequences of haemorrhage.", blooms: "understand", minutes: 30, prereq: ["acute-inflammation"] }, content: { blocks: [] } },
-  { title: "Thrombosis: mechanism & outcomes", module: 2, estimatedMinutes: 40, authored: false, concept: { title: "Mechanism and outcomes of thrombosis", slug: "thrombosis-mechanism", summary: "Endothelial injury, stasis and hypercoagulability; the platelet and coagulation phases; and the four possible fates of a thrombus.", blooms: "analyze", minutes: 40, prereq: ["cell-injury"] }, content: { blocks: [] } },
+  { title: "Hyperaemia, congestion & haemorrhage", module: 2, estimatedMinutes: 30, authored: true, concept: { title: "Hyperaemia, congestion and haemorrhage", slug: "hyperaemia-congestion", summary: "Active and passive hyperaemia, the effects of chronic venous congestion on liver, lung and spleen, and the consequences of haemorrhage.", blooms: "understand", minutes: 30, prereq: ["acute-inflammation"] }, content: lesson16() as never },
+  { title: "Thrombosis: mechanism & outcomes", module: 2, estimatedMinutes: 40, authored: true, concept: { title: "Mechanism and outcomes of thrombosis", slug: "thrombosis-mechanism", summary: "Endothelial injury, stasis and hypercoagulability; the platelet and coagulation phases; and the four possible fates of a thrombus.", blooms: "analyze", minutes: 40, prereq: ["cell-injury"] }, content: lesson17() as never },
   { title: "Embolism: types & fates", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Types and fates of embolism", slug: "embolism-types", summary: "Venous, arterial, gas, fat, air, amniotic fluid and tumour emboli, and where each lodges.", blooms: "apply", minutes: 35, prereq: ["thrombosis-mechanism"] }, content: lesson7() as never },
   { title: "Infarction & ischaemia", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Infarction", slug: "infarction", summary: "The distinction between ischaemia and infarction, the red and pale infarcts, and the influence of collateral supply.", blooms: "apply", minutes: 35, prereq: ["embolism-types"] }, content: lesson8() as never },
   { title: "Disseminated intravascular coagulation", module: 2, estimatedMinutes: 30, authored: true, concept: { title: "Disseminated intravascular coagulation", slug: "dic", summary: "Widespread microvascular coagulation with consumption of platelets and factors, and the bleeding that follows.", blooms: "apply", minutes: 30, prereq: ["thrombosis-mechanism"] }, content: lesson9() as never },
@@ -3267,11 +4017,11 @@ const DEEPER_LESSONS: LessonSeed[] = [
   { title: "Hallmarks of cancer & molecular changes", module: 3, estimatedMinutes: 45, authored: true, concept: { title: "Hallmarks of cancer and molecular changes", slug: "cancer-hallmarks", summary: "Self-sufficiency in growth signals, evasion of suppression, immortality, angiogenesis, invasion and metastasis, and the genes that enable them.", blooms: "analyze", minutes: 45, prereq: ["neoplasia-definitions"] }, content: lesson11() as never },
   { title: "Carcinogenesis: mutation & environment", module: 3, estimatedMinutes: 40, authored: true, concept: { title: "Carcinogenesis", slug: "carcinogenesis", summary: "Initiators and promoters, the multistep sequence, oncogenic viruses, chemical carcinogens and the biology of metastasis.", blooms: "analyze", minutes: 45, prereq: ["cancer-hallmarks"] }, content: lesson12() as never },
   { title: "Grading, staging & tumour markers", module: 3, estimatedMinutes: 35, authored: true, concept: { title: "Grading, staging and tumour markers", slug: "grading-staging", summary: "The TNM staging system, grading, biopsy diagnosis, and the use and limitations of tumour markers.", blooms: "apply", minutes: 35, prereq: ["neoplasia-definitions"] }, content: lesson13() as never },
-  { title: "Paraneoplastic syndromes & tumour immunology", module: 3, estimatedMinutes: 35, authored: false, concept: { title: "Paraneoplastic syndromes and tumour immunology", slug: "paraneoplastic-tumour-immunity", summary: "The systemic effects of remote hormone-like products, immune surveillance, and current immunotherapy.", blooms: "apply", minutes: 35, prereq: ["grading-staging"] }, content: { blocks: [] } },
+  { title: "Paraneoplastic syndromes & tumour immunology", module: 3, estimatedMinutes: 35, authored: true, concept: { title: "Paraneoplastic syndromes and tumour immunology", slug: "paraneoplastic-tumour-immunity", summary: "The systemic effects of remote hormone-like products, immune surveillance, and current immunotherapy.", blooms: "apply", minutes: 35, prereq: ["grading-staging"] }, content: lesson18() as never },
 
   // --- M4 Genetic & immune-mediated disease ---
-  { title: "Mendelian, chromosomal & multifactorial disease", module: 4, estimatedMinutes: 40, authored: false, concept: { title: "Patterns of genetic disease", slug: "genetic-disease-patterns", summary: "Autosomal and sex-linked inheritance, triplet repeats, imprinting, chromosomal disorders and multifactorial inheritance.", blooms: "understand", minutes: 40,     prereq: ["chronic-inflammation"] }, content: { blocks: [] } },
-  { title: "Autoimmune mechanisms", module: 4, estimatedMinutes: 40, authored: false, concept: { title: "Mechanisms of autoimmune disease", slug: "autoimmune-mechanisms", summary: "Loss of tolerance, molecular mimicry, and the systemic versus organ-specific autoimmune diseases.", blooms: "analyze", minutes: 40, prereq: ["chronic-inflammation"] }, content: { blocks: [] } },
+  { title: "Mendelian, chromosomal & multifactorial disease", module: 4, estimatedMinutes: 40, authored: true, concept: { title: "Patterns of genetic disease", slug: "genetic-disease-patterns", summary: "Autosomal and sex-linked inheritance, triplet repeats, imprinting, chromosomal disorders and multifactorial inheritance.", blooms: "understand", minutes: 40,     prereq: ["chronic-inflammation"] }, content: lesson19() as never },
+  { title: "Autoimmune mechanisms", module: 4, estimatedMinutes: 40, authored: true, concept: { title: "Mechanisms of autoimmune disease", slug: "autoimmune-mechanisms", summary: "Loss of tolerance, molecular mimicry, and the systemic versus organ-specific autoimmune diseases.", blooms: "analyze", minutes: 40, prereq: ["chronic-inflammation"] }, content: lesson20() as never },
   { title: "Amyloidosis", module: 4, estimatedMinutes: 30, authored: true, concept: { title: "Amyloidosis", slug: "amyloidosis", summary: "Extracellular deposition of misfolded protein fibrils, its classification, and the organ consequences — an application of the protein-structure chemistry taught in BCHM 101.", blooms: "apply", minutes: 30, prereq: ["chronic-inflammation"] }, content: lesson14() as never },
 
   // --- M5 Environmental & nutritional pathology ---
