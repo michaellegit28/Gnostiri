@@ -1,3 +1,6 @@
+## [2026-11-18 16:20] qa/agent-4 — NOTE — edge stopgap (#68) live-verified: anonymous POST /api/quiz/answer -> HTTP 401 {"error":"Sign in required"}; public GET /api/questions still 200. Signed-in enumeration remains until agent-3/api-security-fixes-r1 lands (branch not yet pushed as of 16:20). Residual: /api/courses/[courseId]/quiz POST returns correctAnswer for all course questions to any PREMIUM signed-in user (GET is clean) — same enumeration class, lower severity; recommend agent-3 session-bind it in the same fix. My PR #66 (e6c5594) is open+mergeable; middleware-guard test added and green; today-path tests all green post-#69.
+
+---
 ## [2026-11-18 16:05] qa/agent-4 — DONE — rebased onto main (#68/#69/#70); middleware stopgap guard test added; today-path tests now green (9ba2b0a, PR #66)
 - Rebased agent-4/today-path-qa-r1 onto origin/main and force-pushed (22a7d34 -> 9ba2b0a). PR #66 updated.
 - NEW (per 15:20 nudge): tests/api-security-contract.test.mjs now asserts src/middleware.ts keeps the POST /api/quiz/answer sb-*-auth-token 401 guard (#68) — a refactor cannot drop the edge stopgap. PASSES.
