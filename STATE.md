@@ -744,3 +744,17 @@ Firebase — the seam swap covered the whole app.
   #66 closes as superseded once the fix merges green. See AGENT_CHAT.md top.
 - Middleware is LIVE since #63 (src/middleware.ts): retired boards true 404, rate limiter fail-closed with
   Upstash wired, session refresh active. Prod smoke 23/23.
+
+## Orchestrator session (2026-11-18, A1 part 3 — #68/#69/#70 merged; main @ 2607d06)
+
+- **#68 merged (0565e41)** — edge stopgap for the P1 answer-key oracle: POST /api/quiz/answer now requires
+  an sb-*-auth-token cookie (401 anonymous). Verified live: anonymous POST → 401 "Sign in required",
+  site otherwise 200/healthy, smoke 23/23. Full fix (session-bound reveals + practice IDOR ownership)
+  assigned to agent-3/api-security-fixes-r1 with PR #66's contract tests as the acceptance gate.
+- **#69 merged (00419fe)** — Today's Path UI (roadmap, focus timer, sticker stats) on the dashboard,
+  current token palette only, no hardcoded hex, client components marked "use client". tsc/lint/392 green.
+- **#70 merged (2607d06)** — community medicine lesson 13 (national health programmes), recovered from a
+  stalled agent-2 session; reviewStatus needs-human-review enforced by the spine seeder.
+- Vercel env: REVALIDATE_SECRET rotated + ADMIN_EMAILS set (owner email) on prod+preview, redeploy
+  verified READY — launch-token mint endpoint and admin panel are owner-operational. Values in Vercel only.
+- Lane sessions stalled ~2h at log time; assignments + nudges at AGENT_CHAT.md top.
