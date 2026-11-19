@@ -470,9 +470,18 @@ async function main() {
     }
   }
 
+  let gateFailed = 0;
+  if (process.env.SMOKE_GATE === "1") {
+    const gate = await runMergeGate();
+    gateFailed = gate.failed;
+    console.log(c.bold(`\nmerge gate (SMOKE_GATE=1):`));
+    for (const l of gate.lines) console.log(l.startsWith("FAIL") ? c.red(l) : l.startsWith("SKIP") ? c.dim(l) : c.green(l));
+    failed += gateFailed;
+  }
+
   const passed = results.length - failed;
   const summary = failed === 0
-    ? `${passed}/${results.length} routes pass`
+    ? `${passed}/${results.length} routes pass${gateFailed === 0 && process.env.SMOKE_GATE === "1" ? " + gate pass" : ""}`
     : `${passed}/${results.length} pass — ${failed} FAILING`;
 
   if (JSON_OUT) {
@@ -506,6 +515,71 @@ async function main() {
     }
   }
   process.exit(failed === 0 ? 0 : 1);
+}
+
+// ── Merge gate (owner decision 2026-11-18) ─────────────────────────────────
+// SMOKE_GATE=1 adds the three prod gate scenarios on top of the catalogue:
+//   (a) logged-out landing      — no cookies, / and /login must be 200
+//   (b) new-user first session  — password grant via Supabase, then an
+//                                 auth-required API must answer 200
+//   (c) gated feature           — same session against a paywalled API must
+//                                 answer 402/403 with a paywall marker (free
+//                                 account) — proves the gate is enforced
+// (b)/(c) read SMOKE_SUPABASE_URL / SMOKE_SUPABASE_ANON_KEY / SMOKE_EMAIL /
+// SMOKE_PASSWORD from the ENVIRONMENT only (never committed). Missing creds
+// => SKIP note, not a failure — the prod gate run always sets them.
+async function runMergeGate() {
+  const lines = [];
+  let failed = 0;
+  const note = (ok, label, detail) => {
+    if (!ok) failed += 1;
+    lines.push(`${ok ? "PASS" : "FAIL"}  gate ${label}${detail ? ` — ${detail}` : ""}`);
+  };
+
+  // (a) logged-out landing
+  for (const p of ["/", "/login"]) {
+    const res = await fetchWithTimeout(`${BASE_URL}${p}`, { headers: { "user-agent": "gnostiri-smoke/1.0" } });
+    note(res.status === 200, `logged-out ${p}`, `status ${res.status}`);
+  }
+
+  const su = process.env.SMOKE_SUPABASE_URL;
+  const sk = process.env.SMOKE_SUPABASE_ANON_KEY;
+  const em = process.env.SMOKE_EMAIL;
+  const pw = process.env.SMOKE_PASSWORD;
+  if (!su || !sk || !em || !pw) {
+    lines.push("SKIP  gate new-user/gated — set SMOKE_SUPABASE_URL, SMOKE_SUPABASE_ANON_KEY, SMOKE_EMAIL, SMOKE_PASSWORD (env only)");
+    return { failed, lines };
+  }
+
+  // password grant -> session cookie (sb-<projectRef>-auth-token = session JSON)
+  const ref = new URL(su).host.split(".")[0];
+  const grant = await fetchWithTimeout(`${su}/auth/v1/token?grant_type=password`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", apikey: sk },
+    body: JSON.stringify({ email: em, password: pw }),
+  });
+  if (grant.status !== 200) {
+    note(false, "auth grant", `status ${grant.status}`);
+    return { failed, lines };
+  }
+  const session = await grant.json();
+  const cookie = `sb-${ref}-auth-token=${encodeURIComponent(JSON.stringify(session))}`;
+
+  // (b) new-user first session: auth-required API with the session cookie
+  const me = await fetchWithTimeout(`${BASE_URL}/api/notifications`, {
+    headers: { cookie, "user-agent": "gnostiri-smoke/1.0" },
+  });
+  note(me.status === 200, "new-user first session (/api/notifications)", `status ${me.status}`);
+
+  // (c) gated feature: paywalled API must refuse a free account
+  const gated = await fetchWithTimeout(`${BASE_URL}/api/downloads`, {
+    headers: { cookie, "user-agent": "gnostiri-smoke/1.0" },
+  });
+  const gatedBody = await gated.text().catch(() => "");
+  const paywalled = gated.status === 402 || gated.status === 403 || /paywall|upgrade|subscribe/i.test(gatedBody);
+  note(paywalled, "gated feature refused for free account (/api/downloads)", `status ${gated.status}`);
+
+  return { failed, lines };
 }
 
 // Run only when invoked as a script, so tests can import the catalogue.

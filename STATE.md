@@ -758,3 +758,23 @@ Firebase — the seam swap covered the whole app.
 - Vercel env: REVALIDATE_SECRET rotated + ADMIN_EMAILS set (owner email) on prod+preview, redeploy
   verified READY — launch-token mint endpoint and admin panel are owner-operational. Values in Vercel only.
 - Lane sessions stalled ~2h at log time; assignments + nudges at AGENT_CHAT.md top.
+
+## Phase 8 infra (2026-11-18, A1 — owner decisions locked)
+
+- **Schema** (migration `20261118180000_phase8_entitlements_analytics`, SQL for the owner's Supabase
+  editor): `Subscription` gains `plan` (free|discovery|highschool|university|prime), `addons[]`,
+  `currency`, `amountCents`, billingPeriod monthly|annual|term (tier kept for the legacy gate);
+  new `AnalyticsEvent` (session_start, mission_viewed/completed, question_answered,
+  streak_incremented, paywall_viewed), `Download` (per-plan monthly caps), `ContentRequest`.
+- **Locked owner decisions**: emblem = tilted accretion-ring (solid disc + single elliptical ring,
+  negative-space gap, monochrome-first, no gradient/lensing/monogram; near-black + accretion amber;
+  ring doubles as progress/streak/loading/bracket motif); type = one display + one body face, Inter
+  out. Competitions free to enter for all (Discovery: 1 bracket/week cap); monetize season pass,
+  cosmetics, unlimited entries, deeper Mastery Cup feedback. Plan names: Discovery / High School /
+  University (+ AI Productivity Pack add-on). 8e not blocked: getEntitlements(user) + feature flags
+  first, Paystack/Stripe test mode, prices in a data file + currency detection + USD fallback,
+  mobile money per country, test keys from owner, live keys at go-live. Merge gate: prod smoke on
+  (a) logged-out landing (b) new-user first session (c) subscribed gated feature.
+- **smoke merge gate**: tools/smoke.mjs with SMOKE_GATE=1 adds the three gate scenarios; (b)/(c)
+  auth via SMOKE_* env vars only (never committed). Verified live: 23/23 + gate(a) pass, (b)/(c)
+  SKIP without creds.

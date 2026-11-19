@@ -54,6 +54,11 @@ model User {
   studyDocuments        StudyDocument[]
   documentQuizItems     DocumentQuizItem[]
   studyTasks            StudyTask[]
+
+  // Phase 8 — analytics, downloads, content requests
+  analyticsEvents       AnalyticsEvent[]
+  downloads             Download[]
+  contentRequests       ContentRequest[]
 }
 
 model Profile {
@@ -70,7 +75,9 @@ model Subscription {
   id           String      @id @default(cuid())
   userId       String
   user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tier         String      @default("free") // 'free' | 'premium'
+  tier         String      @default("free") // 'free' | 'premium' (legacy gate; see plan)
+  plan         String      @default("free") // 'free' | 'discovery' | 'highschool' | 'university' | 'prime'
+  addons       String[]    @default([]) // e.g. 'ai-productivity-pack'
   domainAccess AppDomain[]
   expiresAt    DateTime?
   provider     String?
@@ -78,7 +85,52 @@ model Subscription {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   providerRef  String?     @unique
-  billingPeriod String     @default("monthly")
+  billingPeriod String     @default("monthly") // 'monthly' | 'annual' | 'term'
+  currency     String?     // ISO 4217 the subscriber paid in (prices live in src/lib/plans.ts)
+  amountCents  Int?        // amount actually charged, in the smallest currency unit
+}
+
+// Phase 8: product analytics events (session/mission/question/streak/paywall).
+// Written by /api/analytics; read-only for the dashboard later. Never stores
+// question answers or content — type + coarse metadata only.
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  anonId    String?  // cookie id for logged-out events (landing, paywall viewed)
+  type      String   // session_start | mission_viewed | mission_completed | question_answered | streak_incremented | paywall_viewed
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  @@index([type, createdAt])
+  @@index([userId, createdAt])
+}
+
+// Phase 8c: subscriber download bundles (study+quiz) + course/topic requests.
+// Download rows enforce the per-plan monthly caps (3 highschool / 5 university).
+model Download {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind      String   // 'subject' | 'topic' | 'course'
+  slug      String
+  plan      String   // plan the download was charged against
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model ContentRequest {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind      String   // 'course' | 'subject' | 'topic'
+  slug      String
+  note      String?
+  status    String   @default("open") // 'open' | 'planned' | 'shipped'
+  createdAt DateTime @default(now())
+
+  @@index([status, createdAt])
 }
 
 model Domain {
