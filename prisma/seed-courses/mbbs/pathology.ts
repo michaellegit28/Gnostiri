@@ -3254,10 +3254,307 @@ const MODULE_ONE_SBAS: SbaSeed[] = [
 // ---------------------------------------------------------------------------
 // Deeper modules 2-6: a real concept spine, tracked-placeholder lessons.
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// LESSON 16 — Hyperaemia, congestion & haemorrhage (fully authored)
+// ---------------------------------------------------------------------------
+function lesson16() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: distinguish active hyperaemia from passive congestion by mechanism and by the colour and weight of the involved tissue; explain why acute and chronic passive congestion produce different morphologies in lung, liver and spleen; describe the four capillary mechanisms that displace fluid in oedema and contrast them with congestion; name the spectrum of haemorrhage from petechiae to haematoma and their underlying causes; and connect each of these to its common clinical setting — left-sided failure, right-sided failure, bleeding into a body cavity and chronic occult blood loss.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 — acute inflammation, which introduced the vascular pattern of hyperaemia as the first phase of the acute response. This lesson separates that purposeful hyperaemia from the passive congestion of failing outflow.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Hyperaemia vs congestion",
+        text: "Hyperaemia is an ACTIVE process — arteriolar vasodilatation increases inflow to a tissue, making it red, warm and heavier (exercise, blushing, inflammation). Congestion is a PASSIVE process — impaired venous outflow increases blood content without increasing delivery, making tissue blue-cyanotic, cold and swollen. The same increased blood volume behaves differently because the flow through it differs.",
+      },
+      {
+        type: "paragraph",
+        text: "Capillary exchange follows Starling forces, and congestion changes only one of them: hydrostatic pressure rises at the venular end. Transudate leaks out — a protein-poor fluid with low specific gravity — until oedema develops; with enough chronicity the raised venous pressure also damages the capillary bed, red cells escape, and haemoglobin-derived iron accumulates in macrophages.",
+      },
+
+      { type: "heading", level: 2, text: "Passive congestion organ by organ" },
+      {
+        type: "table",
+        headers: ["Organ", "Acute congestion", "Chronic congestion", "Clinical cause"],
+        rows: [
+          ["Lung (left heart failure)", "Heavy, wet, oedematous alveoli", "Brown induration with haemosiderin-laden macrophages — heart failure cells", "Acute pulmonary oedema, mitral stenosis"],
+          ["Liver (right heart failure)", "Centrilobular distension", "Nutmeg liver — centrilobular congestion with fatty periphery; cardiac cirrhosis late", "Cor pulmonale, constrictive pericarditis"],
+          ["Spleen", "Enlarged, tense", "Fibrotic, firm — congestive splenomegaly with hypersplenism", "Portal hypertension, right heart failure"],
+          ["Lower limb veins", "Dependent swelling", "Varicosities, stasis dermatitis, ulceration", "Immobility, valve incompetence"],
+        ],
+      },
+      {
+        type: "definition",
+        term: "Heart failure cells",
+        text: "Alveolar macrophages that have phagocytosed red cells extravasated from congested pulmonary capillaries and stored haemosiderin; golden-brown granular cytoplasm on Prussian blue stain. Their presence in sputum is the cytological signature of chronic pulmonary congestion.",
+      },
+
+      { type: "heading", level: 2, text: "Haemorrhage" },
+      {
+        type: "definition",
+        term: "Haemorrhage",
+        text: "The extravasation of blood outside the circulation, whether onto a surface, into a tissue or into a body cavity. Its significance is decided by rate, volume and site: a trickle into a joint destroys it slowly, the same volume into the brain kills in minutes.",
+      },
+      {
+        type: "table",
+        headers: ["Size", "Name", "Typical association"],
+        rows: [
+          ["< 1-2 mm", "Petechiae", "Platelet disorders, vasculitis, DIC, infective endocarditis"],
+          ["1 mm to 1 cm", "Purpura", "Vasculitis, sepsis, steroid use"],
+          ["1-2 cm and larger", "Ecchymosis (a bruise)", "Minor trauma with poor coagulation"],
+          ["Any confined collection", "Haematoma", "Trauma, aneurysm rupture, anticoagulation"],
+          ["Fluid blood in a cavity", "Haemothorax, haemoperitoneum", "Rupture, penetrating injury"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The causes of haemorrhage divide into: trauma to a vessel; intrinsic vascular or wall disease (atheroma, aneurysm, vasculitis); disorders of platelets (number, e.g. ITP, or function, e.g. uraemia and aspirin); disorders of coagulation (factor deficiencies, anticoagulants, DIC consumption); and raised intravascular pressure with a weak vessel (hypertensive intracerebral haemorrhage, variceal bleeding).",
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "A patient with rheumatic mitral stenosis has a cut surface of lung that is brown and firm, and sputum macrophages stain blue with Prussian blue. The morphologic reading: chronic passive pulmonary congestion — the stenotic mitral valve raises left atrial and pulmonary venous pressure until capillaries leak red cells, whose iron is scavenged as haemosiderin = heart failure cells = brown induration. The bedside correlate is orthopnoea, pink frothy sputum in decompensation and a mid-diastolic murmur at the apex.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the direction of flow in congestion. Congestion does not bring more oxygen — it traps blood in a tissue and demands more from it, so congestion and hyperaemia arrive at the same 'more blood' by opposite routes and opposite physiology.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the size of a petechia. Petechiae are the smallest (1-2 mm), purpura the larger (to 1 cm), ecchymosis the largest — and small size does not mean small cause: petechiae from thrombocytopenia are the dangerous ones.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with right heart failure has a nutmeg liver on cut surface. What produces the nutmeg pattern?",
+        answer:
+          "Centrilobular (zone 3) blood accumulates first because the hepatic veins drain there; the periportal parenchyma stays pale and often fatty, giving dark-red centres against pale periphery.",
+        explanation:
+          "This is chronic passive congestion of the liver; sustained severe form extends fibrosis from centrilobular zones — cardiac cirrhosis — but the cardiac output failure, not the liver, kills first.",
+      },
+      {
+        type: "question",
+        prompt: "Which element is constant between transudate and exudate, and which separates them?",
+        answer:
+          "Both are tissue fluid; exudates carry high protein, specific gravity and inflammatory cells from a leaky inflamed vessel, transudates are protein-poor with low specific gravity from a pressure or osmotic imbalance.",
+        explanation:
+          "Light's criteria sort them in pleural fluid; the same Starling logic governs the difference between oedema fluid in heart failure and pleural pus in empyema.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which pair correctly matches the process with its mechanism?",
+        options: [
+          "Hyperaemia = venular obstruction; congestion = arteriolar dilatation",
+          "Hyperaemia = arteriolar dilatation; congestion = venular back-pressure",
+          "Both are active dilatations; congestion simply lasts longer",
+          "Hyperaemia = thrombosis; congestion = embolism",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Hyperaemia is active inflow (arteriolar), congestion is passive outflow failure (venular). The colour of the tissue tells them apart — red and warm versus blue and cold.",
+      },
+      {
+        type: "mcq",
+        stem: "A patient with severe aortic stenosis develops exertional dyspnoea with golden-brown granular sputum macrophages on stain. The finding is:",
+        options: [
+          "Pulmonary haemosiderosis from autoimmune disease",
+          "Anthracotic pigment in hilar nodes",
+          "Heart failure cells from chronic pulmonary congestion",
+          "Haemosiderin from resolved pulmonary infarction",
+        ],
+        correctIndex: 2,
+        explanation:
+          "Left-sided obstruction (aortic stenosis) or failure raises pulmonary venous hydrostatic pressure; leaked red cells are scavenged as haemosiderin = heart failure cells = chronic passive congestion of lung.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Congestion is passive, hyperaemia active; the lung answers with brown induration and heart failure cells, the liver with a nutmeg pattern, the spleen with congestion. Haemorrhage is graded by size — petechiae, purpura, ecchymosis, haematoma — and by cause — trauma, vessel wall, platelets, factors or pressure.",
+      },
+      {
+        type: "paragraph",
+        text: "Next, the most clinically significant fate of stagnant blood: thrombosis — the coagulation of blood inside the intact circulation.",
+      },
+    ],
+  };
+}
+
+// ---------------------------------------------------------------------------
+// LESSON 17 — Thrombosis: mechanism & outcomes (fully authored)
+// ---------------------------------------------------------------------------
+function lesson17() {
+  return {
+    blocks: [
+      { type: "heading", level: 2, text: "Learning outcomes" },
+      {
+        type: "paragraph",
+        text: "By the end of this lesson you should be able to: state Virchow's triad and rank its three contributors for the common thromboses you will meet; describe the platelet and coagulation sequence that builds a thrombus and recognise lines of Zahn; distinguish arterial from venous thrombi by composition and by the risk they carry; enumerate the fates of a thrombus and say which one is destructive and which one is reparative; recognise the thrombotic settings of surgery, malignancy, heparin-induced thrombocytopenia and antiphospholipid syndrome; and explain why an anticoagulated or fibrinolytic strategy targets the sequence just described.",
+      },
+
+      { type: "heading", level: 2, text: "Prerequisites" },
+      {
+        type: "paragraph",
+        text: "Lesson 2 — acute inflammation, for the endothelium's normal antithrombotic nature; and lesson 16, for why stasis matters.",
+      },
+
+      { type: "heading", level: 2, text: "The big idea" },
+      {
+        type: "definition",
+        term: "Thrombosis",
+        text: "The formation of a solid mass of blood constituents — platelets, fibrin and trapped cells — within the intact circulation during life. A thrombus is not a clot: a clot forms in stagnant dead blood, a thrombus forms in flowing blood under the control of Virchow's triad.",
+      },
+
+      { type: "heading", level: 2, text: "Virchow's triad" },
+      {
+        type: "table",
+        headers: ["Contributor", "Mechanism", "Clinical examples"],
+        rows: [
+          ["Endothelial injury", "Loss of antithrombotic surface, exposure of subendothelial collagen and tissue factor", "Myocardial infarction with mural thrombus, vasculitis, smoking, catheter trauma"],
+          ["Stasis or turbulence", "Loss of the dilutional flow; activated factors concentrate", "Atrial fibrillation with left atrial appendage thrombus, immobilisation, varicose veins, aneurysms"],
+          ["Hypercoagulability", "Inherited or acquired shift in procoagulant balance", "Factor V Leiden, protein C/S deficiency, malignancy, oestrogen therapy, pregnancy, post-surgical state"],
+        ],
+      },
+      {
+        type: "callout",
+        variant: "info",
+        text: "Surgery is the paradigm of all three at once: endothelial damage at the wound, stasis on the table, and a post-operative hypercoagulable state. That is why prophylaxis pairs early mobilisation with prophylactic dose low-molecular-weight heparin.",
+      },
+
+      { type: "heading", level: 2, text: "Building the thrombus" },
+      {
+        type: "paragraph",
+        text: "An intact endothelium is the strongest antithrombotic surface: it makes prostaglandin I2 and nitric oxide, it expresses thrombomodulin to activate protein C, and it carries heparan sulfate to potentiate antithrombin. Denuded endothelium exposes collagen, which binds von Willebrand factor, which captures platelets through glycoprotein Ib. The adherent platelet activates, changes shape, releases granule contents, and exposes glycoprotein IIb/IIIa, which cross-links fibrinogen and aggregates further platelets. Tissue factor from the injured wall triggers the extrinsic cascade, and the thrombin burst it generates converts fibrinogen to fibrin; the fibrin mesh traps red cells and consolidates the platelet aggregate into a firm thrombus.",
+      },
+      {
+        type: "definition",
+        term: "Lines of Zahn",
+        text: "Alternating pale layers of aggregated platelets and fibrin with dark red layers of red cells, the signature of a thrombus formed in flowing blood. Postmortem clots are homogeneous — currant-jelly red cells settled below, chicken-fat plasma above — with no layering.",
+      },
+
+      { type: "heading", level: 2, text: "Arterial vs venous thrombosis" },
+      {
+        type: "table",
+        headers: ["", "Arterial / cardiac thrombus", "Venous thrombus"],
+        rows: [
+          ["Driving factor", "Endothelial injury at a plaque or a scarred valve", "Stasis, often with low-grade hypercoagulability"],
+          ["Composition", "Platelet-rich, white, lines of Zahn prominent", "Red-cell rich, gelatinous, red"],
+          ["Risk", "Artery occlusion: infarction, stroke", "Embolisation: pulmonary embolism"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Fates of a thrombus" },
+      {
+        type: "table",
+        headers: ["Fate", "Meaning", "Consequence"],
+        rows: [
+          ["Propagation", "The thrombus grows along the vessel", "Increasing occlusion or embolic load"],
+          ["Embolisation", "A fragment detaches and travels", "Pulmonary embolism; systemic embolism from left heart"],
+          ["Organisation", "Ingrowth of fibroblasts and capillaries, later recanalisation", "The only repair; the vessel may never reopen fully"],
+          ["Dissolution", "Fibrinolysis lysed by plasmin", "Restored lumen, especially with early therapy"],
+        ],
+      },
+
+      { type: "heading", level: 2, text: "Worked example" },
+      {
+        type: "example",
+        text: "An elderly man with atrial fibrillation develops a large right middle cerebral artery infarct. The source is a thrombus in the left atrial appendage — Virchow's stasis at work in a fibrillating chamber with no contraction to wash the appendage. The lesion is an embolus, and the fate of its origin is anticoagulation; had the question been why the leg DVT embolised, the answer would be the same triad in the venous tree.",
+      },
+
+      { type: "heading", level: 2, text: "Common mistakes" },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving the thrombus with the postmortem clot. A postmortem clot lacks lines of Zahn and is not attached; if your specimen has laminated layers and is stuck to the wall, it formed in life.",
+      },
+      {
+        type: "callout",
+        variant: "warning",
+        text: "Deceiving HIT as a bleeding problem. Heparin-induced thrombocytopenia is antibody against platelet factor 4-heparin complexes that ACTIVATES platelets — the platelet count falls while the patient clots; continuing heparin makes the thrombosis worse.",
+      },
+
+      { type: "heading", level: 2, text: "Check your understanding" },
+      {
+        type: "question",
+        prompt: "A patient with nephrotic syndrome, on oestrogen therapy, is immobile after surgery. Which of Virchow's contributors is dominant?",
+        answer:
+          "Hypercoagulability — nephrotic loss of antithrombin III, oestrogen increase of coagulant factors and post-surgical state all shift the same direction.",
+        explanation:
+          "This is the acquired hypercoagulable stack: renal loss of protein in urine, hormonal factors, and the reactive state after surgery.",
+      },
+      {
+        type: "question",
+        prompt: "Which fate of a thrombus produces recanalisation?",
+        answer:
+          "Organisation — new capillaries grow into the fibrin mass and, as they coalesce, form channels across the old lumen.",
+        explanation:
+          "Lysis restores patency quickly, but organisation is the long-term route to restored flow — often partial, with a residual wall of organisation.",
+      },
+
+      { type: "heading", level: 2, text: "Multiple choice" },
+      {
+        type: "mcq",
+        stem: "Which mechanism is dominant in myocardial infarction complicated by mural thrombus?",
+        options: [
+          "Turbulent stasis in the ventricle",
+          "Endothelial injury over the infarcted wall",
+          "Hypercoagulability from the infarction itself",
+          "All three contribute equally",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Mural thrombus after MI forms over infarcted (injury) endocardium; stasis in the akinetic segment contributes, but injury over the scar is the initiating lesion.",
+      },
+      {
+        type: "mcq",
+        stem: "Lines of Zahn are significant because they:",
+        options: [
+          "Indicate septic embolisation",
+          "Prove the thrombus formed ante-mortem in flowing blood",
+          "Show the clot was venous, not arterial",
+          "Are deposits of haemosiderin in macrophages",
+        ],
+        correctIndex: 1,
+        explanation:
+          "Alternating platelet and red-cell layers only form when blood is flowing across a forming surface; a postmortem clot lacks them.",
+      },
+
+      { type: "heading", level: 2, text: "Summary and next" },
+      {
+        type: "paragraph",
+        text: "Thrombosis is the triad of endothelial injury, stasis and hypercoagulability acting through a sequence of platelet adhesion, activation, aggregation and fibrin consolidation. Arterial thrombi are platelet-rich, venous thrombi red-cell rich; their fates are propagation, embolisation, organisation and lysis. Recognising the triad in the clinic — surgery, atrial fibrillation, malignancy, HIT — is the whole job of prophylaxis.",
+      },
+      {
+        type: "paragraph",
+        text: "Next in module 3: the molecular changes that make a cell a tumour, and the syndromes a tumour produces beyond its mass.",
+      },
+    ],
+  };
+}
+
 const DEEPER_LESSONS: LessonSeed[] = [
   // --- M2 Haemodynamic disorders & thrombosis ---
-  { title: "Hyperaemia, congestion & haemorrhage", module: 2, estimatedMinutes: 30, authored: false, concept: { title: "Hyperaemia, congestion and haemorrhage", slug: "hyperaemia-congestion", summary: "Active and passive hyperaemia, the effects of chronic venous congestion on liver, lung and spleen, and the consequences of haemorrhage.", blooms: "understand", minutes: 30, prereq: ["acute-inflammation"] }, content: { blocks: [] } },
-  { title: "Thrombosis: mechanism & outcomes", module: 2, estimatedMinutes: 40, authored: false, concept: { title: "Mechanism and outcomes of thrombosis", slug: "thrombosis-mechanism", summary: "Endothelial injury, stasis and hypercoagulability; the platelet and coagulation phases; and the four possible fates of a thrombus.", blooms: "analyze", minutes: 40, prereq: ["cell-injury"] }, content: { blocks: [] } },
+  { title: "Hyperaemia, congestion & haemorrhage", module: 2, estimatedMinutes: 30, authored: true, concept: { title: "Hyperaemia, congestion and haemorrhage", slug: "hyperaemia-congestion", summary: "Active and passive hyperaemia, the effects of chronic venous congestion on liver, lung and spleen, and the consequences of haemorrhage.", blooms: "understand", minutes: 30, prereq: ["acute-inflammation"] }, content: lesson16() as never },
+  { title: "Thrombosis: mechanism & outcomes", module: 2, estimatedMinutes: 40, authored: true, concept: { title: "Mechanism and outcomes of thrombosis", slug: "thrombosis-mechanism", summary: "Endothelial injury, stasis and hypercoagulability; the platelet and coagulation phases; and the four possible fates of a thrombus.", blooms: "analyze", minutes: 40, prereq: ["cell-injury"] }, content: lesson17() as never },
   { title: "Embolism: types & fates", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Types and fates of embolism", slug: "embolism-types", summary: "Venous, arterial, gas, fat, air, amniotic fluid and tumour emboli, and where each lodges.", blooms: "apply", minutes: 35, prereq: ["thrombosis-mechanism"] }, content: lesson7() as never },
   { title: "Infarction & ischaemia", module: 2, estimatedMinutes: 35, authored: true, concept: { title: "Infarction", slug: "infarction", summary: "The distinction between ischaemia and infarction, the red and pale infarcts, and the influence of collateral supply.", blooms: "apply", minutes: 35, prereq: ["embolism-types"] }, content: lesson8() as never },
   { title: "Disseminated intravascular coagulation", module: 2, estimatedMinutes: 30, authored: true, concept: { title: "Disseminated intravascular coagulation", slug: "dic", summary: "Widespread microvascular coagulation with consumption of platelets and factors, and the bleeding that follows.", blooms: "apply", minutes: 30, prereq: ["thrombosis-mechanism"] }, content: lesson9() as never },
