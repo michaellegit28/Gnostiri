@@ -227,6 +227,18 @@ const CATALOGUE = [
     name: "surface-offline",
     markers: [/Saved submissions|offline/i],
   },
+  // Remaining nav destinations (additive, agent-4): each must render live with
+  // no RSC digest / soft-404 (AGENTS.md rule 5). Text markers only where the
+  // signed-out heading is stable; otherwise the 200 + crash guards suffice.
+  { path: "/study", name: "surface-study", markers: [/lane/i] },
+  { path: "/tutor", name: "surface-tutor", markers: [/tutor/i] },
+  { path: "/pricing", name: "surface-pricing", markers: [/Premium/i] },
+  { path: "/battle-plan", name: "surface-battle-plan" },
+  { path: "/progress", name: "surface-progress" },
+  { path: "/desk", name: "surface-desk" },
+  { path: "/certificates", name: "surface-certificates" },
+  { path: "/library/credits", name: "surface-library-credits" },
+  { path: "/university/revision", name: "surface-revision" },
 
   // ── API probes ──────────────────────────────────────────────────────────
   {

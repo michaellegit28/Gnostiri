@@ -261,6 +261,15 @@ test("catalogue: the full priority surface is covered", () => {
     "/profile",
     "/settings",
     "/offline",
+    "/study",
+    "/tutor",
+    "/pricing",
+    "/battle-plan",
+    "/progress",
+    "/desk",
+    "/certificates",
+    "/library/credits",
+    "/university/revision",
   ];
   for (const path of required) {
     assert.ok(paths.has(path), `catalogue is missing ${path}`);

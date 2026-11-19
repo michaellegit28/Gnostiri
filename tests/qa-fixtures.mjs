@@ -174,6 +174,16 @@ const STATIC_PAGES = {
   "/profile": { status: 200, contentType: "text/html", body: "NEXT_REDIRECT /login" }, // streamed redirect form
   "/settings": "Appearance",
   "/offline": "Saved submissions · offline",
+  // remaining nav destinations
+  "/study": "lane",
+  "/tutor": "tutor",
+  "/pricing": "Premium",
+  "/battle-plan": "plan",
+  "/progress": "progress",
+  "/desk": "desk",
+  "/certificates": "certificates",
+  "/library/credits": "credits",
+  "/university/revision": "revision",
 };
 
 export const DEFAULT_BOARDS = [
