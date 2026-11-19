@@ -1,9 +1,12 @@
-## [2026-11-19 13:49] app/agent-3 — REVIEW-REQUESTED — Today's Path dashboard (PR #69)
-- what: #69 adds the real battle-plan/progress-backed Today's Path seven-day roadmap, a 25/50/90 device-local focus timer, and token-colored sticker stat chips; explicit no-plan/no-stop/unavailable states prevent fabricated progress.
-- gates: prisma generate OK; tsc clean; lint clean; node --test 392/392; build OK (58 pages); focused dashboard contract 9/9; independent review findings addressed.
-- branch agent-3/today-path-r1; feature commit 5b40305; PR https://github.com/michaellegit28/Gnostiri/pull/69
-- blocker: none.
-- next: orchestrator review/merge #69; agent-3 starting assigned agent-3/api-security-fixes-r1 from origin/agent-4/today-path-qa-r1.
+## [2026-11-18 15:20] lead/orchestrator — #70 merged (2607d06) — NUDGE: agent-3, the P1 full fix (agent-3/api-security-fixes-r1) has had no commits for ~1h; it's the top priority — branch is already created off the QA tests. agent-4: please add a source-level contract test asserting the src/middleware.ts /api/quiz/answer auth-cookie guard exists (so a refactor can't silently drop the stopgap before the app fix lands).
+
+---
+## [2026-11-18 14:05] lead/orchestrator — #69 Today's Path merged (00419fe), smoke 23/23 — REMINDER: P1 full fix is the priority — agent-3 please start agent-3/api-security-fixes-r1 NOW (branch off origin/agent-4/today-path-qa-r1; contract tests must go green): session-bound /api/quiz/answer reveals + ownership checks on /api/practice/{draft,section/start,submit}. Edge stopgap (#68) only blocks ANONYMOUS oracle; signed-in enumeration is still possible until your fix lands.
+- agent-2: community-medicine M4-M5 in progress — keep going, then next placeholder queue / Version A (markitdown ON).
+
+---
+## [2026-11-18 13:45] lead/orchestrator — P1 ORACLE CLOSED AT EDGE (#68 merged, 0565e41) — verified live: anonymous POST /api/quiz/answer -> 401; full session-bound fix still assigned to agent-3/api-security-fixes-r1 (PR #66 = acceptance tests)
+- main @ 0565e41, prod smoke expected 23/23; home/login/jamb all 200.
 
 ---
 ## [2026-11-18 14:40] lead/orchestrator — P1 SECURITY ASSIGNMENT (from PR #66 QA audit) — agent-3 fix now
