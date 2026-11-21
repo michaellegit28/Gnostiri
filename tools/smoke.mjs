@@ -193,6 +193,29 @@ const CATALOGUE = [
     api: { booleanField: "healthy", textMatches: [/"healthy"\s*:\s*true/] },
   },
 
+  // ── App-shell surfaces (agent-4, additive): every nav destination must
+  //    render live with no RSC digest / soft-404 (AGENTS.md rule 5). Text markers
+  //    only where the signed-out heading is stable; otherwise 200 + crash guards.
+  { path: "/league", name: "surface-league", markers: [/cup/i] },
+  { path: "/library", name: "surface-library", markers: [/cohort studied/i] },
+  { path: "/notifications", name: "surface-notifications", markers: [/Enter Gnostiri first|notif/i] },
+  { // anonymous visitors are redirected to /login (streamed as NEXT_REDIRECT)
+    path: "/profile",
+    name: "surface-profile",
+    expectRedirect: "/login",
+  },
+  { path: "/settings", name: "surface-settings", markers: [/Appearance/i] },
+  { path: "/offline", name: "surface-offline", markers: [/Saved submissions|offline/i] },
+  { path: "/study", name: "surface-study", markers: [/lane/i] },
+  { path: "/tutor", name: "surface-tutor", markers: [/tutor/i] },
+  { path: "/pricing", name: "surface-pricing", markers: [/Premium/i] },
+  { path: "/battle-plan", name: "surface-battle-plan" },
+  { path: "/progress", name: "surface-progress" },
+  { path: "/desk", name: "surface-desk" },
+  { path: "/certificates", name: "surface-certificates" },
+  { path: "/library/credits", name: "surface-library-credits" },
+  { path: "/university/revision", name: "surface-revision" },
+
   // ── API probes ──────────────────────────────────────────────────────────
   {
     // Board-tagged questions for the flagship JAMB physics topic. This probe
@@ -295,18 +318,28 @@ async function probeHtml(entry) {
     return { entry, failures, notes, ms };
   }
 
-  // Handle redirect expectations
+  // Handle redirect expectations. Two forms are valid:
+  //   - a real 3xx with a Location header (route handlers, middleware)
+  //   - a 200 shell whose RSC flight payload carries NEXT_REDIRECT (force-dynamic
+  //     pages that call redirect() during streaming, e.g. /profile signed-out)
   if (entry.expectRedirect) {
-    if (res.status < 300 || res.status >= 400) {
-      failures.push(`expected redirect (3xx), got status ${res.status}`);
-    } else {
+    const expected = entry.expectRedirect;
+    if (res.status >= 300 && res.status < 400) {
       const location = res.headers.get("location") ?? "";
-      const expected = entry.expectRedirect;
       if (!location.includes(expected)) {
         failures.push(`redirect location "${location}" does not contain expected "${expected}"`);
       } else {
         notes.push(`redirect → ${location}`);
       }
+    } else if (res.status === 200) {
+      const body = await res.text();
+      if (/NEXT_REDIRECT/.test(body) && body.includes(expected)) {
+        notes.push(`redirect → ${expected} (streamed NEXT_REDIRECT)`);
+      } else {
+        failures.push(`expected a redirect to ${expected} (3xx header or streamed NEXT_REDIRECT), got status ${res.status} with no such marker`);
+      }
+    } else {
+      failures.push(`expected redirect (3xx) to ${expected}, got status ${res.status}`);
     }
     return { entry, failures, notes, ms };
   }

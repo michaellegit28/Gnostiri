@@ -254,6 +254,10 @@ test("catalogue: the full priority surface is covered", () => {
     "/api/health/auth",
     "/api/questions?boardId=jamb&topicId=jamb-physics-motion-and-kinematics",
     "/api/boards",
+    // app-shell surfaces (agent-4): every nav destination must be smoke-probed
+    "/league","/library","/notifications","/profile","/settings","/offline",
+    "/study","/tutor","/pricing","/battle-plan","/progress","/desk",
+    "/certificates","/library/credits","/university/revision",
   ];
   for (const path of required) {
     assert.ok(paths.has(path), `catalogue is missing ${path}`);
