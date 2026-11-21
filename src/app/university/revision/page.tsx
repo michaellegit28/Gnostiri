@@ -1,3 +1,4 @@
+import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { getDueConcepts } from "@/lib/spaced-repetition";
 import RevisionQueue from "@/components/university/RevisionQueue";
@@ -13,7 +14,19 @@ export const metadata = {
 
 export default async function RevisionPage() {
   const user = await getCurrentUser();
-  const due = user ? await getDueConcepts(user.id, 20) : [];
+  let srsEnabled = false;
+  if (user) {
+    try {
+      const preferences = await prisma.userPreference.findUnique({
+        where: { userId: user.id },
+        select: { srsEnabled: true },
+      });
+      srsEnabled = preferences?.srsEnabled ?? true;
+    } catch {
+      srsEnabled = true;
+    }
+  }
+  const due = user && srsEnabled ? await getDueConcepts(user.id, 20) : [];
 
   return (
     <main className="min-h-screen bg-transparent text-slate-100">
@@ -48,16 +61,27 @@ export default async function RevisionPage() {
             <Sparkles className="w-8 h-8 text-gold mx-auto" />
             <h2 className="font-serif text-2xl font-bold">Nothing due right now</h2>
             <p className="text-slate-400 text-sm max-w-xl mx-auto">
-              {user
-                ? "Study a course and its concepts will appear here on their schedule. Mastery is earned by demonstrating a concept under exam conditions — twice, on separate days."
-                : "Sign in and study a course; the scheduler begins tracking each concept&apos;s forgetting curve the moment you touch it."}
+              {user && !srsEnabled
+                ? "Spaced repetition is off, so due concepts stay out of this queue."
+                : user
+                  ? "Study a course and its concepts will appear here on their schedule. Mastery is earned by demonstrating a concept under exam conditions — twice, on separate days."
+                  : "Sign in and study a course; the scheduler begins tracking each concept&apos;s forgetting curve the moment you touch it."}
             </p>
-            <Link
-              href="/university"
-              className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-            >
-              Browse the courses
-            </Link>
+            {user && !srsEnabled ? (
+              <Link
+                href="/settings"
+                className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                Review settings
+              </Link>
+            ) : (
+              <Link
+                href="/university"
+                className="inline-flex min-h-[44px] items-center rounded-xl border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              >
+                Browse the courses
+              </Link>
+            )}
           </div>
         ) : (
           <RevisionQueue due={due} />
