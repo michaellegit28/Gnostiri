@@ -61,9 +61,9 @@ export interface LeagueEligibility {
 
 /**
  * Create-cup eligibility: Prime for >= 4 consecutive months AND subject
- * mastery >= 60% AND demonstrated accuracy >= 85% across at least three
- * completed assessments. All three conditions are checked server-side at
- * creation time — a client flag is never trusted.
+ * mastery >= 60% AND demonstrated accuracy >= 85% AND no upheld content
+ * reports in the last 90 days. All four conditions are checked server-side
+ * at creation time — a client flag is never trusted.
  */
 export async function evaluateLeagueEligibility(userId: string): Promise<LeagueEligibility> {
   const reasons: string[] = [];
@@ -105,6 +105,11 @@ export async function evaluateLeagueEligibility(userId: string): Promise<LeagueE
       : 0;
   if (sessions.length < 3) reasons.push("At least 3 completed assessments are required.");
   else if (accuracy < 0.85) reasons.push(`Assessment accuracy ${Math.round(accuracy * 100)}% — 85% required.`);
+
+  const upheld = await prisma.contentReport.count({
+    where: { reporterId: userId, status: "fixed", createdAt: { gte: new Date(Date.now() - 90 * 864e5) } },
+  });
+  if (upheld > 0) reasons.push("An upheld content report in the last 90 days blocks hosting.");
 
   return { eligible: reasons.length === 0, reasons, tenureMonths, mastery, accuracy };
 }

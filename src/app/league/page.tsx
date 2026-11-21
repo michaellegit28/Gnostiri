@@ -84,7 +84,7 @@ function EligibilityPanel({ eligibility }: { eligibility: LeagueEligibility }) {
         <h2 className="font-serif text-xl font-bold text-slate-100">Create-cup eligibility</h2>
       </div>
       <p className="mt-1 text-sm text-slate-400">
-        Host your own cup: four Prime months, 60% mastery and 85% accuracy across at least three completed assessments.
+        Host your own cup: four Prime months, 60% mastery and 85% accuracy with a clean record.
       </p>
 
       <div className="mt-5 space-y-4">
