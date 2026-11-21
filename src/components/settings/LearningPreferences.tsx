@@ -131,7 +131,7 @@ export default function LearningPreferences({
             ))}
           </select>
           <span className="mt-2 block text-xs font-normal text-muted">
-            This also selects the country used for curriculum alignment and localized billing.
+            This also selects the country used for localized billing.
           </span>
         </label>
 
