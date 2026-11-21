@@ -778,3 +778,15 @@ Firebase — the seam swap covered the whole app.
 - **smoke merge gate**: tools/smoke.mjs with SMOKE_GATE=1 adds the three gate scenarios; (b)/(c)
   auth via SMOKE_* env vars only (never committed). Verified live: 23/23 + gate(a) pass, (b)/(c)
   SKIP without creds.
+
+## Phase 8f infra (2026-11-18, A1)
+
+- `UserPreference` model (migration `20261118190000_user_preferences`): country, examStandard
+  (GSE subtitle, e.g. jamb-standard), dailyGoalMinutes, srsEnabled, analyticsOptOut — server-stored
+  for signed-in users; signed-out keeps device-local prefs. Drives the /settings hub and the
+  board-first download picker.
+- Gating decisions locked (owner): downloads = premium-only, UNLIMITED (caps removed; Download rows
+  are audit only); downloads visible in Library -> "Saved downloads", offline-capable. University
+  naming = "Year N · Semester M" with course codes (ANAT 201…), faculty-first catalog at /university.
+- Phase-8 schema from #72 (Subscription.plan/addons/currency, AnalyticsEvent, Download,
+  ContentRequest) + this migration are BOTH pending owner paste into the Supabase SQL editor.
