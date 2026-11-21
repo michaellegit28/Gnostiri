@@ -80,9 +80,9 @@ export async function GET(req: NextRequest) {
 }
 
 /**
- * POST /api/competitions — host a new cup. Auth required; the four create-cup
- * gates (Prime tenure + mastery + accuracy + clean record) are re-run
- * SERVER-SIDE here — a client flag is never trusted (ROADMAP.md §3).
+ * POST /api/competitions — host a new cup. Auth required; the three create-cup
+ * gates (Prime tenure + mastery + accuracy) are re-run SERVER-SIDE here — a
+ * client flag is never trusted (ROADMAP.md §3).
  */
 export async function POST(req: NextRequest) {
   const user = await getCurrentUser();
