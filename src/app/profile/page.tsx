@@ -88,7 +88,7 @@ export default async function ProfilePage() {
           { href: "/university/revision", label: "Revision Queue", note: "Concepts due for review", Icon: RotateCcw },
           { href: "/library/credits", label: "Credits & badges", note: "Full reward ledger", Icon: Coins },
           { href: "/notifications", label: "Notifications", note: "Feed and delivery preferences", Icon: Trophy },
-          { href: "/settings", label: "Appearance & accessibility", note: "Background, motion, contrast", Icon: Settings },
+          { href: "/settings", label: "Settings", note: "Learning goals, sync, appearance", Icon: Settings },
         ].map(({ href, label, note, Icon }) => (
           <Link
             key={href}

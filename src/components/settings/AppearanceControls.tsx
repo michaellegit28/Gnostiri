@@ -38,7 +38,7 @@ export default function AppearanceControls() {
     <div className="space-y-5">
       <div className="gn-shadow flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
         <div>
-          <h2 className="font-semibold text-slate-100">Colour theme</h2>
+          <h3 className="font-semibold text-slate-100">Colour theme</h3>
           <p className="mt-1 max-w-md text-sm text-muted">
             Dark by default. Light mode uses the same refined palette — every surface passes contrast in both.
           </p>
@@ -58,7 +58,7 @@ export default function AppearanceControls() {
         onChange={toggleReduced}
       />
       <div className="gn-shadow rounded-2xl border border-line bg-surface/40 p-5">
-        <h2 className="font-semibold text-slate-100">Text-only Lite Mode</h2>
+        <h3 className="font-semibold text-slate-100">Text-only Lite Mode</h3>
         <p className="mt-1 text-sm text-muted">Hides diagrams and heavy media for slow connections and data-saving.</p>
         <div className="mt-4">
           <LiteModeToggle />
@@ -82,7 +82,7 @@ function Toggle({
   return (
     <div className="flex items-start justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
       <div>
-        <h2 className="font-semibold text-slate-100">{label}</h2>
+        <h3 className="font-semibold text-slate-100">{label}</h3>
         <p className="mt-1 max-w-md text-sm text-muted">{note}</p>
       </div>
       <button
