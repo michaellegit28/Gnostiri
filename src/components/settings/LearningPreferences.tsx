@@ -4,22 +4,32 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   DEFAULT_USER_PREFERENCES,
-  EXAM_STANDARDS,
   PREFERENCE_COUNTRIES,
+  userPreferenceSchema,
   type UserPreferenceInput,
 } from "@/lib/user-preferences";
 
 export default function LearningPreferences({
   initial,
   authenticated,
+  available,
 }: {
   initial: UserPreferenceInput;
   authenticated: boolean;
+  available: boolean;
 }) {
   const [preferences, setPreferences] = useState(initial);
+  const [dirty, setDirty] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+
+  function update(next: UserPreferenceInput) {
+    setPreferences(next);
+    setDirty(true);
+    setMessage("");
+    setError("");
+  }
 
   async function save() {
     setBusy(true);
@@ -33,9 +43,20 @@ export default function LearningPreferences({
       });
       const data = await response.json().catch(() => null);
       if (!response.ok || !data?.preferences) {
-        throw new Error(data?.error || "Could not save preferences");
+        const issues = Array.isArray(data?.issues)
+          ? data.issues
+              .map((issue: { path?: string; message?: string }) =>
+                issue.path ? `${issue.path}: ${issue.message}` : issue.message
+              )
+              .filter(Boolean)
+              .join(" ")
+          : "";
+        throw new Error(issues || data?.error || "Could not save preferences");
       }
-      setPreferences(data.preferences);
+      const parsed = userPreferenceSchema.safeParse(data.preferences);
+      if (!parsed.success) throw new Error("The server returned invalid preferences");
+      setPreferences(parsed.data);
+      setDirty(false);
       setMessage("Saved. These settings now follow you across devices.");
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : "Could not save preferences");
@@ -49,8 +70,8 @@ export default function LearningPreferences({
       <section className="gn-shadow rounded-2xl border border-line bg-surface/40 p-5 md:p-6">
         <h2 className="font-semibold text-ink">Learning preferences</h2>
         <p className="mt-2 max-w-2xl text-sm text-muted">
-          Sign in to keep your country, exam standard, daily goal, review queue, and analytics choice in sync
-          across devices. Appearance controls below always remain available on this device.
+          Sign in to keep your country and review-queue choice in sync across devices. Appearance controls
+          below always remain available on this device.
         </p>
         <Link
           href="/login"
@@ -73,23 +94,32 @@ export default function LearningPreferences({
         </div>
         <button
           type="button"
-          onClick={() => setPreferences(DEFAULT_USER_PREFERENCES)}
-          className="min-h-[44px] rounded-xl border border-line-strong px-4 text-sm font-semibold text-muted transition-colors hover:border-primary/50 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          onClick={() => update({ ...DEFAULT_USER_PREFERENCES })}
+          disabled={busy || !available}
+          className="min-h-[44px] rounded-xl border border-line-strong px-4 text-sm font-semibold text-muted transition-colors hover:border-primary/50 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
         >
           Reset defaults
         </button>
       </div>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <label className="text-sm font-semibold text-slate-200">
+      {!available ? (
+        <p role="alert" className="mt-5 rounded-xl border border-warning/40 bg-warning/10 px-4 py-3 text-sm text-amber-200">
+          Synced preferences are temporarily unavailable. Your existing account data is unchanged.
+        </p>
+      ) : null}
+
+      <fieldset disabled={busy || !available} className="mt-6 space-y-5 disabled:opacity-60">
+        <label className="block text-sm font-semibold text-slate-200">
           Study country
           <select
             value={preferences.country ?? ""}
             onChange={(event) =>
-              setPreferences((current) => ({
-                ...current,
-                country: event.target.value ? (event.target.value as UserPreferenceInput["country"]) : null,
-              }))
+              update({
+                ...preferences,
+                country: event.target.value
+                  ? (event.target.value as UserPreferenceInput["country"])
+                  : null,
+              })
             }
             className="mt-2 min-h-[44px] w-full rounded-xl border border-line bg-bg px-3 font-normal text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
@@ -100,77 +130,25 @@ export default function LearningPreferences({
               </option>
             ))}
           </select>
+          <span className="mt-2 block text-xs font-normal text-muted">
+            This also selects the country used for curriculum alignment and localized billing.
+          </span>
         </label>
 
-        <label className="text-sm font-semibold text-slate-200">
-          Exam standard
-          <select
-            value={preferences.examStandard ?? ""}
-            onChange={(event) =>
-              setPreferences((current) => ({
-                ...current,
-                examStandard: event.target.value
-                  ? (event.target.value as UserPreferenceInput["examStandard"])
-                  : null,
-              }))
-            }
-            className="mt-2 min-h-[44px] w-full rounded-xl border border-line bg-bg px-3 font-normal text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            <option value="">Not set</option>
-            {EXAM_STANDARDS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <label className="mt-5 block text-sm font-semibold text-slate-200">
-        Daily study goal
-        <span className="ml-2 font-normal text-muted">minutes per day</span>
-        <input
-          type="number"
-          min={10}
-          max={180}
-          step={5}
-          value={preferences.dailyGoalMinutes}
-          onChange={(event) => {
-            const value = Number(event.target.value);
-            setPreferences((current) => ({
-              ...current,
-              dailyGoalMinutes: Number.isFinite(value) ? Math.min(180, Math.max(10, value)) : 10,
-            }));
-          }}
-          className="mt-2 min-h-[44px] w-full rounded-xl border border-line bg-bg px-3 font-normal text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        />
-      </label>
-
-      <div className="mt-5 space-y-3">
         <PreferenceToggle
           label="Spaced-repetition review queue"
-          note="Use scheduled concept reviews to choose what comes next."
+          note="When off, concepts that are due for review stay out of the revision queue."
           checked={preferences.srsEnabled}
-          onChange={(checked) =>
-            setPreferences((current) => ({ ...current, srsEnabled: checked }))
-          }
+          onChange={(checked) => update({ ...preferences, srsEnabled: checked })}
         />
-        <PreferenceToggle
-          label="Product analytics"
-          note="Turn off collection of product usage events. Learning progress still works."
-          checked={!preferences.analyticsOptOut}
-          onChange={(checked) =>
-            setPreferences((current) => ({ ...current, analyticsOptOut: !checked }))
-          }
-        />
-      </div>
+      </fieldset>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <button
           type="button"
           onClick={() => void save()}
-          disabled={busy}
-          className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-wait disabled:opacity-60"
+          disabled={busy || !available || !dirty}
+          className="gn-motion inline-flex min-h-[44px] items-center justify-center rounded-xl bg-primary px-6 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Saving…" : "Save preferences"}
         </button>

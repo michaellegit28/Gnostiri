@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { getDueConcepts } from "@/lib/spaced-repetition";
 
@@ -12,6 +13,16 @@ export async function GET(req: NextRequest) {
   const user = await getCurrentUser();
   if (!user) return NextResponse.json({ error: "Authentication required" }, { status: 401 });
   const limit = Math.min(50, Math.max(1, Number(req.nextUrl.searchParams.get("limit") || 20)));
-  const due = await getDueConcepts(user.id, limit);
-  return NextResponse.json({ due, count: due.length });
+  let srsEnabled = true;
+  try {
+    const preferences = await prisma.userPreference.findUnique({
+      where: { userId: user.id },
+      select: { srsEnabled: true },
+    });
+    srsEnabled = preferences?.srsEnabled ?? true;
+  } catch {
+    srsEnabled = true;
+  }
+  const due = srsEnabled ? await getDueConcepts(user.id, limit) : [];
+  return NextResponse.json({ due, count: due.length, enabled: srsEnabled });
 }

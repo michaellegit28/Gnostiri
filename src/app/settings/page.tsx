@@ -5,7 +5,7 @@ import AppearanceControls from "@/components/settings/AppearanceControls";
 import LearningPreferences from "@/components/settings/LearningPreferences";
 import {
   DEFAULT_USER_PREFERENCES,
-  PREFERENCE_COUNTRY_CODES,
+  normalizeUserPreferences,
   type UserPreferenceInput,
 } from "@/lib/user-preferences";
 
@@ -16,6 +16,7 @@ export const metadata = { title: "Learning & accessibility — Gnostiri" };
 export default async function SettingsPage() {
   const user = await getCurrentUser();
   let preferences: UserPreferenceInput = { ...DEFAULT_USER_PREFERENCES };
+  let preferencesAvailable = !user;
 
   if (user) {
     try {
@@ -29,22 +30,10 @@ export default async function SettingsPage() {
           analyticsOptOut: true,
         },
       });
-      if (saved) {
-        preferences = {
-          country:
-            saved.country && PREFERENCE_COUNTRY_CODES.includes(saved.country as (typeof PREFERENCE_COUNTRY_CODES)[number])
-              ? (saved.country as (typeof PREFERENCE_COUNTRY_CODES)[number])
-              : null,
-          examStandard: saved.examStandard === "jamb-standard" || saved.examStandard === "sat-standard" ? saved.examStandard : null,
-          dailyGoalMinutes: saved.dailyGoalMinutes,
-          srsEnabled: saved.srsEnabled,
-          analyticsOptOut: saved.analyticsOptOut,
-        };
-      } else if (user.country && PREFERENCE_COUNTRY_CODES.includes(user.country as (typeof PREFERENCE_COUNTRY_CODES)[number])) {
-        preferences.country = user.country as (typeof PREFERENCE_COUNTRY_CODES)[number];
-      }
+      preferences = normalizeUserPreferences(saved ?? DEFAULT_USER_PREFERENCES, user.country);
+      preferencesAvailable = true;
     } catch {
-      preferences = { ...DEFAULT_USER_PREFERENCES };
+      preferencesAvailable = false;
     }
   }
 
@@ -57,7 +46,11 @@ export default async function SettingsPage() {
         Gnostiri is built to be usable with a keyboard, a screen reader, or a slow connection.
       </p>
       <div className="mt-8 space-y-8">
-        <LearningPreferences initial={preferences} authenticated={Boolean(user)} />
+        <LearningPreferences
+          initial={preferences}
+          authenticated={Boolean(user)}
+          available={preferencesAvailable}
+        />
         <section aria-labelledby="appearance-settings">
           <h2 id="appearance-settings" className="font-serif text-xl font-bold text-ink">
             Appearance & accessibility

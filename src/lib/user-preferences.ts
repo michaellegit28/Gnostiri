@@ -69,8 +69,25 @@ export type UserPreferenceInput = z.infer<typeof userPreferenceSchema>;
 
 export const DEFAULT_USER_PREFERENCES: UserPreferenceInput = {
   country: null,
-  examStandard: "jamb-standard",
+  examStandard: null,
   dailyGoalMinutes: 20,
   srsEnabled: true,
   analyticsOptOut: false,
 };
+
+export function normalizeUserPreferences(
+  value: unknown,
+  fallbackCountry: string | null = null
+): UserPreferenceInput {
+  const parsed = userPreferenceSchema.safeParse(value);
+  const normalizedFallback = fallbackCountry?.toUpperCase() ?? null;
+  const country = PREFERENCE_COUNTRY_CODES.includes(
+    normalizedFallback as (typeof PREFERENCE_COUNTRY_CODES)[number]
+  )
+    ? (normalizedFallback as (typeof PREFERENCE_COUNTRY_CODES)[number])
+    : null;
+  return {
+    ...(parsed.success ? parsed.data : DEFAULT_USER_PREFERENCES),
+    country,
+  };
+}
