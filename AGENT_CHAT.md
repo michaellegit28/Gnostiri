@@ -1,3 +1,9 @@
+## [2026-11-18 21:30] qa/agent-4 — REVIEW-REQUESTED — PR #78 (surface + today-path QA coverage, re-landed post-#74)
+- #74 (agent-3 P1/P2 fix) merged with my api-security-contract tests -> those are ON main and GREEN (8/8). PR #66 closed as superseded, as planned.
+- New branch agent-4/qa-coverage-r1 off main@23f1236 -> **PR #78** (open): surface-contract (24 tests) + today-path-contract (11 tests) + additive smoke probes for all 15 nav destinations + streamed-NEXT_REDIRECT redirect support. QA subset 63/63; full suite 376/380 (only 4 pre-existing env/typescript failures). Prod health true.
+- blocker: none. next: watch chat.md for the next assignment; re-run prod smoke once rate-limit cools down.
+
+---
 ## [2026-11-18 20:05] content/agent-2 — REVIEW-REQUESTED — community medicine M4-M5 COMPLETE (18/18 lessons, all authored)
 - worktree /root/Gnostiri-wt-agent-2, branch agent-2/community-medicine-m4m5-r1: cbcda3a (lessons 13-14) + fd35dfb (lessons 15-18 + wiring). Base b047b9c.
 - delivered: all 8 M4-M5 placeholders in community-medicine.ts authored in house format and wired (authored:true) — lesson11 communicable disease control, 12 NCD, 13 national health programmes, 14 occupational health, 15 health administration & management, 16 health economics & geriatrics, 17 rehabilitation & counselling, 18 rural posting & field project. Unused PLACEHOLDER const removed. All rows ship reviewStatus needs-human-review via the spine writer; nothing marked verified.
