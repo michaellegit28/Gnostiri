@@ -27,6 +27,7 @@ model User {
   createdAt      DateTime       @default(now())
 
   profile        Profile?
+  preference     UserPreference?
   subscriptions  Subscription[]
   quizAttempts   QuizAttempt[]
   progress       Progress[]
@@ -69,6 +70,20 @@ model Profile {
   streak        Int       @default(0)
   lastActive    DateTime  @default(now())
   preferredExam String?
+}
+
+// Phase 8f: server-stored user preferences (settings hub). Signed-out users keep
+// device-local prefs (existing pattern); these rows apply across devices.
+model UserPreference {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  country            String?  // ISO country the student studies for (drives currency + exam standard subtitle)
+  examStandard       String?  // e.g. 'jamb-standard' | 'sat-standard' — subtitle on the GSE exam, chosen at signup/first visit
+  dailyGoalMinutes   Int      @default(20)   // Today daily mission target
+  srsEnabled         Boolean  @default(true) // spaced-repetition review queue
+  analyticsOptOut    Boolean  @default(false)
+  updatedAt          DateTime @updatedAt
 }
 
 model Subscription {
