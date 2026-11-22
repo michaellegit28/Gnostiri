@@ -14,8 +14,14 @@ export async function trackAnalyticsEvent(
   if (type === "paywall_viewed") {
     const feature = typeof meta.feature === "string" ? meta.feature : "unknown";
     const key = `gnostiri:paywall:${feature}`;
-    if (window.sessionStorage.getItem(key)) return;
-    window.sessionStorage.setItem(key, "1");
+    let alreadySeen = false;
+    try {
+      alreadySeen = window.sessionStorage.getItem(key) === "1";
+      if (!alreadySeen) window.sessionStorage.setItem(key, "1");
+    } catch {
+      alreadySeen = false;
+    }
+    if (alreadySeen) return;
   }
   try {
     await fetch("/api/analytics", {

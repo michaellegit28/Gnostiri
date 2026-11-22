@@ -92,11 +92,17 @@ export function planPrice(
 ): { amount: number; currency: string; period: BillingPeriod } {
   const local = localPriceForCountry(country);
   const base =
-    plan === "highschool"
-      ? local.highSchoolMonthly
-      : plan === "university"
-        ? local.universityMonthly
-        : Math.round(PLANS[plan].monthlyUsd * 100);
+    plan === "free"
+      ? 0
+      : plan === "highschool"
+        ? local.highSchoolMonthly
+        : plan === "university"
+          ? local.universityMonthly
+          : Math.round(
+              PLANS[plan].monthlyUsd *
+                100 *
+                (local.highSchoolMonthly / (PLANS.highschool.monthlyUsd * 100))
+            );
   const multiplier = period === "annual" ? 10 : period === "term" ? 3 : 1;
   return { amount: base * multiplier, currency: local.currency, period };
 }
@@ -107,7 +113,12 @@ export function addonPrice(
   period: BillingPeriod = "monthly"
 ): { amount: number; currency: string; period: BillingPeriod } {
   const local = localPriceForCountry(country);
-  const base = Math.round(PLANS.highschool.monthlyUsd * ADDONS[addon].monthlyUsd * 100);
+  const base = Math.round(
+    PLANS.highschool.monthlyUsd *
+      ADDONS[addon].monthlyUsd *
+      100 *
+      (local.highSchoolMonthly / (PLANS.highschool.monthlyUsd * 100))
+  );
   const multiplier = period === "annual" ? 10 : period === "term" ? 3 : 1;
   return { amount: base * multiplier, currency: local.currency, period };
 }

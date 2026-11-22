@@ -60,7 +60,7 @@ export default function MiniQuizDemo() {
         body: JSON.stringify({ token, answer: picked }),
       });
       const data = await response.json().catch(() => null);
-      if (!response.ok || !data?.isCorrect) {
+      if (!response.ok || typeof data?.isCorrect !== "boolean") {
         throw new Error(data?.error || "Could not check the answer");
       }
       setResult(data);
