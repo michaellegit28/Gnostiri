@@ -11,6 +11,7 @@ import QuickLinks from "@/components/dashboard/QuickLinks";
 import RecentAchievements from "@/components/dashboard/RecentAchievements";
 import Landing from "@/components/landing/Landing";
 import { LogoMark } from "@/components/brand/Logo";
+import AnalyticsBeacon from "@/components/dashboard/AnalyticsBeacon";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +34,7 @@ export default async function Home() {
         <main className="mx-auto w-full max-w-4xl px-5 py-8 md:py-10">
           <section aria-label="Dashboard" className="space-y-8">
             <Greeting name={user.name} email={user.email} />
+            <AnalyticsBeacon type="mission_viewed" meta={{ source: "dashboard" }} />
             <div className="grid gap-6 lg:grid-cols-[1.45fr_0.75fr]">
               <BattlePlanHero userId={user.id} />
               <FocusTimer />

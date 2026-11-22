@@ -1,4 +1,5 @@
 import prisma from "@/lib/db";
+import { recordAnalyticsEvent } from "@/lib/analytics-server";
 
 export async function recordLearningActivity(userId: string) {
   const profile = await prisma.profile.findUnique({ where: { userId } });
@@ -8,4 +9,7 @@ export async function recordLearningActivity(userId: string) {
   const yesterday = new Date(now.getTime() - 86400000).toISOString().slice(0, 10);
   const streak = lastDay === today ? profile?.streak || 1 : lastDay === yesterday ? (profile?.streak || 0) + 1 : 1;
   await prisma.profile.upsert({ where: { userId }, update: { streak, lastActive: now }, create: { userId, streak, lastActive: now } });
+  if (profile && streak > profile.streak) {
+    await recordAnalyticsEvent(userId, "streak_incremented", { count: streak });
+  }
 }

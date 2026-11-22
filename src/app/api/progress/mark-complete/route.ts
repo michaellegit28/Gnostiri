@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { AppDomain } from "@prisma/client";
 import { getCurrentUser } from "@/lib/server-auth";
 import { recordLearningActivity } from "@/lib/activity";
+import { recordAnalyticsEvent } from "@/lib/analytics-server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -51,6 +52,9 @@ export async function POST(req: NextRequest) {
           lastStudied: new Date(),
         },
       });
+    }
+    if (existing?.status !== "completed") {
+      await recordAnalyticsEvent(user.id, "mission_completed", { kind: "topic", target: topicId });
     }
     await recordLearningActivity(user.id);
 

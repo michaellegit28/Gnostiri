@@ -11,6 +11,7 @@ import SyncIndicator from "@/components/offline/SyncIndicator";
 import AccretionEmblem from "@/components/brand/AccretionEmblem";
 import useDialogFocus from "@/components/ui/useDialogFocus";
 import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
+import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 /**
  * AppShell — one chrome for every device.
@@ -65,6 +66,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     const root = document.documentElement;
     if (localStorage.getItem("gnostiri.solid-bg") === "true") root.classList.add("solid-bg");
     if (localStorage.getItem("gnostiri.reduce-motion") === "true") root.classList.add("reduce-motion");
+  }, []);
+
+  useEffect(() => {
+    void trackAnalyticsEvent("session_start", { source: "app" });
   }, []);
 
   // The top bar hides on scroll-down and returns on scroll-up (never while an overlay is open).
