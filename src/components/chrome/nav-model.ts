@@ -125,6 +125,7 @@ export const NAV_ZONES: NavZone[] = [
     id: "membership",
     label: "Membership",
     items: [
+      { href: "/profile", label: "Profile", icon: GraduationCap, note: "Membership, credits and settings" },
       { href: "/pricing", label: "Gnostiri Prime", icon: Crown, note: "Every feature, one subscription" },
       { href: "/settings", label: "Settings", icon: Settings, note: "Appearance & accessibility" },
       { href: "/library/credits", label: "Credits & badges", icon: Coins, note: "Rewards earned in the Library" },
@@ -132,12 +133,13 @@ export const NAV_ZONES: NavZone[] = [
   },
 ];
 
-/** The four mobile bottom tabs — where a student lives. */
+/** The five mobile bottom tabs — where a student lives. */
 export const BOTTOM_TABS: NavItem[] = [
-  { href: "/", label: "Home", icon: Home, note: "Your dashboard" },
-  { href: "/study", label: "Study", icon: BookOpen, note: "University, High School, Discovery, Desk" },
+  { href: "/", label: "Today", icon: Home, note: "Your mission and progress" },
+  { href: "/study", label: "Study", icon: BookOpen, note: "Courses, high school, discovery, desk" },
+  { href: "/practice", label: "Practice", icon: ClipboardList, note: "Exams, CBT, downloads" },
   { href: "/league", label: "Compete", icon: Trophy, note: "Merit League and rankings" },
-  { href: "/profile", label: "Profile", icon: GraduationCap, note: "Membership and settings" },
+  { href: "/library", label: "Library", icon: Library, note: "Public resources and saved downloads" },
 ];
 
 export function isActive(pathname: string, href: string): boolean {
