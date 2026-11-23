@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import ContentReportTab from "@/components/ContentReportTab";
 import { enqueue } from "@/lib/offline-queue";
+import { trackAnalyticsEvent } from "@/lib/analytics-client";
 import {
   ChevronRight,
   CheckCircle2,
@@ -153,6 +154,7 @@ export default function QuizClient({
     if (!result.ok) throw new Error("Could not check this answer");
     const feedback = await result.json() as { isCorrect: boolean; correctAnswer: string; explanation?: string | null };
     const isCorrect = feedback.isCorrect;
+    void trackAnalyticsEvent("question_answered", { correct: isCorrect, kind: "mcq" });
     setActiveQuestions((items) => items.map((item, index) => index === currentIndex ? { ...item, correctAnswer: feedback.correctAnswer, explanation: feedback.explanation || undefined } : item));
     const record: UserAnswerRecord = {
       questionId: currentQuestion.id,

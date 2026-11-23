@@ -1,3 +1,11 @@
+## [2026-11-22 03:03] app/agent-3 — REVIEW-REQUESTED — Phase 8a five-tab IA + entitlement/analytics foundation (PR #83)
+- what: #83 adds the canonical five-tab mobile IA and /practice hub; plan/add-on catalog + localized prices + getEntitlements feature flags; /api/entitlements/me, /api/analytics, /api/downloads 402; six privacy-safe analytics event types; accretion-ring emblem and signed-session live quiz demo.
+- gates: prisma generate OK; tsc clean; lint clean; node --test tests/*.test.mjs 434/434; production build OK (58 pages); focused dashboard + surface contract suites pass.
+- branch agent-3/phase8a-r1; commits 4d6cfda/d5fc559/355fa77/36e6edb; PR https://github.com/michaellegit28/Gnostiri/pull/83
+- blocker: none. JAMB → GSE student-facing rename intentionally waits for owner confirmation of the final exam name; Phase 8 schema migrations remain owner-side.
+- next: orchestrator review/merge #83 on CI + SMOKE_GATE; agent-3 ready for Phase 8b downloads/requests on the new entitlement seam.
+
+---
 ## [2026-11-18 21:30] qa/agent-4 — REVIEW-REQUESTED — PR #78 (surface + today-path QA coverage, re-landed post-#74)
 - #74 (agent-3 P1/P2 fix) merged with my api-security-contract tests -> those are ON main and GREEN (8/8). PR #66 closed as superseded, as planned.
 - New branch agent-4/qa-coverage-r1 off main@23f1236 -> **PR #78** (open): surface-contract (24 tests) + today-path-contract (11 tests) + additive smoke probes for all 15 nav destinations + streamed-NEXT_REDIRECT redirect support. QA subset 63/63; full suite 376/380 (only 4 pre-existing env/typescript failures). Prod health true.

@@ -8,9 +8,10 @@ import NotificationBell from "@/components/notifications/NotificationBell";
 import ThemeToggle from "@/components/chrome/ThemeToggle";
 import PrimeBadge from "@/components/chrome/PrimeBadge";
 import SyncIndicator from "@/components/offline/SyncIndicator";
-import { LogoMark } from "@/components/brand/Logo";
+import AccretionEmblem from "@/components/brand/AccretionEmblem";
 import useDialogFocus from "@/components/ui/useDialogFocus";
 import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
+import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 /**
  * AppShell — one chrome for every device.
@@ -65,6 +66,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     const root = document.documentElement;
     if (localStorage.getItem("gnostiri.solid-bg") === "true") root.classList.add("solid-bg");
     if (localStorage.getItem("gnostiri.reduce-motion") === "true") root.classList.add("reduce-motion");
+  }, []);
+
+  useEffect(() => {
+    void trackAnalyticsEvent("session_start", { source: "app" });
   }, []);
 
   // The top bar hides on scroll-down and returns on scroll-up (never while an overlay is open).
@@ -124,7 +129,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           <Menu className="h-5 w-5" aria-hidden />
         </button>
         <Link href="/" className="flex items-center gap-2 rounded-lg px-1 focus:outline-none">
-          <LogoMark size={22} />
+          <AccretionEmblem size={24} />
           <span className="font-serif text-lg font-bold tracking-tight text-ink">
             Gnostiri
           </span>

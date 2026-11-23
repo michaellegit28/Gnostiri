@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BookOpen, GraduationCap, Trophy, Sparkles, FileText, Library, Award } from "lucide-react";
-import { LogoMark } from "@/components/brand/Logo";
 import HeroVisual from "@/components/brand/HeroVisual";
+import MiniQuizDemo from "@/components/landing/MiniQuizDemo";
 
 /**
  * The signed-out home. One job: say what Gnostiri is — a global learning and
@@ -32,6 +32,15 @@ export default function Landing() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="grid items-center gap-12 pb-2 pt-10 md:grid-cols-[1.08fr_0.92fr] md:gap-16 md:pt-16">
         <div>
+          <div className="mb-8 flex items-center gap-4">
+            <div className="h-16 w-16">
+              <HeroVisual />
+            </div>
+            <div>
+              <p className="font-serif text-xl font-bold text-ink">Gnostiri</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-muted">Focus · progress · proof</p>
+            </div>
+          </div>
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-electric-text">A global learning ecosystem</p>
           <h1 className="mt-5 max-w-3xl font-serif text-5xl font-bold leading-[1.02] tracking-tight text-ink md:text-7xl">
             Learn anything. Prove everything. One platform.
@@ -64,13 +73,7 @@ export default function Landing() {
             ))}
           </dl>
         </div>
-        <div className="rounded-[2rem] border border-line bg-surface p-5 shadow-sm md:p-8">
-          <div className="mb-5 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-            <span>Progress is built</span>
-            <span className="text-electric-text">One level at a time</span>
-          </div>
-          <HeroVisual />
-        </div>
+        <MiniQuizDemo />
       </section>
 
       {/* ── The six pillars ──────────────────────────────────────────────── */}
