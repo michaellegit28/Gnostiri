@@ -1,12 +1,18 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["AGENTS.md"],
-  "experimental": { "mcp_timeout": 60000 },
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "experimental": {
+    "mcp_timeout": 60000
+  },
   "mcp": {
     "github": {
       "type": "remote",
       "url": "https://api.githubcopilot.com/mcp/",
-      "headers": { "Authorization": "Bearer {env:GITHUB_TOKEN}" }
+      "headers": {
+        "Authorization": "Bearer {env:GITHUB_TOKEN}"
+      }
     },
     "vercel": {
       "type": "remote",
@@ -19,24 +25,58 @@
     },
     "postgres": {
       "type": "local",
-      "command": ["sh", "-c", "exec npx -y @modelcontextprotocol/server-postgres \"$DATABASE_URL\""]
+      "command": [
+        "sh",
+        "-c",
+        "exec npx -y @modelcontextprotocol/server-postgres \"$DATABASE_URL\""
+      ]
     },
     "playwright": {
       "type": "local",
-      "command": ["npx", "-y", "@playwright/mcp@latest"]
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest"
+      ]
     },
     "sequential-thinking": {
       "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-sequential-thinking"]
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
     },
     "memory": {
       "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
     },
     "markitdown": {
       "type": "local",
-      "command": ["/root/mcp-venvs/markitdown/bin/python3", "-m", "markitdown_mcp"],
+      "command": [
+        "/root/mcp-venvs/markitdown/bin/python3",
+        "-m",
+        "markitdown_mcp"
+      ],
       "enabled": true
+    },
+    "supabase": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref=djkdszhhajsakwpxaznu",
+        "--read-only"
+      ],
+      "environment": {
+        "SUPABASE_ACCESS_TOKEN": "{env:SUPABASE_ACCESS_TOKEN}"
+      },
+      "enabled": false
     }
   }
 }
