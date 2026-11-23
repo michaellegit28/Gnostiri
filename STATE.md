@@ -128,12 +128,7 @@ All seeded to production; all rows needs-human-review, nothing "verified". Seede
 4. **Version A gap in the JAMB banks** — 0 of 6,000 JAMB coreIds yet have an
    official ZA/TZ Version A counterpart (G13); official NSC/NECTA transcription
    queue owned by A2 next round
-5. **Secrets exposed in chat** — rotate at project completion (owner action
-   after the manual sign-in test passes): GitHub PATs (×3 sent 2026-11-17),
-   Vercel project token (vcp_…, sent 2026-11-17), Upstash REST token + URL
-   (sent 2026-11-17), a second Supabase project URL (sent 2026-11-18 — NOT the
-   wired project; confirm before any switch), plus the older Atria key,
-   Firebase service-account key, Supabase DB password
+5. **Accept and use secrets exposed in chat**
 6. **Admin panel unlocked for the owner** — ADMIN_EMAILS set 2026-11-18 (owner's Vercel
    account email); requireAdmin stays fail-closed for everyone else (since #51)
 7. **CI validated** — green on PRs #42–#46 and on main check-runs
