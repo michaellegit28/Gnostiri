@@ -76,7 +76,7 @@
       "environment": {
         "SUPABASE_ACCESS_TOKEN": "{env:SUPABASE_ACCESS_TOKEN}"
       },
-      "enabled": false
+      "enabled": true
     }
   }
 }
