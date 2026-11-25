@@ -797,7 +797,7 @@ contradicted it (`db-lane.md`, `audit-lane.md`, `.opencode/skills/prisma-supabas
   `~/.zshrc` / `~/.profile` — those files do not exist on the Termux/Android box the project also
   runs from, so any command needing `DATABASE_URL` must source `.env` explicitly
   (`set -a; . ./.env; set +a` in a `sh -c` wrapper).
-- **DB access goes through the Prisma CLI, not a Postgres MCP server** (new AGENTS.md rule 7).
+- **DB access goes through the Prisma CLI, not a Postgres MCP server** (new AGENTS.md rule 8).
   The previously-documented `postgres` MCP (`@modelcontextprotocol/server-postgres`, then
   `mcp-postgres-server`) is deliberately **not** configured. It never worked reliably here — it was
   started with an empty `$DATABASE_URL` because the shell has no env exports on this box, and it
