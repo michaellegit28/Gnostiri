@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { bracketSubmit } from "@/lib/competition-additions";
+import { recordLearningActivity } from "@/lib/activity";
 
 export const dynamic = "force-dynamic";
 
@@ -66,6 +67,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 
   try {
     const result = await bracketSubmit(prisma, competition, members, member, parsed);
+    await recordLearningActivity(user.id);
     return NextResponse.json(result, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "This round could not be scored";

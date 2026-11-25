@@ -197,7 +197,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
         <section aria-label="Quiz" className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
           <h2 className="font-bold">Quiz <span className="text-[11px] font-normal text-slate-400">· real past questions only</span></h2>
           {topic._count.questions > 0 && (
-            <Link href={`/highschool/study/${subjectParam}/${topicParam}/quiz`} className="mt-2 inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm">
+            <Link href={`/highschool/study/${subjectParam}/${topicParam}/quiz`} className="mt-2 inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-gold text-on-gold font-semibold text-sm">
               Take the {topic.title} quiz ({topic._count.questions} questions) →
             </Link>
           )}
@@ -263,7 +263,7 @@ export default async function TopicPage({ params, searchParams }: { params: { su
             </Link>
           )}
           {next ? (
-            <Link href={`/highschool/study/${subjectParam}/${next.slug}`} className="inline-flex items-center gap-1.5 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-gold-hover">
+            <Link href={`/highschool/study/${subjectParam}/${next.slug}`} className="inline-flex items-center gap-1.5 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-on-gold hover:bg-gold-hover">
               Next topic: {next.title} <ArrowRight className="w-4 h-4" />
             </Link>
           ) : (

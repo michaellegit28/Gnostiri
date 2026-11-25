@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
+import { recordLearningActivity } from "@/lib/activity";
 
 /**
  * /api/documents/[id]/quiz — score a submitted attempt, server-side.
@@ -69,6 +70,8 @@ export async function POST(req: NextRequest, { params }: RouteContext) {
         explanation: item.explanation,
       };
     });
+
+  await recordLearningActivity(user.id);
 
   return NextResponse.json({
     documentId: document.id,

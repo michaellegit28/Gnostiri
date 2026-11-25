@@ -68,7 +68,7 @@ export default function AnswerBooklet({
         placeholder={mode === "simulation" ? "Write your answer…" : "Plan — intro · points · conclusion…"}
         className={
           mode === "simulation"
-            ? "min-h-[340px] w-full resize-y rounded-xl border border-slate-300 bg-white p-5 font-serif text-[15px] leading-8 text-slate-950 placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--paper-ink))]"
+            ? "min-h-[340px] w-full resize-y rounded-xl border border-slate-300 bg-white p-5 font-serif text-[15px] leading-8 text-ink placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--paper-ink))]"
             : "min-h-[180px] w-full resize-y rounded-xl border border-dashed border-line-strong bg-bg p-4 text-[15px] leading-relaxed text-slate-100 placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         }
         style={

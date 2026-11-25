@@ -48,7 +48,7 @@ export default function SubmitConfirmModal({
       className="fixed inset-0 z-50 flex items-center justify-center bg-surface/80 p-4 backdrop-blur-sm focus:outline-none"
     >
       <div className="w-full max-w-md gn-shadow rounded-2xl border border-line bg-surface px-6 py-8 text-center">
-        <h2 id="submit-confirm-heading" className="font-serif text-2xl font-bold text-slate-50">
+        <h2 id="submit-confirm-heading" className="font-serif text-2xl font-bold text-slate-100">
           Submit this section?
         </h2>
         <dl className="mx-auto mt-5 grid max-w-xs grid-cols-3 gap-3 text-center">

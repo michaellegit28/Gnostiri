@@ -90,7 +90,7 @@ export default function Step1Client({ boards }: { boards: CbtBoardCard[] }) {
                   <LogoTile name={board.name} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <h2 className="truncate font-serif text-lg font-bold text-slate-50">{board.name}</h2>
+                      <h2 className="truncate font-serif text-lg font-bold text-slate-100">{board.name}</h2>
                       {disabled && <span className={`${CBT.chip} shrink-0`}>In preparation</span>}
                     </div>
                     <p className={`mt-0.5 text-xs ${CBT.muted}`}>

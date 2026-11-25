@@ -60,7 +60,7 @@ export default async function LeagueBanner() {
             </p>
           </div>
         </div>
-        <span className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors group-hover:bg-gold-hover">
+        <span className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors group-hover:bg-gold-hover">
           Open the League
           <ArrowRight className="h-4 w-4" aria-hidden />
         </span>

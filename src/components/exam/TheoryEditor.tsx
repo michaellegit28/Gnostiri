@@ -64,7 +64,7 @@ export default function TheoryEditor({
         spellCheck={true}
         aria-label={`${questionLabel}. ${words} words, ${chars} characters.`}
         placeholder="Write your answer here…"
-        className="min-h-[280px] w-full resize-y rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-relaxed text-slate-950 placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--paper-ink))]"
+        className="min-h-[280px] w-full resize-y rounded-xl border border-slate-300 bg-white p-4 text-[15px] leading-relaxed text-ink placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--paper-ink))]"
       />
       <div className="flex items-center gap-3">
         <button

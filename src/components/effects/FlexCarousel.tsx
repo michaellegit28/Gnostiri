@@ -150,7 +150,7 @@ export default function FlexCarousel({
                   </span>
                 )}
                 <h3
-                  className={`font-serif font-bold text-slate-50 ${isActive ? "text-xl md:text-2xl" : "text-sm md:text-base"}`}
+                  className={`font-serif font-bold text-slate-100 ${isActive ? "text-xl md:text-2xl" : "text-sm md:text-base"}`}
                 >
                   {item.title}
                 </h3>

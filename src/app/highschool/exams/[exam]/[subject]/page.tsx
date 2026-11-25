@@ -49,7 +49,7 @@ export default async function ExamSubjectPage({ params }: SubjectPageProps) {
   const subjectTitle = subjectPapers[0].subject;
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">

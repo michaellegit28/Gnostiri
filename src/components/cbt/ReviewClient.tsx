@@ -42,7 +42,7 @@ export default function ReviewClient() {
     <div className="mt-6 space-y-8">
       {Array.from(bySubject.entries()).map(([subject, items]) => (
         <section key={subject} aria-labelledby={`rev-${subject}`}>
-          <h2 id={`rev-${subject}`} className="font-serif text-lg font-bold text-slate-50">{subject}</h2>
+          <h2 id={`rev-${subject}`} className="font-serif text-lg font-bold text-slate-100">{subject}</h2>
           <ol className="mt-3 space-y-4">
             {items.map((item, i) => (
               <li key={item.questionId} className={`${CBT.card} p-4`}>

@@ -15,13 +15,13 @@ export const CBT = {
     "gn-motion inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border border-line px-4 font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40",
   chip: "inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-2 px-2.5 py-1 text-xs font-medium text-slate-300",
   eyebrow: "text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text",
-  heading: "font-serif font-bold tracking-tight text-slate-50",
+  heading: "font-serif font-bold tracking-tight text-slate-100",
   muted: "text-slate-400",
   faint: "text-slate-500",
   optionBase:
     "gn-motion flex min-h-[52px] w-full items-center gap-3 rounded-xl border px-4 text-left text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]",
   optionIdle: "border-line bg-surface-2 text-slate-200 hover:border-primary/50",
-  optionPicked: "border-primary bg-primary/15 text-slate-50",
+  optionPicked: "border-primary bg-primary/15 text-slate-100",
   optionLetter:
     "gn-motion flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line text-xs font-bold",
   gridCell:

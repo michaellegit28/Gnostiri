@@ -55,7 +55,7 @@ export default function TransitionModal({
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-electric-text">
           Section complete
         </p>
-        <h2 id="bridge-heading" className="mt-3 font-serif text-3xl font-bold text-slate-50">
+        <h2 id="bridge-heading" className="mt-3 font-serif text-3xl font-bold text-slate-100">
           Take a breath. New section ahead.
         </h2>
         <p className="mt-4 text-slate-300">

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { presetFor } from "@/lib/cbt/config";
 import { gradeSubject, type CbtReport, type SubjectResult } from "@/lib/cbt/scoring";
+import { getCurrentUser } from "@/lib/server-auth";
+import { recordLearningActivity } from "@/lib/activity";
 
 interface SubmitBody {
   boardCode?: string;
@@ -105,5 +107,8 @@ export async function POST(req: NextRequest) {
 
   // Best-effort attempt history is device-local (results UI reads the report
   // from sessionStorage); nothing user-identifiable is persisted here.
-  return NextResponse.json(report);
+  // CBT is usable anonymously so a prospective student can sit a full sim
+  // before signing up; the streak is recorded only when we know who they are.
+  const cbtUser = await getCurrentUser();
+  if (cbtUser) await recordLearningActivity(cbtUser.id);
 }

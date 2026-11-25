@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { hasPremiumAccess } from "@/lib/entitlements";
+import { recordLearningActivity } from "@/lib/activity";
 
 export async function POST(req: NextRequest, { params }: { params: { courseId: string } }) {
   const user = await getCurrentUser();
@@ -16,5 +17,6 @@ export async function POST(req: NextRequest, { params }: { params: { courseId: s
   const completed = await prisma.progress.count({ where: { userId: user.id, domain: "university", entityType: "courseLesson", entityId: { in: course.lessons.map((lesson) => lesson.id) }, status: "completed" } });
   const quizAttempt = await prisma.courseQuizAttempt.findFirst({ where: { userId: user.id, courseId: course.id, domain: "university" } });
   const certificate = premium && completed === course.lessons.length && quizAttempt ? await prisma.certificate.upsert({ where: { userId_courseId: { userId: user.id, courseId: course.id } }, update: {}, create: { userId: user.id, courseId: course.id, domain: "university" } }) : null;
+  await recordLearningActivity(user.id);
   return NextResponse.json({ completed, total: course.lessons.length, certificate });
 }

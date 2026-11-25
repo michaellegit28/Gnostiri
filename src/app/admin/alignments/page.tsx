@@ -53,7 +53,7 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
           <label>Board <select name="board" defaultValue={fBoard} className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">All</option>{boards.map((b) => <option key={b.id} value={b.id}>{b.name} — {b.region.name}</option>)}</select></label>
           <label>Dept <select name="dept" defaultValue={fDept} className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">All</option>{departments.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}</select></label>
           <label>Tier <select name="tier" defaultValue={fTier} className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">All</option><option value="core">core</option><option value="elective">elective</option><option value="excluded">excluded</option></select></label>
-          <button className="px-3 py-1 rounded bg-gold text-slate-950 font-semibold" type="submit">Filter</button>
+          <button className="px-3 py-1 rounded bg-gold text-on-gold font-semibold" type="submit">Filter</button>
           <a href="/admin/alignments" className="px-3 py-1 rounded border border-slate-700">Clear</a>
         </form>
       </section>
@@ -99,7 +99,7 @@ export default async function AdminAlignmentsPage({ searchParams }: { searchPara
           <select name="boardId" required className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="">Board…</option>{boards.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}</select>
           <select name="tier" required className="bg-slate-900 border border-slate-700 rounded px-2 py-1"><option value="elective">elective (safe default)</option><option value="core">core</option><option value="excluded">excluded</option></select>
           <input name="weightNotes" placeholder="weight notes" className="bg-slate-900 border border-slate-700 rounded px-2 py-1" />
-          <button className="px-3 py-1 rounded bg-emerald-500 text-slate-950 font-semibold" type="submit">Create</button>
+          <button className="px-3 py-1 rounded bg-emerald-500 text-ink font-semibold" type="submit">Create</button>
         </form>
         <p className="text-xs text-slate-400">Leave track empty = applies to all tracks. Core only with human verification.</p>
       </section>

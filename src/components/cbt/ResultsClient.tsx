@@ -25,7 +25,7 @@ function ScoreRing({ percent, label, sub }: { percent: number; label: string; su
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <span className="font-serif text-3xl font-bold text-slate-50">{label}</span>
+        <span className="font-serif text-3xl font-bold text-slate-100">{label}</span>
         <span className={`text-xs ${CBT.muted}`}>{sub}</span>
       </div>
     </div>

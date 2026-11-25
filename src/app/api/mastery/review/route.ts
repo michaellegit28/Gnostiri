@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { recordConceptReview, qualityFromResult, type ReviewOutcome } from "@/lib/spaced-repetition";
+import { recordLearningActivity } from "@/lib/activity";
 
 export const dynamic = "force-dynamic";
 
@@ -33,5 +34,6 @@ export async function POST(req: NextRequest) {
   };
 
   const snapshot = await recordConceptReview(user.id, conceptId, review);
+  await recordLearningActivity(user.id);
   return NextResponse.json({ conceptId, mastery: snapshot });
 }

@@ -97,6 +97,63 @@ test("both themes ship the full token set", () => {
   }
 });
 
+// The defect class this kills: a token referenced by tailwind.config.ts but
+// defined in only ONE theme. `rgb(var(--x))` with an undefined custom property
+// is invalid, so the declaration is silently dropped — the text keeps its
+// inherited colour instead of failing the build. That is exactly how dark mode
+// lost `--teal`/`--teal-text` (22 text-teal-200/300 uses rendered colourless)
+// while the theme still passed every curated check. Deriving the list from the
+// config means the next hole cannot be curated away.
+test("every token the tailwind config references exists in BOTH themes", () => {
+  // Scope to the `colors` block only. fontFamily references var(--font-display)
+  // etc., which next/font sets on <html> at runtime rather than in globals.css,
+  // so a whole-config sweep would false-positive on those.
+  const colorsBlock = TW.slice(TW.indexOf("colors: {"), TW.indexOf("letterSpacing:"));
+  assert.ok(colorsBlock.includes("--primary"), "found the colours block in the config");
+
+  const referenced = new Set();
+  for (const m of colorsBlock.matchAll(/var\(--([a-z0-9-]+)\)/g)) {
+    if (m[1] === "alpha-value") continue;
+    referenced.add(m[1]);
+  }
+  assert.ok(referenced.size > 40, `parsed a real token set from the config (got ${referenced.size})`);
+
+  for (const [name, block] of [["dark", DARK], ["light", LIGHT]]) {
+    for (const tokenName of referenced) {
+      assert.ok(
+        new RegExp(`--${tokenName}:`).test(block),
+        `${name} theme defines --${tokenName} (referenced by tailwind.config.ts) — a missing token silently drops the colour instead of failing the build`
+      );
+    }
+  }
+});
+
+// Accent *-text variants are the ones allowed to carry text. They are checked
+// against --surface-2 as well as --bg because that is the ELEVATED surface:
+// in light mode --surface-2 (#E9EDFA) is darker than --bg (#F7F9FF), so
+// contrast on cards is lower than the headline number and must be measured
+// on its own.
+test("accent -text variants clear the body floor on bg AND surface-2, both themes", () => {
+  const accents = [
+    "electric-text", "cyan-text", "violet-text", "pink-text", "gold-text",
+    "teal-text", "success-text", "error-text", "warning-text",
+  ];
+  for (const [name, block] of [["dark", DARK], ["light", LIGHT]]) {
+    for (const acc of accents) {
+      if (!new RegExp(`--${acc}:`).test(block)) continue; // covered above
+      const fg = token(block, acc);
+      for (const surface of ["bg", "surface-2"]) {
+        const bg = token(block, surface);
+        const ratio = contrast(fg, bg).toFixed(2);
+        assert.ok(
+          contrast(fg, bg) >= BODY_FLOOR,
+          `${name} ${acc} on ${surface} = ${ratio}:1 — accent text may not dip below ${BODY_FLOOR}:1`
+        );
+      }
+    }
+  }
+});
+
 test("tokens are channel triples so Tailwind opacity modifiers work", () => {
   assert.match(DARK, /--bg:\s*\d+\s+\d+\s+\d+/, "channels, not hex");
   assert.ok(!/--bg:\s*#/.test(CSS), "no hex token — alpha utilities would break");

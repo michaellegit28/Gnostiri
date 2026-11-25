@@ -785,3 +785,24 @@ Firebase — the seam swap covered the whole app.
   naming = "Year N · Semester M" with course codes (ANAT 201…), faculty-first catalog at /university.
 - Phase-8 schema from #72 (Subscription.plan/addons/currency, AnalyticsEvent, Download,
   ContentRequest) + this migration are BOTH pending owner paste into the Supabase SQL editor.
+
+## Secrets + DB access conventions (2026-11-25, owner directive)
+
+Owner directive recorded in `AGENTS.md` hard rules, and propagated to the lane/skill docs that
+contradicted it (`db-lane.md`, `audit-lane.md`, `.opencode/skills/prisma-supabase-pooler/SKILL.md`):
+
+- **All secrets live in `.env`** (gitignored, `chmod 600`) and are loaded at runtime only.
+  `.env.example` carries NAMES only; this table records values as "set (sensitive)" and never the
+  value itself. Supersedes the older claim in this log that secrets were exported via
+  `~/.zshrc` / `~/.profile` — those files do not exist on the Termux/Android box the project also
+  runs from, so any command needing `DATABASE_URL` must source `.env` explicitly
+  (`set -a; . ./.env; set +a` in a `sh -c` wrapper).
+- **DB access goes through the Prisma CLI, not a Postgres MCP server** (new AGENTS.md rule 7).
+  The previously-documented `postgres` MCP (`@modelcontextprotocol/server-postgres`, then
+  `mcp-postgres-server`) is deliberately **not** configured. It never worked reliably here — it was
+  started with an empty `$DATABASE_URL` because the shell has no env exports on this box, and it
+  starts on stdio regardless, so it looked connected while every query failed. Read-only
+  investigation uses the Supabase MCP `execute_sql`; writes go through Prisma or the Supabase SQL
+  editor per the pooler rules.
+- `opencode.json` still carries a local `postgres` entry (uncommitted owner edit) pointing at
+  `mcp-postgres-server`; it is inert in this setup and is not to be relied on.

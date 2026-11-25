@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { scorePracticeSession } from "@/lib/exam-manifest";
+import { recordLearningActivity } from "@/lib/activity";
 
 export const dynamic = "force-dynamic";
 
@@ -30,5 +31,5 @@ export async function POST(req: NextRequest) {
     data: { status: "completed" },
   });
 
-  return NextResponse.json(breakdown);
+  await recordLearningActivity(user.id);
 }

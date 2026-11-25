@@ -133,7 +133,7 @@ export default async function BattlePlanHero({ userId }: { userId: string }) {
         </div>
         <Link
           href="/battle-plan"
-          className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-on-gold transition-colors hover:bg-gold-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           {cta}
           <ArrowRight className="h-4 w-4" aria-hidden />

@@ -138,7 +138,7 @@ export default async function SubjectPage({ params, searchParams }: { params: { 
               <option value="">All regions</option>
               {regions.map((r) => <option key={r.id} value={r.id}>{r.name}</option>)}
             </select>
-            <button className="rounded bg-gold px-3 py-1.5 font-semibold text-slate-950" type="submit">Apply</button>
+            <button className="rounded bg-gold px-3 py-1.5 font-semibold text-on-gold" type="submit">Apply</button>
             {regionParam && <Link href={`/highschool/study/${subject.slug}`} className="rounded border border-slate-600 px-3 py-1.5">Clear</Link>}
             <span className="text-xs text-slate-400">Highlights topics marked core in that region&apos;s boards.</span>
           </form>

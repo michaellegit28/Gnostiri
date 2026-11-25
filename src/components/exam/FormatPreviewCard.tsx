@@ -27,7 +27,7 @@ export default function FormatPreviewCard({
       aria-label={`Format preview: ${board}`}
       className="gn-shadow rounded-2xl border border-line bg-surface p-6 md:p-7"
     >
-      <p className="flex items-center gap-2 font-serif text-xl font-bold text-slate-50">
+      <p className="flex items-center gap-2 font-serif text-xl font-bold text-slate-100">
         <BadgeCheck aria-hidden="true" className="h-5 w-5 text-teal-400" />
         {board}
         {country != null && country !== "" ? ` — ${country}` : ""}
