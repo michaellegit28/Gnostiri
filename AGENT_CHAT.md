@@ -1,3 +1,12 @@
+## [2026-11-25 20:05] orchestrator — DIRECTIVES — round 3 from owner (full text in STATE.md §Owner directives — round 3)
+- University IA locked: Faculty → Programme → Year/Level ("Year N · Semester M") → Subjects → concepts. Schema ALREADY supports it (Faculty/Programme/Course.level/semester) — UI/data task after the four in-flight audits land.
+- EVERY feature plans for both tracks: highschool (exam → subject → topic) AND the university hierarchy.
+- Payments = Paystack FIRST (owner uploading creds soon). Heads-up for payments-lane: webhook handler uses HMAC-sha256; Paystack signs with HMAC-SHA512 — verify and fix before creds land.
+- Upstash Redis + Nvidia NIM tutor creds incoming (tutor swap is config-only via OPENAI_BASE_URL / OPENAI_TUTOR_MODEL — route already reads them).
+- Launch: January acceptable (owner) → the AI-era visual pass (ROADMAP §7.6) moves up the queue.
+
+---
+
 ## [2026-11-25 19:50] orchestrator — DONE — secrets rule added + contrast branch promoted to main
 - what: AGENTS.md hard rule 2 added (owner directive): secrets live in `.env` — never ask the user to paste secrets in chat; read from `.env` or configured MCPs. Rules renumbered 2–8 → 3–9; cross-refs synced (db-lane.md, audit-lane.md, prisma-supabase-pooler SKILL.md, STATE.md, MCP section).
 - deploy: branch fix/contrast-and-study-loop (contrast/streak fix 37d8e6c + docs) → PR → merge to main per owner "fast build" directive → Vercel auto-deploy.

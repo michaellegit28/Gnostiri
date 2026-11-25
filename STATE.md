@@ -806,3 +806,28 @@ contradicted it (`db-lane.md`, `audit-lane.md`, `.opencode/skills/prisma-supabas
   editor per the pooler rules.
 - `opencode.json` still carries a local `postgres` entry (uncommitted owner edit) pointing at
   `mcp-postgres-server`; it is inert in this setup and is not to be relied on.
+
+## Owner directives — round 3 (2026-11-25, late)
+
+1. **University IA (locked)**: catalogue hierarchy is Faculty → Programme (degree, e.g. MBBS) →
+   Year/Level (100..600, displayed "Year N · Semester M") → Subjects (courses, ANAT 201-style
+   codes) → modules/concepts. The Prisma schema ALREADY models this (Faculty, Programme,
+   Course.level + Course.semester, ProgrammeEnrollment, ProgrammeBenchmark) — this is a UI/data
+   task, not a schema one: /university needs a faculty→programme→year browse hierarchy while
+   keeping the simple degree-spine list as the signed-in default. Build after the running audits
+   return (2026-11-25: security/smoke/UX/discovery audits in flight).
+2. **Always plan for BOTH tracks** — highschool (exam → subject → topic) AND the university
+   hierarchy above — in every feature: discovery expansion, League cups, tutor grounding,
+   notifications, analytics, downloads. No feature ships for one track without a note on the other.
+3. **Payments = Paystack FIRST.** Owner will upload PAYSTACK_SECRET_KEY (+ webhook secret) soon;
+   Stripe/Razorpay secondary. NOTE for payments-lane: the webhook handler verifies HMAC-sha256,
+   but Paystack signs webhooks with HMAC-SHA512 — verify against Paystack docs and fix BEFORE
+   creds land.
+4. **Upstash Redis creds incoming** from owner (rate limiting already enforced on Vercel prod;
+   local/preview envs get the same pair).
+5. **Tutor AI provider = Nvidia NIM (OpenAI-compatible) for now.** Config-only swap:
+   OPENAI_BASE_URL → Nvidia endpoint, OPENAI_TUTOR_MODEL → chosen NIM model. The tutor route
+   already reads both envs (src/app/api/tutor/route.ts:80-83) — no code change expected.
+6. **Launch = January is acceptable** (owner). Aligns with ROADMAP Season 1 (Jan–Apr); Season 3
+   continues as soft launch through December. The AI-era visual pass (ROADMAP §7.6) moves UP the
+   queue — premium UX ships before launch, not after.
