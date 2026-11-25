@@ -144,7 +144,7 @@ function McqBlock({ stem, options, correctIndex, explanation }: { stem: string; 
             >
               <span
                 className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                  reveal ? "bg-emerald-500 text-slate-950" : chosen ? "bg-primary text-on-primary" : "bg-surface-2 text-slate-400"
+                  reveal ? "bg-emerald-500 text-ink" : chosen ? "bg-primary text-on-primary" : "bg-surface-2 text-slate-400"
                 }`}
               >
                 {letters[oi]}

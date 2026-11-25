@@ -65,7 +65,7 @@ export default function Step2Client({
       {/* Subject slots */}
       <section className={`${CBT.panel} p-5`} aria-labelledby="subjects-h">
         <div className="flex items-center justify-between">
-          <h2 id="subjects-h" className="font-serif text-lg font-bold text-slate-50">Subjects</h2>
+          <h2 id="subjects-h" className="font-serif text-lg font-bold text-slate-100">Subjects</h2>
           <span className={CBT.chip}>{mode === "simulation" ? "Board combination" : `${practicePicks}/${maxSlots} chosen`}</span>
         </div>
 
@@ -111,7 +111,7 @@ export default function Step2Client({
 
       {/* Exam mode */}
       <section className={`${CBT.panel} p-5`} aria-labelledby="mode-h">
-        <h2 id="mode-h" className="font-serif text-lg font-bold text-slate-50">Exam mode</h2>
+        <h2 id="mode-h" className="font-serif text-lg font-bold text-slate-100">Exam mode</h2>
         <div role="radiogroup" aria-label="Exam mode" className="mt-3 grid gap-2 rounded-xl border border-line bg-bg p-1 sm:grid-cols-2">
           {(["simulation", "practice"] as Mode[]).map((m) => {
             const disabled = m === "simulation" && !simRules;
@@ -136,12 +136,12 @@ export default function Step2Client({
 
       {/* Session duration */}
       <section className={`${CBT.panel} p-5`} aria-labelledby="duration-h">
-        <h2 id="duration-h" className="font-serif text-lg font-bold text-slate-50">Session duration</h2>
+        <h2 id="duration-h" className="font-serif text-lg font-bold text-slate-100">Session duration</h2>
         {mode === "simulation" && simRules ? (
           <div className="mt-3 flex items-start gap-3 rounded-xl border border-primary/25 bg-primary/5 p-4">
             <Timer className="mt-0.5 h-4 w-4 shrink-0 text-electric-text" aria-hidden />
             <p className="text-sm leading-relaxed text-slate-300">
-              <strong className="text-slate-50">Fixed by the board — {simRules.durationMinutes} minutes total.</strong>{" "}
+              <strong className="text-slate-100">Fixed by the board — {simRules.durationMinutes} minutes total.</strong>{" "}
               The timer is not editable, runs once, and auto-submits your paper at 0:00, exactly
               like the hall. {scoringSummary}
             </p>

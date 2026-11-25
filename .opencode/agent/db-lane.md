@@ -13,6 +13,6 @@ Mandatory skill: `prisma-supabase-pooler`. Its rules are not optional:
 - Production migrations go through Supabase SQL editor in migration-file order; keep `prisma/migrations/` in sync; record applied migrations in STATE.md.
 - After schema/data changes run the drift sweep: production rows have drifted from seeds before (42 draft rows incident).
 
-Use the `postgres` MCP server (reads `$DATABASE_URL` from shell env). Default to read-only queries; run mutations only with an explicit, documented plan. Always state the before/after row counts.
+DB access: **Prisma CLI, not a Postgres MCP** (AGENTS.md rule 8 — there is no postgres MCP in this setup). Use `npx prisma migrate|db push|db execute|generate` and the `prisma/seed-*` scripts; `DATABASE_URL` comes from `./.env` (`set -a; . ./.env; set +a` in a `sh -c` wrapper — it is *not* exported into the shell on the Termux box, so a bare `$DATABASE_URL` is empty). For read-only investigation you may use the Supabase MCP `execute_sql`. Default to read-only work; run mutations only with an explicit, documented plan. Always state the before/after row counts.
 
 Definition of done: schema generated (`npx prisma generate`), tsc green, migration history + STATE.md updated, counts reported to mailbox.

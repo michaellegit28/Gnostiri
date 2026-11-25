@@ -67,7 +67,7 @@ export default function MasterQuizClient({ topicId, sessionId, backHref, backLab
       {error && <p role="alert" className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">{error}</p>}
       {score !== null && <p aria-live="polite" className="font-bold text-gold">Score: {score}/{questions.length}</p>}
       <div className="flex flex-wrap gap-3">
-        {score === null && <button type="button" onClick={submit} disabled={busy || !sessionId} className="px-5 py-2.5 rounded-lg bg-gold text-slate-950 font-semibold text-sm disabled:opacity-50">{busy ? "Marking…" : sessionId ? "Submit" : "Sign in to submit"}</button>}
+        {score === null && <button type="button" onClick={submit} disabled={busy || !sessionId} className="px-5 py-2.5 rounded-lg bg-gold text-on-gold font-semibold text-sm disabled:opacity-50">{busy ? "Marking…" : sessionId ? "Submit" : "Sign in to submit"}</button>}
         {!sessionId && score === null && <Link href="/login" className="px-5 py-2.5 rounded-lg border border-slate-600 text-sm">Sign in</Link>}
         <Link href={backHref} className="px-5 py-2.5 rounded-lg border border-slate-600 text-sm">Back to {backLabel}</Link>
       </div>

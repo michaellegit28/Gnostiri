@@ -18,9 +18,9 @@ type OptionCardProps = {
 
 const TONE: Record<OptionState, string> = {
   idle: "border-line bg-surface text-slate-100 hover:border-slate-500",
-  selected: "border-primary bg-primary/15 text-slate-50",
-  correct: "border-emerald-500/60 bg-emerald-500/10 text-slate-50",
-  incorrect: "border-rose-500/60 bg-rose-500/10 text-slate-50",
+  selected: "border-primary bg-primary/15 text-slate-100",
+  correct: "border-emerald-500/60 bg-emerald-500/10 text-slate-100",
+  incorrect: "border-rose-500/60 bg-rose-500/10 text-slate-100",
 };
 
 const STATE_LABEL: Record<OptionState, string> = {
@@ -52,9 +52,9 @@ export default function OptionCard({
           state === "selected"
             ? "bg-primary text-on-primary"
             : state === "correct"
-              ? "bg-emerald-500 text-slate-950"
+              ? "bg-emerald-500 text-ink"
               : state === "incorrect"
-                ? "bg-rose-500 text-slate-950"
+                ? "bg-rose-500 text-ink"
                 : "bg-surface-2 text-gold"
         }`}
       >

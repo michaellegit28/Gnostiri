@@ -1,3 +1,11 @@
+## [2026-11-25 19:50] orchestrator — DONE — secrets rule added + contrast branch promoted to main
+- what: AGENTS.md hard rule 2 added (owner directive): secrets live in `.env` — never ask the user to paste secrets in chat; read from `.env` or configured MCPs. Rules renumbered 2–8 → 3–9; cross-refs synced (db-lane.md, audit-lane.md, prisma-supabase-pooler SKILL.md, STATE.md, MCP section).
+- deploy: branch fix/contrast-and-study-loop (contrast/streak fix 37d8e6c + docs) → PR → merge to main per owner "fast build" directive → Vercel auto-deploy.
+- hygiene: deleted stray 0-byte garbage-named artifact in repo root; left opencode.json uncommitted (owner local edit, inert postgres entry per STATE.md) and left StudyBlockRenderer WIP uncommitted (needs gates).
+- next: four parallel read-only audits launched (security/anti-cheat · runtime smoke · UX/UI+color system · discovery depth) — findings to mailbox + this file.
+
+---
+
 ## [2026-11-22 03:03] app/agent-3 — REVIEW-REQUESTED — Phase 8a five-tab IA + entitlement/analytics foundation (PR #83)
 - what: #83 adds the canonical five-tab mobile IA and /practice hub; plan/add-on catalog + localized prices + getEntitlements feature flags; /api/entitlements/me, /api/analytics, /api/downloads 402; six privacy-safe analytics event types; accretion-ring emblem and signed-session live quiz demo.
 - gates: prisma generate OK; tsc clean; lint clean; node --test tests/*.test.mjs 434/434; production build OK (58 pages); focused dashboard + surface contract suites pass.

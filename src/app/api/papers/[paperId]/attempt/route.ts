@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
+import { recordLearningActivity } from "@/lib/activity";
 
 interface SubmittedAnswer {
   questionId: string;
@@ -79,6 +80,7 @@ export async function POST(req: NextRequest, { params }: { params: { paperId: st
       });
       attemptId = attempt.id;
       saved = true;
+      await recordLearningActivity(user.id);
     }
 
     return NextResponse.json({ score, maxScore, results, saved, attemptId });

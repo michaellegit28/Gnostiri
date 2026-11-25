@@ -14,16 +14,13 @@ import { CBT } from "@/lib/cbt/ui";
 import type { CbtSessionPaper } from "@/lib/cbt/data";
 import type { CbtReport } from "@/lib/cbt/scoring";
 
-const ACTIVE_KEY = "gnostiri-cbt-active";
+import { CBT_ACTIVE_KEY, readStoredSitting, shouldResume, signatureOf, type CbtSittingState } from "@/lib/cbt/sitting";
+
+const ACTIVE_KEY = CBT_ACTIVE_KEY;
 const REPORT_KEY = "gnostiri-cbt-report";
 
-interface StoredState {
-  answers: Record<string, { chosen: number | null; text?: string; marked?: boolean }>;
-  subjectIdx: number;
-  qIdx: number;
-  paperTab: "objective" | "theory";
-  startedAt: number;
-}
+/** Sitting position + answers. One definition, in the sitting module. */
+type StoredState = CbtSittingState;
 
 function formatClock(sec: number): string {
   const s = Math.max(0, Math.floor(sec));
@@ -35,7 +32,23 @@ function formatClock(sec: number): string {
 
 export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
   const router = useRouter();
-  const digest = useMemo(() => JSON.stringify(paper.subjects.flatMap((s) => s.questions.map((q) => q.id))), [paper]);
+
+  /**
+   * Resolve the sitting ONCE, before anything derives from it. On a reload the
+   * paper prop is a freshly-shuffled paper for the SAME setup, so we keep the
+   * stored paper and the student's answers. Without this the digest never
+   * matched, so every answer was dropped and startedAt reset — a refresh 30
+   * minutes into a 60-minute simulation silently destroyed the sitting and reset
+   * the clock. A sitting whose time has run out is discarded, never resumed.
+   */
+  const [activePaper] = useState<CbtSessionPaper>(() => {
+    const stored = readStoredSitting();
+    if (shouldResume(stored, paper)) return stored!.paper;
+    try { sessionStorage.removeItem(ACTIVE_KEY); } catch { /* ignore */ }
+    return paper;
+  });
+
+  const digest = useMemo(() => JSON.stringify(activePaper.subjects.flatMap((s) => s.questions.map((q) => q.id))), [activePaper]);
 
   const [answers, setAnswers] = useState<Record<string, { chosen: number | null; text?: string; marked?: boolean }>>({});
   const [subjectIdx, setSubjectIdx] = useState(0);
@@ -62,10 +75,10 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
   const [error, setError] = useState<string | null>(null);
   const submittedRef = useRef(false);
 
-  const subject = paper.subjects[subjectIdx];
+  const subject = activePaper.subjects[subjectIdx];
   const flat = subject.questions;
   const current = flat[qIdx];
-  const remaining = paper.durationSec - (now - startedAt) / 1000;
+  const remaining = activePaper.durationSec - (now - startedAt) / 1000;
   const objectiveQuestions = flat.filter((q) => q.type !== "theory");
   const theoryQuestions = flat.filter((q) => q.type === "theory");
   const showTheoryTab = theoryQuestions.length > 0;
@@ -82,8 +95,10 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
   // persist
   useEffect(() => {
     const state: StoredState = { answers, subjectIdx, qIdx, paperTab, startedAt };
-    try { sessionStorage.setItem(ACTIVE_KEY, JSON.stringify({ digest, state })); } catch { /* quota */ }
-  }, [answers, subjectIdx, qIdx, paperTab, startedAt, digest]);
+    try {
+      sessionStorage.setItem(ACTIVE_KEY, JSON.stringify({ digest, signature: signatureOf(activePaper), state, paper: activePaper }));
+    } catch { /* quota */ }
+  }, [answers, subjectIdx, qIdx, paperTab, startedAt, digest, activePaper]);
 
   const submit = useCallback(async () => {
     if (submittedRef.current) return;
@@ -95,11 +110,11 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          boardCode: paper.boardCode,
-          mode: paper.mode,
+          boardCode: activePaper.boardCode,
+          mode: activePaper.mode,
           answers,
-          durationUsedSec: Math.min(paper.durationSec, Math.round((Date.now() - startedAt) / 1000)),
-          papers: paper.subjects.map((s) => ({ topicId: s.topicId, title: s.title, questionIds: s.questions.map((q) => q.id) })),
+          durationUsedSec: Math.min(activePaper.durationSec, Math.round((Date.now() - startedAt) / 1000)),
+          papers: activePaper.subjects.map((s) => ({ topicId: s.topicId, title: s.title, questionIds: s.questions.map((q) => q.id) })),
         }),
       });
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error ?? "grading failed");
@@ -112,7 +127,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
       setSubmitting(false);
       setError(e instanceof Error ? e.message : "Something went wrong while grading");
     }
-  }, [answers, paper, router, startedAt]);
+  }, [answers, activePaper, router, startedAt]);
 
   // auto-submit at 0:00
   useEffect(() => {
@@ -140,7 +155,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
       return;
     }
     if (next >= list.length) {
-      if (subjectIdx < paper.subjects.length - 1) { setSubjectIdx(subjectIdx + 1); setQIdx(0); setPaperTab("objective"); }
+      if (subjectIdx < activePaper.subjects.length - 1) { setSubjectIdx(subjectIdx + 1); setQIdx(0); setPaperTab("objective"); }
       return;
     }
     setQIdx(next);
@@ -153,13 +168,13 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
   if (!activeQ && paperTab === "objective") return null;
 
   return (
-    <main className="flex min-h-screen flex-col bg-transparent text-slate-50">
+    <main className="flex min-h-screen flex-col bg-transparent text-slate-100">
       {/* Header */}
       <header className="sticky top-0 z-20 border-b border-line bg-bg/95 px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] backdrop-blur">
         <div className="mx-auto max-w-2xl">
           <div className="flex items-center justify-between gap-2">
             <div className="flex min-w-0 gap-1 overflow-x-auto" role="tablist" aria-label="Subjects">
-              {paper.subjects.map((s, i) => (
+              {activePaper.subjects.map((s, i) => (
                 <button
                   key={s.topicId}
                   role="tab"
@@ -315,7 +330,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
               <Bookmark className="h-4 w-4" aria-hidden />
               {answers[activeQ.id]?.marked ? "Marked" : "Mark for review"}
             </button>
-            {activeIdx === activeQuestions.length - 1 && subjectIdx === paper.subjects.length - 1 ? (
+            {activeIdx === activeQuestions.length - 1 && subjectIdx === activePaper.subjects.length - 1 ? (
               <button type="button" onClick={() => setConfirmOpen(true)} className={`${CBT.primaryBtn} min-h-[44px] w-auto flex-1 text-sm`}>
                 Submit Exam
               </button>
@@ -341,7 +356,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
               </button>
             </div>
             <p className={`mt-3 text-sm leading-relaxed ${CBT.muted}`}>
-              You answered <strong className="text-slate-100">{answeredCount}</strong> of {paper.subjects.reduce((s, x) => s + x.questions.length, 0)} questions
+              You answered <strong className="text-slate-100">{answeredCount}</strong> of {activePaper.subjects.reduce((s, x) => s + x.questions.length, 0)} questions
               {markedCount > 0 && <> and flagged <strong className="text-slate-100">{markedCount}</strong> for review</>}.
               Grading is final — the timer keeps running until you confirm.
             </p>

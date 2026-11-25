@@ -194,7 +194,7 @@ export default async function ExamBoardPage({ params }: BoardPageProps) {
   const hasPractice = practiceCount > 0 || treeQuestionCount > 0;
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+    <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-slate-400">

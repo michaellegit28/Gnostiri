@@ -169,6 +169,13 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --aurora-1: rgba(49, 92, 255, 0.22);
   --aurora-2: rgba(121, 82, 217, 0.20);
   --aurora-3: rgba(8, 175, 194, 0.16);
+  /* Teal = cyan alias, as in light mode. These MUST exist in dark too: the
+     theme above is the default, and an undefined --teal/--teal-text silently
+     drops the colour from text-teal-200/300 (22 uses) rather than failing the
+     build. tests/a11y.test.mjs asserts both themes define them. */
+  --teal: 66 214 220;          /* #42D6DC */
+  --teal-text: 66 214 220;     /* 9.69:1 on --bg, 6.59:1 on --surface-2 */
+  --teal-soft: 84 224 190;
   --header-bg: rgb(var(--bg) / 0.72);
   color-scheme: dark;
 }
@@ -196,6 +203,11 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --mint: 54 201 165;     /* #54E0BE */
   --coral: 255 107 94;    /* #FF6B5E */
   --pink: 236 121 183;    /* #EC79B7 */
+  /* pink-text was dark-theme-only, so text-pink-200 silently lost its colour
+     in light mode (rgb() with an undefined custom property is invalid and the
+     declaration is dropped). #A83278 measures 5.88:1 on --bg and 5.29:1 on
+     --surface-2 — AA on both. */
+  --pink-text: 168 50 120;  /* #A83278 */
   --ink: 23 38 74;
   --gold: 245 166 35;         /* #F5A623 Solar Gold — premium / rewards */
   --gold-hover: 214 138 20;
@@ -209,7 +221,7 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --teal-soft: 54 201 165;
   --success: 35 134 106;   --success-text: 20 108 67;   --success-soft: 54 201 165;
   --error: 207 85 85;     --error-text: 168 50 50;     --error-soft: 255 107 94;
-  --warning: 214 155 54;   --warning-text: 180 83 9;    --warning-soft: 245 166 35;
+  --warning: 214 155 54;   --warning-text: 146 64 8;    --warning-soft: 245 166 35;
   --danger: 168 50 50;
   --muted-fill: 83 97 123;
   --focus: 49 92 255;

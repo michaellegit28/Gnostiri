@@ -33,7 +33,7 @@ export default async function TakePaperPage({ params, searchParams }: TakePagePr
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen bg-transparent text-slate-50 p-6 md:p-12">
+      <div className="min-h-screen bg-transparent text-slate-100 p-6 md:p-12">
         <div className="max-w-3xl mx-auto space-y-6 text-center py-20">
           <h1 className="font-serif text-3xl font-bold">This paper has no questions transcribed yet</h1>
           <Link
@@ -48,7 +48,7 @@ export default async function TakePaperPage({ params, searchParams }: TakePagePr
   }
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-50 p-4 md:p-10">
+    <div className="min-h-screen bg-transparent text-slate-100 p-4 md:p-10">
       <div className="max-w-3xl mx-auto space-y-4">
         <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
           <Link href="/highschool/exams" className="hover:text-electric-text transition-colors">Exams</Link>

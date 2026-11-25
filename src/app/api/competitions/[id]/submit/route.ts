@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { createNotification } from "@/lib/notify";
 import { buildCupQuestionSet } from "../question-set";
+import { recordLearningActivity } from "@/lib/activity";
 
 export const dynamic = "force-dynamic";
 
@@ -172,6 +173,8 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
   }
   // A notification is a side effect: it must never fail a racer's submit.
   await Promise.allSettled(notifications);
+
+  await recordLearningActivity(user.id);
 
   return NextResponse.json(
     {

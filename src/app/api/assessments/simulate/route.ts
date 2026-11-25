@@ -1,6 +1,7 @@
 import prisma from "@/lib/db";
 import { buildExam, scoreSession, archiveSession, type ExamSession, type ScoredSession } from "@/lib/assessment";
 import { getCurrentUser } from "@/lib/server-auth";
+import { recordLearningActivity } from "@/lib/activity";
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -33,5 +34,5 @@ export async function POST(req: Request) {
   const scored: ScoredSession = scoreSession(body.session as ExamSession, body.answers);
   await archiveSession(userId, scored);
 
-  return Response.json({ scored });
+  await recordLearningActivity(userId);
 }

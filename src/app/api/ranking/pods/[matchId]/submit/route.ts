@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/server-auth";
 import { createNotification } from "@/lib/notify";
 import { buildChampionshipPaper, podAwardKey, podStars, rankPodMembers, tierFor, tierInfo } from "@/lib/ranking";
 import { championshipPool, resolveChampionshipKey } from "@/lib/ranking-pool";
+import { recordLearningActivity } from "@/lib/activity";
 
 export const dynamic = "force-dynamic";
 
@@ -171,6 +172,8 @@ export async function POST(req: NextRequest, { params }: { params: { matchId: st
   await Promise.allSettled(notifications);
 
   const myState = stateOf.get(user.id)!;
+  await recordLearningActivity(user.id);
+
   return NextResponse.json({
     score: Math.max(seat.score, score),
     placement: placementOf.get(user.id) ?? standings.length,
