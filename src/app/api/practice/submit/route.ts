@@ -32,4 +32,5 @@ export async function POST(req: NextRequest) {
   });
 
   await recordLearningActivity(user.id);
+  return NextResponse.json(breakdown);
 }
