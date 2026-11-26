@@ -81,7 +81,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
     } finally {
       setSubmitting(false);
     }
-  }, [session, answers, submitting, result]);
+  }, [session, answers, submitting, result, courseId, mode]);
 
   // Auto-submit on timeout.
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import type { Prisma } from "@prisma/client";
 import prisma from "@/lib/db";
 import { presetFor } from "@/lib/cbt/config";
 import { gradeSubject, type CbtReport, type SubjectResult } from "@/lib/cbt/scoring";
@@ -71,7 +72,18 @@ export async function POST(req: NextRequest) {
     }),
     Promise.all(papers.map((p) => descendantTopicIds(p.topicId))),
   ]);
-  const rowById = new Map(idRows.map((r) => [r.id, r]));
+  type GradeRow = {
+    id: string;
+    topicId: string;
+    options: Prisma.JsonValue;
+    correctAnswer: string;
+    questionText: string;
+  };
+  // Explicit tuple types + Array.from keep this compatible with the repo's ES5
+  // TS target without needing downlevelIteration.
+  const rowById = new Map<string, GradeRow>(
+    idRows.map((r) => [r.id, r] as [string, GradeRow])
+  );
   const memberIds = new Set<string>();
   papers.forEach((p, i) => {
     const tree = new Set(topicSets[i]);
@@ -81,7 +93,9 @@ export async function POST(req: NextRequest) {
     }
   });
   const memberPapers = papers.map((p) => ({ ...p, questionIds: p.questionIds.filter((id) => memberIds.has(id)) }));
-  const byId = new Map([...rowById.entries()].filter(([id]) => memberIds.has(id)));
+  const byId = new Map<string, GradeRow>(
+    Array.from(rowById.entries()).filter(([id]) => memberIds.has(id))
+  );
   const answers = body.answers ?? {};
 
   const subjectResults: SubjectResult[] = [];
