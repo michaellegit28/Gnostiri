@@ -863,9 +863,7 @@ shared study surface**, and raise the UI to a premium/tactile standard. Payments
   downloaded out-of-band (`PRISMA_CLI_BINARY_TARGETS=linux-static-arm64`) and `prisma migrate status` now
   runs, but this box cannot reach the Supabase DB (direct `:5432` and pooler `:6543` both return P1001).
   Sanctioned read-only fallback via the Supabase MCP: DB reachable, 71 public tables, `_prisma_migrations`
-  absent (migrations are owner-applied SQL), Phase 8 + UserPreference columns present. Schema drift to
-  review: `Question.paper/markingGuide/marks/sourceYear`, `Topic.tags`, `User.schoolId`,
-  `ContentRequest.title` exist in the live DB but not in `prisma/schema.prisma`.
+  absent (migrations are owner-applied SQL), Phase 8 + UserPreference columns present. Schema drift found and reconciled in the repo for `Question.paper/markingGuide/marks/sourceYear`, `Topic.tags`, `User.schoolId`, `ContentRequest.title` — these already existed live and are now in `prisma/schema.prisma`; migrations remain owner-applied SQL.
 - **Secret to rotate** — `UPSTASH_REDIS_REST_TOKEN` was printed to the session's command output while
   sourcing `.env`; it was never written to the repo. Rotate it in Upstash and `.env` (name only here).
 - **Gates** — `npx prisma generate` · `npx tsc --noEmit` · `npx next lint` · `node --test tests/*.test.mjs`

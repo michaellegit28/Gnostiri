@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import type { LessonBlock, LessonContent } from "@/types/lesson";
 import { AlertTriangle, CheckCircle2, FileCode2, Info, Lightbulb, PenLine, XCircle } from "lucide-react";
+import { BioDiagram } from "@/components/diagrams/BioDiagrams";
 
 // High-school lesson block renderer.
 //
@@ -314,11 +315,7 @@ function renderBlock(block: LessonBlock, key: number) {
       return <McqBlock key={key} stem={block.stem} options={block.options} correctIndex={block.correctIndex} explanation={block.explanation} />;
 
     case "diagram":
-      return (
-        <div key={key} className="my-6 rounded-xl border border-dashed border-[rgb(var(--paper-line))] p-4 text-sm text-[rgb(var(--paper-ink-soft))]">
-          Diagram unavailable — {block.diagramId}. {block.caption}
-        </div>
-      );
+      return <BioDiagram key={key} diagramId={block.diagramId} caption={block.caption} />;
 
     default:
       return null;
