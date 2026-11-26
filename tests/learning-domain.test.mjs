@@ -25,7 +25,7 @@ const API = read("src/app/api/learning-domain/route.ts");
 test("nav items declare which lane may see them", () => {
   // The lane nav goes straight to the lane's doors (GSE, textbook study, courses),
   // so there is no standalone /highschool or /university hub entry any more.
-  for (const href of ["/highschool/exams", "/highschool/study", "/battle-plan", "/cbt"]) {
+  for (const href of ["/highschool/exams", "/highschool/study", "/cbt"]) {
     assert.match(NAV, new RegExp(`href: "${href}"[\\s\\S]{0,80}?audience: "highschool"`), `${href} belongs to High School`);
   }
   for (const href of ["/university", "/university/revision"]) {
@@ -33,6 +33,8 @@ test("nav items declare which lane may see them", () => {
   }
   assert.match(NAV, /href: "\/discovery"[\s\S]{0,80}?audience: "shared"/, "discovery is shared");
   assert.match(NAV, /href: "\/tutor"[\s\S]{0,80}?audience: "shared"/, "the AI tutor is shared");
+  // Battle Plan is a single shared nav item; the page itself toggles HS/University logic.
+  assert.match(NAV, /href: "\/battle-plan"[\s\S]{0,80}?audience: "shared"/, "Battle Plan is one shared nav item");
   assert.match(NAV, /href: "\/study"[\s\S]{0,80}?audience: "shared"/, "the study hub is shared (it filters itself)");
   // The /desk PDF workspace is a University-only feature (owner directive), never High School.
   assert.match(NAV, /href: "\/desk"[\s\S]{0,80}?audience: "university"/, "PDF Desk belongs to University");

@@ -4,7 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useDomain } from "@/context/DomainContext";
-import { DEFAULT_LEARNING_DOMAIN, domainHome, domainLabel } from "@/lib/learning-domain";
+import {
+  DEFAULT_LEARNING_DOMAIN,
+  LEARNING_DOMAINS,
+  domainLabel,
+  type LearningDomain,
+} from "@/lib/learning-domain";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import {
   Swords,
@@ -16,6 +21,10 @@ import {
   RotateCcw,
   ChevronRight,
   LogIn,
+  GraduationCap,
+  School,
+  Sparkles,
+  Crown,
 } from "lucide-react";
 
 interface MissionItem {
@@ -45,10 +54,25 @@ const priorityStyle: Record<string, string> = {
   low: "bg-teal-500/10 text-teal-300 border-teal-500/30",
 };
 
+const LANE_ICON: Record<LearningDomain, typeof GraduationCap> = {
+  highschool: School,
+  university: GraduationCap,
+};
+
+/**
+ * Battle Plan — one nav item, two lanes. High School is a rules-based
+ * countdown the app builds automatically from the exam date and standard
+ * subjects. University is the premium AI planner: the student supplies their
+ * syllabus, exam dates and course load and the plan is generated. This is the
+ * foundation shell — the High School automated planner is live; the University
+ * AI planner and the shared Battle Plan store wiring land next.
+ */
 export default function BattlePlanPage() {
   const { user, loading } = useAuth();
   const { learningDomain } = useDomain();
-  const domain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
+  const [lane, setLane] = useState<LearningDomain>(learningDomain ?? DEFAULT_LEARNING_DOMAIN);
+
+  // ── High School automated planner state ────────────────────────────────
   const [exam, setExam] = useState("jamb");
   const [examDate, setExamDate] = useState("");
   const [hasPlan, setHasPlan] = useState<boolean | null>(null);
@@ -60,6 +84,11 @@ export default function BattlePlanPage() {
   const [busy, setBusy] = useState(false);
   const [doneBusy, setDoneBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
+
+  // ── University AI planner inputs (shell) ─────────────────────────────────
+  const [goal, setGoal] = useState("");
+  const [uniExamDate, setUniExamDate] = useState("");
+  const [courseLoad, setCourseLoad] = useState("");
 
   const load = useCallback(async (examCode: string) => {
     setError("");
@@ -87,8 +116,8 @@ export default function BattlePlanPage() {
   }, []);
 
   useEffect(() => {
-    if (!loading && user && domain !== "university") void load(exam);
-  }, [loading, user, exam, load, domain]);
+    if (!loading && user && lane === "highschool") void load(exam);
+  }, [loading, user, exam, load, lane]);
 
   async function generate() {
     if (!examDate) {
@@ -134,72 +163,74 @@ export default function BattlePlanPage() {
   const examName = EXAMS.find((e) => e.code === exam)?.name ?? exam.toUpperCase();
   const progress = total > 0 ? Math.round((doneCount / total) * 100) : 0;
 
-  // Battle Plan is the High School study-plan surface. A University session
-  // never sees the exam boards here, even on a direct URL.
-  if (domain === "university") {
-    return (
-      <main className="min-h-screen bg-transparent px-5 py-8 text-slate-100 md:p-12">
-        <div className="mx-auto max-w-3xl space-y-4">
-          <h1 className="gn-title-gradient font-serif text-3xl font-bold tracking-tight md:text-4xl">
-            Battle Plan is a {domainLabel(domain)} feature
-          </h1>
-          <p className="text-muted">
-            High School and University stay separate. Your University lane keeps its courses, exam halls, mastery and revision queue.
-          </p>
-          <Link
-            href={domainHome(domain)}
-            className="gn-motion inline-flex min-h-[44px] items-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            Back to {domainLabel(domain)}
-          </Link>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-transparent text-slate-100 px-5 py-8 md:p-10">
       <div className="mx-auto max-w-4xl space-y-8">
         <nav className="flex items-center gap-2 text-sm text-muted">
-          <Link href="/highschool" className="hover:text-gold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-            High School
+          <Link href="/" className="hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+            Home
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
           <span className="text-slate-100 font-medium">Battle Plan</span>
         </nav>
 
-        <header className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold border border-gold/30">
+        <header className="space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
             <SectionMark variant="battle" className="w-4 h-4 text-gold" />
-            <span>Exam Battle Plan</span>
+            <span>Battle Plan</span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-serif font-bold tracking-tight">
-            Your mission to {examName}
+          <h1 className="gn-title-gradient font-serif text-3xl font-bold tracking-tight md:text-5xl">
+            Battle Plan
           </h1>
-          <p className="text-slate-400 text-base md:text-lg max-w-2xl">
-            Pick your exam date. We turn the real syllabus into a day-by-day mission —
-            weak topics first, everything else in order.
-          </p>
+          {/* Lane switch: a single nav item routes between the two planners. */}
+          <div role="group" aria-label="Battle Plan lane" className="grid max-w-md grid-cols-2 gap-1 rounded-xl border border-line bg-surface/50 p-1">
+            {LEARNING_DOMAINS.map((domain) => {
+              const Icon = LANE_ICON[domain];
+              const selected = lane === domain;
+              return (
+                <button
+                  key={domain}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => {
+                    setLane(domain);
+                    setError("");
+                  }}
+                  className={`gn-motion flex min-h-[40px] items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                    selected ? "bg-primary text-on-primary" : "text-muted hover:text-ink"
+                  }`}
+                >
+                  <Icon className="h-4 w-4" aria-hidden />
+                  {domainLabel(domain)}
+                </button>
+              );
+            })}
+          </div>
         </header>
 
-        {loading ? (
+        {lane === "university" ? (
+          <UniversityPlanner goal={goal} setGoal={setGoal} uniExamDate={uniExamDate} setUniExamDate={setUniExamDate} courseLoad={courseLoad} setCourseLoad={setCourseLoad} />
+        ) : loading ? (
           <p className="text-slate-400">Loading…</p>
         ) : !user ? (
-          <div className="rounded-2xl border border-gold/30 bg-gold/10 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-gold/30 bg-gold/10 p-6 sm:flex-row">
             <div className="flex items-center gap-3">
               <LogIn className="w-5 h-5 text-gold" />
               <p className="text-sm text-slate-200">Sign in to build your personal battle plan.</p>
             </div>
             <Link
               href="/login"
-              className="inline-flex min-h-[44px] items-center rounded-lg gn-btn-gold px-5 py-2.5 font-semibold text-sm transition-colors"
+              className="gn-btn-gold inline-flex min-h-[44px] items-center rounded-lg px-5 py-2.5 font-semibold text-sm transition-colors"
             >
               Sign In
             </Link>
           </div>
         ) : hasPlan === false || hasPlan === null ? (
-          <section className="gn-card gn-lift p-6 md:p-8 space-y-6">
-            <h2 className="text-xl font-bold">Build my plan</h2>
+          <section className="gn-card gn-lift space-y-6 p-6 md:p-8">
+            <h2 className="text-xl font-bold">Automated countdown</h2>
+            <p className="text-sm text-muted">
+              Pick your exam date and we build a day-by-day checklist from the syllabus — automatically.
+            </p>
             <div className="grid gap-6 sm:grid-cols-2">
               <label className="block text-sm text-muted">
                 Exam
@@ -230,10 +261,10 @@ export default function BattlePlanPage() {
               type="button"
               onClick={() => void generate()}
               disabled={busy}
-              className="gn-btn-gold inline-flex items-center gap-2 min-h-[48px] px-6 py-3 rounded-lg font-semibold text-sm transition-all disabled:opacity-50"
+              className="gn-btn-gold inline-flex min-h-[48px] items-center gap-2 rounded-lg px-6 py-3 font-semibold text-sm transition-all disabled:opacity-50"
             >
               <Swords className="w-4 h-4" />
-              {busy ? "Building your mission…" : "Generate Battle Plan"}
+              {busy ? "Building your plan…" : "Generate Battle Plan"}
             </button>
             {error && (
               <p role="alert" className="text-sm text-rose-300">
@@ -243,13 +274,12 @@ export default function BattlePlanPage() {
           </section>
         ) : (
           <div className="space-y-8">
-            {/* Countdown + progress */}
             <section className="relative overflow-hidden rounded-2xl border border-gold/30 bg-gradient-to-b from-amber-950/40 via-slate-900 to-slate-900 p-6 md:p-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                 <div className="flex items-center gap-3">
                   <CalendarDays className="w-8 h-8 text-gold" />
                   <div>
-                    <div className="text-3xl font-serif font-bold">
+                    <div className="font-serif text-3xl font-bold">
                       {daysLeft === null ? "—" : daysLeft === 0 ? "Today" : `${daysLeft} days`}
                     </div>
                     <div className="text-sm text-slate-400">
@@ -261,15 +291,12 @@ export default function BattlePlanPage() {
                 <div className="sm:text-right">
                   <div className="text-2xl font-bold text-teal-300">{progress}%</div>
                   <div className="text-xs text-slate-400">
-                    {doneCount} of {total} missions done
+                    {doneCount} of {total} done
                   </div>
                 </div>
               </div>
-              <div className="mt-4 h-2.5 rounded-full bg-slate-800 overflow-hidden">
-                <div
-                  className="h-full bg-gold transition-all duration-500"
-                  style={{ width: `${progress}%` }}
-                />
+              <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-slate-800">
+                <div className="h-full bg-gold transition-all duration-500" style={{ width: `${progress}%` }} />
               </div>
             </section>
 
@@ -279,52 +306,41 @@ export default function BattlePlanPage() {
               </p>
             )}
 
-            {/* Today's mission */}
             <section className="space-y-4">
-              <h2 className="text-xl font-bold flex items-center gap-2">
+              <h2 className="flex items-center gap-2 text-xl font-bold">
                 <CheckCircle2 className="w-5 h-5 text-gold" />
                 Today&apos;s mission
               </h2>
               {today.length === 0 ? (
-                <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5 text-sm text-emerald-200 flex items-center gap-3">
+                <div className="flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-5 text-sm text-emerald-200">
                   <CheckCircle2 className="w-5 h-5" />
                   All clear. Today&apos;s missions are done — rest or revise.
                 </div>
               ) : (
                 today.map((item) => (
-                  <div
-                    key={`${item.topicId}-${item.kind}`}
-                    className="gn-card gn-lift p-5 flex flex-col gap-4"
-                  >
+                  <div key={`${item.topicId}-${item.kind}`} className="gn-card gn-lift flex flex-col gap-4 p-5">
                     <div className="flex items-start justify-between gap-3">
                       <div className="space-y-1">
                         <div className="text-xs text-muted">
-                          {item.subject} • {item.kind === "quiz" ? "Practice" : "Study"} •{" "}
-                          {item.duration} min
+                          {item.subject} • {item.kind === "quiz" ? "Practice" : "Study"} • {item.duration} min
                         </div>
                         <div className="font-semibold text-slate-100">{item.topic}</div>
                       </div>
-                      <span
-                        className={`shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full border ${priorityStyle[item.priority]}`}
-                      >
-                        {item.priority === "high"
-                          ? "Weak spot"
-                          : item.priority === "medium"
-                            ? "New"
-                            : "Review"}
+                      <span className={`shrink-0 rounded-full border px-2.5 py-1 text-xs font-semibold ${priorityStyle[item.priority]}`}>
+                        {item.priority === "high" ? "Weak spot" : item.priority === "medium" ? "New" : "Review"}
                       </span>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col gap-3 sm:flex-row">
                       <Link
                         href={`/highschool/${item.examCode}/${item.subjectSlug}/${item.topicSlug}/study`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-sm font-semibold transition-colors"
+                        className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold transition-colors hover:bg-slate-700"
                       >
                         <BookOpen className="w-4 h-4 text-teal-300" />
                         Study
                       </Link>
                       <Link
                         href={`/highschool/${item.examCode}/${item.subjectSlug}/${item.topicSlug}/quiz`}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg gn-btn-gold text-sm font-semibold transition-colors"
+                        className="gn-btn-gold flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition-colors"
                       >
                         <HelpCircle className="w-4 h-4" />
                         Quiz
@@ -333,7 +349,7 @@ export default function BattlePlanPage() {
                         type="button"
                         disabled={doneBusy === item.topicId}
                         onClick={() => void markDone(item.topicId)}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-lg border border-emerald-500/30 text-emerald-300 text-sm font-semibold hover:bg-emerald-500/10 transition-colors disabled:opacity-50"
+                        className="flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-emerald-500/30 px-4 py-2 text-sm font-semibold text-emerald-300 transition-colors hover:bg-emerald-500/10 disabled:opacity-50"
                       >
                         <Circle className="w-4 h-4" />
                         {doneBusy === item.topicId ? "Saving…" : "Done"}
@@ -344,30 +360,19 @@ export default function BattlePlanPage() {
               )}
             </section>
 
-            {/* Upcoming */}
             {upcoming.length > 0 && (
               <section className="space-y-4">
                 <h2 className="text-xl font-bold">Coming up</h2>
                 {upcoming.map((day) => (
-                  <div
-                    key={day.date}
-                    className="rounded-xl border border-slate-800 bg-slate-900/60 p-5"
-                  >
-                    <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-                      {day.date}
-                    </div>
+                  <div key={day.date} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
+                    <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate-400">{day.date}</div>
                     <ul className="space-y-2">
                       {day.items.map((item) => (
-                        <li
-                          key={`${item.topicId}-${item.kind}`}
-                          className="text-sm text-slate-300 flex items-center justify-between gap-3"
-                        >
+                        <li key={`${item.topicId}-${item.kind}`} className="flex items-center justify-between gap-3 text-sm text-slate-300">
                           <span className="truncate">
                             {item.subject} — {item.topic}
                           </span>
-                          <span
-                            className={`shrink-0 text-xs font-semibold px-2 py-0.5 rounded-full border ${priorityStyle[item.priority]}`}
-                          >
+                          <span className={`shrink-0 rounded-full border px-2 py-0.5 text-xs font-semibold ${priorityStyle[item.priority]}`}>
                             {item.kind}
                           </span>
                         </li>
@@ -381,7 +386,7 @@ export default function BattlePlanPage() {
             <button
               type="button"
               onClick={() => setHasPlan(false)}
-              className="inline-flex min-h-[44px] items-center gap-2 text-sm text-muted hover:text-slate-200 transition-colors"
+              className="inline-flex min-h-[44px] items-center gap-2 text-sm text-muted transition-colors hover:text-slate-200"
             >
               <RotateCcw className="w-4 h-4" />
               Rebuild with a new exam date
@@ -390,5 +395,87 @@ export default function BattlePlanPage() {
         )}
       </div>
     </main>
+  );
+}
+
+/**
+ * University planner — the premium AI path. Foundation shell: capture the
+ * inputs the AI needs (goal, exam date, course load) with an honest empty state
+ * until generation is wired.
+ */
+function UniversityPlanner({
+  goal,
+  setGoal,
+  uniExamDate,
+  setUniExamDate,
+  courseLoad,
+  setCourseLoad,
+}: {
+  goal: string;
+  setGoal: (v: string) => void;
+  uniExamDate: string;
+  setUniExamDate: (v: string) => void;
+  courseLoad: string;
+  setCourseLoad: (v: string) => void;
+}) {
+  const ready = goal.trim().length > 0 && uniExamDate.length > 0 && courseLoad.trim().length > 0;
+  return (
+    <div className="space-y-6">
+      <section className="gn-card gn-lift space-y-5 p-6 md:p-8">
+        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          <Sparkles className="h-4 w-4 text-violet-200" aria-hidden />
+          AI planner
+        </div>
+        <h2 className="font-serif text-xl font-bold">Tell the planner what you are preparing</h2>
+        <div className="grid gap-5">
+          <label className="block text-sm text-muted">
+            Goal
+            <input
+              type="text"
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              placeholder="e.g. Cover all Year 1 anatomy before finals"
+              className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-slate-100 placeholder:text-slate-500"
+            />
+          </label>
+          <label className="block text-sm text-muted">
+            Exam date
+            <input
+              type="date"
+              value={uniExamDate}
+              min={new Date().toISOString().slice(0, 10)}
+              onChange={(e) => setUniExamDate(e.target.value)}
+              className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-slate-100"
+            />
+          </label>
+          <label className="block text-sm text-muted">
+            Course load
+            <input
+              type="text"
+              value={courseLoad}
+              onChange={(e) => setCourseLoad(e.target.value)}
+              placeholder="e.g. Anatomy, Physiology, Biochemistry"
+              className="mt-2 block min-h-[48px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3 text-slate-100 placeholder:text-slate-500"
+            />
+          </label>
+        </div>
+        <button
+          type="button"
+          disabled={!ready}
+          className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-sm text-on-primary transition-colors hover:bg-primary-hover disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          <Crown className="w-4 h-4" aria-hidden />
+          Generate AI plan
+        </button>
+      </section>
+
+      <div className="rounded-2xl border border-line bg-surface/40 p-8 text-center">
+        <GraduationCap className="mx-auto mb-3 h-8 w-8 text-electric-text" aria-hidden />
+        <p className="text-sm text-muted">
+          Your AI battle plan will appear here. The University planner is being built — this shell captures
+          your goals, dates and course load so the plan can be generated from them.
+        </p>
+      </div>
+    </div>
   );
 }

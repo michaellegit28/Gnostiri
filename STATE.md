@@ -1,3 +1,21 @@
+## Battle Plan foundation (2026-11-26) — branch agent-app/battle-plan-schema
+- Tiered architecture begun: one shared /battle-plan nav item whose page toggles the lane.
+  High School = rules-driven automated countdown (live, existing engine via /api/battle-plan +
+  StudyPlan). University = premium AI planner (foundation shell with honest empty state; the AI
+  generation + premium gating land next).
+- Schema: new UNIFIED BattlePlan model + BattlePlanStatus enum (goals, examDate, inputs Json,
+  plan Json, status) shared by both lanes, indexed (userId, domain, status), cascade to User.
+- Migration: prisma/migrations/20261126120000_battle_plan — strictly additive (CREATE TABLE IF
+  NOT EXISTS, idempotent CREATE TYPE, JSONB, FK→User). Apply via Supabase SQL editor (rule 7);
+  pooler unreachable from this box (P1001). No existing table is touched.
+- NOT YET WIRED: the BattlePlan table is provisioned ahead of the planner persistence + AI
+  generation — next slice reads/writes it.
+- Files: prisma/schema.prisma, prisma/migrations/20261126120000_battle_plan/migration.sql,
+  src/app/battle-plan/page.tsx, src/components/chrome/nav-model.ts (Battle Plan → shared),
+  src/components/dashboard/LaneBoard.tsx, tests/battle-plan.test.mjs.
+- Gates: prisma generate · prisma validate · tsc · next lint · node --test (Battle Plan + full
+  suite) green. Local next build Termux-SWC limited; CI/Vercel authoritative.
+
 ## UX/IA + multi-theme overhaul shipped (2026-11-26) — branch agent-app/copy-ui-themes
 - Explanations moved out of the chrome into the replayable first-sign-in tour; the
   "built for the December launch" footer copy was removed. GSE = High School exam
