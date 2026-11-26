@@ -47,7 +47,8 @@ structure + mastery/SM-2), extras (discovery). 1st-launch token gate
 | UPSTASH_REDIS_REST_TOKEN | EMPTY | Same |
 | STRIPE_SECRET_KEY | EMPTY | Payments not wired |
 | STRIPE_WEBHOOK_SECRET | EMPTY | Same |
-| PAYSTACK_SECRET_KEY | EMPTY | Same |
+| PAYSTACK_SECRET_KEY | EMPTY | Same — Paystack FIRST (owner uploading); checkout + webhook + entitlement verified by payments-lane r1 |
+| PAYSTACK_WEBHOOK_SECRET | EMPTY | Optional — dashboard signing secret (whsec_…) for the newer `Paystack-Signature` t/v1 scheme; the secret-key `x-paystack-signature` header is honoured when unset |
 | RAZORPAY_KEY_ID | NOT SET | Same |
 | RAZORPAY_KEY_SECRET | NOT SET | Same |
 | RAZORPAY_WEBHOOK_SECRET | NOT SET | Same |
