@@ -866,6 +866,8 @@ shared study surface**, and raise the UI to a premium/tactile standard. Payments
   absent (migrations are owner-applied SQL), Phase 8 + UserPreference columns present. Schema drift to
   review: `Question.paper/markingGuide/marks/sourceYear`, `Topic.tags`, `User.schoolId`,
   `ContentRequest.title` exist in the live DB but not in `prisma/schema.prisma`.
+- **Secret to rotate** — `UPSTASH_REDIS_REST_TOKEN` was printed to the session's command output while
+  sourcing `.env`; it was never written to the repo. Rotate it in Upstash and `.env` (name only here).
 - **Gates** — `npx prisma generate` · `npx tsc --noEmit` · `npx next lint` · `node --test tests/*.test.mjs`
   all green. Local `npm run build` is blocked on Termux/Android: Next 14.2.35 has no published
   `@next/swc-android-arm64` and the WASM/native-arm64-musl fallback cannot load on this box. CI remains
