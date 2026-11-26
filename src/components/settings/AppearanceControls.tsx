@@ -2,15 +2,13 @@
 
 import { useEffect, useState } from "react";
 import LiteModeToggle from "@/components/chrome/LiteModeToggle";
-import ThemeToggle from "@/components/chrome/ThemeToggle";
+import ThemeSelector from "@/components/settings/ThemeSelector";
 
 /**
- * Appearance prefs — the accessibility escape hatches, persisted locally:
- * a solid background (no blur — easier on astigmatism and low-end devices),
- * reduced motion, and text-only Lite Mode. All three are stored on the
- * device; none requires an account.
+ * Appearance controls. Persistent, device-local and description-free: theme,
+ * solid background, reduced motion, Lite Mode.
  */
-export default function AppearanceControls() {
+export default function AppearanceControls({ premium }: { premium: boolean }) {
   const [solid, setSolid] = useState(false);
   const [reduced, setReduced] = useState(false);
 
@@ -35,63 +33,54 @@ export default function AppearanceControls() {
   }
 
   return (
-    <div className="space-y-5">
-      <div className="gn-shadow flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
-        <div>
-          <h3 className="font-semibold text-slate-100">Colour theme</h3>
-          <p className="mt-1 max-w-md text-sm text-muted">
-            Dark by default. Light mode uses the same refined palette — every surface passes contrast in both.
-          </p>
+    <div className="space-y-4">
+      <section aria-labelledby="theme-settings" className="rounded-2xl border border-line bg-surface/40 p-5">
+        <h3 id="theme-settings" className="font-semibold text-slate-100">Theme</h3>
+        <div className="mt-4">
+          <ThemeSelector premium={premium} />
         </div>
-        <ThemeToggle />
-      </div>
-      <Toggle
+      </section>
+
+      <Switch
         label="Solid background"
-        note="Replaces the blurred aurora backdrop with a flat dark surface — higher contrast, less eye strain."
         checked={solid}
         onChange={toggleSolid}
       />
-      <Toggle
+      <Switch
         label="Reduce motion"
-        note="Disables card, menu and celebration animations across the app."
         checked={reduced}
         onChange={toggleReduced}
       />
-      <div className="gn-shadow rounded-2xl border border-line bg-surface/40 p-5">
-        <h3 className="font-semibold text-slate-100">Text-only Lite Mode</h3>
-        <p className="mt-1 text-sm text-muted">Hides diagrams and heavy media for slow connections and data-saving.</p>
+
+      <section aria-labelledby="lite-settings" className="rounded-2xl border border-line bg-surface/40 p-5">
+        <h3 id="lite-settings" className="font-semibold text-slate-100">Lite Mode</h3>
         <div className="mt-4">
           <LiteModeToggle />
         </div>
-      </div>
+      </section>
     </div>
   );
 }
 
-function Toggle({
+function Switch({
   label,
-  note,
   checked,
   onChange,
 }: {
   label: string;
-  note: string;
   checked: boolean;
   onChange: () => void;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
-      <div>
-        <h3 className="font-semibold text-slate-100">{label}</h3>
-        <p className="mt-1 max-w-md text-sm text-muted">{note}</p>
-      </div>
+    <div className="flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface/40 p-5">
+      <h3 className="font-semibold text-slate-100">{label}</h3>
       <button
         type="button"
         role="switch"
         aria-checked={checked}
         aria-label={label}
         onClick={onChange}
-        className={`gn-motion relative mt-1 h-7 w-12 shrink-0 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+        className={`gn-motion relative h-7 w-12 shrink-0 rounded-full border transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
           checked ? "border-primary/60 bg-primary/30" : "border-line-strong bg-surface-2"
         }`}
       >

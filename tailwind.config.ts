@@ -6,13 +6,13 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // Dark mode is an EXPLICIT attribute ([data-theme="dark"]), never the OS.
-  // The app's default theme is dark and users opt into light via the toggle
-  // (localStorage + pre-paint script in layout.tsx); following prefers-color-
-  // scheme made every dark: utility flip under an OS setting the app ignores,
-  // producing half-migrated screens. With the selector strategy the dark:
-  // variant tracks the same attribute the token block does.
-  darkMode: ["selector", '[data-theme="dark"]'],
+  // Dark mode is an EXPLICIT attribute, never the OS. The app ships eight named
+  // themes (see src/lib/themes.ts); "Midnight Scholar" is the dark default and
+  // every palette defines its tokens directly under [data-theme="<id>"] in
+  // globals.css, so the dark: variant is dormant (no component uses it). It is
+  // pinned to the default dark theme so if it is ever re-introduced it tracks an
+  // attribute the app controls, not a prefers-color-scheme the app ignores.
+  darkMode: ["selector", '[data-theme="midnight-scholar"]'],
   theme: {
     extend: {
       colors: {

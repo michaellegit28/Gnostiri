@@ -23,9 +23,11 @@ export default async function ExamPage({ params, searchParams }: PageProps) {
 
   const course = await prisma.course.findFirst({
     where: { domain: "university", slug, isPublished: true },
-    select: { id: true, title: true },
+    select: { id: true, title: true, code: true },
   });
   if (!course) notFound();
+  // University course examinations are named GC-(course name & code).
+  const examTitle = course.code ? `GC-${course.title} (${course.code})` : `GC-${course.title}`;
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-12">
@@ -47,13 +49,8 @@ export default async function ExamPage({ params, searchParams }: PageProps) {
         <span className="text-slate-300">Exam hall</span>
       </nav>
       <header className="border-b pb-8">
-        <p className="text-sm font-medium uppercase tracking-widest text-slate-400">Exam Hall</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{course.title}</h1>
-        <p className="mt-3 max-w-2xl text-slate-400">
-          {examMode === "timed"
-            ? "A blueprint-balanced paper drawn from published items across this course. Negative marking applies, answers are revealed only on submission, and the clock auto-submits."
-            : "An open-book attempt on the same blueprint. No time pressure, and practice sittings do not graduate concepts."}
-        </p>
+        <p className="text-sm font-medium uppercase tracking-widest text-slate-400">Course exam hall</p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{examTitle}</h1>
       </header>
 
       <div className="mt-8 flex gap-2">

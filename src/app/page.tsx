@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/lib/server-auth";
 import type { Metadata } from "next";
 import Greeting from "@/components/dashboard/Greeting";
 import BattlePlanHero from "@/components/dashboard/TodaysPath";
-import FocusTimer from "@/components/dashboard/FocusTimer";
+import LaneBoard from "@/components/dashboard/LaneBoard";
 import StatsRow from "@/components/dashboard/StatsRow";
 import LeagueStatusWidget from "@/components/dashboard/LeagueStatusWidget";
 import TutorShortcut from "@/components/dashboard/TutorShortcut";
@@ -17,13 +17,13 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Gnostiri",
-  description: "Verified exam questions, full university courses, your AI study assistant, and a season league.",
+  description: "GSE past papers, university course exam halls, your AI study assistant, and a season league.",
 };
 
 /**
- * Home. Signed in: the dashboard — greeting, today's battle plan, honest stats,
- * the Global Ranking widget and the tutor shortcut. Signed out: one landing
- * screen. No study categories on Home (they live at /study).
+ * Home. Signed in: the dashboard — greeting, today's battle plan, the lane-tabbed
+ * continue board, honest stats, the ranking widget and the tutor shortcut.
+ * Signed out: one landing screen. No study categories on Home (they live at /study).
  */
 export default async function Home() {
   const user = await getCurrentUser();
@@ -35,10 +35,8 @@ export default async function Home() {
           <section aria-label="Dashboard" className="space-y-8">
             <Greeting name={user.name} email={user.email} />
             <AnalyticsBeacon type="mission_viewed" meta={{ source: "dashboard" }} />
-            <div className="grid gap-6 lg:grid-cols-[1.45fr_0.75fr]">
-              <BattlePlanHero userId={user.id} />
-              <FocusTimer />
-            </div>
+            <BattlePlanHero userId={user.id} />
+            <LaneBoard />
             <QuickLinks />
             <StatsRow userId={user.id} />
             <div className="grid gap-6 lg:grid-cols-2">

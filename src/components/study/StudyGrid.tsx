@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { BookOpen, Compass, FolderOpen, GraduationCap } from "lucide-react";
 import { useDomain } from "@/context/DomainContext";
-import { DEFAULT_LEARNING_DOMAIN, isVisibleForLearningDomain, type NavAudience } from "@/lib/learning-domain";
+import { DEFAULT_LEARNING_DOMAIN, isVisibleForAudience, type NavAudience } from "@/lib/learning-domain";
 
 /**
  * Study hub — the cards for one learning lane plus the shared work surfaces.
  * Counts come from the database (never hard-coded) so the page can't lie.
- * A university student never receives the high-school card, and vice versa;
- * discovery and the desk are shared by design.
+ * Filtering is by the card's own AUDIENCE, not its URL prefix: /desk is a
+ * shared-URL route but a University-only feature (owner directive), so a
+ * High School session must never see the PDF Desk card.
  */
 
 interface StudyCardSpec {
@@ -24,7 +25,7 @@ interface StudyCardSpec {
 export default function StudyGrid({ cards }: { cards: StudyCardSpec[] }) {
   const { learningDomain } = useDomain();
   const domain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
-  const visibleCards = cards.filter((card) => isVisibleForLearningDomain(card.href, domain));
+  const visibleCards = cards.filter((card) => isVisibleForAudience(card.audience, domain));
 
   return (
     <div className="gn-stagger grid gap-4 sm:grid-cols-2">

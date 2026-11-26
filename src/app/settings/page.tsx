@@ -1,9 +1,11 @@
 import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
+import { getEntitlements } from "@/lib/entitlements";
 import AppearanceControls from "@/components/settings/AppearanceControls";
 import LearningPreferences from "@/components/settings/LearningPreferences";
 import LearningDomainControls from "@/components/settings/LearningDomainControls";
+import TourReplay from "@/components/onboarding/TourReplay";
 import {
   DEFAULT_USER_PREFERENCES,
   normalizeUserPreferences,
@@ -12,12 +14,13 @@ import {
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Learning & accessibility — Gnostiri" };
+export const metadata = { title: "Settings — Gnostiri" };
 
 export default async function SettingsPage() {
   const user = await getCurrentUser();
   let preferences: UserPreferenceInput = { ...DEFAULT_USER_PREFERENCES };
   let preferencesAvailable = !user;
+  let premium = false;
 
   if (user) {
     try {
@@ -36,16 +39,18 @@ export default async function SettingsPage() {
     } catch {
       preferencesAvailable = false;
     }
+    try {
+      const entitlements = await getEntitlements(user.id);
+      premium = entitlements.plan !== "free";
+    } catch {
+      premium = false;
+    }
   }
 
   return (
     <main className="mx-auto max-w-2xl px-5 py-8 md:py-12">
       <p className="text-[11px] uppercase tracking-[0.3em] text-electric-text">Settings</p>
-      <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100 md:text-4xl">Learning & accessibility</h1>
-      <p className="mt-3 text-sm text-muted">
-        Account preferences travel across devices. Appearance controls stay on this device and apply instantly.
-        Gnostiri is built to be usable with a keyboard, a screen reader, or a slow connection.
-      </p>
+      <h1 className="mt-3 font-serif text-3xl font-bold text-slate-100 md:text-4xl">Settings</h1>
       <div className="mt-8 space-y-8">
         <LearningPreferences
           initial={preferences}
@@ -56,7 +61,6 @@ export default async function SettingsPage() {
           <h2 id="learning-domain-settings" className="font-serif text-xl font-bold text-ink">
             High School / University lane
           </h2>
-          <p className="mt-1 text-sm text-muted">What your navigation and study hub show. Discovery is shared.</p>
           <div className="mt-4">
             <LearningDomainControls />
           </div>
@@ -65,9 +69,16 @@ export default async function SettingsPage() {
           <h2 id="appearance-settings" className="font-serif text-xl font-bold text-ink">
             Appearance & accessibility
           </h2>
-          <p className="mt-1 text-sm text-muted">Stored only on this device.</p>
           <div className="mt-4">
-            <AppearanceControls />
+            <AppearanceControls premium={premium} />
+          </div>
+        </section>
+        <section aria-labelledby="tour-settings">
+          <h2 id="tour-settings" className="font-serif text-xl font-bold text-ink">
+            Feature tour
+          </h2>
+          <div className="mt-4">
+            <TourReplay />
           </div>
         </section>
       </div>
@@ -75,7 +86,6 @@ export default async function SettingsPage() {
         <h2 className="font-semibold text-slate-100">Keyboard shortcuts</h2>
         <ul className="mt-3 space-y-1.5">
           <li><kbd className="rounded border border-line-strong bg-surface-2 px-1.5 py-0.5 text-xs text-slate-300">Ctrl</kbd> / <kbd className="rounded border border-line-strong bg-surface-2 px-1.5 py-0.5 text-xs text-slate-300">⌘</kbd> + <kbd className="rounded border border-line-strong bg-surface-2 px-1.5 py-0.5 text-xs text-slate-300">K</kbd> — jump to any part of the app</li>
-          <li><kbd className="rounded border border-line-strong bg-surface-2 px-1.5 py-0.5 text-xs text-slate-300">Tab</kbd> — move through the interface; every stop shows a gold focus ring</li>
           <li><kbd className="rounded border border-line-strong bg-surface-2 px-1.5 py-0.5 text-xs text-slate-300">Esc</kbd> — close menus and overlays</li>
         </ul>
       </div>

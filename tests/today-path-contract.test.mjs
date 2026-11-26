@@ -1,5 +1,10 @@
 // Contract tests for the dashboard "Today" modules (orchestrator assignment,
-// agent-3/today-path-r1): Today's path roadmap + Focus timer + stat chips.
+// agent-3/today-path-r1): Today's path roadmap + stat chips.
+//
+// The Focus timer was removed on the UX/IA pass (owner directive — a low-value
+// surface on a lane-tabbed dashboard); its component-invariant tests below now
+// skip because the file is gone, which is the intended regression guard against
+// it quietly returning.
 //
 // Source-level assertions on the shipped components — no DB, no browser —
 // following the pattern of qa-tools.test.mjs / dashboard.test.mjs. They encode
@@ -39,18 +44,19 @@ test("Home keeps the greeting, stats, league widget, achievements and tutor shor
   }
 });
 
-test("Home wires the focus timer beside the day-planning module and passes userId", () => {
+test("Home wires the day-planning module server-scoped (userId) and drops the focus timer", () => {
   const page = has(PAGE) ? read(PAGE) : "";
   // The day module may be the legacy BattlePlanHero file or the new TodaysPath
   // (which main imports aliased as BattlePlanHero). Either way it must be
-  // user-scoped server-side, and FocusTimer ships beside it.
+  // user-scoped server-side.
   assert.match(page, /BattlePlanHero|TodaysPath/, "Home renders a day-planning module");
-  assert.match(page, /FocusTimer/, "FocusTimer is wired on Home");
   assert.match(
     page,
-    /(BattlePlanHero|TodaysPath)[\s\S]{0,120}userId=\{user\.id\}/,
+    /(BattlePlanHero|TodaysPath)[\s\S]{0,160}userId=\{user\.id\}/,
     "the day module receives userId={user.id} (server-scoped, not client-derived)",
   );
+  // The Focus timer was removed on the UX/IA pass — it must not be wired back in.
+  assert.doesNotMatch(page, /FocusTimer/, "the focus timer is no longer wired on Home");
 });
 
 // ─── TodaysPath: server component invariants ──────────────────────────────────

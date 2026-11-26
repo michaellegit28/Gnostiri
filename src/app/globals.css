@@ -707,3 +707,185 @@ html.reduce-motion .gn-badge::after, html.lite-mode .gn-badge::after, html.lite 
   .gn-flame { animation: gn-flame 1800ms ease-in-out infinite; transform-origin: center; }
 }
 html.reduce-motion .gn-flame, html.lite-mode .gn-flame, html.lite .gn-flame { animation: none; }
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Selectable colour themes (settings → Appearance).
+   Eight premium palettes. Free students get Midnight Scholar (dark) and
+   Paper White (light); the rest are Prime-locked but visible. Each palette
+   block is SELF-CONTAINED for the surfaces that carry content and contrast,
+   and pins the aurora + ink/disabled helper tokens so a light palette never
+   inherits the dark defaults. Shared secondary identities (subject colours,
+   semantic status, module accents, competition cups) are pooled per mode in
+   the two grouped rules at the end so they stay consistent across all palettes
+   of the same mode yet still flip with light/dark.
+   ----------------------------------------------------------------------------- */
+
+/* ── Dark palettes ─────────────────────────────────────────────────────────── */
+[data-theme="midnight-scholar"] {
+  --bg-deep: 5 8 18;        --bg: 10 15 30;        --surface: 26 35 50;    --surface-2: 38 49 72;
+  --border: 44 58 84;       --border-strong: 96 122 169;
+  --text: 226 232 240;      --text-muted: 148 163 184; --text-subtle: 116 131 155;
+  --text-placeholder: 148 163 184; --input-border: 96 122 169; --link: 147 197 253;
+  --text-disabled: 74 88 116; --muted-fill: 148 163 184; --ink: 226 232 240;
+  --primary: 59 130 246;    --primary-hover: 96 165 250; --on-primary: 8 15 30;
+  --electric: 59 130 246;   --electric-text: 147 197 253;
+  --gold: 245 166 35;       --gold-hover: 255 209 122; --gold-text: 255 209 122; --on-gold: 8 15 30;
+  --focus: 59 130 246;      --radius: 14px;
+  --glass-bg: rgb(26 35 50 / 0.72); --glass-border: rgb(226 232 240 / 0.14); --header-bg: rgb(10 15 30 / 0.72);
+  --aurora-1: rgb(59 130 246 / 0.20); --aurora-2: rgb(99 102 241 / 0.16); --aurora-3: rgb(56 189 248 / 0.14);
+  color-scheme: dark;
+}
+
+[data-theme="deep-forest"] {
+  --bg-deep: 4 15 12;       --bg: 10 31 26;        --surface: 26 46 40;    --surface-2: 36 62 54;
+  --border: 46 69 60;       --border-strong: 91 140 122;
+  --text: 209 250 229;      --text-muted: 154 203 177; --text-subtle: 120 172 149;
+  --text-placeholder: 154 203 177; --input-border: 91 140 122; --link: 167 243 208;
+  --text-disabled: 76 116 98; --muted-fill: 154 203 177; --ink: 209 250 229;
+  --primary: 16 185 129;    --primary-hover: 52 211 153; --on-primary: 3 31 22;
+  --electric: 16 185 129;   --electric-text: 167 243 208;
+  --gold: 245 166 35;       --gold-hover: 255 209 122; --gold-text: 255 209 122; --on-gold: 3 31 22;
+  --focus: 16 185 129;      --radius: 14px;
+  --glass-bg: rgb(26 46 40 / 0.72); --glass-border: rgb(209 250 229 / 0.14); --header-bg: rgb(10 31 26 / 0.72);
+  --aurora-1: rgb(16 185 129 / 0.18); --aurora-2: rgb(34 197 94 / 0.12); --aurora-3: rgb(132 204 22 / 0.10);
+  color-scheme: dark;
+}
+
+[data-theme="solarized-dark"] {
+  --bg-deep: 0 20 26;       --bg: 0 43 54;         --surface: 7 54 66;     --surface-2: 18 71 82;
+  --border: 88 110 117;     --border-strong: 147 161 171;
+  --text: 228 233 236;      --text-muted: 165 180 187; --text-subtle: 138 154 160;
+  --text-placeholder: 165 180 187; --input-border: 147 161 171; --link: 133 183 226;
+  --text-disabled: 90 110 116; --muted-fill: 165 180 187; --ink: 228 233 236;
+  --primary: 38 139 210;    --primary-hover: 89 168 224; --on-primary: 0 29 38;
+  --electric: 38 139 210;   --electric-text: 133 183 226;
+  --gold: 181 137 0;        --gold-hover: 203 158 20; --gold-text: 233 196 106; --on-gold: 0 43 54;
+  --focus: 38 139 210;      --radius: 14px;
+  --glass-bg: rgb(7 54 66 / 0.72); --glass-border: rgb(228 233 236 / 0.16); --header-bg: rgb(0 43 54 / 0.74);
+  --aurora-1: rgb(38 139 210 / 0.16); --aurora-2: rgb(181 137 0 / 0.12); --aurora-3: rgb(133 183 226 / 0.10);
+  color-scheme: dark;
+}
+
+[data-theme="high-contrast"] {
+  --bg-deep: 0 0 0;         --bg: 0 0 0;           --surface: 26 26 26;    --surface-2: 45 45 45;
+  --border: 140 140 140;    --border-strong: 210 210 210;
+  --text: 255 255 255;      --text-muted: 220 220 220; --text-subtle: 200 200 200;
+  --text-placeholder: 210 210 210; --input-border: 220 220 220; --link: 255 255 255;
+  --text-disabled: 160 160 160; --muted-fill: 200 200 200; --ink: 255 255 255;
+  --primary: 255 255 255;   --primary-hover: 235 235 235; --on-primary: 0 0 0;
+  --electric: 255 255 255;  --electric-text: 255 255 255;
+  --gold: 255 214 102;      --gold-hover: 255 228 150; --gold-text: 255 214 102; --on-gold: 0 0 0;
+  --focus: 255 255 255;     --radius: 14px;
+  --glass-bg: rgb(26 26 26 / 0.92); --glass-border: rgb(255 255 255 / 0.24); --header-bg: rgb(0 0 0 / 0.92);
+  --aurora-1: rgb(255 255 255 / 0.04); --aurora-2: rgb(255 255 255 / 0.03); --aurora-3: rgb(255 255 255 / 0.02);
+  color-scheme: dark;
+}
+
+/* ── Light palettes ────────────────────────────────────────────────────────── */
+[data-theme="paper-white"] {
+  --bg-deep: 241 245 249;   --bg: 250 250 250;     --surface: 255 255 255;  --surface-2: 241 245 249;
+  --border: 214 222 238;    --border-strong: 148 163 184;
+  --text: 30 41 59;         --text-muted: 71 85 105; --text-subtle: 100 116 139;
+  --text-placeholder: 100 116 139; --input-border: 148 163 184; --link: 67 56 202;
+  --text-disabled: 148 163 184; --muted-fill: 100 116 139; --ink: 30 41 59;
+  --primary: 79 70 229;     --primary-hover: 67 56 202; --on-primary: 255 255 255;
+  --electric: 79 70 229;    --electric-text: 67 56 202;
+  --gold: 180 83 9;         --gold-hover: 154 52 18; --gold-text: 154 52 18; --on-gold: 255 255 255;
+  --focus: 79 70 229;       --radius: 14px;
+  --glass-bg: rgb(255 255 255 / 0.74); --glass-border: rgb(30 41 59 / 0.10); --header-bg: rgb(250 250 250 / 0.74);
+  --aurora-1: rgb(99 102 241 / 0.10); --aurora-2: rgb(14 165 233 / 0.08); --aurora-3: rgb(245 158 11 / 0.07);
+  color-scheme: light;
+}
+
+[data-theme="warm-cream"] {
+  --bg-deep: 247 240 224;   --bg: 253 246 227;     --surface: 255 254 248;  --surface-2: 247 240 224;
+  --border: 226 216 187;    --border-strong: 172 158 111;
+  --text: 60 48 24;         --text-muted: 112 92 56; --text-subtle: 133 118 91;
+  --text-placeholder: 133 118 91; --input-border: 172 158 111; --link: 180 83 9;
+  --text-disabled: 172 158 111; --muted-fill: 133 118 91; --ink: 60 48 24;
+  --primary: 194 65 12;     --primary-hover: 154 52 18; --on-primary: 255 251 235;
+  --electric: 194 65 12;    --electric-text: 154 52 18;
+  --gold: 180 83 9;         --gold-hover: 146 64 14; --gold-text: 146 64 14; --on-gold: 255 251 235;
+  --focus: 180 83 9;        --radius: 14px;
+  --glass-bg: rgb(255 254 248 / 0.78); --glass-border: rgb(60 48 24 / 0.12); --header-bg: rgb(253 246 227 / 0.78);
+  --aurora-1: rgb(245 158 11 / 0.12); --aurora-2: rgb(217 119 6 / 0.09); --aurora-3: rgb(132 204 22 / 0.07);
+  color-scheme: light;
+}
+
+[data-theme="cool-slate"] {
+  --bg-deep: 226 232 240;   --bg: 241 245 249;     --surface: 255 255 255;  --surface-2: 226 232 240;
+  --border: 203 213 225;    --border-strong: 148 163 184;
+  --text: 15 23 42;         --text-muted: 71 85 105; --text-subtle: 100 116 139;
+  --text-placeholder: 100 116 139; --input-border: 148 163 184; --link: 3 105 161;
+  --text-disabled: 148 163 184; --muted-fill: 100 116 139; --ink: 15 23 42;
+  --primary: 2 132 199;     --primary-hover: 3 105 161; --on-primary: 255 255 255;
+  --electric: 14 165 233;   --electric-text: 3 105 161;
+  --gold: 180 83 9;         --gold-hover: 154 52 18; --gold-text: 154 52 18; --on-gold: 255 255 255;
+  --focus: 2 132 199;       --radius: 14px;
+  --glass-bg: rgb(255 255 255 / 0.78); --glass-border: rgb(15 23 42 / 0.10); --header-bg: rgb(241 245 249 / 0.78);
+  --aurora-1: rgb(14 165 233 / 0.12); --aurora-2: rgb(99 102 241 / 0.08); --aurora-3: rgb(16 185 129 / 0.06);
+  color-scheme: light;
+}
+
+[data-theme="solarized-light"] {
+  --bg-deep: 238 232 213;   --bg: 253 246 227;     --surface: 255 253 242;  --surface-2: 238 232 213;
+  --border: 214 205 178;    --border-strong: 147 161 171;
+  --text: 88 110 117;       --text-muted: 112 128 134; --text-subtle: 124 137 138;
+  --text-placeholder: 124 137 138; --input-border: 147 161 171; --link: 36 110 156;
+  --text-disabled: 147 161 171; --muted-fill: 124 137 138; --ink: 88 110 117;
+  --primary: 38 139 210;    --primary-hover: 32 122 189; --on-primary: 253 246 227;
+  --electric: 38 139 210;   --electric-text: 36 110 156;
+  --gold: 181 137 0;        --gold-hover: 154 116 0; --gold-text: 133 100 8; --on-gold: 253 246 227;
+  --focus: 38 139 210;       --radius: 14px;
+  --glass-bg: rgb(255 253 242 / 0.78); --glass-border: rgb(0 43 54 / 0.12); --header-bg: rgb(253 246 227 / 0.78);
+  --aurora-1: rgb(38 139 210 / 0.10); --aurora-2: rgb(181 137 0 / 0.08); --aurora-3: rgb(133 183 226 / 0.07);
+  color-scheme: light;
+}
+
+/* Pooled secondary identities — shared across every palette of a given mode so
+   subject/status/module/competition colours stay consistent yet still flip with
+   light vs dark. Listed AFTER the palette blocks so they win over the base
+   :root defaults on ties. */
+[data-theme="midnight-scholar"],
+[data-theme="deep-forest"],
+[data-theme="solarized-dark"],
+[data-theme="high-contrast"] {
+  --cup-speed: 49 92 255;     --cup-mastery: 181 154 255; --cup-bracket: 20 184 166; --cup-endurance: 245 166 35;
+  --subj-physics: 125 211 252; --subj-chem: 84 224 190; --subj-bio: 244 114 182; --subj-math: 167 139 250;
+  --cyan: 66 214 220; --cyan-text: 130 224 240;
+  --violet: 181 154 255; --violet-text: 199 181 255;
+  --pink: 244 160 214; --pink-text: 244 160 214;
+  --teal: 66 214 220; --teal-text: 140 233 236;
+  --success: 54 201 165; --success-text: 134 239 172; --success-soft: 54 201 165;
+  --error: 255 107 94; --error-text: 255 138 128; --error-soft: 255 107 94;
+  --warning: 245 166 35; --warning-text: 255 209 122; --warning-soft: 245 166 35;
+  --danger: 255 107 94;
+  --mod-university-a: 49 92 255;   --mod-university-b: 181 154 255;
+  --mod-highschool-a: 66 214 220;  --mod-highschool-b: 84 224 190;
+  --mod-discovery-a: 181 154 255;  --mod-discovery-b: 244 160 214;
+}
+
+[data-theme="paper-white"],
+[data-theme="warm-cream"],
+[data-theme="cool-slate"],
+[data-theme="solarized-light"] {
+  --cup-speed: 49 92 255;     --cup-mastery: 121 82 217; --cup-bracket: 13 148 136; --cup-endurance: 194 65 12;
+  --subj-physics: 3 105 161; --subj-chem: 6 95 70; --subj-bio: 190 24 93; --subj-math: 91 33 182;
+  --cyan: 14 116 144; --cyan-text: 14 116 144;
+  --violet: 109 40 217; --violet-text: 91 33 182;
+  --pink: 219 39 119; --pink-text: 168 50 120;
+  --teal: 14 116 144; --teal-text: 6 118 130;
+  --success: 5 150 105; --success-text: 6 95 70; --success-soft: 5 150 105;
+  --error: 220 38 38; --error-text: 185 28 28; --error-soft: 220 38 38;
+  --warning: 180 83 9; --warning-text: 146 64 8; --warning-soft: 217 119 6;
+  --danger: 185 28 28;
+  --mod-university-a: 67 56 202;   --mod-university-b: 109 40 217;
+  --mod-highschool-a: 8 145 178;   --mod-highschool-b: 5 150 105;
+  --mod-discovery-a: 109 40 217;   --mod-discovery-b: 219 39 119;
+}
+
+/* Lane-aware panes: the unified dashboard renders both lane panels and CSS
+   selects the active one, so there is no server/client identity mismatch. */
+[data-lane="university"] .lane-highschool { display: none; }
+[data-lane="highschool"] .lane-university { display: none; }

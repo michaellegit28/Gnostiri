@@ -10,8 +10,11 @@ import PrimeBadge from "@/components/chrome/PrimeBadge";
 import SyncIndicator from "@/components/offline/SyncIndicator";
 import AccretionEmblem from "@/components/brand/AccretionEmblem";
 import useDialogFocus from "@/components/ui/useDialogFocus";
+import LaneSwitch from "@/components/chrome/LaneSwitch";
+import FeatureTour from "@/components/onboarding/FeatureTour";
 import { NAV_LABEL, TAB_BAR_LABEL, bottomTabsForDomain, isActive, navZonesForDomain, type NavItem } from "./nav-model";
 import { useDomain } from "@/context/DomainContext";
+import { useAuth } from "@/context/AuthContext";
 import { DEFAULT_LEARNING_DOMAIN, learningDomainFromPathname } from "@/lib/learning-domain";
 import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
@@ -24,11 +27,14 @@ import { trackAnalyticsEvent } from "@/lib/analytics-client";
  *
  * Everything renders from nav-model.ts, the drawer/bottom-bar/sidebar/palette
  * can never drift apart, and the AI Tutor FAB, bell and Prime crown each live
- * in exactly one place. Keyboard users get a skip link first in the DOM.
+ * in exactly one place. Keyboard users get a skip link first in the DOM. The
+ * sidebar carries the dual-lane switch; the mount hosts the replayable feature
+ * tour.
  */
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "/";
   const { learningDomain } = useDomain();
+  const { user } = useAuth();
   const pathLearningDomain = learningDomainFromPathname(pathname);
   // Direct lane URLs show their own lane for that page; every other screen
   // follows the student's chosen lane. Discovery never switches the lane.
@@ -176,6 +182,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         }`}
       >
         <div className="h-full overflow-y-auto px-4 py-6">
+          <LaneSwitch />
           {navZones.map((zone) => (
             <div key={zone.id} className="mb-7">
               <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
@@ -214,33 +221,16 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </button>
           </div>
           <nav aria-label={NAV_LABEL} className="px-5 pb-16 pt-4">
+            <LaneSwitch />
             {navZones.map((zone) => (
               <div key={zone.id} className="mb-7">
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
                 <ul className="divide-y divide-border/10 border-y border-border/10">
-                  {zone.items.map((item) => {
-                    const Icon = item.icon;
-                    const active = isActive(pathname, item.href);
-                    return (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          aria-current={active ? "page" : undefined}
-                            className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none ${
-                              active ? "border-primary/40 bg-primary/10 text-slate-100" : "border-transparent hover:border-primary/40"
-                            }`}
-                        >
-                          <Icon className={`h-5 w-5 ${active ? "text-primary" : "text-slate-400 group-hover:text-primary"}`} aria-hidden />
-                          <span>
-                            <span className={`block font-serif text-lg font-bold ${active ? "text-slate-100" : "text-slate-100 group-hover:text-primary"}`}>
-                              {item.label}
-                            </span>
-                            <span className="block text-xs text-muted">{item.note}</span>
-                          </span>
-                        </Link>
-                      </li>
-                    );
-                  })}
+                  {zone.items.map((item) => (
+                    <li key={item.href}>
+                      <DrawerLink item={item} pathname={pathname} />
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
@@ -292,7 +282,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                     >
                       <Icon className="h-4 w-4 text-slate-400" aria-hidden />
                       {item.label}
-                      <span className="ml-auto text-xs text-muted">{item.note}</span>
                     </Link>
                   </li>
                 );
@@ -308,7 +297,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           {children}
         </main>
         <footer className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pb-28 pt-4 lg:pb-6">
-          <p className="text-xs text-muted">Gnostiri — built for the December launch.</p>
+          <p className="text-xs text-muted">Gnostiri</p>
           <Link href="/settings" className="rounded text-xs text-slate-400 underline-offset-2 hover:text-electric-text focus:outline-none">
             Appearance & accessibility
           </Link>
@@ -344,6 +333,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           })}
         </ul>
       </nav>
+
+      {/* The first-sign-in tour only mounts for signed-in students. */}
+      {user ? <FeatureTour /> : null}
     </>
   );
 }
@@ -361,6 +353,25 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
     >
       <Icon className="h-4 w-4 shrink-0" aria-hidden />
       <span className="font-semibold">{item.label}</span>
+    </Link>
+  );
+}
+
+function DrawerLink({ item, pathname }: { item: NavItem; pathname: string }) {
+  const Icon = item.icon;
+  const active = isActive(pathname, item.href);
+  return (
+    <Link
+      href={item.href}
+      aria-current={active ? "page" : undefined}
+      className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none ${
+        active ? "border-primary/40 bg-primary/10 text-slate-100" : "border-transparent hover:border-primary/40"
+      }`}
+    >
+      <Icon className={`h-5 w-5 ${active ? "text-primary" : "text-slate-400 group-hover:text-primary"}`} aria-hidden />
+      <span className={`font-serif text-lg font-bold ${active ? "text-slate-100" : "text-slate-100 group-hover:text-primary"}`}>
+        {item.label}
+      </span>
     </Link>
   );
 }
