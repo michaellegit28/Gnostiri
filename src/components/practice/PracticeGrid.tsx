@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { CalendarCheck, ClipboardList, FolderDown, GraduationCap, MonitorPlay } from "lucide-react";
 import { useDomain } from "@/context/DomainContext";
-import { DEFAULT_LEARNING_DOMAIN, domainLabel, isVisibleForLearningDomain, type NavAudience } from "@/lib/learning-domain";
+import { DEFAULT_LEARNING_DOMAIN, isVisibleForAudience, type NavAudience } from "@/lib/learning-domain";
 
 interface PracticeCardSpec {
   href: string;
   title: string;
-  note: string;
   Icon: typeof ClipboardList;
   audience: NavAudience;
 }
@@ -16,46 +15,41 @@ interface PracticeCardSpec {
 const CARDS: PracticeCardSpec[] = [
   {
     href: "/highschool/exams",
-    title: "Exam boards",
-    note: "Country boards, verified papers, and blueprint-aligned practice.",
+    title: "GSE",
     Icon: ClipboardList,
     audience: "highschool",
   },
   {
     href: "/cbt",
     title: "Timed CBT",
-    note: "A focused computer-based session with server-side scoring.",
     Icon: MonitorPlay,
-    audience: "highschool",
+    audience: "shared",
   },
   {
     href: "/university",
     title: "Course exam halls",
-    note: "Open a university course, then sit its timed, blueprint-balanced exam.",
     Icon: GraduationCap,
     audience: "university",
   },
   {
     href: "/battle-plan",
-    title: "Battle plan",
-    note: "Turn your exam date into a realistic day-by-day mission.",
+    title: "Battle Plan",
     Icon: CalendarCheck,
-    audience: "shared",
+    audience: "highschool",
   },
   {
     href: "/library",
-    title: "Saved downloads",
-    note: "Private study and quiz bundles are collected with your library resources.",
+    title: "Library",
     Icon: FolderDown,
     audience: "shared",
   },
 ];
 
-/** Practice hub, filtered to the student's lane. Discovery is not a practice mode. */
+/** Practice hub, filtered to the student's lane by the card's own audience. */
 export default function PracticeGrid() {
   const { learningDomain } = useDomain();
   const domain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
-  const cards = CARDS.filter((card) => isVisibleForLearningDomain(card.href, domain));
+  const cards = CARDS.filter((card) => isVisibleForAudience(card.audience, domain));
   const primary = cards[0] ?? CARDS[0];
 
   return (
@@ -64,15 +58,15 @@ export default function PracticeGrid() {
         href={primary.href}
         className="gn-motion mt-7 inline-flex min-h-[48px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        {domain === "university" ? "Open a course exam hall" : "Browse exam boards"}
+        {domain === "university" ? "Open a course exam hall" : "Open GSE"}
       </Link>
 
       <section aria-labelledby="practice-destinations" className="mt-12">
         <h2 id="practice-destinations" className="font-serif text-2xl font-bold tracking-tight text-ink">
-          Choose a practice mode
+          Practice modes
         </h2>
         <div className="gn-stagger mt-6 grid gap-4 sm:grid-cols-2">
-          {cards.map(({ href, title, note, Icon }) => (
+          {cards.map(({ href, title, Icon }) => (
             <Link
               key={href}
               href={href}
@@ -82,12 +76,11 @@ export default function PracticeGrid() {
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
               <h3 className="mt-5 font-serif text-xl font-bold text-ink group-hover:text-electric-text">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{note}</p>
             </Link>
           ))}
         </div>
         <p className="mt-4 text-xs text-muted">
-          Showing {domainLabel(domain)} practice. Change this in <Link href="/settings#learning-domain-settings" className="text-electric-text hover:underline">settings</Link>.
+          Change lane in <Link href="/settings#learning-domain-settings" className="text-electric-text hover:underline">settings</Link>.
         </p>
       </section>
     </>

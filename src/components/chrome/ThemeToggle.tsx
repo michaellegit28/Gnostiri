@@ -2,65 +2,37 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import { BRAND_CREAM, BRAND_NAVY } from "@/components/brand/Logo";
+import { currentThemeId, applyTheme, toggleThemeMode } from "@/lib/theme-client";
+import { themeById } from "@/lib/themes";
 
 /**
- * ThemeToggle — dark (default) ⇄ light. The choice is device-local
- * (localStorage "gnostiri.theme") and applied pre-paint by the layout script,
- * so there is no flash. <meta name="theme-color"> follows the theme so the
- * PWA chrome matches. First visit follows the operating system.
- *
- * The meta tag needs a literal colour, so it comes from the documented brand
- * constants (the same source the mark and the win card draw from).
+ * Top-bar dark ⇄ light switch. The full theme catalogue lives in settings;
+ * this keeps the fast OS-style toggle without exposing the other lane or
+ * feature descriptions in the chrome.
  */
-
-const DARK = BRAND_NAVY;
-const LIGHT = BRAND_CREAM;
-
-function currentTheme(): "dark" | "light" {
-  const attr = document.documentElement.getAttribute("data-theme");
-  return attr === "light" ? "light" : "dark";
-}
-
-function apply(theme: "dark" | "light") {
-  document.documentElement.setAttribute("data-theme", theme);
-  try {
-    localStorage.setItem("gnostiri.theme", theme);
-  } catch {
-    /* private mode — the theme simply doesn't persist */
-  }
-  // The layout ships TWO theme-color metas (one per prefers-color-scheme).
-  // Setting every one to the resolved colour makes the explicit choice win
-  // over the OS following until the next load, where the pre-paint script
-  // re-syncs both from the stored theme.
-  const color = theme === "light" ? LIGHT : DARK;
-  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
-    meta.setAttribute("content", color);
-  });
-}
-
 export default function ThemeToggle({ className }: { className?: string }) {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [themeId, setThemeId] = useState(currentThemeId());
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setTheme(currentTheme());
+    setThemeId(currentThemeId());
     setMounted(true);
   }, []);
 
-  const next = theme === "dark" ? "light" : "dark";
+  const theme = themeById(themeId);
+  const nextId = toggleThemeMode(themeId);
 
   return (
     <button
       type="button"
       onClick={() => {
-        apply(next);
-        setTheme(next);
+        applyTheme(nextId);
+        setThemeId(nextId);
       }}
-      aria-label={mounted ? `Switch to ${next} mode` : "Switch colour theme"}
+      aria-label={mounted ? `Switch to ${themeById(nextId).name}` : "Switch colour theme"}
       className={`flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-300 hover:text-electric-text focus:outline-none ${className ?? ""}`}
     >
-      {mounted && theme === "light" ? (
+      {theme.mode === "light" ? (
         <Moon className="h-5 w-5" aria-hidden />
       ) : (
         <Sun className="h-5 w-5" aria-hidden />

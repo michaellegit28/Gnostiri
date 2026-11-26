@@ -52,7 +52,7 @@ export default async function StudyPage() {
       href: "/highschool",
       label: "High School",
       icon: "BookOpen" as const,
-      line: "Exam questions, verified against your lane",
+      line: "GSE past papers and the syllabuses behind them",
       count: `${jambQuestions.toLocaleString("en-NG")} questions · ${jambSubjects} subjects`,
       audience: "highschool" as const,
     },
@@ -60,7 +60,7 @@ export default async function StudyPage() {
       href: "/university",
       label: "University",
       icon: "GraduationCap" as const,
-      line: "Courses, full depth, mastery in teaching order",
+      line: "Courses, concepts and course exam halls",
       count: `${courses} courses · lessons, quizzes and mastery`,
       audience: "university" as const,
     },
@@ -68,17 +68,17 @@ export default async function StudyPage() {
       href: "/discovery",
       label: "Discovery",
       icon: "Compass" as const,
-      line: "Explore past the syllabus",
+      line: "Open research trails past the syllabus",
       count: `${discoveryTopics} research trails`,
       audience: "shared" as const,
     },
     {
       href: "/desk",
-      label: "Desk",
+      label: "PDF Desk",
       icon: "FolderOpen" as const,
-      line: "Your uploads, notes and plans",
+      line: "Turn your PDFs into notes and quizzes",
       count: user ? `${deskCount} document${deskCount === 1 ? "" : "s"} on your desk` : "Sign in to open your desk",
-      audience: "shared" as const,
+      audience: "university" as const,
     },
   ];
 
@@ -86,10 +86,6 @@ export default async function StudyPage() {
     <main className="mx-auto max-w-4xl px-5 py-8 md:py-12">
       <p className="text-[11px] uppercase tracking-[0.3em] text-primary">Study</p>
       <h1 className="gn-title-gradient mt-3 font-serif text-3xl font-bold tracking-tight md:text-4xl">Your study lane</h1>
-      <p className="mt-3 max-w-2xl text-sm text-muted">
-        Your lane, open research trails, and your own uploaded material. High School and University stay separate;
-        Discovery belongs to both.
-      </p>
       <div className="mt-5">
         <Link
           href="/settings#learning-domain-settings"

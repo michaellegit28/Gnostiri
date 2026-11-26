@@ -324,7 +324,8 @@ test(`input-border clears the 3:1 UI floor on bg and surface, both themes`, () =
 // Dark mode tracks the [data-theme] attribute, never the OS — an OS-following
 // dark: variant flips under a setting the app ignores and half-migrates screens.
 test("dark mode is attribute-driven (selector strategy), not OS-following", () => {
-  assert.match(TW, /darkMode:\s*\[\s*"selector",\s*'\[data-theme="dark"\]'/, "the dark: variant keys off [data-theme]");
+  assert.match(TW, /darkMode:\s*\[\s*"selector",\s*'\[data-theme="midnight-scholar"\]'/, "the dark: variant keys off a [data-theme] attribute");
+  assert.doesNotMatch(TW, /darkMode:[^\]]*prefers-color-scheme/, "the dark: variant must not follow the OS scheme");
 });
 
 // PWA/browser chrome follows the app grounds via two theme-color metas.
@@ -344,8 +345,8 @@ test("blur is neutralised globally — the engineered look has no backdrop blur"
   assert.match(CSS, /backdrop-blur[^{]*\{\s*backdrop-filter:\s*none !important/, "every backdrop-blur utility is dead on arrival");
 });
 
-test("the layout defaults to dark and applies the stored theme before paint", () => {
-  assert.match(LAYOUT, /data-theme="dark"/, "dark is the default");
+test("the layout defaults to the dark theme and applies the stored theme before paint", () => {
+  assert.match(LAYOUT, /data-theme="midnight-scholar"/, "Midnight Scholar (dark) is the default");
   assert.match(LAYOUT, /localStorage\.getItem\("gnostiri\.theme"\)/, "no flash: the stored theme is applied pre-paint");
 });
 

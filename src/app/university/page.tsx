@@ -3,7 +3,7 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import { hasPremiumAccess } from "@/lib/entitlements";
 import { UNIVERSITY_OPEN } from "@/lib/access";
-import { ArrowRight, BookOpen, Clock, GraduationCap, Notebook } from "lucide-react";
+import { ArrowRight, BookOpen, GraduationCap, Notebook } from "lucide-react";
 import WaitlistForm from "@/components/university/WaitlistForm";
 
 export const dynamic = "force-dynamic";
@@ -71,14 +71,8 @@ export default async function UniversityIndexPage() {
               Gnostiri University
             </p>
             <h1 className="max-w-3xl font-serif text-4xl font-bold tracking-tight md:text-6xl">
-              Courses and degrees, studied <span className="gn-aurora-text">in order.</span>
+              University
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
-              A full degree is the spine of this catalogue — {mbbs.length} subject
-              {mbbs.length === 1 ? "" : "s"}, taught pre-clinical to clinical, each lesson built on the one
-              before it — with {foundation.length} standalone foundation course{foundation.length === 1 ? "" : "s"} around it. Every
-              lesson listed here is open to study. Nothing is padded to look finished.
-            </p>
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <GraduationCap className="h-3.5 w-3.5" aria-hidden /> {courses.length} course
@@ -86,9 +80,6 @@ export default async function UniversityIndexPage() {
               </span>
               <span className="flex items-center gap-1.5">
                 <BookOpen className="h-3.5 w-3.5" aria-hidden /> {totalLessons} lessons
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5" aria-hidden /> taught in concept order
               </span>
             </div>
           </div>
@@ -103,11 +94,6 @@ export default async function UniversityIndexPage() {
             <h2 id="mbbs-heading" className="font-serif text-3xl font-bold">
               {degreeProgramme ? degreeProgramme.name : "Medicine & Surgery (MBBS)"}
             </h2>
-            <p className="max-w-2xl text-sm text-slate-400">
-              {mbbs.length} subject{mbbs.length === 1 ? "" : "s"} in teaching order. Foundations come
-              first, then the specialties that build on them — the same order the programme teaches
-              them in.
-            </p>
           </div>
 
           {mbbs.length === 0 ? (
@@ -191,12 +177,8 @@ export default async function UniversityIndexPage() {
                 Foundation courses
               </p>
               <h2 id="foundation-heading" className="font-serif text-3xl font-bold">
-                Skills that feed every degree.
+                Foundation courses
               </h2>
-              <p className="max-w-2xl text-sm text-slate-400">
-                {foundation.length} standalone course{foundation.length === 1 ? "" : "s"} outside the
-                degree spine — study them alongside it, or entirely on their own.
-              </p>
             </div>
             <ul className="grid gap-4 md:grid-cols-2">
               {foundation.map((course) => {

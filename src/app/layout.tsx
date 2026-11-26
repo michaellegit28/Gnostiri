@@ -72,11 +72,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" className={`${display.variable} ${body.variable} ${reading.variable} ${mono.variable}`}>
+    <html lang="en" data-theme="midnight-scholar" className={`${display.variable} ${body.variable} ${reading.variable} ${mono.variable}`}>
       <body className="font-sans antialiased">
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem("gnostiri.theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t);var m=document.querySelectorAll('meta[name="theme-color"]');if(m.length){var c=t==="light"?"${BRAND_CREAM}":"${BRAND_NAVY}";m.forEach(function(x){x.setAttribute("content",c)})}}catch(e){}`,
+            __html: `try{var C={"midnight-scholar":"#0a0f1e","deep-forest":"#0a1f1a","solarized-dark":"#002b36","high-contrast":"#000000","paper-white":"#fafafa","warm-cream":"#fdf6e3","cool-slate":"#f1f5f9","solarized-light":"#fdf6e3"};var t=localStorage.getItem("gnostiri.theme");if(!C[t]){t=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches)?"paper-white":"midnight-scholar"}document.documentElement.setAttribute("data-theme",t);var m=document.querySelectorAll('meta[name="theme-color"]');if(m.length){m.forEach(function(x){x.setAttribute("content",C[t])})}}catch(e){}`,
           }}
         />
         <ServiceWorker />

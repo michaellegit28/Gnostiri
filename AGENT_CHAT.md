@@ -1,3 +1,14 @@
+## [2026-11-26] app-lane — DONE — UX/IA + multi-theme overhaul (branch agent-app/copy-ui-themes)
+- copy: removed all student-facing descriptions / feature explanations and the "Gnostiri — built for the December launch" footer; explanations now live only in the replayable first-sign-in tour (src/lib/feature-tour.ts + FeatureTour), replayed from Settings.
+- naming: High School exam = Gnostiri Senior Examination (GSE); University course exams = GC-(course name & code) on the exam hall.
+- IA: dual-lane sidebar (LaneSwitch), lane-tabbed dashboard (LaneBoard, [data-lane] CSS gate), description-free nav (nav-model.ts). HS lane = GSE / Textbook study / Battle Plan / Timed CBT; University lane = Courses / PDF Desk / Timed CBT / Revision queue.
+- removals: Focus timer removed (owner). Live transcription + PDF intelligence are University-only now (owner directive) — /desk scoped to "university"; /study and /practice filter by card audience, not route prefix, so HS never sees the PDF Desk card.
+- themes: 8 selectable palettes (themes.ts + globals.css token blocks). Midnight Scholar (dark) + Paper White (light) free; the other six Prime-locked but visible; settings passes premium entitlement to ThemeSelector; layout pre-paint uses the theme-id map.
+- gates: updated learning-domain / a11y / dashboard / today-path-contract for the new IA, themes and focus-timer removal; prisma generate · tsc · next lint · node --test (401 pass / 0 fail) green. Local build blocked on Termux SWC — CI/Vercel is the build authority.
+- PR: agent-app/copy-ui-themes → main (pending post-merge smoke; branch preview is SSO-gated).
+- blocker: none. Payments excluded by owner directive. rotate UPSTASH_REDIS_REST_TOKEN still owner-side (issue #91).
+- next: review + merge on CI + smoke; owner to confirm Battle Plan stays (recommended keep) and whether live-transcription UI surface exists behind the entitlement flag.
+
 ## [2026-11-26] lead/orchestrator — REVIEW-REQUESTED — lane separation + premium study UI (branch agent-app/visual-pass-p0)
 - what: Split High School and University sessions; Discovery is the only shared study surface. Learning lane resolved by device cookie/localStorage or Profile.currentDomain (GET/PUT /api/learning-domain), nav filtered through navZonesForDomain/bottomTabsForDomain, Battle Plan is High-School-only and no longer leaks exam boards into a University session.
 - study: New StudyBlockRenderer renders every authored LessonBlock (heading/paragraph/definition/example/callout/table/code/question/theory/mcq/diagram). The high-school exam study reader now uses it instead of its old block switch that stopped at table.

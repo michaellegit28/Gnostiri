@@ -23,16 +23,19 @@ const DOMAIN = read("src/context/DomainContext.tsx");
 const API = read("src/app/api/learning-domain/route.ts");
 
 test("nav items declare which lane may see them", () => {
-  for (const href of ["/highschool", "/highschool/exams", "/cbt"]) {
-    assert.match(NAV, new RegExp(`href: "${href}"[\\s\\S]*?audience: "highschool"`), `${href} belongs to High School`);
+  // The lane nav goes straight to the lane's doors (GSE, textbook study, courses),
+  // so there is no standalone /highschool or /university hub entry any more.
+  for (const href of ["/highschool/exams", "/highschool/study", "/battle-plan", "/cbt"]) {
+    assert.match(NAV, new RegExp(`href: "${href}"[\\s\\S]{0,80}?audience: "highschool"`), `${href} belongs to High School`);
   }
   for (const href of ["/university", "/university/revision"]) {
-    assert.match(NAV, new RegExp(`href: "${href}"[\\s\\S]*?audience: "university"`), `${href} belongs to University`);
+    assert.match(NAV, new RegExp(`href: "${href}"[\\s\\S]{0,80}?audience: "university"`), `${href} belongs to University`);
   }
-  assert.match(NAV, /href: "\/discovery"[\s\S]*?audience: "shared"/, "discovery is shared");
-  assert.match(NAV, /href: "\/study"[\s\S]*?audience: "shared"/, "the study hub is shared (it filters itself)");
-  // Battle Plan lives at a shared URL but is the High School plan surface.
-  assert.match(NAV, /href: "\/battle-plan"[\s\S]*?audience: "highschool"/);
+  assert.match(NAV, /href: "\/discovery"[\s\S]{0,80}?audience: "shared"/, "discovery is shared");
+  assert.match(NAV, /href: "\/tutor"[\s\S]{0,80}?audience: "shared"/, "the AI tutor is shared");
+  assert.match(NAV, /href: "\/study"[\s\S]{0,80}?audience: "shared"/, "the study hub is shared (it filters itself)");
+  // The /desk PDF workspace is a University-only feature (owner directive), never High School.
+  assert.match(NAV, /href: "\/desk"[\s\S]{0,80}?audience: "university"/, "PDF Desk belongs to University");
 });
 
 test("the shell renders a lane-filtered navigation, not the mixed global list", () => {
@@ -44,7 +47,7 @@ test("the shell renders a lane-filtered navigation, not the mixed global list", 
 });
 
 test("the study hub only serves the lane card, and always serves shared surfaces", () => {
-  assert.match(STUDY_GRID, /isVisibleForLearningDomain\(card\.href, domain\)/);
+  assert.match(STUDY_GRID, /isVisibleForAudience\(card\.audience, domain\)/);
   assert.match(STUDY_GRID, /"use client"/);
   for (const card of ["/highschool", "/university", "/discovery", "/desk"]) {
     assert.match(STUDY_PAGE, new RegExp(`href:\\s*"${card}"`), `the study page carries the ${card} spec in the source`);
@@ -55,9 +58,9 @@ test("the study hub only serves the lane card, and always serves shared surfaces
 });
 
 test("practice is lane-filtered and its CTA follows the lane", () => {
-  assert.match(PRACTICE_GRID, /CARDS\.filter\(\(card\) => isVisibleForLearningDomain\(card\.href, domain\)\)/);
+  assert.match(PRACTICE_GRID, /CARDS\.filter\(\(card\) => isVisibleForAudience\(card\.audience, domain\)\)/);
   assert.match(PRACTICE_GRID, /Open a course exam hall/);
-  assert.match(PRACTICE_GRID, /Browse exam boards/);
+  assert.match(PRACTICE_GRID, /Open GSE/);
   assert.match(PRACTICE_PAGE, /<PracticeGrid \/>/);
 });
 
@@ -71,10 +74,14 @@ test("the lane choice is explicit, visible and persisted for signed-in users", (
   assert.match(API, /z\.enum\(\["highschool", "university"\]\)/);
 });
 
-test("discovery is the only shared study surface", () => {
-  const studyZone = NAV.slice(NAV.indexOf('id: "study"'), NAV.indexOf('id: "compete"'));
-  const shared = [...studyZone.matchAll(/audience: "shared"/g)].length;
-  assert.ok(shared >= 2, "study + discovery + desk are shared; the lane routes are not");
-  assert.doesNotMatch(studyZone, /href: "\/highschool\/exams"[\s\S]*?audience: "shared"/);
-  assert.match(studyZone, /href: "\/discovery"[\s\S]*?audience: "shared"/);
+test("discovery + tutor are the shared surfaces; the lane routes are not shared", () => {
+  // The "Your lane" zone carries each lane's own content; shared items live in
+  // their own zone. No destination inside the lane zone may be tagged shared,
+  // and GSE must be tagged High School (not shared) in its own entry.
+  const laneZone = NAV.slice(NAV.indexOf('id: "lane"'), NAV.indexOf('id: "shared"'));
+  assert.doesNotMatch(laneZone, /audience: "shared"/, "the lane zone holds no shared destinations");
+  assert.match(NAV, /href: "\/highschool\/exams",[\s\S]{0,80}?audience: "highschool"/, "GSE belongs to High School, not shared");
+  assert.doesNotMatch(NAV, /href: "\/highschool\/exams",[\s\S]{0,80}?audience: "shared"/, "GSE is never tagged shared");
+  assert.match(NAV, /href: "\/discovery"[\s\S]{0,80}?audience: "shared"/, "discovery is shared");
+  assert.match(NAV, /href: "\/tutor"[\s\S]{0,80}?audience: "shared"/, "the AI tutor is shared");
 });

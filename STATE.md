@@ -1,3 +1,22 @@
+## UX/IA + multi-theme overhaul shipped (2026-11-26) — branch agent-app/copy-ui-themes
+- Explanations moved out of the chrome into the replayable first-sign-in tour; the
+  "built for the December launch" footer copy was removed. GSE = High School exam
+  (Gnostiri Senior Examination); GC-(course name & code) = University course exam.
+- Dual-lane sidebar (LaneSwitch) + lane-tabbed dashboard (LaneBoard, [data-lane] CSS gate);
+  the nav is description-free. Focus timer removed. Live transcription + PDF intelligence
+  are University-only (owner directive): /desk is scoped to "university", and /study and
+  /practice filter by card audience (not route prefix), so a High School session never
+  sees the PDF Desk card.
+- Eight selectable themes: Midnight Scholar (dark) + Paper White (light) free; six Prime-
+  locked but visible. Settings passes the premium entitlement to ThemeSelector; the layout
+  pre-paint script uses the theme-id map.
+- Gates: prisma generate · tsc · next lint · node --test all green. Key files:
+  src/lib/themes.ts, src/lib/theme-client.ts, src/lib/feature-tour.ts,
+  src/components/onboarding/{FeatureTour,TourReplay}.tsx,
+  src/components/chrome/{nav-model,LaneSwitch,AppShell,ThemeToggle}.tsx,
+  src/components/settings/ThemeSelector.tsx, src/components/dashboard/LaneBoard.tsx.
+- Local `next build` is Termux-SWC limited; CI/Vercel is the build authority.
+
 ## Grading hotfix CI repair (2026-11-26)
 
 - Rebased the grading/security hotfix onto main and repaired its CI failure:
