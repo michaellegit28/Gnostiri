@@ -16,6 +16,14 @@
 - Gates: prisma generate · prisma validate · tsc · next lint · node --test (Battle Plan + full
   suite) green. Local next build Termux-SWC limited; CI/Vercel authoritative.
 
+### Status (2026-11-26, owner-directed merges)
+- #92 (UX/IA + themes) and #93 (Battle Plan foundation) both MERGED to main (merge commits);
+  production smoke 38/38 pass against gnostiri.vercel.app.
+- MIGRATION STILL TO APPLY: `prisma/migrations/20261126120000_battle_plan/migration.sql` must be
+  run in the Supabase SQL editor (rule 7). Local Prisma write is blocked (P1001 / Android schema
+  engine) and the Supabase MCP is read-only (rule 8). Table "BattlePlan" confirmed absent pre-apply;
+  provisioned ahead of the planner persistence + AI generation.
+
 ## UX/IA + multi-theme overhaul shipped (2026-11-26) — branch agent-app/copy-ui-themes
 - Explanations moved out of the chrome into the replayable first-sign-in tour; the
   "built for the December launch" footer copy was removed. GSE = High School exam

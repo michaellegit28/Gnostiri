@@ -1,3 +1,10 @@
+## [2026-11-26 21:30] app-lane — LIVE — both PRs merged to main; prod smoke 38/38; migration pending owner apply
+- MERGED (owner-directed): #92 (UX/IA + themes) → main; #93 (Battle Plan foundation, stacked) → main. Merge commits used so the stack stayed clean.
+- VERIFY LIVE: production serving the new code (`/battle-plan` lane toggle, `/settings` theme groups + "Replay the tour"); tools/smoke.mjs vs gnostiri.vercel.app = 38/38 pass.
+- MIGRATE-TO-SQL: BattlePlan table confirmed NOT present; the additive migration must be run in the Supabase SQL editor (rule 7). Local Prisma write blocked (P1001 / Android schema engine) and Supabase MCP is read-only (rule 8) — so the write is owner-side. SQL block sent to owner; will re-verify (read-only) after apply.
+- ops: owner rotating UPSTASH_REDIS_REST_TOKEN in .env — ALSO update it in Vercel env (the live rate-limiter uses the Vercel value, so the compromised token stays hot until Vercel is updated).
+- next: owner applies the migration SQL; then Battle Plan slice 2 (BattlePlan persistence + University AI generation behind the premium gate).
+
 ## [2026-11-26] app-lane — DONE — UX/IA + multi-theme overhaul (branch agent-app/copy-ui-themes)
 - copy: removed all student-facing descriptions / feature explanations and the "Gnostiri — built for the December launch" footer; explanations now live only in the replayable first-sign-in tour (src/lib/feature-tour.ts + FeatureTour), replayed from Settings.
 - naming: High School exam = Gnostiri Senior Examination (GSE); University course exams = GC-(course name & code) on the exam hall.
