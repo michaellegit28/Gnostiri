@@ -1,3 +1,11 @@
+## Grading hotfix CI repair (2026-11-26)
+
+- Rebased the grading/security hotfix onto main and repaired its CI failure:
+  source-contract semantics are unchanged, but the route now uses typed Map tuples
+  and `Array.from(Map.entries())` so it compiles under the repo's ES5 TS target
+  without `--downlevelIteration`; `ExamHall` submit callback lists all deps.
+- Objective evidence: tsc · lint · full `node --test` green in the worktree.
+
 # Gnostiri — STATE.md (2026-11-17)
 
 Live URL: gnostiri.vercel.app · Repo: github.com/michaellegit28/Gnostiri · Branch: main

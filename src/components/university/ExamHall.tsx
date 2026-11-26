@@ -69,7 +69,9 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
       const res = await fetch("/api/assessments/simulate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ session, answers: payload }),
+        // The server rebuilds the blueprint from courseId and grades against
+        // DB keys — the session payload is never trusted from the client.
+        body: JSON.stringify({ courseId, mode, answers: payload }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Failed to score exam");
@@ -79,7 +81,7 @@ export function ExamHall({ courseId, mode }: ExamHallProps) {
     } finally {
       setSubmitting(false);
     }
-  }, [session, answers, submitting, result]);
+  }, [session, answers, submitting, result, courseId, mode]);
 
   // Auto-submit on timeout.
   useEffect(() => {

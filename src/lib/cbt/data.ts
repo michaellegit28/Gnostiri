@@ -91,7 +91,7 @@ export async function listCbtBoards(): Promise<CbtBoardCard[]> {
  * parent's (agricultural-science owns "jamb-agriculture-full-syllabus"), which
  * hid 500 questions from CBT practice until this replaced it.
  */
-async function descendantTopicIds(rootId: string): Promise<string[]> {
+export async function descendantTopicIds(rootId: string): Promise<string[]> {
   const ids = [rootId];
   let frontier = [rootId];
   for (let depth = 0; depth < 4 && frontier.length > 0; depth++) {
