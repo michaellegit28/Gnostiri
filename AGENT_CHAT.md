@@ -4,6 +4,7 @@
 - UI: mesh + grain ground, masked 1px top-light card edge, layered shadows, spring press, staggered fade-up, gradient hero titles, glass only on shell chrome/modals, all silenced under reduced-motion/Lite/solid-bg.
 - hygiene: site.ts consumed by root metadata; new sitemap.ts/robots.ts with private routes disallowed; pricing/offline copy lane-aware; removed a stray zero-byte prisma junk file.
 - gates: prisma generate · tsc · next lint · node --test tests/*.test.mjs all green. Local build blocked on Termux SWC (no @next/swc-android-arm64); CI is the build authority. DB reachable via sanctioned Supabase read; Prisma direct/pooler unreachable from this box (P1001).
+- PR: https://github.com/michaellegit28/Gnostiri/pull/90 (branch agent-app/visual-pass-p0)
 - blocker: none. Payments wiring intentionally excluded by owner directive.
 - ops: rotate UPSTASH_REDIS_REST_TOKEN (session output leak; value never committed).
 - next: review + merge on CI + smoke; owner-side to confirm launch-token behaviour and DB schema drift noted in STATE.md.
