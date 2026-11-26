@@ -13,6 +13,14 @@ enum AppDomain {
   extras
 }
 
+// Battle Plan lifecycle. High School plans are rules-generated; University
+// plans are AI-generated (premium). Both lanes share this one store.
+enum BattlePlanStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
 model User {
   id             String         @id @default(cuid())
   // Auth identity — Supabase Auth uid (Google OAuth / email+password).
@@ -61,6 +69,9 @@ model User {
   analyticsEvents       AnalyticsEvent[]
   downloads             Download[]
   contentRequests       ContentRequest[]
+
+  // Battle Plan — per-lane goals, dates and generated plans (rules for HS, AI for University)
+  battlePlans           BattlePlan[]
 }
 
 model Profile {
@@ -1233,4 +1244,27 @@ model HallOfFameEntry {
 
   @@unique([seasonSlug, tier, rank])
   @@index([seasonSlug, tier])
+}
+
+// ── Battle Plan (foundation) ────────────────────────────────────────────────
+// One unified store for both lanes' study plans. The generated payload is JSON
+// so the High School rules engine and the University AI planner can both write
+// their own shape without a schema change. `inputs` captures what the student
+// supplied (HS: exam code + subjects; University: syllabus + course load).
+model BattlePlan {
+  id        String           @id @default(cuid())
+  userId    String
+  domain    AppDomain
+  title     String
+  goal      String? // the student's stated goal
+  examDate  DateTime?
+  inputs    Json? // student-provided inputs (lane-specific shape)
+  plan      Json? // generated plan payload (lane-specific shape)
+  status    BattlePlanStatus @default(DRAFT)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, domain, status])
 }

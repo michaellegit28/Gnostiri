@@ -72,7 +72,6 @@ export const NAV_ZONES: NavZone[] = [
       // ── High School ──
       { href: "/highschool/exams", label: "GSE", icon: ClipboardList, audience: "highschool" },
       { href: "/highschool/study", label: "Textbook study", icon: BookOpen, audience: "highschool" },
-      { href: "/battle-plan", label: "Battle Plan", icon: Swords, audience: "highschool" },
       { href: "/cbt", label: "Timed CBT", icon: MonitorPlay, audience: "highschool" },
       // ── University ──
       { href: "/university", label: "Courses", icon: GraduationCap, audience: "university" },
@@ -93,6 +92,7 @@ export const NAV_ZONES: NavZone[] = [
     id: "learning",
     label: "My learning",
     items: [
+      { href: "/battle-plan", label: "Battle Plan", icon: Swords, audience: "shared" },
       { href: "/progress", label: "Progress", icon: BarChart3, audience: "shared" },
       { href: "/league", label: "League", icon: Trophy, audience: "shared" },
       { href: "/certificates", label: "Certificates", icon: FileBadge, audience: "shared" },

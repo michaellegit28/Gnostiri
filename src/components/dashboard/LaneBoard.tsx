@@ -35,9 +35,9 @@ const LANE_LINKS: Record<LearningDomain, LaneLink[]> = {
   ],
   university: [
     { href: "/university", label: "Courses", Icon: GraduationCap },
+    { href: "/battle-plan", label: "Battle Plan", Icon: Swords },
     { href: "/desk", label: "PDF Desk", Icon: FolderOpen },
     { href: "/cbt", label: "Timed CBT", Icon: MonitorPlay },
-    { href: "/university/revision", label: "Revision queue", Icon: RotateCcw },
   ],
 };
 
