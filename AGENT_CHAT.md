@@ -5,7 +5,7 @@
 - removals: Focus timer removed (owner). Live transcription + PDF intelligence are University-only now (owner directive) — /desk scoped to "university"; /study and /practice filter by card audience, not route prefix, so HS never sees the PDF Desk card.
 - themes: 8 selectable palettes (themes.ts + globals.css token blocks). Midnight Scholar (dark) + Paper White (light) free; the other six Prime-locked but visible; settings passes premium entitlement to ThemeSelector; layout pre-paint uses the theme-id map.
 - gates: updated learning-domain / a11y / dashboard / today-path-contract for the new IA, themes and focus-timer removal; prisma generate · tsc · next lint · node --test (401 pass / 0 fail) green. Local build blocked on Termux SWC — CI/Vercel is the build authority.
-- PR: agent-app/copy-ui-themes → main (pending post-merge smoke; branch preview is SSO-gated).
+- PR: https://github.com/michaellegit28/Gnostiri/pull/92 (branch agent-app/copy-ui-themes) — awaiting CI + post-merge smoke; branch preview is SSO-gated, so smoke runs against production after merge.
 - blocker: none. Payments excluded by owner directive. rotate UPSTASH_REDIS_REST_TOKEN still owner-side (issue #91).
 - next: review + merge on CI + smoke; owner to confirm Battle Plan stays (recommended keep) and whether live-transcription UI surface exists behind the entitlement flag.
 
