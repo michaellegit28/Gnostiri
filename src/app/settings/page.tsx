@@ -3,6 +3,7 @@ import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import AppearanceControls from "@/components/settings/AppearanceControls";
 import LearningPreferences from "@/components/settings/LearningPreferences";
+import LearningDomainControls from "@/components/settings/LearningDomainControls";
 import {
   DEFAULT_USER_PREFERENCES,
   normalizeUserPreferences,
@@ -51,6 +52,15 @@ export default async function SettingsPage() {
           authenticated={Boolean(user)}
           available={preferencesAvailable}
         />
+        <section aria-labelledby="learning-domain-settings">
+          <h2 id="learning-domain-settings" className="font-serif text-xl font-bold text-ink">
+            High School / University lane
+          </h2>
+          <p className="mt-1 text-sm text-muted">What your navigation and study hub show. Discovery is shared.</p>
+          <div className="mt-4">
+            <LearningDomainControls />
+          </div>
+        </section>
         <section aria-labelledby="appearance-settings">
           <h2 id="appearance-settings" className="font-serif text-xl font-bold text-ink">
             Appearance & accessibility

@@ -129,7 +129,7 @@ export default function UploadForm() {
           onChange={(e) => setSubject(e.target.value)}
           placeholder="e.g. biology"
           maxLength={60}
-          className="w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-200 placeholder:text-slate-600 focus:border-primary focus:outline-none"
+          className="w-full rounded-lg border border-line bg-bg px-3 py-2 text-sm text-slate-200 placeholder:text-placeholder focus:border-primary focus:outline-none"
         />
       </div>
 

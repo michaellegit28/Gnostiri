@@ -27,18 +27,21 @@ type Channels = readonly [number, number, number];
 const hex = ([r, g, b]: Channels): string =>
   "#" + [r, g, b].map((c) => c.toString(16).padStart(2, "0")).join("");
 
-/** The accent — the token gold, exactly. */
-export const BRAND_GOLD = hex([212, 175, 55]);
+/** The accent — Solar Gold #F5A623, the flat brand gold. This is --gold-from /
+ *  --gold-soft in globals.css; --gold itself is theme-dependent chrome (luminous
+ *  in dark, darkened for the 3:1 UI floor in light) and never paints flat art. */
+export const BRAND_GOLD = hex([245, 166, 35]);
 /** Gradient lift — the mark's bright stop. */
 export const BRAND_GOLD_LIGHT = hex([240, 190, 95]);
 /** Gradient shade. */
 export const BRAND_GOLD_DEEP = hex([156, 122, 30]);
-/** Dark navy ground — --bg, the win card's sheet. */
-export const BRAND_NAVY = hex([15, 23, 42]);
-/** Deeper navy — --bg-deep, the PWA splash ground. */
-export const BRAND_BG_DEEP = hex([11, 17, 32]);
-/** The cream page — --bg in light mode / --paper. */
-export const BRAND_CREAM = hex([253, 251, 247]);
+/** Dark navy ground — --bg (dark) #101B33, the win card's sheet. */
+export const BRAND_NAVY = hex([16, 27, 51]);
+/** Deeper navy — --bg-deep (dark) #081022, the PWA splash ground. */
+export const BRAND_BG_DEEP = hex([8, 16, 34]);
+/** Light-mode page ground — --bg in light mode #F7F9FF (theme-color light
+ *  value). The print medium stays --paper #FDFBF7; the app ground diverged. */
+export const BRAND_CREAM = hex([247, 249, 255]);
 /** The hero figure. */
 export const BRAND_TEXT = hex([241, 245, 249]);
 /** The display handle. */
@@ -49,8 +52,8 @@ export const BRAND_TEXT_MUTED = hex([203, 213, 225]);
 export const BRAND_TEXT_SUBTLE = hex([148, 163, 184]);
 /** The date / footer. */
 export const BRAND_TEXT_DIM = hex([100, 116, 139]);
-/** --border, the soft printed rule in the email. */
-export const BRAND_LINE = hex([51, 65, 85]);
+/** --border (dark) #2C3D5C — the soft printed rule in the email. */
+export const BRAND_LINE = hex([44, 61, 92]);
 /** Google Sign-In "G" — brand-accurate per Google's guidelines; never themed. */
 export const GOOGLE_G_BLUE = hex([66, 133, 244]);
 export const GOOGLE_G_GREEN = hex([52, 168, 83]);

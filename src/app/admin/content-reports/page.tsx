@@ -310,7 +310,7 @@ export default async function AdminContentReportsPage({
                 Previous
               </Link>
             ) : (
-              <span className="inline-flex min-h-[44px] items-center rounded-lg border border-line/50 px-4 text-muted opacity-50" aria-disabled="true">
+              <span className="inline-flex min-h-[44px] items-center rounded-lg border border-line/50 px-4 text-disabled" aria-disabled="true">
                 Previous
               </span>
             )}
@@ -323,7 +323,7 @@ export default async function AdminContentReportsPage({
                 Next
               </Link>
             ) : (
-              <span className="inline-flex min-h-[44px] items-center rounded-lg border border-line/50 px-4 text-muted opacity-50" aria-disabled="true">
+              <span className="inline-flex min-h-[44px] items-center rounded-lg border border-line/50 px-4 text-disabled" aria-disabled="true">
                 Next
               </span>
             )}

@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useDomain } from "@/context/DomainContext";
+import { DEFAULT_LEARNING_DOMAIN } from "@/lib/learning-domain";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -22,7 +23,7 @@ interface TutorPanelProps {
  * a guide: greeting, starters, streaming answers, primary send.
  */
 export default function TutorPanel({ onClose }: TutorPanelProps) {
-  const { currentDomain } = useDomain();
+  const { currentDomain, learningDomain } = useDomain();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -58,7 +59,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          domain: currentDomain || "highschool",
+          domain: currentDomain || learningDomain || DEFAULT_LEARNING_DOMAIN,
           action: "ask",
           message: prompt,
           messages: next,

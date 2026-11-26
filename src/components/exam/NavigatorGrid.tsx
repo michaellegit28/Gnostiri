@@ -14,10 +14,12 @@ type NavigatorGridProps = {
 };
 
 function cellTone(isCurrent: boolean, isAnswered: boolean, isFlagged: boolean): string {
-  if (isCurrent) return "border-sky-400 bg-sky-400/15 text-sky-200";
+  // Token palette only — sky-* was a fixed Tailwind colour (theme-unaware and
+  // off-palette); the primary/electric pair is the app's action identity.
+  if (isCurrent) return "border-primary bg-primary/10 text-electric-text";
   if (isFlagged) return "border-gold/60 bg-gold/15 text-gold-text";
   if (isAnswered) return "border-emerald-500/60 bg-emerald-500/15 text-emerald-300";
-  return "border-line bg-surface text-slate-300 hover:border-slate-500";
+  return "border-line bg-surface text-ink hover:border-slate-500";
 }
 
 export default function NavigatorGrid({
@@ -45,7 +47,7 @@ export default function NavigatorGrid({
             onClick={() => onSelect(i)}
             aria-label={`Question ${i + 1}: ${state}`}
             aria-current={isCurrent ? "true" : undefined}
-            className={`flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg border font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${cellTone(isCurrent, answered[i] === true, flagged[i] === true)}`}
+            className={`flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg border font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${cellTone(isCurrent, answered[i] === true, flagged[i] === true)}`}
           >
             {i + 1}
             {flagged[i] === true && (

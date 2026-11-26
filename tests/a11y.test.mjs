@@ -53,14 +53,23 @@ function palette(block) {
   return {
     bg: token(block, "bg"),
     surface: token(block, "surface"),
+    surface2: token(block, "surface-2"),
     text: token(block, "text"),
     muted: token(block, "text-muted"),
     subtle: token(block, "text-subtle"),
+    placeholder: token(block, "text-placeholder"),
+    disabled: token(block, "text-disabled"),
+    borderStrong: token(block, "border-strong"),
+    inputBorder: token(block, "input-border"),
+    link: token(block, "link"),
     gold: token(block, "gold"),
     goldText: token(block, "gold-text"),
     onGold: token(block, "on-gold"),
     success: token(block, "success"),
     error: token(block, "error"),
+    warning: token(block, "warning"),
+    cyan: token(block, "cyan"),
+    mint: token(block, "mint"),
   };
 }
 
@@ -224,6 +233,105 @@ test(`state colours clear their floors in both themes (danger, success)`, () => 
     assert.ok(contrast(p.error, p.bg) >= UI_FLOOR, `${name} error ≥ ${UI_FLOOR}:1 as a UI signal`);
     assert.ok(contrast(p.success, p.bg) >= UI_FLOOR, `${name} success ≥ ${UI_FLOOR}:1 as a UI signal`);
   }
+});
+
+// ─── P0 visual pass — the newly enforced pairs ───────────────────────────────
+
+// --text-subtle is the lowest TEXT step (it backs text-slate-500/600/700 and
+// text-subtle). The defect class this kills: a subtle value that clears 4.5:1
+// on --bg but silently drops below it on the ELEVATED card surface, where most
+// of these captions actually sit (light --surface-2 #E9EDFA is darker than the
+// #F7F9FF ground).
+test(`text-subtle clears the body floor on surface-2 in BOTH themes`, () => {
+  for (const [name, p] of [["dark", DARK_P], ["light", LIGHT_P]]) {
+    assert.ok(
+      contrast(p.subtle, p.surface2) >= BODY_FLOOR,
+      `${name} subtle ${p.subtle} on surface-2 ${p.surface2} = ${contrast(p.subtle, p.surface2).toFixed(2)}:1 — the lowest text step must hold ${BODY_FLOOR}:1 on cards`
+    );
+  }
+});
+
+// slate-600/700 USED to alias --border-strong (2.5:1 dark / 1.6:1 light as
+// text). The alias now rides --text-subtle, and --border-strong itself is
+// banned from text — but it still carries UI edges, so it must hold the 3:1
+// non-text floor of WCAG 1.4.11 on both grounds in both themes.
+test(`border-strong clears the 3:1 UI floor (bg and surface) in both themes — and is no longer a text alias`, () => {
+  for (const [name, p] of [["dark", DARK_P], ["light", LIGHT_P]]) {
+    for (const surface of ["bg", "surface"]) {
+      assert.ok(
+        contrast(p.borderStrong, p[surface]) >= UI_FLOOR,
+        `${name} border-strong ${p.borderStrong} on ${surface} = ${contrast(p.borderStrong, p[surface]).toFixed(2)}:1`
+      );
+    }
+  }
+  assert.match(TW, /600:\s*"rgb\(var\(--text-subtle\) \/ <alpha-value>\)"/, "slate-600 aliases the subtle-text token");
+  assert.match(TW, /700:\s*"rgb\(var\(--text-subtle\) \/ <alpha-value>\)"/, "slate-700 aliases the subtle-text token");
+  assert.ok(!TW.includes('600: "rgb(var(--border-strong)'), "slate-600 must not alias a border token");
+});
+
+// WCAG 1.4.11 non-text contrast: status dots, badge fills and icons painted
+// with the warning/cyan/mint/gold accents must stay ≥3:1 against the ground.
+// These shipped at 1.9–2.5:1 in light mode (visible in dark, invisible in
+// light) before the pass.
+test(`light status fills (warning, cyan, mint, gold) clear the 3:1 UI floor vs bg`, () => {
+  for (const fill of ["warning", "cyan", "mint", "gold"]) {
+    assert.ok(
+      contrast(LIGHT_P[fill], LIGHT_P.bg) >= UI_FLOOR,
+      `light ${fill} ${LIGHT_P[fill]} on bg = ${contrast(LIGHT_P[fill], LIGHT_P.bg).toFixed(2)}:1 — non-text UI needs ${UI_FLOOR}:1`
+    );
+  }
+});
+
+// Placeholders are real text the user must read (input hints, the CBT essay
+// prompt). They ride their own token so they can be tuned independently of
+// subtle, and must clear 4.5:1 wherever an input sits: bg and surface-2.
+test(`placeholder text clears the body floor on bg AND surface-2, both themes`, () => {
+  for (const [name, p] of [["dark", DARK_P], ["light", LIGHT_P]]) {
+    for (const surface of ["bg", "surface2"]) {
+      assert.ok(
+        contrast(p.placeholder, p[surface]) >= BODY_FLOOR,
+        `${name} placeholder ${p.placeholder} on ${surface} = ${contrast(p.placeholder, p[surface]).toFixed(2)}:1`
+      );
+    }
+  }
+});
+
+// Links are interactive text: AA on the ground AND on the elevated surface.
+test(`link token clears the body floor on bg AND surface-2, both themes`, () => {
+  for (const [name, p] of [["dark", DARK_P], ["light", LIGHT_P]]) {
+    for (const surface of ["bg", "surface2"]) {
+      assert.ok(
+        contrast(p.link, p[surface]) >= BODY_FLOOR,
+        `${name} link ${p.link} on ${surface} = ${contrast(p.link, p[surface]).toFixed(2)}:1`
+      );
+    }
+  }
+});
+
+// Input borders must be visible-but-quiet: ≥3:1 (1.4.11) against both grounds
+// without shouting like border-strong.
+test(`input-border clears the 3:1 UI floor on bg and surface, both themes`, () => {
+  for (const [name, p] of [["dark", DARK_P], ["light", LIGHT_P]]) {
+    for (const surface of ["bg", "surface"]) {
+      assert.ok(
+        contrast(p.inputBorder, p[surface]) >= UI_FLOOR,
+        `${name} input-border ${p.inputBorder} on ${surface} = ${contrast(p.inputBorder, p[surface]).toFixed(2)}:1`
+      );
+    }
+  }
+});
+
+// Dark mode tracks the [data-theme] attribute, never the OS — an OS-following
+// dark: variant flips under a setting the app ignores and half-migrates screens.
+test("dark mode is attribute-driven (selector strategy), not OS-following", () => {
+  assert.match(TW, /darkMode:\s*\[\s*"selector",\s*'\[data-theme="dark"\]'/, "the dark: variant keys off [data-theme]");
+});
+
+// PWA/browser chrome follows the app grounds via two theme-color metas.
+test("the layout ships theme-color metas for both colour schemes", () => {
+  assert.match(LAYOUT, /themeColor/, "the viewport export carries themeColor");
+  assert.match(LAYOUT, /prefers-color-scheme: dark/, "a dark scheme value ships");
+  assert.match(LAYOUT, /prefers-color-scheme: light/, "a light scheme value ships");
 });
 
 // ─── source contracts carried over from 6d ───────────────────────────────────

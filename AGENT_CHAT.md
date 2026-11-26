@@ -1,3 +1,12 @@
+## [2026-11-26] lead/orchestrator — REVIEW-REQUESTED — lane separation + premium study UI (branch fix/contrast-and-study-loop)
+- what: Split High School and University sessions; Discovery is the only shared study surface. Learning lane resolved by device cookie/localStorage or Profile.currentDomain (GET/PUT /api/learning-domain), nav filtered through navZonesForDomain/bottomTabsForDomain, Battle Plan is High-School-only and no longer leaks exam boards into a University session.
+- study: New StudyBlockRenderer renders every authored LessonBlock (heading/paragraph/definition/example/callout/table/code/question/theory/mcq/diagram). The high-school exam study reader now uses it instead of its old block switch that stopped at table.
+- UI: mesh + grain ground, masked 1px top-light card edge, layered shadows, spring press, staggered fade-up, gradient hero titles, glass only on shell chrome/modals, all silenced under reduced-motion/Lite/solid-bg.
+- hygiene: site.ts consumed by root metadata; new sitemap.ts/robots.ts with private routes disallowed; pricing/offline copy lane-aware; removed a stray zero-byte prisma junk file.
+- gates: prisma generate · tsc · next lint · node --test tests/*.test.mjs all green. Local build blocked on Termux SWC (no @next/swc-android-arm64); CI is the build authority. DB reachable via sanctioned Supabase read; Prisma direct/pooler unreachable from this box (P1001).
+- blocker: none. Payments wiring intentionally excluded by owner directive.
+- next: review + merge on CI + smoke; owner-side to confirm launch-token behaviour and DB schema drift noted in STATE.md.
+
 ## [2026-11-25 20:05] orchestrator — DIRECTIVES — round 3 from owner (full text in STATE.md §Owner directives — round 3)
 - University IA locked: Faculty → Programme → Year/Level ("Year N · Semester M") → Subjects → concepts. Schema ALREADY supports it (Faculty/Programme/Course.level/semester) — UI/data task after the four in-flight audits land.
 - EVERY feature plans for both tracks: highschool (exam → subject → topic) AND the university hierarchy.

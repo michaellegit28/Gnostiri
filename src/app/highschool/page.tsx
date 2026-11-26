@@ -56,7 +56,7 @@ export default async function HighSchoolHub() {
 
         <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 text-center">
           <Trophy className="w-6 h-6 text-electric-text mx-auto mb-2" />
-          <p className="text-sm text-slate-400">Ready to compete? <Link href="/arena" className="rounded text-electric-text hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">Global Arena</Link> adds inter-school and inter-country cups — it&apos;s in build.</p>
+          <p className="text-sm text-slate-400">Ready to compete? The <Link href="/league" className="rounded text-electric-text hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">Merit League</Link> runs speed, endurance, mastery and bracket cups.</p>
         </section>
       </div>
     </div>

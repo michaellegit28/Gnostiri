@@ -25,7 +25,7 @@ export default function RootError({ error, reset }: RootErrorProps) {
           Something broke on our side. Try again, or head back home.
         </p>
         {error?.digest && (
-          <p className="mt-4 font-mono text-xs text-slate-600">
+          <p className="mt-4 font-mono text-xs text-subtle">
             Reference: {error.digest}
           </p>
         )}
