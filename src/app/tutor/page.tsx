@@ -9,9 +9,9 @@ import { useAuth } from "@/context/AuthContext";
 type Message = { role: "user" | "assistant"; content: string };
 
 function TutorPageContent() {
-  const { currentDomain, setCurrentDomain } = useDomain();
+  const { currentDomain, learningDomain, setCurrentDomain } = useDomain();
   const searchParams = useSearchParams();
-  const domain = (searchParams.get("domain") as DomainType | null) || currentDomain;
+  const domain = (searchParams.get("domain") as DomainType | null) || currentDomain || learningDomain;
   const { user } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");

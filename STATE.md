@@ -832,3 +832,41 @@ contradicted it (`db-lane.md`, `audit-lane.md`, `.opencode/skills/prisma-supabas
 6. **Launch = January is acceptable** (owner). Aligns with ROADMAP Season 1 (Jan–Apr); Season 3
    continues as soft launch through December. The AI-era visual pass (ROADMAP §7.6) moves UP the
    queue — premium UX ships before launch, not after.
+
+## High School / University split + premium study UI (2026-11-26, A1 — owner directive)
+
+Owner directive this session: keep High School and University sessions separate, make **Discovery the only
+shared study surface**, and raise the UI to a premium/tactile standard. Payments were explicitly excluded.
+
+- **Learning lane** — `src/lib/learning-domain.ts` is the single rule. `src/context/DomainContext.tsx` resolves
+  the lane (device cookie/localStorage for signed-out, `Profile.currentDomain` for signed-in via
+  `GET/PUT /api/learning-domain`) and `nav-model.ts` exports `navZonesForDomain` / `bottomTabsForDomain`
+  so the sidebar, drawer, command palette and bottom tabs can never drift. Discovery, Desk, Tutor,
+  Competitions, Library and membership stay shared; `/battle-plan` is now a High-School-only surface and
+  refuses to leak exam content into a University session even on a direct URL.
+- **Study hub + practice** — `/study` ships only the lane card (server-side filtered from domain + profile
+  cookie, client-filtered as the safety net) plus shared Discovery/Desk. `/practice` has a lane-aware
+  primary CTA and card set (High School boards/CBT vs University course exam halls). Pricing copy and the
+  Offline fallback follow the lane too.
+- **Study content** — new `src/components/study/StudyBlockRenderer.tsx` renders every authored `LessonBlock`
+  (code, check question, theory, MCQ, table, diagram) in the paper medium; the exam study reader uses it
+  instead of its own truncated block switch. The old reader stopped at `table`, so authored code/theory/MCQ
+  blocks rendered as nothing.
+- **Premium UI** — body mesh + grain overlay, `.gn-card` now carries a masked 1px top-light edge and a
+  layered shadow stack, cards get `.gn-stagger` fade-up, buttons get a spring press, hero headings use
+  `.gn-title-gradient`, and glass stays limited to the navbar/drawer/palette/bottom nav. All effects stay
+  inside prefers-reduced-motion / Lite Mode / solid-background prefs.
+- **SEO/hygiene** — `src/lib/site.ts` is finally consumed by root metadata; new `sitemap.ts` and `robots.ts`
+  cover public lanes and keep private/session surfaces out of the crawl. A stale zero-byte junk file in
+  `prisma/` was removed.
+- **DB status** — `prisma validate` + `prisma generate` pass. Prisma engines needed for ARM64/Termux are
+  downloaded out-of-band (`PRISMA_CLI_BINARY_TARGETS=linux-static-arm64`) and `prisma migrate status` now
+  runs, but this box cannot reach the Supabase DB (direct `:5432` and pooler `:6543` both return P1001).
+  Sanctioned read-only fallback via the Supabase MCP: DB reachable, 71 public tables, `_prisma_migrations`
+  absent (migrations are owner-applied SQL), Phase 8 + UserPreference columns present. Schema drift found and reconciled in the repo for `Question.paper/markingGuide/marks/sourceYear`, `Topic.tags`, `User.schoolId`, `ContentRequest.title` — these already existed live and are now in `prisma/schema.prisma`; migrations remain owner-applied SQL.
+- **Secret to rotate** — `UPSTASH_REDIS_REST_TOKEN` was printed to the session's command output while
+  sourcing `.env`; it was never written to the repo. Rotate it in Upstash and `.env` (name only here).
+- **Gates** — `npx prisma generate` · `npx tsc --noEmit` · `npx next lint` · `node --test tests/*.test.mjs`
+  all green. Local `npm run build` is blocked on Termux/Android: Next 14.2.35 has no published
+  `@next/swc-android-arm64` and the WASM/native-arm64-musl fallback cannot load on this box. CI remains
+  the build authority for release.

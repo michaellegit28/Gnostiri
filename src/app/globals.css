@@ -17,13 +17,50 @@
 body {
   color: rgb(var(--text));
   background-color: rgb(var(--bg));
-  /* Ambient aurora orbs (vibrant academic futurism). Blue/violet/cyan only,
+  /* Ambient mesh (vibrant academic futurism). Blue/violet/cyan only,
      ever-muted. Never cream. The user's "solid background" preference clears it. */
   background-image:
     radial-gradient(70% 50% at 12% -5%, var(--aurora-1), transparent 70%),
     radial-gradient(55% 45% at 90% 10%, var(--aurora-2), transparent 72%),
     radial-gradient(50% 42% at 72% 96%, var(--aurora-3), transparent 70%);
   background-attachment: fixed;
+}
+
+/* A second, thinner mesh layer + a faint grain overlay. The mesh gives the dark
+   ground depth without a bright gradient; the grain kills the flat digital
+   banding. Both sit behind content, never intercept a pointer, and are removed
+   by the solid-background preference, Lite Mode and reduced motion. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(40% 34% at 16% 12%, rgb(var(--electric) / 0.16), transparent 60%),
+    radial-gradient(38% 30% at 86% 18%, rgb(var(--violet) / 0.14), transparent 62%),
+    radial-gradient(46% 36% at 72% 88%, rgb(var(--cyan) / 0.12), transparent 64%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.32;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+html.solid-bg body::before,
+html.solid-bg body::after,
+html.lite body::before,
+html.lite body::after,
+html.lite-mode body::before,
+html.lite-mode body::after {
+  display: none !important;
 }
 
 /* Floating-chrome clearance: keep page ends above the fixed Tutor pill (mobile) */
@@ -45,32 +82,44 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
 .font-reading { text-rendering: optimizeLegibility; font-feature-settings: "kern" 1, "liga" 1; }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Phase 6d — accessibility & contrast pass (shell surfaces)
+   Phase 6d — accessibility & contrast pass (shell surfaces) — v2 (P0 visual pass)
    -----------------------------------------------------------------------------
-   Measured WCAG 2.1 contrast ratios, computed from these hex values against
-   the app background #070b16 (recomputed from source by tests/a11y.test.mjs in
-   pure JS — no browser, no Yak shaving):
+   Measured WCAG 2.1 contrast ratios against the REAL theme grounds — dark
+   --bg #101B33 / --surface #172642 / --surface-2 #263956, light --bg #F7F9FF /
+   --surface #FFFFFF / --surface-2 #E9EDFA — recomputed from the shipped channel
+   tokens by tests/a11y.test.mjs in pure JS (no browser). The v1 table quoted
+   values for a retired #070b16 ground and slate-400/500 literals; the token
+   ladder below replaces it.
 
-     foreground token                    surface            ratio    verdict
-     gold #D4AF37                        #070b16            9.35:1   AA body text
-     slate-300 #cbd5e1  (.text-muted)    #070b16           13.24:1   AA body text
-     slate-400 #94a3b8                    #070b16            7.67:1   AA body text
-     slate-500 #64748b                    #070b16            4.13:1   FAILS 4.5:1 body
-     slate-950 #020617  on gold CTA       #D4AF37            9.59:1   AA body text
-     amber-200 #fde68a  on gold/15        over #070b16      12.49:1   AA body text
-     gold as border / focus ring          #070b16            9.35:1   UI >= 3:1
+     token (theme)                        vs bg / vs surface-2     verdict
+     --text dark #FFFFFF                  17.12 / 13.—             AA body
+     --text-muted dark #AAB8D3            8.57 / 6.—               AA body (floor)
+     --text-subtle dark #97A6C4           6.98 / 4.75              AA text step
+     --text-subtle light #5A6B8C          5.09 / 4.59              AA text step
+     --text-placeholder dark #97A6C4      6.98 / 4.75              AA (input hint)
+     --text-placeholder light #5A6B8C     5.09 / 4.59              AA (input hint)
+     --text-disabled dark #71809F         4.31 / 2.9               ≥3 UI, aria-disabled
+     --text-disabled light #8A94AC        2.89 / 2.6               decorative-only + aria-disabled
+     --link dark #8FB8FF                  8.53 / 5.81              AA text
+     --link light #2547D6                 6.76 / 6.09              AA text
+     --border-strong dark #5570A8         3.48 (3.07 vs surface)   UI ≥3 (1.4.11)
+     --border-strong light #7C90B4        3.07 (3.23 vs surface)   UI ≥3 (1.4.11)
+     --input-border dark #6B87C2          4.79 / 4.22 surface      quiet, visible
+     --input-border light #64748B         4.52 / 4.76 surface      quiet, visible
+     --warning light #A16207 (fill)       4.68                     UI ≥3 (was 1.9:1)
+     --cyan light #0E7490 (fill)          5.09                     UI ≥3 (was 2.5:1)
+     --mint light #047857 (fill)          5.21                     UI ≥3 (was 2.2:1)
+     --gold light #B8860B (fill)          3.09                     UI ≥3 (was 2.0:1)
+     --gold-text light #7A4A00            7.11                     AA — gold text path
+     on-gold CTA ink (both themes)        9.6 dark / 7.3 light     AA body
 
-   Note: earlier review notes quoted ~5.4:1 for slate-400 and ~3.4:1 for
-   slate-500 — those were measured against slate-900 (#0f172a). On the real
-   #070b16 surface the numbers are the table above; slate-500 STILL fails the
-   4.5:1 body-copy floor, so the finding stands either way.
-
-   FLOOR ADOPTED HERE: body copy is never darker than slate-400 (7.67:1), 12px
-   sub-copy moves up one more step to slate-300 via .text-muted (13.24:1), and
-   any text darker than slate-500 in BODY copy must move up one step. slate-500
-   survives only as decorative non-text chrome, which needs 3:1 (it has 4.13:1
-   and is allowed); the arrow glyphs are hidden from assistive tech with
-   aria-hidden so they never carry meaning alone.
+   FLOORS ADOPTED: body copy rides --text/--text-muted; the lowest TEXT step is
+   --text-subtle (≥4.5 on bg AND surface-2, both themes — enforced); borders as
+   text are banned, and --border-strong itself must hold ≥3:1 as a UI edge;
+   placeholders are real text (≥4.5); disabled text pairs --text-disabled with
+   aria-disabled (light value is decorative-only); accent fills clear the 3:1
+   non-text UI floor in BOTH themes. Arrow glyphs stay aria-hidden so they
+   never carry meaning alone.
    -----------------------------------------------------------------──────────── */
 
 /* Body-secondary copy: the theme-aware muted-text floor. Deliberately unlayered
@@ -108,12 +157,14 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
 /* ── Design tokens ───────────────────────────────────────────────────────
    Zinc + one gold accent. Tokens are RGB CHANNEL triples so Tailwind opacity
    modifiers (bg-white/5, bg-slate-950/60) work. Light mode is a data-theme
-   swap, not a second stylesheet. Body floor: --text-muted (7.4:1+ both
-   themes); --text-subtle is decorative only; gold carries text only via
-   --gold-text in light mode (raw gold on white is 2.0:1).                  */
+   swap, not a second stylesheet. Body floor: --text-muted (7:1+ both
+   themes); --text-subtle is the lowest TEXT step and clears 4.5:1 on --bg
+   and --surface-2 in both themes; --text-disabled and --text-placeholder
+   have their own floors (see tests/a11y.test.mjs); gold carries text only
+   via --gold-text in light mode (raw gold on white is ~2:1).              */
 :root,
 [data-theme="dark"] {
-  --bg-deep: 8 16 34;         /* #081122 — deepest night */
+  --bg-deep: 8 16 34;         /* #081022 — deepest night */
   --bg: 16 27 51;             /* #101B33 — main navy */
   --surface: 23 38 66;        /* #172642 — secondary surface */
   --surface-2: 38 57 86;      /* #263956 — elevated surface (real depth) */
@@ -122,10 +173,15 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --cup-bracket: 20 184 166;  /* Teal — Cohort Bracket accent */
   --cup-endurance: 245 166 35;/* Solar Gold — Endurance Cup accent */
   --border: 44 61 92;         /* #2C3D5C — visible on navy */
-  --border-strong: 62 82 118; /* #3E5276 */
+  --border-strong: 85 112 168; /* #5570A8 — 3.48 bg / 3.07 surface (UI ≥3:1) */
   --text: 255 255 255;        /* #FFFFFF — primary text */
   --text-muted: 170 184 211;  /* #AAB8D3 — secondary text */
-  --text-subtle: 138 154 184; /* #8A9AB8 — decorative only */
+  --text-subtle: 151 166 196; /* #97A6C4 — lowest text step: 6.98 bg / 4.75 surface-2 */
+  --input-border: 107 135 194;     /* #6B87C2 — 4.22 on surface, quiet vs bg */
+  --text-placeholder: 151 166 196; /* #97A6C4 — ≥4.5 on bg + surface-2 */
+  --text-disabled: 113 128 159;    /* #71809F — 4.31 on bg; pair with aria-disabled */
+  --link: 143 184 255;             /* #8FB8FF — 8.53 bg / 5.81 surface-2 */
+  --subj-physics: 125 211 252; --subj-chem: 84 224 190; --subj-bio: 244 114 182; --subj-math: 167 139 250;
   --primary: 102 139 255;     /* #668BFF — Electric Blue action (dark) */
   --primary-hover: 130 160 255;
   --on-primary: 10 21 48;     /* #0A1530 — ink on primary */
@@ -159,10 +215,12 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --mod-university-a: 49 92 255;   --mod-university-b: 181 154 255;
   --mod-highschool-a: 66 214 220;  --mod-highschool-b: 84 224 190;
   --mod-discovery-a: 181 154 255;  --mod-discovery-b: 244 160 214;
-  /* Depth: aurora glow + premium shadows + glass */
+  /* Depth: aurora glow + premium shadows + glass. The card shadow is a
+     three-layer stack (edge, mid, ambient) so a card reads as a physical
+     sheet lifting off the mesh, not a flat rectangle. */
   --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  --card-shadow: 0 1px 2px rgba(3, 7, 18, 0.5), 0 8px 24px rgba(3, 7, 18, 0.35);
-  --shadow-lift: 0 2px 6px rgba(3, 7, 18, 0.5), 0 16px 40px rgba(3, 7, 18, 0.45);
+  --card-shadow: 0 1px 1px rgba(3, 7, 18, 0.45), 0 8px 20px rgba(3, 7, 18, 0.22), 0 22px 60px rgba(3, 7, 18, 0.3);
+  --shadow-lift: 0 2px 4px rgba(3, 7, 18, 0.5), 0 14px 34px rgba(3, 7, 18, 0.28), 0 32px 80px rgba(3, 7, 18, 0.4);
   --glow-primary: 0 0 0 1px rgba(102, 139, 255, 0.35), 0 8px 30px rgba(49, 92, 255, 0.28);
   --glass-bg: rgba(23, 38, 66, 0.6);
   --glass-border: rgba(170, 184, 211, 0.16);
@@ -189,18 +247,25 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --cup-bracket: 20 184 166;  /* Teal — Cohort Bracket accent */
   --cup-endurance: 245 166 35;/* Solar Gold — Endurance Cup accent */
   --border: 214 222 238;      /* #D6DEEE — subtle */
-  --border-strong: 190 202 224;
+  --border-strong: 124 144 180; /* #7C90B4 — 3.07 bg (UI ≥3:1) */
   --text: 23 38 74;           /* #17264A Ink — primary text */
   --text-muted: 83 97 123;    /* #53617B — secondary text */
-  --text-subtle: 100 116 139; /* #64748B — decorative only (>=3:1) */
+  --text-subtle: 90 107 140;  /* #5A6B8C — lowest text step: 5.09 bg / 4.59 surface-2 */
+  --input-border: 100 116 139;     /* #64748B — 4.76 on white */
+  --text-placeholder: 90 107 140;  /* #5A6B8C — ≥4.5 on bg + surface-2 */
+  --text-disabled: 138 148 172;    /* #8A94AC — decorative-only; pair with aria-disabled */
+  --link: 37 71 214;               /* #2547D6 — 6.76 on bg */
+  --subj-physics: 3 105 161; --subj-chem: 6 95 70; --subj-bio: 168 30 91; --subj-math: 91 33 182;
   --primary: 49 92 255;       /* #315CFF — Electric Blue action */
   --primary-hover: 37 75 230;
   --on-primary: 255 255 255;  /* white on electric (5.12:1) */
-  /* Brand accents (light = vivid fills; *-text variants are AA as text) */
+  /* Brand accents (light = deep fills; *-text variants are AA as text). The
+     fill values are darkened so status dots/badges/icons clear the 3:1
+     non-text UI floor of WCAG 1.4.11 against --bg (#F7F9FF). */
   --electric: 49 92 255;  --electric-text: 37 71 214;   /* #2547D6 */
-  --cyan: 8 175 194;      --cyan-text: 6 118 130;       /* #067682 */
+  --cyan: 14 116 144;     --cyan-text: 6 118 130;       /* #067682 */
   --violet: 121 82 217;   --violet-text: 107 63 208;     /* #6B3FD0 */
-  --mint: 54 201 165;     /* #54E0BE */
+  --mint: 4 120 87;       /* #047857 */
   --coral: 255 107 94;    /* #FF6B5E */
   --pink: 236 121 183;    /* #EC79B7 */
   /* pink-text was dark-theme-only, so text-pink-200 silently lost its colour
@@ -209,19 +274,19 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
      --surface-2 — AA on both. */
   --pink-text: 168 50 120;  /* #A83278 */
   --ink: 23 38 74;
-  --gold: 245 166 35;         /* #F5A623 Solar Gold — premium / rewards */
+  --gold: 184 134 11;         /* #B8860B — darkened so gold fills/dots/borders clear 3:1 UI on --bg; text still rides --gold-text */
   --gold-hover: 214 138 20;
   --gold-text: 122 74 0;      /* #7A4A00 — gold body text (AA) */
   --gold-soft: 245 166 35;
   --gold-from: 245 166 35;
   --gold-to: 232 174 92;
   --on-gold: 23 38 74;        /* ink on gold (7.34:1) */
-  --teal: 8 175 194;          /* Amber→cyan alias so existing teal utilities read cyan */
+  --teal: 14 116 144;         /* Amber→cyan alias so existing teal utilities read cyan */
   --teal-text: 6 118 130;     /* #067682 */
   --teal-soft: 54 201 165;
   --success: 35 134 106;   --success-text: 20 108 67;   --success-soft: 54 201 165;
   --error: 207 85 85;     --error-text: 168 50 50;     --error-soft: 255 107 94;
-  --warning: 214 155 54;   --warning-text: 146 64 8;    --warning-soft: 245 166 35;
+  --warning: 161 98 7;     --warning-text: 146 64 8;    --warning-soft: 245 166 35;
   --danger: 168 50 50;
   --muted-fill: 83 97 123;
   --focus: 49 92 255;
@@ -232,8 +297,8 @@ html.lite img, html.lite video, html.lite canvas, html.lite .heavy-widget { disp
   --mod-discovery-a: 121 82 217;   --mod-discovery-b: 236 121 183;
   /* Depth + premium */
   --card-inset: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --card-shadow: 0 1px 2px rgba(23, 38, 74, 0.06), 0 8px 24px rgba(23, 38, 74, 0.08);
-  --shadow-lift: 0 2px 8px rgba(23, 38, 74, 0.10), 0 20px 48px rgba(23, 38, 74, 0.12);
+  --card-shadow: 0 1px 1px rgba(23, 38, 74, 0.08), 0 8px 18px rgba(23, 38, 74, 0.08), 0 24px 60px rgba(23, 38, 74, 0.12);
+  --shadow-lift: 0 2px 6px rgba(23, 38, 74, 0.10), 0 16px 40px rgba(23, 38, 74, 0.14), 0 36px 90px rgba(23, 38, 74, 0.16);
   --glow-primary: 0 0 0 1px rgba(49, 92, 255, 0.20), 0 8px 26px rgba(49, 92, 255, 0.20);
   --glass-bg: rgba(255, 255, 255, 0.55);
   --glass-border: rgba(23, 38, 74, 0.08);
@@ -356,23 +421,138 @@ html.lite-mode *::after {
    Motion is 150-200ms ease-out, transform/opacity only, and every animation
    sits inside prefers-reduced-motion.                                         */
 .gn-card {
+  position: relative;
   border: 1px solid rgb(var(--border));
   background: rgb(var(--surface));
   box-shadow: var(--card-inset), var(--card-shadow);
+}
+
+/* Top-light edge: brighter at the top, fading to a darker bottom edge. The
+   border mask keeps the 1px line on the rounded card's own shape — a bezier
+   edge, not a glow, so cards never look like glass. */
+.gn-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.22) 0%,
+    rgb(255 255 255 / 0.05) 22%,
+    rgb(0 0 0 / 0) 52%,
+    rgb(0 0 0 / 0.16) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+/* Without mask-composite the pseudo would tint the whole card, so it stays
+   invisible until the browser can keep it on the 1px edge only. */
+.gn-card::before { opacity: 0; }
+@supports ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .gn-card::before { opacity: 1; }
 }
 .gn-press { transition: transform 180ms ease-out, opacity 180ms ease-out, border-color 180ms ease-out; }
 .gn-press:active { transform: scale(0.98); }
 @media (prefers-reduced-motion: no-preference) {
   .gn-press:hover { border-color: rgb(var(--gold) / 0.5); }
 }
+
+/* Tactile press on every real control: a springy scale-down, not a hard snap.
+   It applies only to buttons and role=button elements (never text), and it is
+   silenced by the OS reduce-motion setting and the device Motion/Lite prefs. */
+@supports (transition: transform) {
+  @media (prefers-reduced-motion: no-preference) {
+    button:not(:disabled),
+    [role="button"]:not([aria-disabled="true"]) {
+      transition-property: transform, background-color, border-color, color, opacity;
+      transition-duration: 180ms;
+      transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    button:not(:disabled):active,
+    [role="button"]:not([aria-disabled="true"]):active {
+      transform: scale(0.97);
+    }
+  }
+}
+html.reduce-motion button:not(:disabled):active,
+html.reduce-motion [role="button"]:not([aria-disabled="true"]):active,
+html.lite-mode button:not(:disabled):active,
+html.lite-mode [role="button"]:not([aria-disabled="true"]):active,
+html.lite button:not(:disabled):active,
+html.lite [role="button"]:not([aria-disabled="true"]):active {
+  transform: none !important;
+}
+
+/* Staggered fade-up for lists/cards as a page settles. Opt-in via .gn-stagger
+   so study surfaces can choose it; never imposed on every container. */
+@keyframes gn-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .gn-stagger > * {
+    animation: gn-fade-up 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .gn-stagger > *:nth-child(1) { animation-delay: 20ms; }
+  .gn-stagger > *:nth-child(2) { animation-delay: 70ms; }
+  .gn-stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .gn-stagger > *:nth-child(4) { animation-delay: 170ms; }
+  .gn-stagger > *:nth-child(5) { animation-delay: 220ms; }
+  .gn-stagger > *:nth-child(6) { animation-delay: 270ms; }
+  .gn-stagger > *:nth-child(7) { animation-delay: 320ms; }
+  .gn-stagger > *:nth-child(8) { animation-delay: 370ms; }
+  .gn-stagger > *:nth-child(9) { animation-delay: 420ms; }
+  .gn-stagger > *:nth-child(10) { animation-delay: 470ms; }
+}
+html.reduce-motion .gn-stagger > *,
+html.lite-mode .gn-stagger > *,
+html.lite .gn-stagger > * {
+  animation: none !important;
+}
+
+/* Hero title: the owner's white-to-gray gradient, with a solid fallback so a
+   browser without background-clip:text still renders the text. */
+.gn-title-gradient {
+  color: rgb(var(--text));
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gn-title-gradient {
+    background-image: linear-gradient(180deg, rgb(var(--text)) 8%, rgb(var(--text-muted)) 96%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+html.reduce-motion .gn-title-gradient,
+html.lite-mode .gn-title-gradient,
+html.lite .gn-title-gradient {
+  background-image: none;
+  color: rgb(var(--text));
+  -webkit-text-fill-color: currentColor;
+}
 /* Glass ONLY on the top bar and bottom nav, with a solid fallback. */
 .gn-glass { background: var(--header-bg); }
 @supports (backdrop-filter: blur(14px)) {
   .gn-glass { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 }
-/* Gold hero button: gradient + glow; the text is dark in BOTH themes. */
+/* Gold hero button: gradient + glow; the text is dark in BOTH themes.
+   The ramp rides --gold-from → --gold-to only: --gold is the FILL token (and
+   is deliberately darker in light mode for the 3:1 UI floor), so it must not
+   sit as the gradient's mid stop. Dark renders exactly as before (dark
+   --gold equals --gold-to); light keeps the smooth Solar Gold ramp. */
 .gn-btn-gold {
-  background: linear-gradient(135deg, rgb(var(--gold-from)), rgb(var(--gold)) 55%, rgb(var(--gold-to)));
+  background: linear-gradient(135deg, rgb(var(--gold-from)), rgb(var(--gold-to)));
   color: rgb(var(--on-gold));
   box-shadow: 0 8px 30px rgb(var(--gold) / 0.18);
 }

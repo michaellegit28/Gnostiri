@@ -1,9 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { BookOpen, Compass, FolderOpen, GraduationCap } from "lucide-react";
+import { useDomain } from "@/context/DomainContext";
+import { DEFAULT_LEARNING_DOMAIN, isVisibleForLearningDomain, type NavAudience } from "@/lib/learning-domain";
 
 /**
- * Study hub — the four ways to study, as cards with real counts.
+ * Study hub — the cards for one learning lane plus the shared work surfaces.
  * Counts come from the database (never hard-coded) so the page can't lie.
+ * A university student never receives the high-school card, and vice versa;
+ * discovery and the desk are shared by design.
  */
 
 interface StudyCardSpec {
@@ -12,19 +18,24 @@ interface StudyCardSpec {
   icon: "BookOpen" | "GraduationCap" | "Compass" | "FolderOpen";
   line: string;
   count: string;
+  audience: NavAudience;
 }
 
 export default function StudyGrid({ cards }: { cards: StudyCardSpec[] }) {
+  const { learningDomain } = useDomain();
+  const domain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
+  const visibleCards = cards.filter((card) => isVisibleForLearningDomain(card.href, domain));
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
-      {cards.map((card) => {
+    <div className="gn-stagger grid gap-4 sm:grid-cols-2">
+      {visibleCards.map((card) => {
         const ICONS = { BookOpen, GraduationCap, Compass, FolderOpen } as const;
         const Icon = ICONS[card.icon];
         return (
           <Link
             key={card.href}
             href={card.href}
-            className="gn-motion gn-lift gn-shadow group flex min-h-[132px] flex-col justify-between rounded-2xl border border-line bg-surface p-6 transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-[var(--shadow-lift)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="gn-card gn-motion gn-lift gn-shadow group flex min-h-[132px] flex-col justify-between rounded-2xl p-6 transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-[var(--shadow-lift)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <div className="flex items-center justify-between">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-bg text-electric-text">
@@ -45,5 +56,3 @@ export default function StudyGrid({ cards }: { cards: StudyCardSpec[] }) {
     </div>
   );
 }
-
-

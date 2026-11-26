@@ -10,7 +10,9 @@ import PrimeBadge from "@/components/chrome/PrimeBadge";
 import SyncIndicator from "@/components/offline/SyncIndicator";
 import AccretionEmblem from "@/components/brand/AccretionEmblem";
 import useDialogFocus from "@/components/ui/useDialogFocus";
-import { BOTTOM_TABS, NAV_LABEL, NAV_ZONES, TAB_BAR_LABEL, isActive, type NavItem } from "./nav-model";
+import { NAV_LABEL, TAB_BAR_LABEL, bottomTabsForDomain, isActive, navZonesForDomain, type NavItem } from "./nav-model";
+import { useDomain } from "@/context/DomainContext";
+import { DEFAULT_LEARNING_DOMAIN, learningDomainFromPathname } from "@/lib/learning-domain";
 import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 /**
@@ -26,6 +28,13 @@ import { trackAnalyticsEvent } from "@/lib/analytics-client";
  */
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "/";
+  const { learningDomain } = useDomain();
+  const pathLearningDomain = learningDomainFromPathname(pathname);
+  // Direct lane URLs show their own lane for that page; every other screen
+  // follows the student's chosen lane. Discovery never switches the lane.
+  const activeDomain = pathLearningDomain ?? learningDomain ?? DEFAULT_LEARNING_DOMAIN;
+  const navZones = navZonesForDomain(activeDomain);
+  const bottomTabs = bottomTabsForDomain(activeDomain);
   const [drawer, setDrawer] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const [palette, setPalette] = useState(false);
@@ -94,7 +103,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     };
   }, [drawer, palette]);
 
-  const allItems = NAV_ZONES.flatMap((z) => z.items);
+  const allItems = navZones.flatMap((z) => z.items);
   const paletteItems = allItems.filter(
     (item, index, items) => items.findIndex((candidate) => candidate.href === item.href) === index
   );
@@ -110,7 +119,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Top bar ─────────────────────────────────────────────────────── */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 flex h-14 items-center gap-2 border-b border-line bg-bg/85 px-3 backdrop-blur-md transition-transform duration-300 md:h-15 ${
+        className={`gn-glass fixed inset-x-0 top-0 z-50 flex h-14 items-center gap-2 border-b border-line px-3 transition-transform duration-300 md:h-15 ${
           hidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
@@ -162,12 +171,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {/* ── Desktop sidebar ─────────────────────────────────────────────── */}
       <nav
         aria-label={NAV_LABEL}
-        className={`fixed inset-y-0 left-0 z-40 hidden w-64 transform border-r border-line bg-bg/97 pt-14 backdrop-blur-lg transition-transform duration-300 lg:block ${
+        className={`gn-glass fixed inset-y-0 left-0 z-40 hidden w-64 transform border-r border-line pt-14 transition-transform duration-300 lg:block ${
           sidebar ? "-translate-x-full" : "translate-x-0"
         }`}
       >
         <div className="h-full overflow-y-auto px-4 py-6">
-          {NAV_ZONES.map((zone) => (
+          {navZones.map((zone) => (
             <div key={zone.id} className="mb-7">
               <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
               <ul className="space-y-0.5">
@@ -191,7 +200,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           aria-modal="true"
           aria-label="Primary navigation"
           tabIndex={-1}
-          className="fixed inset-0 z-[60] overflow-y-auto bg-bg/97 backdrop-blur-lg lg:hidden"
+          className="gn-glass fixed inset-0 z-[60] overflow-y-auto lg:hidden"
         >
           <div className="flex h-14 items-center justify-between px-3">
             <span className="font-serif text-lg font-bold text-slate-100">Gnostiri</span>
@@ -205,7 +214,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </button>
           </div>
           <nav aria-label={NAV_LABEL} className="px-5 pb-16 pt-4">
-            {NAV_ZONES.map((zone) => (
+            {navZones.map((zone) => (
               <div key={zone.id} className="mb-7">
                 <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
                 <ul className="divide-y divide-border/10 border-y border-border/10">
@@ -256,7 +265,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           aria-labelledby="command-palette-title"
           tabIndex={-1}
         >
-          <div className="mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-line bg-surface/95 shadow-2xl">
+          <div className="gn-glass mx-auto mt-24 w-[min(92vw,32rem)] overflow-hidden rounded-2xl border border-line shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/10 px-4 py-2">
               <h2 id="command-palette-title" className="text-[11px] uppercase tracking-[0.3em] text-electric-text">
                 Jump to
@@ -309,10 +318,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {/* ── Mobile bottom tabs ──────────────────────────────────────────── */}
       <nav
         aria-label={TAB_BAR_LABEL}
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-bg/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
+        className="gn-glass fixed inset-x-0 bottom-0 z-50 border-t border-line pb-[env(safe-area-inset-bottom)] lg:hidden"
       >
         <ul className="flex">
-          {BOTTOM_TABS.map((tab) => {
+          {bottomTabs.map((tab) => {
             const Icon = tab.icon;
             const active = isActive(pathname, tab.href);
             return (

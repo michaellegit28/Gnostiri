@@ -11,8 +11,11 @@ import {
   type QueueItem,
   type ViewRecord,
 } from "@/lib/offline-queue";
+import { useDomain } from "@/context/DomainContext";
+import { DEFAULT_LEARNING_DOMAIN, domainHome, domainLabel } from "@/lib/learning-domain";
 
 export default function OfflinePage() {
+  const { learningDomain } = useDomain();
   const [views, setViews] = useState<ViewRecord[]>([]);
   const [items, setItems] = useState<QueueItem[]>([]);
   const [busy, setBusy] = useState(false);
@@ -152,10 +155,10 @@ export default function OfflinePage() {
           Back to study
         </Link>
         <Link
-          href="/highschool/study"
+          href={domainHome(learningDomain ?? DEFAULT_LEARNING_DOMAIN)}
           className="inline-flex min-h-[44px] items-center rounded-xl border border-line-strong px-5 text-sm font-semibold text-slate-200 hover:border-primary/60 hover:text-white"
         >
-          High school topics
+          {domainLabel(learningDomain ?? DEFAULT_LEARNING_DOMAIN)} home
         </Link>
       </div>
     </div>

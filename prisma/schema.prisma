@@ -24,6 +24,7 @@ model User {
   name           String?
   avatar         String?
   country        String?
+  schoolId       String?        // institution-linked accounts (school/hub licences)
   createdAt      DateTime       @default(now())
 
   profile        Profile?
@@ -141,6 +142,7 @@ model ContentRequest {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   kind      String   // 'course' | 'subject' | 'topic'
   slug      String
+  title     String   @default("") // requester-facing label for the requested content
   note      String?
   status    String   @default("open") // 'open' | 'planned' | 'shipped'
   createdAt DateTime @default(now())
@@ -288,6 +290,7 @@ model Topic {
   description   String?
   orderIndex    Int            @default(0)
   isPublished   Boolean        @default(true)
+  tags          String[]      @default([]) // topic-scoped metadata tags (alignment/curriculum tools)
   lessons       Lesson[]
   questions     Question[]
   quizAttempts  QuizAttempt[]
@@ -325,6 +328,10 @@ model Question {
   explanation  String?
   difficulty   String   @default("medium")
   sourceExam   String?
+  paper        String?  // paper label/number a question came from, where it applies
+  markingGuide String?  // examiner marking scheme for the item, where one exists
+  marks        Int      @default(1)
+  sourceYear   Int?
   hint         String?
   markingPoints Json?
   boardTags    QuestionBoardTag[]

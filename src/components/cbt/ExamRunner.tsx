@@ -268,7 +268,7 @@ export default function ExamRunner({ paper }: { paper: CbtSessionPaper }) {
                   onChange={(e) => setTheory(e.target.value)}
                   rows={9}
                   placeholder="Write your full answer — examiners reward structured points, definitions and examples."
-                  className="w-full rounded-xl border border-line bg-bg p-4 text-sm leading-relaxed text-slate-100 placeholder:text-slate-600 focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="w-full rounded-xl border border-line bg-bg p-4 text-sm leading-relaxed text-slate-100 placeholder:text-placeholder focus:border-primary/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 />
                 <p className={`mt-1 text-right text-xs ${CBT.faint}`}>
                   {(answers[activeQ.id]?.text ?? "").trim().split(/\s+/).filter(Boolean).length} words

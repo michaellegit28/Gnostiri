@@ -239,7 +239,7 @@ export default function BracketCupClient({ competitionId }: { competitionId: str
           {view.roundOne.matches.map((match) => (
             <li key={match.matchIndex} className="flex items-center justify-between gap-3 px-5 py-3 text-sm">
               <span className="text-slate-300">
-                {match.a?.handle ?? "—"} <span className="text-slate-600">vs</span> {match.b?.handle ?? "—"}
+                {match.a?.handle ?? "—"} <span className="text-subtle">vs</span> {match.b?.handle ?? "—"}
               </span>
               <span className="text-xs text-slate-500">
                 {match.bye ? "bye" : match.winner ? `won by ${match.winner.handle}` : match.state}

@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useDomain } from "@/context/DomainContext";
+import { DEFAULT_LEARNING_DOMAIN, domainHome, domainLabel } from "@/lib/learning-domain";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import {
   Swords,
@@ -45,6 +47,8 @@ const priorityStyle: Record<string, string> = {
 
 export default function BattlePlanPage() {
   const { user, loading } = useAuth();
+  const { learningDomain } = useDomain();
+  const domain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
   const [exam, setExam] = useState("jamb");
   const [examDate, setExamDate] = useState("");
   const [hasPlan, setHasPlan] = useState<boolean | null>(null);
@@ -83,8 +87,8 @@ export default function BattlePlanPage() {
   }, []);
 
   useEffect(() => {
-    if (!loading && user) void load(exam);
-  }, [loading, user, exam, load]);
+    if (!loading && user && domain !== "university") void load(exam);
+  }, [loading, user, exam, load, domain]);
 
   async function generate() {
     if (!examDate) {
@@ -129,6 +133,29 @@ export default function BattlePlanPage() {
 
   const examName = EXAMS.find((e) => e.code === exam)?.name ?? exam.toUpperCase();
   const progress = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+
+  // Battle Plan is the High School study-plan surface. A University session
+  // never sees the exam boards here, even on a direct URL.
+  if (domain === "university") {
+    return (
+      <main className="min-h-screen bg-transparent px-5 py-8 text-slate-100 md:p-12">
+        <div className="mx-auto max-w-3xl space-y-4">
+          <h1 className="gn-title-gradient font-serif text-3xl font-bold tracking-tight md:text-4xl">
+            Battle Plan is a {domainLabel(domain)} feature
+          </h1>
+          <p className="text-muted">
+            High School and University stay separate. Your University lane keeps its courses, exam halls, mastery and revision queue.
+          </p>
+          <Link
+            href={domainHome(domain)}
+            className="gn-motion inline-flex min-h-[44px] items-center rounded-xl bg-primary px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            Back to {domainLabel(domain)}
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-transparent text-slate-100 px-5 py-8 md:p-10">

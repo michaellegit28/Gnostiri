@@ -7,8 +7,10 @@ import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignme
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 import ManualCompleteButton from "@/components/study/ManualCompleteButton";
+import StudyBlockRenderer from "@/components/study/StudyBlockRenderer";
 import ContentReportTab from "@/components/ContentReportTab";
 import { BioDiagram } from "@/components/diagrams/BioDiagrams";
+import type { LessonBlock } from "@/types/lesson";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -142,6 +144,11 @@ export default async function TopicPage({ params, searchParams }: { params: { su
     if (b.type === "definition") return <p key={i} className="text-sm font-reading text-slate-200 rounded-lg border border-slate-700 p-3"><strong>{b.term}: </strong>{b.text}</p>;
     if (b.type === "example") return <p key={i} className="text-sm font-reading text-slate-300 border-l-2 border-gold pl-3">{b.text}</p>;
     if (b.type === "callout") return <p key={i} className="text-sm font-reading text-slate-100 rounded-lg border border-gold/30 bg-gold/5 p-3">{b.text}</p>;
+    // Rich study blocks (code / theory / check question / MCQ) share the
+    // accessible renderer instead of collapsing to raw text.
+    if (b.type === "code" || b.type === "theory" || b.type === "question" || b.type === "mcq") {
+      return <StudyBlockRenderer key={i} content={{ blocks: [b as LessonBlock] }} />;
+    }
     if (b.type === "diagram" && b.diagramId) return <BioDiagram key={i} diagramId={b.diagramId} caption={b.caption || ""} />;
     if (b.type === "table" && b.headers) return <div key={i} className="overflow-x-auto rounded-lg border border-slate-700"><table className="w-full text-xs"><thead><tr>{b.headers.map((h) => <th key={h} className="p-2 text-left font-sans bg-slate-800">{h}</th>)}</tr></thead><tbody>{(b.rows || []).map((r, ri) => <tr key={ri}>{r.map((c, ci) => <td key={ci} className="p-2 border-t border-slate-800">{c}</td>)}</tr>)}</tbody></table></div>;
     return <p key={i} className="text-sm font-reading text-slate-300 leading-relaxed">{b.text}</p>;

@@ -507,7 +507,7 @@ export default function CupPlayClient({
         </div>
       )}
 
-      <footer className="mt-10 text-center text-[11px] uppercase tracking-[0.2em] text-slate-600">
+      <footer className="mt-10 text-center text-[11px] uppercase tracking-[0.2em] text-subtle">
         The clock is server-anchored · answers are graded once, on submit
       </footer>
     </main>

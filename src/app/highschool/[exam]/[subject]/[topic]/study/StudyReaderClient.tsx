@@ -4,11 +4,12 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { enqueue } from "@/lib/offline-queue";
-import { LessonContent, LessonBlock } from "@/types/lesson";
+import { LessonContent } from "@/types/lesson";
 import CurriculumAlignmentWidget from "@/components/curriculum/CurriculumAlignmentWidget";
 import AlignmentDisclaimer from "@/components/curriculum/AlignmentDisclaimer";
 import LiteModeBanner from "@/components/curriculum/LiteModeBanner";
 import ContentReportTab from "@/components/ContentReportTab";
+import StudyBlockRenderer from "@/components/study/StudyBlockRenderer";
 import {
   ChevronRight,
   ChevronLeft,
@@ -17,9 +18,6 @@ import {
   CheckCircle,
   HelpCircle,
   MessageSquare,
-  Info,
-  AlertTriangle,
-  Sparkles,
   List,
   Check,
   CloudOff,
@@ -120,137 +118,6 @@ export default function StudyReaderClient({
       console.error("Failed to mark complete:", err);
     } finally {
       setIsMarking(false);
-    }
-  };
-
-  const renderBlock = (block: LessonBlock, index: number) => {
-    switch (block.type) {
-      case "heading":
-        if (block.level === 2) {
-          return (
-            <h2
-              key={index}
-              className="font-serif text-2xl md:text-3xl font-bold text-[rgb(var(--paper-ink))] mt-8 mb-4 border-b border-[rgb(var(--paper-line))] pb-2"
-            >
-              {block.text}
-            </h2>
-          );
-        }
-        return (
-          <h3
-            key={index}
-            className="font-serif text-xl md:text-2xl font-semibold text-[rgb(var(--paper-gold))] mt-6 mb-3"
-          >
-            {block.text}
-          </h3>
-        );
-
-      case "paragraph":
-        return (
-          <p
-            key={index}
-            className="text-[rgb(var(--paper-ink-soft))] font-reading text-base md:text-lg leading-[1.8] my-4"
-          >
-            {block.text}
-          </p>
-        );
-
-      case "definition":
-        return (
-          <div
-            key={index}
-            className="border border-[rgb(var(--paper-gold)/0.5)] bg-[rgb(var(--paper-wash))] rounded-xl p-5 my-6 shadow-sm"
-          >
-            <div className="text-xs font-semibold uppercase tracking-wider text-[rgb(var(--paper-gold))] mb-1">
-              Key idea
-            </div>
-            <div className="font-bold text-[rgb(var(--paper-ink))] text-lg mb-2">{block.term}</div>
-            <div className="text-[rgb(var(--paper-ink-soft))] font-reading leading-relaxed">{block.text}</div>
-          </div>
-        );
-
-      case "example":
-        return (
-          <div
-            key={index}
-            className="border-l-4 border-[rgb(var(--paper-green))] bg-[rgb(var(--paper-navy-wash))] rounded-r-xl p-5 my-6 shadow-sm"
-          >
-            <div className="text-xs font-semibold uppercase tracking-wider text-[rgb(var(--paper-green))] mb-2 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4" />
-              <span>Example</span>
-            </div>
-            <div className="text-[rgb(var(--paper-ink-soft))] font-reading leading-relaxed">{block.text}</div>
-          </div>
-        );
-
-      case "callout":
-        if (block.variant === "info") {
-          return (
-            <div
-              key={index}
-              className="border border-[rgb(var(--paper-navy)/0.3)] bg-[rgb(var(--paper-navy-wash))] text-[rgb(var(--paper-navy))] rounded-xl p-5 my-6 flex items-start gap-3"
-            >
-              <Info className="w-5 h-5 text-[rgb(var(--paper-navy))] shrink-0 mt-0.5" />
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wider text-[rgb(var(--paper-navy))] mb-1">
-                  Note
-                </div>
-                <div className="font-reading leading-relaxed">{block.text}</div>
-              </div>
-            </div>
-          );
-        }
-        return (
-          <div
-            key={index}
-            className="border border-[rgb(var(--paper-amber)/0.4)] bg-[rgb(var(--paper-amber-wash))] text-[rgb(var(--paper-amber))] rounded-xl p-5 my-6 flex items-start gap-3"
-          >
-            <AlertTriangle className="w-5 h-5 text-[rgb(var(--paper-amber))] shrink-0 mt-0.5" />
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-[rgb(var(--paper-amber))] mb-1">
-                Watch out
-              </div>
-              <div className="font-reading leading-relaxed">{block.text}</div>
-            </div>
-          </div>
-        );
-
-      case "table":
-        return (
-          <div key={index} className="overflow-x-auto my-6 rounded-xl border border-[rgb(var(--paper-line))] bg-[rgb(var(--paper))]">
-            <table className="w-full text-left border-collapse">
-              <thead className="bg-[rgb(var(--paper-wash))] border-b border-[rgb(var(--paper-line))]">
-                <tr>
-                  {block.headers.map((header, hIdx) => (
-                    <th
-                      key={hIdx}
-                      className="p-3 text-sm font-semibold text-[rgb(var(--paper-ink))] border-r border-[rgb(var(--paper-line))] last:border-r-0"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[rgb(var(--paper-line))]">
-                {block.rows.map((row, rIdx) => (
-                  <tr key={rIdx} className="hover:bg-[rgb(var(--paper-wash))]">
-                    {row.map((cell, cIdx) => (
-                      <td
-                        key={cIdx}
-                        className="p-3 text-sm font-reading text-[rgb(var(--paper-ink-soft))] border-r border-[rgb(var(--paper-line))] last:border-r-0"
-                      >
-                        {cell}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        );
-
-      default:
-        return null;
     }
   };
 
@@ -375,9 +242,7 @@ export default function StudyReaderClient({
 
           {hasBlocks ? (
             <article className="rounded-2xl bg-[rgb(var(--paper-wash))] p-6 md:p-10 shadow-xl shadow-black/40">
-              <div className="space-y-2">
-                {lessonContent!.blocks.map((block, idx) => renderBlock(block, idx))}
-              </div>
+              <StudyBlockRenderer content={lessonContent!} />
             </article>
           ) : (
             <div className="flex flex-col items-center justify-center py-16 text-center border border-dashed border-slate-800 rounded-2xl bg-slate-900/50 p-8">

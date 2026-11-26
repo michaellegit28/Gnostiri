@@ -12,10 +12,13 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+// Level chips use the aliased token palette directly (no dark: variants —
+// dark mode is an attribute the tokens already track): emerald-* → --success,
+// primary/electric → the action pair, gold/amber → the warning family.
 const LEVELS: Record<string, { label: string; classes: string }> = {
-  mastery: { label: "Mastery", classes: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300" },
-  proficient: { label: "Proficient", classes: "bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300" },
-  developing: { label: "Developing", classes: "bg-amber-100 text-amber-800 dark:bg-gold/15 dark:text-amber-300" },
+  mastery: { label: "Mastery", classes: "bg-emerald-500/15 text-emerald-300" },
+  proficient: { label: "Proficient", classes: "bg-primary/15 text-electric-text" },
+  developing: { label: "Developing", classes: "bg-gold/15 text-amber-300" },
 };
 
 export default async function TranscriptPage() {
@@ -67,15 +70,15 @@ export default async function TranscriptPage() {
 
       <section className="mt-8 grid grid-cols-3 gap-4">
         <div className="rounded-2xl border border-line bg-surface p-5">
-          <div className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{stats.mastery}</div>
+          <div className="text-3xl font-bold text-emerald-300">{stats.mastery}</div>
           <div className="text-sm text-slate-400">At mastery</div>
         </div>
         <div className="rounded-2xl border border-line bg-surface p-5">
-          <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">{stats.proficient}</div>
+          <div className="text-3xl font-bold text-teal-300">{stats.proficient}</div>
           <div className="text-sm text-slate-400">Proficient</div>
         </div>
         <div className="rounded-2xl border border-line bg-surface p-5">
-          <div className="text-3xl font-bold text-amber-600 dark:text-gold">{stats.developing}</div>
+          <div className="text-3xl font-bold text-gold-text">{stats.developing}</div>
           <div className="text-sm text-slate-400">Developing</div>
         </div>
       </section>

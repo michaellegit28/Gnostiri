@@ -6,6 +6,13 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // Dark mode is an EXPLICIT attribute ([data-theme="dark"]), never the OS.
+  // The app's default theme is dark and users opt into light via the toggle
+  // (localStorage + pre-paint script in layout.tsx); following prefers-color-
+  // scheme made every dark: utility flip under an OS setting the app ignores,
+  // producing half-migrated screens. With the selector strategy the dark:
+  // variant tracks the same attribute the token block does.
+  darkMode: ["selector", '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -19,8 +26,12 @@ const config: Config = {
           300: "rgb(var(--text-muted) / <alpha-value>)",
           400: "rgb(var(--text-muted) / <alpha-value>)",
           500: "rgb(var(--text-subtle) / <alpha-value>)",
-          600: "rgb(var(--border-strong) / <alpha-value>)",
-          700: "rgb(var(--border-strong) / <alpha-value>)",
+          // 600/700 previously aliased --border-strong (a BORDER token): as
+          // text it measured 2.5:1 dark / 1.6:1 light — invisible captions.
+          // They now join 500 on --text-subtle, which clears 4.5:1 on bg and
+          // surface-2 in BOTH themes.
+          600: "rgb(var(--text-subtle) / <alpha-value>)",
+          700: "rgb(var(--text-subtle) / <alpha-value>)",
           800: "rgb(var(--border) / <alpha-value>)",
           900: "rgb(var(--surface) / <alpha-value>)",
           950: "rgb(var(--bg) / <alpha-value>)",
@@ -97,6 +108,28 @@ const config: Config = {
         success: "rgb(var(--success) / <alpha-value>)",
         danger: "rgb(var(--danger) / <alpha-value>)",
         warning: "rgb(var(--warning) / <alpha-value>)",
+        // Form + disabled-state tokens. Inputs sit on --bg/--surface and need
+        // a visible-but-quiet border (≥4.5:1 vs surface in both themes);
+        // placeholders are real text and clear 4.5:1; disabled text is
+        // decorative-only in light (pair with aria-disabled) and 4.31:1 in dark.
+        "input-border": "rgb(var(--input-border) / <alpha-value>)",
+        placeholder: "rgb(var(--text-placeholder) / <alpha-value>)",
+        disabled: "rgb(var(--text-disabled) / <alpha-value>)",
+        // Links carry their own token: primary-as-text fails in light on white,
+        // and gold is premium-only. --link is AA on bg + surface-2 both themes.
+        link: "rgb(var(--link) / <alpha-value>)",
+        // Subject identities for per-trail chips (fill + text from one token:
+        // dark = luminous accent on navy, light = deep AA fill/text).
+        "subj-physics": "rgb(var(--subj-physics) / <alpha-value>)",
+        "subj-chem": "rgb(var(--subj-chem) / <alpha-value>)",
+        "subj-bio": "rgb(var(--subj-bio) / <alpha-value>)",
+        "subj-math": "rgb(var(--subj-math) / <alpha-value>)",
+        // mod-* aliases for subject trails: per-trail chips keep the mod-*
+        // naming convention but resolve onto the subj-* tokens.
+        "mod-physics": "rgb(var(--subj-physics) / <alpha-value>)",
+        "mod-chem": "rgb(var(--subj-chem) / <alpha-value>)",
+        "mod-bio": "rgb(var(--subj-bio) / <alpha-value>)",
+        "mod-math": "rgb(var(--subj-math) / <alpha-value>)",
         // Semantic families are theme-aware so exam, tutor, and league states
         // keep the same meaning in both light and dark modes.
         teal: {

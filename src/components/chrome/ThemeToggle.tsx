@@ -29,8 +29,14 @@ function apply(theme: "dark" | "light") {
   } catch {
     /* private mode — the theme simply doesn't persist */
   }
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute("content", theme === "light" ? LIGHT : DARK);
+  // The layout ships TWO theme-color metas (one per prefers-color-scheme).
+  // Setting every one to the resolved colour makes the explicit choice win
+  // over the OS following until the next load, where the pre-paint script
+  // re-syncs both from the stored theme.
+  const color = theme === "light" ? LIGHT : DARK;
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+    meta.setAttribute("content", color);
+  });
 }
 
 export default function ThemeToggle({ className }: { className?: string }) {
