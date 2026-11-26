@@ -7,6 +7,7 @@
 - PR: https://github.com/michaellegit28/Gnostiri/pull/90 (branch agent-app/visual-pass-p0)
 - blocker: none. Payments wiring intentionally excluded by owner directive.
 - ops: rotate UPSTASH_REDIS_REST_TOKEN (session output leak; value never committed).
+- smoke: Vercel preview for this branch is SSO-protected (302 to vercel.com/sso-api for all routes), so runtime smoke could not run unauthenticated; production smoke after merge or SSO bypass is owner-side.
 - next: review + merge on CI + smoke; owner-side to confirm launch-token behaviour and DB schema drift noted in STATE.md.
 
 ## [2026-11-25 20:05] orchestrator — DIRECTIVES — round 3 from owner (full text in STATE.md §Owner directives — round 3)
