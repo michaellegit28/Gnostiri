@@ -88,9 +88,16 @@ test("metadata descriptions are under 120 characters", () => {
 });
 
 test("the pricing page names real prices", () => {
+  // Display strings now derive from the shared checkout pricing table
+  // (src/lib/plans.ts PRIME_PRICES) so the shown price can never drift from the
+  // charged one — tests/payments-paystack.test.mjs locks every display string.
   const pricing = read("src/app/pricing/page.tsx");
-  assert.match(pricing, /\$3\.99 \/ month/, "names the $3.99 monthly price");
-  assert.match(pricing, /\$39\.90 \/ year/, "names the $39.90 annual price");
+  assert.match(pricing, /formatPrimePrice/, "prices render from the shared catalog");
+  const plans = read("src/lib/plans.ts");
+  assert.ok(
+    plans.includes('US: { currency: "USD", monthly: 399, annual: 3990 }'),
+    "names the $3.99 monthly / $39.90 annual price"
+  );
 });
 
 test("headings are sentence case, not Title Case Everywhere", () => {
