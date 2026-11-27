@@ -77,6 +77,7 @@ export const NAV_ZONES: NavZone[] = [
       { href: "/cbt", label: "Timed CBT", icon: MonitorPlay, audience: "highschool" },
       // ── University — no Timed CBT; the advanced AI cluster lives in its own lane ──
       { href: "/university", label: "Courses", icon: GraduationCap, audience: "university" },
+      { href: "/university/ai", label: "AI Studio", icon: Sparkles, audience: "university" },
       { href: "/desk", label: "PDF Desk", icon: FolderOpen, audience: "university" },
       { href: "/university/revision", label: "Revision queue", icon: RotateCcw, audience: "university" },
     ],

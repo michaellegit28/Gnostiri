@@ -10,6 +10,7 @@ import {
   MonitorPlay,
   RotateCcw,
   Swords,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import { useDomain } from "@/context/DomainContext";
@@ -38,6 +39,7 @@ const LANE_LINKS: Record<LearningDomain, LaneLink[]> = {
   // University — deep, AI-heavy lane (no Timed CBT; the AI cluster replaces it).
   university: [
     { href: "/university", label: "Courses", Icon: GraduationCap },
+    { href: "/university/ai", label: "AI Studio", Icon: Sparkles },
     { href: "/battle-plan", label: "Battle Plan", Icon: Swords },
     { href: "/desk", label: "PDF Desk", Icon: FolderOpen },
     { href: "/university/revision", label: "Revision queue", Icon: RotateCcw },

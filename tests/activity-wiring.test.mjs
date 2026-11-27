@@ -41,6 +41,7 @@ const NOT_LEARNING = [
   "analytics",                     // telemetry
   "auth/country",                  // profile preference
   "battle-plan",                   // plan generation, not study
+  "ai/notes",                      // study-note capture, not a completion
   "cbt/session",                   // start a sitting
   "competitions/[id]/streak",      // streak claim, not learning
   "competitions",                  // create a cup
