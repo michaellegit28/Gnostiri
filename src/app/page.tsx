@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Gnostiri",
-  description: "GSE past papers, university course exam halls, your AI study assistant, and a season league.",
+  description: "GPE past papers, university course exam halls, your AI study assistant, and a season league.",
 };
 
 /**

@@ -3,7 +3,7 @@ import PracticeGrid from "@/components/practice/PracticeGrid";
 
 export const metadata: Metadata = {
   title: "Practice — Gnostiri",
-  description: "Timed CBT, GSE past papers, and university course exam halls.",
+  description: "Timed CBT, GPE past papers, and university course exam halls.",
 };
 
 /**

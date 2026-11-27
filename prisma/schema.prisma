@@ -91,7 +91,7 @@ model UserPreference {
   userId             String   @unique
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   country            String?  // ISO country the student studies for (drives currency + exam standard subtitle)
-  examStandard       String?  // e.g. 'jamb-standard' | 'sat-standard' — subtitle on the GSE exam, chosen at signup/first visit
+  examStandard       String?  // e.g. 'jamb-standard' | 'sat-standard' — subtitle on the GPE exam, chosen at signup/first visit
   dailyGoalMinutes   Int      @default(20)   // Today daily mission target
   srsEnabled         Boolean  @default(true) // spaced-repetition review queue
   analyticsOptOut    Boolean  @default(false)

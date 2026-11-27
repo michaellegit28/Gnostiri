@@ -16,21 +16,23 @@ import {
   Settings,
   BarChart3,
   FileBadge,
+  Bell,
   type LucideIcon,
 } from "lucide-react";
 import { isVisibleForAudience, type LearningDomain, type NavAudience } from "@/lib/learning-domain";
+import { GPE } from "@/lib/exam-brand";
 
 /**
- * One navigation model for every surface: the desktop sidebar, the mobile
- * drawer, the bottom tab bar and the command palette all render from this.
- * Adding a destination here adds it everywhere — there is no second list to
- * drift.
+ * One navigation model for every surface: the sidebar menu, the mobile drawer,
+ * the bottom tab bar and the command palette all render from this. Adding a
+ * destination here adds it everywhere — there is no second list to drift.
  *
- * Information architecture: two learning lanes (High School / University) that
- * stay separate, a thin shared layer (tutor, discovery, my learning) and a
- * membership zone. High School exams are the Gnostiri Senior Examination
- * (GSE); University course exams are GC-(course). No descriptions live here —
- * the explanation lives only in the replayable feature tour.
+ * Information architecture: two isolated learning lanes (High School /
+ * University) that never cross-link, a thin shared layer (tutor, discovery,
+ * my learning, notifications) and a membership zone. High School exams are the
+ * Gnostiri Proficiency Exam (GPE); University course exams are GC-(course).
+ * Timed CBT is High School only — University gets the advanced AI cluster
+ * instead. No descriptions live here — explanations live only in the tour.
  *
  * Accessibility contract:
  *  - Accessible names are SHARED constants so every surface announces identically.
@@ -38,7 +40,7 @@ import { isVisibleForAudience, type LearningDomain, type NavAudience } from "@/l
  *    visible non-colour indicator on every surface.
  */
 
-/** Accessible name of the desktop sidebar and the mobile drawer. */
+/** Accessible name of the sidebar menu and the mobile drawer. */
 export const NAV_LABEL = "Primary";
 /** Accessible name of the mobile bottom tab bar. */
 export const TAB_BAR_LABEL = "Primary tabs";
@@ -47,7 +49,7 @@ export interface NavItem {
   href: string;
   label: string;
   icon: LucideIcon;
-  /** Which learning lane may see this destination. Discovery + workspace are shared. */
+  /** Which learning lane may see this destination. Shared items show in both. */
   audience: NavAudience;
 }
 
@@ -70,13 +72,12 @@ export const NAV_ZONES: NavZone[] = [
     label: "Your lane",
     items: [
       // ── High School ──
-      { href: "/highschool/exams", label: "GSE", icon: ClipboardList, audience: "highschool" },
+      { href: "/highschool/exams", label: GPE, icon: ClipboardList, audience: "highschool" },
       { href: "/highschool/study", label: "Textbook study", icon: BookOpen, audience: "highschool" },
       { href: "/cbt", label: "Timed CBT", icon: MonitorPlay, audience: "highschool" },
-      // ── University ──
+      // ── University — no Timed CBT; the advanced AI cluster lives in its own lane ──
       { href: "/university", label: "Courses", icon: GraduationCap, audience: "university" },
       { href: "/desk", label: "PDF Desk", icon: FolderOpen, audience: "university" },
-      { href: "/cbt", label: "Timed CBT", icon: MonitorPlay, audience: "university" },
       { href: "/university/revision", label: "Revision queue", icon: RotateCcw, audience: "university" },
     ],
   },
@@ -86,6 +87,7 @@ export const NAV_ZONES: NavZone[] = [
     items: [
       { href: "/tutor", label: "AI Tutor", icon: Sparkles, audience: "shared" },
       { href: "/discovery", label: "Discovery", icon: Compass, audience: "shared" },
+      { href: "/notifications", label: "Notifications", icon: Bell, audience: "shared" },
     ],
   },
   {
@@ -104,7 +106,6 @@ export const NAV_ZONES: NavZone[] = [
     label: "Membership",
     items: [
       { href: "/pricing", label: "Gnostiri Prime", icon: Crown, audience: "shared" },
-      { href: "/library/credits", label: "Credits", icon: Coins, audience: "shared" },
       { href: "/profile", label: "Profile", icon: GraduationCap, audience: "shared" },
       { href: "/settings", label: "Settings", icon: Settings, audience: "shared" },
     ],
@@ -115,7 +116,7 @@ export const NAV_ZONES: NavZone[] = [
 export const BOTTOM_TABS: NavItem[] = [
   { href: "/", label: "Today", icon: Home, audience: "shared" },
   { href: "/study", label: "Study", icon: BookOpen, audience: "shared" },
-  { href: "/cbt", label: "Practice", icon: MonitorPlay, audience: "shared" },
+  { href: "/cbt", label: "Practice", icon: MonitorPlay, audience: "highschool" },
   { href: "/progress", label: "Progress", icon: BarChart3, audience: "shared" },
   { href: "/library", label: "Library", icon: Library, audience: "shared" },
 ];

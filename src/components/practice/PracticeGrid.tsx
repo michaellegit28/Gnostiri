@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CalendarCheck, ClipboardList, FolderDown, GraduationCap, MonitorPlay } from "lucide-react";
 import { useDomain } from "@/context/DomainContext";
 import { DEFAULT_LEARNING_DOMAIN, isVisibleForAudience, type NavAudience } from "@/lib/learning-domain";
+import { GPE } from "@/lib/exam-brand";
 
 interface PracticeCardSpec {
   href: string;
@@ -15,7 +16,7 @@ interface PracticeCardSpec {
 const CARDS: PracticeCardSpec[] = [
   {
     href: "/highschool/exams",
-    title: "GSE",
+    title: GPE,
     Icon: ClipboardList,
     audience: "highschool",
   },
@@ -23,7 +24,7 @@ const CARDS: PracticeCardSpec[] = [
     href: "/cbt",
     title: "Timed CBT",
     Icon: MonitorPlay,
-    audience: "shared",
+    audience: "highschool",
   },
   {
     href: "/university",
@@ -58,7 +59,7 @@ export default function PracticeGrid() {
         href={primary.href}
         className="gn-motion mt-7 inline-flex min-h-[48px] items-center rounded-xl bg-primary px-6 font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        {domain === "university" ? "Open a course exam hall" : "Open GSE"}
+        {domain === "university" ? "Open a course exam hall" : `Open ${GPE}`}
       </Link>
 
       <section aria-labelledby="practice-destinations" className="mt-12">

@@ -19,6 +19,7 @@ import {
   domainLabel,
   type LearningDomain,
 } from "@/lib/learning-domain";
+import { GPE } from "@/lib/exam-brand";
 
 interface LaneLink {
   href: string;
@@ -27,17 +28,19 @@ interface LaneLink {
 }
 
 const LANE_LINKS: Record<LearningDomain, LaneLink[]> = {
+  // High School — the linear exam-prep lane (includes Timed CBT).
   highschool: [
-    { href: "/highschool/exams", label: "GSE", Icon: ClipboardList },
+    { href: "/highschool/exams", label: GPE, Icon: ClipboardList },
     { href: "/highschool/study", label: "Textbook study", Icon: BookOpen },
     { href: "/battle-plan", label: "Battle Plan", Icon: Swords },
     { href: "/cbt", label: "Timed CBT", Icon: MonitorPlay },
   ],
+  // University — deep, AI-heavy lane (no Timed CBT; the AI cluster replaces it).
   university: [
     { href: "/university", label: "Courses", Icon: GraduationCap },
     { href: "/battle-plan", label: "Battle Plan", Icon: Swords },
     { href: "/desk", label: "PDF Desk", Icon: FolderOpen },
-    { href: "/cbt", label: "Timed CBT", Icon: MonitorPlay },
+    { href: "/university/revision", label: "Revision queue", Icon: RotateCcw },
   ],
 };
 
@@ -61,7 +64,7 @@ export default function LaneBoard() {
         <h2 id="lane-board-title" className="font-serif text-xl font-bold text-ink">
           Continue
         </h2>
-        <div role="tablist" aria-label="Learning lane" className="flex gap-1 rounded-xl border border-line bg-surface/50 p-1">
+        <div role="group" aria-label="Learning lane" className="flex gap-1 rounded-xl border border-line bg-surface/50 p-1">
           {LEARNING_DOMAINS.map((domain) => {
             const selected = domain === lane;
             return (
