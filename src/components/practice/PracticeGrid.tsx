@@ -34,7 +34,7 @@ const CARDS: PracticeCardSpec[] = [
   },
   {
     href: "/battle-plan",
-    title: "Battle Plan",
+    title: "Study Plan",
     Icon: CalendarCheck,
     audience: "highschool",
   },

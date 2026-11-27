@@ -5,7 +5,7 @@ import {
   Compass,
   FolderOpen,
   Sparkles,
-  Swords,
+  ListChecks,
   Trophy,
   Library,
   Crown,
@@ -69,7 +69,7 @@ export const NAV_ZONES: NavZone[] = [
   },
   {
     id: "lane",
-    label: "Your lane",
+    label: "Study",
     items: [
       // ── High School ──
       { href: "/highschool/exams", label: GPE, icon: ClipboardList, audience: "highschool" },
@@ -78,15 +78,15 @@ export const NAV_ZONES: NavZone[] = [
       // ── University — no Timed CBT; the advanced AI cluster lives in its own lane ──
       { href: "/university", label: "Courses", icon: GraduationCap, audience: "university" },
       { href: "/university/ai", label: "AI Studio", icon: Sparkles, audience: "university" },
-      { href: "/desk", label: "PDF Desk", icon: FolderOpen, audience: "university" },
-      { href: "/university/revision", label: "Revision queue", icon: RotateCcw, audience: "university" },
+      { href: "/desk", label: "Documents", icon: FolderOpen, audience: "university" },
+      { href: "/university/revision", label: "Review", icon: RotateCcw, audience: "university" },
     ],
   },
   {
     id: "shared",
-    label: "Shared",
+    label: "Discover",
     items: [
-      { href: "/tutor", label: "AI Tutor", icon: Sparkles, audience: "shared" },
+      { href: "/tutor", label: "Tutor", icon: Sparkles, audience: "shared" },
       { href: "/discovery", label: "Discovery", icon: Compass, audience: "shared" },
       { href: "/notifications", label: "Notifications", icon: Bell, audience: "shared" },
     ],
@@ -95,18 +95,18 @@ export const NAV_ZONES: NavZone[] = [
     id: "learning",
     label: "My learning",
     items: [
-      { href: "/battle-plan", label: "Battle Plan", icon: Swords, audience: "shared" },
+      { href: "/battle-plan", label: "Study Plan", icon: ListChecks, audience: "shared" },
       { href: "/progress", label: "Progress", icon: BarChart3, audience: "shared" },
-      { href: "/league", label: "League", icon: Trophy, audience: "shared" },
+      { href: "/league", label: "Compete", icon: Trophy, audience: "shared" },
       { href: "/certificates", label: "Certificates", icon: FileBadge, audience: "shared" },
       { href: "/library", label: "Library", icon: Library, audience: "shared" },
     ],
   },
   {
     id: "membership",
-    label: "Membership",
+    label: "Account",
     items: [
-      { href: "/pricing", label: "Gnostiri Prime", icon: Crown, audience: "shared" },
+      { href: "/pricing", label: "Upgrade", icon: Crown, audience: "shared" },
       { href: "/profile", label: "Profile", icon: GraduationCap, audience: "shared" },
       { href: "/settings", label: "Settings", icon: Settings, audience: "shared" },
     ],

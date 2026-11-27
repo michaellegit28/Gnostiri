@@ -9,7 +9,7 @@ import {
   GraduationCap,
   MonitorPlay,
   RotateCcw,
-  Swords,
+  ListChecks,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
@@ -33,16 +33,16 @@ const LANE_LINKS: Record<LearningDomain, LaneLink[]> = {
   highschool: [
     { href: "/highschool/exams", label: GPE, Icon: ClipboardList },
     { href: "/highschool/study", label: "Textbook study", Icon: BookOpen },
-    { href: "/battle-plan", label: "Battle Plan", Icon: Swords },
+    { href: "/battle-plan", label: "Study Plan", Icon: ListChecks },
     { href: "/cbt", label: "Timed CBT", Icon: MonitorPlay },
   ],
   // University — deep, AI-heavy lane (no Timed CBT; the AI cluster replaces it).
   university: [
     { href: "/university", label: "Courses", Icon: GraduationCap },
     { href: "/university/ai", label: "AI Studio", Icon: Sparkles },
-    { href: "/battle-plan", label: "Battle Plan", Icon: Swords },
-    { href: "/desk", label: "PDF Desk", Icon: FolderOpen },
-    { href: "/university/revision", label: "Revision queue", Icon: RotateCcw },
+    { href: "/battle-plan", label: "Study Plan", Icon: ListChecks },
+    { href: "/desk", label: "Documents", Icon: FolderOpen },
+    { href: "/university/revision", label: "Review", Icon: RotateCcw },
   ],
 };
 
