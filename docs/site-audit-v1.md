@@ -47,3 +47,19 @@ Add-to-Home/PWA) without a native rewrite.
 ## Store/IA notes
 Every route must remain: standalone-installable, offline-graceful, lane-correct,
 description-free, WCAG-AA contrast, 44px touch targets.
+
+## Responsive/a11y sweep — status ✅
+- **Batch 1 (shipped):** 44px touch-target floor across 13 files — every
+  interactive control under the floor bumped; `min-h<44px` in `src` = 0; the
+  TutorPanel icon button is a true 44×44.
+- **Batch 2 (verified, no code change needed):** whole-site anti-pattern scan —
+  `<img>` missing alt = 0 · `<iframe>` missing title = 0 · `target="_blank"`
+  already carry `rel="noreferrer"` (⟹ noopener) · fixed-width containers are
+  responsive (`inset-x-3` on mobile) or `max-w + truncate` · the one wide admin
+  table is wrapped in `overflow-x-auto` · `text-[10px]` are intentional eyebrow /
+  nav labels (premium design language, not body copy).
+- Keyboard/focus: shell menu + command palette use `useDialogFocus` (focus-in on
+  open, Tab trap, restore-to-trigger on close); `sw.js` serves `/offline` on
+  failed navigations. Contrast is token-enforced (`tests/a11y.test.mjs`).
+- **Result:** the sweep is complete — touch-target, keyboard/focus, offline,
+  contrast and responsive floors all clear.
