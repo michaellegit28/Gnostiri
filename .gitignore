@@ -42,3 +42,7 @@ next-env.d.ts
 
 # local clearance backups — never commit
 /.backups
+
+# external agent skills installed by `npx skills` — never commit (unvetted, full-permission)
+/.agents
+/skills-lock.json
