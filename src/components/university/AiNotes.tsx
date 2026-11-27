@@ -30,6 +30,11 @@ export default function AiNotes() {
         return;
       }
       const data = await res.json();
+      if (!res.ok) {
+        setNotes([]);
+        setError(typeof data.error === "string" ? data.error : "AI notes are unavailable right now.");
+        return;
+      }
       setNotes(Array.isArray(data.notes) ? data.notes : []);
     } catch {
       setError("Could not load your notes. Check your connection.");
