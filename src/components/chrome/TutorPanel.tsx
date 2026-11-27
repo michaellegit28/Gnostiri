@@ -122,7 +122,7 @@ export default function TutorPanel({ onClose }: TutorPanelProps) {
           type="button"
           onClick={onClose}
           aria-label="Close tutor"
-          className="flex min-h-[40px] min-w-[40px] items-center justify-center rounded-full text-slate-400 hover:text-slate-100 hover:bg-surface/10 transition-colors"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-slate-400 hover:text-slate-100 hover:bg-surface/10 transition-colors"
         >
           <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M6 6l12 12M18 6L6 18" />

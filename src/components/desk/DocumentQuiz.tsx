@@ -94,7 +94,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
         <button
           type="button"
           onClick={() => { setResults(null); setScore(null); setSelections({}); setIndex(0); }}
-          className="min-h-[40px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
+          className="min-h-[44px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           Try again
         </button>
@@ -141,7 +141,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
           type="button"
           disabled={index === 0}
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
-          className="min-h-[40px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+          className="min-h-[44px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-300 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Previous
         </button>
@@ -149,7 +149,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
           <button
             type="button"
             onClick={() => setIndex((i) => Math.min(items.length - 1, i + 1))}
-            className="min-h-[40px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
+            className="min-h-[44px] gn-motion rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
           >
             Next
           </button>
@@ -158,7 +158,7 @@ export default function DocumentQuiz({ documentId, items }: { documentId: string
             type="button"
             disabled={busy}
             onClick={submit}
-            className="inline-flex min-h-[40px] items-center gap-2 rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-60"
           >
             {busy && <Loader2 className="h-4 w-4 animate-spin" />}
             Submit & score

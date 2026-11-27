@@ -60,7 +60,7 @@ export default function ArtifactCard({ doc, signedIn }: { doc: ArtifactCardData;
         <AdoptButton documentId={doc.id} signedIn={signedIn} label="Adopt" className="flex-1 sm:flex-none" />
         <Link
           href={`/library/${doc.id}`}
-          className="gn-motion inline-flex min-h-[40px] items-center justify-center gap-1.5 rounded-lg border border-line px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-primary/50 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="gn-motion inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-line px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-primary/50 hover:text-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
           <BookOpen className="h-4 w-4" aria-hidden /> Read preview
         </Link>
