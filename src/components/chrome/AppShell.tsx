@@ -18,7 +18,7 @@ import {
 } from "./nav-model";
 import { useDomain } from "@/context/DomainContext";
 import { useAuth } from "@/context/AuthContext";
-import { DEFAULT_LEARNING_DOMAIN, learningDomainFromPathname } from "@/lib/learning-domain";
+import { DEFAULT_LEARNING_DOMAIN, domainLabel, learningDomainFromPathname } from "@/lib/learning-domain";
 import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 /**
@@ -134,7 +134,20 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </button>
           </div>
 
-          <nav aria-label={NAV_LABEL} className="mt-4 flex-1">
+          <button
+            type="button"
+            onClick={() => {
+              setMenu(false);
+              setPalette(true);
+            }}
+            className="mb-3 flex min-h-[44px] w-full items-center gap-2 rounded-lg border border-line bg-surface/50 px-3 text-sm font-semibold text-muted transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <Command className="h-4 w-4" aria-hidden />
+            Jump to… <kbd className="ml-auto text-[10px] text-subtle">Ctrl K</kbd>
+          </button>
+
+          <nav aria-label={NAV_LABEL} className="flex-1">
+            <p className="px-2 pb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">{domainLabel(activeDomain)}</p>
             <LaneSwitch />
             {navZones.map((zone) => (
               <div key={zone.id} className="mb-5">
@@ -148,17 +161,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 </ul>
               </div>
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                setMenu(false);
-                setPalette(true);
-              }}
-              className="mb-3 flex min-h-[44px] w-full items-center gap-2 rounded-lg px-2 text-sm font-semibold text-muted hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              <Command className="h-4 w-4" aria-hidden />
-              Jump to… <kbd className="ml-auto text-[10px] text-subtle">Ctrl K</kbd>
-            </button>
           </nav>
 
           {/* Footer — Prime + Settings pinned to the bottom of the menu. */}
@@ -246,7 +248,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       {/* ── Mobile bottom tabs ──────────────────────────────────────────── */}
       <nav
         aria-label={TAB_BAR_LABEL}
-        className="gn-glass fixed inset-x-0 bottom-0 z-50 border-t border-line pb-[env(safe-area-inset-bottom)] lg:hidden"
+        className={`gn-glass fixed inset-x-0 bottom-0 z-50 border-t border-line pb-[env(safe-area-inset-bottom)] transition-transform duration-300 lg:hidden ${menu ? "translate-y-full" : "translate-y-0"}`}
       >
         <ul className="flex">
           {bottomTabs.map((tab) => {

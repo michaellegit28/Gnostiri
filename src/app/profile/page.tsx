@@ -16,9 +16,10 @@ export default async function ProfilePage() {
   if (!user) redirect("/login");
 
   const premium = await hasPremiumAccess(user.id, "highschool");
-  const [credits, badges] = await Promise.all([
+  const [credits, badges, profile] = await Promise.all([
     prisma.leagueCredit.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" }, take: 20 }),
     prisma.leagueBadge.findMany({ where: { userId: user.id }, orderBy: { awardedAt: "desc" } }),
+    prisma.profile.findUnique({ where: { userId: user.id }, select: { currentDomain: true } }),
   ]);
   const balance = credits.reduce((sum, row) => sum + row.delta, 0);
 
@@ -29,6 +30,13 @@ export default async function ProfilePage() {
         {user.name ?? user.email ?? "Your account"}
       </h1>
       <p className="mt-2 text-sm text-muted">{user.email ?? ""}</p>
+      {profile?.currentDomain && (
+        <p className="mt-2 text-sm text-muted">
+          Learning lane: <span className="font-semibold text-ink">{profile.currentDomain === "university" ? "University" : profile.currentDomain === "highschool" ? "High School" : profile.currentDomain}</span>
+          {" · "}
+          <Link href="/settings#learning-domain-settings" className="rounded text-electric-text underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">Change</Link>
+        </p>
+      )}
 
       <div className="gn-shadow mt-8 rounded-2xl border border-gold/30 bg-gold/[0.06] p-6">
         <div className="flex items-center gap-2">
