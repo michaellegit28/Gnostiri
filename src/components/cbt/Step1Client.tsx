@@ -105,7 +105,7 @@ export default function Step1Client({ boards }: { boards: CbtBoardCard[] }) {
                   disabled={disabled}
                   onClick={() => setSelected(isSelected ? null : board.code)}
                   aria-pressed={isSelected}
-                  className={`${CBT.ghostBtn} mt-3 min-h-[40px] w-full text-sm ${isSelected && !disabled ? "border-primary/60 bg-primary/15 text-electric-text" : ""}`}
+                  className={`${CBT.ghostBtn} mt-3 min-h-[44px] w-full text-sm ${isSelected && !disabled ? "border-primary/60 bg-primary/15 text-electric-text" : ""}`}
                 >
                   {isSelected ? (<><Check className="h-4 w-4" aria-hidden /> Selected</>) : "Select"}
                 </button>

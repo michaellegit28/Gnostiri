@@ -78,7 +78,7 @@ export default function TaskList({
         {uploadHref && (
           <Link
             href={uploadHref}
-            className="gn-motion mt-3 inline-flex min-h-[36px] items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="gn-motion mt-3 inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             {onDesk ? "Go to the upload form" : "Open your desk"}
           </Link>
@@ -117,7 +117,7 @@ export default function TaskList({
                     type="button"
                     disabled={busy}
                     onClick={() => update(task.id, "done")}
-                    className="inline-flex min-h-[36px] items-center gap-1.5 rounded-lg bg-emerald-700/30 px-3 py-1.5 text-xs font-semibold text-emerald-300 transition-colors hover:bg-emerald-700/50 disabled:opacity-50"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-emerald-700/30 px-3 py-1.5 text-xs font-semibold text-emerald-300 transition-colors hover:bg-emerald-700/50 disabled:opacity-50"
                   >
                     <CheckCircle2 className="h-3.5 w-3.5" /> Done
                   </button>
@@ -125,7 +125,7 @@ export default function TaskList({
                     type="button"
                     disabled={busy}
                     onClick={() => update(task.id, "skipped")}
-                    className="inline-flex min-h-[36px] items-center rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-slate-400 transition-colors hover:text-slate-200 disabled:opacity-50"
+                    className="inline-flex min-h-[44px] items-center rounded-lg border border-line px-3 py-1.5 text-xs font-semibold text-slate-400 transition-colors hover:text-slate-200 disabled:opacity-50"
                   >
                     Skip
                   </button>

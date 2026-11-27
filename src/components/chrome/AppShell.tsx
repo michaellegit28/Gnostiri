@@ -154,7 +154,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 setMenu(false);
                 setPalette(true);
               }}
-              className="mb-3 flex min-h-[40px] w-full items-center gap-2 rounded-lg px-2 text-sm font-semibold text-muted hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="mb-3 flex min-h-[44px] w-full items-center gap-2 rounded-lg px-2 text-sm font-semibold text-muted hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <Command className="h-4 w-4" aria-hidden />
               Jump to… <kbd className="ml-auto text-[10px] text-subtle">Ctrl K</kbd>

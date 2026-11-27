@@ -89,7 +89,7 @@ function QuestionBlock({ prompt, answer, explanation }: { prompt: string; answer
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={answerId}
-        className="mt-3 inline-flex min-h-[36px] items-center rounded-lg border border-line-strong/40 px-3 py-1.5 text-sm font-medium text-slate-400 transition-colors hover:border-slate-400/70 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
+        className="mt-3 inline-flex min-h-[44px] items-center rounded-lg border border-line-strong/40 px-3 py-1.5 text-sm font-medium text-slate-400 transition-colors hover:border-slate-400/70 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/70"
       >
         {open ? "Hide answer" : "Show answer"}
       </button>

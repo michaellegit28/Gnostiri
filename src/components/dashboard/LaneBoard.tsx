@@ -75,7 +75,7 @@ export default function LaneBoard() {
                 type="button"
                 aria-pressed={selected}
                 onClick={() => setLane(domain)}
-                className={`gn-motion min-h-[36px] rounded-lg px-3 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                className={`gn-motion min-h-[44px] rounded-lg px-3 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selected ? "bg-primary text-on-primary" : "text-muted hover:text-ink"
                 }`}
               >

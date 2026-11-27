@@ -196,7 +196,7 @@ export default function BattlePlanPage() {
                     setLane(domain);
                     setError("");
                   }}
-                  className={`gn-motion flex min-h-[40px] items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+                  className={`gn-motion flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     selected ? "bg-primary text-on-primary" : "text-muted hover:text-ink"
                   }`}
                 >

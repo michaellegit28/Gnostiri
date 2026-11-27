@@ -184,7 +184,7 @@ export default async function LibraryPage({
                   </p>
                   <Link
                     href="/library"
-                    className="gn-motion mt-4 inline-flex min-h-[40px] items-center rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="gn-motion mt-4 inline-flex min-h-[44px] items-center rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     Clear filters
                   </Link>
@@ -198,7 +198,7 @@ export default async function LibraryPage({
                   </p>
                   <Link
                     href="/desk"
-                    className="gn-motion mt-4 inline-flex min-h-[40px] items-center rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="gn-motion mt-4 inline-flex min-h-[44px] items-center rounded-lg border border-line px-4 py-2 text-sm font-semibold text-slate-200 transition-colors hover:border-primary/50 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
                     Open your desk
                   </Link>

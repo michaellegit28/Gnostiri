@@ -44,7 +44,7 @@ export default function DocumentList({ documents }: { documents: DeskDocument[] 
         </p>
         <Link
           href="#desk-upload"
-          className="gn-motion mt-4 inline-flex min-h-[40px] items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
+          className="gn-motion mt-4 inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
         >
           <FileText className="h-4 w-4" aria-hidden /> Go to the upload form
         </Link>
