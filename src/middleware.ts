@@ -110,38 +110,37 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // ---- IP rate limiting for /api ----
+  // ---- IP rate limiting (best-effort, FAIL OPEN) ----
+  // A limiter outage must never take the site down. If Upstash is not
+  // configured or is unreachable, the request is allowed through — the limiter
+  // is protection, not a dependency. Only a LIVE over-limit count (429) blocks.
+  // (This is exactly what made the whole site 503 when the Redis token was
+  // rotated out: a bad token shouldn't be able to take production offline.)
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) {
-    if (process.env.NODE_ENV === "production") {
-      const unavailable = NextResponse.json({ error: "Rate limiting is not configured" }, { status: 503 });
-      carrySessionCookies(sessionResponse, unavailable);
-      return unavailable;
+  if (url && token) {
+    const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    const ip = request.ip || forwarded || "unknown";
+    const minute = Math.floor(Date.now() / 60000);
+    const key = `ip-limit:${ip}:${minute}`;
+    try {
+      const response = await fetch(`${url}/incr/${encodeURIComponent(key)}`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
+      if (response.ok) {
+        const result = await response.json();
+        const count = Number(result.result || 0);
+        if (count === 1) await fetch(`${url}/expire/${encodeURIComponent(key)}/70`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
+        if (count > 100) {
+          const tooMany = NextResponse.json({ error: "Too many requests" }, { status: 429 });
+          carrySessionCookies(sessionResponse, tooMany);
+          return tooMany;
+        }
+      }
+      // response not ok (bad token / Redis error) → fall through and allow.
+    } catch {
+      // Redis unreachable/misconfigured — fail open (allow the request).
     }
-    return sessionResponse;
   }
-  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  const ip = request.ip || forwarded || "unknown";
-  const minute = Math.floor(Date.now() / 60000);
-  const key = `ip-limit:${ip}:${minute}`;
-  try {
-    const response = await fetch(`${url}/incr/${encodeURIComponent(key)}`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
-    if (!response.ok) throw new Error("Redis request failed");
-    const result = await response.json();
-    const count = Number(result.result || 0);
-    if (count === 1) await fetch(`${url}/expire/${encodeURIComponent(key)}/70`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
-    if (count > 100) {
-      const tooMany = NextResponse.json({ error: "Too many requests" }, { status: 429 });
-      carrySessionCookies(sessionResponse, tooMany);
-      return tooMany;
-    }
-    return sessionResponse;
-  } catch {
-    const unavailable = NextResponse.json({ error: "Rate limiting unavailable" }, { status: 503 });
-    carrySessionCookies(sessionResponse, unavailable);
-    return unavailable;
-  }
+  return sessionResponse;
 }
 
 export const config = {
