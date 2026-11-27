@@ -40,10 +40,10 @@ test("cards use a top-light 1px edge and multi-layered shadows — not glass", (
 });
 
 test("glassmorphism is reserved for the navbar and modals", () => {
-  // The header, desktop sidebar, mobile drawer, command palette and bottom nav
-  // are the only gn-glass consumers in the shell.
+  // Overhaul v1 removed the header/sidebar/drawer. The menu button, menu
+  // popover, command palette card and bottom nav are the gn-glass consumers.
   const glassCount = [...SHELL.matchAll(/gn-glass/g)].length;
-  assert.ok(glassCount >= 5, `expected the shell chrome to use gn-glass (got ${glassCount})`);
+  assert.ok(glassCount >= 4, `expected the shell chrome to use gn-glass (got ${glassCount})`);
   // The shell must not use ad-hoc backdrop-blur on ordinary cards.
   assert.doesNotMatch(SHELL, /bg-surface\/95 backdrop-blur/);
 });

@@ -68,11 +68,8 @@ for (const route of NAV_REQUIRED) {
   });
 }
 
-test("/notifications is reachable via the notification bell (not a nav item, by design)", () => {
-  const bell = has("src/components/notifications/NotificationBell.tsx")
-    ? read("src/components/notifications/NotificationBell.tsx")
-    : "";
-  assert.match(bell, /\/notifications/, "the bell links to /notifications");
+test("/notifications is reachable as a menu item (overhaul v1)", () => {
+  assert.ok(NAV.includes('"/notifications"'), "notifications is a nav menu item");
 });
 
 test("/offline is the service-worker fallback (registered in the SW, not a nav item)", () => {

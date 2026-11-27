@@ -72,6 +72,12 @@ model User {
 
   // Battle Plan — per-lane goals, dates and generated plans (rules for HS, AI for University)
   battlePlans           BattlePlan[]
+
+  // University AI lane — notes, live-transcription, AI assessments, auto-correction
+  aiNotes               AiNote[]
+  aiTranscriptionSessions AiTranscriptionSession[]
+  aiAssessments         AiAssessment[]
+  aiCorrections         AiCorrection[]
 }
 
 model Profile {
@@ -91,7 +97,7 @@ model UserPreference {
   userId             String   @unique
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   country            String?  // ISO country the student studies for (drives currency + exam standard subtitle)
-  examStandard       String?  // e.g. 'jamb-standard' | 'sat-standard' — subtitle on the GSE exam, chosen at signup/first visit
+  examStandard       String?  // e.g. 'jamb-standard' | 'sat-standard' — subtitle on the GPE exam, chosen at signup/first visit
   dailyGoalMinutes   Int      @default(20)   // Today daily mission target
   srsEnabled         Boolean  @default(true) // spaced-repetition review queue
   analyticsOptOut    Boolean  @default(false)
@@ -1267,4 +1273,77 @@ model BattlePlan {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId, domain, status])
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// University AI lane (Overhaul v1, PR-B) — ADDITIVE ONLY.
+// Deep AI features scoped to the University lane: PDF Intelligence notes, AI
+// live-tutor transcription, AI assessments and auto-correction. courseId/lessonId
+// are plain scalars (no FK to existing tables) so this migration never touches
+// an existing table. Generated payloads are JSON so the AI shapes stay flexible.
+// ----------------------------------------------------------------------------- */
+
+model AiNote {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String?
+  lessonId  String?
+  title     String
+  body      String
+  source    Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, courseId])
+  @@index([userId, createdAt])
+}
+
+model AiTranscriptionSession {
+  id         String   @id @default(cuid())
+  userId     String
+  courseId   String?
+  sourceType String // "tutor-audio" | "lesson" | "lecture"
+  sourceRef  String?
+  transcript String
+  notes      String?
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, courseId])
+  @@index([userId, createdAt])
+}
+
+model AiAssessment {
+  id        String                @id @default(cuid())
+  userId    String
+  courseId  String?
+  title     String
+  config    Json
+  createdAt DateTime              @default(now())
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attempts  AiAssessmentAttempt[]
+  @@index([userId, courseId])
+}
+
+model AiAssessmentAttempt {
+  id           String       @id @default(cuid())
+  assessmentId String
+  responses    Json
+  score        Float?
+  feedback     Json?
+  createdAt    DateTime     @default(now())
+  assessment   AiAssessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  @@index([assessmentId])
+  @@index([assessmentId, createdAt])
+}
+
+model AiCorrection {
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String?
+  artifactRef String
+  result      Json
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId, courseId])
+  @@index([userId, createdAt])
 }

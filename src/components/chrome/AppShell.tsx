@@ -3,54 +3,47 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Command, Crown, Menu, X } from "lucide-react";
-import NotificationBell from "@/components/notifications/NotificationBell";
-import ThemeToggle from "@/components/chrome/ThemeToggle";
-import PrimeBadge from "@/components/chrome/PrimeBadge";
-import SyncIndicator from "@/components/offline/SyncIndicator";
+import { Command, Crown, Menu, Settings as SettingsIcon, X } from "lucide-react";
 import AccretionEmblem from "@/components/brand/AccretionEmblem";
 import useDialogFocus from "@/components/ui/useDialogFocus";
 import LaneSwitch from "@/components/chrome/LaneSwitch";
 import FeatureTour from "@/components/onboarding/FeatureTour";
-import { NAV_LABEL, TAB_BAR_LABEL, bottomTabsForDomain, isActive, navZonesForDomain, type NavItem } from "./nav-model";
+import {
+  NAV_LABEL,
+  TAB_BAR_LABEL,
+  bottomTabsForDomain,
+  isActive,
+  navZonesForDomain,
+  type NavItem,
+} from "./nav-model";
 import { useDomain } from "@/context/DomainContext";
 import { useAuth } from "@/context/AuthContext";
 import { DEFAULT_LEARNING_DOMAIN, learningDomainFromPathname } from "@/lib/learning-domain";
 import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 /**
- * AppShell — one chrome for every device.
- *
- *   Mobile  (<768px):  top bar + bottom tab bar; the hamburger opens a zone drawer
- *   Tablet  (768–1023): collapsible sidebar, opened from the top bar
- *   Desktop (>=1024px): persistent sidebar; the content gets the remaining width
- *
- * Everything renders from nav-model.ts, the drawer/bottom-bar/sidebar/palette
- * can never drift apart, and the AI Tutor FAB, bell and Prime crown each live
- * in exactly one place. Keyboard users get a skip link first in the DOM. The
- * sidebar carries the dual-lane switch; the mount hosts the replayable feature
- * tour.
+ * AppShell — navigation lives exclusively in a top-left menu; there is no top
+ * header. The menu is a minimalist, content-height popover (it never fills the
+ * screen): the lane switch on top, the active lane's links, the shared layer
+ * (incl. Notifications), and a footer with Gnostiri Prime and Settings pinned
+ * to the bottom. Mobile keeps the bottom tab bar and opens the same menu.
  */
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "/";
   const { learningDomain } = useDomain();
   const { user } = useAuth();
   const pathLearningDomain = learningDomainFromPathname(pathname);
-  // Direct lane URLs show their own lane for that page; every other screen
-  // follows the student's chosen lane. Discovery never switches the lane.
   const activeDomain = pathLearningDomain ?? learningDomain ?? DEFAULT_LEARNING_DOMAIN;
   const navZones = navZonesForDomain(activeDomain);
   const bottomTabs = bottomTabsForDomain(activeDomain);
-  const [drawer, setDrawer] = useState(false);
-  const [sidebar, setSidebar] = useState(false);
+  const [menu, setMenu] = useState(false);
   const [palette, setPalette] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const paletteRef = useDialogFocus<HTMLDivElement>(palette);
-  const drawerRef = useDialogFocus<HTMLDivElement>(drawer);
+  const menuRef = useDialogFocus<HTMLDivElement>(menu);
   const firstPath = useRef(pathname);
 
   useEffect(() => {
-    setDrawer(false);
+    setMenu(false);
     setPalette(false);
     if (firstPath.current !== pathname) {
       firstPath.current = pathname;
@@ -62,12 +55,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setDrawer(false);
+        setMenu(false);
         setPalette(false);
       }
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        if (!palette) setDrawer(false);
+        if (!palette) setMenu(false);
         setPalette(!palette);
       }
     };
@@ -87,32 +80,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     void trackAnalyticsEvent("session_start", { source: "app" });
   }, []);
 
-  // The top bar hides on scroll-down and returns on scroll-up (never while an overlay is open).
-  useEffect(() => {
-    if (drawer || palette) return;
-    let lastY = window.scrollY;
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        setHidden(y > 160 && y > lastY);
-        lastY = y;
-        ticking = false;
-      });
-    };
-    document.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      document.removeEventListener("scroll", onScroll);
-      setHidden(false);
-    };
-  }, [drawer, palette]);
-
-  const allItems = navZones.flatMap((z) => z.items);
-  const paletteItems = allItems.filter(
-    (item, index, items) => items.findIndex((candidate) => candidate.href === item.href) === index
-  );
+  const paletteItems = navZones
+    .flatMap((z) => z.items)
+    .filter((item, index, items) => items.findIndex((c) => c.href === item.href) === index);
 
   return (
     <>
@@ -123,128 +93,97 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
 
-      {/* ── Top bar ─────────────────────────────────────────────────────── */}
-      <header
-        className={`gn-glass fixed inset-x-0 top-0 z-50 flex h-14 items-center gap-2 border-b border-line px-3 transition-transform duration-300 md:h-15 ${
-          hidden ? "-translate-y-full" : "translate-y-0"
-        }`}
+      {/* ── Top-left menu button (no top header) ─────────────────────────── */}
+      <button
+        type="button"
+        aria-label="Open menu"
+        aria-controls="app-menu"
+        aria-expanded={menu}
+        onClick={() => {
+          setPalette(false);
+          setMenu(true);
+        }}
+        className="gn-glass fixed left-3 top-3 z-[70] flex h-11 w-11 items-center justify-center rounded-xl border border-line text-slate-200 hover:text-electric-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       >
-        <button
-          type="button"
-          aria-label="Open navigation"
-          aria-controls="mobile-navigation"
-          aria-expanded={drawer || sidebar}
-          onClick={() => {
-            setPalette(false);
-            if (window.innerWidth >= 1024) setSidebar((v) => !v);
-            else setDrawer(true);
-          }}
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none lg:hidden"
-        >
-          <Menu className="h-5 w-5" aria-hidden />
-        </button>
-        <Link href="/" className="flex items-center gap-2 rounded-lg px-1 focus:outline-none">
-          <AccretionEmblem size={24} />
-          <span className="font-serif text-lg font-bold tracking-tight text-ink">
-            Gnostiri
-          </span>
-        </Link>
-        <div className="ml-auto flex items-center gap-1">
-          <button
-            type="button"
-            aria-label="Jump to navigation (Command K)"
-            aria-haspopup="dialog"
-            aria-controls="command-palette"
-            aria-expanded={palette}
-            onClick={() => {
-              setDrawer(false);
-              setPalette(true);
-            }}
-            className="hidden min-h-[44px] items-center gap-2 rounded-lg border border-line px-3 text-xs text-slate-400 hover:border-electric/50 hover:text-slate-200 focus:outline-none md:flex"
-          >
-            <Command className="h-3.5 w-3.5" aria-hidden />
-            Jump to…
-          </button>
-          <div className="flex items-center [&_button]:min-h-[44px]">
-            <SyncIndicator />
-            <ThemeToggle />
-            <NotificationBell />
-          </div>
-          <PrimeBadge />
-        </div>
-      </header>
+        <Menu className="h-5 w-5" aria-hidden />
+      </button>
 
-      {/* ── Desktop sidebar ─────────────────────────────────────────────── */}
-      <nav
-        aria-label={NAV_LABEL}
-        className={`gn-glass fixed inset-y-0 left-0 z-40 hidden w-64 transform border-r border-line pt-14 transition-transform duration-300 lg:block ${
-          sidebar ? "-translate-x-full" : "translate-x-0"
-        }`}
-      >
-        <div className="h-full overflow-y-auto px-4 py-6">
-          <LaneSwitch />
-          {navZones.map((zone) => (
-            <div key={zone.id} className="mb-7">
-              <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
-              <ul className="space-y-0.5">
-                {zone.items.map((item) => (
-                  <li key={item.href}>
-                    <SidebarLink item={item} pathname={pathname} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </nav>
-
-      {/* ── Mobile drawer ───────────────────────────────────────────────── */}
-      {drawer && (
+      {/* ── Minimalist menu popover (content-height, never full screen) ───── */}
+      {menu && (
         <div
-          ref={drawerRef}
-          id="mobile-navigation"
+          ref={menuRef}
+          id="app-menu"
           role="dialog"
           aria-modal="true"
           aria-label="Primary navigation"
           tabIndex={-1}
-          className="gn-glass fixed inset-0 z-[60] overflow-y-auto lg:hidden"
+          className="gn-glass fixed left-3 top-3 z-[80] flex max-h-[calc(100vh-1.5rem)] w-72 flex-col overflow-y-auto rounded-2xl border border-line p-4 shadow-2xl"
         >
-          <div className="flex h-14 items-center justify-between px-3">
-            <span className="font-serif text-lg font-bold text-slate-100">Gnostiri</span>
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-2">
+              <AccretionEmblem size={22} />
+              <span className="font-serif text-lg font-bold tracking-tight text-ink">Gnostiri</span>
+            </span>
             <button
               type="button"
-              aria-label="Close navigation"
-              onClick={() => setDrawer(false)}
+              aria-label="Close menu"
+              onClick={() => setMenu(false)}
               className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-slate-200 hover:text-electric-text focus:outline-none"
             >
               <X className="h-5 w-5" aria-hidden />
             </button>
           </div>
-          <nav aria-label={NAV_LABEL} className="px-5 pb-16 pt-4">
+
+          <nav aria-label={NAV_LABEL} className="mt-4 flex-1">
             <LaneSwitch />
             {navZones.map((zone) => (
-              <div key={zone.id} className="mb-7">
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
-                <ul className="divide-y divide-border/10 border-y border-border/10">
+              <div key={zone.id} className="mb-5">
+                <p className="mb-1.5 px-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
+                <ul className="space-y-0.5">
                   {zone.items.map((item) => (
                     <li key={item.href}>
-                      <DrawerLink item={item} pathname={pathname} />
+                      <MenuLink item={item} pathname={pathname} onNavigate={() => setMenu(false)} />
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
-            <Link
-              href="/profile"
-              className="flex min-h-[48px] items-center justify-center rounded-xl border border-border/10 text-sm font-semibold text-slate-400 hover:border-electric/50 hover:text-electric-text focus:outline-none"
+            <button
+              type="button"
+              onClick={() => {
+                setMenu(false);
+                setPalette(true);
+              }}
+              className="mb-3 flex min-h-[40px] w-full items-center gap-2 rounded-lg px-2 text-sm font-semibold text-muted hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              Profile & settings
-            </Link>
+              <Command className="h-4 w-4" aria-hidden />
+              Jump to… <kbd className="ml-auto text-[10px] text-subtle">Ctrl K</kbd>
+            </button>
           </nav>
+
+          {/* Footer — Prime + Settings pinned to the bottom of the menu. */}
+          <div className="mt-2 space-y-0.5 border-t border-line pt-3">
+            <Link
+              href="/pricing"
+              onClick={() => setMenu(false)}
+              className="flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 border-transparent px-2 text-sm font-semibold text-slate-300 hover:bg-surface/10 hover:text-gold focus:outline-none"
+            >
+              <Crown className="h-4 w-4 text-gold" aria-hidden />
+              Gnostiri Prime
+            </Link>
+            <Link
+              href="/settings"
+              onClick={() => setMenu(false)}
+              className="flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 border-transparent px-2 text-sm font-semibold text-slate-300 hover:bg-surface/10 hover:text-primary focus:outline-none"
+            >
+              <SettingsIcon className="h-4 w-4" aria-hidden />
+              Settings
+            </Link>
+          </div>
         </div>
       )}
 
-      {/* ── Command palette ─────────────────────────────────────────────── */}
+      {/* ── Command palette ───────────────────────────────────────────────── */}
       {palette && (
         <div
           ref={paletteRef}
@@ -292,8 +231,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       )}
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
-      <div className="pt-14 lg:pl-64">
-        <main id="main" tabIndex={-1} className="min-h-[calc(100vh-3.5rem)] pb-28 lg:pb-10">
+      <div className="pt-16">
+        <main id="main" tabIndex={-1} className="min-h-[calc(100vh-4rem)] pb-28 lg:pb-10">
           {children}
         </main>
         <footer className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-4 pb-28 pt-4 lg:pb-6">
@@ -324,8 +263,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 >
                   <Icon className="h-5 w-5" aria-hidden />
                   {tab.label}
-                  {/* Active state is never colour-only: aria-current="page" for
-                      assistive tech plus a primary dot every sighted user can see. */}
                   {active && <span className="h-1 w-1 rounded-full bg-primary" aria-hidden="true" />}
                 </Link>
               </li>
@@ -340,12 +277,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
+function MenuLink({ item, pathname, onNavigate }: { item: NavItem; pathname: string; onNavigate: () => void }) {
   const Icon = item.icon;
   const active = isActive(pathname, item.href);
   return (
     <Link
       href={item.href}
+      onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={`flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 px-2 text-sm transition-colors focus:outline-none ${
         active ? "border-primary/40 bg-primary/10 text-slate-100" : "border-transparent text-slate-300 hover:bg-surface/10 hover:text-primary"
@@ -353,25 +291,6 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
     >
       <Icon className="h-4 w-4 shrink-0" aria-hidden />
       <span className="font-semibold">{item.label}</span>
-    </Link>
-  );
-}
-
-function DrawerLink({ item, pathname }: { item: NavItem; pathname: string }) {
-  const Icon = item.icon;
-  const active = isActive(pathname, item.href);
-  return (
-    <Link
-      href={item.href}
-      aria-current={active ? "page" : undefined}
-      className={`group flex min-h-[52px] items-center gap-3 border-l-2 py-3 pl-1 transition-colors focus:outline-none ${
-        active ? "border-primary/40 bg-primary/10 text-slate-100" : "border-transparent hover:border-primary/40"
-      }`}
-    >
-      <Icon className={`h-5 w-5 ${active ? "text-primary" : "text-slate-400 group-hover:text-primary"}`} aria-hidden />
-      <span className={`font-serif text-lg font-bold ${active ? "text-slate-100" : "text-slate-100 group-hover:text-primary"}`}>
-        {item.label}
-      </span>
     </Link>
   );
 }

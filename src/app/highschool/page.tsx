@@ -2,18 +2,19 @@ import Link from "next/link";
 import { BookOpen, FileText, ChevronRight } from "lucide-react";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import { SUBJECTS, allTopicSlugs } from "@/lib/curriculum";
+import { GPE, GPE_NAME } from "@/lib/exam-brand";
 
 export const dynamic = "force-dynamic";
 
-// High School hub: two doors — Study (textbooks) and GSE (the Gnostiri Senior
-// Examination past papers). The explanation of each lives in the feature tour;
-// the cards themselves stay description-free.
+// High School hub: two doors — Study (textbooks) and GPE (the Gnostiri
+// Proficiency Exam past papers). The explanation of each lives in the feature
+// tour; the cards themselves stay description-free.
 export default async function HighSchoolHub() {
   const subjects = SUBJECTS.length;
   const topics = allTopicSlugs().length;
   return (
     <div className="min-h-screen bg-transparent text-slate-100 px-5 py-8 md:p-10">
-      <div className="max-w-6xl mx-auto space-y-8">
+      <div className="mx-auto max-w-6xl space-y-8">
         <nav className="flex items-center gap-2 text-sm text-slate-400">
           <Link href="/" className="rounded hover:text-electric-text transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">Home</Link>
           <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -49,14 +50,14 @@ export default async function HighSchoolHub() {
             <div className="space-y-4">
               <FileText className="w-8 h-8 text-electric-text" aria-hidden />
               <div>
-                <h2 className="text-2xl font-serif font-bold">Gnostiri Senior Examination</h2>
+                <h2 className="text-2xl font-serif font-bold">{GPE_NAME}</h2>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                  GSE · past papers by board
+                  {GPE} · past papers by board
                 </p>
               </div>
             </div>
             <Link href="/highschool/exams" className="gn-motion mt-6 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 font-semibold text-sm text-on-primary transition-colors hover:bg-primary-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-              Open GSE
+              Open {GPE}
             </Link>
           </div>
         </div>

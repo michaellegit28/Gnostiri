@@ -52,7 +52,7 @@ export default async function StudyPage() {
       href: "/highschool",
       label: "High School",
       icon: "BookOpen" as const,
-      line: "GSE past papers and the syllabuses behind them",
+      line: "GPE past papers and the syllabuses behind them",
       count: `${jambQuestions.toLocaleString("en-NG")} questions · ${jambSubjects} subjects`,
       audience: "highschool" as const,
     },

@@ -39,6 +39,16 @@ export const metadata: Metadata = {
   description: site.description,
   alternates: { canonical: absoluteUrl("/") },
   applicationName: site.name,
+  // iOS / installed-PWA polish (Add to Home Screen, Apple store wrapper).
+  appleWebApp: {
+    capable: true,
+    title: site.name,
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
   openGraph: {
     type: "website",
     url: site.url,

@@ -128,8 +128,11 @@ test("the SyncIndicator carries the three states and flushes on reconnect", () =
   assert.match(INDICATOR, /void sync\(\)/, "a reconnect flushes the queue");
   assert.match(INDICATOR, /from "@\/lib\/offline-queue"/, "the chip reads the shared queue");
   const shell = read("src/components/chrome/AppShell.tsx");
-  assert.match(shell, /<SyncIndicator \/>/, "the chip is mounted in the top bar");
-  assert.match(shell, /<ThemeToggle \/>/, "the ThemeToggle is still mounted");
+  // Overhaul v1 removed the top bar: the sync chip and theme toggle no longer
+  // live in the shell; theming moved to Settings › Appearance.
+  assert.doesNotMatch(shell, /<SyncIndicator/, "the sync chip was removed from the shell (owner directive)");
+  assert.doesNotMatch(shell, /<ThemeToggle/, "the theme toggle no longer lives in the shell");
+  assert.match(read("src/components/settings/AppearanceControls.tsx"), /<ThemeSelector/, "theming lives in Settings › Appearance");
 });
 
 test("the /offline fallback page exists and lists what is cached", () => {
