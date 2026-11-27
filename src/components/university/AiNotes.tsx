@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { NotebookPen, Plus } from "lucide-react";
+import { NotebookPen, Plus, Trash2 } from "lucide-react";
 
 interface AiNote {
   id: string;
@@ -19,6 +19,7 @@ export default function AiNotes() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [busy, setBusy] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState("");
 
   const load = useCallback(async () => {
@@ -67,6 +68,21 @@ export default function AiNotes() {
       setError(e instanceof Error ? e.message : "Could not save your note");
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function remove(id: string) {
+    setDeletingId(id);
+    setError("");
+    try {
+      const res = await fetch(`/api/ai/notes/${id}`, { method: "DELETE" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Could not delete the note");
+      await load();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Could not delete the note");
+    } finally {
+      setDeletingId(null);
     }
   }
 
@@ -126,7 +142,18 @@ export default function AiNotes() {
           <ul className="space-y-2">
             {notes.map((note) => (
               <li key={note.id} className="rounded-xl border border-line bg-surface/40 p-4">
-                <div className="font-semibold text-ink">{note.title}</div>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="font-semibold text-ink">{note.title}</div>
+                  <button
+                    type="button"
+                    onClick={() => void remove(note.id)}
+                    disabled={deletingId === note.id}
+                    aria-label={`Delete note: ${note.title}`}
+                    className="gn-motion flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-lg text-subtle transition-colors hover:text-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-50"
+                  >
+                    <Trash2 className="h-4 w-4" aria-hidden />
+                  </button>
+                </div>
                 <p className="mt-1 whitespace-pre-wrap text-sm text-muted">{note.body}</p>
               </li>
             ))}
