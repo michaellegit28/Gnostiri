@@ -1,57 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { CalendarCheck, ClipboardList, FolderDown, GraduationCap, MonitorPlay } from "lucide-react";
 import { useDomain } from "@/context/DomainContext";
-import { DEFAULT_LEARNING_DOMAIN, isVisibleForAudience, type NavAudience } from "@/lib/learning-domain";
+import { DEFAULT_LEARNING_DOMAIN, isVisibleForAudience } from "@/lib/learning-domain";
 import { GSE } from "@/lib/exam-brand";
+import { PRACTICE_CARDS, type PracticeCardSpec } from "@/components/practice/practice-cards";
 
-interface PracticeCardSpec {
-  href: string;
-  title: string;
-  Icon: typeof ClipboardList;
-  audience: NavAudience;
-}
-
-const CARDS: PracticeCardSpec[] = [
-  {
-    href: "/highschool/exams",
-    title: GSE,
-    Icon: ClipboardList,
-    audience: "highschool",
-  },
-  {
-    href: "/cbt",
-    title: "Timed CBT",
-    Icon: MonitorPlay,
-    audience: "highschool",
-  },
-  {
-    href: "/university",
-    title: "Course exam halls",
-    Icon: GraduationCap,
-    audience: "university",
-  },
-  {
-    href: "/battle-plan",
-    title: "Study Plan",
-    Icon: CalendarCheck,
-    audience: "highschool",
-  },
-  {
-    href: "/library",
-    title: "Library",
-    Icon: FolderDown,
-    audience: "shared",
-  },
-];
-
-/** Practice hub, filtered to the student's lane by the card's own audience. */
-export default function PracticeGrid() {
+/**
+ * Practice hub, filtered to the student's lane by the card's own audience.
+ * The page pre-scopes the payload server-side; this second client filter
+ * re-applies after a lane switch without a reload.
+ */
+export default function PracticeGrid({ cards = PRACTICE_CARDS }: { cards?: PracticeCardSpec[] }) {
   const { learningDomain } = useDomain();
   const domain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
-  const cards = CARDS.filter((card) => isVisibleForAudience(card.audience, domain));
-  const primary = cards[0] ?? CARDS[0];
+  const visibleCards = cards.filter((card) => isVisibleForAudience(card.audience, domain));
+  const primary = visibleCards[0] ?? cards[0];
 
   return (
     <>
@@ -67,7 +31,7 @@ export default function PracticeGrid() {
           Practice modes
         </h2>
         <div className="gn-stagger mt-6 grid gap-4 sm:grid-cols-2">
-          {cards.map(({ href, title, Icon }) => (
+          {visibleCards.map(({ href, title, Icon }) => (
             <Link
               key={href}
               href={href}

@@ -104,6 +104,13 @@ test("the study hub only ships the active lane's cards (no leak-in-the-payload)"
   assert.match(page, /domain === "university"/, "and the lane branch picks the right surface set");
 });
 
+test("the practice hub pre-scopes its payload server-side too (no client-only strip)", () => {
+  const page = q("src/app/practice/page.tsx");
+  assert.match(page, /export const dynamic = "force-dynamic"/, "the lane must resolve per-request");
+  assert.match(page, /getCurrentUser\(\)/, "signed-in lanes come from the profile");
+  assert.match(page, /PRACTICE_CARDS\.filter\(\(card\) => isVisibleForAudience\(card\.audience, domain\)\)/, "the other lane's cards never ship");
+});
+
 /**
  * The owner directive: the ONLY places that switch the learning lane are the
  * menu and Settings. Scan every source file for callers of setLearningDomain
