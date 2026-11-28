@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import type { LearningDomain } from "@/lib/learning-domain";
 
 interface WeekDay {
   date: string;
@@ -15,12 +16,18 @@ interface WeekDay {
  * Seven-day plan timeline — relocated off Home in the IA rework (Home answers
  * "what now" only; the calendar strip is analytics). Reads /api/battle-plan,
  * so it stays a client component with no DB access (AGENTS.md rule 4).
+ *
+ * Lane-separated: the battle plan is a High School surface, so a University
+ * session never fetches or renders the HS strip — it gets an honest pointer
+ * to its own revision schedule instead.
  */
-export default function WeekTimeline() {
+export default function WeekTimeline({ domain }: { domain: LearningDomain }) {
   const [week, setWeek] = useState<WeekDay[] | null>(null);
   const [failed, setFailed] = useState(false);
+  const isHighSchool = domain === "highschool";
 
   useEffect(() => {
+    if (!isHighSchool) return;
     let cancelled = false;
     fetch("/api/battle-plan?exam=jamb")
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error("failed"))))
@@ -33,7 +40,29 @@ export default function WeekTimeline() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isHighSchool]);
+
+  if (!isHighSchool) {
+    return (
+      <section
+        aria-labelledby="week-timeline-title"
+        className="rounded-2xl border border-slate-800 bg-slate-900 p-6"
+      >
+        <h2 id="week-timeline-title" className="text-lg font-serif font-semibold text-slate-100">
+          This week&apos;s revision
+        </h2>
+        <p className="mt-2 text-sm text-slate-400">
+          University revision follows your courses&apos; spaced-repetition schedule — no exam countdown plan here.
+        </p>
+        <Link
+          href="/university/revision"
+          className="mt-4 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-gold underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+        >
+          Open revision →
+        </Link>
+      </section>
+    );
+  }
 
   return (
     <section

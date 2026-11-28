@@ -84,8 +84,8 @@ export default async function ProgressPage() {
         {/* Stat chips — streak, accuracy, minutes (lane-scoped) */}
         <StatsRow userId={user.id} domain={domain} linkTo={null} />
 
-        {/* Seven-day plan timeline (relocated here from Home) */}
-        <WeekTimeline />
+        {/* Seven-day plan timeline (relocated here from Home; High School only) */}
+        <WeekTimeline domain={domain} />
 
         {/* Ranking + achievements */}
         <div className="grid gap-6 lg:grid-cols-2">
