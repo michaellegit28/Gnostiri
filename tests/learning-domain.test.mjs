@@ -60,10 +60,13 @@ test("the study hub only serves the lane card, and always serves shared surfaces
 });
 
 test("practice is lane-filtered and its CTA follows the lane", () => {
-  assert.match(PRACTICE_GRID, /CARDS\.filter\(\(card\) => isVisibleForAudience\(card\.audience, domain\)\)/);
+  // The payload is pre-scoped server-side (like /study) and the grid re-applies
+  // the audience filter client-side after a lane switch.
+  assert.match(PRACTICE_PAGE, /PRACTICE_CARDS\.filter\(\(card\) => isVisibleForAudience\(card\.audience, domain\)\)/, "the practice payload is lane-scoped server-side");
+  assert.match(PRACTICE_GRID, /cards\.filter\(\(card\) => isVisibleForAudience\(card\.audience, domain\)\)/);
   assert.match(PRACTICE_GRID, /Open a course exam hall/);
   assert.match(PRACTICE_GRID, /\$\{GSE\}/, "the HS practice CTA uses the GSE exam name");
-  assert.match(PRACTICE_PAGE, /<PracticeGrid \/>/);
+  assert.match(PRACTICE_PAGE, /<PracticeGrid cards=/, "the page hands the grid the pre-scoped cards");
 });
 
 test("the lane choice is explicit, visible and persisted for signed-in users", () => {
