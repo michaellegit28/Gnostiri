@@ -62,7 +62,7 @@ test("the study hub only serves the lane card, and always serves shared surfaces
 test("practice is lane-filtered and its CTA follows the lane", () => {
   assert.match(PRACTICE_GRID, /CARDS\.filter\(\(card\) => isVisibleForAudience\(card\.audience, domain\)\)/);
   assert.match(PRACTICE_GRID, /Open a course exam hall/);
-  assert.match(PRACTICE_GRID, /\$\{GPE\}/, "the HS practice CTA uses the GPE exam name");
+  assert.match(PRACTICE_GRID, /\$\{GSE\}/, "the HS practice CTA uses the GSE exam name");
   assert.match(PRACTICE_PAGE, /<PracticeGrid \/>/);
 });
 

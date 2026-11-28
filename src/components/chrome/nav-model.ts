@@ -20,7 +20,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { isVisibleForAudience, type LearningDomain, type NavAudience } from "@/lib/learning-domain";
-import { GPE } from "@/lib/exam-brand";
+import { GSE } from "@/lib/exam-brand";
 
 /**
  * One navigation model for every surface: the sidebar menu, the mobile drawer,
@@ -30,7 +30,7 @@ import { GPE } from "@/lib/exam-brand";
  * Information architecture: two isolated learning lanes (High School /
  * University) that never cross-link, a thin shared layer (tutor, discovery,
  * my learning, notifications) and a membership zone. High School exams are the
- * Gnostiri Proficiency Exam (GPE); University course exams are GC-(course).
+ * Gnostiri Senior Examination (GSE); University exams are GPE (Gnostiri Proficiency Exam), course halls GC-(course).
  * Timed CBT is High School only — University gets the advanced AI cluster
  * instead. No descriptions live here — explanations live only in the tour.
  *
@@ -72,7 +72,7 @@ export const NAV_ZONES: NavZone[] = [
     label: "Study",
     items: [
       // ── High School ──
-      { href: "/highschool/exams", label: GPE, icon: ClipboardList, audience: "highschool" },
+      { href: "/highschool/exams", label: GSE, icon: ClipboardList, audience: "highschool" },
       { href: "/highschool/study", label: "Textbook study", icon: BookOpen, audience: "highschool" },
       { href: "/cbt", label: "Timed CBT", icon: MonitorPlay, audience: "highschool" },
       // ── University — no Timed CBT; the advanced AI cluster lives in its own lane ──
@@ -106,7 +106,7 @@ export const NAV_ZONES: NavZone[] = [
     id: "membership",
     label: "Account",
     items: [
-      { href: "/pricing", label: "Upgrade", icon: Crown, audience: "shared" },
+      { href: "/pricing", label: "Gnostiri Prime", icon: Crown, audience: "shared" },
       { href: "/profile", label: "Profile", icon: GraduationCap, audience: "shared" },
       { href: "/settings", label: "Settings", icon: Settings, audience: "shared" },
     ],
