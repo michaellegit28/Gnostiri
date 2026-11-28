@@ -3,12 +3,6 @@ import { getCurrentUser } from "@/lib/server-auth";
 import type { Metadata } from "next";
 import Greeting from "@/components/dashboard/Greeting";
 import BattlePlanHero from "@/components/dashboard/TodaysPath";
-import LaneBoard from "@/components/dashboard/LaneBoard";
-import StatsRow from "@/components/dashboard/StatsRow";
-import LeagueStatusWidget from "@/components/dashboard/LeagueStatusWidget";
-import TutorShortcut from "@/components/dashboard/TutorShortcut";
-import QuickLinks from "@/components/dashboard/QuickLinks";
-import RecentAchievements from "@/components/dashboard/RecentAchievements";
 import Landing from "@/components/landing/Landing";
 import { LogoMark } from "@/components/brand/Logo";
 import AnalyticsBeacon from "@/components/dashboard/AnalyticsBeacon";
@@ -17,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Gnostiri",
-  description: "GPE past papers, university course exam halls, your AI study assistant, and a season league.",
+  description: "GSE past papers, university course exam halls, your AI study assistant, and a season league.",
 };
 
 /**
@@ -32,18 +26,16 @@ export default async function Home() {
     <div className="flex min-h-screen flex-col font-sans">
       {user ? (
         <main className="mx-auto w-full max-w-4xl px-5 py-8 md:py-10">
-          <section aria-label="Dashboard" className="space-y-8">
+          <section aria-label="Today" className="space-y-6">
             <Greeting name={user.name} email={user.email} />
             <AnalyticsBeacon type="mission_viewed" meta={{ source: "dashboard" }} />
             <BattlePlanHero userId={user.id} />
-            <LaneBoard />
-            <QuickLinks />
-            <StatsRow userId={user.id} />
-            <div className="grid gap-6 lg:grid-cols-2">
-              <LeagueStatusWidget />
-              <RecentAchievements userId={user.id} />
-            </div>
-            <TutorShortcut />
+            <Link
+              href="/battle-plan"
+              className="gn-motion inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-electric-text underline-offset-2 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              View full plan →
+            </Link>
           </section>
         </main>
       ) : (
