@@ -17,6 +17,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import StatCard from "@/components/ui/StatCard";
+import WeekTimeline from "@/components/progress/WeekTimeline";
 
 interface TopicSummary {
   topicId: string;
@@ -178,6 +179,9 @@ export default function ProgressPage() {
             Your accuracy by topic, the weak ones to revisit, and every recent quiz attempt.
           </p>
         </div>
+
+        {/* Seven-day plan timeline (relocated here from Home in the IA rework) */}
+        <WeekTimeline />
 
         {/* Domain Switcher Tabs */}
         <div role="region" aria-label="Progress sections" tabIndex={0} className="flex border-b border-slate-800 gap-2 overflow-x-auto">
