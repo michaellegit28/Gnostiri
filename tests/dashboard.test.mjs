@@ -8,21 +8,19 @@ const q = (p) => readFileSync(ROOT + p, "utf8");
 const HOME = "src/app/page.tsx";
 const TEASER = "src/components/landing/Landing.tsx";
 
-test("the signed-in dashboard shows no study categories", () => {
+test("the signed-in Home is action-only (no study categories, no analytics grid)", () => {
   const home = q(HOME);
   assert.doesNotMatch(home, /StudyGrid|LibraryStrip|DashboardTeaser/, "study categories are off Home");
-  assert.match(home, /LeagueStatusWidget/, "the league status widget is on Home");
-  assert.match(home, /TutorShortcut/, "the tutor shortcut is on Home");
+  // IA rework: Home answers "what now" only — the kitchen-sink grid, stats,
+  // league and achievements moved to Study/Progress.
+  assert.doesNotMatch(home, /LeagueStatusWidget|StatsRow|LaneBoard|RecentAchievements|TutorShortcut|QuickLinks/, "Home carries no analytics/tool grid");
+  assert.match(home, /Greeting/, "the greeting stays");
+  assert.match(home, /BattlePlanHero|TodaysPath/, "today's plan is the Home hero");
 });
 
-test("the dashboard keeps the greeting, path module and stats", () => {
+test("the Home analytics moved off Home (tools→Study, analytics→Progress next slice)", () => {
   const home = q(HOME);
-  for (const part of ["Greeting", "StatsRow"]) {
-    assert.match(home, new RegExp(part), `${part} stays on Home`);
-  }
-  // Day-planning module: legacy BattlePlanHero or the new TodaysPath (main imports
-  // TodaysPath aliased as BattlePlanHero, so either name is fine).
-  assert.match(home, /BattlePlanHero|TodaysPath/, "a today's-path / battle-plan module stays on Home");
+  assert.doesNotMatch(home, /LeagueStatusWidget|StatsRow|LaneBoard|RecentAchievements|TutorShortcut|QuickLinks/, "Home carries no analytics/tool grid");
 });
 
 test("the signed-out landing is numbers-first and category-free", () => {

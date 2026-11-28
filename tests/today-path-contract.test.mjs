@@ -37,11 +37,11 @@ test("Home wires the today's-path module (day planning stays on the dashboard)",
   assert.match(home, /BattlePlanHero|TodaysPath/, "Home must render a day-planning module");
 });
 
-test("Home keeps the greeting, stats, league widget, achievements and tutor shortcut", () => {
+test("Home keeps the greeting + day module; analytics/tools move to Study/Progress", () => {
   const home = has(PAGE) ? read(PAGE) : "";
-  for (const part of ["Greeting", "StatsRow", "LeagueStatusWidget", "RecentAchievements", "TutorShortcut"]) {
-    assert.match(home, new RegExp(part), `${part} stays on Home`);
-  }
+  assert.match(home, /Greeting/, "the greeting stays on Home");
+  assert.match(home, /BattlePlanHero|TodaysPath/, "the day module stays on Home");
+  assert.doesNotMatch(home, /StatsRow|LeagueStatusWidget|RecentAchievements|TutorShortcut/, "analytics/tools are off Home");
 });
 
 test("Home wires the day-planning module server-scoped (userId) and drops the focus timer", () => {
