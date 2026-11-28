@@ -20,7 +20,7 @@ import {
   domainLabel,
   type LearningDomain,
 } from "@/lib/learning-domain";
-import { GPE } from "@/lib/exam-brand";
+import { GSE } from "@/lib/exam-brand";
 
 interface LaneLink {
   href: string;
@@ -31,7 +31,7 @@ interface LaneLink {
 const LANE_LINKS: Record<LearningDomain, LaneLink[]> = {
   // High School — the linear exam-prep lane (includes Timed CBT).
   highschool: [
-    { href: "/highschool/exams", label: GPE, Icon: ClipboardList },
+    { href: "/highschool/exams", label: GSE, Icon: ClipboardList },
     { href: "/highschool/study", label: "Textbook study", Icon: BookOpen },
     { href: "/battle-plan", label: "Study Plan", Icon: ListChecks },
     { href: "/cbt", label: "Timed CBT", Icon: MonitorPlay },

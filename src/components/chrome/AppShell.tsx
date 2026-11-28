@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Command, Crown, Menu, Settings as SettingsIcon, X } from "lucide-react";
+import { Command, Menu, X } from "lucide-react";
 import AccretionEmblem from "@/components/brand/AccretionEmblem";
 import useDialogFocus from "@/components/ui/useDialogFocus";
-import LaneSwitch from "@/components/chrome/LaneSwitch";
+import LaneDropdown from "@/components/chrome/LaneDropdown";
+import MenuAccordion from "@/components/chrome/MenuAccordion";
 import FeatureTour from "@/components/onboarding/FeatureTour";
 import {
   NAV_LABEL,
@@ -18,7 +19,7 @@ import {
 } from "./nav-model";
 import { useDomain } from "@/context/DomainContext";
 import { useAuth } from "@/context/AuthContext";
-import { DEFAULT_LEARNING_DOMAIN, domainLabel, learningDomainFromPathname } from "@/lib/learning-domain";
+import { DEFAULT_LEARNING_DOMAIN, learningDomainFromPathname } from "@/lib/learning-domain";
 import { trackAnalyticsEvent } from "@/lib/analytics-client";
 
 /**
@@ -146,41 +147,33 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             Jump to… <kbd className="ml-auto text-[10px] text-subtle">Ctrl K</kbd>
           </button>
 
-          <nav aria-label={NAV_LABEL} className="flex-1">
-            <p className="px-2 pb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">{domainLabel(activeDomain)}</p>
-            <LaneSwitch />
-            {navZones.map((zone) => (
-              <div key={zone.id} className="mb-5">
-                <p className="mb-1.5 px-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-electric-text">{zone.label}</p>
-                <ul className="space-y-0.5">
+          <nav aria-label={NAV_LABEL} className="flex-1 space-y-1">
+            <LaneDropdown />
+            {navZones
+              .find((z) => z.id === "today")
+              ?.items.map((item) => (
+                <MenuLink key={item.href} item={item} pathname={pathname} onNavigate={() => setMenu(false)} />
+              ))}
+            {navZones
+              .filter((z) => z.id === "lane" || z.id === "shared" || z.id === "learning")
+              .map((zone) => (
+                <MenuAccordion key={zone.id} label={zone.label}>
                   {zone.items.map((item) => (
                     <li key={item.href}>
                       <MenuLink item={item} pathname={pathname} onNavigate={() => setMenu(false)} />
                     </li>
                   ))}
-                </ul>
-              </div>
-            ))}
+                </MenuAccordion>
+              ))}
           </nav>
 
-          {/* Footer — Prime + Settings pinned to the bottom of the menu. */}
+          {/* Account — flat, bottom of the menu, no dropdown, no duplicates. */}
           <div className="mt-2 space-y-0.5 border-t border-line pt-3">
-            <Link
-              href="/pricing"
-              onClick={() => setMenu(false)}
-              className="flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 border-transparent px-2 text-sm font-semibold text-slate-300 hover:bg-surface/10 hover:text-gold focus:outline-none"
-            >
-              <Crown className="h-4 w-4 text-gold" aria-hidden />
-              Gnostiri Prime
-            </Link>
-            <Link
-              href="/settings"
-              onClick={() => setMenu(false)}
-              className="flex min-h-[44px] items-center gap-3 rounded-lg border-l-2 border-transparent px-2 text-sm font-semibold text-slate-300 hover:bg-surface/10 hover:text-primary focus:outline-none"
-            >
-              <SettingsIcon className="h-4 w-4" aria-hidden />
-              Settings
-            </Link>
+            {navZones
+              .find((z) => z.id === "membership")
+              ?.items.map((item) => (
+                <MenuLink key={item.href} item={item} pathname={pathname} onNavigate={() => setMenu(false)} />
+              ))}
           </div>
         </div>
       )}

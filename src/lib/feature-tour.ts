@@ -16,12 +16,12 @@ export const FEATURE_TOUR_SLIDES: FeatureTourSlide[] = [
   {
     id: "study",
     title: "Study",
-    body: "High School has the Gnostiri Proficiency Exam (GPE) and textbook study. University has courses, degrees and course exam halls.",
+    body: "High School has the Gnostiri Senior Examination (GSE) and textbook study. University has courses, degrees and course exam halls.",
   },
   {
     id: "practice",
     title: "Practice",
-    body: "High School uses Timed CBT and GPE papers. University uses Course exam halls with GC-(course) exam papers.",
+    body: "High School uses Timed CBT and GSE papers. University uses Course exam halls with GC-(course) exam papers.",
   },
   {
     id: "shared",
