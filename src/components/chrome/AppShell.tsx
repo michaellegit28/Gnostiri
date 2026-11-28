@@ -111,16 +111,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Minimalist menu popover (content-height, never full screen) ───── */}
       {menu && (
-        <div
-          ref={menuRef}
-          id="app-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Primary navigation"
-          tabIndex={-1}
-          className="gn-glass fixed left-3 top-3 z-[80] flex max-h-[calc(100vh-1.5rem)] w-72 flex-col overflow-y-auto rounded-2xl border border-line p-4 shadow-2xl"
-        >
-          <div className="flex items-center justify-between">
+        <>
+          <div className="fixed inset-0 z-[75] bg-bg/70 backdrop-blur-sm" onClick={() => setMenu(false)} aria-hidden="true" />
+          <div
+            ref={menuRef}
+            id="app-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Primary navigation"
+            tabIndex={-1}
+            className="gn-glass fixed inset-x-0 bottom-0 z-[80] flex max-h-[80vh] flex-col overflow-y-auto rounded-t-2xl border-t border-line p-4 pb-8 shadow-2xl"
+          >
+            <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-line-strong" aria-hidden="true" />
+            <div className="flex items-center justify-between">
             <span className="flex items-center gap-2">
               <AccretionEmblem size={22} />
               <span className="font-serif text-lg font-bold tracking-tight text-ink">Gnostiri</span>
@@ -175,7 +178,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <MenuLink key={item.href} item={item} pathname={pathname} onNavigate={() => setMenu(false)} />
               ))}
           </div>
-        </div>
+          </div>
+        </>
       )}
 
       {/* ── Command palette ───────────────────────────────────────────────── */}
