@@ -23,6 +23,13 @@ test("the Home analytics moved off Home (tools→Study, analytics→Progress nex
   assert.doesNotMatch(home, /LeagueStatusWidget|StatsRow|LaneBoard|RecentAchievements|TutorShortcut|QuickLinks/, "Home carries no analytics/tool grid");
 });
 
+test("the analytics live on Progress, not Home", () => {
+  const progress = q("src/app/progress/page.tsx");
+  assert.match(progress, /LeagueStatusWidget/, "league status is on Progress");
+  assert.match(progress, /RecentAchievements/, "achievements are on Progress");
+  assert.match(progress, /<StatsRow /, "the stat chips are on Progress");
+});
+
 test("the signed-out landing is numbers-first and category-free", () => {
   const band = q(TEASER);
   assert.match(band, /5,997/, "a real question count, not an adjective");
