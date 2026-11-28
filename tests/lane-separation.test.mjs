@@ -7,7 +7,7 @@
 
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync, statSync } from "node:fs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const q = (p) => readFileSync(ROOT + p, "utf8");
@@ -102,4 +102,34 @@ test("the study hub only ships the active lane's cards (no leak-in-the-payload)"
   const page = q("src/app/study/page.tsx");
   assert.match(page, /isVisibleForAudience\(card\.audience, domain\)/, "the hub payload is lane-scoped server-side");
   assert.match(page, /domain === "university"/, "and the lane branch picks the right surface set");
+});
+
+/**
+ * The owner directive: the ONLY places that switch the learning lane are the
+ * menu and Settings. Scan every source file for callers of setLearningDomain
+ * and assert the set is exactly those two — a third switch anywhere in the
+ * app fails this suite.
+ */
+function sourceFiles(dir) {
+  const out = [];
+  for (const entry of readdirSync(dir)) {
+    const path = `${dir}/${entry}`;
+    if (statSync(path).isDirectory()) out.push(...sourceFiles(path));
+    else if (/\.(ts|tsx)$/.test(entry)) out.push(path);
+  }
+  return out;
+}
+
+test("lane switches exist ONLY in the menu and Settings", () => {
+  const callers = sourceFiles("src")
+    .filter((file) => /setLearningDomain\(/.test(readFileSync(file, "utf8")))
+    .map((file) => file.replace(/^src\//, ""));
+  assert.deepEqual(
+    callers.sort(),
+    [
+      "components/chrome/LaneDropdown.tsx", // the menu (canonical)
+      "components/settings/LearningDomainControls.tsx", // Settings (canonical)
+    ],
+    "no other surface may switch the learning lane",
+  );
 });

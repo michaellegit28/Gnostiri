@@ -4,12 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useDomain } from "@/context/DomainContext";
-import {
-  DEFAULT_LEARNING_DOMAIN,
-  LEARNING_DOMAINS,
-  domainLabel,
-  type LearningDomain,
-} from "@/lib/learning-domain";
+import { DEFAULT_LEARNING_DOMAIN, type LearningDomain } from "@/lib/learning-domain";
 import { SectionMark } from "@/components/logo/GnostiriLogo";
 import {
   Swords,
@@ -22,7 +17,6 @@ import {
   ChevronRight,
   LogIn,
   GraduationCap,
-  School,
   Sparkles,
   Crown,
 } from "lucide-react";
@@ -54,23 +48,17 @@ const priorityStyle: Record<string, string> = {
   low: "bg-teal-500/10 text-teal-300 border-teal-500/30",
 };
 
-const LANE_ICON: Record<LearningDomain, typeof GraduationCap> = {
-  highschool: School,
-  university: GraduationCap,
-};
-
 /**
- * Battle Plan — one nav item, two lanes. High School is a rules-based
- * countdown the app builds automatically from the exam date and standard
- * subjects. University is the premium AI planner: the student supplies their
- * syllabus, exam dates and course load and the plan is generated. This is the
- * foundation shell — the High School automated planner is live; the University
- * AI planner and the shared Battle Plan store wiring land next.
+ * Study plan — one surface, strictly per lane (owner directive: the lane
+ * toggles ONLY in the menu and Settings, never inline). High School gets the
+ * rules-based countdown the app builds from the exam date and syllabus;
+ * University gets the premium AI planner shell. The lane comes from the
+ * session, so neither side is reachable from the other lane's UI.
  */
 export default function BattlePlanPage() {
   const { user, loading } = useAuth();
   const { learningDomain } = useDomain();
-  const [lane, setLane] = useState<LearningDomain>(learningDomain ?? DEFAULT_LEARNING_DOMAIN);
+  const lane: LearningDomain = learningDomain ?? DEFAULT_LEARNING_DOMAIN;
 
   // ── High School automated planner state ────────────────────────────────
   const [exam, setExam] = useState("jamb");
@@ -111,7 +99,7 @@ export default function BattlePlanPage() {
       setUpcoming(data.upcoming);
       if (data.plan.examDate) setExamDate(data.plan.examDate.slice(0, 10));
     } catch {
-      setError("Could not load your battle plan. Check your connection.");
+      setError("Could not load your study plan. Check your connection.");
     }
   }, []);
 
@@ -171,41 +159,17 @@ export default function BattlePlanPage() {
             Home
           </Link>
           <ChevronRight className="w-4 h-4 text-slate-600" />
-          <span className="text-slate-100 font-medium">Battle Plan</span>
+          <span className="text-slate-100 font-medium">Study plan</span>
         </nav>
 
         <header className="space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
             <SectionMark variant="battle" className="w-4 h-4 text-gold" />
-            <span>Battle Plan</span>
+            <span>Study plan</span>
           </div>
           <h1 className="gn-title-gradient font-serif text-3xl font-bold tracking-tight md:text-5xl">
-            Battle Plan
+            Study plan
           </h1>
-          {/* Lane switch: a single nav item routes between the two planners. */}
-          <div role="group" aria-label="Battle Plan lane" className="grid max-w-md grid-cols-2 gap-1 rounded-xl border border-line bg-surface/50 p-1">
-            {LEARNING_DOMAINS.map((domain) => {
-              const Icon = LANE_ICON[domain];
-              const selected = lane === domain;
-              return (
-                <button
-                  key={domain}
-                  type="button"
-                  aria-pressed={selected}
-                  onClick={() => {
-                    setLane(domain);
-                    setError("");
-                  }}
-                  className={`gn-motion flex min-h-[44px] items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                    selected ? "bg-primary text-on-primary" : "text-muted hover:text-ink"
-                  }`}
-                >
-                  <Icon className="h-4 w-4" aria-hidden />
-                  {domainLabel(domain)}
-                </button>
-              );
-            })}
-          </div>
         </header>
 
         {lane === "university" ? (
@@ -216,7 +180,7 @@ export default function BattlePlanPage() {
           <div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-gold/30 bg-gold/10 p-6 sm:flex-row">
             <div className="flex items-center gap-3">
               <LogIn className="w-5 h-5 text-gold" />
-              <p className="text-sm text-slate-200">Sign in to build your personal battle plan.</p>
+              <p className="text-sm text-slate-200">Sign in to build your personal study plan.</p>
             </div>
             <Link
               href="/login"
@@ -264,7 +228,7 @@ export default function BattlePlanPage() {
               className="gn-btn-gold inline-flex min-h-[48px] items-center gap-2 rounded-lg px-6 py-3 font-semibold text-sm transition-all disabled:opacity-50"
             >
               <Swords className="w-4 h-4" />
-              {busy ? "Building your plan…" : "Generate Battle Plan"}
+              {busy ? "Building your plan…" : "Generate study plan"}
             </button>
             {error && (
               <p role="alert" className="text-sm text-rose-300">
@@ -472,7 +436,7 @@ function UniversityPlanner({
       <div className="rounded-2xl border border-line bg-surface/40 p-8 text-center">
         <GraduationCap className="mx-auto mb-3 h-8 w-8 text-electric-text" aria-hidden />
         <p className="text-sm text-muted">
-          Your AI battle plan will appear here. The University planner is being built — this shell captures
+          Your AI study plan will appear here. The University planner is being built — this shell captures
           your goals, dates and course load so the plan can be generated from them.
         </p>
       </div>

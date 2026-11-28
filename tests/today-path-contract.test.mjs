@@ -77,7 +77,7 @@ test("TodaysPath has NO event handlers (an onClick here would crash it as an RSC
 
 test("TodaysPath renders an honest empty state, not a fabricated plan", { skip: !has(TODAYS_PATH) }, () => {
   const src = read(TODAYS_PATH);
-  assert.match(src, /All clear for today|Build your battle plan/, "an honest empty state exists when there is no plan");
+  assert.match(src, /All clear for today|Build your study plan/, "an honest empty state exists when there is no plan");
 });
 
 test("TodaysPath meets the a11y floor (labelled region, current-step signal, live region, 44px targets, reduced motion)", { skip: !has(TODAYS_PATH) }, () => {

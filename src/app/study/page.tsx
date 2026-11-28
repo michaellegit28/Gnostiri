@@ -3,7 +3,6 @@ import Link from "next/link";
 import prisma from "@/lib/db";
 import { getCurrentUser } from "@/lib/server-auth";
 import StudyGrid, { type StudyCardSpec } from "@/components/study/StudyGrid";
-import StudyLaneSwitch from "@/components/study/StudyLaneSwitch";
 import {
   DEFAULT_LEARNING_DOMAIN,
   domainLabel,
@@ -156,10 +155,7 @@ export default async function StudyPage() {
   return (
     <main className="mx-auto max-w-4xl px-5 py-8 md:py-12">
       <p className="text-[11px] uppercase tracking-[0.3em] text-primary">Study</p>
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="gn-title-gradient font-serif text-3xl font-bold tracking-tight md:text-4xl">Your study lane</h1>
-        <StudyLaneSwitch />
-      </div>
+      <h1 className="gn-title-gradient mt-3 font-serif text-3xl font-bold tracking-tight md:text-4xl">Your study lane</h1>
       <p className="mt-3 max-w-2xl text-sm text-muted">
         Everything in your current lane, plus the tools that follow you everywhere.{" "}
         <Link

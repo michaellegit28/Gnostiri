@@ -97,7 +97,7 @@ export default async function ExamHubPage({ params }: ExamHubPageProps) {
         >
           <div>
             <div className="font-serif font-bold text-lg text-slate-100 group-hover:text-electric-text transition-colors">
-              Get your JAMB battle plan
+              Get your JAMB study plan
             </div>
             <p className="text-sm text-slate-400 mt-1">
               Pick your exam date — we turn the syllabus into a day-by-day mission, weak topics first.

@@ -153,7 +153,7 @@ export default async function TodaysPath({ userId }: { userId: string }) {
             ? "Your recorded path is complete"
             : plan
               ? "No active stop is recorded"
-              : "Build your battle plan";
+              : "Build your study plan";
   const cta = loadFailed ? null : plan ? "View full plan" : "Build your plan";
 
   return (
@@ -224,7 +224,7 @@ export default async function TodaysPath({ userId }: { userId: string }) {
       ) : !plan ? (
         <div className="mt-6 rounded-xl border border-line bg-bg px-5 py-6 text-center">
           <MapPin className="mx-auto h-6 w-6 text-electric-text" aria-hidden />
-          <p className="mt-3 font-semibold text-ink">Your path starts with a battle plan</p>
+          <p className="mt-3 font-semibold text-ink">Your path starts with a study plan</p>
           <p className="mt-1 text-sm text-muted">No schedule is shown until real exam dates and syllabus topics are available.</p>
         </div>
       ) : (
@@ -294,7 +294,7 @@ export default async function TodaysPath({ userId }: { userId: string }) {
               </ol>
             ) : (
               <p className="mt-3 rounded-xl border border-line bg-bg px-4 py-4 text-sm text-muted">
-                No stop is recorded for today. Check the battle plan for the next scheduled session.
+                No stop is recorded for today. Check your study plan for the next scheduled session.
               </p>
             )}
           </div>

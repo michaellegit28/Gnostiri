@@ -22,17 +22,25 @@ const MIGRATION_DIR = "prisma/migrations/20261126120000_battle_plan";
 const MIGRATION = `${MIGRATION_DIR}/migration.sql`;
 const EXTRA_MIGRATION = `${MIGRATION_DIR}/README.md`;
 
-// ─── one nav item, two lanes ──────────────────────────────────────────────────
+// ─── one nav item, lane from the session ─────────────────────────────────────
 
-test("Battle Plan is one shared nav item (the page toggles the lane)", () => {
+test("the study plan is one shared nav item whose lane comes from the session (no inline toggle)", () => {
   const nav = read("src/components/chrome/nav-model.ts");
   assert.match(nav, /href: "\/battle-plan"[\s\S]{0,80}?audience: "shared"/, "single shared nav item");
   const page = has(PAGE) ? read(PAGE) : "";
-  // The page carries its own lane switcher with both destinations reachable.
-  assert.match(page, /role="group"/, "the lane switch is an labelled group");
-  assert.match(page, /aria-label="Battle Plan lane"/, "the lane switch is named for assistive tech");
-  assert.match(page, /domainLabel\(domain\)/, "both lanes are labelled");
-  assert.match(page, /lane === "university"/, "University AI branch is reachable from the toggle");
+  // Owner directive: lane switches live ONLY in the menu and Settings — the page
+  // never offers its own toggle, so a High School student cannot flip to the
+  // University planner (or vice versa) from here.
+  assert.doesNotMatch(page, /LEARNING_DOMAINS\.map/, "the page carries no lane switcher");
+  assert.doesNotMatch(page, /setLane\(/, "no local lane state to flip");
+  assert.match(page, /const lane: LearningDomain = learningDomain \?\? DEFAULT_LEARNING_DOMAIN/, "the lane comes from the session");
+  assert.match(page, /lane === "university"/, "the University planner branch still exists — it is simply unreachable from High School UI");
+});
+
+test("the plan speaks 'study plan', not 'battle plan'", () => {
+  const page = has(PAGE) ? read(PAGE) : "";
+  assert.match(read("src/app/battle-plan/layout.tsx"), /title: "Study plan/, "the tab title is renamed");
+  assert.doesNotMatch(page, /Battle Plan/, "no user-visible 'Battle Plan' copy remains on the page");
 });
 
 // ─── the unified store ──────────────────────────────────────────────────────────
