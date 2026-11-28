@@ -75,6 +75,19 @@ export async function GET(req: NextRequest) {
 
   const withStatus = items.map((i) => ({ ...i, done: done.has(i.topicId) }));
   const todayItems = withStatus.filter((i) => i.date <= today && !i.done);
+  // Seven-day timeline (moved off Home onto /progress in the IA rework).
+  const week = Array.from({ length: 7 }, (_, index) => {
+    const date = addDays(new Date(), index);
+    const dayItems = withStatus.filter((i) => i.date === date);
+    const complete = dayItems.length > 0 && dayItems.every((i) => i.done);
+    return {
+      date,
+      label: new Date(`${date}T00:00:00.000Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric" }),
+      count: dayItems.length,
+      complete,
+      current: index === 0 && dayItems.some((i) => !i.done),
+    };
+  });
   const upcomingMap = new Map<string, typeof withStatus>();
   for (const i of withStatus.filter((i) => i.date > today && !i.done)) {
     if (!upcomingMap.has(i.date)) upcomingMap.set(i.date, []);
@@ -92,6 +105,7 @@ export async function GET(req: NextRequest) {
     doneCount: withStatus.filter((i) => i.done).length,
     today: todayItems,
     upcoming,
+    week,
   });
 }
 

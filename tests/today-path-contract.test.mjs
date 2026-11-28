@@ -90,6 +90,27 @@ test("TodaysPath meets the a11y floor (labelled region, current-step signal, liv
   assert.match(src, /motion-safe:|prefers-reduced-motion/, "motion is dropped for reduced-motion users");
 });
 
+// ─── IA rework: Home is action-only ──────────────────────────────────────────
+
+test("TodaysPath collapses overdue items into ONE catch-up banner (no wall of rows)", { skip: !has(TODAYS_PATH) }, () => {
+  const src = read(TODAYS_PATH);
+  assert.match(src, /catch up on/, "a single catch-up banner names the overdue count");
+  assert.match(src, /Review overdue/, "the banner links out to the full plan");
+  assert.doesNotMatch(src, /overdue\} overdue|overdue\.length\} overdue/, "no per-row overdue count chip");
+});
+
+test("TodaysPath drops the seven-day strip and the 'Open battle plan' label (IA rework)", { skip: !has(TODAYS_PATH) }, () => {
+  const src = read(TODAYS_PATH);
+  assert.doesNotMatch(src, /Seven-day path/, "the week strip moved to /progress (WeekTimeline)");
+  assert.match(src, /View full plan/, "calm terminology replaces the aggressive 'Open battle plan'");
+  assert.match(src, /visibleStops = todayItems/, "only today's stops list on Home — overdue collapse to the banner");
+});
+
+test("TodaysPath encourages a cold streak instead of showing a bare zero", { skip: !has(TODAYS_PATH) }, () => {
+  const src = read(TODAYS_PATH);
+  assert.match(src, /start your streak/, "zero-streak users get encouraging microcopy");
+});
+
 // ─── FocusTimer: client component invariants ──────────────────────────────────
 
 test("FocusTimer is a client component that never touches the database", { skip: !has(FOCUS_TIMER) }, () => {

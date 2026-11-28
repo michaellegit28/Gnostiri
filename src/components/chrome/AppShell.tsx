@@ -109,21 +109,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <Menu className="h-5 w-5" aria-hidden />
       </button>
 
-      {/* ── Minimalist menu popover (content-height, never full screen) ───── */}
+      {/* ── Menu: anchored to the hamburger (top-left), extended vertically to
+          the bottom inset; the Account zone stays pinned at the panel bottom. ── */}
       {menu && (
-        <>
-          <div className="fixed inset-0 z-[75] bg-bg/70 backdrop-blur-sm" onClick={() => setMenu(false)} aria-hidden="true" />
-          <div
-            ref={menuRef}
-            id="app-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Primary navigation"
-            tabIndex={-1}
-            className="gn-glass fixed inset-x-0 bottom-0 z-[80] flex max-h-[80vh] flex-col overflow-y-auto rounded-t-2xl border-t border-line p-4 pb-8 shadow-2xl"
-          >
-            <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-line-strong" aria-hidden="true" />
-            <div className="flex items-center justify-between">
+        <div
+          ref={menuRef}
+          id="app-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Primary navigation"
+          tabIndex={-1}
+          className="gn-glass fixed bottom-3 left-3 top-3 z-[80] flex w-72 flex-col rounded-2xl border border-line p-4 shadow-2xl"
+        >
+          <div className="flex items-center justify-between">
             <span className="flex items-center gap-2">
               <AccretionEmblem size={22} />
               <span className="font-serif text-lg font-bold tracking-tight text-ink">Gnostiri</span>
@@ -144,13 +142,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               setMenu(false);
               setPalette(true);
             }}
-            className="mb-3 flex min-h-[44px] w-full items-center gap-2 rounded-lg border border-line bg-surface/50 px-3 text-sm font-semibold text-muted transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            className="mb-3 mt-3 flex min-h-[44px] w-full items-center gap-2 rounded-lg border border-line bg-surface/50 px-3 text-sm font-semibold text-muted transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <Command className="h-4 w-4" aria-hidden />
             Jump to… <kbd className="ml-auto text-[10px] text-subtle">Ctrl K</kbd>
           </button>
 
-          <nav aria-label={NAV_LABEL} className="flex-1 space-y-1">
+          <nav aria-label={NAV_LABEL} className="flex-1 space-y-1 overflow-y-auto">
             <LaneDropdown />
             {navZones
               .find((z) => z.id === "today")
@@ -170,7 +168,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               ))}
           </nav>
 
-          {/* Account — flat, bottom of the menu, no dropdown, no duplicates. */}
+          {/* Account — flat, pinned to the bottom of the extended panel, no dropdown, no duplicates. */}
           <div className="mt-2 space-y-0.5 border-t border-line pt-3">
             {navZones
               .find((z) => z.id === "membership")
@@ -178,8 +176,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 <MenuLink key={item.href} item={item} pathname={pathname} onNavigate={() => setMenu(false)} />
               ))}
           </div>
-          </div>
-        </>
+        </div>
       )}
 
       {/* ── Command palette ───────────────────────────────────────────────── */}

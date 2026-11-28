@@ -53,10 +53,6 @@ function dateKey(base: Date, offset: number) {
   return date.toISOString().slice(0, 10);
 }
 
-function dayLabel(date: Date) {
-  return date.toLocaleDateString("en-GB", { weekday: "short", day: "numeric" });
-}
-
 function stopClass(state: StopState) {
   if (state === "done") return "border-success/40 bg-success/10";
   if (state === "current") return "border-primary/60 bg-primary/10";
@@ -136,21 +132,14 @@ export default async function TodaysPath({ userId }: { userId: string }) {
   const completedToday = todayItems.length > 0 && todayItems.every((item) => item.done);
   const hasFuture = withStatus.some((item) => item.date > today);
   const noStopScheduled = Boolean(plan && todayItems.length === 0 && overdue.length === 0 && hasFuture);
-  const candidateStops = overdue.length > 0 ? overdue : todayItems;
-  const visibleStops = candidateStops
+  // Home shows today's stops only — overdue items collapse into a single
+  // catch-up banner (one gentle prompt, not a wall of 42 rows).
+  const visibleStops = todayItems
     .filter((item, index, stops) => stops.findIndex((candidate) => candidate.topicId === item.topicId) === index)
     .slice(0, 3);
   const daysLeft = plan?.examDate
     ? Math.max(0, Math.ceil((new Date(plan.examDate).getTime() - now.getTime()) / 86400000))
     : null;
-
-  const week = Array.from({ length: 7 }, (_, index) => {
-    const date = dateKey(now, index);
-    const dayItems = withStatus.filter((item) => item.date === date);
-    const complete = dayItems.length > 0 && dayItems.every((item) => item.done);
-    const current = index === 0 && dayItems.some((item) => !item.done);
-    return { date, label: dayLabel(new Date(`${date}T00:00:00.000Z`)), complete, current, count: dayItems.length };
-  });
 
   const heading = loadFailed
     ? "Today's path is unavailable"
@@ -165,7 +154,7 @@ export default async function TodaysPath({ userId }: { userId: string }) {
             : plan
               ? "No active stop is recorded"
               : "Build your battle plan";
-  const cta = loadFailed ? null : plan ? "Open battle plan" : "Build your battle plan";
+  const cta = loadFailed ? null : plan ? "View full plan" : "Build your plan";
 
   return (
     <section
@@ -195,6 +184,11 @@ export default async function TodaysPath({ userId }: { userId: string }) {
                         ? "No active stop is recorded for today."
                         : "Choose an exam date and your real syllabus becomes a week-by-week path."}
           </p>
+          {!loadFailed && plan && activeStreak === 0 ? (
+            <p className="mt-2 text-xs text-subtle">
+              Finish today&apos;s stop to start your streak — one session is all it takes.
+            </p>
+          ) : null}
         </div>
         <div className="flex items-center gap-3">
           {activeStreak > 0 ? (
@@ -235,45 +229,26 @@ export default async function TodaysPath({ userId }: { userId: string }) {
         </div>
       ) : (
         <>
-          <nav aria-label="Seven-day path" className="mt-6 border-t border-line pt-5">
-            <ol className="grid grid-cols-7 gap-1">
-              {week.map((day, index) => (
-                <li key={day.date}>
-                  <Link
-                    href="/battle-plan"
-                    aria-current={index === 0 ? "date" : undefined}
-                    aria-label={`${day.label}: ${day.complete ? "complete" : day.current ? "current stop" : day.count ? `${day.count} planned` : "no stop"}`}
-                    className="flex min-h-[52px] flex-col items-center justify-center gap-1 rounded-lg text-[10px] font-semibold text-muted transition-colors hover:bg-surface-2 hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`h-3 w-3 rounded-full border-2 ${
-                        day.complete
-                          ? "border-success bg-success"
-                          : day.current
-                            ? "border-primary bg-primary motion-safe:animate-pulse"
-                            : day.count
-                              ? "border-primary/60 bg-surface"
-                              : "border-line-strong bg-surface"
-                      }`}
-                    />
-                    <span>{day.label}</span>
-                  </Link>
-                </li>
-              ))}
-            </ol>
-          </nav>
+          {overdue.length > 0 ? (
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-warning/40 bg-warning/10 px-5 py-4">
+              <p className="text-sm font-semibold text-amber-100">
+                You have {overdue.length} {overdue.length === 1 ? "task" : "tasks"} to catch up on.
+              </p>
+              <Link
+                href="/battle-plan"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-warning/50 px-4 text-sm font-semibold text-amber-200 transition-colors hover:text-amber-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                Review overdue
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+          ) : null}
 
           <div className="mt-5 border-t border-line pt-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h3 className="font-semibold text-ink">
-                {completedToday ? "Today is complete" : overdue.length > 0 ? "Stops still waiting" : "Today's stops"}
+                {completedToday ? "Today is complete" : "Today's stops"}
               </h3>
-              {overdue.length > 0 ? (
-                <span className="rounded-full border border-warning/40 bg-warning/10 px-3 py-1 text-xs font-semibold text-amber-200">
-                  {overdue.length} overdue
-                </span>
-              ) : null}
             </div>
 
             {visibleStops.length > 0 ? (
