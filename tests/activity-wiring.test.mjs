@@ -42,6 +42,7 @@ const NOT_LEARNING = [
   "auth/country",                  // profile preference
   "battle-plan",                   // plan generation, not study
   "ai/notes",                      // study-note capture, not a completion
+  "ai/assessments",               // assessment container (create/list), not a completion
   "cbt/session",                   // start a sitting
   "competitions/[id]/streak",      // streak claim, not learning
   "competitions",                  // create a cup
