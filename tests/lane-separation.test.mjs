@@ -15,29 +15,27 @@ const q = (p) => readFileSync(ROOT + p, "utf8");
 const NAV = "src/components/chrome/nav-model.ts";
 
 /**
- * The sanctioned shared list. Anything that crosses lanes must be here and
- * ONLY here: account utilities (one account, both lanes), the two lanes'
- * shared entry points (/, /study), the shared study surfaces the owner
- * approved (Discovery, Tutor, Library, Compete) and the shared plan/analytics
- * shells that toggle their own lane internally.
+ * The sanctioned shared list (owner: "nothing should be shared"). Only three
+ * kinds of destination may cross lanes, and each must be here:
+ *  1. the two self-filtering entry points (/, /study),
+ *  2. Discovery — the ONE shared study surface (extras trails carry no lane
+ *     tag yet; owner-approved earlier),
+ *  3. account utilities — one account, one feed (notifications, Prime,
+ *     profile, settings).
+ * Everything else (tutor, study plan, progress, compete, certificates,
+ * library) is per-lane.
  */
 const SHARED_OK = new Set([
-  "/", // Home — action-only, account-scoped
-  "/study", // the hub (filters itself by lane)
-  "/tutor", // AI tutor (domain-scoped in content)
-  "/discovery", // the ONLY shared study content surface
-  "/notifications", // account utility
-  "/battle-plan", // plan shell (toggles HS/University internally)
-  "/progress", // analytics (split by lane tabs)
-  "/league", // community surface (flagged to owner, default shared)
-  "/certificates", // earned records
-  "/library", // community surface (flagged to owner, default shared)
+  "/", // Home — self-filtering entry point (renders the session lane's panel)
+  "/study", // the hub — self-filtering entry point
+  "/discovery", // the ONE shared study surface (extras trails, no lane tag yet)
+  "/notifications", // account utility (one account, one feed)
   "/pricing", // account utility
   "/profile", // account utility
   "/settings", // account utility
 ]);
 
-function navItems() {
+function rawNavItems() {
   return q(NAV)
     .split("\n")
     .filter((line) => line.includes("href:") && line.includes("audience:"))
@@ -45,6 +43,13 @@ function navItems() {
       href: line.match(/href: "([^"]+)"/)[1],
       audience: line.match(/audience: "([^"]+)"/)[1],
     }));
+}
+
+/** First-declared audience per destination (bottom tabs may repeat a nav entry). */
+function navItems() {
+  const seen = new Map();
+  for (const item of rawNavItems()) if (!seen.has(item.href)) seen.set(item.href, item.audience);
+  return [...seen].map(([href, audience]) => ({ href, audience }));
 }
 
 test("every nav destination declares its lane, and the shared list is exactly the sanctioned one", () => {
@@ -69,13 +74,22 @@ test("no lane route is shared — the lanes never cross-link in the nav", () => 
   }
 });
 
-test("the shared study surface is discovery; the shared study tools are the approved few", () => {
-  const sharedStudy = navItems().filter(({ href, audience }) => audience === "shared" && ["/tutor", "/discovery", "/battle-plan"].includes(href));
+test("Discovery is the ONLY shared study surface; everything else is per-lane", () => {
+  const sharedStudy = navItems().filter(({ audience }) => audience === "shared");
   assert.deepEqual(
     sharedStudy.map((i) => i.href).sort(),
-    ["/battle-plan", "/discovery", "/tutor"],
-    "only discovery, the tutor and the lane-aware plan shell cross lanes among study surfaces",
+    ["/", "/discovery", "/notifications", "/pricing", "/profile", "/settings", "/study"],
+    "only Discovery crosses lanes among study surfaces — the rest are entry points or account utilities",
   );
+  // Per-lane surfaces appear once per lane (zone + bottom tab), never shared.
+  for (const href of ["/tutor", "/battle-plan", "/progress", "/league", "/library"]) {
+    const audiences = rawNavItems().filter((i) => i.href === href).map((i) => i.audience);
+    assert.ok(!audiences.includes("shared"), `${href} is never a shared entry`);
+    assert.ok(audiences.includes("highschool") && audiences.includes("university"), `${href} carries an entry for each lane`);
+  }
+  // Course certificates are a University surface only.
+  const certAudiences = [...new Set(rawNavItems().filter((i) => i.href === "/certificates").map((i) => i.audience))];
+  assert.deepEqual(certAudiences, ["university"], "certificates belong to University only");
 });
 
 test("the progress week strip never ships the High School plan to a University session", () => {
