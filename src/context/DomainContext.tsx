@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import {
   DEFAULT_LEARNING_DOMAIN,
@@ -59,6 +59,7 @@ function domainFromPathname(pathname: string): DomainType | null {
 
 export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname() ?? "/";
+  const router = useRouter();
   const { user, loading } = useAuth();
   const [manualDomain, setManualDomain] = useState<DomainType | null>(null);
   const [learningDomain, setLearningDomainState] = useState<LearningDomain | null>(null);
@@ -111,17 +112,25 @@ export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     (domain: LearningDomain) => {
       setLearningDomainState(domain);
       writeStoredDomain(domain);
+      // The lane is resolved server-side (profile / cookie), so a switch must
+      // re-render the server components — Home, the hubs — immediately, not on
+      // the next manual refresh. refresh() runs after the profile sync resolves
+      // so the server never reads a stale lane.
       if (user) {
         void fetch("/api/learning-domain", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ domain }),
-        }).catch(() => {
-          // A failed sync must not lose the choice; the local lane still applies.
-        });
+        })
+          .then(() => router.refresh())
+          .catch(() => {
+            // A failed sync must not lose the choice; the local lane still applies.
+          });
+      } else {
+        router.refresh();
       }
     },
-    [user]
+    [user, router]
   );
 
   return (

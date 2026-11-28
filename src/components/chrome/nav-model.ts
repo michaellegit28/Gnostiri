@@ -86,8 +86,14 @@ export const NAV_ZONES: NavZone[] = [
     id: "shared",
     label: "Discover",
     items: [
-      { href: "/tutor", label: "Tutor", icon: Sparkles, audience: "shared" },
+      // The tutor's CONTENT is domain-scoped server-side (its API requires a
+      // lane), so each lane carries its own entry — one URL, two audiences.
+      { href: "/tutor", label: "Tutor", icon: Sparkles, audience: "highschool" },
+      { href: "/tutor", label: "Tutor", icon: Sparkles, audience: "university" },
+      // Discovery is the neutral extras surface — the ONE shared study surface
+      // (owner-approved): its trails carry no lane tag yet.
       { href: "/discovery", label: "Discovery", icon: Compass, audience: "shared" },
+      // Notifications are account-level (one account, one feed).
       { href: "/notifications", label: "Notifications", icon: Bell, audience: "shared" },
     ],
   },
@@ -95,11 +101,18 @@ export const NAV_ZONES: NavZone[] = [
     id: "learning",
     label: "My learning",
     items: [
-      { href: "/battle-plan", label: "Study Plan", icon: ListChecks, audience: "shared" },
-      { href: "/progress", label: "Progress", icon: BarChart3, audience: "shared" },
-      { href: "/league", label: "Compete", icon: Trophy, audience: "shared" },
-      { href: "/certificates", label: "Certificates", icon: FileBadge, audience: "shared" },
-      { href: "/library", label: "Library", icon: Library, audience: "shared" },
+      // One URL per lane audience: the route self-scopes (or lane-gates), so
+      // each lane only ever sees its own entry.
+      { href: "/battle-plan", label: "Study Plan", icon: ListChecks, audience: "highschool" },
+      { href: "/battle-plan", label: "Study Plan", icon: ListChecks, audience: "university" },
+      { href: "/progress", label: "Progress", icon: BarChart3, audience: "highschool" },
+      { href: "/progress", label: "Progress", icon: BarChart3, audience: "university" },
+      { href: "/league", label: "Compete", icon: Trophy, audience: "highschool" },
+      { href: "/league", label: "Compete", icon: Trophy, audience: "university" },
+      // Course certificates are a University surface only.
+      { href: "/certificates", label: "Certificates", icon: FileBadge, audience: "university" },
+      { href: "/library", label: "Library", icon: Library, audience: "highschool" },
+      { href: "/library", label: "Library", icon: Library, audience: "university" },
     ],
   },
   {
@@ -113,13 +126,16 @@ export const NAV_ZONES: NavZone[] = [
   },
 ];
 
-/** The five mobile bottom tabs — where a student lives. */
+/** The five mobile bottom tabs — where a student lives. Each lane gets its own set. */
 export const BOTTOM_TABS: NavItem[] = [
   { href: "/", label: "Today", icon: Home, audience: "shared" },
   { href: "/study", label: "Study", icon: BookOpen, audience: "shared" },
   { href: "/cbt", label: "Practice", icon: MonitorPlay, audience: "highschool" },
-  { href: "/progress", label: "Progress", icon: BarChart3, audience: "shared" },
-  { href: "/library", label: "Library", icon: Library, audience: "shared" },
+  { href: "/practice", label: "Practice", icon: MonitorPlay, audience: "university" },
+  { href: "/progress", label: "Progress", icon: BarChart3, audience: "highschool" },
+  { href: "/progress", label: "Progress", icon: BarChart3, audience: "university" },
+  { href: "/library", label: "Library", icon: Library, audience: "highschool" },
+  { href: "/library", label: "Library", icon: Library, audience: "university" },
 ];
 
 /**

@@ -24,9 +24,10 @@ const EXTRA_MIGRATION = `${MIGRATION_DIR}/README.md`;
 
 // ─── one nav item, lane from the session ─────────────────────────────────────
 
-test("the study plan is one shared nav item whose lane comes from the session (no inline toggle)", () => {
+test("the study plan is one route with one entry per lane; the lane comes from the session (no inline toggle)", () => {
   const nav = read("src/components/chrome/nav-model.ts");
-  assert.match(nav, /href: "\/battle-plan"[\s\S]{0,80}?audience: "shared"/, "single shared nav item");
+  assert.match(nav, /href: "\/battle-plan"[\s\S]{0,80}?audience: "highschool"/, "a High School nav entry");
+  assert.match(nav, /href: "\/battle-plan"[\s\S]{0,80}?audience: "university"/, "and a University nav entry");
   const page = has(PAGE) ? read(PAGE) : "";
   // Owner directive: lane switches live ONLY in the menu and Settings — the page
   // never offers its own toggle, so a High School student cannot flip to the
