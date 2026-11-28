@@ -915,3 +915,32 @@ shared study surface**, and raise the UI to a premium/tactile standard. Payments
   all green. Local `npm run build` is blocked on Termux/Android: Next 14.2.35 has no published
   `@next/swc-android-arm64` and the WASM/native-arm64-musl fallback cannot load on this box. CI remains
   the build authority for release.
+
+## 2026-11-28 — IA rework completion + strict lane separation (PRs #105–#111, all merged & live)
+
+- **Menu geometry** — the menu stays anchored to the top-left hamburger and is **extended vertically** to the
+  bottom inset (the bottom-sheet detour is reverted); the Account zone (Gnostiri Prime / Profile / Settings)
+  is pinned at the panel bottom.
+- **Home** — action-only (greeting + the lane's own "what now" panel + "View full plan"), and now
+  **explicitly split per lane**: High School renders the study-plan path (`TodaysPath`); University renders
+  `UniversityToday` (real SM-2 due count over `ConceptMastery.nextReviewDue` + Courses / AI Studio links).
+  Neither panel can render the other lane's surfaces or copy. Overdue items collapse to one catch-up banner.
+- **Study** — the hub (full lane grid + shared tools, labelled sections). **Progress** — the analytics home
+  (lane-scoped stat chips, seven-day timeline, Global Ranking, achievements, HS/Uni/Extras topic tables).
+- **Lane separation (owner directive)** — explicit codebase sweep completed; the lane toggle now exists
+  **only in the menu (`LaneDropdown`) and Settings (`LearningDomainControls`)** — a full-src contract test
+  fails if `setLearningDomain` is called anywhere else. `/study` inline switch and the `/battle-plan` lane
+  toggle removed; dead `LaneSwitch`/`LaneBoard` components deleted. Payloads are lane-scoped **server-side**
+  on `/study` **and** `/practice` (the last leak found: practice shipped the other lane's card to strip
+  client-side). `/battle-plan` API stays High School-only; `/tutor` API stays domain-scoped;
+  `WeekTimeline` on Progress is domain-gated.
+- **Naming** — every user-visible "Battle Plan" renamed to **"Study plan"** (page, tab title, CTAs,
+  `/study-plan` description). Route stays `/battle-plan`; nav label was already "Study Plan".
+- **Audit doc** — separation contracts in `tests/lane-separation.test.mjs`, `tests/home-lanes.test.mjs`,
+  `tests/study-hub.test.mjs`, `tests/progress-analytics.test.mjs`, `tests/week-timeline.test.mjs`.
+- **Still shared (flagged to owner, no override)**: Library + Compete/League (community surfaces),
+  Settings/Profile/Account/Notifications (account utilities). Open question: surface a GPE-labelled
+  University exam entry?
+- **Gates** — tsc · next lint · node --test → **448 pass / 0 fail**; prod verified (/, /study, /progress,
+  /practice, /battle-plan all 200; HS practice payload carries no "Course exam halls"; no "Battle Plan"
+  copy remains).
