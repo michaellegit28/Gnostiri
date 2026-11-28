@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCurrentUser } from "@/lib/server-auth";
 import { AudioLines, Mic, ScanText, Sparkles } from "lucide-react";
 import AiNotes from "@/components/university/AiNotes";
+import AiAssessments from "@/components/university/AiAssessments";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +48,7 @@ export default async function UniversityAiStudioPage() {
       ) : (
         <div className="mt-8 space-y-8">
           <AiNotes />
+          <AiAssessments />
 
           <section aria-labelledby="ai-lane-next" className="space-y-3">
             <h2 id="ai-lane-next" className="font-serif text-xl font-bold text-ink">Also in the AI lane</h2>
