@@ -32,7 +32,7 @@ test("the signed-out landing is numbers-first and category-free", () => {
   }
 });
 
-test("the study hub is a dedicated route with four cards", () => {
+test("the study hub is a dedicated route carrying the lane doors and the tools", () => {
   const study = q("src/app/study/page.tsx");
   for (const href of ["/highschool", "/university", "/discovery", "/desk"]) {
     assert.match(study, new RegExp(href.replace(/\//g, "\\/")), `${href} is on /study`);
