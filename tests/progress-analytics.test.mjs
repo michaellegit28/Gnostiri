@@ -28,7 +28,7 @@ test("Progress is a server component that gates auth server-side", () => {
 test("Progress carries the relocated analytics surfaces", () => {
   const page = q(PAGE);
   assert.match(page, /<StatsRow /, "stat chips (streak / accuracy / minutes)");
-  assert.match(page, /<WeekTimeline \/>/, "the seven-day plan timeline");
+  assert.match(page, /<WeekTimeline /, "the seven-day plan timeline");
   assert.match(page, /<LeagueStatusWidget \/>/, "the global ranking");
   assert.match(page, /<RecentAchievements /, "recent achievements");
   assert.match(page, /<ProgressDashboard \/>/, "the lane-filtered tables (client half)");
