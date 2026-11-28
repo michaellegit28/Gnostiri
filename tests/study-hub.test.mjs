@@ -13,7 +13,6 @@ const q = (p) => readFileSync(ROOT + p, "utf8");
 
 const PAGE = "src/app/study/page.tsx";
 const GRID = "src/components/study/StudyGrid.tsx";
-const SWITCH = "src/components/study/StudyLaneSwitch.tsx";
 
 test("the hub groups its grid into labelled sections, not one flat list of identical cards", () => {
   const page = q(PAGE);
@@ -44,21 +43,8 @@ test("the hub ships only the current lane's cards (server-side audience filter)"
   assert.match(grid, /isVisibleForAudience\(card\.audience, domain\)/, "and the client filter re-applies after a lane switch");
 });
 
-test("the hub lane switch persists the lane and re-renders the server payload", () => {
-  const src = q(SWITCH);
-  assert.match(src, /^["']use client["']/m, "an interactive control is a client component");
-  assert.match(src, /setLearningDomain\(domain\)/, "picking a lane persists it (context + cookie + profile)");
-  assert.match(src, /router\.refresh\(\)/, "and round-trips the server so the grid re-scopes");
-  assert.doesNotMatch(src, /@\/lib\/db|from ["']@prisma\/client["']/, "no DB client in the client bundle");
+test("the hub carries NO inline lane switch — the toggle lives only in the menu and Settings", () => {
   const page = q(PAGE);
-  assert.match(page, /<StudyLaneSwitch \/>/, "the hub renders the switch");
-});
-
-test("the lane switch meets the a11y floor (listbox semantics, 44px targets, visible focus)", () => {
-  const src = q(SWITCH);
-  assert.match(src, /aria-haspopup="listbox"/, "the trigger exposes listbox semantics");
-  assert.match(src, /role="option"/, "options are announced as options");
-  assert.match(src, /aria-selected=/, "the current lane is exposed beyond colour");
-  assert.match(src, /min-h-\[44px\]/, "targets clear the 44px floor");
-  assert.match(src, /focus-visible:ring/, "keyboard focus is always visible");
+  assert.doesNotMatch(page, /StudyLaneSwitch|setLearningDomain/, "the study hub must not switch lanes inline");
+  assert.match(page, /settings#learning-domain-settings/, "it points at the canonical lane settings instead");
 });
